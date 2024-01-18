@@ -1,0 +1,6 @@
+.custom-size {
+    max-width: 100%; /* Set your desired maximum width */
+    max-height: 200px; /* Set your desired maximum height */
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+  }
