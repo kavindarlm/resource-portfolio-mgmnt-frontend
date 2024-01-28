@@ -1,0 +1,144 @@
+body {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.login-page {
+    background-image: url('/assets/image/backimage1.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+#maindiv {
+      width: 80%;
+      max-width: 1176px;
+      padding: 50px;
+      background: #C2D9FF;
+      border-radius: 25px;
+      margin: 0 auto;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%, -50%);
+      
+}
+
+.login-form-container .row {
+    align-items: center;
+}
+
+
+#logo{
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+    border-radius: 25px;
+}
+
+#userProfile{
+    max-width: 100%;
+    height: auto;
+    margin-top: 70px;
+    display: block;
+}
+
+.center {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+}  
+
+@media (min-width: 992px) {
+    .col-md-border:not(:last-child) {
+        border-right: 1px solid #1E3895;
+    }
+    .col-md-border + .col-md-border {
+        border-left: 1px solid #1E3895;
+        margin-left: -1px;
+    }
+}
+
+#text1{
+    color: #1E3895;
+    text-align: center;
+    font-family: "Montserrat-Bold", Helvetica;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px;
+}
+
+#text2{
+    color: #1E3895;
+    text-align: center;
+    font-family: "Roboto-Medium", Helvetica;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal; 
+}
+
+#box1{
+    width: 100%;
+    border-radius: 10px;
+    border: 0.5px solid #BCBCBC;
+    background: var(--White, #FFF); 
+    padding: 10px 30px;
+}
+
+form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.text3{
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    
+}
+
+.box2{
+    width: 100%;
+    background-color: #1E3895;
+    border-radius: 10px;
+    padding: 10px 100px;
+}
+
+/*Responsive*/
+@media (max-width: 768px) {
+    #maindiv {
+        width: 80%;
+    }
+    #logo {
+      width: 100%;
+      height: auto;  /* Maintain aspect ratio */
+    }
+  
+    .row {
+      flex-direction: column;  /* Stack columns on small screens */
+    }
+  }
+  
+
+.company-name {
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 40px;
+}
+.company-name h1 {
+    color: #ecf3ff;
+    font-family: "Montserrat-Bold", Helvetica;
+    font-weight: 700;
+    font-size: 48px;
+    letter-spacing: 0.96px;
+}
