@@ -1,6 +1,107 @@
 .custom-size {
     max-width: 100%; /* Set your desired maximum width */
-    max-height: 200px; /* Set your desired maximum height */
+    max-height: 180px; /* Set your desired maximum height */
     width: 100%;
     height: auto; /* Maintain aspect ratio */
   }
+
+  .position-relative {
+    position: relative;
+  }
+  
+  .position-absolute {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  
+  .white-div-container {
+    background: white;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 30px;
+    width: calc(100% - 40px);
+    border-radius: 10px;
+    /* Adjust the height as necessary, or remove it to fit content */
+    height: 500px; 
+    /* The padding-top value should be equal to or greater than the height of the .container-fluid to avoid overlap */
+    padding-top: 100px; 
+  }
+  .logo {
+    height: 60px; /* Adjust as needed */
+    border-radius: 10px;
+    max-width: 100%;
+  }
+  
+  .title {
+    color: white;
+    margin: 0;
+    font-size: 1.5rem; /* Adjust as needed */
+  }
+  
+  .user-initials {
+    background-color: white;
+    color: #1E3895;
+    /* padding: 10px 10px; */
+    border-radius:8px; /* Adjust as needed for rounded corners */
+    font-weight: bold;
+    font-size: 1.2rem; /* Adjust as needed */
+  }
+  .box2{
+    border: 4px solid #1E3895;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  .box {
+    background-color: #1E3895;
+    border: 1px solid #1E3895;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  
+  .box h1 {
+    color: white;
+    text-align: right; /* Align center by default */
+    margin-right: 40px; /* Reset margin-right to 0 */
+    font-size: 1.8rem; /* Adjust as needed */
+  }
+  
+  
+  /* Responsive adjustments */
+  @media (max-width: 992px) {
+    .box h1 {
+      font-size: 1.25rem; /* Adjust font size for medium screens */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .box h1 {
+      font-size: .7rem; /* Smaller font size for small screens */
+    }
+  
+    /* Make the logo and initials smaller on small screens */
+    .logo, .user-initials {
+      height: 40px; /* Adjust as needed */
+      padding: 3px 3px; /* Adjust as needed */
+    }
+    
+    /* Ensure the box containing the title takes full width */
+    .bg-primary {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    
+    /* Stack logo and initials on small screens */
+    .navbar-brand, .user-initials {
+      flex: 0 0 auto;
+      width: auto;
+    }
+  }
+
+  
