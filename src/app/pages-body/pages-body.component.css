@@ -142,8 +142,7 @@
       font-size: .7rem; /* Smaller font size for small screens */
     }
   
-    /* Make the logo and initials smaller on small screens */
-    .logo, .user-initials {
+    .logo, .user-initials, .background-overlay {
       height: 40px; /* Adjust as needed */
       padding: 3px 3px; /* Adjust as needed */
     }
