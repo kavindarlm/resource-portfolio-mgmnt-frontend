@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PagesBodyComponent } from './pages-body/pages-body.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { FgPsswdComponent } from './fg-psswd/fg-psswd.component';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     AppComponent,
     PagesBodyComponent,
     ForgotPasswordComponent,
+    FgPsswdComponent,
   ],
   imports: [
     BrowserModule,
