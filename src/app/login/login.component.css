@@ -16,6 +16,8 @@
 
 } */
 
+
+
 .login-page {
     background-image: url('/assets/image/backimage1.jpg'); 
     
@@ -23,6 +25,9 @@
     background-repeat: no-repeat;
     min-height: 100vh;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
     /* justify-content: space-between; */
     
 
@@ -36,20 +41,22 @@
 
 #maindiv {
 
-      width: 70%;
+      width: 100%;
       max-width: 100%;
-      /* padding: 50px; */
+      padding: 15px;
       background: #C2D9FF;
       border-radius: 20px;
-      /* margin: 0 auto; */
+      margin: 0 auto;
       position: relative;
       /* top: 50%; */
       transform: translateY(-50%, -50%);
 }
 
+
 .login-form-container .row {
     align-items: center;
 }
+
 
 
 #logo{
@@ -62,7 +69,7 @@
 #userProfile{
     max-width: 100%;
     height: auto;
-    margin-top: 70px;
+    margin-top: 20px;
     display: block;
 }
 
@@ -72,15 +79,7 @@
     width: 50%;
 }  
 
-@media (min-width: 992px) {
-    .col-md-border:not(:last-child) {
-        border-right: 1px solid #1E3895;
-    }
-    .col-md-border + .col-md-border {
-        border-left: 1px solid #1E3895;
-        margin-left: -1px;
-    }
-}
+
 
 #text1{
     color: #1E3895;
@@ -139,22 +138,46 @@ form{
         width: 80%;
     }
     #logo {
-      width: 100%;
+      width: 80%;
       height: auto;  /* Maintain aspect ratio */
     }
   
     .row {
       flex-direction: column;  /* Stack columns on small screens */
     }
+
+    .box2 {
+        width: 100%;
+        /* padding: 10px; */
+        margin: 0 auto;
+    }
+
+    .company-name {
+        width: 80%;
+        text-align: center;
+    }
   }
   
+  @media (min-width: 992px) {
+    .col-md-border:not(:last-child) {
+        border-right: 1px solid #1E3895;
+    }
+    .col-md-border + .col-md-border {
+        border-left: 1px solid #1E3895;
+        margin-left: -1px;
+    }
+}
 
 .company-name {
-    margin: 0 auto;
+    /* margin: 0 auto; */
+    margin-top: 25px;
+    margin-bottom: 0;
     text-align: center;
-    padding-top: 40px;
+    /* padding-top: 40px; */
+    /* display: flex; */
+    /* flex-direction: column; */
 }
-.company-name h1 {
+.company-name p {
     color: #ecf3ff;
     font-family: "Montserrat-Bold", Helvetica;
     font-weight: 700;
