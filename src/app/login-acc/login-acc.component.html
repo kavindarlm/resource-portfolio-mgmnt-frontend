@@ -20,15 +20,15 @@
                         <form class="text-start container-sm text-color px-5">
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label fw-medium">User Name</label>
-                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Enter your email">
+                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Enter your email" required>
                             </div>
                             <label for="inputPassword5" class="form-label fw-medium">Password</label>
-                            <input type="password" id="inputPassword5" class="form-control" placeholder="Password">
+                            <input type="password" id="inputPassword5" class="form-control" placeholder="Password" required>
                             <div class="text-center">
-                                <p class="fw-normal text-color justify-content-center">Forgot Your Password ?</p>
+                                <p><a routerLink="/forgot-password" class="fw-normal text-color justify-content-center link-offset-2 link-underline link-underline-opacity-0">Forgot Your Password ?</a></p>
                             </div>
                             <div class="d-grid gap-2 ">
-                                <button class="btn btn-outline-primary" type="button">Log In</button>
+                                <button class="btn btn-outline-color" type="submit">Log In</button>
                             </div>
                         </form>
                     </div>    

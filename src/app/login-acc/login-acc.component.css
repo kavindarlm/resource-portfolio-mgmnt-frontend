@@ -38,11 +38,11 @@
   .text-color{
     color: #1E3895;
   }
-  .btn-outline-primary {
+  .btn-outline-color {
     color: #1E3895;
     border-color: #1E3895;
   }
-  .btn-outline-primary:hover {
+  .btn-outline-color:hover {
     color: #ffffff;
     background-color: #1E3895;
     border-color: #1E3895;
