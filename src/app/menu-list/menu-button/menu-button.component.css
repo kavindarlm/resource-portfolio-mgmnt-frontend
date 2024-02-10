@@ -1,0 +1,79 @@
+.btn-custom-color{
+    background-color: #7752FE;
+}
+.btn-listmenu{
+    background-color: #7752FE;
+    color: #FEFEFE;
+    width: 100%; /* Set the width for desktop */
+    height: 40px;
+    font-weight: bold;
+    margin-top: 1%;
+    margin-bottom: .7%;
+    text-align: center;
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.btn-listmenu:hover{
+    background-color:  #1E3895;
+    color: #FEFEFE;
+}
+
+.btn-costom{
+    background-color: #C2D9FF;
+    color: #7752FE;
+    width: 100%; /* Set the width for desktop */
+    height: 40px;
+    font-weight: semibold;
+    margin-top: .3%;
+    text-align: center;
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.btn-costom:hover{
+    background-color: #1E3895;
+    color: #FEFEFE;
+}
+
+
+@media (max-width: 575.98px) {
+    /* Styles for screens less than 576px wide (xs) */
+    .btn-listmenu,
+    .btn-costom {
+        font-size: 0.8rem;
+    }
+}
+@media (min-width: 576px) {
+    /* Styles for screens equal to or greater than 576px wide (sm) */
+    .btn-listmenu,
+    .btn-costom {
+        font-size: 0.8rem;
+    }
+}
+
+@media (min-width: 768px) {
+    /* Styles for screens equal to or greater than 768px wide (md) */
+    .btn-listmenu,
+    .btn-costom {
+        font-size: 0.9rem; 
+    }
+}
+@media (min-width: 992px) {
+    /* Styles for screens equal to or greater than 992px wide (lg) */
+    .btn-listmenu,
+    .btn-costom {
+        font-size: 1.0rem;
+        line-height: .95;
+    }
+}
+@media (min-width: 1200px) {
+    /* Styles for screens equal to or greater than 1200px wide (xl) */
+    .btn-listmenu,
+    .btn-costom {
+        font-size: 1.1rem;
+        line-height: .98;
+    }
+}

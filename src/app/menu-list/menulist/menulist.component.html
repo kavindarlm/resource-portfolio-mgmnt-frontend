@@ -1,0 +1,20 @@
+<nav class="main-nav">
+    <ul class="list-group">
+        <li><app-menu-button (click)="toggleSubMenu()" [btnClass]="'btn-listmenu'"
+                [text]="'Menu List'"></app-menu-button></li>
+        <span class="border-top" style="border-width: 50px;">
+            <div *ngIf="showMenu" class="submenu active">
+                <li><app-menu-button [btnClass]="'btn-costom'" [text]="'Project Dashboard'"></app-menu-button></li>
+                <li><app-menu-button [btnClass]="'btn-costom'" [text]="'Sprint Management'"></app-menu-button></li>
+                <li><app-menu-button [btnClass]="'btn-costom'" [text]="'Handle Request'"></app-menu-button></li>
+                <li><app-menu-button [btnClass]="'btn-costom'" [text]="'Calendar Management'"></app-menu-button></li>
+                <li><app-menu-button [btnClass]="'btn-costom'" [text]="'Org. Unit Management'"></app-menu-button></li>
+                <li><app-menu-button [btnClass]="'btn-costom'" [text]="'Team Management'"></app-menu-button></li>
+                <li><app-menu-button [btnClass]="'btn-costom'" [text]="'Resource Management'"></app-menu-button></li>
+                <li><app-menu-button [btnClass]="'btn-costom'" [text]="'Project Management'"></app-menu-button></li>
+                <li><app-menu-button [btnClass]="'btn-costom'" [text]="'Update Task Progress'"></app-menu-button></li>
+
+            </div>
+        </span>
+    </ul>
+</nav>
