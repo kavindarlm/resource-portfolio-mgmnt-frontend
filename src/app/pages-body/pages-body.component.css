@@ -61,6 +61,7 @@
     max-height: 75vh;
     margin-bottom: 75px;
     overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .logo {
