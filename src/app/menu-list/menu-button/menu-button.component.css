@@ -7,12 +7,11 @@
     width: 100%; /* Set the width for desktop */
     height: 40px;
     font-weight: bold;
-    margin-top: 1%;
-    margin-bottom: .7%;
     text-align: center;
     display: flex; /* Use flexbox */
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
+    border-radius: 10px;
 }
 
 .btn-listmenu:hover{
@@ -21,20 +20,36 @@
 }
 
 .btn-costom{
-    background-color: #C2D9FF;
-    color: #7752FE;
-    width: 100%; /* Set the width for desktop */
+    width: 95%; /* Set the width for desktop */
     height: 40px;
-    font-weight: semibold;
-    margin-top: .3%;
-    text-align: center;
-    display: flex; /* Use flexbox */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    font-weight: bold;
+    background-color: #fefefe;
+    border: .5px solid #7752FE;
+    border-radius: 10px;
+    color: #7752FE;
+    margin-top: 2%;
+    margin-left: 2%;
+
+
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Add transition effect */
+
+    /* Add subtle elevation */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    /* Add padding */
+    padding: 0 15px;
+
+    /* Center text vertically */
+    line-height: 40px;
+
+    /* Cursor pointer to indicate interactivity */
+    cursor: pointer;
+
+    
 }
 
 .btn-costom:hover{
-    background-color: #1E3895;
+    background-color: #7752FE;
     color: #FEFEFE;
 }
 

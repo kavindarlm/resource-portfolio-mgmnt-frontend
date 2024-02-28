@@ -8,4 +8,5 @@ import { Component, Input } from '@angular/core';
 export class MenuButtonComponent {
   @Input() text: string ="";
   @Input() btnClass: string = "";
+  @Input() name: string= "";
 }
