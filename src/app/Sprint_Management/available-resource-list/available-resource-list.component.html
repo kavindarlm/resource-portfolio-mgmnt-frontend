@@ -1,0 +1,43 @@
+
+<div class="border rounded container">
+
+  <div class="d-grid rounded text-white text-center boxclr bd-highlight mx-auto shadow p-3 mb-5 w-100 text2 mt-3 ">Available Resource List</div>
+
+
+
+
+<!-- app.component.html -->
+<div>
+  <app-filter [options1]="teams" 
+  label1="Filter by: Team Name" 
+  [options2]="OrgUnit" 
+  label2="Filter by: Org.Unit" 
+  filter1="Team" 
+  filter2="Org_Unit"
+  [hArray]="headArray"
+  [gArray]="resources">
+</app-filter>
+
+</div>
+
+<nav>
+  <ul class="pagination d-flex justify-content-center">
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Previous">
+        <span aria-hidden="true">	&lsaquo;</span>
+        
+      </a>
+    </li>
+    <li class="page-item "><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">...</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&rsaquo;</span>
+        
+      </a>
+    </li>
+  </ul>
+</nav>
+
+</div>

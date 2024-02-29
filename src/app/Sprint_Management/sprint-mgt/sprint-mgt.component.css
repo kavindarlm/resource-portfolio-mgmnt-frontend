@@ -1,0 +1,58 @@
+.container{
+    
+    width:694px;
+    
+    position:absolute;
+    
+    
+}
+
+.boxclr {
+background-color: #7752fe;
+
+
+}
+
+
+.text2{
+
+color: #7752fe;
+font-size: 20px;
+font-family: Montserrat;
+
+}
+
+.text5 {
+    color: #7752fe;
+    text-align: center;
+    vertical-align: text-middle;
+    font-size: 12px;
+    font-family: Montserrat;
+    border-style: hidden;
+    outline: none;
+  }
+
+  .text6 {
+    
+    text-align: center;
+    vertical-align: text-middle;
+    font-size: 12px;
+    font-family: Montserrat;
+    
+    
+  }
+
+  
+    /* add resource button */
+
+    .btn-primary:hover {
+        background-color: #1E3895;
+        color: #ffffff;
+      }
+    
+      .btn-primary {
+        background-color: white;
+        border: 1px solid #7752fe;
+        
+      }
+    
