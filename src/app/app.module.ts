@@ -13,12 +13,13 @@ import { SprintMgtComponent } from './Sprint_Management/sprint-mgt/sprint-mgt.co
 import { Ng2SearchPipe } from 'ng2-search-filter';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FilterPipe } from './Sprint_Management/filter.pipe';
-import { TablesComponent } from './Sprint_Management/Reusable_components/tables/tables.component';
 import { FilterComponent } from './Sprint_Management/Reusable_components/filter/filter.component';
+import { TablesComponent } from './Sprint_Management/Reusable_Components/tables/tables.component';
 import { AvailableResourceListComponent } from './Sprint_Management/available-resource-list/available-resource-list.component';
 import { AvailabiilityComponent } from './Sprint_Management/availabiility/availabiility.component';
 import { AlertBoxComponent } from './Sprint_Management/Reusable_Components/alert-box/alert-box.component';
 import { AddedResourceListComponent } from './Sprint_Management/added-resource-list/added-resource-list.component';
+import { MainComponent } from './Sprint_Management/main/main.component';
 
 
 
@@ -29,13 +30,14 @@ import { AddedResourceListComponent } from './Sprint_Management/added-resource-l
     PagesBodyComponent,
     CreateFormComponent,
     SprintMgtComponent,
+    TablesComponent,
 
     FilterPipe,
-    TablesComponent,
     FilterComponent,
     AvailableResourceListComponent,
     AvailabiilityComponent,
     AddedResourceListComponent,
+    MainComponent,
     // AddedResourceListComponent,
     // AlertBoxComponent,
   ],

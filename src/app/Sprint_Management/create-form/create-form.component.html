@@ -1,77 +1,64 @@
 <div class="container">
-    <div class="box1">
-      
-      <div class="d-grid rounded boxclr bd-highlight mx-auto gap-2 col-6 shadow p-3 mb-5 w-100 text1 ">Create New Sprint</div>
-  
+  <div class="box1">
+
+      <div class="d-grid rounded boxclr bd-highlight mx-auto gap-2 col-12 col-sm-8 col-md-6 shadow p-3 mb-5 w-100 text1">Create New Sprint</div>
+
       <div class="form-container">
-        <form>
-          <label class="text2">Sprint Time</label><br>
-  
-          <label class="text3 box3">From:</label>
-  
-          <select id="year" name="year" class="text4 box2" required>
-            <option value="" disabled selected>Year</option>
-            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
-          </select>
-  
-          <select id="month" name="month" class="text4 box2" required>
-            <option value="" disabled selected>Month</option>
-            <option *ngFor="let month of months" [value]="month">{{ month }}</option>
-          </select>
-  
-          <select id="day" name="day" class="text4 box2" required>
-            <option value="" disabled selected>Day</option>
-            <option *ngFor="let day of days" [value]="day">{{ day }}</option>
-          </select>
-  
-          <br/>
-  
-          <label class="text3 box3">To:</label>
-  
-          <select id="yearTo" name="yearTo" class="text4 box2" required>
-            <option value="" disabled selected>Year</option>
-            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
-          </select>
-  
-          <select id="monthTo" name="monthTo" class="text4 box2" required>
-            <option value="" disabled selected>Month</option>
-            <option *ngFor="let month of months" [value]="month">{{ month }}</option>
-          </select>
-  
-          <select id="dayTo" name="dayTo" class="text4 box2" required>
-            <option value="" disabled selected>Day</option>
-            <option *ngFor="let day of days" [value]="day">{{ day }}</option>
-          </select>
-  
-          <label class="text2">Sprint Name</label><br>
-  
-          <label class="text3 box3">Name:</label>
-          <input type="text" class="text4 box2"/>
-        </form>
-      </div>
-    </div>
-  
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-1 border-bottom"></div>
-  
-    <div class="box1">
-<!-- <app-added-resource-list [headArray]="headArray"
-[gridArray]="resources" ></app-added-resource-list> -->
+          <form>
+              <label class="text2 fw-bold">Sprint Time</label><br>
 
+              <label class="text3 p-3">From:</label>
 
-
-
-
+              <select id="year" name="year" class="text4 border rounded" required>
+                <option value="" disabled selected>Year</option>
+                <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+              </select>
       
-    </div>
+              <select id="month" name="month" class="text4 border rounded" required>
+                <option value="" disabled selected>Month</option>
+                <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+              </select>
+      
+              <select id="day" name="day" class="text4 border rounded" required>
+                <option value="" disabled selected>Day</option>
+                <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+              </select>
+      
+              <br/>
+      
+              <label class="text3 p-3">To:</label>
+      
+              <select id="yearTo" name="yearTo" class="text4  border rounded" required>
+                <option value="" disabled selected>Year</option>
+                <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+              </select>
+      
+              <select id="monthTo" name="monthTo" class="text4  border rounded" required>
+                <option value="" disabled selected>Month</option>
+                <option *ngFor="let month of months" [value]="month">{{ month }}</option>
+              </select>
+      
+              <select id="dayTo" name="dayTo" class="text4  border rounded" required>
+                <option value="" disabled selected>Day</option>
+                <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+              </select>
+              <br/>
+    
 
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-1 border-bottom"></div>
-  
-    <div>
-      <div class="rectangle4343 text2 center">Create Sprint </div>
-    </div>
+              <label class="text2 fw-bold">Sprint Name</label><br>
+
+              <label class="text3 box3">Name:</label>
+              <input type="text" class="text4 box2" />
+          </form>
+      </div>
   </div>
-  
-  
-  
-  
-  
+
+  <div class="box1">
+      <app-added-resource-list [HeadArray]="headArray" [tablecontents]="resources"></app-added-resource-list>
+  </div>
+
+  <div>
+      <div class="rectangle4343 text2 center">Create Sprint </div>
+  </div>
+</div>
+

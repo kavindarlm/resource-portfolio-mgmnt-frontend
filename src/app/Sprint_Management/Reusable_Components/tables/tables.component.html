@@ -1,17 +1,15 @@
-
-
-<table class="text5  spacing table table-hover">
-    <thead>
-      <tr >
-        <th *ngFor="let head of HeadArray">{{head}}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr  *ngFor="let items of GridArray">
-        <td *ngFor="let head of HeadArray">
-            {{items[head]}} 
-        </td>       
-      </tr>  
-    </tbody>
+<div class="table-responsive">
+    <table class="table text spacing table-hover">
+      <thead>
+        <tr>
+          <th class="headingblock" *ngFor="let head of HeadArray">{{ head }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let items of GridArray">
+          <td *ngFor="let head of HeadArray">{{ items[head] }}</td>
+        </tr>
+      </tbody>
     </table>
+</div>
   

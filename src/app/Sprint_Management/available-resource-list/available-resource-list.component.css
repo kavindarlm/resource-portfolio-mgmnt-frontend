@@ -1,33 +1,46 @@
-.container{
-    
-    height:1164px;
-    width:697px;
-    
-    }
-  
-  .text5 {
-      color: #190482;
-      text-align: center;
-      vertical-align: text-middle;
-      font-size: 12px;
-      font-family: Montserrat;
-      border-style: hidden;
-      outline: none;
-    }
-    
-    .boxclr {
-      background-color: #7752fe;
-    }
-  
-  
-    .text2{
-  
-      color: #7752fe;
-      font-size: 20px;
-      font-family: Montserrat;
-  
-    }
-    .pagination .page-item .page-link {
-      color: #190482; /* Set the color of the page numbers to green */
-    }
-    
+.container {
+  max-width: 697px;
+  margin: auto;
+}
+
+.text5 {
+  color: #190482;
+  text-align: center;
+  font-size: 12px;
+  font-family: Montserrat;
+  border-style: hidden;
+  outline: none;
+}
+
+.boxclr {
+  background-color: #7752fe;
+}
+
+.text2 {
+  color: #7752fe;
+  font-size: 20px;
+  font-family: Montserrat;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.pagination .page-item {
+  margin-right: 5px;
+}
+
+.pagination .page-link {
+  color: #190482;
+  border: 1px solid #7752fe;
+}
+
+.pagination .page-link:hover {
+  background-color: #7752fe;
+  color: #fff;
+}
+
+/* Adjust styles for the rest of your components as needed */

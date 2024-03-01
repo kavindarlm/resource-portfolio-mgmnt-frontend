@@ -10,7 +10,7 @@ export class SprintMgtComponent{
 CloseTab(){
   
 }
-headArray=['Resource_ID','Team','Job_Role','Org_Unit','Availability'];
+hArray=['Resource_ID','Team','Job_Role','Org_Unit','Availability'];
 
 resources = [
 

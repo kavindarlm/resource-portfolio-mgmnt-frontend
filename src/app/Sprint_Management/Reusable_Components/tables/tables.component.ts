@@ -1,13 +1,11 @@
-import { Component, OnInit , Input} from '@angular/core';
+import { Component , Input , OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-tables',
   templateUrl: './tables.component.html',
   styleUrl: './tables.component.css'
 })
-
-
-export class TablesComponent implements OnInit {
+export class TablesComponent {
 
   @Input () HeadArray :string[]=[];
   @Input () GridArray :any[]=[];
@@ -15,6 +13,5 @@ export class TablesComponent implements OnInit {
   ngOnInit() {
     
   }
-
 
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-added-resource-list',
@@ -7,9 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AddedResourceListComponent {
 
-  headArray=['Resource_ID','Team','Job_Role','Org_Unit','Availability'];
-  tablecontents=[
-    
-  ] 
+
+  @Input() HeadArray: any[] = [];
+  @Input() tablecontents: any[] = [];
 
 }

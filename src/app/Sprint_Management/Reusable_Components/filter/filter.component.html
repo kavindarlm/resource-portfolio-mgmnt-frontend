@@ -1,42 +1,31 @@
 <div class="row mx-auto mb-5 mt-3">
 
-
-<div class="col">
-  <div class="gap-2 col rounded text1 mx-auto mb-5 mt-3">
-    <select class="form-select" [(ngModel)]="searchText">
-      <option disabled selected>{{ label1 }}</option>
-      <option *ngFor="let option1 of options1" [value]="option1">{{ option1 }}</option>
-    </select>
-    
-  </div>
-</div>
-
-<div class="col">
-  <div class=" gap-2 col rounded text1 mx-auto mb-5 mt-3">
-
-    <select class="form-select" [(ngModel)]="searchText">
-      <option disabled selected>{{ label2 }}</option>
-      <option *ngFor="let option2 of options2" [value]="option2">{{ option2 }}</option>
-    </select>
-    
-  
-  
-  </div>
-</div>
-
-<div class="col-auto mx-auto mb-5 mt-3">
-  <div class=" rounded text1">
-    <button class="btn shadow-none" (click)="filterContents()"><img src="assets/image/search.png"/></button>
+  <div class="col">
+    <div class="gap-2 col rounded text mx-auto mb-5 mt-3">
+      <select class="form-select" [(ngModel)]="searchText">
+        <option disabled selected>{{ label1 }}</option>
+        <option *ngFor="let option1 of options1" [value]="option1">{{ option1 }}</option>
+      </select>
     </div>
+  </div>
 
+  <div class="col">
+    <div class=" gap-2 col rounded text mx-auto mb-5 mt-3">
+      <select class="form-select" [(ngModel)]="searchText">
+        <option disabled selected>{{ label2 }}</option>
+        <option *ngFor="let option2 of options2" [value]="option2">{{ option2 }}</option>
+      </select>
+    </div>
+  </div>
 
+  <div class="col-auto mx-auto mb-5 mt-3">
+    <div class=" rounded text">
+      <button class="btn shadow-none" (click)="filterContents()">
+        <img src="assets/image/search.png"/>
+      </button>
+    </div>
+  </div>
 
-</div>
-
-<app-tables 
-[HeadArray]="hArray" 
-[GridArray]="filteredContents"></app-tables> 
-
-
+  <app-tables [HeadArray]="hArray" [GridArray]="filteredContents"></app-tables>
 
 </div>
