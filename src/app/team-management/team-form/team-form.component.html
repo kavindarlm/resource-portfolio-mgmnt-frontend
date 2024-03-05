@@ -1,4 +1,5 @@
-<div>
+<div class ="box">
+  <div class="formBox">
     <form [formGroup]="teamForm" (ngSubmit)="OnFormSubmitted()" class="form"> <!--reactive form  (ngSubmit)="createTeam()"-->
         <div>
             <button class="new-team btn btn-primary btn-md">Create New Team</button>
@@ -21,7 +22,7 @@
           <label for="description">Description</label>
           <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter Description" formControlName="description">
         </div>
-
+      <hr>
         <div>
             <button class="new-resource btn btn-primary btn-md">Team Resource List</button>
         </div>
@@ -37,13 +38,16 @@
           </table>
 
         <div  class="addResourceBtn">
-            <app-new-team-button [text]="'Add Resources ID'" (click)="accessList"></app-new-team-button>
+            <app-new-team-button [text]="'Add Resources ID'" (click)="acsessResourceTable()"></app-new-team-button>
         </div>
-    
+
         <div>
             <input class="submit-btn btn btn-primary btn-md createTeamBtn" type="submit" value="Create Team">
         </div>
       </form>
-
 </div>
 
+<app-resource-table *ngIf="showResourceTable"></app-resource-table>
+
+
+</div>

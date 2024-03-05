@@ -9,7 +9,19 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class TeamFormComponent implements OnInit{
 
 teamForm!: FormGroup;
-accessList: any;
+
+showResourceTable = false;
+
+constructor(){
+  this.showResourceTable = false;
+
+}
+
+acsessResourceTable(){ 
+  this.showResourceTable = !this.showResourceTable;
+
+}
+
 
   ngOnInit(){
     this.teamForm = new FormGroup({

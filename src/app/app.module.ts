@@ -9,6 +9,7 @@ import { TeamFormComponent } from './team-management/team-form/team-form.compone
 import { TeamListComponent } from './team-management/team-list/team-list.component';
 import { TeamMainBoxComponent } from './team-management/team-main-box/team-main-box.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ResourceTableComponent } from './team-management/resource-table/resource-table.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     TeamFormComponent,
     TeamListComponent,
     TeamMainBoxComponent,
+    ResourceTableComponent,
     
   ],
   imports: [

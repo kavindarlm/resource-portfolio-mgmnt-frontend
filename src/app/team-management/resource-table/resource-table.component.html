@@ -1,0 +1,18 @@
+<table class="table border">
+    <thead>
+        <tr>
+            <th><button class="tbtn">Resource Id</button></th>
+            <th><button class="tbtn">Job Role</button></th>
+            <th><button class="tbtn">Org. Unit</button></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let resource of resources">
+            <td>{{resource.resourceName}}</td>
+            <td>{{resource.role}}</td>
+            <td>{{resource.OrgUnit}}</td>
+            <td><button>Select</button></td>
+        </tr>
+    </tbody>
+</table>

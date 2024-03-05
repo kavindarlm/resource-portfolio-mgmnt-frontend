@@ -1,7 +1,25 @@
 <div class="teamListBox float left border-top border-end mt-2">
     <button class="teamListBtn btn btn-primary btn-md">Team List</button>
 <hr/>
+<div>
+ <table>
+  <thead>
+    <tr>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let team of teams">
+      <td><button class="teamNameBtn btn btn-primary btn-md">{{team.teamName}}</button></td>
+    </tr>
+  </tbody>
+ </table>
+</div>
+
+<div>
   <app-new-team-button [text]="'New Team'" (click)="toggleMainBox()"></app-new-team-button>
+</div>
+
 </div>
 
 <app-team-main-box *ngIf="showForm"></app-team-main-box>

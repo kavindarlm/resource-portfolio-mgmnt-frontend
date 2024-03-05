@@ -1,0 +1,20 @@
+table{
+    width:fit-content ;
+    margin: 20px;
+    border-collapse: collapse;
+}
+
+table, td {
+    margin-top: 10px;
+    border: 1px solid #8691A833;
+    text-align: center;
+    color: #7752FE;
+}
+
+.tbtn{
+    background-color: #C2D9FF;
+    color: #190482;
+   
+}
+
+

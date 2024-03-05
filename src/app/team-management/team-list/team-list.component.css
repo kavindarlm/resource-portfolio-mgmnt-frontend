@@ -3,6 +3,7 @@
     width:fit-content;
     height: 100vh;
     float: left;
+    
 }
 
 .teamListBtn{
@@ -15,7 +16,23 @@
     display: inline-block;
     width: 188px;
     height: 39px;
-     
+    pointer-events: none;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.teamNameBtn{
+    background-color: #C2D9FF;
+    border: 2px solid #C2D9FF;
+    border-radius: 8px;
+    color: #7752FE;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 188px;
+    height: 39px;
+    pointer-events: none;
     margin-top: 10px;
     margin-left: 10px;
     margin-right: 10px;
