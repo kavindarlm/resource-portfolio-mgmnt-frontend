@@ -7,6 +7,7 @@ import { PagesBodyComponent } from './pages-body/pages-body.component';
 import { CreateNewtaskComponent } from './TaskManagement/create-newtask/create-newtask.component';
 import { ProjectDetailsComponent } from './TaskManagement/project-details/project-details.component';
 import { UpdateTaskComponent } from './TaskManagement/update-task/update-task.component';
+import { ButtonTusksComponent } from './TaskManagement/button-tusks/button-tusks.component';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { UpdateTaskComponent } from './TaskManagement/update-task/update-task.co
     CreateNewtaskComponent,
     ProjectDetailsComponent,
     UpdateTaskComponent,
+    ButtonTusksComponent,
 
   ],
   imports: [
