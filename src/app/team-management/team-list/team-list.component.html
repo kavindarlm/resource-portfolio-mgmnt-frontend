@@ -1,0 +1,7 @@
+<div class="teamListBox float left border-top border-end mt-2">
+    <button class="teamListBtn btn btn-primary btn-md">Team List</button>
+<hr/>
+  <app-new-team-button [text]="'New Team'" (click)="toggleMainBox()"></app-new-team-button>
+</div>
+
+<app-team-main-box *ngIf="showForm"></app-team-main-box>

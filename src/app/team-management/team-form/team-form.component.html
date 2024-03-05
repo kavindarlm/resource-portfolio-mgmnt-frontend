@@ -1,0 +1,49 @@
+<div>
+    <form [formGroup]="teamForm" (ngSubmit)="OnFormSubmitted()" class="form"> <!--reactive form  (ngSubmit)="createTeam()"-->
+        <div>
+            <button class="new-team btn btn-primary btn-md">Create New Team</button>
+        </div>
+         
+        <div class="title-team">
+             <p>Team Name:</p>
+        </div> 
+
+        <div class="form-group">
+          <label for="team-name">Name</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter Team Name" formControlName="team">
+        </div>
+
+        <div class="title-description">
+            <p>Description:</p>
+        </div> 
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter Description" formControlName="description">
+        </div>
+
+        <div>
+            <button class="new-resource btn btn-primary btn-md">Team Resource List</button>
+        </div>
+
+        <table class="add-resource-table">
+            <thead>
+              <tr>
+                <th scope="col">ResourceID</th>
+                <th scope="col">Job Role</th>
+                <th scope="col">Org. Unit</th>
+              </tr>
+            </thead>
+          </table>
+
+        <div  class="addResourceBtn">
+            <app-new-team-button [text]="'Add Resources ID'" (click)="accessList"></app-new-team-button>
+        </div>
+    
+        <div>
+            <input class="submit-btn btn btn-primary btn-md createTeamBtn" type="submit" value="Create Team">
+        </div>
+      </form>
+
+</div>
+

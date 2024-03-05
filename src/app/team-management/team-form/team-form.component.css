@@ -1,0 +1,132 @@
+.form {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 50px;
+    width: fit-content;
+    border-radius: 8px; 
+    color: #7752FE;
+
+
+}
+
+.new-team,
+.new-resource{
+  background-color: #7752FE;
+  border: none;
+  color: #FEFEFE;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  width: 350px;
+  border-radius: 8px;
+  pointer-events: none;
+
+ 
+}
+
+.title-team,
+.title-description{
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 10px; 
+    display: flex; 
+    align-items: center; 
+    margin-left: 25px;
+}
+
+label {
+    display: inline-block; 
+    width: 100px; 
+    margin-right: 10px; 
+    margin-bottom: 5px; 
+}
+
+.submit-btn {
+    border: 2px solid #C2D9FF ;
+    border-radius: 4px;
+    flex: 1; 
+    padding: 8px; 
+  }
+
+
+textarea {
+    flex: 1; 
+    padding: 8px; 
+    border: 2px solid #C2D9FF ;
+    border-radius: 4px;
+    
+}
+
+button[type="submit"] {
+    display: block;
+    margin: 0 auto;
+    width: 150px;
+    padding: 10px; 
+    margin-top: 10px;
+    background-color: #1E3895;
+    color: #FEFEFE;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+table, td, th {
+    margin-top: 10px;
+    border: 1px solid;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px; 
+}
+
+.add-resource{
+    background-color: #FEFEFE;
+    border: 2px solid #7752FE;
+    color: #7752FE;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    height: auto;
+    padding: 10px; 
+    display: block;
+    margin: 0 auto;
+    width: 150px;
+    
+}
+
+::placeholder {
+    color: #C2D9FF;
+}
+
+/* form validation input feild getting red */
+
+input.ng-invalid.ng-touched {
+    border: red 2px solid;
+}
+
+
+.addResourceBtn{
+    align-items: center;
+    margin-left: 70px;
+}
+
+.createTeamBtn{
+    background-color: #FEFEFE;
+    border: 2px solid #CBCBCB;
+    border-radius: 8px;
+    color: #7752FE;
+    text-align: center;
+    text-decoration: bold;
+    display: inline-block;
+    width: 188px;
+    height: 39px;
+    margin-bottom: 15px; 
+    margin-top: 10px;
+    margin-left: 80px;
+    margin-right: 10px;
+}
