@@ -7,6 +7,7 @@ import { PagesBodyComponent } from './pages-body/pages-body.component';
 import { CreateProjectComponent } from './Project-management/create-project/create-project.component';
 import { ProjectListComponent } from './Project-management/project-list/project-list.component';
 import { ProjectButtunsComponent } from './Project-management/project-buttuns/project-buttuns.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ProjectButtunsComponent } from './Project-management/project-buttuns/pr
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration()

@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-2">
+        <div class="col-sm-4 col-md-2 col-lg-2">
             <div class="container-lg-fluid">
                 <div class="row">
                         <div class="table-container">
@@ -19,11 +19,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <!-- <app-button [btnClss]="'addproject'" [text]="'+ Add New Project'"
-                                            [routerLink]="['/NewProjectForm']">
-                                        </app-button> -->
-                                        <app-project-buttuns [btnClss]="'addproject'" [text]="'Add New Project'" [routerLink]="['/NewProjectForm']"></app-project-buttuns>
-                                        <!-- <app-create-project *ngIf="showProjectForm"></app-create-project> -->
+                                        <app-project-buttuns [btnClss]="'addproject'" [text]="'Add New Project'" [routerLink]="'CreateProject'"></app-project-buttuns>
                                     </td>
                                 </tr>
                             </table>
@@ -31,8 +27,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-10">
-            <app-create-project></app-create-project>
+        <div class="col-sm-9 col-md-9 col-lg-10">
+                    <app-create-project></app-create-project>
         </div>
     </div>
 </div>
