@@ -1,0 +1,32 @@
+.addButton {
+    /* padding : 2px 100px;  */
+    width: 75%;
+   color: #7752fe;
+   background-color: white;
+   border: rgb(203, 203, 203) 1px solid;
+   border-radius: 5px;
+   margin: 0 50px;
+}
+
+.addButton:hover {
+   background-color: #04175a;
+   color: white;
+}
+
+
+
+.container {
+   position: relative;
+   width: 50%;
+   margin-left: 0;
+}
+
+.center {
+   margin: 0;
+   position: absolute;
+   /* top: 50%; */
+   left: 15%;
+   width: 75%;
+   /* -ms-transform: translate(-50%, -50%); */
+   /* transform: translate(-50%, -50%); */
+}

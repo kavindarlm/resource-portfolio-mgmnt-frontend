@@ -1,0 +1,54 @@
+.container {
+    position: relative;
+    width: 45%;
+    margin: 10px;
+    border: 1px #ced2d9 solid;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.topic {
+    background-color: #7752fe;
+    padding: 5px;
+    text-align: center;
+    width: 80%;
+    margin: 5px auto;
+    color: white;
+    border-radius: 5px;
+}
+
+.input-group {
+    width: 30%;
+    position: relative;
+    float: right;
+    right: 0px;
+    margin-top: 5px;
+}
+
+#exampleModalLabel {
+    color: #7752fe;
+}
+
+.form-label {
+    color: #8e8ffa;
+}
+
+.table-headers .headers {
+    margin: 5px;
+    padding: 2px 50px;
+    background-color: #c2d9ff;
+    color: #04175a;
+    font-weight: bold;
+    border: 1px #93b8f3 solid;
+    border-radius: 5px;
+}
+
+.table-headers {
+    border-top: 1px white solid;
+    border-left: 1px white solid;
+    border-right: 1px white solid;
+}
+
+.table-body {
+    text-align: center;
+}
