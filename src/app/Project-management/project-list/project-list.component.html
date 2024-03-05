@@ -1,28 +1,38 @@
-<div class="container-lg-fluid">
+<div class="container-fluid">
     <div class="row">
-            <div class="table-container">
-                <table class="table table-borderless">
-                    <thead>
-                        <tr>
-                            <th class="col">
-                                    <app-project-buttuns [btnClss]="'label-project'" [text]="'Project List'"></app-project-buttuns>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tr *ngFor="let project of projectDetails ">
-                        <td>
-                            <app-project-buttuns [btnClss]="'btn-costom'" [text]="project.projectName" (Click)="openProject(project.projectName)"></app-project-buttuns>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <!-- <app-button [btnClss]="'addproject'" [text]="'+ Add New Project'"
-                                [routerLink]="['/NewProjectForm']">
-                            </app-button> -->
-                            <app-project-buttuns [btnClss]="'addproject'" [text]="'Add New Project'"></app-project-buttuns>
-                        </td>
-                    </tr>
-                </table>
+        <div class="col-2">
+            <div class="container-lg-fluid">
+                <div class="row">
+                        <div class="table-container">
+                            <table class="table table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th class="col">
+                                                <app-project-buttuns [btnClss]="'label-project'" [text]="'Project List'"></app-project-buttuns>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tr *ngFor="let project of projectDetails ">
+                                    <td>
+                                        <app-project-buttuns [btnClss]="'btn-costom'" [text]="project.projectName" (Click)="openProject(project.projectName)"></app-project-buttuns>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <!-- <app-button [btnClss]="'addproject'" [text]="'+ Add New Project'"
+                                            [routerLink]="['/NewProjectForm']">
+                                        </app-button> -->
+                                        <app-project-buttuns [btnClss]="'addproject'" [text]="'Add New Project'" [routerLink]="['/NewProjectForm']"></app-project-buttuns>
+                                        <!-- <app-create-project *ngIf="showProjectForm"></app-create-project> -->
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                </div>
             </div>
+        </div>
+        <div class="col-10">
+            <app-create-project></app-create-project>
+        </div>
     </div>
 </div>

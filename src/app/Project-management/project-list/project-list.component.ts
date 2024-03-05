@@ -6,8 +6,15 @@ import { Component } from '@angular/core';
   styleUrl: './project-list.component.css'
 })
 export class ProjectListComponent {
-  constructor(){}
 
+  // showProjectForm=false;
+  constructor(){
+    // this.showProjectForm=false;
+  }
+
+  // displayProjectForm(){
+  //   this.showProjectForm=true;
+  // }
 
   ngOnInit(): void {}
   
