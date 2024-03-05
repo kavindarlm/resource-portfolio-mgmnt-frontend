@@ -1,0 +1,15 @@
+.table-container{
+    width: 50%;
+    height: inherit;
+    margin-left: 20%;
+    border: solid 1px #ccc;
+}
+th, td {
+    padding: 8px; /* Padding for content spacing */
+    text-align: left; /* Text alignment within cells */
+  }
+.table-borderless{
+    border: none;
+    height: 300px;
+    overflow: auto;
+} 
