@@ -10,7 +10,7 @@ import { PagesBodyComponent } from './pages-body/pages-body.component';
   declarations: [
     AppComponent,
     PagesBodyComponent,
-
+    
   ],
   imports: [
     BrowserModule,
