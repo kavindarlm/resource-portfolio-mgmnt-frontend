@@ -1,0 +1,77 @@
+<div class="container-lg-fluid">
+    <div class="row">
+        <!-- <div class="col-lg-2">
+            <app-project-list></app-project-list>
+        </div> -->
+        <div class="col-lg-10">
+            <div class="container-lg form-container">
+                <app-project-buttuns [btnClss]="'label-project'" [text]="'Create New Project'"></app-project-buttuns>
+                <form [formGroup]="projectForm" (ngSubmit)="onSaveProject()">
+
+                    <div class="form-goup row-label">
+                        <label class="pm-label" for="projectName">Project Name*</label>
+                        <div class="form-group row row-label">
+                            <label for="projectName" class="col-sm-2 col-form-label col-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="projectName" placeholder="Enter Project Name" [formControlName]="'projectName'" >
+                            </div>
+                        </div>
+                        <label class="pm-label" for="projectStartDate">Project Start Date*</label>
+                        <div class="form-group row row-label">
+                            <label for="projectStartDate" class="col-sm-2 col-form-label col-label">From :</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" id="projectStartDate" placeholder="Enter projectStartDate" required formControlName="projectStartDate">
+                            </div>
+                        </div>
+                        <div class="form-group row row-label">
+                            <label class="pm-label" for="projectEndDate">Project End Date*</label>
+                            <label for="projectEndDate" class="col-sm-2 col-form-label col-label">To :</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" id="projectEndDate"
+                                    placeholder="Enter projectEndDate" required formControlName="projectEndDate">
+                            </div>
+                        </div>
+    
+                        <label class="pm-label" for="ProjectCriticality">Project Criticallity*</label>
+                        <div class="form-group row row-label">
+                            <label for="ProjectCriticality" class="col-sm-2 col-form-label col-label">Criticality</label>
+                            <div class="col-sm-10">
+                                <select id="inputState" class="form-control" required >
+                                    <option disabled selected value="">Select Project Criticality</option>
+                                    <option>High</option>
+                                    <option>Medium</option>
+                                    <option>Low</option>
+                                </select>
+                            </div>
+                        </div>
+                        <label class="pm-label" for="projectManager">Project Manager*</label>
+                        <div class="form-group row row-label">
+                            <label for="projectManager" class="col-sm-2 col-form-label col-label">Assigner :</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="projectManager"
+                                    placeholder="Enter Project Manager ID" required formControlName="projectManager">
+                            </div>
+                        </div>
+                        <label class="pm-label" for="deliveryManager">Delivery Manager*</label>
+                        <div class="form-group row row-label">
+                            <label for="deliveryManager" class="col-sm-2 col-form-label col-label">Assigner :</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="deliveryManager"
+                                    placeholder="Enter Delivery Manager ID" required formControlName="deliveryManager">
+                            </div>
+                        </div>
+                        <label class="pm-label" for="projectDescription">Project Description</label>
+                        <div class="form-group row row-label">
+                            <label for="projectDescription" class="col-sm-2 col-form-label col-label">Description :</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" id="projectDescription" rows="3"
+                                    placeholder="Enter Description" formControlName="projectDescription"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <app-button  [btnClss]="'button-project'" [text]="'Add Project'" (onClick)="onSaveProject()"></app-button>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
