@@ -1,0 +1,20 @@
+<div class="listBox">
+    <div class="container">
+        <h6>Unit List</h6>
+
+        <app-reuse-button [text]="'Unit 1'"></app-reuse-button>
+        <app-reuse-button [text]="'Unit 2'"></app-reuse-button>
+        <app-reuse-button [text]="'Unit 3'"></app-reuse-button>
+        <app-reuse-button [text]="'Unit 4'"></app-reuse-button>
+        <app-reuse-button [text]="'Unit 5'"></app-reuse-button>
+        <app-reuse-button [text]="'Unit 6'"></app-reuse-button>
+        <app-reuse-button [text]="'Unit 7'"></app-reuse-button>
+        <app-reuse-button [text]="'Unit 8'"></app-reuse-button>
+        <app-reuse-button [text]="'Unit 9'"></app-reuse-button>
+        <app-reuse-button [text]="'Unit 10'"></app-reuse-button>
+
+
+    </div>
+    <button class="addButton" (click)="showcomponent()">New Unit</button>
+</div>
+<app-unit-form *ngIf="showForm"></app-unit-form>

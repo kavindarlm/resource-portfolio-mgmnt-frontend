@@ -1,0 +1,47 @@
+.listBox {
+    border: 1px #ced2d9 solid;
+    width: 20%;
+    margin: 15px 10px;
+    position: relative;
+    padding-bottom: 10px;
+    float: left;
+    border-radius: 5px;
+}
+
+.container {
+    width: 100%;
+    
+    
+    
+    padding: 10px;
+    
+    
+    /* display: inline-block; */
+}
+
+h6 {
+	background-color: #7752fe;
+	padding: 5px;
+	text-align: center;
+	/* width: 80%; */
+	margin: 5px auto;
+	color: white;
+	border-radius: 5px;
+}
+
+.addButton {
+    background-color: #c2d9ff;
+    color: #7752fe;
+    width: 92%;
+    display: block;
+    /* margin: 10px; */
+    border: none;
+    border-radius: 5px;
+    padding: 5px 0;
+    margin-left: 10px;
+}
+
+.addButton:hover {
+    background-color: #1e3895;
+    color: white;
+}

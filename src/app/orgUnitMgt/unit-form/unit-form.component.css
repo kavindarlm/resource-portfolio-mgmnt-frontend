@@ -1,0 +1,87 @@
+.formBox {
+    width: 50%;
+    float: inline-start;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border: 1px #ced2d9 solid;
+    border-radius: 5px;
+    position: relative;
+}
+
+.topic {
+    background-color: #7752fe;
+    padding: 5px;
+    text-align: center;
+    width: 50%;
+    margin: 5px auto;
+    color: white;
+    border-radius: 5px;
+}
+
+.form-label {
+    color: #7752fe;
+    font-weight: bold;
+}
+
+::placeholder {
+  color: #c3c0ce; /* Change this to your desired color */
+}
+
+.form-group label {
+    display: block;
+}
+
+.form-group .form-control,
+.form-group .form-select {
+  display: inline;
+}
+
+.form-group .form-control,
+.form-group .form-select {
+  width: 75%;
+}
+
+.form-group .form-label {
+  margin-right: 20px;  
+} 
+
+.addButton {
+    /* padding : 2px 100px;  */
+   width: 20%;
+   color: #7752fe;
+   background-color: white;
+   border: #7752fe 1px solid;
+   border-radius: 5px;
+   margin:0 25%;
+   /* display: flex;
+   align-items: center;
+   justify-content: center; */
+   padding: 5px;
+}
+
+.addButton:hover {
+   background-color: #04175a;
+   color: white;
+}
+
+.inputField {
+    /* margin-left: 10px; */
+    display: flex;
+    justify-content: center;
+    color: #7752fe;
+}
+
+/* .inputField p {
+    flex: 50%;
+    float: right;
+}
+
+.inputField .form-control {
+    flex: 50%;
+    float: left;
+} */
+
+.add {
+    display: flex;
+    justify-content: center;
+}
