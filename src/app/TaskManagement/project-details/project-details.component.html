@@ -1,0 +1,48 @@
+<div class="container card-body">
+    <div class="heder-label">
+        {{ projectDetails[0].projectName }}
+    </div>
+
+    <div class="detailCard">
+        <div class="container">
+            <div class="row rowOne">
+                <div class="col-6">
+                    <div class="colBorder">
+                        ProjectStartDate: {{projectDetails[0].projectStartDate | date: 'dd-MM-yyyy'}}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="colBorder">
+                        PojectEndDate: {{projectDetails[0].projectEndDate | date: 'dd-MM-yyyy'}}
+                    </div>
+                </div>
+            </div>
+            <div class="row rowOne">
+                <div class="col-12">
+                    <div class="colBorder">
+                        DeliveryManager: {{projectDetails[0].deliveryManager}}
+                    </div>
+                </div>
+            </div>
+            <div class="row rowTwo">
+                <div class="col-9">
+                    <div class="colDescription">
+                        Project Description: {{projectDetails[0].projectDescription}}
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="colCricality ">
+                        Project Criticality:
+                        <div [ngClass]="projectDetails[0].ProjectCriticality" class="levelSqure">
+                        </div>
+                        {{projectDetails[0].ProjectCriticality}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="heder-label">
+        Task Management
+    </div>
+</div>

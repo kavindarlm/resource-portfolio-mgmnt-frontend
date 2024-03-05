@@ -1,0 +1,70 @@
+.card-body{
+    width: 100%;
+    color: #7752FE; 
+    font-weight: 600; /* Semi-bold font weight */
+    border: 1px solid  #CBCBCB; /* Border style */
+    padding: 5px; 
+}
+.heder-label{
+    font-size: 20px;
+    font-weight: semi-bold;
+    text-align: center;
+    background-color: #7752FE;
+    height: 6%;
+    width: 100%;
+    border-radius: 8px;
+    color: white;
+    display: block;
+    padding: 10px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.row-label{
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+::placeholder{
+    color: #7752FE;
+    opacity: .5;
+}
+
+.form-control{
+    color: #7752FE;
+}
+
+select {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #7752FE; /* Text color when not focused */
+    background-color: #fff; /* Background color when not focused */
+    opacity: .5;
+}
+
+/* Style the select element when it is focused */
+select:focus {
+    border-color: #7752FE; /* Border color when focused */
+    color: #7752FE; /* Text color when focused */
+}
+
+/* Style the options inside the dropdown */
+select option {
+    color: #7752FE; /* Text color of options */
+    background-color: #fff; /* Background color of options */
+}
+
+/* Style the options when hovered */
+select option:hover {
+    background-color: #7752FE; /* Background color of options when hovered */
+    color: #fff; /* Text color of options when hovered */
+}
+
+.col-label{
+    font-weight: regular;
+    color: #7752FE;
+    text-align: right;
+}
+
+.form-body{
+    padding: 25px;
+}

@@ -1,0 +1,120 @@
+.heder-label {
+    font-size: 20px;
+    font-weight: semi-bold;
+    text-align: center;
+    background-color: #7752FE;
+    height: 6%;
+    width: 100%;
+    border-radius: 8px;
+    color: white;
+    display: block;
+    padding: 10px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.card-body {
+    width: 100%;
+    color: #7752FE;
+    font-weight: 600;
+    /* Semi-bold font weight */
+    border: 1px solid #CBCBCB;
+    /* Border style */
+    padding: 5px;
+}
+
+.rowOne {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.colBorder {
+    border: 1px double #CBCBCB;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.range-slider-container {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    /* Adjust width as needed */
+    padding: 10px;
+    border: 1px double #CBCBCB;
+    border-radius: 10px;
+}
+
+.progress-container-label {
+    font-weight: 600px;
+    text-align: center;
+    background-color: #C2D9FF;
+    height: auto;
+    width: 80%;
+    border-radius: 8px;
+    display: block;
+    padding: 6px;
+    margin-left: 10%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.progress-container {
+    font-weight: 600px;
+    text-align: center;
+    height: auto;
+    width: 80%;
+    border-radius: 8px;
+    border: 1px double #CBCBCB;
+    display: block;
+    padding: 6px;
+    margin-left: 10%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: #A9BCFF;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 6px;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 100px;
+    background: #7752FE;
+    cursor: pointer;
+    position: relative;
+    /* Ensure the thumb is positioned relatively */
+}
+
+.slider-value {
+    position: absolute;
+    top: 10px;
+    /* Adjust the positioning to be above the thumb */
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+}
+
+
+/* .slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #04AA6D;
+    cursor: pointer;
+  } */
