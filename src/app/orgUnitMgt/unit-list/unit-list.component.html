@@ -13,8 +13,18 @@
         <app-reuse-button [text]="'Unit 9'"></app-reuse-button>
         <app-reuse-button [text]="'Unit 10'"></app-reuse-button>
 
-
-    </div>
+        <!-- <table class="unitTable">
+            <thead>
+                <th><h6>Unit List</h6></th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let arr of array">
+                    <td><button class="listBtn">{{arr.Name}}</button></td>
+                </tr>
+            </tbody>
+        </table> -->
+    </div> 
     <button class="addButton" (click)="showcomponent()">New Unit</button>
 </div>
+
 <app-unit-form *ngIf="showForm"></app-unit-form>
