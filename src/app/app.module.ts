@@ -22,7 +22,7 @@ import { ButtonTusksComponent } from './TaskManagement/button-tusks/button-tusks
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     provideClientHydration()
