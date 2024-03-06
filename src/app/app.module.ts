@@ -8,6 +8,7 @@ import { CreateNewtaskComponent } from './TaskManagement/create-newtask/create-n
 import { ProjectDetailsComponent } from './TaskManagement/project-details/project-details.component';
 import { UpdateTaskComponent } from './TaskManagement/update-task/update-task.component';
 import { ButtonTusksComponent } from './TaskManagement/button-tusks/button-tusks.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { ButtonTusksComponent } from './TaskManagement/button-tusks/button-tusks
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration()
