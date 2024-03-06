@@ -9,24 +9,35 @@
 }
 
 .container {
-    width: 100%;
-    
-    
-    
+    width: 100%; 
     padding: 10px;
-    
-    
     /* display: inline-block; */
+}
+
+.unitTable {
+    width: 100%;
 }
 
 h6 {
 	background-color: #7752fe;
 	padding: 5px;
 	text-align: center;
-	/* width: 80%; */
+	width: 100%;
 	margin: 5px auto;
 	color: white;
 	border-radius: 5px;
+}
+
+.listBtn {
+    background-color: #c2d9ff;
+    color: #7752fe;
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border: none;
+    padding: 3px;
+    border-radius: 5px;
 }
 
 .addButton {
