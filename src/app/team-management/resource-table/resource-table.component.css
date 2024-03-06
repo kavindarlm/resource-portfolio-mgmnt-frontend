@@ -1,7 +1,15 @@
+.tableBox{
+    width:fit-content ;
+    margin: 10px;
+    float: right;
+    border: 1px solid #8691A833;
+
+}
+
 table{
     width:fit-content ;
-    margin: 20px;
-    border-collapse: collapse;
+    margin: 30px;
+    float: right;
 }
 
 table, td {
@@ -11,10 +19,55 @@ table, td {
     color: #7752FE;
 }
 
+th{
+    background-color: none;
+}
+
 .tbtn{
-    background-color: #C2D9FF;
+    background-color:  #C2D9FF;
+    border: 1px solid #C2D9FF;
+    border-radius: 4px;
     color: #190482;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
    
+}
+
+.systemResource{
+    background-color: #7752FE;
+    border: 2px solid #7752FE;
+    border-radius: 8px;
+    color: #FEFEFE;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: 350px;
+    height: 39px;
+    pointer-events: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 30px;
+}
+
+.selectBtn{
+    background-color:  #FEFEFE;
+    border: 2px solid #7752FE;
+    border-radius: 8px;
+    color: #7752FE;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    width: fit-content;
+    height: fit-content;
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
 }
 
 

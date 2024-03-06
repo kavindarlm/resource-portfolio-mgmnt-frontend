@@ -2,6 +2,7 @@
     border: 1px solid #ccc;
     padding: 20px;
     margin: 20px;
+    margin-right: 10px;
     width: fit-content;
     border-radius: 8px; 
     color: #7752FE;
@@ -131,8 +132,8 @@ input.ng-invalid.ng-touched {
     display: inline-block;
     width: 188px;
     height: 39px;
-    margin-bottom: 15px; 
-    margin-top: 10px;
+    margin-bottom: 1px; 
+    margin-top: 1px;
     margin-left: 80px;
     margin-right: 10px;
 }
