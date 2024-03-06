@@ -12,6 +12,22 @@ export class FirstViewComponent implements OnInit {
   formValue !: FormGroup;
   api: any;
   constructor(private formbuilder: FormBuilder) {}
+
+  array: any = [
+    {
+      Name: "Kamal",
+      ID: "1",
+      JobRole: "Software Engineer",
+      OrgUnit: "Unit 3"
+    },
+    {
+      Name: "Saman",
+      ID: "2",
+      JobRole:"UI/UX Engineer",
+      OrgUnit: "Unit 2"
+    }
+  ]
+
   ngOnInit(): void {
     this.formValue = this.formbuilder.group({
       resourceName : [''],
