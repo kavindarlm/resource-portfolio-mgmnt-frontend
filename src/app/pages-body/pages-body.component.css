@@ -48,7 +48,7 @@
     overflow: hidden;
   }
 
-  .white-div-container {
+  #white-div-container {
     background: white;
     margin-left: 20px;
     margin-right: 20px;
@@ -61,7 +61,24 @@
     max-height: 75vh;
     margin-bottom: 75px;
     overflow-y: auto;
+    display: flex;
+    /* changes */
+    height: 100vh;
   }
+
+
+
+  #sidebar{
+    width: 200px;
+    height: 100%;
+    background-color: black;
+  }
+  #contentContainer{
+    flex-grow: 1;
+    background-color: rgb(255, 255, 255);
+  }
+
+
 
   .logo {
     height: 60px; /* Adjust as needed */
