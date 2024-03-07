@@ -1,0 +1,13 @@
+/* .sidebar {
+    display: flex;
+    width: 0;
+    background-color: red;
+    transition: width 0.3s ease-in-out;
+    padding: 0;
+  }
+  
+  .sidebarActive .sidebar {
+    width: 300px;
+    padding: 10px;
+  }
+   */
