@@ -60,8 +60,61 @@
     /* Adjust the height as necessary, or remove it to fit content */
     max-height: 75vh;
     margin-bottom: 75px;
+    /* overflow-y: auto; */
+    /* changes */
+    height: 100vh;
+    display: flex;
+    /* width: 100%; */
+    /* z-index: 1; */
+  }
+
+  .sidebar{
+    width: 200px;
+    min-height: 100%;
+    background-color: rgb(0, 0, 0);
+    transform: translate(-120%);
+    transition: transform 0.3s ease-in-out;
+  }
+  .contentContainer{
+    flex-grow: 1;
+    margin-left: -200px;
+    transition: margin-left 0.3s ease-in-out;
+    /* overflow-y: auto; */
+    /* z-index: 2; */
+  }
+  .sidebarActive .sidebar {
+    transform: translate(0%);
+  }
+  
+  .sidebarActive .contentContainer {
+    margin-left: 0px;
+  }
+  
+  .hederContainer{
+    display: flex;
+    width: 100%;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    box-shadow: 4px 4px 4px 4px #ccc;
+  }
+  .slider-icon{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  /* svg{
+    cursor: pointer;
+  } */
+  .slider-icon{
+    cursor: pointer;
+  }
+  .content{
     overflow-y: auto;
   }
+
+
+
 
   .logo {
     height: 60px; /* Adjust as needed */

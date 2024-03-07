@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrl: './pages-body.component.css'
 })
 export class PagesBodyComponent {
-
+  sidebarActive = false;
 }
