@@ -3,13 +3,17 @@
     margin: 10px;
     float: right;
     border: 1px solid #8691A833;
+    border-radius: 8px;
+    padding: 20px;
+
 
 }
 
 table{
     width:fit-content ;
-    margin: 30px;
+    margin: 20px;
     float: right;
+    
 }
 
 table, td {

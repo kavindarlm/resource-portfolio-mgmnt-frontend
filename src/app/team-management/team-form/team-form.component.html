@@ -1,5 +1,5 @@
-<div class ="box">
-  <div class="formBox">
+<div class ="box border-top mt-2">
+  <div class="formBox mt-2">
     <form [formGroup]="teamForm" (ngSubmit)="OnFormSubmitted()" class="form"> <!--reactive form  (ngSubmit)="createTeam()"-->
         <div>
             <button class="new-team btn btn-primary btn-md">Create New Team</button>
@@ -47,7 +47,8 @@
       </form>
 </div>
 
-<app-resource-table *ngIf="showResourceTable"></app-resource-table>
-
+<div class="resourceTableBox">
+  <app-resource-table *ngIf="showResourceTable"></app-resource-table>
+</div>
 
 </div>
