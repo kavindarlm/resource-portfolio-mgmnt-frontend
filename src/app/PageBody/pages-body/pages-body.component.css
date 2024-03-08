@@ -52,7 +52,7 @@
     margin-left: 20px;
     margin-right: 20px;
     margin-top: 100px;
-    /* width: calc(100% - 40px); */
+    width: calc(100% - 40px);
     border-radius: 10px;
     /*inside content padding 10px*/
     padding: 10px;
@@ -65,6 +65,8 @@
     display: flex;
     /* position: fixed; */
     background-color: rgb(255, 255, 255);
+    overflow-y: hidden;
+    position: fixed;
     
     /* width: 100%;  */
   }
@@ -113,7 +115,8 @@
     display: flex;
     overflow-y: scroll;
     padding: 10px;
-  }
+    box-shadow: 0px 2px 10px #CBCBCB;
+  } 
 
   .title {
     color: white;

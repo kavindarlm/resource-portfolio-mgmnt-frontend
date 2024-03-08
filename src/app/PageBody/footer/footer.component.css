@@ -23,10 +23,6 @@
 }
 
 @media (max-width: 768px) {
-    .footer {
-        position: static;
-    }
-
     .footer-text {
         font-size: 0.7rem;
     }
