@@ -45,22 +45,13 @@
   margin-top: 3%;
   margin-left: 2%;
   content: fit-content;
-
-
   transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
-  /* Add transition effect */
-
   /* Add subtle elevation */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
   /* Add padding */
   padding: 0 15px;
-
   /* Center text vertically */
   line-height: 40px;
-
-  /* Cursor pointer to indicate interactivity */
-  /* cursor: pointer; */
   /* Ensure text fits within the button */
   white-space: nowrap;
   /* Prevent wrapping */
@@ -68,9 +59,11 @@
   /* Hide overflow text */
   text-overflow: ellipsis;
   /* Show ellipsis for overflow text */
+  
 }
 
-.menu-button:hover {
+.menu-button:hover,
+.menu-button:active {
   background-color: #7752FE;
   color: #FEFEFE;
 }
