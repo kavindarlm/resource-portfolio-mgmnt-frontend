@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
 
 @Component({
   selector: 'app-side-bar-header',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './side-bar-header.component.css'
 })
 export class SideBarHeaderComponent {
+  @Input() sidebarActive: boolean = false;
+  @Output() sidebarToggled = new EventEmitter<void>();
+  togglrSidebar() {
+    this.sidebarToggled.emit();
+  }
   
 }
+ 

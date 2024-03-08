@@ -70,13 +70,13 @@
   }
 
 
-  .sidebar{
+  /* .sidebar{
     display: flex;   
     width: 0;
     background-color: red;
     transition: width 0.3s ease-in-out;
     padding: 0;
-  }
+  } */
   .contentContainer{
     /* flex-grow: 1; */
     display: flex;
@@ -84,12 +84,13 @@
     background: white;
     width: 100vw;
   }
-  .sidebarActive .sidebar {
+  /* .sidebarActive{
     width: 300px;
     padding: 10px;
+    
   }
-  
-  .hederContainer{
+   */
+  /* .hederContainer{
     display: flex;
     width: 100%;
     min-height: 60px;
@@ -100,13 +101,13 @@
     overflow-y: hidden;
     position: relative;
     
-  }
-  .slider-icon{
+  } */
+  /* .slider-icon{
     display: flex;
     gap: 20px;
     align-items: center;
     cursor: pointer;
-  }
+  } */
   
   .content{
     display: flex;
