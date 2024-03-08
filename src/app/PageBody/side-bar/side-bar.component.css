@@ -8,11 +8,16 @@
   }
    
 .sidebarActive{
-    width: 300px;
+    width: 250px;
     padding-top: 10px;
-    border-right: 1px solid #808080;
+    border-right: 1px double #CBCBCB;
+    box-shadow: 0px 2px 10px #CBCBCB;
+    /* overflow-y: scroll; */
 }
-
+/* .sidebarActive::-webkit-scrollbar {
+  display: none;
+} */
+ 
 .Menu-Labal {
   background-color: #7752FE;
   color: #FEFEFE;
@@ -35,7 +40,7 @@
     border: .5px solid #7752FE;
     border-radius: 10px;
     color: #7752FE;
-    margin-top: 2%;
+    margin-top: 3%;
     margin-left: 2%;
     content: fit-content;
 
@@ -64,11 +69,21 @@
 }
 li{
   list-style-type: none;
+  
 }
 
 
-.listmenu-line {
+.listmenu-line{
     margin-top: 9px;
     width: 100%;
     text-align: center;
+    box-shadow: 0px 2px 10px #CBCBCB;
+  }
+  @media only screen and (max-width: 768px) {
+    .sidebarActive{
+      position: fixed;
+      z-index: 0;
+      height: 100%;
+      overflow-y: auto;
+    }
   }
