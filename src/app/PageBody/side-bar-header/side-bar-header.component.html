@@ -1,6 +1,5 @@
-<div class="hederContainer">
-    <div class="slider-icon" (click)="togglrSidebar()">
-      <img [src]="sidebarActive ?'assets/image/cross-icon.svg' : 'assets/image/menu-icon.svg'"
-        >
-    </div>
+<div class="hederContainer" [ngClass]="{'headerActive': sidebarActive }">
+  <div class="slider-icon" (click)="togglrSidebar()">
+    <img [src]="sidebarActive ?'assets/image/cross-icon.svg' : 'assets/image/menu-icon.svg'">
   </div>
+</div>
