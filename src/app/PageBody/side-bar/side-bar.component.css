@@ -9,7 +9,8 @@
    
 .sidebarActive{
     width: 300px;
-    padding: 10px;
+    padding-top: 10px;
+    border-right: 1px solid #808080;
 }
 
 .Menu-Labal {
@@ -64,3 +65,10 @@
 li{
   list-style-type: none;
 }
+
+
+.listmenu-line {
+    margin-top: 9px;
+    width: 100%;
+    text-align: center;
+  }
