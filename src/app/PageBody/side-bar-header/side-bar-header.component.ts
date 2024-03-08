@@ -14,9 +14,9 @@ export class SideBarHeaderComponent implements OnInit{
     this.sidebarToggled.emit();
   }
   selectedButton!: string;
-  constructor(private sidebarService: SidebarheaderServiceService){}
+  constructor(private sidebarHeaderService: SidebarheaderServiceService){}
   ngOnInit(): void {
-      this.sidebarService.headername$.subscribe(name => {
+      this.sidebarHeaderService.headername$.subscribe(name => {
         this.selectedButton = name;
       })
   }

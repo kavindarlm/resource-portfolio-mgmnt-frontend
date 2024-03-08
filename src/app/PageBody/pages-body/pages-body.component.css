@@ -59,63 +59,26 @@
     /* Adjust the height as necessary, or remove it to fit content */
     max-height: 75vh;
     margin-bottom: 75px;
-    /* overflow-y: auto; */
-    /* changes */
     height: 75vh;
     display: flex;
-    /* position: fixed; */
     background-color: rgb(255, 255, 255);
     overflow-y: hidden;
     position: fixed;
-    
-    /* width: 100%;  */
   }
 
-
-  /* .sidebar{
-    display: flex;   
-    width: 0;
-    background-color: red;
-    transition: width 0.3s ease-in-out;
-    padding: 0;
-  } */
   .contentContainer{
-    /* flex-grow: 1; */
     display: flex;
     flex-direction: column;
     background: white;
     width: 100vw;
   }
-  /* .sidebarActive{
-    width: 300px;
-    padding: 10px;
-    
-  }
-   */
-  /* .hederContainer{
-    display: flex;
-    width: 100%;
-    min-height: 60px;
-    padding: 10px 20px;
-    box-sizing: border-box;
-    justify-content: space-between;
-    box-shadow: 5px 2px 10px rgba(0,0,0,0.2);
-    overflow-y: hidden;
-    position: relative;
-    
-  } */
-  /* .slider-icon{
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    cursor: pointer;
-  } */
-  
+
   .content{
     display: flex;
     overflow-y: scroll;
     padding: 10px;
     box-shadow: 0px 2px 10px #CBCBCB;
+    height: 75vh;
   } 
 
   .title {
@@ -123,16 +86,6 @@
     margin: 0;
     font-size: 1.5rem; /* Adjust as needed */
   }
-  
-  
-
-  
-  
-  
-  
-  
-  /* Footer Styles */
-  
   /* Responsive adjustments */
   
   @media (max-width: 768px) {  

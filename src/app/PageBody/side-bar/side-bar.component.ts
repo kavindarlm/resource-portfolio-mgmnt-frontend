@@ -7,11 +7,11 @@ import { SidebarheaderServiceService } from '../side-bar-header-service/sidebarh
   styleUrl: './side-bar.component.css'
 })
 export class SideBarComponent implements OnInit{
-  constructor(private sidebarService: SidebarheaderServiceService){}
+  constructor(private sidebarHeaderService: SidebarheaderServiceService){}
   ngOnInit(): void {
   }
   selectHeaderName(name:string){
-    this.sidebarService.setHeaderName(name);
+    this.sidebarHeaderService.setHeaderName(name);
   }
   @Input() sidebarActivee: boolean = false;
 }
