@@ -1,5 +1,5 @@
 .sidebar {
-    display: flex;
+    /* display: flex; */
     width: 0;
     background-color: white;
     transition: width 0.1s ease-in-out;
@@ -27,7 +27,7 @@
 }
 
 .menu-button{
-  width: 95%; /* Set the width for desktop */
+    width: 95%; /* Set the width for desktop */
     height: 40px;
     font-weight: bold;
     background-color: #fefefe;
@@ -51,11 +51,16 @@
     line-height: 40px;
 
     /* Cursor pointer to indicate interactivity */
-    cursor: pointer;
-
-
+    /* cursor: pointer; */
     /* Ensure text fits within the button */
     white-space: nowrap; /* Prevent wrapping */
     overflow: hidden; /* Hide overflow text */
     text-overflow: ellipsis; /* Show ellipsis for overflow text */
+}
+.menu-button:hover{
+  background-color: #7752FE;
+  color: #FEFEFE;
+}
+li{
+  list-style-type: none;
 }
