@@ -1,8 +1,8 @@
 .sidebar {
     display: flex;
     width: 0;
-    background-color: red;
-    transition: width 0.3s ease-in-out;
+    background-color: white;
+    transition: width 0.1s ease-in-out;
     padding: 0;
     height: 100%;
   }
@@ -11,4 +11,51 @@
     width: 300px;
     padding: 10px;
 }
-   
+
+.Menu-Labal {
+  background-color: #7752FE;
+  color: #FEFEFE;
+  width: 95%;
+  height: 40px;
+  font-weight: bold;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  margin-left: 2%;
+  padding: 3%;
+}
+
+.menu-button{
+  width: 95%; /* Set the width for desktop */
+    height: 40px;
+    font-weight: bold;
+    background-color: #fefefe;
+    border: .5px solid #7752FE;
+    border-radius: 10px;
+    color: #7752FE;
+    margin-top: 2%;
+    margin-left: 2%;
+    content: fit-content;
+
+
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s; /* Add transition effect */
+
+    /* Add subtle elevation */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    /* Add padding */
+    padding: 0 15px;
+
+    /* Center text vertically */
+    line-height: 40px;
+
+    /* Cursor pointer to indicate interactivity */
+    cursor: pointer;
+
+
+    /* Ensure text fits within the button */
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Show ellipsis for overflow text */
+}
