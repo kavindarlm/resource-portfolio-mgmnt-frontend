@@ -3,31 +3,29 @@
         <div class="topic">
             <h6>Add New Resource</h6>
         </div>
-        <form>
+        <!-- <form> -->
             <div class="form-group mb-3">
                 <br>
                 <label for="resourceName" class="form-label">Resource Name *</label>
                 <div class="inputField">
                     <p>Name :</p>
-                    <input type="text" class="form-control" id="resourceName" placeholder="Enter Name">
+                    <input type="text" [(ngModel)]="resourceObject.resourceName" class="form-control" id="resourceName" placeholder="Enter Name">
                 </div>
             </div>
             <div class="form-group mb-3">
                 <label for="resourceID" class="form-label">Resource ID *</label>
                 <div class="inputField">
                     <p>ID :</p>
-                    <input type="text" class="form-control" id="resourceID" placeholder="Enter Resource ID">
+                    <input type="text" [(ngModel)]="resourceObject.resourceID" class="form-control" id="resourceID" placeholder="Enter Resource ID">
                 </div>
             </div>
             <div class="form-group mb-3">
                 <label for="jobRole" class="form-label">Job Role *</label>
                 <div class="inputField">
                     <p>Job Role :</p>
-                    <select class="form-select" id="jobRole" style="color: #c3c0ce;">
-                        <option selected>Select Job Role</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
+                    <select class="form-select" [(ngModel)]="resourceObject.roleId" id="jobRole"><!-- style="color: #c3c0ce; -->
+                        <option value="">Select Job Role</option>
+                        <option *ngFor="let roles of jobroles" [value]="roles.roleId">{{roles.roleName}}</option>
                     </select>
                 </div>
             </div>
@@ -35,17 +33,15 @@
                 <label for="orgUnit" class="form-label">Organizational Unit</label>
                 <div class="inputField">
                     <p>Org Unit :</p>
-                    <select class="form-select" id="orgUnit" style="color: #c3c0ce;">
-                        <option selected>Select Organizational Unit</option>
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                        <option value="3">Option 3</option>
+                    <select class="form-select" [(ngModel)]="resourceObject.unitId" id="orgUnit" style="color: #c3c0ce;">
+                        <option value="">Select Organizational Unit</option>
+                        <option *ngFor="let units of orgunits" [value]="units.unitId">{{units.unitName}}</option>
                     </select>
                 </div>
             </div>
             <div class="add">
-                <button type="submit" class="addButton">Add Resource</button>
+                <button type="button" (click)="onCreateResource()" class="addButton">Add Resource</button>
             </div>
-        </form>
+        <!-- </form> -->
     </div>
 </div>

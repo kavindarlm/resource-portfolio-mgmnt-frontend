@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { ResourceModel } from './add-form.model';
+import { FormGroup } from '@angular/forms';
+// import { ResourceModel } from './add-form.model';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-form',
@@ -9,32 +10,46 @@ import { ResourceModel } from './add-form.model';
 })
 
 export class AddFormComponent implements OnInit {
-  resourceModelObj : ResourceModel = new ResourceModel();
+
   formValue !: FormGroup;
-  api: any;
-  constructor(private formbuilder: FormBuilder) {}
+  
+  jobroles: any[]=[]; //creating an array for jobroles
+  orgunits: any[]=[]; //creating an array for orgunits
+
+  resourceObject : any ={ //Creating a resource object
+    "resourceName" : "",
+    "resourceID" : "",
+    "jobRole" : "",
+    "roleId" : "",
+    "orgUnit" : "",
+    "unitId" : ""
+  }
+
+  constructor(private http: HttpClient) {} // Have to include the HttpClient Module in app.model too
   ngOnInit(): void {
-    this.formValue = this.formbuilder.group({
-      resourceName : [''],
-      resourceID : [''],
-      jobRole : [''],
-      orgUnit : ['']
+    this.loadJobRoles();// calling the loadJobRoles Method
+    this.loadOrgUnits();
+  }
+
+  loadJobRoles() { //a function to get data from the json file(jobroles)
+    this.http.get("assets/jobroles.json").subscribe((res:any)=>{
+      debugger;
+      this.jobroles = res.data;//the response from this asset file(jobroles.json) will be stored in this array
     })
   }
 
-  postResourceDetails() {
-    this.resourceModelObj.resourceName = this.formValue.value.resourceName;
-    this.resourceModelObj.resourceID = this.formValue.value.resourceID;
-    this.resourceModelObj.jobRole = this.formValue.value.jobRole;
-    this.resourceModelObj.orgUnit = this.formValue.value.orgUnit;
-
-    this.api.postResource(this.resourceModelObj)
-    .subscribe((res: any)=>{
-      console.log(res);
-      alert("Employee added successfully");
-    },
-    ()=>{
-      alert("Something went wrong");
+  loadOrgUnits() {
+    this.http.get("assets/orgunits.json").subscribe((res:any)=> {
+      debugger;
+      this.orgunits = res.data;
     })
   }
+
+  onCreateResource(){
+    debugger;
+    this.http.post("assets/postResources.json", this.resourceObject).subscribe((res:any)=> {
+      alert(res.message)
+    })
+  }
+
 }

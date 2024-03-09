@@ -1,6 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { ResourceModel } from './first-view.model';
+import { FormGroup } from '@angular/forms';
+// import { ResourceModel } from './first-view.model';
 
 @Component({
   selector: 'app-first-view',
@@ -8,32 +9,22 @@ import { ResourceModel } from './first-view.model';
   styleUrl: './first-view.component.css'
 })
 export class FirstViewComponent implements OnInit {
-  resourceModelObj : ResourceModel = new ResourceModel();
+
+  resourceList: any[]=[];
   formValue !: FormGroup;
-  api: any;
-  constructor(private formbuilder: FormBuilder) {}
+
+  constructor(private http:HttpClient) {}
+
+
   ngOnInit(): void {
-    this.formValue = this.formbuilder.group({
-      resourceName : [''],
-      resourceID : [''],
-      jobRole : [''],
-      orgUnit : ['']
+    this.loadResources();
+  }
+
+  loadResources() {
+    this.http.get("assets/getResources.json").subscribe((res:any)=>{
+      debugger;
+      this.resourceList = res.data;
     })
   }
 
-  postResourceDetails() {
-    this.resourceModelObj.resourceName = this.formValue.value.resourceName;
-    this.resourceModelObj.resourceID = this.formValue.value.resourceID;
-    this.resourceModelObj.jobRole = this.formValue.value.jobRole;
-    this.resourceModelObj.orgUnit = this.formValue.value.orgUnit;
-
-    this.api.postResource(this.resourceModelObj)
-    .subscribe((res: any)=>{
-      console.log(res);
-      alert("Employee added successfully");
-    },
-    ()=>{
-      alert("Something went wrong");
-    })
-  }
 }

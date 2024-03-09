@@ -1,7 +1,7 @@
 {
     "data" : [
         {
-            "resourceName" : "Anuditha Jayamanne",
+            "resourceName" : "abc",
             "resourceID" : "0001",
             "jobRole" : "Software Engineer",
             "roleId" : "1",
@@ -9,7 +9,7 @@
             "unitId" : "3"
         },
         {
-            "resourceName" : "Savindi Paboda",
+            "resourceName" : "ruv",
             "resourceID" : "0002",
             "jobRole" : "Software Engineer",
             "roleId" : "1",

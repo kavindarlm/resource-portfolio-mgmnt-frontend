@@ -16,13 +16,13 @@
             </tr>
         </thead>
         <tbody class="table-body">
-            <tr>
-                <td>1</td>
-                <td>Software Engineer</td>
-                <td>Unit 2</td>
+            <tr *ngFor="let resource of resourceList">
+                <td>{{resource.resourceID}}</td>
+                <td>{{resource.jobRole}}</td>
+                <td>{{resource.orgUnit}}</td>
             </tr>
         </tbody>
     </table>
 </div>
-<!-- Button trigger modal(bootstrap- https://getbootstrap.com/docs/5.3/components/modal/#how-it-works) -->
+
 
