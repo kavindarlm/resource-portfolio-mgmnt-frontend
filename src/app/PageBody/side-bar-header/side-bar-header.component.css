@@ -22,10 +22,11 @@
   
   .sidebar-header{
     font-size: 1.5rem;
-    font-weight: bold;
+    font-weight: 600;
     color: #190482;
     width: 100%;
     text-align: center; 
+    letter-spacing: 0.05rem;
   }
   @media only screen and (max-width: 768px) {
     .hederContainer{
