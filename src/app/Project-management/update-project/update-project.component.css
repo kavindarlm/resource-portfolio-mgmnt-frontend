@@ -79,21 +79,33 @@ select option:hover {
     caret-color: transparent;
 }
 
-.button-project{
+.button-edit{
     color: #7752FE;
     border: solid 1.5px #7752FE;
     font-weight: semibold;
-    width: 50%;
+    width: 30%;
     margin-top: 3%;
-    margin-left: 25%;
+    margin-left: 35%;
     height: 10%;
 }
-.button-project:hover{
+.button-edit:hover{
     color: #FEFEFE;
     background-color: #1E3895;
     font-weight: semibold;
     border: solid 1px #7752FE;
 }
-
-
-
+.button-delete{
+    color: #FF0000;
+    border: solid 1.5px #FF0000;
+    font-weight: semibold;
+    width: 20%;
+    margin-top: 3%;
+    margin-left: 65%;
+    height: 8%;
+}
+.button-delete:hover{
+    color: #FEFEFE;
+    background-color: #FF0000;
+    font-weight: semibold;
+    border: solid 1px #FF0000;
+}

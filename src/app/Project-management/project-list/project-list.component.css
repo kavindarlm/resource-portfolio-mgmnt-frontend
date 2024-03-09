@@ -1,15 +1,55 @@
 .table-container{
-    width: 100%;
-    height: inherit;
-    margin-left: 20%;
-    border: solid 1px #ccc;
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    margin-left: 40%;   
 }
 th, td {
     padding: 8px; /* Padding for content spacing */
     text-align: left; /* Text alignment within cells */
   }
-.table-borderless{
-    border: none;
-    height: 300px;
-    overflow: auto;
-} 
+.project-list{
+    overflow-y: scroll;
+    /* Adjusted height */
+    border: solid 1px black;
+    width: 100%;
+    
+}   
+
+.table-data{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+    margin: 10px 0;
+    
+}
+
+.addproject{
+    color: #7752FE;
+    border: solid 1.5px #7752FE;
+    font-weight: semibold;
+    width: 100%;
+    margin-top: 3%;
+}
+
+.addproject:hover{
+    color: #FEFEFE;
+    background-color: #1E3895;
+    font-weight: semibold;
+    border: solid 1px #7752FE;
+
+}
+.btn-costom{
+    background-color: #C2D9FF;
+    color: #7752FE;
+    font-family: Montserrat;
+    width: 100%; /* Set the width for desktop */
+    height: 40px;
+    font-weight: semibold;   
+}
+
+.btn-costom:hover{
+    background-color: #1E3895;
+    color: #FEFEFE;
+}

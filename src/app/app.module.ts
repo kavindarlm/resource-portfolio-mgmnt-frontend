@@ -8,7 +8,9 @@ import { CreateProjectComponent } from './Project-management/create-project/crea
 import { ProjectListComponent } from './Project-management/project-list/project-list.component';
 import { ProjectButtunsComponent } from './Project-management/project-buttuns/project-buttuns.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { HttpClientModule } from '@angular/common/http';
+import { UpdateProjectComponent } from './Project-management/update-project/update-project.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     CreateProjectComponent,
     ProjectListComponent,
     ProjectButtunsComponent,
+    UpdateProjectComponent,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     provideClientHydration()

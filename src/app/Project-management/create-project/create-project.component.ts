@@ -1,48 +1,34 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from '../service/api.service';
+import { datamodel } from './modelproject';
+import { ProjectListComponent } from '../project-list/project-list.component';
 
 @Component({
   selector: 'app-create-project',
   templateUrl: './create-project.component.html',
   styleUrl: './create-project.component.css'
 })
-export class CreateProjectComponent {
-  submmitted = false;
+export class CreateProjectComponent implements OnInit {
+ projectform!: FormGroup;
+ constructor(private formbulider: FormBuilder,private api:ApiService, private projectList: ProjectListComponent){}
+ ngOnInit(): void {
+     this.projectform = this.formbulider.group({
+      projectName: ['',Validators.required],
+      projectStartDate: ['',Validators.required],
+      projectEndDate: ['',Validators.required],
+      criticality: ['',Validators.required], 
+      projectManager: ['',Validators.required],
+      deliveryManager: ['',Validators.required],
+      projectDescription: ['',Validators.required],
+     })
+ }
 
-  constructor(private formBulider: FormBuilder) { }
-
-  // ngOnInit(){
-  //   //Validations 
-
-  //   this.projectForm = this.formBulider.group({
-  //     projectName:['',Validators.required]
-  //   })
-  // }
-
-  projectObj: any = {
-    projectId: 0,
-    projectName: '',
-    projectStartDate: '', 
-    projectEndDate: '',
-    projectManager: '',
-    deliveryManager: '', 
-    projectDescription: '',
-  };
-
-  projectForm: FormGroup = new FormGroup({
-    projectId: new FormControl('0'),
-    projectName: new FormControl(''),
-    projectStartDate: new FormControl(''),
-    projectEndDate: new FormControl(''),
-    projectManager: new FormControl(''),
-    deliveryManager: new FormControl(''),
-    projectDescription: new FormControl(''),
-  });
-
-
-
-  onSaveProject() {
-    console.warn(this.projectForm.value);
-    alert("cm");
+ addProject(data: datamodel) {
+    // console.log(data);
+    this.api.addProject(data).subscribe((res=>{
+      this.projectform.reset();
+    }))
+    this.projectList.getProjectList();
   }
 }
