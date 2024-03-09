@@ -1,0 +1,36 @@
+{
+    "data" : [
+        {
+            "resourceName" : "Anuditha Jayamanne",
+            "resourceID" : "0001",
+            "jobRole" : "Software Engineer",
+            "roleId" : "1",
+            "orgUnit" : "Unit 3",
+            "unitId" : "3"
+        },
+        {
+            "resourceName" : "Savindi Paboda",
+            "resourceID" : "0002",
+            "jobRole" : "Software Engineer",
+            "roleId" : "1",
+            "orgUnit" : "Unit 7",
+            "unitId" : "7"
+        },
+        {
+            "resourceName" : "ABC",
+            "resourceID" : "0003",
+            "jobRole" : "UI/UX Engineer",
+            "roleId" : "2",
+            "orgUnit" : "Unit 4",
+            "unitId" : "4"
+        },
+        {
+            "resourceName" : "JKL",
+            "resourceID" : "0004",
+            "jobRole" : "Software Architect",
+            "roleId" : "3",
+            "orgUnit" : "Unit 2",
+            "unitId" : "2"
+        }
+    ]
+}
