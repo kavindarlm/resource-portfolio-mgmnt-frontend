@@ -33,7 +33,6 @@
     left: 0;
     width: 100%;
     margin-top: 10px;
-    z-index: 2;
   }
 
   .site-container {
@@ -49,7 +48,7 @@
   }
 
   .white-div-container {
-    background: white;
+   
     margin-left: 20px;
     margin-right: 20px;
     margin-top: 100px;
@@ -60,89 +59,37 @@
     /* Adjust the height as necessary, or remove it to fit content */
     max-height: 75vh;
     margin-bottom: 75px;
-    overflow-y: auto;
+    height: 75vh;
+    display: flex;
+    background-color: rgb(255, 255, 255);
+    overflow-y: hidden;
+    position: fixed;
   }
 
-  .logo {
-    height: 60px; /* Adjust as needed */
-    border-radius: 10px;
-    max-width: 100%;
+  .contentContainer{
+    display: flex;
+    flex-direction: column;
+    background: white;
+    width: 100vw;
   }
-  
+
+  .content{
+    display: flex;
+    overflow-y: scroll;
+    padding: 10px;
+    box-shadow: 0px 2px 10px #CBCBCB;
+    height: 75vh;
+  } 
+
   .title {
     color: white;
     margin: 0;
     font-size: 1.5rem; /* Adjust as needed */
   }
-  
-  .user-initials {
-    background-color: white;
-    color: #1E3895;
-    /* padding: 10px 10px; */
-    border-radius:8px; /* Adjust as needed for rounded corners */
-    font-weight: bold;
-    font-size: 1.2rem; /* Adjust as needed */
-  }
-
-  .box2{
-    border: 4px solid #1E3895;
-    border-radius: 10px;
-    padding: 10px;
-  }
-  
-  .box {
-    background-color: #1E3895;
-    border: 1px solid #1E3895;
-    border-radius: 10px;
-    padding: 10px;
-  }
-  
-  .box h1 {
-    color: white;
-    text-align: right; /* Align center by default */
-    margin-right: 40px; /* Reset margin-right to 0 */
-    font-size: 1.8rem; /* Adjust as needed */
-  }
-
-  /* Footer Styles */
-  .footer {
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    font-weight: 500;
-    color: #04175A;
-  }
-
-  .hr-line{
-    align-items: center;
-    width: calc(100% - 40px);
-    margin-left: 20px;
-    margin-right: 20px;
-    color: #A2A2A2;
-    border-width: 2px;
-  }
-
-  .footer-text{
-    line-height: 10px;
-    margin-bottom: 13px;
-    font-size: 0.9rem;
-  }
-    
-  
   /* Responsive adjustments */
-  @media (max-width: 992px) {
-    .box h1 {
-      font-size: 1.25rem; /* Adjust font size for medium screens */
-    }
-  }
   
-  @media (max-width: 768px) {
-    .box h1 {
-      font-size: .7rem; /* Smaller font size for small screens */
-    }
-  
-    .logo, .user-initials, .background-overlay {
+  @media (max-width: 768px) {  
+  .background-overlay {
       height: 40px; /* Adjust as needed */
       padding: 3px 3px; /* Adjust as needed */
     }
@@ -152,19 +99,12 @@
       flex: 0 0 100%;
       max-width: 100%;
     }
-
-    .footer {
-      position: static;
-    }
-    .footer-text{
-      font-size: 0.7rem;
-    }
   }
   
   @media (max-width: 576px) {
     
     /* Stack logo and initials on small screens */
-    .navbar-brand, .user-initials {
+    .navbar-brand {
       flex: 0 0 auto;
       width: auto;
     }
