@@ -3,9 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateProjectComponent } from './Project-management/create-project/create-project.component';
 import { ProjectListComponent } from './Project-management/project-list/project-list.component';
 import { UpdateProjectComponent } from './Project-management/update-project/update-project.component';
+import { LayOutComponent } from './Project-management/lay-out/lay-out.component';
 
 const routes: Routes = [
-  { path: '', component: ProjectListComponent},
+  // { path: '', component: ProjectListComponent},
+  { path: '', component: LayOutComponent},
   { path: 'updatePoject/:id', component: UpdateProjectComponent},
   // { path: '', redirectTo: '/ProjectList', pathMatch: 'full' },
   {path: 'CreateProject', component: CreateProjectComponent}
