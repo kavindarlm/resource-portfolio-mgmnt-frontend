@@ -1,13 +1,13 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-10">
-            <div class="container-lg form-container">
+            <div class="container-lg form-container"> 
                 <app-project-buttuns [btnClss]="'label-project'" [text]="'Update Project'"></app-project-buttuns>
                 <form>
                     <div class="form-goup row-label">
                         <label class="pm-label" for="projectName">Project Name *</label>
                         <div class="form-group row row-label">
-                            <label for="projectName" class="col-sm-2 col-form-label col-label">Name :</label>
+                            <label for="projectName" class="col-sm-2 col-form-label col-label">Name :</label> 
                             <div class="col-sm-10">
                                 <input type="text" class="form-control"  id="projectName" [(ngModel)]="projectdata.projectName" name="projectName"
                                     placeholder="Enter Project Name">
@@ -67,7 +67,7 @@
                                 <textarea class="form-control" id="projectDescription" rows="3" [(ngModel)]="projectdata.projectDescription" name="projectDescription"
                                     placeholder="Enter Description"></textarea>   
                             </div>
-                        </div>
+                        </div> 
                     </div>
                     <button class="btn button-edit" (click)="editProjectDetails()">Edit Project</button>
                     <button class="btn button-delete">Delete Project</button>

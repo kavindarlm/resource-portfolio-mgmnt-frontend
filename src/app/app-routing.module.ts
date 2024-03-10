@@ -5,15 +5,15 @@ import { ProjectListComponent } from './Project-management/project-list/project-
 import { UpdateProjectComponent } from './Project-management/update-project/update-project.component';
 
 const routes: Routes = [
-  { path: '', component: ProjectListComponent },
+  { path: '', component: ProjectListComponent},
   { path: 'updatePoject/:id', component: UpdateProjectComponent},
   // { path: '', redirectTo: '/ProjectList', pathMatch: 'full' },
   {path: 'CreateProject', component: CreateProjectComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],  
+  exports: [RouterModule]       
 })
 export class AppRoutingModule {}
  

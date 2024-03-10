@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UpdateProjectComponent } from './Project-management/update-project/update-project.component';
 import { FormsModule } from '@angular/forms';
+import { LayOutComponent } from './Project-management/lay-out/lay-out.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { FormsModule } from '@angular/forms';
     ProjectListComponent,
     ProjectButtunsComponent,
     UpdateProjectComponent,
+    LayOutComponent,
 
   ],
   imports: [
