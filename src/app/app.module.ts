@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CreateNewtaskComponent } from './TaskManagement/create-newtask/create-newtask.component';
@@ -34,8 +33,6 @@ import { SideBarHeaderComponent } from './PageBody/side-bar-header/side-bar-head
     AppRoutingModule,
     ReactiveFormsModule
   ],
-    AppRoutingModule
-  ], 
   providers: [
     provideClientHydration()
   ],
