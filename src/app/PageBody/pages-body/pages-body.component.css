@@ -51,15 +51,15 @@
    
     margin-left: 20px;
     margin-right: 20px;
-    margin-top: 100px;
+    margin-top: 70px;
     width: calc(100% - 40px);
     border-radius: 10px;
     /*inside content padding 10px*/
     padding: 10px;
     /* Adjust the height as necessary, or remove it to fit content */
-    max-height: 75vh;
+    max-height: 82vh;
     margin-bottom: 75px;
-    height: 75vh;
+    height: 82vh;
     display: flex;
     background-color: rgb(255, 255, 255);
     overflow-y: hidden;
