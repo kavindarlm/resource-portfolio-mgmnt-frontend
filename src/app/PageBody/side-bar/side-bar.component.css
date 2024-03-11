@@ -15,28 +15,31 @@
 }
 
 .Menu-Labal {
-  background-color: #7752FE;
-  color: #FEFEFE;
+  /* background-color: #1E3895; */
+  color: #1E3895;
+  border: #1e3895ee 2px solid;
   width: 95%;
   height: 40px;
-  font-weight: bold;
+  font-weight: 600;
   text-align: center;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
   margin-left: 2%;
   padding: 3%;
+
+  box-shadow: 5px 5px 30px rgba(162, 162, 162, 0.26)
 }
 
 .menu-button {
   width: 95%;
   /* Set the width for desktop */
   height: 40px;
-  font-weight: bold;
+  font-weight: 500;
   background-color: #fefefe;
-  border: .5px solid #7752FE;
+  border: .5px solid #b4a0ff88;
   border-radius: 10px;
-  color: #7752FE;
+  color: #1e3895;
   margin-top: 3%;
   margin-left: 2%;
   content: fit-content;
@@ -58,7 +61,7 @@
 
 .menu-button:hover,
 .menu-button:active {
-  background-color: #7752FE;
+  background-color: #1e3895;
   color: #FEFEFE;
 }
 
@@ -108,14 +111,17 @@ li {
 @media (min-width: 992px) {
   /* Styles for screens equal to or greater than 992px wide (lg) */
   .menu-button {
-      font-size: 1.0rem;
+      font-size: .9rem;
       line-height: .95;
   }
 }
 @media (min-width: 1200px) {
   /* Styles for screens equal to or greater than 1200px wide (xl) */
   .menu-button {
-      font-size: .9rem;
+      font-size: .96rem;
       line-height: .98;
   }
+  .Menu-Labal {
+    font-size: 1rem;
+}
 }
