@@ -7,23 +7,25 @@
                 <label for="projectName" class="col-sm-2 col-form-label col-label">Name :</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="projectName" placeholder="Enter Project Name"
-                        formControlName="projectName">
+                        formControlName="projectName" [ngClass]="{'is-invalid': projectform.controls['projectName'].invalid && projectform.controls['projectName'].touched}">
                 </div>
             </div>
+
             <label class="pm-label" for="projectStartDate">Project Start Date *</label>
             <div class="form-group row row-label">
                 <label for="projectStartDate" class="col-sm-2 col-form-label col-label">From :</label>
                 <div class="col-sm-10">
                     <input type="date" class="form-control" id="projectStartDate" placeholder="Enter projectStartDate"
-                        required formControlName="projectStartDate">
+                        required formControlName="projectStartDate" [ngClass]="{'is-invalid': projectform.controls['projectStartDate'].invalid && projectform.controls['projectStartDate'].touched}">
                 </div>
             </div>
+
             <div class="form-group row row-label">
                 <label class="pm-label" for="projectEndDate">Project End Date *</label>
                 <label for="projectEndDate" class="col-sm-2 col-form-label col-label">To :</label>
                 <div class="col-sm-10">
                     <input type="date" class="form-control" id="projectEndDate" placeholder="Enter projectEndDate"
-                        required formControlName="projectEndDate">
+                        required formControlName="projectEndDate" [ngClass]="{'is-invalid': projectform.controls['projectEndDate'].invalid && projectform.controls['projectEndDate'].touched}">
                 </div>
             </div>
 
@@ -32,7 +34,7 @@
                 <label for="ProjectCriticality" class="col-sm-2 col-form-label col-label">Criticality :</label>
                 <div class="col-sm-10">
                     <select id="inputState" class="form-control" required id="criticality"
-                        formControlName="criticality">
+                        formControlName="criticality" [ngClass]="{'is-invalid': projectform.controls['criticality'].invalid && projectform.controls['criticality'].touched}">
                         <option disabled selected value="">Select Project Criticality</option>
                         <option>High</option>
                         <option>Medium</option>
@@ -40,20 +42,22 @@
                     </select>
                 </div>
             </div>
+
             <label class="pm-label" for="projectManager">Project Manager *</label>
             <div class="form-group row row-label">
                 <label for="projectManager" class="col-sm-2 col-form-label col-label">Assigner :</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="projectManager" placeholder="Enter Project Manager ID"
-                        required formControlName="projectManager">
+                        required formControlName="projectManager" [ngClass]="{'is-invalid': projectform.controls['projectManager'].invalid && projectform.controls['projectManager'].touched}">
                 </div>
             </div>
+            
             <label class="pm-label" for="deliveryManager">Delivery Manager *</label>
             <div class="form-group row row-label">
                 <label for="deliveryManager" class="col-sm-2 col-form-label col-label">Assigner :</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="deliveryManager" placeholder="Enter Delivery Manager ID"
-                        required formControlName="deliveryManager">
+                        required formControlName="deliveryManager" [ngClass]="{'is-invalid': projectform.controls['deliveryManager'].invalid && projectform.controls['deliveryManager'].touched}">
                 </div>
             </div>
             <label class="pm-label" for="projectDescription">Project Description</label>
@@ -61,11 +65,12 @@
                 <label for="projectDescription" class="col-sm-2 col-form-label col-label">Description :</label>
                 <div class="col-sm-10">
                     <textarea class="form-control" id="projectDescription" rows="3" placeholder="Enter Description"
-                        formControlName="projectDescription"></textarea>
+                        formControlName="projectDescription" [ngClass]="{'is-invalid': projectform.controls['projectDescription'].invalid && projectform.controls['projectDescription'].touched}"></textarea>
                 </div>
             </div>
         </div>
         <button class="btn btn-lg button-project" (click)="addProject(this.projectform.value)"
-            [disabled]="this.projectform.invalid">Add Project</button>
+            >Add Project</button>
     </form>
 </div>
+<!-- [disabled]="this.projectform.invalid" -->

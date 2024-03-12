@@ -11,6 +11,7 @@ import { ProjectListComponent } from '../project-list/project-list.component';
 })
 export class CreateProjectComponent implements OnInit {
  projectform!: FormGroup;
+ submited = false;
  constructor(private formbulider: FormBuilder,private api:ApiService, private projectList: ProjectListComponent){}
  ngOnInit(): void {
      this.projectform = this.formbulider.group({
@@ -20,12 +21,16 @@ export class CreateProjectComponent implements OnInit {
       criticality: ['',Validators.required], 
       projectManager: ['',Validators.required],
       deliveryManager: ['',Validators.required],
-      projectDescription: ['',Validators.required],
+      projectDescription: ['',[Validators.required,Validators.minLength(3)]],
      })
  }
-
  addProject(data: datamodel) {
     // console.log(data);
+    this.submited = true;
+    if(this.projectform.invalid){
+      return;
+    }
+    alert('Form Submitted Successfully');
     this.api.addProject(data).subscribe((res=>{
       this.projectform.reset();
     }))
