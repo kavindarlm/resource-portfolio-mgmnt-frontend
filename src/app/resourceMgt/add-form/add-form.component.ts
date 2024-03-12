@@ -32,7 +32,7 @@ export class AddFormComponent implements OnInit {
   }
 
   loadJobRoles() { //a function to get data from the json file(jobroles)
-    this.http.get("assets/jobroles.json").subscribe((res:any)=>{
+    this.http.get("assets/jobRoles.json").subscribe((res:any)=>{
       debugger;
       this.jobroles = res.data;//the response from this asset file(jobroles.json) will be stored in this array
     })
