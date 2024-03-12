@@ -36,7 +36,7 @@ export class LoginAccComponent {
       });
 
       if (response.status === 201) {
-        this.router.navigate(['/pages-body']);
+        this.router.navigate(['./admin-dashboard']);
         console.log('Login successful');
       }
     } catch (error) {
