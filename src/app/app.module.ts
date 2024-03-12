@@ -4,11 +4,8 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NewTeamButtonComponent } from './team-management/new-team-button/new-team-button.component';
-import { TeamFormComponent } from './team-management/team-form/team-form.component';
-import { TeamListComponent } from './team-management/team-list/team-list.component';
 import { TeamMainBoxComponent } from './team-management/team-main-box/team-main-box.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ResourceTableComponent } from './team-management/resource-table/resource-table.component';
 import { PagesBodyComponent } from './PageBody/pages-body/pages-body.component';
 import { FooterComponent } from './PageBody/footer/footer.component';
 import { PageHeaderComponent } from './PageBody/page-header/page-header.component';
@@ -21,6 +18,13 @@ import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admi
 import { DashboardHeaderComponent } from './admin-dashboard/dashboard-header/dashboard-header.component';
 import { UserListComponent } from './admin-dashboard/user-list/user-list.component';
 import { SearchBarComponent } from './admin-dashboard/search-bar/search-bar.component';
+import { FilterPipe } from './team-management/filter.pipe';
+import { UpdateComponent } from './team-management/update/update.component';
+import { HttpClientModule } from '@angular/common/http';
+import { TeamListComponent } from './team-management/team-list/team-list.component';
+import { TeamFormComponent } from './team-management/team-form/team-form.component';
+import { ResourceTableComponent } from './team-management/resource-table/resource-table.component';
+
 
 
 @NgModule({
@@ -28,11 +32,11 @@ import { SearchBarComponent } from './admin-dashboard/search-bar/search-bar.comp
     AppComponent,
     PagesBodyComponent,
     NewTeamButtonComponent,
-    TeamFormComponent,
-    TeamListComponent,
     TeamMainBoxComponent,
+    TeamListComponent,
+    TeamFormComponent,
     ResourceTableComponent,
-    
+
     FooterComponent,
     PageHeaderComponent,
     SideBarComponent,
@@ -44,12 +48,15 @@ import { SearchBarComponent } from './admin-dashboard/search-bar/search-bar.comp
     DashboardHeaderComponent,
     UserListComponent,
     SearchBarComponent,
+    FilterPipe,
+    UpdateComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration()

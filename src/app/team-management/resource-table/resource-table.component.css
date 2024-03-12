@@ -16,8 +16,8 @@ table{
     
 }
 
-table, td {
-    margin-top: 10px;
+ td {
+    /* margin-top: 10px; */
     border: 1px solid #8691A833;
     text-align: center;
     color: #7752FE;
@@ -25,6 +25,7 @@ table, td {
 
 th{
     background-color: none;
+    border: none;
 }
 
 .tbtn{
@@ -62,7 +63,7 @@ th{
 .selectBtn{
     background-color:  #FEFEFE;
     border: 2px solid #7752FE;
-    border-radius: 8px;
+    border-radius: 2px;
     color: #7752FE;
     text-align: center;
     text-decoration: none;
@@ -75,3 +76,8 @@ th{
 }
 
 
+.selectBtn.selected {
+    background-color: #1E3895;
+    color: white;
+    border: none;
+  }

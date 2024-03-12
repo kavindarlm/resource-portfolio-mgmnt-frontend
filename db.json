@@ -1,0 +1,163 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "a title",
+      "views": 100
+    },
+    {
+      "id": "2",
+      "title": "another title",
+      "views": 200
+    },
+    {
+      "id": "f8ef",
+      "teamName": "Team 02",
+      "description": "This is team 03",
+      "selectedResources": [
+        {
+          "resourceId": 4,
+          "resourceName": "Resource 4",
+          "role": "Developer",
+          "OrgUnit": "Org 4"
+        }
+      ]
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "text": "a comment about post 1",
+      "postId": "1"
+    },
+    {
+      "id": "2",
+      "text": "another comment about post 1",
+      "postId": "1"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "teams": [
+    {
+      "id": "6350",
+      "teamName": "Team 01",
+      "description": "This is team 01",
+      "selectedResources": [
+        {
+          "resourceId": 1,
+          "resourceName": "Resource 1",
+          "role": "Developer",
+          "OrgUnit": "Org 1"
+        },
+        {
+          "resourceId": 2,
+          "resourceName": "Resource 2",
+          "role": "Developer",
+          "OrgUnit": "Org 2"
+        },
+        {
+          "resourceId": 3,
+          "resourceName": "Resource 3",
+          "role": "Developer",
+          "OrgUnit": "Org 3"
+        }
+      ]
+    },
+    {
+      "id": "7600",
+      "teamName": "Team 02",
+      "description": "This is team 02",
+      "selectedResources": [
+        {
+          "resourceId": 1,
+          "resourceName": "Resource 1",
+          "role": "Developer",
+          "OrgUnit": "Org 1"
+        },
+        {
+          "resourceId": 2,
+          "resourceName": "Resource 2",
+          "role": "Developer",
+          "OrgUnit": "Org 2"
+        },
+        {
+          "resourceId": 3,
+          "resourceName": "Resource 3",
+          "role": "Developer",
+          "OrgUnit": "Org 3"
+        }
+      ]
+    },
+    {
+      "id": "5400",
+      "teamName": "Team 03",
+      "description": "This is team 03",
+      "selectedResources": [
+        {
+          "resourceId": 1,
+          "resourceName": "Resource 1",
+          "role": "Developer",
+          "OrgUnit": "Org 1"
+        },
+        {
+          "resourceId": 2,
+          "resourceName": "Resource 2",
+          "role": "Developer",
+          "OrgUnit": "Org 2"
+        }
+      ]
+    },
+    {
+      "id": "e4a6",
+      "teamName": "Team 04",
+      "description": "this is team 04",
+      "selectedResources": [
+        {
+          "resourceId": 1,
+          "resourceName": "Resource 1",
+          "role": "Developer",
+          "OrgUnit": "Org 1"
+        },
+        {
+          "resourceId": 3,
+          "resourceName": "Resource 3",
+          "role": "Developer",
+          "OrgUnit": "Org 3"
+        },
+        {
+          "resourceId": 4,
+          "resourceName": "Resource 4",
+          "role": "Developer",
+          "OrgUnit": "Org 4"
+        }
+      ]
+    },
+    {
+      "id": "b0b0",
+      "teamName": "Team 02",
+      "description": "This is team 01",
+      "selectedResources": []
+    },
+    {
+      "id": "b22f",
+      "teamName": "Team 02",
+      "description": "This is team 02",
+      "selectedResources": [
+        {
+          "resourceId": 1,
+          "resourceName": "Resource 1",
+          "role": "Developer",
+          "OrgUnit": "Org 1"
+        },
+        {
+          "resourceId": 2,
+          "resourceName": "Resource 2",
+          "role": "Developer",
+          "OrgUnit": "Org 2"
+        }
+      ]
+    }
+  ]
+}

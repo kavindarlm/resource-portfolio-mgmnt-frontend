@@ -2,8 +2,13 @@
     <div>
         <button class="systemResource">System Resource List</button>
     </div>
-   
-    <table class="table border">
+   <!-- new code-for search bar -->
+    <div class="clo-sm-7">
+        <!-- search box -->
+    <input type="search" [(ngModel)]="searchtext" id="form1" class="form-control" placeholder="Search" aria-label="search">
+    </div>
+        
+    <table class="table">
         <thead>
             <tr>
                 <th><button class="tbtn">Resource Id</button></th>
@@ -13,13 +18,14 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let resource of resources">
+            <tr *ngFor="let resource of resources | filter:searchtext">
                 <td>{{resource.resourceName}}</td>
                 <td>{{resource.role}}</td>
                 <td>{{resource.OrgUnit}}</td>
-                <td><button class="selectBtn">Select</button></td>
+                <td><button class="selectBtn" (click)="onSelect(resource)" [ngClass]="{ 'selected': isSelected(resource) }">Select</button></td>
             </tr>
         </tbody>
     </table>
     
 </div> 
+
