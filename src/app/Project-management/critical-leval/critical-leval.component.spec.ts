@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LayOutComponent } from './lay-out.component';
+import { CriticalLevalComponent } from './critical-leval.component';
 
-describe('LayOutComponent', () => {
-  let component: LayOutComponent;
-  let fixture: ComponentFixture<LayOutComponent>;
+describe('CriticalLevalComponent', () => {
+  let component: CriticalLevalComponent;
+  let fixture: ComponentFixture<CriticalLevalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LayOutComponent]
+      declarations: [CriticalLevalComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(LayOutComponent);
+    fixture = TestBed.createComponent(CriticalLevalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,9 +1,9 @@
 .form-container{
     width: 100%;
-    border: solid 1px #ccc;
+    border-left: solid 1px #ccc;
+    border-right: solid 1px #ccc;
     background-color: #FEFEFE;
-    padding: 10px;
-    width: 60%;
+    /* padding: 10px; */
     
 }
 .pm-label{
@@ -15,7 +15,7 @@
 
 .col-label{
     font-size: 1.0rem;
-    color: #7752FE;
+    color: #7752FE;   
     text-align: right;
 }
 

@@ -1,10 +1,9 @@
 .form-container{
     width: 100%;
-    border: solid 1px #ccc;
+    border-left: solid 1px #ccc;
+    border-right: solid 1px #ccc;
     background-color: #FEFEFE;
-    padding: 10px;
-    width: 60%;
-    
+    /* padding: 10px; */
 }
 .pm-label{
     font-size: 1.0rem;
@@ -28,7 +27,7 @@
     opacity: .5;
 }
 
-.form-control{
+.form-control{ 
     color: #7752FE;
 }
 

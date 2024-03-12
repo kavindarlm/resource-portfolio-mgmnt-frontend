@@ -15,6 +15,10 @@ export class ProjectListComponent {
   ngOnInit(): void {
     this.getProjectList();
   }
+  // showupdateproject(){
+  //   this.updateproject = true;
+  // }
+
   
   openProject(project: any) {
     // Implement the logic to open the corresponding project

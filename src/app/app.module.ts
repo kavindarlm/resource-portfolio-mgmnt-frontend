@@ -11,12 +11,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UpdateProjectComponent } from './Project-management/update-project/update-project.component';
 import { FormsModule } from '@angular/forms';
-import { LayOutComponent } from './Project-management/lay-out/lay-out.component';
 import { PagesBodyComponent } from './PageBody/pages-body/pages-body.component';
 import { FooterComponent } from './PageBody/footer/footer.component';
 import { PageHeaderComponent } from './PageBody/page-header/page-header.component';
 import { SideBarComponent } from './PageBody/side-bar/side-bar.component';
 import { SideBarHeaderComponent } from './PageBody/side-bar-header/side-bar-header.component';
+import { CriticalLevalComponent } from './Project-management/critical-leval/critical-leval.component';
 
 
 @NgModule({
@@ -27,11 +27,11 @@ import { SideBarHeaderComponent } from './PageBody/side-bar-header/side-bar-head
     ProjectListComponent,
     ProjectButtunsComponent,
     UpdateProjectComponent,
-    LayOutComponent,
     FooterComponent,
     PageHeaderComponent,
     SideBarComponent,
     SideBarHeaderComponent,
+    CriticalLevalComponent,
 
   ],
   imports: [
@@ -41,8 +41,7 @@ import { SideBarHeaderComponent } from './PageBody/side-bar-header/side-bar-head
     HttpClientModule,
     FormsModule
   ],
-    AppRoutingModule
-  ], 
+  
   providers: [
     provideClientHydration()
   ],

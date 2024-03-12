@@ -24,4 +24,9 @@ export class ApiService {
   updateProject(data: datamodel,id: string){ 
     return this.http.put<datamodel>("http://localhost:3000/posts/"+id,data);
   }
+
+  //DeleteProject
+  deleteProject(id: string){
+    return this.http.delete<datamodel>("http://localhost:3000/posts/"+id);
+  }
 }
