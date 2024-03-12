@@ -1,0 +1,32 @@
+.custom-size {
+    height: 10%; /* Adjust this value to change the height */
+    width: 20%;
+    margin-left: 75%;
+}
+.font-color{
+    color: #1E3895;
+}
+
+.search-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+input.search-input::placeholder {
+    color: #b8b8b8; /* Replace with your desired color */
+    text-align: center; 
+}
+
+.custom-button{
+   border-color: #1E3895;
+}
+
+.custom-button:hover{
+    background-color: #1E3895;
+}
+
+
+.border{
+    border: 1px solid #1E3895;
+}

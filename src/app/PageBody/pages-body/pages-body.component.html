@@ -1,0 +1,24 @@
+<div class="site-container position-relative min-vh-100 d-flex flex-column">
+  <div class="background-container position-fixed">
+    <img src="assets/image/backimage1.jpg" class="img-fluid custom-size" alt="Background Image">
+    <!-- <div class="background-overlay"></div> -->
+  </div>
+  <div class="overlay-content position-absolute">
+    <!-- Header -->
+    <app-page-header></app-page-header>
+    <div class="white-div-container">
+      <!-- Sidebar -->
+      <app-side-bar [sidebarActivee]="sidebarActivee"></app-side-bar>
+      <div class="contentContainer">
+        <!-- Sidebar Header -->
+        <app-side-bar-header [sidebarActive]="sidebarActivee" (sidebarToggled)="toggleSiderbar()"></app-side-bar-header>
+        <div class="content">
+          <!-- content is goes here --> 
+          Add your content here 
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  <app-footer></app-footer>
+</div>
