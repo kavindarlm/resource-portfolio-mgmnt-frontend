@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Tapro-Project';
+  handleSearch(searchTerm: string) {
+    console.log('Searching for:', searchTerm);
+    // You can perform your search logic here
+  }
 }

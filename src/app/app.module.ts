@@ -12,6 +12,13 @@ import { FooterComponent } from './PageBody/footer/footer.component';
 import { PageHeaderComponent } from './PageBody/page-header/page-header.component';
 import { SideBarComponent } from './PageBody/side-bar/side-bar.component';
 import { SideBarHeaderComponent } from './PageBody/side-bar-header/side-bar-header.component';
+import { FgPsswdComponent } from './fg-psswd/fg-psswd.component';
+import { LoginAccComponent } from './login-acc/login-acc.component';
+import { FormsModule } from '@angular/forms';
+import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admin-dasbd-body.component';
+import { DashboardHeaderComponent } from './admin-dashboard/dashboard-header/dashboard-header.component';
+import { UserListComponent } from './admin-dashboard/user-list/user-list.component';
+import { SearchBarComponent } from './admin-dashboard/search-bar/search-bar.component';
 
 
 @NgModule({
@@ -27,12 +34,22 @@ import { SideBarHeaderComponent } from './PageBody/side-bar-header/side-bar-head
     SideBarComponent,
     SideBarHeaderComponent,
 
+    FgPsswdComponent,
+    LoginAccComponent,
+    AdminDasbdBodyComponent,
+    DashboardHeaderComponent,
+    UserListComponent,
+    SearchBarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
+
+   
+
   providers: [
     provideClientHydration()
   ],
