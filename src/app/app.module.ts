@@ -17,6 +17,13 @@ import { PageHeaderComponent } from './PageBody/page-header/page-header.componen
 import { SideBarComponent } from './PageBody/side-bar/side-bar.component';
 import { SideBarHeaderComponent } from './PageBody/side-bar-header/side-bar-header.component';
 import { CriticalLevalComponent } from './Project-management/critical-leval/critical-leval.component';
+import { FgPsswdComponent } from './fg-psswd/fg-psswd.component';
+import { LoginAccComponent } from './login-acc/login-acc.component';
+// import { FormsModule } from '@angular/forms';
+import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admin-dasbd-body.component';
+import { DashboardHeaderComponent } from './admin-dashboard/dashboard-header/dashboard-header.component';
+import { UserListComponent } from './admin-dashboard/user-list/user-list.component';
+import { SearchBarComponent } from './admin-dashboard/search-bar/search-bar.component';
 
 
 @NgModule({
@@ -33,6 +40,12 @@ import { CriticalLevalComponent } from './Project-management/critical-leval/crit
     SideBarHeaderComponent,
     CriticalLevalComponent,
 
+    FgPsswdComponent,
+    LoginAccComponent,
+    AdminDasbdBodyComponent,
+    DashboardHeaderComponent,
+    UserListComponent,
+    SearchBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +55,9 @@ import { CriticalLevalComponent } from './Project-management/critical-leval/crit
     FormsModule
   ],
   
+  //   AppRoutingModule,
+  //   FormsModule
+  // ],
   providers: [
     provideClientHydration()
   ],

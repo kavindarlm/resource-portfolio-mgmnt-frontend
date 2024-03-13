@@ -17,6 +17,20 @@ const routes: Routes = [
     ]
 }
 ];
+import { LoginAccComponent } from './login-acc/login-acc.component';  
+import { FgPsswdComponent } from './fg-psswd/fg-psswd.component';
+// import { PagesBodyComponent } from './PageBody/pages-body/pages-body.component';
+import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admin-dasbd-body.component';
+
+// const routes: Routes = [
+//   //redirect to login page
+//   { path: '', redirectTo: '/login', pathMatch: 'full' },
+//   { path: 'login', component: LoginAccComponent },
+//   { path: 'forgot-password', component: FgPsswdComponent },
+//   { path: 'pages-body', component: PagesBodyComponent },
+//   { path: 'admin-dashboard', component: AdminDasbdBodyComponent}
+  
+// ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],  
