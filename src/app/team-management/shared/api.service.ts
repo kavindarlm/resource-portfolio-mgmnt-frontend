@@ -47,4 +47,11 @@ export class ApiService {
 fetchData(id: number) {
   return this.http.get<dataModel>('http://localhost:3000/teams/' + id);
 }
+
+//edit data
+editTeams(data:dataModel, id:number){
+  return this.http.put('http://localhost:3000/teams/' + id, data) ;
 }
+
+}
+

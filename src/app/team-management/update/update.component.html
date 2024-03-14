@@ -52,7 +52,7 @@
         </table>
   
         <div class="addResourceBtn">
-          <app-new-team-button [text]="'Add Resources ID'"></app-new-team-button>
+          <app-new-team-button [text]="'Add Resources ID'" (click)="toggleResourceTable()"></app-new-team-button>
         </div>
         <hr>
   
@@ -62,14 +62,14 @@
       </form>
   
       <div>
-        <button>edit</button>
+        <button (click)="edit()">edit</button>
         <button>delete</button>
         <!-- <pre>{{teamData|json}}</pre> -->
       </div>
     </div>
   
     <div class="resourceTableBox">
-      <app-resource-table></app-resource-table>
+      <app-resource-table *ngIf="showResourceTable"></app-resource-table>
     </div>
   </div>
   

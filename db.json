@@ -158,6 +158,25 @@
           "OrgUnit": "Org 2"
         }
       ]
+    },
+    {
+      "id": "b4e1",
+      "teamName": "Team 05",
+      "description": "This is team 02",
+      "selectedResources": [
+        {
+          "resourceId": 1,
+          "resourceName": "Resource 1",
+          "role": "Developer",
+          "OrgUnit": "Org 1"
+        },
+        {
+          "resourceId": 2,
+          "resourceName": "Resource 2",
+          "role": "Developer",
+          "OrgUnit": "Org 2"
+        }
+      ]
     }
   ]
 }
