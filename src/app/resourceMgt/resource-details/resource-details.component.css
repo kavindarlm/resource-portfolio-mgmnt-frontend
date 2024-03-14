@@ -1,0 +1,108 @@
+.formBox {
+    width: 90%;
+    float: right;
+    margin-top: 10px;
+    margin-right: 20px;
+    padding-bottom: 10px;
+    border: 1px #ced2d9 solid;
+    border-radius: 5px;
+}
+
+.topic {
+    background-color: #7752fe;
+    padding: 5px;
+    text-align: center;
+    width: 80%;
+    margin: 5px auto;
+    color: white;
+    border-radius: 5px;
+}
+
+.form-label {
+    color: #7752fe;
+    font-weight: bold;
+}
+
+::placeholder {
+  color: #c3c0ce; /* Change this to your desired color */
+}
+
+.form-group label {
+    display: block;
+}
+
+.form-group p,
+.form-group .form-control,
+.form-group .form-select {
+  display: inline;
+}
+
+.form-group .form-control,
+.form-group .form-select {
+  width: 75%;
+}
+
+.form-group p {
+  margin-right: 20px;  
+} 
+
+.editButton, .deleteButton{
+    /* padding : 2px 100px;  */
+   width: 40%;
+   color: #7752fe;
+   background-color: white;
+   border: rgb(203, 203, 203) 1px solid;
+   border-radius: 5px;
+   margin:0 5%;
+   /* display: flex;
+   align-items: center;
+   justify-content: center; */
+   padding: 5px;
+}
+
+.editButton:hover, .deleteButton:hover {
+    transition: 0.5s;
+   background-color: #04175a;
+   color: white;
+}
+
+.editButton {
+    float: left;
+}
+
+.deleteButton {
+    float: right;
+}
+
+.details {
+    /* display: flex; */
+    border: #c3c0ce 1px solid;
+    padding: 5% 0;
+    border-radius: 5px;
+}
+
+.details p {
+    color: #7752fe;
+    margin-left: 7%;
+}
+
+.detailButton {
+    float: inline-end;
+    margin-right: 7%;
+    width: 60%;
+    border: 1px solid #cbcacd;
+    background-color: white;
+    border-radius: 5px;
+    color: #7752fe;
+    display: inline;
+}
+
+/* .inputField p {
+    flex: 50%;
+    float: right;
+}
+
+.inputField .form-control {
+    flex: 50%;
+    float: left;
+} */

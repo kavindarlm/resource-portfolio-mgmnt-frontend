@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router'; 
 import { LoginAccComponent } from './login-acc/login-acc.component';  
 import { FgPsswdComponent } from './fg-psswd/fg-psswd.component';
 import { PagesBodyComponent } from './PageBody/pages-body/pages-body.component';
@@ -19,6 +19,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule] 
 })
 export class AppRoutingModule { }

@@ -1,10 +1,25 @@
-.container {
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* border: 1px #0e3270 solid; */
+    column-gap: 10px;
+    height: 100%;
+}
+
+.mainBox {
     position: relative;
-    width: 45%;
+    width: 100%;
+    padding: 20px;
     margin: 10px;
-    border: 1px #ced2d9 solid;
+    border: 1px #c6cad0 solid;
     display: inline-block;
     border-radius: 5px;
+}
+
+.box2 {
+    /* width: fit-content; */
+    height: 100%;
+    display: inline-block;
 }
 
 .topic {
@@ -33,9 +48,14 @@
     color: #8e8ffa;
 }
 
+.table .table-bordered {
+    position: relative;
+    width: 100%;
+}
+
 .table-headers .headers {
     margin: 5px;
-    padding: 2px 50px;
+    padding: 2px 45px;
     background-color: #c2d9ff;
     color: #04175a;
     font-weight: bold;
@@ -51,4 +71,14 @@
 
 .table-body {
     text-align: center;
+}
+
+.clickable-row td {
+    color: #7752fe;
+}
+
+.clickable-row:hover td{
+    transition: 0.5s;
+    background-color: #04175a;
+    color: white;
 }

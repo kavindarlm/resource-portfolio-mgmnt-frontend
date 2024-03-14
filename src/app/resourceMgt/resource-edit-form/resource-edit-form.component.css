@@ -4,7 +4,6 @@
     margin-top: 10px;
     margin-right: 20px;
     padding-bottom: 10px;
-    padding-left: 10px;
     border: 1px #ced2d9 solid;
     border-radius: 5px;
 }
@@ -25,48 +24,47 @@
 }
 
 ::placeholder {
-    color: #c3c0ce;
-    /* Change this to your desired color */
+  color: #c3c0ce; /* Change this to your desired color */
 }
 
 .form-group label {
     display: block;
-
 }
 
 .form-group p,
 .form-group .form-control,
 .form-group .form-select {
-    display: inline;
+  display: inline;
 }
 
 .form-group .form-control,
 .form-group .form-select {
-    width: 75%;
+  width: 75%;
 }
 
-/* .form-group p {
-  margin-right: 20px;  
-}  */
+.form-group p {
+  margin-right: 15px;  
+  float: left;
+} 
 
-.addButton {
+.editButton {
     /* padding : 2px 100px;  */
-    width: 40%;
-    color: #7752fe;
-    background-color: white;
-    border: rgb(203, 203, 203) 1px solid;
-    border-radius: 5px;
-    margin: 0 25%;
-    /* display: flex;
+   width: 40%;
+   color: #7752fe;
+   background-color: white;
+   border: rgb(203, 203, 203) 1px solid;
+   border-radius: 5px;
+   margin:0 25%;
+   /* display: flex;
    align-items: center;
    justify-content: center; */
-    padding: 5px;
+   padding: 5px;
 }
 
-.addButton:hover {
+.editButton:hover {
     transition: 0.5s;
-    background-color: #04175a;
-    color: white;
+   background-color: #04175a;
+   color: white;
 }
 
 .inputField {
@@ -76,30 +74,17 @@
     color: #7752fe;
 }
 
-.inputField p {
-
-    float: left;
-    margin-left: 5%;
-    margin-right: 3%;
+/* .inputField p {
+    flex: 50%;
+    float: right;
 }
 
-/* .inputField .inputBox {
-    float: right; 
-    margin-right: 3%;
+.inputField .form-control {
+    flex: 50%;
+    float: left;
 } */
 
-/* .inputField .form-control {
-
-    float: right; 
-    margin-right: 3%;
-} */
-
-/* .inputField .form-select {
-    float: right; 
-    margin-right: 3%;
-} */
-
-.add {
+.edit {
     display: flex;
     justify-content: center;
 }

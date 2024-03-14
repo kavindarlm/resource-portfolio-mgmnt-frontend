@@ -1,0 +1,34 @@
+<div class="formBox">
+    <div class="container mt-3">
+        <div class="topic">
+            <h6>Resource Details</h6>
+        </div>
+        <!-- <form> -->
+            <div class="form-group mb-3">
+                <br>
+                <!-- <div class="inputField"> -->
+                    <!-- <p>Resource Name :</p> -->
+                    <!-- <div *ngFor="let item of sharedData | keyvalue">
+                        {{ item.key }}: {{ item.value }}
+                    </div> -->
+                <div class="details">
+                    <div><p>Resource Name:</p><button class="detailButton">{{ sharedData?.resourceName }}</button></div><br>
+                    <div><p>Resource ID:</p><button class="detailButton">{{ sharedData?.resourceID }}</button></div><br>
+                    <div><p>Job Role:</p><button class="detailButton">{{ sharedData?.jobRole }}</button></div><br>
+                    <div><p>Org. Unit:</p><button class="detailButton">{{ sharedData?.orgUnit }}</button></div>
+                </div>
+                <!-- </div> -->
+            </div>
+                    
+            <div class="editAndDelete">
+                <button type="button" class="editButton" (click)="onEdit()">Edit Resource</button>
+            </div>
+            <div class="editAndDelete">
+                <button type="button" class="deleteButton">Delete Resource</button>
+            </div>
+            
+        <!-- </form> -->
+    </div>
+</div>
+
+<app-resource-edit-form *ngIf="showResourceEditForm"></app-resource-edit-form>
