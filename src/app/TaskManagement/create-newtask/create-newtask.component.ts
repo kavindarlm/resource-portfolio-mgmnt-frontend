@@ -18,4 +18,7 @@ export class CreateNewtaskComponent implements OnInit {
       });
 
       }
+    submitTaskkform(data: any){
+      console.log(data);
+    }
   }

@@ -3,14 +3,14 @@
         Create New Task
     </div>
     <div class="container form-body">
-        <form [formGroup]="taskForm" FormConto="TaskForm">
+        <form [formGroup]="taskForm">
 
             <div class="form-group row row-label">
                 <label class="pm-label" for="taskName">Task Name*</label>
                 <label for="taskName" class="col-sm-2 col-form-label col-label">Name</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="taskName" placeholder="Enter Project Name"
-                        [formControlName]="'taskName'">
+                        formControlName="taskName">
                 </div>
             </div>
             <div class="form-group row row-label">
@@ -34,10 +34,10 @@
                 <label for="taskpersentage" class="col-sm-2 col-form-label col-label">Percentage</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="taskpersentage" placeholder="Enter task percentage"
-                        [formControlName]="'taskpersentage'">
+                        formControlName="taskpersentage">
                 </div> 
             </div>
-            <app-button-tusks [btnClss]="'button-project'" [text]="'Add Task'"></app-button-tusks>
+            <button (click)="submitTaskkform(this.taskForm.value)" class="btn button-project">Add Task</button>
         </form>
     </div>
 </div>

@@ -68,3 +68,19 @@ select option:hover {
 .form-body{
     padding: 25px;
 }
+
+
+.button-project{
+    color: #7752FE;
+    border: solid 1.5px #7752FE;
+    font-weight: semibold;
+    width: 50%;
+    margin-top: 3%;
+    margin-left: 25%;
+}
+.button-project:hover{
+    color: #FEFEFE;
+    background-color: #1E3895;
+    font-weight: semibold;
+    border: solid 1px #7752FE;
+}
