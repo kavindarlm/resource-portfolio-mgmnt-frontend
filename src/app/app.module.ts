@@ -19,6 +19,7 @@ import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admi
 import { DashboardHeaderComponent } from './admin-dashboard/dashboard-header/dashboard-header.component';
 import { UserListComponent } from './admin-dashboard/user-list/user-list.component';
 import { SearchBarComponent } from './admin-dashboard/search-bar/search-bar.component';
+import { ProjectListComponent } from './TaskManagement/project-list/project-list.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { SearchBarComponent } from './admin-dashboard/search-bar/search-bar.comp
     DashboardHeaderComponent,
     UserListComponent,
     SearchBarComponent,
+    ProjectListComponent,
   ],
   imports: [
     BrowserModule,
