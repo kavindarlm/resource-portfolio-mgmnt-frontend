@@ -4,12 +4,6 @@
     padding: 20px; /* Adjust padding based on your design */
 }
 
-.text {
-    color: #190482;
-    font-size: 2rem; /* Adjust font size based on your design */
-    font-family: Montserrat;
-}
-
 /* Responsive styles */
 @media only screen and (max-width: 768px) {
     .text {
