@@ -107,34 +107,81 @@
     background-color: aqua !important;
 }
 
+.tableContent{
+    text-align: center;
+    color: #7752FE;
+}
+
 .slider {
     -webkit-appearance: none;
-    width: 80%;
-    height: 10px;
-    background: #A9BCFF;
+    width: 100%;
+    height: 20px;
+    background-color: #A9BCFF;
     outline: none;
     opacity: 0.7;
     -webkit-transition: .2s;
     transition: opacity .2s;
     border-radius: 6px;
+    margin-right: 100px;
+    
 }
 
 .slider:hover {
     opacity: 1;
 }
-
+/*
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 15px;
-    height: 15px;
+    width: 35px;
+    height: 35px;
     border-radius: 100px;
     background: #7752FE;
     cursor: pointer;
     position: relative;
-    /* Ensure the thumb is positioned relatively */
-}
-.tableContent{
-    text-align: center;
-    color: #7752FE;
-}
+    
+    
+} */
+  input[type="range"] {
+
+    -webkit-appearance: none;
+    appearance: none; 
+    width: 100%;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    border-radius: 16px;
+  }
+  /* Track: Mozilla Firefox */
+  input[type="range"]::-moz-range-track {
+    height: 15px;
+    background: #A9BCFF;
+    border-radius: 16px;
+  }
+  
+  /* Thumb: webkit */
+  input[type="range"]::-webkit-slider-thumb {
+    /* removing default appearance */
+    -webkit-appearance: none;
+    appearance: none; 
+    /* creating a custom design */
+    height: 20px;
+    width: 20px;
+    background-color: #7752FE;
+    border-radius: 50%;
+    border: 2px solid #fdfdfd;
+    /*  slider progress trick  */
+    box-shadow: -407px 0 0 400px #7752FE;
+    position: relative;
+  }
+   
+  /* Thumb: Firefox */
+  input[type="range"]::-moz-range-thumb {
+    height: 20px;
+    width: 0px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 1px solid #7752FE;
+    /*  slider progress trick  */
+    box-shadow: -407px 0 0 400px #7752FE;
+  }
