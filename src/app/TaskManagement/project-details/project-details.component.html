@@ -34,7 +34,7 @@
                     <div class="colCricality ">
                         Project Criticality:
                         <div [ngClass]="projectDetails[0].ProjectCriticality" class="levelSqure">
-                        </div>
+                         </div>
                         {{projectDetails[0].ProjectCriticality}}
                     </div>
                 </div>
@@ -44,5 +44,23 @@
 
     <div class="heder-label">
         Task Management
+    </div>
+    <div class="taskTable">
+        <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th scope="col" class="col-4"><div class="btn-costom">Task ID</div></th>
+                <th scope="col" class="col-4"><div class="btn-costom">Expected Task %</div></th>
+                <th scope="col" class="col-4"><div class="btn-costom">Task progress</div></th>
+              </tr> 
+            </thead>
+            <tbody>
+              <tr ng *ngFor="let task of tasks" class="tableRow" (click)="handleTaskClick(task.taskId)">
+                <td class="col-4 tableContent">{{task.taskId}}</td>
+                <td class="col-4 tableContent">{{task.expectedTaskPercentage}}</td>
+                <td class="col-4 tableContent"><input type="range" min="1" max="100" value={{task.taskProgress}} class="slider" id="myRange" disabled>{{task.taskProgress}} %</td>
+              </tr>
+            </tbody>
+          </table>
     </div>
 </div>
