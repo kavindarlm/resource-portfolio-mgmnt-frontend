@@ -2,7 +2,6 @@
     <div class="heder-label">
         {{ projectDetails[0].projectName }}
     </div>
-
     <div class="detailCard">
         <div class="container">
             <div class="row rowOne">
@@ -60,7 +59,8 @@
                 <td class="col-4 tableContent">{{task.expectedTaskPercentage}}</td>
                 <td class="col-4 tableContent"><input type="range" min="1" max="100" value={{task.taskProgress}} class="slider" id="myRange" disabled>{{task.taskProgress}} %</td>
               </tr>
-            </tbody>
+            </tbody> 
           </table>
+          <app-button-tusks [btnClss]="'button-project'" [text]="'Add New Task'"></app-button-tusks>
     </div>
 </div>
