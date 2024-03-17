@@ -32,6 +32,10 @@ import { AddedResourceListComponent } from './Sprint_Management/added-resource-l
 import { MainComponent } from './Sprint_Management/main/main.component';
 
 
+import { PagesBodyComponent } from './pages-body/pages-body.component';
+import { CreateProjectComponent } from './Project-management/create-project/create-project.component';
+import { ProjectListComponent } from './Project-management/project-list/project-list.component';
+import { ProjectButtunsComponent } from './Project-management/project-buttuns/project-buttuns.component';
 
 
 @NgModule({
@@ -61,6 +65,10 @@ import { MainComponent } from './Sprint_Management/main/main.component';
     MainComponent,
     // AddedResourceListComponent,
     // AlertBoxComponent,
+    CreateProjectComponent,
+    ProjectListComponent,
+    ProjectButtunsComponent,
+
   ],
   imports: [
     BrowserModule,
