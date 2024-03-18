@@ -1,8 +1,3 @@
-.custom-size {
-    height: 10%; /* Adjust this value to change the height */
-    width: 20%;
-    margin-left: 75%;
-}
 .font-color{
     color: #1E3895;
 }
@@ -29,4 +24,19 @@ input.search-input::placeholder {
 
 .border{
     border: 1px solid #1E3895;
+}
+
+th{
+    color: #1e3895e1;
+    font-weight: 500;
+}
+
+td{
+    color:rgba(0, 0, 255, 0.575);
+    font-weight: 300;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #3b5edd;
+    color: white;
 }

@@ -15,6 +15,7 @@ import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admi
 import { DashboardHeaderComponent } from './admin-dashboard/dashboard-header/dashboard-header.component';
 import { UserListComponent } from './admin-dashboard/user-list/user-list.component';
 import { SearchBarComponent } from './admin-dashboard/search-bar/search-bar.component';
+import { AddNewUserComponent } from './admin-dashboard/add-new-user/add-new-user.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { SearchBarComponent } from './admin-dashboard/search-bar/search-bar.comp
     DashboardHeaderComponent,
     UserListComponent,
     SearchBarComponent,
+    AddNewUserComponent,
   ],
   imports: [
     BrowserModule,
