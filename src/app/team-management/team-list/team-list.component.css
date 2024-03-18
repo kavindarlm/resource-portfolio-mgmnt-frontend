@@ -56,3 +56,29 @@
     height: 80vh;
     overflow-y: scroll;
 }
+
+.table-container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* margin-left: 40%;    */
+}
+
+.table-data{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    /* justify-content: space-between; */
+    margin: 10px 0;
+    max-height: 83vh;
+    overflow-y: scroll;
+    /* overflow: hidden; */
+    
+}
+.table-data::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar width */
+  }
+  
+  .table-data {
+    scrollbar-width: none; /* Firefox */
+  }

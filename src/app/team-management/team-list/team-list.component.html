@@ -1,7 +1,24 @@
 <div class="container-fluid">
   <div class="row no-gutters">
     <div class="col-2">
-      <div class="teamListBox border-top border-end">
+      <div class="table-container">
+        <div>
+          <button class="teamListBtn btn btn-primary btn-md">Team List</button>
+        </div>
+
+        <div class="table-data">
+          <div *ngFor="let team of teams " class="btns">
+            <button class="teamNameBtn btn btn-primary" routerLink="/update/{{team.id}}"
+              routerLinkActive="active">{{team.teamName}}</button>
+          </div>
+        </div>
+
+        <div>
+          <app-new-team-button [text]="'New Team'" routerLink="TeamForm"></app-new-team-button>
+        </div>
+      </div>
+
+      <!-- <div class="teamListBox border-top border-end">
         <button class="teamListBtn btn btn-primary btn-md">Team List</button>
         <hr />
         <table class="tableList">
@@ -20,7 +37,7 @@
         <div>
           <app-new-team-button [text]="'New Team'" routerLink="TeamForm"></app-new-team-button>
         </div>
-      </div>
+      </div> -->
 
     </div>
     <div class="col-10 ">
