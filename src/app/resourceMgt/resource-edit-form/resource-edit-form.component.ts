@@ -15,6 +15,7 @@ export class ResourceEditFormComponent implements OnInit{
 
   formValue!: FormGroup; ////////////////////////
   selectedResource: any; /////////////////////////
+resourceObject: any;
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private resourceService: ResourceService) { }
 

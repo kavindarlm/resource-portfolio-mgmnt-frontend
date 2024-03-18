@@ -5,13 +5,22 @@
   background-color: white;
   border: rgb(203, 203, 203) 1px solid;
   border-radius: 5px;
-  margin: 5% 25%;
+  margin: 3% 25%;
+  /* margin: 5% auto; */
 }
 
 .addButton:hover {
   background-color: #04175a;
   color: white;
 }
+
+.container {
+   width: 100%;
+   max-width: 600px; /* Adjust maximum width as needed */
+   /* margin: 0 auto; Center the container horizontally */
+   padding: 0 10px; /* Add padding to the sides */
+}
+
 
 /* .grid-container {
   display: grid;
@@ -30,6 +39,15 @@
   /* top: 50%; */
   left: 50%;
   width: 75%;
+  text-align: center; /* Center the content inside the container */
+
   /* -ms-transform: translate(-50%, -50%); */
   /* transform: translate(-50%, -50%); */
+}
+
+/* Media query for responsiveness */
+@media screen and (max-width: 768px) {
+   .addButton {
+       width: 100%; /* Make the button full width on smaller screens */
+   }
 }

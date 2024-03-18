@@ -36,11 +36,11 @@ export class AddFormComponent implements OnInit {
     
     //initializing a FormGroup using the FormBuilder service. This FormGroup represents your form, 
     //and it contains form controls that correspond to the fields of the resource data (resourceID, jobRole, orgUnit).
-    // this.formValue = this.formBuilder.group({
-    //   resourceID: [this.resourceObject.resourceID],
-    //   jobRole: [this.resourceObject.jobRole],
-    //   orgUnit: [this.resourceObject.orgUnit]
-    // });
+    this.formValue = this.formBuilder.group({
+      resourceID: [this.resourceObject.resourceID],
+      jobRole: [this.resourceObject.jobRole],
+      orgUnit: [this.resourceObject.orgUnit]
+    });
 
     this.formValue = this.formBuilder.group({
       resourceName: ['', Validators.required], // Apply validators to form controls
@@ -53,7 +53,7 @@ export class AddFormComponent implements OnInit {
 
   loadJobRoles() { //a function to get data from the json file(jobroles)
     this.http.get("assets/jsonFiles-resourceMgt/jobroles.json").subscribe((res: any) => {
-      // debugger;
+      debugger;
       this.jobroles = res.data;//the response from this asset file(jobroles.json) will be stored in this array
     })
   }
@@ -66,10 +66,10 @@ export class AddFormComponent implements OnInit {
   }
 
   onCreateResource() {
-    // debugger;
+    debugger;
     if(this.formValue) {
       this.http.post("assets/jsonFiles-resourceMgt/postResources.json", this.resourceObject).subscribe((res: any) => {
-        alert(res.message)
+        alert(res.message);
       });
     }
     

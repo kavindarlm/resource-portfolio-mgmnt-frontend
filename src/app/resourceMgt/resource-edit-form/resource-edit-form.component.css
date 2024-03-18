@@ -27,6 +27,15 @@
   color: #c3c0ce; /* Change this to your desired color */
 }
 
+.formDetailBox {
+    border: #c3c0ce 1px solid;
+    padding-right: 5px;
+    padding-bottom: 3%;
+    border-radius: 5px;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
 .form-group label {
     display: block;
 }
@@ -43,8 +52,10 @@
 }
 
 .form-group p {
-  margin-right: 15px;  
+  margin-right: 10px;  
   float: left;
+  width: 30%;
+  margin-left: 5%;
 } 
 
 .editButton {
@@ -54,7 +65,7 @@
    background-color: white;
    border: rgb(203, 203, 203) 1px solid;
    border-radius: 5px;
-   margin:0 25%;
+   margin:5% 25% 0 25%;
    /* display: flex;
    align-items: center;
    justify-content: center; */
@@ -87,4 +98,60 @@
 .edit {
     display: flex;
     justify-content: center;
+}
+
+.deleteButton {
+    /* padding : 2px 100px;  */
+width: 40%;
+color: red;
+background-color: white;
+border: red 1px solid;
+border-radius: 5px;
+margin:0 5%;
+/* display: flex;
+align-items: center;
+justify-content: center; */
+padding: 5px;
+display: inline-block;
+}
+
+.deleteButton {
+    float: right;
+}
+
+.deleteButton:hover {
+    transition: 0.5s;
+    background-color: red;
+    color: white;
+}
+
+/* Adjust styles for smaller screens */
+@media screen and (max-width: 768px) {
+    .formBox {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .topic {
+        width: 90%;
+    }
+
+    .editButton {
+        width: 90%;
+        margin: 0 5%;
+    }
+
+    .deleteButton {
+        width: 90%;
+        margin: 0 5%;
+    }
+
+    .inputField .form-control,
+    .inputField .form-select {
+        width: 90%;
+    }
+
+    .form-group p {
+        margin-right: 5px;
+    }
 }

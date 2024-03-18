@@ -1,15 +1,15 @@
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr; /* Set a single column layout by default */
     /* border: 1px #0e3270 solid; */
     column-gap: 10px;
-    height: 100%;
+    /* height: 100%; */
 }
 
 .mainBox {
     position: relative;
     width: 100%;
-    padding: 20px;
+    padding: 10px 20px 20px 20px;
     margin: 10px;
     border: 1px #c6cad0 solid;
     display: inline-block;
@@ -17,6 +17,7 @@
 }
 
 .box2 {
+    width: 100%;
     /* width: fit-content; */
     height: 100%;
     display: inline-block;
@@ -38,6 +39,7 @@
     float: right;
     right: 0px;
     margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 #exampleModalLabel {
@@ -51,6 +53,7 @@
 .table .table-bordered {
     position: relative;
     width: 100%;
+    border-radius: 5px;
 }
 
 .table-headers .headers {
@@ -81,4 +84,22 @@
     transition: 0.5s;
     background-color: #04175a;
     color: white;
+}
+
+@media screen and (min-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr); /* Use a two-column layout on larger screens */
+    }
+
+    .mainBox {
+        margin: 10px;
+    }
+}
+
+/* .input-group { */
+    /* width: 100%; Adjust search input width to fit the container */
+/* } */
+
+.table-headers .headers {
+    padding: 2px 20px; /* Adjust header button padding for smaller screens */
 }

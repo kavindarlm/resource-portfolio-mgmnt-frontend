@@ -5,8 +5,9 @@
         </div>
         <!-- search bar -->
         <div class="input-group rounded">
-            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+            <input type="search" class="form-control rounded" placeholder="Search.." aria-label="Search"
                 aria-describedby="search-addon" />
+                <!-- <app-search-bar></app-search-bar> -->
         </div>
 
         <table class="table table-bordered">
@@ -36,6 +37,7 @@
         <app-add-form *ngIf="showForm"></app-add-form>
         <!-- <router-outlet></router-outlet> -->
         <app-resource-details *ngIf="showResourceDetails"></app-resource-details>
+        <!-- <router-outlet></router-outlet> -->
     </div>
     
 </div>

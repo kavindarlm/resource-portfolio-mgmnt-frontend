@@ -1,11 +1,12 @@
 .formBox {
     width: 90%;
     float: right;
-    margin-top: 10px;
-    margin-right: 20px;
+    margin: 10px 20px 10px 0;
+    /* margin-right: 20px; */
     padding-bottom: 10px;
     border: 1px #ced2d9 solid;
     border-radius: 5px;
+    box-sizing: border-box; /* Include padding and border in the width calculation */
 }
 
 .topic {
@@ -16,6 +17,11 @@
     margin: 5px auto;
     color: white;
     border-radius: 5px;
+}
+
+/* Adjust the form-group styles */
+.form-group {
+    margin-bottom: 20px; /* Add some space between form groups */
 }
 
 .form-label {
@@ -46,7 +52,7 @@
   margin-right: 20px;  
 } 
 
-.editButton, .deleteButton{
+.editButton {
     /* padding : 2px 100px;  */
    width: 40%;
    color: #7752fe;
@@ -58,12 +64,34 @@
    align-items: center;
    justify-content: center; */
    padding: 5px;
+   display: inline-block;
 }
 
-.editButton:hover, .deleteButton:hover {
+.deleteButton {
+        /* padding : 2px 100px;  */
+   width: 40%;
+   color: red;
+   background-color: white;
+   border: red 1px solid;
+   border-radius: 5px;
+   margin:0 5%;
+   /* display: flex;
+   align-items: center;
+   justify-content: center; */
+   padding: 5px;
+   display: inline-block;
+}
+
+.editButton:hover  {
     transition: 0.5s;
    background-color: #04175a;
    color: white;
+}
+
+.deleteButton:hover {
+    transition: 0.5s;
+    background-color: red;
+    color: white;
 }
 
 .editButton {
@@ -88,13 +116,16 @@
 
 .detailButton {
     float: inline-end;
-    margin-right: 7%;
+    /* margin-right: 7%; */
     width: 60%;
     border: 1px solid #cbcacd;
     background-color: white;
     border-radius: 5px;
     color: #7752fe;
-    display: inline;
+    /* display: inline; */
+    margin: 0 5px; /* Add space around buttons */
+    padding: 5px 10px; /* Add padding to buttons */
+    /* display: inline-block; Ensure buttons are displayed in a line */
 }
 
 /* .inputField p {
@@ -106,3 +137,10 @@
     flex: 50%;
     float: left;
 } */
+
+/* Adjust the width of the detailButton based on the screen size */
+@media screen and (max-width: 768px) {
+    .detailButton {
+        flex-basis: 100%; /* Set the flex basis to 100% on smaller screens */
+    }
+}

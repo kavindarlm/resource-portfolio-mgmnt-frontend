@@ -1,8 +1,8 @@
 .formBox {
     width: 90%;
     float: right;
-    margin-top: 10px;
-    margin-right: 20px;
+    margin: 10px 20px 10px 0;
+    /* margin-right: 20px; */
     padding-bottom: 10px;
     padding-left: 10px;
     border: 1px #ced2d9 solid;
@@ -23,6 +23,19 @@
     color: #7752fe;
     font-weight: bold;
 }
+
+/*-------------------------*/
+/* Adjust input width and alignment */
+/* .inputField p { */
+    /* margin-left: 3%; Adjust spacing */
+/* } */
+
+.form-group p {
+    margin-right: 10px;  
+    float: left;
+    width: 25%;
+    /* margin-left: 20%; */
+  } 
 
 ::placeholder {
     color: #c3c0ce;
@@ -102,4 +115,26 @@
 .add {
     display: flex;
     justify-content: center;
+}
+
+/* Form responsiveness */
+@media screen and (max-width: 768px) {
+    .formBox {
+        width: 90%; /* Adjust width for smaller screens */
+    }
+
+    .inputField p {
+        margin-left: 0; /* Remove left margin */
+        margin-right: 3%; /* Add right margin */
+    }
+
+    .inputField .form-control,
+    .inputField .form-select {
+        width: 100%; /* Full width inputs */
+    }
+
+    .addButton {
+        width: 70%; /* Adjust button width */
+        margin: 0 15%; /* Adjust button margins */
+    }
 }
