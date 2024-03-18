@@ -24,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TeamListComponent } from './team-management/team-list/team-list.component';
 import { TeamFormComponent } from './team-management/team-form/team-form.component';
 import { ResourceTableComponent } from './team-management/resource-table/resource-table.component';
+import { DeletePopupComponent } from './team-management/delete-popup/delete-popup.component';
 
 
 
@@ -50,6 +51,7 @@ import { ResourceTableComponent } from './team-management/resource-table/resourc
     SearchBarComponent,
     FilterPipe,
     UpdateComponent,
+    DeletePopupComponent,
   ],
   imports: [
     BrowserModule,

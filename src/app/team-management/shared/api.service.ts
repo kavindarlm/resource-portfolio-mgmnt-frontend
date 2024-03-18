@@ -53,5 +53,9 @@ editTeams(data:dataModel, id:number){
   return this.http.put('http://localhost:3000/teams/' + id, data) ;
 }
 
+//delete data
+deleteTeams(id: number){
+  return this.http.delete('http://localhost:3000/teams/' + id);
+}
 }
 

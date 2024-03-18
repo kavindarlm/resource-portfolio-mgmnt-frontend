@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { ApiService } from '../shared/api.service';
 import { dataModel } from '../team-form/team-form.model';
+import { GeneralService } from '../shared/general.service';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class UpdateComponent implements OnInit {
   constructor(
     private activatedroute: ActivatedRoute,
      private router: Router, 
-     private api: ApiService
+     private api: ApiService,
+     public generalservice: GeneralService
      ) 
      { 
     this.showResourceTable = false;
@@ -51,10 +53,10 @@ export class UpdateComponent implements OnInit {
       }
     );
   }
-  
 
-
-  }
+  //delete team data
+ 
+}
   
   
   

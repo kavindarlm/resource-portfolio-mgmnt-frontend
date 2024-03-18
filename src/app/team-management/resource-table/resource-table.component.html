@@ -1,31 +1,38 @@
-<div class="tableBox mt-2">
-    <div>
-        <button class="systemResource">System Resource List</button>
-    </div>
-   <!-- new code-for search bar -->
-    <div class="clo-sm-7">
-        <!-- search box -->
-    <input type="search" [(ngModel)]="searchtext" id="form1" class="form-control" placeholder="Search" aria-label="search">
-    </div>
-        
-    <table class="table">
-        <thead>
-            <tr>
-                <th><button class="tbtn">Resource Id</button></th>
-                <th><button class="tbtn">Job Role</button></th>
-                <th><button class="tbtn">Org. Unit</button></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let resource of resources | filter:searchtext">
-                <td>{{resource.resourceName}}</td>
-                <td>{{resource.role}}</td>
-                <td>{{resource.OrgUnit}}</td>
-                <td><button class="selectBtn" (click)="onSelect(resource)" [ngClass]="{ 'selected': isSelected(resource) }">Select</button></td>
-            </tr>
-        </tbody>
-    </table>
-    
-</div> 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+          <div class="resourcebody">
+            <div>
+                <button class="systemResource btn btn-primary">System Resource List</button>
+            </div>
 
+            <!-- new code-for search bar -->
+            <div class="clo-sm-7">
+                <!-- search box -->
+                <input type="search" [(ngModel)]="searchtext" id="form1" class="form-control" placeholder="Search"
+                    aria-label="search">
+            </div>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th><button class="tbtn">Resource Id</button></th>
+                        <th><button class="tbtn">Job Role</button></th>
+                        <th><button class="tbtn">Org. Unit</button></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let resource of resources | filter:searchtext">
+                        <td>{{resource.resourceName}}</td>
+                        <td>{{resource.role}}</td>
+                        <td>{{resource.OrgUnit}}</td>
+                        <td><button class="selectBtn" (click)="onSelect(resource)"
+                                [ngClass]="{ 'selected': isSelected(resource) }">Select</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+    </div>
+</div>
