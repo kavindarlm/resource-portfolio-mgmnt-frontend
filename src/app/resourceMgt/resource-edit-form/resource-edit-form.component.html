@@ -27,7 +27,7 @@
                     <div class="inputField">
                         <p>Job Role :</p>
                         <select class="form-select" formControlName="jobRole"
-                            id="jobRole" [(ngModel)]="resourceObject.roleId"><!-- style="color: #c3c0ce; -->
+                            id="jobRole"><!-- style="color: #c3c0ce; -->
                             <!-- [(ngModel)]="resourceObject.roleId" -->
                             <option value="">Select Job Role</option>
                             <option *ngFor="let roles of jobroles" [value]="roles.roleId">{{roles.roleName}}</option>
@@ -37,7 +37,7 @@
                 <div class="form-group mb-3">
                     <div class="inputField">
                         <p>Org Unit :</p>
-                        <select class="form-select" formControlName="orgUnit" id="orgUnit" [(ngModel)]="resourceObject.unitId">
+                        <select class="form-select" formControlName="orgUnit" id="orgUnit">
                             <!-- [(ngModel)]="resourceObject.unitId" -->
                             <option value="">Select Organizational Unit</option>
                             <option *ngFor="let units of orgunits" [value]="units.unitId">{{units.unitName}}</option>

@@ -1,56 +1,48 @@
+
 <div class="formBox">
     <div class="container mt-3">
         <div class="topic">
             <h6>Add New Resource</h6>
         </div>
-        <form [formGroup]="resourceForm"> 
-        <div class="form-group mb-3" *ngIf="formValue">
-            <br>
-            <label for="resourceName" class="form-label">Resource Name *</label>
-            <div class="inputField">
-                <p>Name :</p>
-                <input type="text" [(ngModel)]="resourceObject.resourceName" formControlName="resourceName"
-                    class="form-control inputBox" id="resourceName" placeholder="Enter Name">
-                <!-- Display validation message -->
-                <div *ngIf="formValue.get('resourceName')?.errors && formValue.get('resourceName')?.touched">
-                    <small class="text-danger" *ngIf="formValue.get('resourceName')?.hasError('required')">Resource Name
-                        is required</small>
+        <!-- <form> -->
+            <div class="form-group mb-3">
+                <br>
+                <label for="resourceName" class="form-label">Resource Name *</label>
+                <div class="inputField">
+                    <p>Name :</p>
+                    <input type="text" [(ngModel)]="resourceObject.resourceName" formControlName="resourceName" class="form-control inputBox" id="resourceName" placeholder="Enter Name">
                 </div>
             </div>
-        </div>
-        <div class="form-group mb-3">
-            <label for="resourceID" class="form-label">Resource ID *</label>
-            <div class="inputField">
-                <p>ID :</p>
-                <input type="text" [(ngModel)]="resourceObject.resourceID" formControlName="resourceID"
-                    class="form-control inputBox" id="resourceID" placeholder="Enter Resource ID">
+            <div class="form-group mb-3">
+                <label for="resourceID" class="form-label">Resource ID *</label>
+                <div class="inputField">
+                    <p>ID :</p>
+                    <input type="text" [(ngModel)]="resourceObject.resourceID" formControlName="resourceID" class="form-control inputBox" id="resourceID" placeholder="Enter Resource ID">
+                </div>
             </div>
-        </div>
-        <div class="form-group mb-3">
-            <label for="jobRole" class="form-label">Job Role *</label>
-            <div class="inputField">
-                <p>Job Role :</p>
-                <select class="form-select inputBox" [(ngModel)]="resourceObject.roleId" formControlName="jobRole"
-                    id="jobRole">
-                    <option selected disabled>Select Job Role</option>
-                    <option *ngFor="let roles of jobroles" [value]="roles.roleId">{{roles.roleName}}</option>
-                </select>
+            <div class="form-group mb-3">
+                <label for="jobRole" class="form-label">Job Role *</label>
+                <div class="inputField">
+                    <p>Job Role :</p>
+                    <select class="form-select inputBox" [(ngModel)]="resourceObject.roleId" formControlName="jobRole" id="jobRole"><!-- style="color: #c3c0ce; -->
+                        <option disabled selected="selected">Select Job Role</option>
+                        <option *ngFor="let roles of jobroles" [value]="roles.roleId">{{roles.roleName}}</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-group mb-3">
-            <label for="orgUnit" class="form-label ">Organizational Unit</label>
-            <div class="inputField">
-                <p>Org Unit :</p>
-                <select class="form-select inputBox" [(ngModel)]="resourceObject.unitId" formControlName="orgUnit"
-                    id="orgUnit">
-                    <option selected disabled>Select Organizational Unit</option>
-                    <option *ngFor="let units of orgunits" [value]="units.unitId">{{units.unitName}}</option>
-                </select>
+            <div class="form-group mb-3">
+                <label for="orgUnit" class="form-label">Organizational Unit</label>
+                <div class="inputField">
+                    <p>Org Unit :</p>
+                    <select class="form-select inputBox" [(ngModel)]="resourceObject.unitId" formControlName="orgUnit" id="orgUnit">
+                        <option disabled selected="selected">Select Organizational Unit</option>
+                        <option *ngFor="let units of orgunits" [value]="units.unitId">{{units.unitName}}</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="add">
-            <button type="button" (click)="onCreateResource()" class="addButton">Add Resource</button>
-        </div>
-        </form>
+            <div class="add">
+                <button type="button" (click)="onCreateResource()" class="addButton">Add Resource</button>
+            </div>
+        <!-- </form> -->
     </div>
 </div>

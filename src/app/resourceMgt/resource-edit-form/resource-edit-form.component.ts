@@ -39,13 +39,13 @@ resourceObject: any;
     this.formValue.patchValue({
       resourceName: this.selectedResource.resourceName,
       resourceID: this.selectedResource.resourceID,
-      jobRole: this.selectedResource.jobRole,
-      orgUnit: this.selectedResource.orgUnit
+      jobRole: this.selectedResource.roleId,
+      orgUnit: this.selectedResource.unitId
     });
   }
 
   loadJobRoles() { //a function to get data from the json file(jobroles)
-    this.http.get("assets/jsonFiles-resourceMgt/jobroles.json").subscribe((res: any) => {
+    this.http.get("assets/jsonFiles-resourceMgt/jobRoles.json").subscribe((res: any) => {
       debugger;
       this.jobroles = res.data;//the response from this asset file(jobroles.json) will be stored in this array
     })
@@ -61,7 +61,7 @@ resourceObject: any;
   onEditResource() {
     debugger;
     this.http.post("assets/jsonFiles-resourceMgt/putResources.json", this.selectedResource).subscribe((res: any) => {
-      alert(res.message)
+      alert(res.message);
     })
   }
 }
