@@ -1,4 +1,5 @@
 import { Component , Input , OnInit } from '@angular/core';
+import { AvailabiilityComponent } from '../../availabiility/availabiility.component';
 
 @Component({
   selector: 'app-tables',
@@ -13,5 +14,12 @@ export class TablesComponent {
   ngOnInit() {
     
   }
+
+  comp:any ;
+  detectComp(comp:any){
+    if(comp === "availability"){
+      this.comp = AvailabiilityComponent;
+  }
+}
 
 }

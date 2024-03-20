@@ -24,25 +24,5 @@
   font-family: Montserrat;
 }
 
-.pagination {
-  display: flex;
-  justify-content: center;
-  list-style: none;
-  padding: 0;
-}
-
-.pagination .page-item {
-  margin-right: 5px;
-}
-
-.pagination .page-link {
-  color: #190482;
-  border: 1px solid #7752fe;
-}
-
-.pagination .page-link:hover {
-  background-color: #7752fe;
-  color: #fff;
-}
 
 /* Adjust styles for the rest of your components as needed */
