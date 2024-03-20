@@ -1,4 +1,6 @@
-<div class="container">
+<div class="container ">
+  
+  
   <div class="box1">
 
       <div class="d-grid rounded boxclr bd-highlight mx-auto gap-2 col-12 col-sm-8 col-md-6 shadow p-3 mb-5 w-100 text1">Create New Sprint</div>
@@ -54,11 +56,26 @@
   </div>
 
   <div class="box1">
-      <app-added-resource-list [HeadArray]="headArray" [tablecontents]="resources"></app-added-resource-list>
+    <app-added-resource-list [HeadArray]="headArray" [tablecontents]="resources"></app-added-resource-list>
   </div>
 
-  <div>
-      <div class="rectangle4343 text2 center">Create Sprint </div>
+  <div class="d-grid gap-2 col-6 mx-auto border rounded">
+    <button class="btn btn-primary text5 fw-bold" type="button" (click)="detectCom('availableResourceList')"> Add New Resource </button> 
+    
+       
   </div>
+  
+  <div>
+    <div class="rectangle4343 text2 center">Create Sprint </div>
+  </div>
+
 </div>
 
+
+
+  <ng-container *ngComponentOutlet="comp"></ng-container>
+
+
+
+
+  

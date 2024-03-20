@@ -1,5 +1,8 @@
 <div class="border rounded container">
 
+  
+
+
   <div class="d-grid rounded text-white text-center boxclr bd-highlight mx-auto shadow p-3 mb-5 w-100 text2 mt-3">Available Resource List</div>
 
   <!-- app.component.html -->
@@ -33,5 +36,8 @@
       </li>
     </ul>
   </nav>
+
+  <app-project-buttuns [btnClss]="'addproject'" [text]="'Add New Sprint'" (click)="detectComp('availability')"></app-project-buttuns>
+  <ng-container *ngComponentOutlet="comp"></ng-container>
 
 </div>

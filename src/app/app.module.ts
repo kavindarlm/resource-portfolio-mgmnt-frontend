@@ -31,11 +31,10 @@ import { AlertBoxComponent } from './Sprint_Management/Reusable_Components/alert
 import { AddedResourceListComponent } from './Sprint_Management/added-resource-list/added-resource-list.component';
 import { MainComponent } from './Sprint_Management/main/main.component';
 
-
-import { PagesBodyComponent } from './pages-body/pages-body.component';
-import { CreateProjectComponent } from './Project-management/create-project/create-project.component';
 import { ProjectListComponent } from './Project-management/project-list/project-list.component';
 import { ProjectButtunsComponent } from './Project-management/project-buttuns/project-buttuns.component';
+import { ListComponent } from './Sprint_Management/Reusable_Components/list/list.component';
+
 
 
 @NgModule({
@@ -65,10 +64,11 @@ import { ProjectButtunsComponent } from './Project-management/project-buttuns/pr
     MainComponent,
     // AddedResourceListComponent,
     // AlertBoxComponent,
-    CreateProjectComponent,
-    ProjectListComponent,
-    ProjectButtunsComponent,
 
+    ProjectButtunsComponent,
+    ProjectListComponent,
+    ListComponent,
+   
   ],
   imports: [
     BrowserModule,

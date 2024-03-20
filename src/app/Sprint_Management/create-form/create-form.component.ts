@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AvailableResourceListComponent } from '../available-resource-list/available-resource-list.component';
 
 @Component({
   selector: 'app-create-form',
@@ -23,7 +24,14 @@ export class CreateFormComponent {
 
   ];
 
+  comp:any ;
+  detectCom(comp:any){
+    if(comp === "availableResourceList"){
+      this.comp = AvailableResourceListComponent;
+  }
+
 
  
 }
 
+}

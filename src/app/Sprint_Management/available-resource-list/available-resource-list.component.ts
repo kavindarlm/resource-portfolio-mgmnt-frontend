@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AvailabiilityComponent } from '../availabiility/availabiility.component';
 
 @Component({
   selector: 'app-available-resource-list',
@@ -18,4 +19,11 @@ export class AvailableResourceListComponent {
 
   teams: string[] = ['Team 01', 'Team 02', 'Team 03'];
   OrgUnit: string[] = ['TAPRO', 'DirectFN'];
+
+  comp:any ;
+  detectComp(comp:any){
+    if(comp === "availability"){
+      this.comp = AvailabiilityComponent;
+  }
+}
 }

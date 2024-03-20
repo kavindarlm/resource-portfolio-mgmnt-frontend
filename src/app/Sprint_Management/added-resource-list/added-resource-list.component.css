@@ -31,24 +31,7 @@
   outline: none;
 }
 
-/* Button Styles */
-.btn-primary {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 16px; /* Adjust font size based on your design */
-  text-align: center;
-  text-decoration: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: white;
-  border: 1px solid #7752fe;
-  transition: background-color 0.3s, color 0.3s;
-}
 
-.btn-primary:hover {
-  background-color: #1E3895;
-  color: #ffffff;
-}
 
 /* Responsive styles */
 @media only screen and (max-width: 768px) {
