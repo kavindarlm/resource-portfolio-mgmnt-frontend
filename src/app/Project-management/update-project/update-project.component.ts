@@ -13,7 +13,7 @@ export class UpdateProjectComponent implements OnInit {
   public dataid!: string;
   // public projectdata!: datamodel;
   projectForm: datamodel = { 
-    id: '',
+    projectid: '',
     projectName: '',
     projectStartDate: '',
     projectEndDate: '', 

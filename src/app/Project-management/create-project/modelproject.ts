@@ -1,5 +1,5 @@
 export interface datamodel{
-    id: string;
+    projectid: string;
     projectName: string;
     projectStartDate: string;
     projectEndDate: string;

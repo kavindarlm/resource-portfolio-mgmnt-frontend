@@ -11,23 +11,26 @@ export class ApiService {
   //AddProject
   addProject(data:datamodel){
     // return this.http.post<datamodel>("http://localhost:3000/posts",data);
-    return this.http.post<datamodel>("http://localhost:5000/projects",data);
+    return this.http.post<datamodel>("/projects",data);
   }
   //GetProjectDetails
   getProjectList(){
-    return this.http.get<datamodel[]>("http://localhost:3000/posts");
+    // return this.http.get<datamodel[]>("http://localhost:3000/posts");
+    return this.http.get<datamodel[]>("/projects");
   }
   //FetchProjectDetails
   fetchProject(id:string){ 
-    return this.http.get<datamodel>("http://localhost:3000/posts/"+id);
+    // return this.http.get<datamodel>("http://localhost:3000/posts/"+id);
+    return this.http.get<datamodel>("/projects/"+id)
   }
   //UpdateProjectDetails
   updateProject(data: datamodel,id: string){ 
-    return this.http.put<datamodel>("http://localhost:3000/posts/"+id,data);
+    // return this.http.put<datamodel>("http://localhost:3000/posts/"+id,data);
+    return this.http.put<datamodel>("/projects/"+id,data);
   }
 
   //DeleteProject
   deleteProject(id: string){
-    return this.http.delete<datamodel>("http://localhost:3000/posts/"+id);
+    return this.http.delete<datamodel>("/projects/"+id);
   }
 }
