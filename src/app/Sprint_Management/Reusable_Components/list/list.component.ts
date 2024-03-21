@@ -9,9 +9,8 @@ import { CreateFormComponent } from '../../create-form/create-form.component';
 export class ListComponent {
 
   @Input() listTopic: string = '';
-  @Input() addlisticon: string = '';
   @Input() projects: any[] = [];
-  @Input() addroutelink:string = '';  
+
 
   comp:any ;
   detectComp(comp:any){

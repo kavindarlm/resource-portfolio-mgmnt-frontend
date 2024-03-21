@@ -6,169 +6,39 @@ import { Component } from '@angular/core';
   styleUrl: './main.component.css'
 })
 export class MainComponent {
-  
 
-  projectDetails: any = [
+  sprint: any = [
     {
-      projectID: 1,
-      projectName: 'Project 1',
-      projectDescription: 'This is project 1',
-      projectStartDate: '2021-08-01',
-      projectEndDate: '2021-08-31',
-      projectStatus: 'Active',
-    },
-    {
-      projectID: 2,
-      projectName: 'Project 2',
-      projectDescription: 'This is project 2',
-      projectStartDate: '2021-09-01',
-      projectEndDate: '2021-09-30',
-      projectStatus: 'Inactive',
-    },
-    {
-      projectID: 3,
-      projectName: 'Project 3',
-      projectDescription: 'This is project 3',
-      projectStartDate: '2021-10-01',
-      projectEndDate: '2021-10-31',
-      projectStatus: 'Active',
-    },
-    {
-      projectID: 4,
-      projectName: 'Project 4',
-      projectDescription: 'This is project 4',
-      projectStartDate: '2021-11-01',
-      projectEndDate: '2021-11-30',
-      projectStatus: 'Active',
-    },
-    {
-      projectID: 5,
-      projectName: 'Project 5',
-      projectDescription: 'This is project 5',
-      projectStartDate: '2021-12-01',
-      projectEndDate: '2021-12-31',
-      projectStatus: 'Inactive',
-    },
-    {
-      projectID: 6,
-      projectName: 'Project 6',
-      projectDescription: 'This is project 6',
-      projectStartDate: '2022-01-01',
-      projectEndDate: '2022-01-31',
-      projectStatus: 'Active',
-    },
-    {
-      projectID: 7,
-      projectName: 'Project 7',
-      projectDescription: 'This is project 7',
-      projectStartDate: '2022-02-01',
-      projectEndDate: '2022-02-28',
-      projectStatus: 'Active',
-    },
-    {
-      projectID: 8,
-      projectName: 'Project 8',
-      projectDescription: 'This is project 8',
-      projectStartDate: '2022-03-01',
-      projectEndDate: '2022-03-31',
-      projectStatus: 'Inactive',
-    },
-    {
-      projectID: 9,
-      projectName: 'Project 9',
-      projectDescription: 'This is project 9',
-      projectStartDate: '2022-04-01',
-      projectEndDate: '2022-04-30',
-      projectStatus: 'Active',
-    },
-    {
-      projectID: 10,
-      projectName: 'Project 10',
-      projectDescription: 'This is project 10',
-      projectStartDate: '2022-05-01',
-      projectEndDate: '2022-05-31',
-      projectStatus: 'Active',
-    },
-    {
-      projectID: 1,
-      projectName: 'Project 1',
-      projectDescription: 'This is project 1',
-      projectStartDate: '2021-08-01',
-      projectEndDate: '2021-08-31',
-      projectStatus: 'Active',
-    },
-    {
-      projectID: 2,
-      projectName: 'Project 2',
-      projectDescription: 'This is project 2',
-      projectStartDate: '2021-09-01',
-      projectEndDate: '2021-09-30',
-      projectStatus: 'Inactive',
-    },
-    {
-      projectID: 3,
-      projectName: 'Project 3',
-      projectDescription: 'This is project 3',
-      projectStartDate: '2021-10-01',
-      projectEndDate: '2021-10-31',
-      projectStatus: 'Active',
-    },
-    {
-      projectID: 4,
-      projectName: 'Project 4',
-      projectDescription: 'This is project 4',
-      projectStartDate: '2021-11-01',
-      projectEndDate: '2021-11-30',
-      projectStatus: 'Active',
-    },
-    {
-      projectID: 5,
-      projectName: 'Project 5',
-      projectDescription: 'This is project 5',
-      projectStartDate: '2021-12-01',
-      projectEndDate: '2021-12-31',
-      projectStatus: 'Inactive',
-    },
-    { 
-      projectID: 6,
-      projectName: 'Project 6',
-      projectDescription: 'This is project 6',
-      projectStartDate: '2022-01-01',
-      projectEndDate: '2022-01-31',
-      projectStatus: 'Active',
-    },
-    {
-      projectID: 7,
-      projectName: 'Project 7',
-      projectDescription: 'This is project 7',
-      projectStartDate: '2022-02-01',
-      projectEndDate: '2022-02-28',
-      projectStatus: 'Active',
-    },
-    {
-      projectID: 8,
-      projectName: 'Project 8',
-      projectDescription: 'This is project 8',
-      projectStartDate: '2022-03-01',
-      projectEndDate: '2022-03-31',
-      projectStatus: 'Inactive',
-    },
-    {
-      projectID: 9,
-      projectName: 'Project 9',
-      projectDescription: 'This is project 9',
-      projectStartDate: '2022-04-01',
-      projectEndDate: '2022-04-30',
-      projectStatus: 'Active',
-    },
-    {
-      projectID: 10,
-      projectName: 'Project 10',
-      projectDescription: 'This is project 10',
-      projectStartDate: '2022-05-01',
-      projectEndDate: '2022-05-31',
-      projectStatus: 'Active',
-    },
+      id: 1,
+      name: "Sprint 01",
+      startDate: new Date("2024-03-01"),
+      endDate: new Date("2024-03-15")
+  },
+  {
+      id: 2,
+      name: "Sprint 02",
+      startDate: new Date("2024-03-16"),
+      endDate: new Date("2024-03-31")
+  },
+  {
+      id: 3,
+      name: "Sprint 03",
+      startDate: new Date("2024-04-01"),
+      endDate: new Date("2024-04-15")
+  },
+  {
+      id: 4,
+      name: "Sprint 04",
+      startDate: new Date("2024-04-16"),
+      endDate: new Date("2024-04-30")
+  },
+  {
+      id: 5,
+      name: "Sprint 05",
+      startDate: new Date("2024-05-01"),
+      endDate: new Date("2024-05-15")
+  }
   ];
+  
 
 }

@@ -14,8 +14,9 @@
                             </thead>
                             <tr *ngFor="let project of projects">
                                 <td>
-                                    <app-project-buttuns [btnClss]="'btn-costom'" [text]="project.projectName"></app-project-buttuns>
+                                    <app-project-buttuns [btnClss]="'btn-costom'" [text]="project.name"></app-project-buttuns>
                                 </td>
+                                <!-- [text]="'Sprint ' + project.id" -->
                             </tr>
                             <tr>
                                 <td>
