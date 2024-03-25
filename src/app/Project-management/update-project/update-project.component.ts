@@ -34,16 +34,19 @@ export class UpdateProjectComponent implements OnInit {
       // console.log(this.projectdata);
     })
   }
+
   editProjectDetails() {
     this.api.updateProject(this.projectForm, this.dataid).subscribe((res: datamodel) => {
       this.router.navigate(['/projectlist']);
       this.projectList.getProjectList();
     })
   }
+
   deleteProjectDetails(){
     this.api.deleteProject(this.dataid).subscribe((res: datamodel) => {
       this.router.navigate(['/projectlist']);
       this.projectList.getProjectList();
     });
   }
+
 }

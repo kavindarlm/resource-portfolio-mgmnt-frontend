@@ -33,4 +33,24 @@ export class ApiService {
   deleteProject(id: string){
     return this.http.delete<datamodel>("/projects/"+id);
   }
+
+  //Number of ongoing projects
+  getProjectCount() {
+    return this.http.get<number>("/projects/count/countprojects");
+  }
+
+  //Number of ongoing HighCriticalProjects
+  getHighCriticalProjectCount(){
+    return this.http.get<number>("/projects/high-criticality/count");
+  }
+
+  //Number of ongoing LowCriticalProjects
+  getLowCriticalProjectCount(){
+    return this.http.get<number>("/projects/low-criticality/count");
+  }
+
+  //Number of ongoing MediumCriticalProjects
+  getMediumCriticalProjectCount(){
+    return this.http.get<number>("/projects/Medium-criticality/count");
+  }
 }
