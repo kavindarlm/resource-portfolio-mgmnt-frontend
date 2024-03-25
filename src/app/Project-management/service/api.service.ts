@@ -11,46 +11,46 @@ export class ApiService {
   //AddProject
   addProject(data:datamodel){
     // return this.http.post<datamodel>("http://localhost:3000/posts",data);
-    return this.http.post<datamodel>("/projects",data);
+    return this.http.post<datamodel>("http://localhost:3000/project",data);
   }
   //GetProjectDetails
-  getProjectList(){
+  getProjectList(){ 
     // return this.http.get<datamodel[]>("http://localhost:3000/posts");
-    return this.http.get<datamodel[]>("/projects");
+    return this.http.get<datamodel[]>("http://localhost:3000/project");
   }
   //FetchProjectDetails
   fetchProject(id:string){ 
     // return this.http.get<datamodel>("http://localhost:3000/posts/"+id);
-    return this.http.get<datamodel>("/projects/"+id)
+    return this.http.get<datamodel>("http://localhost:3000/project/"+id)
   }
   //UpdateProjectDetails
   updateProject(data: datamodel,id: string){ 
     // return this.http.put<datamodel>("http://localhost:3000/posts/"+id,data);
-    return this.http.put<datamodel>("/projects/"+id,data);
+    return this.http.put<datamodel>("http://localhost:3000/project/"+id,data);
   }
 
   //DeleteProject
   deleteProject(id: string){
-    return this.http.delete<datamodel>("/projects/"+id);
+    return this.http.delete<datamodel>("http://localhost:3000/project/"+id);
   }
 
   //Number of ongoing projects
   getProjectCount() {
-    return this.http.get<number>("/projects/count/countprojects");
-  }
+    return this.http.get<number>("http://localhost:3000/project/count/countprojects");
+  } 
 
   //Number of ongoing HighCriticalProjects
   getHighCriticalProjectCount(){
-    return this.http.get<number>("/projects/high-criticality/count");
+    return this.http.get<number>("http://localhost:3000/project/high-criticality/count");
   }
 
   //Number of ongoing LowCriticalProjects
   getLowCriticalProjectCount(){
-    return this.http.get<number>("/projects/low-criticality/count");
+    return this.http.get<number>("http://localhost:3000/project/low-criticality/count");
   }
 
   //Number of ongoing MediumCriticalProjects
   getMediumCriticalProjectCount(){
-    return this.http.get<number>("/projects/Medium-criticality/count");
+    return this.http.get<number>("http://localhost:3000/project/Medium-criticality/count");
   }
 }
