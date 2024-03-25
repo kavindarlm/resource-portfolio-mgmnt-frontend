@@ -20,7 +20,7 @@ import { UserListComponent } from './admin-dashboard/user-list/user-list.compone
 import { SearchBarComponent } from './admin-dashboard/search-bar/search-bar.component';
 import { FilterPipe } from './team-management/filter.pipe';
 import { UpdateComponent } from './team-management/update/update.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { TeamListComponent } from './team-management/team-list/team-list.component';
 import { TeamFormComponent } from './team-management/team-form/team-form.component';
 import { ResourceTableComponent } from './team-management/resource-table/resource-table.component';
@@ -61,7 +61,8 @@ import { DeletePopupComponent } from './team-management/delete-popup/delete-popu
     HttpClientModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideHttpClient() 
   ],
   bootstrap: [AppComponent]
 })

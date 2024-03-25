@@ -76,6 +76,7 @@
           "configurations": {
             "production": {
               "buildTarget": "tapro2:build:production"
+              
             },
             "development": {
               "buildTarget": "tapro2:build:development"

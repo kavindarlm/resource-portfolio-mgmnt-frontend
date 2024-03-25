@@ -12,12 +12,12 @@ export class ServiceService {
   constructor(private http: HttpClient) { }
 //create data
   addTeam(data: any): Observable<any> {
-    return this.http.post('http://localhost:3000/teams',data);
+    return this.http.post('/teams',data);
 }
 
 //fetch data
 getTeams(): Observable<any> {
-  return this.http.get('http://localhost:3000/teams');
+  return this.http.get('/teams');
 }
 
 //new code - add selected resources to the table

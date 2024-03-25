@@ -20,6 +20,7 @@
     text-decoration: none;
     width: 100%;
     margin-bottom: 2%;
+    pointer-events: none;
 }
 
 .title-team,

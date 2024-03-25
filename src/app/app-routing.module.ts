@@ -8,13 +8,16 @@ import { PagesBodyComponent } from './PageBody/pages-body/pages-body.component';
 import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admin-dasbd-body.component';
 import { UpdateComponent } from './team-management/update/update.component';
 import { TeamListComponent } from './team-management/team-list/team-list.component';
+import { DeletePopupComponent } from './team-management/delete-popup/delete-popup.component';
 
 const routes: Routes = [
-  {path:'',component:TeamListComponent,
+  {path:'',component:PagesBodyComponent,
    children:[
+    {path:'teamlistcomponent', component:TeamListComponent},
     {path: 'NewTeamButton', component: NewTeamButtonComponent},
     {path: 'TeamForm', component: TeamFormComponent},
     {path:'update/:id', component: UpdateComponent},
+    {path: "delete/:id", component:DeletePopupComponent}
    ]
 }
   //redirect to login page

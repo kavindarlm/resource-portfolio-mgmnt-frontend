@@ -7,33 +7,36 @@ import { dataModel } from '../team-form/team-form.model';
   providedIn: 'root'
 })
 export class ApiService {
+  delete(arg0: string) {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(private http: HttpClient) { }
 
 
-  postTeam(data: any){
-    return this.http.post('http://localhost:3000/teams', data)
+  postTeam(data: dataModel){
+    return this.http.post<dataModel>('/teams', data)
     .pipe(map((res:any)=>{
       return res;
     }))
   }
 
   getTeam(){
-    return this.http.get('http://localhost:3000/teams')
+    return this.http.get<dataModel[]>('/teams')
     .pipe(map((res:any)=>{
       return res;
     }))
   }
 
-  updateTeam(data: any,id:number){
-    return this.http.put('http://localhost:3000/teams/' + id, data)
+  updateTeam(id: number, data: dataModel){
+    return this.http.put<dataModel>('/teams/' + id, data)
     .pipe(map((res:any)=>{
       return res;
     }))
   }
 
   deleteTeam(id: number){
-    return this.http.delete('http://localhost:3000/teams/' + id)
+    return this.http.delete('/teams/' + id)
     .pipe(map((res:any)=>{
       return res;
     }))
@@ -45,17 +48,17 @@ export class ApiService {
 // }
 
 fetchData(id: number) {
-  return this.http.get<dataModel>('http://localhost:3000/teams/' + id);
+  return this.http.get<dataModel>('/teams/' + id);
 }
 
 //edit data
 editTeams(data:dataModel, id:number){
-  return this.http.put('http://localhost:3000/teams/' + id, data) ;
+  return this.http.put('/teams/' + id, data) ;
 }
 
 //delete data
 deleteTeams(id: number){
-  return this.http.delete('http://localhost:3000/teams/' + id);
+  return this.http.delete('/teams/' + id);
 }
 }
 

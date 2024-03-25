@@ -1,8 +1,6 @@
 
 .teamListBox{
     width:100%;
-    /* height: 100vh; */
-    /* float: left; */
     
 }
 
@@ -13,13 +11,11 @@
     color: #FEFEFE;
     text-align: center;
     text-decoration: none;
-    /* display: inline-block; */
     width: 100%;
     height: 39px;
     pointer-events: none;
     margin-top: 10px;
-    /* margin-left: 10px; */
-    /* margin-right: 10px; */
+
 }
 
 .teamNameBtn{
@@ -29,24 +25,20 @@
     color: #7752FE;
     text-align: center;
     text-decoration: none;
-    /* display: inline-block; */
     width: 100%;
     height: 39px;
     margin-top: 10px;
-    /* margin-left: 10px;
-    margin-right: 10px; */
+   
 }
 .tableList{
     width: 100%;
 }
 
-/* Override Bootstrap row padding */
 .row.no-gutters {
     margin-right: 0;
     margin-left: 0;
 }
 
-/* Optionally, remove padding from columns within the row */
 .row.no-gutters > [class^="col-"] {
     padding-right: 0;
     padding-left: 0;
@@ -61,24 +53,23 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    /* margin-left: 40%;    */
+
 }
 
 .table-data{
     display: flex;
     flex-direction: column;
     gap: 6px;
-    /* justify-content: space-between; */
     margin: 10px 0;
     max-height: 83vh;
     overflow-y: scroll;
-    /* overflow: hidden; */
     
 }
+
 .table-data::-webkit-scrollbar {
-    width: 0; /* Remove scrollbar width */
+    width: 0; 
   }
   
   .table-data {
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none; 
   }

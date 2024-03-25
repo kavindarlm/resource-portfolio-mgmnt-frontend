@@ -2,14 +2,18 @@ import { Component } from '@angular/core';
 import { GeneralService } from '../shared/general.service';
 import { ApiService } from '../shared/api.service';
 import { Router } from '@angular/router';
+import { catchError, map } from 'rxjs';
+
 
 @Component({
   selector: 'app-delete-popup',
   templateUrl: './delete-popup.component.html',
-  styleUrl: './delete-popup.component.css'
+  styleUrls: ['./delete-popup.component.css']
 })
 export class DeletePopupComponent {
   public dataid!: number;
+  http: any;
+  
   constructor(public generalservice: GeneralService,
     private api: ApiService,
     private router: Router
@@ -19,18 +23,15 @@ export class DeletePopupComponent {
 
   }
 
-  delete() {
-    this.api.deleteTeams(this.dataid).subscribe(
-      (_res: any) => { // Change the type of '_res' to 'any'
-        // Assuming 'res' is of type 'dataModel'
-        // Your logic here
-        this.router.navigate(['/']); // Navigate to the desired route
+  deleteTeam() {
+    this.api.deleteTeam(this.dataid).subscribe(
+      () => {
+        this.router.navigate(['/teams']);
       },
-      (error: any) => { // Define error type as 'any' or specify the error type if known
-        // Handle errors if necessary
+      (error: any) => {
+        console.error('Failed to delete team:', error);
       }
     );
-  
   }
 
 

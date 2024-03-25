@@ -3,7 +3,7 @@
     <div class="col-2">
       <div class="table-container">
         <div>
-          <button class="teamListBtn btn btn-primary btn-md">Team List</button>
+          <button  class="teamListBtn btn btn-primary btn-md">Team List</button>
         </div>
 
         <div class="table-data">
@@ -18,38 +18,9 @@
         </div>
       </div>
 
-      <!-- <div class="teamListBox border-top border-end">
-        <button class="teamListBtn btn btn-primary btn-md">Team List</button>
-        <hr />
-        <table class="tableList">
-          <thead>
-            <tr>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let team of teams">
-              <td><button class="teamNameBtn btn btn-primary" routerLink="/update/{{team.id}}">{{ team.teamName
-                  }}</button></td>
-            </tr>
-          </tbody>
-        </table>
-        <div>
-          <app-new-team-button [text]="'New Team'" routerLink="TeamForm"></app-new-team-button>
-        </div>
-      </div> -->
-
     </div>
     <div class="col-10 ">
       <router-outlet></router-outlet>
     </div>
-
-    <!-- <div>
-      <app-team-form *ngIf="showForm"></app-team-form>
-    </div> -->
-
-    <!-- <div>
-  <app-update></app-update>
-</div> -->
   </div>
 </div>

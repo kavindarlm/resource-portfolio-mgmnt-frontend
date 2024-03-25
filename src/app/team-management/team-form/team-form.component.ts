@@ -45,11 +45,11 @@ export class TeamFormComponent implements OnInit {
       const formData = { ...this.teamForm.value, selectedResources: this.selectedResources };
 
       this.service.addTeam(formData).subscribe({
-        next: (val: any) => {
-          alert('Team added successfully');
+        next: (_val: any) => {
+          // alert('Team added successfully');
         },
-        error: (err: any) => {
-          alert('Error while adding team');
+        error: (_err: any) => {
+          // alert('Error while adding team');
         }
       });
     }
