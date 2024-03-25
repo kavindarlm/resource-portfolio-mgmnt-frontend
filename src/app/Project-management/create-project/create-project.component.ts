@@ -29,7 +29,7 @@ export class CreateProjectComponent implements OnInit {
     this.submited = true;
     if(this.projectform.invalid){
       return;
-    }
+    } 
     alert('Form Submitted Successfully');
     this.api.addProject(data).subscribe((res=>{
       this.projectform.reset();
