@@ -63,12 +63,6 @@ button[type="submit"] {
     
 }
 
-/* table {
-    
-    border-collapse: collapse;
-    margin: 10px;
-  
-} */
 
 .tbtn{
     background-color:  #C2D9FF;
@@ -119,18 +113,5 @@ input.ng-invalid.ng-touched {
     border-radius: 8px; 
 }
 
-/* .resourceTableBox{
-    width: fit-content;
-    height: 100%;  
-    
-
-    
-} */
-
-/* .box{
-  display: grid;
-  grid-template-columns: auto auto;
-  column-gap: 10px;
-} */
 
 

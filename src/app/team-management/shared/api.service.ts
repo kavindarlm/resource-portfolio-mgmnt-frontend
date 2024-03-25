@@ -42,10 +42,6 @@ export class ApiService {
     }))
   }
 
-  //fetch data
-// fetchData(id: number) {
-//   return this.http.get<dataModel>('http://localhost:3000/teams/' + id);
-// }
 
 fetchData(id: number) {
   return this.http.get<dataModel>('/teams/' + id);

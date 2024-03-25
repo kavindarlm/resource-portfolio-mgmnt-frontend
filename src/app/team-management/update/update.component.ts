@@ -43,13 +43,10 @@ export class UpdateComponent implements OnInit {
 //edit team data
 edit() {
   this.api.updateTeam(this.dataid, this.teamData).subscribe(
-    (_res: any) => { // Change the type of '_res' to 'any'
-      // Assuming 'res' is of type 'dataModel'
-      // Your logic here
-      this.router.navigate(['/']); // Navigate to the desired route
+    (_res: any) => { 
+      this.router.navigate(['/']); 
     },
-    (_error: any) => { // Define error type as 'any' or specify the error type if known
-      // Handle errors if necessary
+    (_error: any) => { 
     }
   );
 }
@@ -60,42 +57,3 @@ edit() {
   
   
   
-
-// import { Component, OnInit } from '@angular/core';
-// import { ActivatedRoute, Router, Params } from '@angular/router';
-// import { ApiService } from '../shared/api.service';
-// import { dataModel } from '../team-form/team-form.model';
-
-// @Component({
-//   selector: 'app-update',
-//   templateUrl: './update.component.html',
-//   styleUrls: ['./update.component.css']
-// })
-// export class UpdateComponent implements OnInit {
-//   public dataid!: number;
-//   public teamData: dataModel = { id:'', teamName: '', description: '', resorceId: 0, resourceName: '', role: '', OrgUnit: '' };
-//   selectedResources: any;
-
-//   constructor(private activatedroute: ActivatedRoute, private router: Router, private api: ApiService) { }
-
-//   ngOnInit(): void {
-//     this.activatedroute.paramMap.subscribe((params: Params) => {
-//       this.dataid = params['get']('id');
-
-//     });
-//     this.api.fetchData(this.dataid).subscribe((data: dataModel) => {
-//       this.teamData = data;
-//     });
-//   }
-// }
-
-
-// use this if you want to move team to team with refreshing
-// ngOnInit(): void {
-  //     this.activatedroute.paramMap.subscribe((params: Params) => {
-  //       this.dataid = params['get']('id');
-  
-  //     });
-  //     this.api.fetchData(this.dataid).subscribe((data: dataModel) => {
-  //       this.teamData = data;
-  //     });

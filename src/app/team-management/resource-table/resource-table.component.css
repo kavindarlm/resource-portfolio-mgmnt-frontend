@@ -1,13 +1,3 @@
-/* .tableBox{
-    width:fit-content ;
-    margin: 10px;
-    float: right;
-    border: 1px solid #8691A833;
-    border-radius: 8px;
-    padding: 20px;
-
-
-} */
 
 .resourcebody{
     padding: 2%;
@@ -17,14 +7,10 @@
 table{
     width:100% ;
     padding: 2%;
-    /* margin: 20px;
-    float: right;
-     */
      
 }
 
  td {
-    /* margin-top: 10px; */
     border: 1px solid #8691A833;
     text-align: center;
     color: #7752FE;
@@ -42,13 +28,6 @@ th{
     color: #190482;
     text-align: center;
     text-decoration: none;
-    
-    /* display: inline-block;
-    width: fit-content;
-    height: fit-content;
-    margin-top: 1px;
-    margin-left: 1px;
-    margin-right: 1px; */
    
 }
 
@@ -71,12 +50,7 @@ th{
     color: #7752FE;
     text-align: center;
     text-decoration: none;
-    /* display: inline-block;
-    width: fit-content;
-    height: fit-content;
-    margin-top: 1px;
-    margin-left: 1px;
-    margin-right: 1px; */
+
 }
 
 

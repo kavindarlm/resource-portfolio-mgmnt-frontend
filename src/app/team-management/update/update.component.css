@@ -1,13 +1,6 @@
 
 /* this is the form */
 .formm {
-    /* padding: 20px;
-    padding-bottom: 5px;
-    margin: 20px;
-    margin-right: 10px; */
-    /* width: fit-content; */
-    color: #7752FE;
-    /* display: inline-block; */
     padding: 2%;
 
 
@@ -25,14 +18,6 @@
     text-decoration: none;
     width: 100%;
     margin-bottom: 2%;
-    /* display: inline-block; */
-    /* width: 350px;
-    height: 39px;
-    pointer-events: none;
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px; */
 
  
 }
@@ -59,22 +44,6 @@ label {
     margin-bottom: 5px; 
 }
 
-/* submit button */
-/* .submit-btn {
-    border: 2px solid #C2D9FF ;
-    border-radius: 4px;
-    flex: 1; 
-    padding: 8px; 
-  } */
-
-/* textarea */
-/* textarea {
-    flex: 1; 
-    padding: 8px; 
-    border: 2px solid #C2D9FF ;
-    border-radius: 4px;
-    
-} */
 
 /* submit button */
 button[type="submit"] {
@@ -98,12 +67,6 @@ button[type="submit"] {
     
 }
 
-/* table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 10px;
-  
-} */
 
 .tbtn{
     background-color:  #C2D9FF;
@@ -113,32 +76,10 @@ button[type="submit"] {
     text-align: center;
     width: 100%;
     margin: 0;
-    /* text-decoration: none; */
-    /* display: inline-block; */
-    /* width: fit-content; */
-    /* height: fit-content; */
-    /* margin-top: 1px;
-    margin-left: 1px;
-    margin-right: 1px;
-    padding-left: 20px;
-    padding-right:20px; */
+   
    
 }
 
-/* .add-resource{
-    background-color: #FEFEFE;
-    border: 2px solid #7752FE;
-    color: #7752FE;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 8px;
-    height: auto;
-    padding: 10px; 
-    display: block;
-    margin: 0 auto;
-    width: 150px;
-    
-} */
 
 /* placeholder for input feilds */
 ::placeholder {

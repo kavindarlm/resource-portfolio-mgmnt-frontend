@@ -19,8 +19,6 @@ export class DeletePopupComponent {
     private router: Router
     ){
 
-    
-
   }
 
   deleteTeam() {

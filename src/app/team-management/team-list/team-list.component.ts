@@ -34,7 +34,7 @@ export class TeamListComponent implements OnInit{
   fetchTeamList() {
     this.service.getTeams().subscribe({
       next: (res: any) => {
-        this.teams = res; //response is an array of teams, replace 'any' with the actual type
+        this.teams = res; 
       },
       error: (_err: any) => {
       
