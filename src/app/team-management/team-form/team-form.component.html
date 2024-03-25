@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-6">
-    <form [formGroup]="teamForm" class="form" >
+    <form [formGroup]="teamForm" class="form border rounded" >
       <div>
         <button class="new-team btn btn-primary">Create New Team</button>
       </div>
@@ -73,7 +73,7 @@
 
   
 
-  <div class="col-6">
+  <div class="col-6" >
     <app-resource-table *ngIf="showResourceTable"></app-resource-table>
   </div>
 </div>
