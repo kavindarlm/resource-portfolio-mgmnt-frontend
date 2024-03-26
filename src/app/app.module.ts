@@ -20,6 +20,7 @@ import { DashboardHeaderComponent } from './admin-dashboard/dashboard-header/das
 import { UserListComponent } from './admin-dashboard/user-list/user-list.component';
 import { SearchBarComponent } from './admin-dashboard/search-bar/search-bar.component';
 import { ProjectListComponent } from './TaskManagement/project-list/project-list.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { ProjectListComponent } from './TaskManagement/project-list/project-list
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
 
    

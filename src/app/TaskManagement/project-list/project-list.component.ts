@@ -11,7 +11,7 @@ export class ProjectListComponent {
   data: undefined|projectModel[];
   constructor(private api:taskApiService){}
   ngOninit(): void{
-
+    this.getProjectList();
   }
   getProjectList(){
     this.api.getProjectList().subscribe(res=>{
