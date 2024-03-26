@@ -8,8 +8,8 @@
 
                 <div class="table-data">
                     <div *ngFor="let project of data " class="btns">
-                        <button class="btn btn-costom" routerLink="updatePoject/{{project.id}}"
-                            routerLinkActive="active">{{project.name}}</button>
+                        <button class="btn btn-costom" routerLink="projectTaskDetails/{{project.projectid}}"
+                            routerLinkActive="active">{{project.projectName}}</button>
                     </div>
                 </div>
             </div>

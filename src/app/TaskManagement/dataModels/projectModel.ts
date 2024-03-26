@@ -1,4 +1,4 @@
-{ 
+export interface projectModel{ 
     projectid: '',
     projectName: '',
     projectStartDate: '',

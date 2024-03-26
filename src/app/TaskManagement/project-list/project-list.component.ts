@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { projectModel } from '../dataModels/projectModel';
+import { taskApiService } from '../services/taskApi.service';
 
 @Component({
   selector: 'app-project-list',
@@ -6,21 +8,14 @@ import { Component } from '@angular/core';
   styleUrl: './project-list.component.css'
 })
 export class ProjectListComponent {
-  data : any = [
-    {
-      id: 1,
-      name: 'Project 1',
-      description: 'Project 1 description'
-    },
-    {
-      id: 2,
-      name: 'Project 2',
-      description: 'Project 2 description'
-    },
-    {
-      id: 3,
-      name: 'Project 3',
-      description: 'Project 3 description'
-    }
-  ]
+  data: undefined|projectModel[];
+  constructor(private api:taskApiService){}
+  ngOninit(): void{
+
+  }
+  getProjectList(){
+    this.api.getProjectList().subscribe(res=>{
+      this.data = res;
+    })
+  }
 }
