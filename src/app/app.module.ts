@@ -18,6 +18,7 @@ import { SearchBarComponent } from './admin-dashboard/search-bar/search-bar.comp
 import { AddNewUserComponent } from './admin-dashboard/add-new-user/add-new-user.component';
 import { FunctionManagementComponent } from './admin-dashboard/function-management/function-management.component';
 import { FunctionButtonComponent } from './admin-dashboard/function-button/function-button.component';
+import { UserDetailComponent } from './admin-dashboard/user-detail/user-detail.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { FunctionButtonComponent } from './admin-dashboard/function-button/funct
     AddNewUserComponent,
     FunctionManagementComponent,
     FunctionButtonComponent,
+    UserDetailComponent,
   ],
   imports: [
     BrowserModule,

@@ -20,47 +20,16 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Mark steven Fernando</td>
-                          <td>mark</td>
-                          
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Jacob</td>
-                          <td>fcdc</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Larry</td>
-                          <td>cdcd</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">4</th>
-                          <td>Larry</td>
-                          <td>cdcd</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">5</th>
-                          <td>Larry</td>
-                          <td>cdcd</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">6</th>
-                          <td>Larry</td>
-                          <td>cdcd</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">7</th>
-                          <td>Larry</td>
-                          <td>cdcd</td>
+                        <tr *ngFor="let user of userdetails" (click)="hello(user)">
+                          <th scope="row">{{user.userId}}</th>
+                          <td>{{user.userName}}</td>
+                          <td>{{user.email}}</td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
-            <button type="button" class="btn btn-outline-primary w-50 mt-3 custom-button btn-sm">Add New User</button>        
+            <button type="button" class="btn btn-outline-primary w-50 mt-3 custom-button btn-sm curser" routerLink="addnewuser">Add New User</button>        
         </div>
       </div>
 </div>
