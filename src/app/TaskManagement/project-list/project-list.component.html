@@ -5,8 +5,7 @@
                 <div>
                     <div class="heder-label">Project List</div>
                 </div>
-
-                <div class="table-data">
+                <div class="table-data"> 
                     <div *ngFor="let project of data " class="btns">
                         <button class="btn btn-costom" routerLink="projectTaskDetails/{{project.projectid}}"
                             routerLinkActive="active">{{project.projectName}}</button>
@@ -14,6 +13,8 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-10">
+            <router-outlet></router-outlet>
     </div>
-</div>
+</div>  
  
