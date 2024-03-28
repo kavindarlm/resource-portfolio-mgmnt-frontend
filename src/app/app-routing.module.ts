@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'admin-dashboard', component: AdminDasbdBodyComponent},
   { path: 'projectList', component: ProjectListComponent,
   children:[
-  {path: 'projectTaskDetails/id', component: ProjectDetailsComponent}
+  {path: 'projectTaskDetails/:id', component: ProjectDetailsComponent}
   ]}, 
   //wildcard route to handle 404
   //{ path: '**', component: PageNotFoundComponent } // PageNotFoundComponent needs to be created 

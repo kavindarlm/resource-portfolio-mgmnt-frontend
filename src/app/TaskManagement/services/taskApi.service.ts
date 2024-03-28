@@ -13,4 +13,10 @@ export class taskApiService{
     // return this.http.get<datamodel[]>("http://localhost:3000/posts");
     return this.http.get<projectModel[]>("http://localhost:3000/project"); 
   }
+
+  fetchProject(id:string){
+    // return this.http.get<datamodel>("http://localhost:3000/posts/"+id);
+    return this.http.get<projectModel>("http://localhost:3000/project/"+id)
+  }
+
 }
