@@ -17,5 +17,6 @@ export class ProjectListComponent {
     this.api.getProjectList().subscribe(res=>{
       this.data = res;
     })
+    
   }
 }
