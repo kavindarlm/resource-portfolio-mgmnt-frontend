@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { projectModel } from '../dataModels/projectModel';
 import { taskApiService } from '../services/taskApi.service';
 
@@ -7,15 +7,16 @@ import { taskApiService } from '../services/taskApi.service';
   templateUrl: './project-list.component.html',
   styleUrl: './project-list.component.css'
 })
-export class ProjectListComponent {
+export class ProjectListComponent implements OnInit{
   data: undefined|projectModel[];
   constructor(private api:taskApiService){}
-  ngOninit(): void{
-    this.getProjectList();
+  ngOnInit(): void{
+    this.getProjectLists();
   }
-  getProjectList(){
+  getProjectLists(){
     this.api.getProjectList().subscribe(res=>{
       this.data = res;
+      console.log(this.data, 'data')
     })
     
   }

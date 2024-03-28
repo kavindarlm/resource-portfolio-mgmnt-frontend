@@ -4,6 +4,7 @@ import { LoginAccComponent } from './login-acc/login-acc.component';
 import { FgPsswdComponent } from './fg-psswd/fg-psswd.component';
 import { PagesBodyComponent } from './PageBody/pages-body/pages-body.component';
 import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admin-dasbd-body.component';
+import { ProjectListComponent } from './TaskManagement/project-list/project-list.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -11,7 +12,8 @@ const routes: Routes = [
   { path: 'login', component: LoginAccComponent },
   { path: 'forgot-password', component: FgPsswdComponent },
   { path: 'pages-body', component: PagesBodyComponent },
-  { path: 'admin-dashboard', component: AdminDasbdBodyComponent}
+  { path: 'admin-dashboard', component: AdminDasbdBodyComponent},
+  { path: 'projectList', component: ProjectListComponent}
   
   //wildcard route to handle 404
   //{ path: '**', component: PageNotFoundComponent } // PageNotFoundComponent needs to be created
