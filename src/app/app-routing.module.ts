@@ -17,11 +17,11 @@ const routes: Routes = [
   { path: 'projectList', component: ProjectListComponent,
   children:[
   {path: 'projectTaskDetails/id', component: ProjectDetailsComponent}
-  ]},
+  ]}, 
   //wildcard route to handle 404
-  //{ path: '**', component: PageNotFoundComponent } // PageNotFoundComponent needs to be created
+  //{ path: '**', component: PageNotFoundComponent } // PageNotFoundComponent needs to be created 
 ];
-
+ 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
