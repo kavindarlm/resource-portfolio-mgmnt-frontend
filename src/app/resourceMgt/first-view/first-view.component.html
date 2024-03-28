@@ -20,7 +20,7 @@
             </thead>
             <tbody class="table-body">
                 <tr *ngFor="let resource of resourceList" (click)="rowClick($event, resource)" class="clickable-row">
-                    <td>{{resource.resourceID}}</td>
+                    <td>{{resource.resourceId}}</td>
                     <td>{{resource.jobRole}}</td>
                     <td>{{resource.orgUnit}}</td>
                 </tr>

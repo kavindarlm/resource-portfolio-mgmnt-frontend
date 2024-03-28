@@ -25,7 +25,7 @@ resourceObject: any;
 
     this.formValue = this.formBuilder.group({
       resourceName: [''],
-      resourceID: [''],
+      resourceId: [''],
       jobRole: [''],
       orgUnit: ['']
     });
@@ -38,7 +38,7 @@ resourceObject: any;
   setFormData() {
     this.formValue.patchValue({
       resourceName: this.selectedResource.resourceName,
-      resourceID: this.selectedResource.resourceID,
+      resourceId: this.selectedResource.resourceId,
       jobRole: this.selectedResource.roleId,
       orgUnit: this.selectedResource.unitId
     });
@@ -58,9 +58,15 @@ resourceObject: any;
     })
   }
 
+  // onEditResource() {
+  //   debugger;
+  //   this.http.post("assets/jsonFiles-resourceMgt/putResources.json", this.selectedResource).subscribe((res: any) => {
+  //     alert(res.message);
+  //   })
+  // }
+
   onEditResource() {
-    debugger;
-    this.http.post("assets/jsonFiles-resourceMgt/putResources.json", this.selectedResource).subscribe((res: any) => {
+    this.http.put(`http://localhost:3000/resources/${this.selectedResource.id}`, this.formValue.value).subscribe((res: any) => {
       alert(res.message);
     })
   }

@@ -25,12 +25,19 @@ export class FirstViewComponent implements OnInit {
     this.loadResources();
   }
 
+  // loadResources() {
+  //   this.http.get("assets/jsonFiles-resourceMgt/getResources.json").subscribe((res:any)=>{
+  //     debugger;
+  //     this.resourceList = res.data;
+  //   })
+  // }
+
   loadResources() {
-    this.http.get("assets/jsonFiles-resourceMgt/getResources.json").subscribe((res:any)=>{
-      debugger;
-      this.resourceList = res.data;
+    this.http.get("http://localhost:3000/resources").subscribe((res:any)=>{
+      this.resourceList = res; // Assuming the response is directly the array of resources
     })
   }
+  
 
   showcomponent(): void{
     this.showForm =! this.showForm;

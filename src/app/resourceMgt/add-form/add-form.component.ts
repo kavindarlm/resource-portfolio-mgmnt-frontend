@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 // import { ResourceModel } from './add-form.model';
 import { HttpClient } from '@angular/common/http';
 import { ResourceService } from '../../shared/sevices_resourceMgt/resource.service'; // Adjust the path as necessary
+import { ResourceModel } from './addformmodel';
 
 
 @Component({
@@ -13,37 +14,42 @@ import { ResourceService } from '../../shared/sevices_resourceMgt/resource.servi
 
 export class AddFormComponent implements OnInit {
   selectedResource: any;
-  formValue !: FormGroup;
+  resourceForm !: FormGroup;
 
   jobroles: any[] = []; //creating an array for jobroles
   orgunits: any[] = []; //creating an array for orgunits
 
   resourceObject: any = { //Creating a resource object
     "resourceName": "",
-    "resourceID": "",
+    "resourceId": "",
     "jobRole": "",
     "roleId": "",
     "orgUnit": "",
     "unitId": ""
   }
-  formBuilder: any;
+  // formBuilder: any;
 
 
-  constructor(private http: HttpClient, public resourceService: ResourceService) { } // Have to include the HttpClient Module in app.model too
+  constructor(private http: HttpClient, private resourceService: ResourceService, private formBuilder: FormBuilder) { } // Have to include the HttpClient Module in app.model too
   ngOnInit(): void {
     this.loadJobRoles();// calling the loadJobRoles Method
     this.loadOrgUnits();
 
-    //initializing a FormGroup using the FormBuilder service. This FormGroup represents your form, 
-    //and it contains form controls that correspond to the fields of the resource data (resourceID, jobRole, orgUnit).
-    this.formValue = this.formBuilder.group({
-      resourceID: [this.resourceObject.resourceID],
-      jobRole: [this.resourceObject.jobRole],
-      orgUnit: [this.resourceObject.orgUnit]
+    this.resourceForm = this.formBuilder.group({
+      resourceName: [''],
+      resourceId: [''],
+      jobRole: [''],
+      orgUnit: ['']
     });
+    
 
   }
 
+  // createResource(){
+  //   this.resourceService.createResource(this.datat).subscribe((res=>{
+
+  //   }))
+  // }
   loadJobRoles() { //a function to get data from the json file(jobroles)
     this.http.get("assets/jsonFiles-resourceMgt/jobRoles.json").subscribe((res: any) => {
       // debugger;
@@ -53,21 +59,51 @@ export class AddFormComponent implements OnInit {
 
   loadOrgUnits() {
     this.http.get("assets/jsonFiles-resourceMgt/orgunits.json").subscribe((res: any) => {
-      debugger;
+      // debugger;
       this.orgunits = res.data;
     })
   }
 
-  onCreateResource() {
-    // debugger;
-    this.http.post("assets/jsonFiles-resourceMgt/postResources.json", this.resourceObject).subscribe((res: any) => {
-      alert(res.message)
-    })
-  }
+  // onCreateResource() {
+  //   debugger;
+  //   this.http.post("assets/jsonFiles-resourceMgt/postResources.json", this.resourceObject).subscribe((res: any) => {
+  //     alert(res.message)
+  //   })
+  // }
 
-  sendData() {
-    const dataToSend = this.resourceObject; // Sample data
-    this.resourceService.setData(dataToSend);
+  ///////////////correct/////
+  // onCreateResource() {
+  //   this.http.post("http://localhost:3000/resources", this.resourceObject).subscribe((res: any) => {
+  //     alert(res.message);
+  //   })
+  // }
+
+  // onCreateResource() {
+  //   console.log('Form Value:', this.formValue.value);
+  //   console.log('Sending resource object:', this.resourceObject);
+  //   this.http.post("/resources", this.resourceObject)
+  //     .subscribe(
+  //       (res: any) => {
+  //         console.log('Response:', res);
+  //         alert(res.message);
+  //       },
+  //       (error) => {
+  //         console.error('Error:', error);
+  //         alert('An error occurred. Please try again.');
+  //       }
+  //     );
+  // }
+  
+
+  sendData(data: ResourceModel) {
+    debugger;
+     const dataToSend = this.resourceForm.value;
+     this.resourceService.createResource(data).subscribe((res=>{
+      console.log(data)
+      }))
+     // Sample data
+    // this.resourceService.setData(dataToSend);
+    // this.resourceService.createResource(dataToSend);
   }
 
   // rowClick($event: any, resource: any) {
