@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-// import { ResourceModel } from './first-view.model';
 import { ResourceService } from '../../shared/sevices_resourceMgt/resource.service'; // Adjust the path as necessary
 import { ResourceModel } from '../add-form/addformmodel';
 
@@ -13,10 +11,8 @@ import { ResourceModel } from '../add-form/addformmodel';
 export class FirstViewComponent implements OnInit {
 
   showResourceDetails: boolean = false;//first not to show the form
-  // resourceList: any[]=[];
-  // resourceList!: ResourceModel[];
+
   resourceList: ResourceModel[] | undefined;
-  // formValue !: FormGroup;
   resourceObject: any;
   showForm = false;
 
@@ -27,12 +23,6 @@ export class FirstViewComponent implements OnInit {
     this.loadResources();
   }
 
-  // loadResources() {
-  //   this.http.get("assets/jsonFiles-resourceMgt/getResources.json").subscribe((res:any)=>{
-  //     debugger;
-  //     this.resourceList = res.data;
-  //   })
-  // }
 
   loadResources() {
     this.resourceService.getResources().subscribe((res:any)=>{
@@ -45,9 +35,6 @@ export class FirstViewComponent implements OnInit {
     }
     );
   }
-
-  // this.resourceService.getResources()
-  
 
   showcomponent(): void{
     this.showForm =! this.showForm;

@@ -41,8 +41,8 @@ export class AddFormComponent implements OnInit {
     this.resourceForm = this.formBuilder.group({
       resourceName: [''],
       resourceId: [''],
-      jobRole: [''],
-      orgUnit: ['']
+      roleId: [''],
+      unitId: ['']
     });
     
 

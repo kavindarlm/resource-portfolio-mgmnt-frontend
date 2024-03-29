@@ -70,4 +70,17 @@ resourceObject: any;
       alert(res.message);
     })
   }
+
+  // loadResources() {
+  //   this.resourceService.getResources().subscribe((res:any)=>{
+  //     debugger;
+  //     this.resourceList = res; // Assuming the response is directly the array of resources
+  //   },
+  //   (error) => {
+  //     console.error('Error:', error);
+  //     alert('An error occurred. Please try again.');
+  //   }
+  //   );
+  // }
+
 }

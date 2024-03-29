@@ -1,5 +1,5 @@
 export interface ResourceModel{
-    id : number;
+    // id : number;
     resourceName : string ;
     resourceId : string; 
     roleId : number ;

@@ -73,7 +73,7 @@
                 <label for="jobRole" class="form-label">Job Role *</label>
                 <div class="inputField">
                     <p>Job Role :</p>
-                    <select class="form-select inputBox" formControlName="jobRole" id="jobRole">
+                    <select class="form-select inputBox" formControlName="roleId" id="jobRole">
                         <option disabled selected="selected">Select Job Role</option>
                         <option *ngFor="let role of jobroles" [value]="role.roleId">{{role.roleName}}</option>
                     </select>
@@ -83,7 +83,7 @@
                 <label for="orgUnit" class="form-label">Organizational Unit</label>
                 <div class="inputField">
                     <p>Org Unit :</p>
-                    <select class="form-select inputBox" formControlName="orgUnit" id="orgUnit">
+                    <select class="form-select inputBox" formControlName="unitId" id="orgUnit">
                         <option disabled selected="selected">Select Organizational Unit</option>
                         <option *ngFor="let unit of orgunits" [value]="unit.unitId">{{unit.unitName}}</option>
                     </select>

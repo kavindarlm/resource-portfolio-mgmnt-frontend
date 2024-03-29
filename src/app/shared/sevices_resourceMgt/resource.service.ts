@@ -42,9 +42,9 @@ export class ResourceService {
 
   // }
 
-  // updateResource(id: string, resourceData: any): Observable<any> {
-  //   return this.http.put<any>(`http://localhost:3000/resources/${id}`, resourceData);
-  // }
+  updateResource(id: string, resourceData: any): Observable<any> {
+    return this.http.put<any>(`http://localhost:3000/resources/${id}`, resourceData);
+  }
 
   // deleteResource(id: string): Observable<any> {
   //   return this.http.delete<any>(`http://localhost:3000/resources/${id}`);
