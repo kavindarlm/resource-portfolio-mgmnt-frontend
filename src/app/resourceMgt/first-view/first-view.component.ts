@@ -13,9 +13,9 @@ import { ResourceModel } from '../add-form/addformmodel';
 export class FirstViewComponent implements OnInit {
 
   showResourceDetails: boolean = false;//first not to show the form
-  resourceList: any[]=[];
+  // resourceList: any[]=[];
   // resourceList!: ResourceModel[];
-  // resourceList: ResourceModel[] | undefined;
+  resourceList: ResourceModel[] | undefined;
   // formValue !: FormGroup;
   resourceObject: any;
   showForm = false;

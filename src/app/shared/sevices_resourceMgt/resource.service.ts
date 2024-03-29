@@ -22,7 +22,7 @@ export class ResourceService {
   }
 
   getResources() {
-    return this.http.get<any[]>("http://localhost:3000/resource");
+    return this.http.get<ResourceModel[]>("http://localhost:3000/resource");
   }
 
   createResource(data: ResourceModel){
