@@ -22,11 +22,11 @@ export class ResourceService {
   }
 
   getResources() {
-    return this.http.get<any[]>("http://localhost:3000/resources");
+    return this.http.get<any[]>("http://localhost:3000/resource");
   }
 
   createResource(data: ResourceModel){
-    return this.http.post<ResourceModel>("/resources",data);
+    return this.http.post<ResourceModel>("http://localhost:3000/resource",data);
   }
 
   // createResource(clickedResource: any) {

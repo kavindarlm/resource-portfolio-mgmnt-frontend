@@ -19,15 +19,18 @@ export class AddFormComponent implements OnInit {
   jobroles: any[] = []; //creating an array for jobroles
   orgunits: any[] = []; //creating an array for orgunits
 
-  resourceObject: any = { //Creating a resource object
-    "resourceName": "",
-    "resourceId": "",
-    "jobRole": "",
-    "roleId": "",
-    "orgUnit": "",
-    "unitId": ""
-  }
+  //Creating a resource object
+  // resourceObject: any = { 
+  //   "resourceName": "",
+  //   "resourceId": "",
+  //   "jobRole": "",
+  //   "roleId": "",
+  //   "orgUnit": "",
+  //   "unitId": ""
+  // }
   // formBuilder: any;
+
+  // resourceModelObject : ResourceModel = new ResourceModel()
 
 
   constructor(private http: HttpClient, private resourceService: ResourceService, private formBuilder: FormBuilder) { } // Have to include the HttpClient Module in app.model too
@@ -96,7 +99,8 @@ export class AddFormComponent implements OnInit {
   
 
   sendData(data: ResourceModel) {
-    debugger;
+    console.log(data);
+    // debugger;
      const dataToSend = this.resourceForm.value;
      this.resourceService.createResource(data).subscribe((res=>{
       console.log(data)

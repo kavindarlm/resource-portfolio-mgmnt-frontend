@@ -29,15 +29,16 @@
         <br>
         <div>
             <app-button (click)="showcomponent()"></app-button>
+            <router-outlet></router-outlet>
         </div>
     </div>
     
 
     <div class="box2">
         <app-add-form *ngIf="showForm"></app-add-form>
-        <!-- <router-outlet></router-outlet> -->
+        <router-outlet></router-outlet>
         <app-resource-details *ngIf="showResourceDetails"></app-resource-details>
-        <!-- <router-outlet></router-outlet> -->
+        <router-outlet></router-outlet>
     </div>
     
 </div>

@@ -33,10 +33,17 @@ export class FirstViewComponent implements OnInit {
   // }
 
   loadResources() {
-    this.http.get("http://localhost:3000/resources").subscribe((res:any)=>{
+    this.http.get("http://localhost:3000/resource").subscribe((res:any)=>{
       this.resourceList = res; // Assuming the response is directly the array of resources
-    })
+    },
+    (error) => {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again.');
+    }
+    );
   }
+  
+  // this.resourceService.getResources()
   
 
   showcomponent(): void{
