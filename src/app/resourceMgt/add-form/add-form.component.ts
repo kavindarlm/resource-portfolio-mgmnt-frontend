@@ -13,7 +13,6 @@ import { ResourceModel } from './addformmodel';
 })
 
 export class AddFormComponent implements OnInit {
-  selectedResource: any;
   resourceForm !: FormGroup;
 
   jobroles: any[] = []; //creating an array for jobroles
@@ -48,11 +47,6 @@ export class AddFormComponent implements OnInit {
 
   }
 
-  // createResource(){
-  //   this.resourceService.createResource(this.datat).subscribe((res=>{
-
-  //   }))
-  // }
   loadJobRoles() { //a function to get data from the json file(jobroles)
     this.http.get("assets/jsonFiles-resourceMgt/jobRoles.json").subscribe((res: any) => {
       // debugger;
@@ -66,37 +60,6 @@ export class AddFormComponent implements OnInit {
       this.orgunits = res.data;
     })
   }
-
-  // onCreateResource() {
-  //   debugger;
-  //   this.http.post("assets/jsonFiles-resourceMgt/postResources.json", this.resourceObject).subscribe((res: any) => {
-  //     alert(res.message)
-  //   })
-  // }
-
-  ///////////////correct/////
-  // onCreateResource() {
-  //   this.http.post("http://localhost:3000/resources", this.resourceObject).subscribe((res: any) => {
-  //     alert(res.message);
-  //   })
-  // }
-
-  // onCreateResource() {
-  //   console.log('Form Value:', this.formValue.value);
-  //   console.log('Sending resource object:', this.resourceObject);
-  //   this.http.post("/resources", this.resourceObject)
-  //     .subscribe(
-  //       (res: any) => {
-  //         console.log('Response:', res);
-  //         alert(res.message);
-  //       },
-  //       (error) => {
-  //         console.error('Error:', error);
-  //         alert('An error occurred. Please try again.');
-  //       }
-  //     );
-  // }
-  
 
   sendData(data: ResourceModel) {
     console.log(data);

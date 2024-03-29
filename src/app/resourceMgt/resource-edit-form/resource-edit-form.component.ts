@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';////////////////////
 import { ResourceService } from '../../shared/sevices_resourceMgt/resource.service';///////////////////////
+import { ResourceModel } from '../add-form/addformmodel';
+import { Observable } from 'rxjs';
+import { FirstViewComponent } from '../first-view/first-view.component';
 
 @Component({
   selector: 'app-resource-edit-form',
@@ -15,7 +18,7 @@ export class ResourceEditFormComponent implements OnInit{
 
   formValue!: FormGroup; ////////////////////////
   selectedResource: any; /////////////////////////
-resourceObject: any;
+  resourceObject: any;
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private resourceService: ResourceService) { }
 
@@ -26,8 +29,8 @@ resourceObject: any;
     this.formValue = this.formBuilder.group({
       resourceName: [''],
       resourceId: [''],
-      jobRole: [''],
-      orgUnit: ['']
+      roleId: [''],
+      unitId: ['']
     });
 
     this.selectedResource = this.resourceService.getData();
@@ -39,8 +42,8 @@ resourceObject: any;
     this.formValue.patchValue({
       resourceName: this.selectedResource.resourceName,
       resourceId: this.selectedResource.resourceId,
-      jobRole: this.selectedResource.roleId,
-      orgUnit: this.selectedResource.unitId
+      roleId: this.selectedResource.roleId,
+      unitId: this.selectedResource.unitId
     });
   }
 
@@ -58,18 +61,37 @@ resourceObject: any;
     })
   }
 
+
   // onEditResource() {
-  //   debugger;
-  //   this.http.post("assets/jsonFiles-resourceMgt/putResources.json", this.selectedResource).subscribe((res: any) => {
+  //   this.http.put(`http://localhost:3000/resources/${this.selectedResource.id}`, this.formValue.value).subscribe((res: any) => {
   //     alert(res.message);
   //   })
   // }
 
-  onEditResource() {
-    this.http.put(`http://localhost:3000/resources/${this.selectedResource.id}`, this.formValue.value).subscribe((res: any) => {
-      alert(res.message);
-    })
+  // onEditResource() {
+  //   this.resourceService.updateResource(this.selectedResource.resourceId, this.formValue.value).subscribe((res:any)=>{
+  //     this.formValue = res;
+  //   })
+  // }
+
+  onEditResource(data: ResourceModel) {
+    console.log(data);
+    this.resourceService.updateResource(this.selectedResource.resourceId, data)
+      .subscribe(
+        (res: any) => {
+          debugger;
+          console.log('Resource updated successfully:', res);
+          // this.router.navigate([])
+          // Optionally, you might want to perform additional actions here, such as showing a success message or navigating to another page.
+        },
+        (error) => {
+          console.error('Error occurred while updating resource:', error);
+          // Handle error appropriately, such as displaying an error message to the user.
+        }
+      );
   }
+  
+
 
   // loadResources() {
   //   this.resourceService.getResources().subscribe((res:any)=>{

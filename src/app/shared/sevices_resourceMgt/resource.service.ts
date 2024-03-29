@@ -29,21 +29,9 @@ export class ResourceService {
     return this.http.post<ResourceModel>("http://localhost:3000/resource",data);
   }
 
-  // createResource(clickedResource: any) {
-    
-  //   console.log(clickedResource);
-  //   return this.http.post<any>("/resources", clickedResource).subscribe((res: any) => {
-  //     alert(res.message);
-  //   });
-  //   alert("Resource was added.");
-  // }
-// 
-  // createResource(data: add-form){
 
-  // }
-
-  updateResource(id: string, resourceData: any): Observable<any> {
-    return this.http.put<any>(`http://localhost:3000/resources/${id}`, resourceData);
+  updateResource(id: string, resourceData: ResourceModel) {
+    return this.http.put<ResourceModel>("http://localhost:3000/resource/"+id, resourceData);
   }
 
   // deleteResource(id: string): Observable<any> {
