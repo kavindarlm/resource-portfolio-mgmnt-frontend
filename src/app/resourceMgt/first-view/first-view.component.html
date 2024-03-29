@@ -21,8 +21,8 @@
             <tbody class="table-body">
                 <tr *ngFor="let resource of resourceList" (click)="rowClick($event, resource)" class="clickable-row">
                     <td>{{resource.resourceId}}</td>
-                    <td>{{resource.jobRole}}</td>
-                    <td>{{resource.orgUnit}}</td>
+                    <td>{{resource.roleId}}</td>
+                    <td>{{resource.unitId}}</td>
                 </tr>
             </tbody>
         </table>

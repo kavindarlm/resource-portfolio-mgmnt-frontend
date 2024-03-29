@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 // import { ResourceModel } from './first-view.model';
 import { ResourceService } from '../../shared/sevices_resourceMgt/resource.service'; // Adjust the path as necessary
-
+import { ResourceModel } from '../add-form/addformmodel';
 
 @Component({
   selector: 'app-first-view',
@@ -14,8 +14,10 @@ export class FirstViewComponent implements OnInit {
 
   showResourceDetails: boolean = false;//first not to show the form
   resourceList: any[]=[];
-  formValue !: FormGroup;
-  resourceObject: any;//but the resource object is available on the add-form component
+  // resourceList!: ResourceModel[];
+  // resourceList: ResourceModel[] | undefined;
+  // formValue !: FormGroup;
+  resourceObject: any;
   showForm = false;
 
   constructor(private http:HttpClient, private resourceService: ResourceService) {}
@@ -33,7 +35,8 @@ export class FirstViewComponent implements OnInit {
   // }
 
   loadResources() {
-    this.http.get("http://localhost:3000/resource").subscribe((res:any)=>{
+    this.resourceService.getResources().subscribe((res:any)=>{
+      debugger;
       this.resourceList = res; // Assuming the response is directly the array of resources
     },
     (error) => {
@@ -42,7 +45,7 @@ export class FirstViewComponent implements OnInit {
     }
     );
   }
-  
+
   // this.resourceService.getResources()
   
 
