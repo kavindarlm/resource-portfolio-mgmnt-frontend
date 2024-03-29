@@ -34,9 +34,9 @@ export class ResourceService {
     return this.http.put<ResourceModel>("http://localhost:3000/resource/"+id, resourceData);
   }
 
-  // deleteResource(id: string): Observable<any> {
-  //   return this.http.delete<any>(`http://localhost:3000/resources/${id}`);
-  // }
+  deleteResource(id: string): Observable<any> {
+    return this.http.delete<any>("http://localhost:3000/resource/"+id);
+  }
 
 }
 

@@ -62,17 +62,6 @@ export class ResourceEditFormComponent implements OnInit{
   }
 
 
-  // onEditResource() {
-  //   this.http.put(`http://localhost:3000/resources/${this.selectedResource.id}`, this.formValue.value).subscribe((res: any) => {
-  //     alert(res.message);
-  //   })
-  // }
-
-  // onEditResource() {
-  //   this.resourceService.updateResource(this.selectedResource.resourceId, this.formValue.value).subscribe((res:any)=>{
-  //     this.formValue = res;
-  //   })
-  // }
 
   onEditResource(data: ResourceModel) {
     console.log(data);
@@ -81,6 +70,7 @@ export class ResourceEditFormComponent implements OnInit{
         (res: any) => {
           debugger;
           console.log('Resource updated successfully:', res);
+          alert('Resource updated Successfully');
           // this.router.navigate([])
           // Optionally, you might want to perform additional actions here, such as showing a success message or navigating to another page.
         },
@@ -91,18 +81,10 @@ export class ResourceEditFormComponent implements OnInit{
       );
   }
   
-
-
-  // loadResources() {
-  //   this.resourceService.getResources().subscribe((res:any)=>{
-  //     debugger;
-  //     this.resourceList = res; // Assuming the response is directly the array of resources
-  //   },
-  //   (error) => {
-  //     console.error('Error:', error);
-  //     alert('An error occurred. Please try again.');
-  //   }
-  //   );
-  // }
+  onDeleteResource() {
+    this.resourceService.deleteResource(this.selectedResource.resourceId).subscribe((res:ResourceModel)=> {
+      console.log('Resource deleted successfully:', res);
+    })
+  }
 
 }
