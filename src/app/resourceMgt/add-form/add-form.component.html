@@ -1,53 +1,3 @@
-<!-- 
-<div class="formBox">
-    <div class="container mt-3">
-        <div class="topic">
-            <h6>Add New Resource</h6>
-        </div>
-        <form [formGroup]="formValue" (ngSubmit)="sendData()">
-
-            <div class="form-group mb-3">
-                <br>
-                <label for="resourceName" class="form-label">Resource Name *</label>
-                <div class="inputField">
-                    <p>Name :</p>
-                    <input type="text" [(ngModel)]="resourceObject.resourceName" formControlName="resourceName" class="form-control inputBox" id="resourceName" placeholder="Enter Name">
-                </div>
-            </div>
-            <div class="form-group mb-3">
-                <label for="resourceID" class="form-label">Resource ID *</label>
-                <div class="inputField">
-                    <p>ID :</p>
-                    <input type="text" [(ngModel)]="resourceObject.resourceId" formControlName="resourceId" class="form-control inputBox" id="resourceID" placeholder="Enter Resource ID">
-                </div>
-            </div>
-            <div class="form-group mb-3">
-                <label for="jobRole" class="form-label">Job Role *</label>
-                <div class="inputField">
-                    <p>Job Role :</p>
-                    <select class="form-select inputBox" [(ngModel)]="resourceObject.roleId" formControlName="jobRole" id="jobRole">
-                        <option disabled selected="selected">Select Job Role</option>
-                        <option *ngFor="let roles of jobroles" [value]="roles.roleId">{{roles.roleName}}</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group mb-3">
-                <label for="orgUnit" class="form-label">Organizational Unit</label>
-                <div class="inputField">
-                    <p>Org Unit :</p>
-                    <select class="form-select inputBox" [(ngModel)]="resourceObject.unitId" formControlName="orgUnit" id="orgUnit">
-                        <option disabled selected="selected">Select Organizational Unit</option>
-                        <option *ngFor="let units of orgunits" [value]="units.unitId">{{units.unitName}}</option>
-                    </select>
-                </div>
-            </div>
-            <div class="add">
-                <button type="submit" class="addButton">Add Resource</button>
-            </div>
-        </form>
-    </div>
-</div> -->
-
 <div class="formBox">
     <div class="container mt-3">
         <div class="topic">
@@ -59,21 +9,26 @@
                 <label for="resourceName" class="form-label">Resource Name *</label>
                 <div class="inputField">
                     <p>Name :</p>
-                    <input type="text" formControlName="resourceName" class="form-control inputBox" id="resourceName" placeholder="Enter Name">
+                    <input type="text" formControlName="resourceName" [ngClass]="{'is-invalid': resourceForm.controls['resourceName'].invalid && resourceForm.controls['resourceName'].touched}"
+                     class="form-control inputBox" id="resourceName"
+                        placeholder="Enter Name">
                 </div>
             </div>
             <div class="form-group mb-3">
                 <label for="resourceID" class="form-label">Resource ID *</label>
                 <div class="inputField">
                     <p>ID :</p>
-                    <input type="text" formControlName="resourceId" class="form-control inputBox" id="resourceID" placeholder="Enter Resource ID">
+                    <input type="text" formControlName="resourceId" [ngClass]="{'is-invalid': resourceForm.controls['resourceId'].invalid && resourceForm.controls['resourceId'].touched}"
+                    class="form-control inputBox" id="resourceID"
+                        placeholder="Enter Resource ID">
                 </div>
             </div>
             <div class="form-group mb-3">
                 <label for="jobRole" class="form-label">Job Role *</label>
                 <div class="inputField">
                     <p>Job Role :</p>
-                    <select class="form-select inputBox" formControlName="roleId" id="jobRole">
+                    <select class="form-select inputBox" formControlName="roleId" [ngClass]="{'is-invalid': resourceForm.controls['roleId'].invalid && resourceForm.controls['roleId'].touched}"
+                    id="jobRole">
                         <option disabled selected="selected">Select Job Role</option>
                         <option *ngFor="let role of jobroles" [value]="role.roleId">{{role.roleName}}</option>
                     </select>
@@ -83,14 +38,16 @@
                 <label for="orgUnit" class="form-label">Organizational Unit</label>
                 <div class="inputField">
                     <p>Org Unit :</p>
-                    <select class="form-select inputBox" formControlName="unitId" id="orgUnit">
+                    <select class="form-select inputBox" formControlName="unitId" [ngClass]="{'is-invalid': resourceForm.controls['unitId'].invalid && resourceForm.controls['unitId'].touched}"
+                     id="orgUnit">
                         <option disabled selected="selected">Select Organizational Unit</option>
                         <option *ngFor="let unit of orgunits" [value]="unit.unitId">{{unit.unitName}}</option>
                     </select>
                 </div>
             </div>
             <div class="add">
-                <button type="submit" class="addButton" (click)="sendData(this.resourceForm.value)">Add Resource</button>
+                <button type="submit" class="addButton" (click)="sendData(this.resourceForm.value)">Add
+                    Resource</button>
             </div>
         </form>
     </div>

@@ -24,12 +24,6 @@
     font-weight: bold;
 }
 
-/*-------------------------*/
-/* Adjust input width and alignment */
-/* .inputField p { */
-    /* margin-left: 3%; Adjust spacing */
-/* } */
-
 .form-group p {
     margin-right: 10px;  
     float: left;
@@ -39,7 +33,6 @@
 
 ::placeholder {
     color: #c3c0ce;
-    /* Change this to your desired color */
 }
 
 .form-group label {
@@ -58,10 +51,6 @@
     width: 75%;
 }
 
-/* .form-group p {
-  margin-right: 20px;  
-}  */
-
 .addButton {
     /* padding : 2px 100px;  */
     width: 40%;
@@ -70,9 +59,6 @@
     border: rgb(203, 203, 203) 1px solid;
     border-radius: 5px;
     margin: 0 25%;
-    /* display: flex;
-   align-items: center;
-   justify-content: center; */
     padding: 5px;
 }
 
@@ -83,7 +69,6 @@
 }
 
 .inputField {
-    /* margin-left: 10px; */
     display: flex;
     justify-content: center;
     color: #7752fe;
@@ -95,22 +80,6 @@
     margin-left: 5%;
     margin-right: 3%;
 }
-
-/* .inputField .inputBox {
-    float: right; 
-    margin-right: 3%;
-} */
-
-/* .inputField .form-control {
-
-    float: right; 
-    margin-right: 3%;
-} */
-
-/* .inputField .form-select {
-    float: right; 
-    margin-right: 3%;
-} */
 
 .add {
     display: flex;

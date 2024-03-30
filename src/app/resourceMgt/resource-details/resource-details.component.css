@@ -60,9 +60,6 @@
    border: rgb(203, 203, 203) 1px solid;
    border-radius: 5px;
    margin:0 5%;
-   /* display: flex;
-   align-items: center;
-   justify-content: center; */
    padding: 5px;
    display: inline-block;
 }
@@ -75,9 +72,6 @@
    border: red 1px solid;
    border-radius: 5px;
    margin:0 5%;
-   /* display: flex;
-   align-items: center;
-   justify-content: center; */
    padding: 5px;
    display: inline-block;
 }
@@ -128,15 +122,6 @@
     /* display: inline-block; Ensure buttons are displayed in a line */
 }
 
-/* .inputField p {
-    flex: 50%;
-    float: right;
-}
-
-.inputField .form-control {
-    flex: 50%;
-    float: left;
-} */
 
 /* Adjust the width of the detailButton based on the screen size */
 @media screen and (max-width: 768px) {

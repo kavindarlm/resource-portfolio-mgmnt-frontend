@@ -1,6 +1,7 @@
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr; /* Set a single column layout by default */
+    grid-template-columns: 1fr;
+    /* Set a single column layout by default */
     /* border: 1px #0e3270 solid; */
     column-gap: 10px;
     /* height: 100%; */
@@ -67,10 +68,6 @@
     border-radius: 5px;
 }
 
-/* .headers {
-    margin-left: 20px;
-} */
-
 .table-headers {
     border-top: 1px white solid;
     border-left: 1px white solid;
@@ -85,7 +82,7 @@
     color: #7752fe;
 }
 
-.clickable-row:hover td{
+.clickable-row:hover td {
     transition: 0.5s;
     background-color: #04175a;
     color: white;
@@ -93,7 +90,8 @@
 
 @media screen and (min-width: 768px) {
     .grid-container {
-        grid-template-columns: repeat(2, 1fr); /* Use a two-column layout on larger screens */
+        grid-template-columns: repeat(2, 1fr);
+        /* Use a two-column layout on larger screens */
     }
 
     .mainBox {
@@ -101,10 +99,7 @@
     }
 }
 
-/* .input-group { */
-    /* width: 100%; Adjust search input width to fit the container */
-/* } */
-
 .table-headers .headers {
-    padding: 2px 20px; /* Adjust header button padding for smaller screens */
+    padding: 2px 20px;
+    /* Adjust header button padding for smaller screens */
 }

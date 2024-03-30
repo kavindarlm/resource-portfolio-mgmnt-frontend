@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup } from '@angular/forms';////////////////////
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ResourceService } from '../../shared/sevices_resourceMgt/resource.service';///////////////////////
 import { ResourceModel } from '../add-form/addformmodel';
 import { Observable } from 'rxjs';
 import { FirstViewComponent } from '../first-view/first-view.component';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-resource-edit-form',
@@ -16,8 +18,8 @@ export class ResourceEditFormComponent implements OnInit{
   jobroles: any[] = []; //creating an array for jobroles
   orgunits: any[] = []; //creating an array for orgunits
 
-  formValue!: FormGroup; ////////////////////////
-  selectedResource: any; /////////////////////////
+  formValue!: FormGroup; //
+  selectedResource: any; //
   resourceObject: any;
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private resourceService: ResourceService) { }
@@ -48,14 +50,30 @@ export class ResourceEditFormComponent implements OnInit{
   }
 
   loadJobRoles() { //a function to get data from the json file(jobroles)
-    this.http.get("assets/jsonFiles-resourceMgt/jobRoles.json").subscribe((res: any) => {
+    this.http.get("assets/jsonFiles-resourceMgt/jobRoles.json")
+    .pipe(
+      catchError((error) => {
+        console.error('Error fetching job roles:', error);
+        // Handle error gracefully, such as showing an alert to the user.
+        return throwError('Error fetching job roles');
+      })
+    )
+    .subscribe((res: any) => {
       debugger;
       this.jobroles = res.data;//the response from this asset file(jobroles.json) will be stored in this array
     })
   }
 
   loadOrgUnits() {
-    this.http.get("assets/jsonFiles-resourceMgt/orgunits.json").subscribe((res: any) => {
+    this.http.get("assets/jsonFiles-resourceMgt/orgunits.json")
+    .pipe(
+      catchError((error) => {
+        console.error('Error fetching organizational units:', error);
+        // Handle error gracefully, such as showing an alert to the user.
+        return throwError('Error fetching organizational units');
+      })
+    )
+    .subscribe((res: any) => {
       debugger;
       this.orgunits = res.data;
     })
@@ -82,9 +100,15 @@ export class ResourceEditFormComponent implements OnInit{
   }
   
   onDeleteResource() {
-    this.resourceService.deleteResource(this.selectedResource.resourceId).subscribe((res:ResourceModel)=> {
+    this.resourceService.deleteResource(this.selectedResource.resourceId)
+    .subscribe((res:ResourceModel)=> {
       console.log('Resource deleted successfully:', res);
-    })
+    },
+    (error) => {
+      console.error('Error occurred while deleting resource:', error);
+      // Handle error appropriately, such as displaying an error message to the user.
+    }
+    );
   }
 
 }
