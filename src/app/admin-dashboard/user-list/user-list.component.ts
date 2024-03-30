@@ -63,7 +63,7 @@ export class UserListComponent {
     }
   
  ];
-hello(user: any){
+identifyUser(user: any){
   console.log(user.userId);
   this.router.navigate(['admin-dashboard/userDetail']);
 }

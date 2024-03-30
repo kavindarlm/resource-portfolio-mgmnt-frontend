@@ -20,7 +20,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let user of userdetails" (click)="hello(user)">
+                        <tr *ngFor="let user of userdetails" (click)="identifyUser(user)">
                           <th scope="row">{{user.userId}}</th>
                           <td>{{user.userName}}</td>
                           <td>{{user.email}}</td>

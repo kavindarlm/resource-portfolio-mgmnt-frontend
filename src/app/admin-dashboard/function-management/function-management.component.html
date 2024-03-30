@@ -11,42 +11,10 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Project Dashboard</td>
-                      <td><app-function-button buttonText="Add"></app-function-button></td>
-                    </tr>
-                    <tr>
-                      <td>Handle Request</td>
-                      <td><app-function-button buttonText="Add"></app-function-button></td>
-                    </tr>
-                    <tr>
-                      <td>Sprint Management</td>
-                      <td><app-function-button buttonText="Add"></app-function-button></td>
-                    </tr>
-                    <tr>
-                      <td>Calander Management</td>
-                        <td><app-function-button buttonText="Add"></app-function-button></td>
-                    </tr>
-                    <tr>
-                      <td>Unit Management</td>
-                      <td><app-function-button buttonText="Add"></app-function-button></td>
-                    </tr>
-                    <tr>
-                      <td>Team Management</td>
-                      <td><app-function-button buttonText="Add"></app-function-button></td>
-                    </tr>
-                    <tr>
-                      <td>Resource Management</td>
-                      <td><app-function-button buttonText="Add"></app-function-button></td>
-                    </tr>
-                    <tr>
-                        <td>Project Management</td>
-                        <td><app-function-button buttonText="Add"></app-function-button></td>
-                      </tr>
-                      <tr>
-                        <td>Update Task Progress</td>
-                        <td><app-function-button buttonText="Add"></app-function-button></td>
-                      </tr>
+                    <tr *ngFor="let function of functions">
+                      <td>{{function.func_name}}</td>
+                      <td><app-function-button (click)="handleClick(function.func_id)" buttonText="Add"></app-function-button></td>
+                  </tr> 
                   </tbody>
                 </table>
               </div>
