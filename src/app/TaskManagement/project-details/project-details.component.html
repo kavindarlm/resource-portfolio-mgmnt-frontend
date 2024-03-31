@@ -1,66 +1,83 @@
-<div class="container card-body">
-    <div class="heder-label">
-       {{projectData?.projectName}}
-    </div>
-    <div class="detailCard">
-        <div class="container">
-            <div class="row rowOne">
-                <div class="col-6">
-                    <div class="colBorder">
-                        ProjectStartDate: {{projectData?.projectStartDate | date: 'dd-MM-yyyy'}}
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="container card-body">
+                <div class="heder-label">
+                    {{projectData?.projectName}}
+                </div>
+                <div class="detailCard">
+                    <div class="container">
+                        <div class="row rowOne">
+                            <div class="col-6">
+                                <div class="colBorder">
+                                    ProjectStartDate: {{projectData?.projectStartDate | date: 'dd-MM-yyyy'}}
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="colBorder">
+                                    PojectEndDate: {{projectData?.projectEndDate | date: 'dd-MM-yyyy'}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row rowOne">
+                            <div class="col-12">
+                                <div class="colBorder">
+                                    DeliveryManager: {{projectData?.deliveryManager}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row rowTwo">
+                            <div class="col-9">
+                                <div class="colDescription">
+                                    Project Description: {{projectData?.projectDescription}}
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="colCricality ">
+                                    Project Criticality:
+                                    <div [ngClass]="projectData?.criticality" class="levelSqure">
+                                    </div>
+                                    {{projectData?.criticality}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-6">
-                    <div class="colBorder">
-                        PojectEndDate: {{projectData?.projectEndDate | date: 'dd-MM-yyyy'}}
-                    </div>
+
+                <div class="heder-label">
+                    Task Management
                 </div>
-            </div>
-            <div class="row rowOne">
-                <div class="col-12">
-                    <div class="colBorder">
-                        DeliveryManager: {{projectData?.deliveryManager}}
-                    </div>
-                </div>
-            </div>
-            <div class="row rowTwo">
-                <div class="col-9">
-                    <div class="colDescription">
-                        Project Description: {{projectData?.projectDescription}}
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="colCricality ">
-                        Project Criticality:
-                        <div [ngClass]="projectData?.criticality" class="levelSqure">
-                         </div>
-                        {{projectData?.criticality}}
-                    </div>
+                <div class="taskTable">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="col-4">
+                                    <div class="btn-costom">Task ID</div>
+                                </th>
+                                <th scope="col" class="col-4">
+                                    <div class="btn-costom">Expected Task %</div>
+                                </th>
+                                <th scope="col" class="col-4">
+                                    <div class="btn-costom">Task progress</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let taskDetails of TaskData " class="tableRow">
+                                <td class="col-4 tableContent">{{taskDetails.taskid}}</td>
+                                <td class="col-4 tableContent">{{taskDetails.taskAllocationPercentage}}</td>
+                                <td class="col-4 tableContent"><input type="range" min="1" max="100"
+                                        value={{taskDetails.taskProgressPercentage}} class="slider" id="myRange"
+                                        disabled>{{taskDetails.taskProgressPercentage}} %</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <app-button-tusks [btnClss]="'button-project'" [text]="'Add New Task'" routerLink="newTask"></app-button-tusks>
                 </div>
             </div>
         </div>
+        <div class="col-6">
+            <router-outlet></router-outlet>
+        </div>
     </div>
-
-    <div class="heder-label">
-        Task Management
-    </div>
-    <div class="taskTable">
-        <table class="table table-bordered table-hover">
-            <thead>
-              <tr>
-                <th scope="col" class="col-4"><div class="btn-costom">Task ID</div></th>
-                <th scope="col" class="col-4"><div class="btn-costom">Expected Task %</div></th>
-                <th scope="col" class="col-4"><div class="btn-costom">Task progress</div></th>
-              </tr> 
-            </thead>
-            <tbody>
-              <tr *ngFor="let taskDetails of TaskData " class="tableRow">
-                <td class="col-4 tableContent">{{taskDetails.taskid}}</td>
-                <td class="col-4 tableContent">{{taskDetails.taskProgressPercentage}}</td>
-                <td class="col-4 tableContent"><input type="range" min="1" max="100" value={{taskDetails.taskProgressPercentage}} class="slider" id="myRange" disabled>{{taskDetails.taskProgressPercentage}} %</td>
-              </tr> 
-            </tbody>   
-          </table>
-          <app-button-tusks [btnClss]="'button-project'" [text]="'Add New Task'"></app-button-tusks>
-    </div>
-</div> 
+</div>

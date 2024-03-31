@@ -20,6 +20,8 @@ export class taskApiService{
   }
 
   getTaskList(id:string){
-    return this.http.get<taskModel>("http://localhost:3000/task/project/"+id)
+    return this.http.get<taskModel[]>("http://localhost:3000/task/project/"+id)
   }
+
+  
 }

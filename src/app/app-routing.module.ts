@@ -6,6 +6,7 @@ import { PagesBodyComponent } from './PageBody/pages-body/pages-body.component';
 import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admin-dasbd-body.component';
 import { ProjectListComponent } from './TaskManagement/project-list/project-list.component';
 import { ProjectDetailsComponent } from './TaskManagement/project-details/project-details.component';
+import { CreateNewtaskComponent } from './TaskManagement/create-newtask/create-newtask.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -16,7 +17,10 @@ const routes: Routes = [
   { path: 'admin-dashboard', component: AdminDasbdBodyComponent},
   { path: 'projectList', component: ProjectListComponent,
   children:[
-  {path: 'projectTaskDetails/:id', component: ProjectDetailsComponent}
+  {path: 'projectTaskDetails/:id', component: ProjectDetailsComponent,
+    children: [
+      {path: 'newTask', component: CreateNewtaskComponent}
+    ]}
   ]}, 
   //wildcard route to handle 404
   //{ path: '**', component: PageNotFoundComponent } // PageNotFoundComponent needs to be created 

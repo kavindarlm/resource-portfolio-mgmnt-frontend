@@ -31,8 +31,8 @@ export class ProjectDetailsComponent implements OnInit{
   }
   getTaskList(){
     this.api.getTaskList(this.dataid).subscribe(res => {
-      this.TaskData = [res];
+      this.TaskData = res;
     })
   }
 
-}
+} 
