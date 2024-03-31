@@ -19,7 +19,7 @@ const routes: Routes = [
   children:[
   {path: 'projectTaskDetails/:id', component: ProjectDetailsComponent,
     children: [
-      {path: 'newTask', component: CreateNewtaskComponent}
+      {path: 'newTask/:id', component: CreateNewtaskComponent}
     ]}
   ]}, 
   //wildcard route to handle 404

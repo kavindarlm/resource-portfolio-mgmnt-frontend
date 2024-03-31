@@ -72,11 +72,11 @@
                             </tr>
                         </tbody>
                     </table>
-                    <app-button-tusks [btnClss]="'button-project'" [text]="'Add New Task'" routerLink="newTask"></app-button-tusks>
+                    <app-button-tusks [btnClss]="'button-project'" [text]="'Add New Task'" routerLink="newTask/{{projectData?.projectid}}" routerLink="active" ></app-button-tusks>
                 </div>
-            </div>
+            </div>  
         </div>
-        <div class="col-6">
+        <div class="col-6">  
             <router-outlet></router-outlet>
         </div>
     </div>
