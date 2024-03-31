@@ -19,4 +19,7 @@ export class taskApiService{
     return this.http.get<projectModel>("http://localhost:3000/project/"+id)
   }
 
+  getTaskList(){
+    
+  }
 }
