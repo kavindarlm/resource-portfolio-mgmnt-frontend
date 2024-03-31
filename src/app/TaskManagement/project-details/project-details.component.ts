@@ -13,7 +13,7 @@ export class ProjectDetailsComponent implements OnInit{
 
   public dataid!: string;
   projectData: undefined| projectModel;
-  TaskData: undefined| taskModel;
+  TaskData: undefined| taskModel[];
 
   ngOnInit(): void {
       this.activateDataRout.paramMap.subscribe((param: Params) => {
@@ -30,9 +30,8 @@ export class ProjectDetailsComponent implements OnInit{
     })
   }
   getTaskList(){
-    this.api.getTaskList(this.dataid).subscribe((data: taskModel)=>{
-      
-      console.log(data);
+    this.api.getTaskList(this.dataid).subscribe(res => {
+      this.TaskData = [res];
     })
   }
 
