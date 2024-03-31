@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { projectModel } from "../dataModels/projectModel";
+import { projectModel, taskModel } from "../dataModels/projectModel";
 
 @Injectable({
     providedIn: 'root'
@@ -19,7 +19,7 @@ export class taskApiService{
     return this.http.get<projectModel>("http://localhost:3000/project/"+id)
   }
 
-  getTaskList(){
-    
+  getTaskList(id:string){
+    return this.http.get<taskModel>("http://localhost:3000/task/project/"+id)
   }
 }
