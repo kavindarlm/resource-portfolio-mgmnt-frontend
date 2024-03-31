@@ -19,6 +19,7 @@ import { AddNewUserComponent } from './admin-dashboard/add-new-user/add-new-user
 import { FunctionManagementComponent } from './admin-dashboard/function-management/function-management.component';
 import { FunctionButtonComponent } from './admin-dashboard/function-button/function-button.component';
 import { UserDetailComponent } from './admin-dashboard/user-detail/user-detail.component';
+import { DashbordButtonComponent } from './admin-dashboard/dashbord-button/dashbord-button.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { UserDetailComponent } from './admin-dashboard/user-detail/user-detail.c
     FunctionManagementComponent,
     FunctionButtonComponent,
     UserDetailComponent,
+    DashbordButtonComponent,
   ],
   imports: [
     BrowserModule,

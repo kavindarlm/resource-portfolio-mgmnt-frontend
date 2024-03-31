@@ -27,8 +27,13 @@ export class FunctionManagementComponent {
       { "func_id": "7", "func_name": "Resource Management" },
       { "func_id": "8", "func_name": "Project Management" },
       { "func_id": "9", "func_name": "Update Task Progress" }
-  ]
+  ];
+
+  functionIds: string[] = []; //for store the fuc_id as array
+
+
   handleClick(func_id: string) {
+    this.functionIds.push(func_id);
     console.log(func_id);
   }
   
