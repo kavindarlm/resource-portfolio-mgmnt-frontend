@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'admin-dashboard', component: AdminDasbdBodyComponent,
     children: [
       {path: 'addnewuser', component: AddNewUserComponent},
-      {path: 'userDetail' , component:UserDetailComponent}
+      {path: 'userDetail/:id' , component:UserDetailComponent}
     ]
   }
   

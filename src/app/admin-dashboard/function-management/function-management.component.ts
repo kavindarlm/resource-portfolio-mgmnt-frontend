@@ -35,6 +35,8 @@ export class FunctionManagementComponent {
   handleClick(func_id: string) {
     this.functionIds.push(func_id);
     console.log(func_id);
+    console.log(this.functionIds);
   }
+  
   
 }

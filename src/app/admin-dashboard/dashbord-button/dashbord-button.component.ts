@@ -1,4 +1,4 @@
-import { Component,Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-dashbord-button',
@@ -6,6 +6,6 @@ import { Component,Input } from '@angular/core';
   styleUrl: './dashbord-button.component.css'
 })
 export class DashbordButtonComponent {
-    @Input() buttonText!: string;
-    @Input() buttonClass!: string;
+  @Input() buttonText!: string;
+  @Input() buttonClass!: string;
 }

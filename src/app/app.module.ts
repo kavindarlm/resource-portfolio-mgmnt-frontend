@@ -20,6 +20,8 @@ import { FunctionManagementComponent } from './admin-dashboard/function-manageme
 import { FunctionButtonComponent } from './admin-dashboard/function-button/function-button.component';
 import { UserDetailComponent } from './admin-dashboard/user-detail/user-detail.component';
 import { DashbordButtonComponent } from './admin-dashboard/dashbord-button/dashbord-button.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -42,11 +44,14 @@ import { DashbordButtonComponent } from './admin-dashboard/dashbord-button/dashb
     FunctionButtonComponent,
     UserDetailComponent,
     DashbordButtonComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration()

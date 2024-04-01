@@ -4,15 +4,22 @@ import { Component,Input,Output,EventEmitter } from '@angular/core';
   selector: 'app-function-button',
   templateUrl: './function-button.component.html',
   styleUrl: './function-button.component.css',
-  template: `<button (click)="onButtonClick()">{{buttonText}}</button>`
 })
 export class FunctionButtonComponent {
   @Input() buttonText: string = 'Default'; // Default button text
-  @Output() buttonClicked = new EventEmitter<string>();
+  // @Output() buttonClicked = new EventEmitter<string>();
+  isClicked = false;
 
-  onButtonClick() {
-    this.buttonClicked.emit(this.buttonText);
-  }
 
   // This is the function that will be called when the button is clicked
+  handleClick() {
+    this.isClicked = !this.isClicked;
+    this.buttonText = this.isClicked ? 'Done' : 'Add';
+  }
+
+  get buttonClass() {
+    return this.isClicked ? 'btn-primary' : 'btn-outline-primary'; 
+  }
+
+  
 }
