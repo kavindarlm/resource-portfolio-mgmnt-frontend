@@ -21,18 +21,23 @@ export class ProjectDetailsComponent implements OnInit{
         console.log(this.dataid);
       });
       this.getProjectDetails();
-      this.getTaskList(); 
-
+      this.getTaskList();
   }
+
   getProjectDetails(){
     this.api.fetchProject(this.dataid).subscribe((data: projectModel)=>{
       this.projectData = data;
     })
   }
+
   getTaskList(){
     this.api.getTaskList(this.dataid).subscribe(res => {
       this.TaskData = res;
     })
+  }
+
+  selectTaskbyId(taskid: string){
+    console.log("This is taskid",taskid);
   }
 
 } 

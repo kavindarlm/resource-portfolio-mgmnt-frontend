@@ -1,11 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-update-task',
   templateUrl: './update-task.component.html',
   styleUrl: './update-task.component.css'
 })
-export class UpdateTaskComponent {
+export class UpdateTaskComponent implements OnInit {
+  public taskid! : string;
+  constructor(private activateDataRout: ActivatedRoute){}
+  ngOnInit(): void {
+      this.activateDataRout.paramMap.subscribe((param: Params) => {
+        this.taskid = param['get']('id');
+        console.log(this.taskid);
+      });
+  }
+
   TaskDetails:  any = [{
     taskName: 'Task 1',
     taskStartDate: '2021-08-01',
@@ -29,6 +39,4 @@ export class UpdateTaskComponent {
     // Dynamically update the gradient based on the percentage
     this.trackGradient = `linear-gradient(to right, #A9BCFF 0%, #A9BCFF ${percentage}%, #7752FE ${percentage}%, #7752FE 100%)`;
   }
-
-  
 }

@@ -63,7 +63,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let taskDetails of TaskData " class="tableRow">
+                            <tr *ngFor="let taskDetails of TaskData " class="tableRow" (click)="selectTaskbyId(taskDetails.taskid)" routerLink="updatetask/{{taskDetails.taskid}}" routerLink="active">
                                 <td class="col-4 tableContent">{{taskDetails.taskid}}</td>
                                 <td class="col-4 tableContent">{{taskDetails.taskAllocationPercentage}}</td>
                                 <td class="col-4 tableContent"><input type="range" min="1" max="100"
