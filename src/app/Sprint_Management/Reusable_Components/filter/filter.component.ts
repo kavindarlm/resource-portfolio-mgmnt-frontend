@@ -19,8 +19,9 @@ export class FilterComponent implements OnInit {
   
 
   searchText: string = '';
+  
 
-  filteredContents: any[] = []; // Initialize as an array
+  filteredContents: any[] = [];
 
   ngOnInit() {
     this.filterContents();
@@ -29,18 +30,12 @@ export class FilterComponent implements OnInit {
   filterContents(){
     if (this.searchText.trim() === '') {
       this.filteredContents = this.gArray;
-    }
-    else {
-      // Perform filtering based on the selected searchText
+    } else {
       this.filteredContents = this.gArray.filter(tablec =>
         tablec[this.filter1].toLowerCase().includes(this.searchText.toLowerCase()) ||
         tablec[this.filter2].toLowerCase().includes(this.searchText.toLowerCase())
       );
     }
 
-  }
-
-
-
 }
-
+}

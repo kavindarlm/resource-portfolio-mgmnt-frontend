@@ -28,6 +28,11 @@
   outline: none;
 }
 
+.boxclr {
+  background-color: #7752fe;
+}
+
+
 /* Add media queries for responsiveness */
 @media (min-width: 576px) {
   .box1 {

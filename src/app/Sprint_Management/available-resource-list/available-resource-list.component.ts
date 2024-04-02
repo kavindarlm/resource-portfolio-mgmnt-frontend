@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AvailabiilityComponent } from '../availabiility/availabiility.component';
+import { ResourceService } from '../../services/resource.service';
 
 @Component({
   selector: 'app-available-resource-list',
@@ -10,15 +11,34 @@ export class AvailableResourceListComponent {
 
   headArray=['Resource_ID','Team','Job_Role','Org_Unit','Availability'];
 
-  resources = [
-    { Resource_ID: '0011R', Team: 'Team 01', Job_Role: 'UX/UI Designer', Org_Unit: 'TAPRO', Availability: 'y' },
-    { Resource_ID: '0022Y', Team: 'Team 01', Job_Role: 'UX/UI Designer', Org_Unit: 'DirectFN', Availability: 'y' },
-    { Resource_ID: '0022H', Team: 'Team 03', Job_Role: 'UX/UI Designer', Org_Unit: 'DirectFN', Availability: 'y' },
-    { Resource_ID: '0022G', Team: 'Team 02', Job_Role: 'UX/UI Designer', Org_Unit: 'TAPRO', Availability: 'y' }
-  ];
+  resources: any[] = [];
 
-  teams: string[] = ['Team 01', 'Team 02', 'Team 03'];
-  OrgUnit: string[] = ['TAPRO', 'DirectFN'];
+  constructor(private resourceService: ResourceService ) { }
+
+  ngOnInit(): void {
+    this.fetchResources();
+  }
+
+  fetchResources(): void {
+    this.resourceService.getResources().subscribe(
+      (data: any[]) => {
+        this.resources = data.map(resource => ({
+          Resource_ID: resource.resource_id,
+          Team: resource.team_name,
+          Job_Role: resource.role_name,
+          Org_Unit: resource.org_unit_name,
+          Availability: 'y'  
+        }));
+        console.log('Resources:', this.resources);
+      },
+      error => {
+        console.error('Error fetching resources:', error);
+      }
+    );
+  }
+
+  teams: string[] = ['Development Team A', 'Quality Assurance Team', 'Product Management Team'];
+  OrgUnit: string[] = ['Development', 'Quality Assurance','Product Management'];
 
   
 }

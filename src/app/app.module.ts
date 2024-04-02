@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, importProvidersFrom } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -23,17 +23,17 @@ import { SprintMgtComponent } from './Sprint_Management/sprint-mgt/sprint-mgt.co
 import { Ng2SearchPipe } from 'ng2-search-filter';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FilterPipe } from './Sprint_Management/filter.pipe';
-import { FilterComponent } from './Sprint_Management/Reusable_components/filter/filter.component';
-import { TablesComponent } from './Sprint_Management/Reusable_Components/tables/tables.component';
+import { FilterComponent } from './Sprint_Management/Reusable_Components/filter/filter.component';
 import { AvailableResourceListComponent } from './Sprint_Management/available-resource-list/available-resource-list.component';
 import { AvailabiilityComponent } from './Sprint_Management/availabiility/availabiility.component';
-import { AlertBoxComponent } from './Sprint_Management/Reusable_Components/alert-box/alert-box.component';
 import { AddedResourceListComponent } from './Sprint_Management/added-resource-list/added-resource-list.component';
-import { MainComponent } from './Sprint_Management/main/main.component';
+
 
 import { ProjectListComponent } from './Project-management/project-list/project-list.component';
 import { ProjectButtunsComponent } from './Project-management/project-buttuns/project-buttuns.component';
 import { ListComponent } from './Sprint_Management/Reusable_Components/list/list.component';
+import { HttpClientModule } from '@angular/common/http';
+import { TablesComponent } from './Sprint_Management/Reusable_Components/tables/tables.component';
 
 
 
@@ -54,20 +54,23 @@ import { ListComponent } from './Sprint_Management/Reusable_Components/list/list
     SearchBarComponent,
     CreateFormComponent,
     SprintMgtComponent,
-    TablesComponent,
+
 
     FilterPipe,
     FilterComponent,
     AvailableResourceListComponent,
     AvailabiilityComponent,
+
     AddedResourceListComponent,
-    MainComponent,
-    // AddedResourceListComponent,
     // AlertBoxComponent,
 
     ProjectButtunsComponent,
     ProjectListComponent,
+
+    
     ListComponent,
+
+    TablesComponent
    
   ],
   imports: [
@@ -76,6 +79,10 @@ import { ListComponent } from './Sprint_Management/Reusable_Components/list/list
     FormsModule,
     CommonModule,
     FormsModule,
+    HttpClientModule,
+  
+    
+
   ],
   providers: [
     provideClientHydration()

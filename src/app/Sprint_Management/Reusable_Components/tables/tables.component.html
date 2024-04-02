@@ -1,34 +1,36 @@
 <div class="table-responsive">
-  <table class="table text spacing table-hover">
-    <thead>
-      <tr>
-        <th class="headingblock" *ngFor="let head of HeadArray">{{ head }}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <ng-container *ngFor="let items of GridArray">
-        <tr (click)="detectComp('availability')">
-          <td *ngFor="let head of HeadArray">{{ items[head] }}</td>
+    <table class="table text spacing table-hover">
+      <thead>
+        <tr>
+          <th class="headingblock" *ngFor="let head of HeadArray">{{ head }}</th>
         </tr>
-      </ng-container>
-    </tbody>
-  </table>
-  <nav>
-    <ul class="pagination d-flex justify-content-center">
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&lsaquo;</span>
-        </a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">...</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&rsaquo;</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
-</div>
-<ng-container *ngComponentOutlet="comp"></ng-container>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let items of GridArray">
+          <tr (click)="detectComp('availability')">
+            <td *ngFor="let head of HeadArray">{{ items[head] }}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+    <nav>
+      <ul class="pagination d-flex justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&lsaquo;</span>
+          </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">...</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&rsaquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <ng-container *ngComponentOutlet="comp"></ng-container>
+  
+  

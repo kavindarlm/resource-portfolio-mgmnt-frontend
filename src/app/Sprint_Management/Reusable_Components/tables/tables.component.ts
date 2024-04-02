@@ -1,6 +1,7 @@
 import { Component , Input , OnInit } from '@angular/core';
 import { AvailabiilityComponent } from '../../availabiility/availabiility.component';
 
+
 @Component({
   selector: 'app-tables',
   templateUrl: './tables.component.html',

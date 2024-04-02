@@ -12,11 +12,10 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tr *ngFor="let project of projects">
+                            <tr *ngFor="let sprint of sprints">
                                 <td>
-                                    <app-project-buttuns [btnClss]="'btn-costom'" [text]="project.name"></app-project-buttuns>
+                                    <app-project-buttuns [btnClss]="'btn-costom'" [text]="sprint.Sname" (click)="detectComp('sprintmgt')"></app-project-buttuns>
                                 </td>
-                                <!-- [text]="'Sprint ' + project.id" -->
                             </tr>
                             <tr>
                                 <td>
