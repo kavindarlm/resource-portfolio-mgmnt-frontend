@@ -1,28 +1,28 @@
 <div class="container card-body">
-    <div class="heder-label">
-        {{TaskDetails[0].taskName}}
+    <div class="heder-label" [(ngModel)]="taskDetails.taskName" name="taskName">
+        {{taskDetails.taskName}}
     </div>
     <div class="row rowOne">
         <div class="col-6">
             <div class="colBorder">
-                ProjectStartDate: {{TaskDetails[0].taskStartDate | date: 'dd-MM-yyyy'}}
+                ProjectStartDate: {{taskDetails.exStartDate| date: 'dd-MM-yyyy'}}
             </div>
         </div>
         <div class="col-6">
             <div class="colBorder">
-                PojectEndDate: {{TaskDetails[0].taskEndDate | date: 'dd-MM-yyyy'}}
+                PojectEndDate: {{taskDetails.exEndDate | date: 'dd-MM-yyyy'}}
             </div>
         </div>
         <div class="row rowOne">
             <div class="col-12">
                 <div class="colBorder">
-                    Expected Total Task Percentage: {{TaskDetails[0].taskPecentage}}%
+                    Expected Total Task Percentage: {{taskDetails.taskAllocationPercentage}}%
                 </div>
             </div>
         </div>
         <div class="row rowOne">
             <div class="range-slider-container">
-                <input type="range" min="1" max="100" value={{sliderValue}} class="slider" id="myRange"
+                <input type="range" min="1" max="100" value={{taskDetails.taskProgressPercentage}} class="slider" id="myRange" [(ngModel)]="taskDetails.taskProgressPercentage" name="taskAllocationPercentage"
                     (input)="updateProgress($event)">
                     
                 <!-- <span class="slider-value">{{ sliderValue }}</span> -->
@@ -30,11 +30,11 @@
                     Update Progress
                 </div>
                 <div class="progress-container">
-                    {{ sliderValue }}
+                    {{ taskDetails.taskProgressPercentage }}
                 </div>
             </div> 
         </div>
-        <app-button-tusks [btnClss]="'button-project'" [text]="'Add Percentage'"></app-button-tusks>
+        <app-button-tusks [btnClss]="'button-project'" [text]="'Add Percentage'" (onClick)="updatedata()"></app-button-tusks>
     </div>
 </div>
 

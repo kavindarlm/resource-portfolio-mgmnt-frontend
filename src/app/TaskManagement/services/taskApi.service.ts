@@ -27,5 +27,13 @@ export class taskApiService{
     return this.http.post<taskModel>("http://localhost:3000/task/newtask/"+id,data);
   }
 
+  getTaskByid(id: string){
+    return this.http.get<taskModel>("http://localhost:3000/task/"+id);
+  }
+
+  updatetaskPersentage(id: string, data: taskModel){
+    return this.http.put<taskModel>("http://localhost:3000/task/"+id,data);
+  }
+
   
 }
