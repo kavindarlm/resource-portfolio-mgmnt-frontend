@@ -1,3 +1,5 @@
+import exp from "constants";
+
 export interface projectModel {
   projectid: '';
   projectName: '';
@@ -16,5 +18,9 @@ export interface taskModel {
   exEndDate: '';
   taskDescription: '';
   taskAllocationPercentage: '';
+  taskProgressPercentage: '';
+}
+
+export interface taskUpdateModel{
   taskProgressPercentage: '';
 }

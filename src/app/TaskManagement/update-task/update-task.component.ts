@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { taskModel } from '../dataModels/projectModel';
+import { taskModel, taskUpdateModel } from '../dataModels/projectModel';
 import { taskApiService } from '../services/taskApi.service';
 
 @Component({
@@ -17,6 +17,10 @@ export class UpdateTaskComponent implements OnInit {
     exEndDate: '',
     taskDescription: '',
     taskAllocationPercentage: '',
+    taskProgressPercentage: ''
+  }
+
+  taskUpdate: taskUpdateModel={
     taskProgressPercentage: ''
   }
   constructor(private activateDataRout: ActivatedRoute, private TaskService: taskApiService){}
@@ -46,9 +50,9 @@ export class UpdateTaskComponent implements OnInit {
   }
 
   updatedata(){
-    this.TaskService.updatetaskPersentage(this.taskid, this.taskDetails).subscribe((data: taskModel) =>{
-      this.taskDetails = data;
-      
-    })
+    this.TaskService.updatetaskPersentage(this.taskid, this.taskDetails).subscribe((data: taskUpdateModel) =>{
+      this.taskUpdate = data;
+      alert("Task Updated Successfully");
+    });
   }
 }

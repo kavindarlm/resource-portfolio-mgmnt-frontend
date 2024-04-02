@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { projectModel, taskModel } from "../dataModels/projectModel";
+import { projectModel, taskModel, taskUpdateModel } from "../dataModels/projectModel";
 
 @Injectable({
     providedIn: 'root'
@@ -32,7 +32,7 @@ export class taskApiService{
   }
 
   updatetaskPersentage(id: string, data: taskModel){
-    return this.http.put<taskModel>("http://localhost:3000/task/"+id,data);
+    return this.http.put<taskUpdateModel>("http://localhost:3000/task/"+id,data);
   }
 
   
