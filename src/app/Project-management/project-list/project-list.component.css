@@ -4,17 +4,18 @@
     width: 100%;
     /* margin-left: 40%;    */
 }
+
 th, td {
     padding: 8px; /* Padding for content spacing */
     text-align: left; /* Text alignment within cells */
-  }
+}
+
 .project-list{
     overflow-y: scroll;
     /* Adjusted height */
     border: solid 1px black;
-    width: 100%;
-    
-}   
+    width: 100%; /* Set the width for desktop */
+}
 
 .table-data{
     display: flex;
@@ -22,7 +23,6 @@ th, td {
     gap: 10px;
     justify-content: space-between;
     margin: 10px 0;
-    
 }
 
 .addproject{
@@ -38,8 +38,8 @@ th, td {
     background-color: #1E3895;
     font-weight: semibold;
     border: solid 1px #7752FE;
-
 }
+
 .btn-costom{
     background-color: #C2D9FF;
     color: #7752FE;
