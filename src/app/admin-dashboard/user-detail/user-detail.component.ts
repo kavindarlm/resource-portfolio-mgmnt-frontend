@@ -26,6 +26,7 @@ export class UserDetailComponent implements OnInit {
     this.getUserDetail();
   }
 
+  // Function to get the user_id from the route
   getuserIdFromrout() {
     this.activeRoutData.paramMap.subscribe((param: Params) => {
       this.userid = param['get']('id');
@@ -33,11 +34,14 @@ export class UserDetailComponent implements OnInit {
     })
   }
 
+  // Function to get the user details by user_id
   getUserDetail() {
     this.dashboardService.getSingleUser(this.userid).subscribe((data: UserModel) => {
       this.userForm = data;
     })
   }
+
+  // Function to edit the user details
   editUserDetail() {
     this.dashboardService.editUser(this.userid, this.userForm).subscribe((res) => {
       console.log(res);
@@ -45,6 +49,7 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
+  // Function to delete the user details
   deleteUserDetail() {
     this.dashboardService.deleteUser(this.userid).subscribe((res) => {
       console.log(res);

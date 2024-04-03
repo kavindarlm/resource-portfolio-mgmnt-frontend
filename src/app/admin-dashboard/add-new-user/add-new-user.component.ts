@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DashboardService } from '../admin-dashboard-services/dashboard.service';
+import { FunctionManagementComponent } from '../function-management/function-management.component';
+import { SharedService } from '../admin-dashboard-services/shared.service';
 
 @Component({
   selector: 'app-add-new-user',
@@ -9,7 +11,7 @@ import { DashboardService } from '../admin-dashboard-services/dashboard.service'
   styleUrl: './add-new-user.component.css'
 })
 export class AddNewUserComponent implements OnInit {
-  constructor(private formBuilder: FormBuilder, private userService: DashboardService) { }
+  constructor(private formBuilder: FormBuilder, private userService: DashboardService, private sharedService: SharedService) { }
 
   userForm!: FormGroup;
 
@@ -22,6 +24,7 @@ export class AddNewUserComponent implements OnInit {
 
   submitUserForm(Userdata: any) {
     console.log(Userdata);
+    console.log(this.sharedService.functionIds$);
     this.userService.createUser(Userdata).subscribe((res) => {
       console.log(res);
     });
