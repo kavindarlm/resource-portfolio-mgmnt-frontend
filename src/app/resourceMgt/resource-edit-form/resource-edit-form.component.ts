@@ -18,15 +18,15 @@ export class ResourceEditFormComponent implements OnInit{
   jobroles: any[] = []; //creating an array for jobroles
   orgunits: any[] = []; //creating an array for orgunits
 
-  formValue!: FormGroup; //
-  selectedResource: any; //
+  formValue!: FormGroup; 
+  selectedResource: any; 
   resourceObject: any;
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private resourceService: ResourceService) { }
 
   ngOnInit(): void {
     this.loadJobRoles();// calling the loadJobRoles Method
-    this.loadOrgUnits();
+    this.loadOrgUnits();// calling the loadOrgUnits Method
 
     this.formValue = this.formBuilder.group({
       resourceName: [''],

@@ -28,13 +28,13 @@ export class FirstViewComponent implements OnInit {
 
   loadResources() {
     this.resourceService.getResources()
-    // .pipe(
-    //   catchError((error) => {
-    //     console.error('Error fetching resources:', error);
-    //     alert('An error occurred while fetching resources. Please try again.');
-    //     return throwError('Error fetching resources');
-    //   })
-    // )
+    .pipe(
+      catchError((error) => {
+        console.error('Error fetching resources:', error);
+        alert('An error occurred while fetching resources. Please try again.');
+        return throwError('Error fetching resources');
+      })
+    )
     .subscribe((res: any) => {
       debugger;
       this.resourceList = res; // Assuming the response is directly the array of resources

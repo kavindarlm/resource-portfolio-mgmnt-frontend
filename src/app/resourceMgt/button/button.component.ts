@@ -15,7 +15,7 @@ export class ButtonComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  showcomponent(): void{
-    this.showForm =! this.showForm;
-  }
+  // showcomponent(): void{
+  //   this.showForm =! this.showForm;
+  // }
 }
