@@ -7,14 +7,14 @@ import { PagesBodyComponent } from './PageBody/pages-body/pages-body.component';
 import path from 'node:path';
 
 const routes: Routes = [
-  { path: '', component: PagesBodyComponent,
+  { path: 'pages-body', component: PagesBodyComponent,
     children:[
       {path: 'projectlist', component: ProjectListComponent,
       children:[
         {path: 'createproject', component: CreateProjectComponent}, 
         {path: 'updatePoject/:id', component: UpdateProjectComponent}
       ]},
-    ]
+    ] 
 }
 ];
 import { LoginAccComponent } from './login-acc/login-acc.component';  
