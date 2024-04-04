@@ -10,4 +10,5 @@ export class ProjectButtunsComponent {
   @Input() btnClss: string = "";
   @Input() mli: string= "";
   @Output() onClick = new EventEmitter<void>();
+  @Input() disabled: boolean = false;
 }

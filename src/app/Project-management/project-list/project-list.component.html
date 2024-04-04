@@ -1,38 +1,30 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-2">
-            <div class="container-lg-fluid">
-                <div class="row">
-                        <div class="table-container">
-                            <table class="table table-borderless">
-                                <thead>
-                                    <tr>
-                                        <th class="col">
-                                                <app-project-buttuns [btnClss]="'label-project'" [text]="'Project List'"></app-project-buttuns>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tr *ngFor="let project of projectDetails ">
-                                    <td>
-                                        <app-project-buttuns [btnClss]="'btn-costom'" [text]="project.projectName" (Click)="openProject(project.projectName)"></app-project-buttuns>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <!-- <app-button [btnClss]="'addproject'" [text]="'+ Add New Project'"
-                                            [routerLink]="['/NewProjectForm']">
-                                        </app-button> -->
-                                        <app-project-buttuns [btnClss]="'addproject'" [text]="'Add New Project'" [routerLink]="['/NewProjectForm']"></app-project-buttuns>
-                                        <!-- <app-create-project *ngIf="showProjectForm"></app-create-project> -->
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
+        <div class="col-md-2">
+            <div class="table-container">
+                <div>
+                    <app-project-buttuns [btnClss]="'label-project'" [text]="'Project List'"></app-project-buttuns>
+                </div>
+
+                <div class="table-data">
+                    <div *ngFor="let project of data " class="btns">
+                        <button class="btn btn-costom" routerLink="updatePoject/{{project.projectid}}"
+                            routerLinkActive="active">{{project.projectName}}</button>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn addproject" routerLink="createproject" routerLinkActive="active">Add New
+                        Project</button>
                 </div>
             </div>
         </div>
-        <div class="col-10">
-            
+        <div class="col-md-8">
+            <router-outlet></router-outlet>
+        </div>
+        <div class="col-md-2">
+            <app-critical-leval></app-critical-leval>
         </div>
     </div>
+
 </div>

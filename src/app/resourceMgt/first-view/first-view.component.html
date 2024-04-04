@@ -1,0 +1,52 @@
+<div class="grid-container">
+    <div class="mainBox">
+        <div class="topic">
+            <h6>System Resource List</h6>
+        </div>
+        <!-- search bar -->
+        <div class="input-group rounded">
+            <input type="search" class="form-control rounded" placeholder="Search.." aria-label="Search"
+                aria-describedby="search-addon" />
+        </div>
+        <!-- <div class="input-group">
+            <div class="form-outline" data-mdb-input-init>
+              <input type="search" id="form1" class="form-control" placeholder="Search.." />
+            </div>
+            <button type="button" class="btn btn-primary" data-mdb-ripple-init>
+              <i class="fas fa-search"></i>
+            </button>
+          </div> -->
+        <!-- <app-search-bar></app-search-bar> -->
+
+        <table class="table table-bordered">
+            <thead class="table-headers">
+                <tr>
+                    <th><button class="headers">Resource ID</button></th>
+                    <th><button class="headers">Job Role</button></th>
+                    <th><button class="headers">Org. Unit</button></th>
+                </tr>
+            </thead>
+            <tbody class="table-body">
+                <tr *ngFor="let resource of resourceList" (click)="rowClick($event, resource)" class="clickable-row">
+                    <td>{{resource.resourceId}}</td>
+                    <td>{{resource.roleId}}</td>
+                    <td>{{resource.unitId}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <div>
+            <app-button (click)="showcomponent()"></app-button>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+
+    <div class="box2">
+        <app-add-form *ngIf="showForm"></app-add-form>
+        <router-outlet></router-outlet>
+        <app-resource-details *ngIf="showResourceDetails"></app-resource-details>
+        <router-outlet></router-outlet>
+    </div>
+
+</div>
