@@ -1,0 +1,84 @@
+/* General Styles */
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Table Styles */
+  .table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: #ffffff;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  
+  .table th, .table td {
+    padding: 12px;
+    text-align: left;
+  }
+  
+  /* Heading Styles */
+  .headingblock {
+    background-color: #c2d9ff;
+    border: 1px solid #ffffff;
+  }
+  
+  /* Cell Styles */
+  .table td {
+    color: #7752fe;
+    font-size: 12px;
+    background-color: #ffffff;
+    border: 1px solid rgba(134, 145, 168, 0.2);
+  }
+  
+  /* Hover Styles */
+  .table-hover tbody tr:hover > td {
+    background-color: #1E3895;
+    color: white;
+  }
+  
+  /* Responsive Styles */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Text5 Styles */
+  .text {
+    color: #190482;
+    text-align: center;
+    font-size: 12px;
+    border-style: hidden;
+    outline: none;
+  }
+  
+  /* Spacing Styles */
+  .spacing {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  
+/* Pagination */
+  .pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .pagination .page-item {
+    margin-right: 5px;
+  }
+  
+  .pagination .page-link {
+    color: #190482;
+    border: 1px solid #7752fe;
+  }
+  
+  .pagination .page-link:hover {
+    background-color: #7752fe;
+    color: #fff;
+  }

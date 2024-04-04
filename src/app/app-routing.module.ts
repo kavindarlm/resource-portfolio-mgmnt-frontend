@@ -10,6 +10,12 @@ import path from 'node:path';
 import { LoginAccComponent } from './login-acc/login-acc.component';  
 import { FgPsswdComponent } from './fg-psswd/fg-psswd.component';
 import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admin-dasbd-body.component';
+// import { MainComponent } from './Sprint_Management/main/main.component';
+// import { CreateFormComponent } from './Sprint_Management/create-form/create-form.component';
+// import { SprintMgtComponent } from './Sprint_Management/sprint-mgt/sprint-mgt.component';
+import { ListComponent } from './Sprint_Management/Reusable_Components/list/list.component';
+import { CreateFormComponent } from './Sprint_Management/create-form/create-form.component';
+import { AvailableResourceListComponent } from './Sprint_Management/available-resource-list/available-resource-list.component';
 import { AddFormComponent } from './resourceMgt/add-form/add-form.component';
 import { FirstViewComponent } from './resourceMgt/first-view/first-view.component';
 import { ButtonComponent } from './resourceMgt/button/button.component';
@@ -20,7 +26,6 @@ import { UserDetailComponent } from './admin-dashboard/user-detail/user-detail.c
 import { UpdateComponent } from './team-management/update/update.component';
 import { TeamListComponent } from './team-management/team-list/team-list.component';
 import { DeletePopupComponent } from './team-management/delete-popup/delete-popup.component';
-
 
 const routes: Routes = [
   //redirect to login page
@@ -50,6 +55,13 @@ const routes: Routes = [
               { path: 'resouce-edit-form', component: ResourceEditFormComponent }
             ]},
         ]},
+      {path: 'sprint-management', component: ListComponent,
+        children: [
+          { path: 'createform', component: CreateFormComponent,
+        children:[
+          {path: 'availableResources', component:AvailableResourceListComponent}
+        ]}
+        ]},
     ]
   },
   { path: 'admin-dashboard', component: AdminDasbdBodyComponent,
@@ -58,8 +70,8 @@ const routes: Routes = [
       {path: 'userDetail/:id' , component:UserDetailComponent}
     ]
   }
-  
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],  

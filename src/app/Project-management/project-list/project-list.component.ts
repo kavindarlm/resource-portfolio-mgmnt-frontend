@@ -19,7 +19,6 @@ export class ProjectListComponent {
   //   this.updateproject = true;
   // }
 
-  
   openProject(project: any) {
     // Implement the logic to open the corresponding project
     console.log('Opening project:', project.projectName);
@@ -27,7 +26,6 @@ export class ProjectListComponent {
     // Example: Navigate to a project detail page
     // this.router.navigate(['/project', project.id]);
   }
-
   getProjectList(){
     this.api.getProjectList().subscribe(res=>{
       this.data = res;
