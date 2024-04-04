@@ -6,7 +6,7 @@ export interface Resource {
   }
   
   export interface dataModel {
-    id: string;
+    id: number;
     teamName: string;
     description: string;
     selectedResources: Resource[];

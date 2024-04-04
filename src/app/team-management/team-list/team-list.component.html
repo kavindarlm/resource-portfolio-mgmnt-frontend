@@ -8,7 +8,7 @@
 
         <div class="table-data">
           <div *ngFor="let team of teams " class="btns">
-            <button class="teamNameBtn btn btn-primary" routerLink="/update/{{team.id}}"
+            <button class="teamNameBtn btn btn-primary" routerLink="update/{{team.id}}"
               routerLinkActive="active">{{team.teamName}}</button>
           </div>
         </div>
@@ -21,6 +21,7 @@
 
     <div class="col-10 ">
       <router-outlet></router-outlet>
+      
     </div>
 
   </div>

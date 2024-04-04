@@ -3,6 +3,7 @@ import { GeneralService } from '../shared/general.service';
 import { ApiService } from '../shared/api.service';
 import { Router } from '@angular/router';
 import { catchError, map } from 'rxjs';
+import { dataModel } from '../team-form/team-form.model';
 
 
 @Component({
@@ -12,6 +13,8 @@ import { catchError, map } from 'rxjs';
 })
 export class DeletePopupComponent {
   public dataid!: number;
+  public teamData: dataModel = { id:0 , teamName: '', description: '', selectedResources: [] };
+
   http: any;
   
   constructor(public generalservice: GeneralService,
@@ -22,8 +25,14 @@ export class DeletePopupComponent {
   }
 
   deleteTeam() {
+    if (!this.dataid) {
+      console.error('Team ID is undefined.');
+      return;
+    }
+    
     this.api.deleteTeam(this.dataid).subscribe(
       () => {
+        // Redirect to the teams list page after successful deletion
         this.router.navigate(['/teams']);
       },
       (error: any) => {

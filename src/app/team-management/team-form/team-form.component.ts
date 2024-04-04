@@ -27,10 +27,19 @@ export class TeamFormComponent implements OnInit {
       selectedResources: this.formbuilder.array([]) // Initialize selectedResources as a FormArray
     });
 
-    this.service.selectedResources$.subscribe((resources) => {
-      this.selectedResources = resources;
-      this.updateSelectedResourcesFormArray();
-    });
+    // this.service.selectedResources$.subscribe((resources) => {
+    //   this.selectedResources = resources;
+    //   this.updateSelectedResourcesFormArray();
+    // });
+    this.service.selectedResources$.subscribe(
+      data => {
+        this.selectedResources = data;
+      },
+      error => {
+        console.error(error);
+      }
+    );
+
 
   
   }
@@ -56,12 +65,12 @@ export class TeamFormComponent implements OnInit {
   }
 
   // Helper function to update the selectedResources FormArray
-  updateSelectedResourcesFormArray() {
-    const selectedResourcesArray = this.teamForm.get('selectedResources') as FormArray;
-    selectedResourcesArray.clear();
+  // updateSelectedResourcesFormArray() {
+  //   const selectedResourcesArray = this.teamForm.get('selectedResources') as FormArray;
+  //   selectedResourcesArray.clear();
 
-    this.selectedResources.forEach(resource => {
-      selectedResourcesArray.push(this.formbuilder.group(resource));
-    });
-  }
+  //   this.selectedResources.forEach(resource => {
+  //     selectedResourcesArray.push(this.formbuilder.group(resource));
+  //   });
+  // }
 }

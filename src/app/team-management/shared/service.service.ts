@@ -12,12 +12,12 @@ export class ServiceService {
   constructor(private http: HttpClient) { }
 //create data
   addTeam(data: any): Observable<any> {
-    return this.http.post('/teams',data);
+    return this.http.post('http://localhost:3000/teams',data);
 }
 
 //fetch data
 getTeams(): Observable<any> {
-  return this.http.get('/teams');
+  return this.http.get('http://localhost:3000/teams');
 }
 
 //new code - add selected resources to the table
@@ -26,6 +26,15 @@ private selectedResourcesSource = new BehaviorSubject<any[]>([]);
 
   addSelectedResource(resource: any) {
     const currentSelectedResources = this.selectedResourcesSource.getValue();
-    this.selectedResourcesSource.next([...currentSelectedResources, resource]);
-}
+    const index = currentSelectedResources.indexOf(resource);
+    if (index === -1) {
+      // If the resource is not already selected, add it
+      this.selectedResourcesSource.next([...currentSelectedResources, resource]);
+    } else {
+      // If the resource is already selected, remove it
+      const newSelectedResources = [...currentSelectedResources];
+      newSelectedResources.splice(index, 1);
+      this.selectedResourcesSource.next(newSelectedResources);
+    }
+  }
 }

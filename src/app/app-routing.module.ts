@@ -11,15 +11,23 @@ import { TeamListComponent } from './team-management/team-list/team-list.compone
 import { DeletePopupComponent } from './team-management/delete-popup/delete-popup.component';
 
 const routes: Routes = [
-  {path:'',component:PagesBodyComponent,
-   children:[
-    {path:'teamlistcomponent', component:TeamListComponent},
-    {path: 'NewTeamButton', component: NewTeamButtonComponent},
-    {path: 'TeamForm', component: TeamFormComponent},
-    {path:'update/:id', component: UpdateComponent},
-    {path: "delete/:id", component:DeletePopupComponent}
-   ]
-}
+  {
+    path: '',
+    component: PagesBodyComponent,
+    children: [
+      {
+        path: 'teamlistcomponent',
+        component: TeamListComponent,
+        children: [
+          { path: 'TeamForm', component: TeamFormComponent },
+          { path: 'update/:id', component: UpdateComponent },
+          { path: 'delete/:id', component: DeletePopupComponent }
+        ]
+      },
+      
+    ]
+  }
+];
   //redirect to login page
   // { path: '', redirectTo: '/login', pathMatch: 'full' },
   // { path: 'login', component: LoginAccComponent },
@@ -37,7 +45,7 @@ const routes: Routes = [
 // ];
   //wildcard route to handle 404
   //{ path: '**', component: PageNotFoundComponent } // PageNotFoundComponent needs to be created
-];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

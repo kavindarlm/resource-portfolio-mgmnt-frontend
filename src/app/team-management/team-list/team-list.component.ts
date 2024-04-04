@@ -14,8 +14,7 @@ export class TeamListComponent implements OnInit{
   showUpdate =false;
 
   constructor(private service: ServiceService) {
-    this.showForm = false;
-    this.showUpdate = false;
+   
    }
 
   ngOnInit(): void {
@@ -23,13 +22,6 @@ export class TeamListComponent implements OnInit{
     
   }
 
-  toggleMainBox() {
-    this.showForm = !this.showForm;
-  }
-
-  toggleUpdateBox() {
-    this.showUpdate = !this.showUpdate;
-  }
 
   fetchTeamList() {
     this.service.getTeams().subscribe({

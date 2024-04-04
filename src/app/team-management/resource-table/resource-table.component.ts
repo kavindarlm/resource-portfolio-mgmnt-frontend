@@ -81,11 +81,11 @@ export class ResourceTableComponent {
     const index = this.selectedResources.indexOf(resource);
 
     // If not selected, add to the array; otherwise, remove it
-    if (index === -1) {
-      this.selectedResources.push(resource);
-    } else {
-      this.selectedResources.splice(index, 1);
-    }
+    // if (index === -1) {
+    //   this.selectedResources.push(resource);
+    // } else {
+    //   this.selectedResources.splice(index, 1);
+    // }
   }
 
   isSelected(resource: any): boolean {
