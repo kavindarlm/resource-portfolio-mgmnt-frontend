@@ -31,10 +31,11 @@ const routes: Routes = [
       ]},
       {path: 'teamlistcomponent',component: TeamListComponent,
         children: [
+          { path: 'NewTeamButton', component: NewTeamButtonComponent},
           { path: 'TeamForm', component: TeamFormComponent },
           { path: 'update/:id', component: UpdateComponent },
           { path: 'delete/:id', component: DeletePopupComponent }
-        ]},
+      ]},
     ]
   },
   { path: 'admin-dashboard', component: AdminDasbdBodyComponent,
