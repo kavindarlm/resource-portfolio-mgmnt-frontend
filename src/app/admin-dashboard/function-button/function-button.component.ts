@@ -18,7 +18,7 @@ export class FunctionButtonComponent {
   }
 
   get buttonClass() {
-    return this.isClicked ? 'btn-primary' : 'btn-outline-primary'; 
+    return this.isClicked ? 'btn-success' : 'btn-outline-success'; 
   }
 
   

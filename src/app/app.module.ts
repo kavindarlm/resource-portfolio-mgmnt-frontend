@@ -21,6 +21,9 @@ import { FunctionButtonComponent } from './admin-dashboard/function-button/funct
 import { UserDetailComponent } from './admin-dashboard/user-detail/user-detail.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { SpinnerComponent } from './spinner/spinner/spinner.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -42,6 +45,7 @@ import { HttpClientModule } from '@angular/common/http';
     FunctionManagementComponent,
     FunctionButtonComponent,
     UserDetailComponent,
+    SpinnerComponent,
 
   ],
   imports: [
@@ -49,8 +53,10 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
-  ],
+    HttpClientModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule,//BrowserAnimationModule ws added for the spinner
+  ], 
   providers: [
     provideClientHydration()
   ],

@@ -1,7 +1,7 @@
 <div class="col-lg-12 col-md-12 col-sm-12 justify-content-center">
     <div class="border rounded p-2 custom-card">
         <div class="d-flex flex-column justify-content-center align-items-center">
-            <div class="border rounded text-center col-10 mb-3 mt-1 pt-1 pb-1 font-color ">Add New User</div>
+            <div class="border rounded text-center col-10 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Add New User</div>
             <div class="container-lg form-container font-color">
                 <form [formGroup]="userForm" class="fs-6">
                     <div class="form-goup row-label mb-2">
@@ -10,8 +10,15 @@
                             <label for="userName"
                                 class="col-3 col-form-label col-label ps-5 fst-normal text-primary">Full Name :</label>
                             <div class="col-9">
-                                <input type="text" class="form-control" id="userName" placeholder="Enter User Name"
-                                    formControlName="user_name" required>
+                                <!-- <input type="text" class="form-control" id="userName" placeholder="Enter User Name"
+                                    formControlName="user_name" required> -->
+                                <input type="text" id="user_name" formControlName="user_name" class="form-control"
+                                    placeholder="Enter User Name"
+                                    [ngClass]="{'is-invalid': userForm.controls['user_name'].invalid && userForm.controls['user_name'].touched}">
+                                <div class="invalid-feedback"
+                                    *ngIf="userForm.controls['user_name'].invalid && userForm.controls['user_name'].touched">
+                                    User Name is required
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -21,8 +28,15 @@
                             <label for="projectName"
                                 class="col-3 col-form-label col-label ps-5 fst-normal text-primary">Name :</label>
                             <div class="col-9">
-                                <input type="email" class="form-control" id="email" placeholder="Enter Email"
-                                    formControlName="user_email" required>
+                                <!-- <input type="email" class="form-control" id="email" placeholder="Enter Email"
+                                    formControlName="user_email" required> -->
+                                <input type="email" id="user_email" formControlName="user_email" class="form-control"
+                                    placeholder="Enter Email"
+                                    [ngClass]="{'is-invalid': userForm.controls['user_email'].invalid && userForm.controls['user_email'].touched}">
+                                <div class="invalid-feedback"
+                                    *ngIf="userForm.controls['user_email'].invalid && userForm.controls['user_email'].touched">
+                                    User Email is required and must be a valid email address
+                                </div>
                             </div>
                         </div>
                     </div>

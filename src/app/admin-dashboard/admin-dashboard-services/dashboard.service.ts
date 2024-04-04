@@ -18,8 +18,11 @@ export class DashboardService {
     }
 
     //Get all users
-    getUser() {
-        return this.http.get<UserModel[]>('http://localhost:3000/api/findAll');
+    // getUser() {
+    //     return this.http.get<UserModel[]>('http://localhost:3000/api/findAll');
+    // }
+    async getUser(){
+        return await this.http.get<UserModel[]>('http://localhost:3000/api/findAll');
     }
 
     //Get single user
