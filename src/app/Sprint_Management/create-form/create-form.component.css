@@ -1,16 +1,17 @@
 .container {
   background-color: #ffffff;
-  max-width: 595px;
+  /* max-width: 595px; */
   margin: auto;
   border-radius: 8px;
   border: 1px solid rgba(134, 145, 168, 0.2);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  padding: 10px;
+  /* padding: 10px; */
   box-sizing: border-box;
+  width: 100%;
 }
 
 .box1 {
-  padding: 10px;
+  /* padding: 10px; */
   box-sizing: border-box;
   margin-bottom: 20px; /* Added margin for spacing between sections */
 }
@@ -34,7 +35,7 @@
 
 
 /* Add media queries for responsiveness */
-@media (min-width: 576px) {
+/* @media (min-width: 576px) {
   .box1 {
       max-width: 540px;
   }
@@ -56,7 +57,7 @@
   .box1 {
       max-width: 1140px;
   }
-}
+} */
 
 /* Button Styles */
 .btn-primary {

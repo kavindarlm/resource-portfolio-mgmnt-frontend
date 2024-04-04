@@ -18,7 +18,7 @@ export class SideBarComponent implements OnInit{
     this.sidebarHeaderService.setHeaderName(name);
     switch (name) {
       case 'SPRINT MANAGEMENT':
-        this.router.navigateByUrl('/sprint-management');
+        // this.router.navigateByUrl('/sprint-management');
         break;
       case 'HANDLE REQUEST RESOURCES':
         // this.router.navigateByUrl('/sprint-mgt');
@@ -26,7 +26,7 @@ export class SideBarComponent implements OnInit{
       // Add more cases for other buttons if needed
       default:
         // Navigate to a default component or do nothing
-        break;
+        break; 
     }
   }
 

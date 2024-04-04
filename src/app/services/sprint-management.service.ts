@@ -17,7 +17,17 @@ export class SprintManagementService {
   saveSprint(sprintData: any): Observable<any> {
     const url = `${this.baseUrl}/sprint`;
     return this.http.post<any>(url, sprintData);
-  } 
+  }
+
+  private sprintName: string = '';
+
+  setSprintName(name: string): void {
+    this.sprintName = name;
+  }
+
+  getSprintName(): string {
+    return this.sprintName;
+  }
 
   
 }

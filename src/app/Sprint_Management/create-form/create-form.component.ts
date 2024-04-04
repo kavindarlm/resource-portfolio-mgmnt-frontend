@@ -32,12 +32,12 @@ export class CreateFormComponent {
 
   ];
 
-  comp:any ;
-  detectCom(comp:any){
-    if(comp === "availableResourceList"){
-      this.comp = AvailableResourceListComponent;
-  } 
-}
+//   comp:any ;
+//   detectCom(comp:any){
+//     if(comp === "availableResourceList"){
+//       this.comp = AvailableResourceListComponent;
+//   } 
+// }
 
 getSprintFormData(data: any) {
   console.warn(data);
