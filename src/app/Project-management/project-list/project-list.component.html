@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="table-container">
+                <div>
+                    <app-project-buttuns [btnClss]="'label-project'" [text]="'Project List'"></app-project-buttuns>
+                </div>
+
+                <div class="table-data">
+                    <div *ngFor="let project of data " class="btns">
+                        <button class="btn btn-costom" routerLink="updatePoject/{{project.projectid}}"
+                            routerLinkActive="active">{{project.projectName}}</button>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn addproject" routerLink="createproject" routerLinkActive="active">Add New
+                        Project</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <router-outlet></router-outlet>
+        </div>
+        <div class="col-md-2">
+            <app-critical-leval></app-critical-leval>
+        </div>
+    </div>
+
+</div>

@@ -3,14 +3,23 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import { CreateProjectComponent } from './Project-management/create-project/create-project.component';
+import { ProjectListComponent } from './Project-management/project-list/project-list.component';
+import { ProjectButtunsComponent } from './Project-management/project-buttuns/project-buttuns.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { UpdateProjectComponent } from './Project-management/update-project/update-project.component';
+import { FormsModule } from '@angular/forms';
 import { PagesBodyComponent } from './PageBody/pages-body/pages-body.component';
 import { FooterComponent } from './PageBody/footer/footer.component';
 import { PageHeaderComponent } from './PageBody/page-header/page-header.component';
 import { SideBarComponent } from './PageBody/side-bar/side-bar.component';
 import { SideBarHeaderComponent } from './PageBody/side-bar-header/side-bar-header.component';
+import { CriticalLevalComponent } from './Project-management/critical-leval/critical-leval.component';
 import { FgPsswdComponent } from './fg-psswd/fg-psswd.component';
 import { LoginAccComponent } from './login-acc/login-acc.component';
-import { FormsModule } from '@angular/forms';
+// import { FormsModule } from '@angular/forms';
 import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admin-dasbd-body.component';
 import { DashboardHeaderComponent } from './admin-dashboard/dashboard-header/dashboard-header.component';
 import { UserListComponent } from './admin-dashboard/user-list/user-list.component';
@@ -30,10 +39,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   declarations: [
     AppComponent,
     PagesBodyComponent,
+    CreateProjectComponent,
+    ProjectListComponent,
+    ProjectButtunsComponent,
+    UpdateProjectComponent,
     FooterComponent,
     PageHeaderComponent,
     SideBarComponent,
     SideBarHeaderComponent,
+    CriticalLevalComponent,
 
     FgPsswdComponent,
     LoginAccComponent,
@@ -51,12 +65,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,//BrowserAnimationModule ws added for the spinner
-  ], 
+  ],
+  
   providers: [
     provideClientHydration()
   ],
