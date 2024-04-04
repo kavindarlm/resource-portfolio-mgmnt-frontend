@@ -1,0 +1,24 @@
+<div class="col-lg-12 col-sm-12 justify-content-center">
+  <div class="border rounded p-2 custom-card">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="border rounded text-center col-10 mb-3 mt-1 pt-1 pb-1 font-color ">Function Management</div>
+      <div class="container">
+        <table class="table table-bordered table-striped table-sm">
+          <thead class="thead-dark fs-6 fst-normal">
+            <tr>
+              <th scope="col" class="col-10">Function Name</th>
+              <th scope="col" class="col-2">Add</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let function of functionData">
+              <td>{{function.function_name}}</td>
+              <td><app-function-button (click)="handleClick(function.function_id)" buttonText="Add"></app-function-button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
