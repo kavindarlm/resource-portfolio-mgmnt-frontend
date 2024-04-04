@@ -10,6 +10,11 @@ import path from 'node:path';
 import { LoginAccComponent } from './login-acc/login-acc.component';  
 import { FgPsswdComponent } from './fg-psswd/fg-psswd.component';
 import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admin-dasbd-body.component';
+import { AddFormComponent } from './resourceMgt/add-form/add-form.component';
+import { FirstViewComponent } from './resourceMgt/first-view/first-view.component';
+import { ButtonComponent } from './resourceMgt/button/button.component';
+import { ResourceDetailsComponent } from './resourceMgt/resource-details/resource-details.component';
+import { ResourceEditFormComponent } from './resourceMgt/resource-edit-form/resource-edit-form.component';
 import { AddNewUserComponent } from './admin-dashboard/add-new-user/add-new-user.component';
 import { UserDetailComponent } from './admin-dashboard/user-detail/user-detail.component';
 import { UpdateComponent } from './team-management/update/update.component';
@@ -36,6 +41,15 @@ const routes: Routes = [
           { path: 'update/:id', component: UpdateComponent },
           { path: 'delete/:id', component: DeletePopupComponent }
       ]},
+      {path: 'first-view', component: FirstViewComponent,
+        children: [
+          { path: 'button', component: ButtonComponent },
+          { path: 'add-form', component: AddFormComponent },
+          {path: 'resource-details', component: ResourceDetailsComponent,
+            children: [
+              { path: 'resouce-edit-form', component: ResourceEditFormComponent }
+            ]},
+        ]},
     ]
   },
   { path: 'admin-dashboard', component: AdminDasbdBodyComponent,
