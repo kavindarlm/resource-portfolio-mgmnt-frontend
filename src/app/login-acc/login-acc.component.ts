@@ -18,7 +18,6 @@ export class LoginAccComponent {
   };
 
   ngOnInit() {
-    // Instructions that should be executed when the component is initialized
   }
 
   async login() {

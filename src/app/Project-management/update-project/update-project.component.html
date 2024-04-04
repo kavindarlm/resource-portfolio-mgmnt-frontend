@@ -1,0 +1,77 @@
+<div class="container-lg form-container">
+    <app-project-buttuns [btnClss]="'label-project'" [text]="'Update Project'"></app-project-buttuns>
+    <form>
+        <div class="form-goup row-label">
+            <label class="pm-label" for="projectName">Project Name *</label>
+            <div class="form-group row row-label">
+                <label for="projectName" class="col-sm-2 col-form-label col-label">Name :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" [(ngModel)]="projectForm.projectName" name="projectName" 
+                         placeholder="Enter Project Name">  
+                </div> 
+            </div>
+            <label class="pm-label" for="projectStartDate">Project Start Date *</label>
+            <div class="form-group row row-label">
+                <label for="projectStartDate" class="col-sm-2 col-form-label col-label">From :</label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control"
+                        [(ngModel)]="projectForm.projectStartDate" name="projectStartDate"
+                        placeholder="Enter projectStartDate">
+                </div>
+            </div>
+            <div class="form-group row row-label">
+                <label class="pm-label" for="projectEndDate">Project End Date *</label>
+                <label for="projectEndDate" class="col-sm-2 col-form-label col-label">To :</label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control" [(ngModel)]="projectForm.projectEndDate"
+                        name="projectEndDate" placeholder="Enter projectEndDate" required>
+                </div>
+            </div> 
+
+            <label class="pm-label" for="ProjectCriticality">Project Criticallity *</label>
+            <div class="form-group row row-label">
+                <label for="ProjectCriticality" class="col-sm-2 col-form-label col-label">Criticality
+                    :</label>
+                <div class="col-sm-10">
+                    <select id="inputState" class="form-control" required id="criticality"
+                        [(ngModel)]="projectForm.criticality" name="criticality">
+                        <option disabled selected value="">Select Project Criticality</option>
+                        <option>High</option>
+                        <option>Medium</option>
+                        <option>Low</option>
+                    </select>
+                </div>
+            </div>
+            <label class="pm-label" for="projectManager">Project Manager *</label>
+            <div class="form-group row row-label">
+                <label for="projectManager" class="col-sm-2 col-form-label col-label">Assigner :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="Enter Project Manager ID"
+                        [(ngModel)]="projectForm.projectManager" name="projectManager" required>
+                </div> 
+            </div>
+            <label class="pm-label" for="deliveryManager">Delivery Manager *</label>
+            <div class="form-group row row-label">
+                <label for="deliveryManager" class="col-sm-2 col-form-label col-label">Assigner :</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"
+                        [(ngModel)]="projectForm.deliveryManager" name="deliveryManager"
+                        placeholder="Enter Delivery Manager ID" required>
+                </div>
+            </div>
+            <label class="pm-label" for="projectDescription">Project Description</label>
+            <div class="form-group row row-label">
+                <label for="projectDescription" class="col-sm-2 col-form-label col-label">Description
+                    :</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" rows="3"
+                        [(ngModel)]="projectForm.projectDescription" name="projectDescription"
+                        placeholder="Enter Description"></textarea>
+                </div>
+            </div>
+        </div>
+        <button class="btn button-edit" (click)="editProjectDetails()">Edit Project</button>
+        <button class="btn button-delete" (click)="deleteProjectDetails()">Delete Project</button>
+    </form> 
+</div>
+<!-- <pre>{{projectForm|json}}</pre> -->
