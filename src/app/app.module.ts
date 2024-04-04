@@ -15,6 +15,15 @@ import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admi
 import { DashboardHeaderComponent } from './admin-dashboard/dashboard-header/dashboard-header.component';
 import { UserListComponent } from './admin-dashboard/user-list/user-list.component';
 import { SearchBarComponent } from './admin-dashboard/search-bar/search-bar.component';
+import { AddNewUserComponent } from './admin-dashboard/add-new-user/add-new-user.component';
+import { FunctionManagementComponent } from './admin-dashboard/function-management/function-management.component';
+import { FunctionButtonComponent } from './admin-dashboard/function-button/function-button.component';
+import { UserDetailComponent } from './admin-dashboard/user-detail/user-detail.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { SpinnerComponent } from './spinner/spinner/spinner.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -32,12 +41,22 @@ import { SearchBarComponent } from './admin-dashboard/search-bar/search-bar.comp
     DashboardHeaderComponent,
     UserListComponent,
     SearchBarComponent,
+    AddNewUserComponent,
+    FunctionManagementComponent,
+    FunctionButtonComponent,
+    UserDetailComponent,
+    SpinnerComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
-  ],
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule,//BrowserAnimationModule ws added for the spinner
+  ], 
   providers: [
     provideClientHydration()
   ],
