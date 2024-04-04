@@ -1,0 +1,117 @@
+.mainbox{
+    display: flex;
+}
+
+
+.form {
+    color: #7752FE;
+    padding: 2%;
+}
+
+
+/* buttons which used to display titles */
+.new-team,
+.new-resource{
+    background-color: #7752FE;
+    border: 2px solid #7752FE;
+    border-radius: 8px;
+    color: #FEFEFE;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    margin-bottom: 2%;
+    pointer-events: none;
+}
+
+.title-team,
+.title-description{
+    font-weight: bold;
+}
+
+.form-group {
+    margin-bottom: 10px; 
+    display: flex; 
+    align-items: center; 
+    margin-left: 25px;
+}
+
+label {
+    display: inline-block; 
+    width: 100px; 
+    margin-right: 10px; 
+    margin-bottom: 5px; 
+}
+
+button[type="submit"] {
+    display: block;
+    margin: 0 auto;
+    width: 150px;
+    padding: 10px; 
+    margin-top: 10px;
+    background-color: #1E3895;
+    color: #FEFEFE;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+
+ td {
+    border: 1px solid #8691A833;
+    text-align: center;
+    color: #7752FE;
+    
+}
+
+
+.tbtn{
+    background-color:  #C2D9FF;
+    border: 1px solid #C2D9FF;
+    border-radius: 4px;
+    color: #190482;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+   
+}
+
+::placeholder {
+    color: #C2D9FF;
+}
+
+input.ng-invalid.ng-touched {
+    border: red 2px solid;
+}
+
+.addResourceBtn{
+    align-items: center;
+    margin-left: 70px;
+}
+
+.createTeamBtn{
+    background-color: #FEFEFE;
+    border: 2px solid #CBCBCB;
+    border-radius: 8px;
+    color: #7752FE;
+    text-align: center;
+    text-decoration: bold;
+    display: inline-block;
+    /* width: 100%; */
+    height: auto;
+    margin-bottom: 1px; 
+    margin-top: 1px;
+    margin-left: 80px;
+    margin-right: 10px;
+}
+
+
+.formBox{
+    width: fit-content;
+    height: 100%;  
+    border: 1px solid #ccc;  
+    margin: 10px;
+    border-radius: 8px; 
+}
+
+
+
