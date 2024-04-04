@@ -29,8 +29,6 @@ const routes: Routes = [
         {path: 'createproject', component: CreateProjectComponent}, 
         {path: 'updatePoject/:id', component: UpdateProjectComponent}
       ]},
-    ],
-    children: [
       {path: 'teamlistcomponent',component: TeamListComponent,
         children: [
           { path: 'TeamForm', component: TeamFormComponent },
