@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NewTeamButtonComponent } from './team-management/new-team-button/new-team-button.component';
+import { TeamMainBoxComponent } from './team-management/team-main-box/team-main-box.component';
 import { CreateProjectComponent } from './Project-management/create-project/create-project.component';
 import { ProjectListComponent } from './Project-management/project-list/project-list.component';
 import { ProjectButtunsComponent } from './Project-management/project-buttuns/project-buttuns.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { UpdateProjectComponent } from './Project-management/update-project/update-project.component';
 import { FormsModule } from '@angular/forms';
 import { PagesBodyComponent } from './PageBody/pages-body/pages-body.component';
@@ -21,6 +22,13 @@ import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admi
 import { DashboardHeaderComponent } from './admin-dashboard/dashboard-header/dashboard-header.component';
 import { UserListComponent } from './admin-dashboard/user-list/user-list.component';
 import { SearchBarComponent } from './admin-dashboard/search-bar/search-bar.component';
+import { FilterPipe } from './team-management/filter.pipe';
+import { UpdateComponent } from './team-management/update/update.component';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { TeamListComponent } from './team-management/team-list/team-list.component';
+import { TeamFormComponent } from './team-management/team-form/team-form.component';
+import { ResourceTableComponent } from './team-management/resource-table/resource-table.component';
+import { DeletePopupComponent } from './team-management/delete-popup/delete-popup.component';
 import { AddNewUserComponent } from './admin-dashboard/add-new-user/add-new-user.component';
 import { FunctionManagementComponent } from './admin-dashboard/function-management/function-management.component';
 import { FunctionButtonComponent } from './admin-dashboard/function-button/function-button.component';
@@ -34,6 +42,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   declarations: [
     AppComponent,
     PagesBodyComponent,
+    NewTeamButtonComponent,
+    TeamMainBoxComponent,
+    TeamListComponent,
+    TeamFormComponent,
+    ResourceTableComponent,
     CreateProjectComponent,
     ProjectListComponent,
     ProjectButtunsComponent,
@@ -43,19 +56,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SideBarComponent,
     SideBarHeaderComponent,
     CriticalLevalComponent,
-
     FgPsswdComponent,
     LoginAccComponent,
     AdminDasbdBodyComponent,
     DashboardHeaderComponent,
     UserListComponent,
     SearchBarComponent,
+    FilterPipe,
+    UpdateComponent,
+    DeletePopupComponent,
     AddNewUserComponent,
     FunctionManagementComponent,
     FunctionButtonComponent,
     UserDetailComponent,
     SpinnerComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -68,7 +82,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    provideHttpClient() 
   ],
   bootstrap: [AppComponent]
 })
