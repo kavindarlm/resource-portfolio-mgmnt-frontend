@@ -1,0 +1,39 @@
+<div class="formBox" *ngIf="!showResourceEditForm">
+    <div class="container mt-3">
+        <div class="topic">
+            <h6>Resource Details</h6>
+        </div>
+
+        <div class="form-group mb-3">
+            <br>
+
+            <div class="details">
+                <div>
+                    <p>Resource Name:</p><button class="detailButton">{{ sharedData?.resourceName }}</button>
+                </div><br>
+                <div>
+                    <p>Resource ID:</p><button class="detailButton">{{ sharedData?.resourceId }}</button>
+                </div><br>
+                <div>
+                    <p>Job Role:</p><button class="detailButton">{{ sharedData?.roleId }}</button>
+                </div><br>
+                <div>
+                    <p>Org. Unit:</p><button class="detailButton">{{ sharedData?.unitId }}</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="editAndDelete">
+            <button type="button" class="editButton" (click)="onEdit()">Edit Resource</button>
+        </div>
+        <div class="editAndDelete">
+            <button type="button" class="deleteButton" (click)="onDelete()">Delete Resource</button>
+        </div>
+
+
+    </div>
+</div>
+
+<app-resource-edit-form *ngIf="showResourceEditForm"></app-resource-edit-form>
+<router-outlet></router-outlet>

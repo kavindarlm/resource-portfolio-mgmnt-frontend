@@ -1,0 +1,47 @@
+.container {
+  width: 694px;
+  position: absolute;
+}
+
+.boxclr {
+  background-color: #7752fe;
+}
+
+.text2 {
+  color: #7752fe;
+  font-size: 20px;
+  font-family: Montserrat;
+}
+
+.text5,
+.text6 {
+  text-align: center;
+  font-size: 12px;
+  font-family: Montserrat;
+}
+
+.text5{
+  color: #7752fe;
+}
+
+/* Edit Sprint button */
+.btn-primary:hover {
+  background-color: #1e3895;
+  color: #ffffff;
+}
+
+.btn-primary {
+  background-color: white;
+  border: 1px solid #7752fe;
+}
+
+/* Delete Sprint button */
+.btn-outline-danger {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: white;
+}
