@@ -17,8 +17,6 @@ const routes: Routes = [
 import { NewTeamButtonComponent } from './team-management/new-team-button/new-team-button.component';
 import { TeamMainBoxComponent } from './team-management/team-main-box/team-main-box.component';
 import { CreateProjectComponent } from './Project-management/create-project/create-project.component';
-import { ProjectListComponent } from './Project-management/project-list/project-list.component';
-import { ProjectButtunsComponent } from './Project-management/project-buttuns/project-buttuns.component';
 import { UpdateProjectComponent } from './Project-management/update-project/update-project.component';
 import { PagesBodyComponent } from './PageBody/pages-body/pages-body.component';
 import { FooterComponent } from './PageBody/footer/footer.component';
@@ -36,7 +34,6 @@ import { CreateFormComponent } from './Sprint_Management/create-form/create-form
 import { SprintMgtComponent } from './Sprint_Management/sprint-mgt/sprint-mgt.component';
 import { Ng2SearchPipe } from 'ng2-search-filter';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { FilterPipe } from './Sprint_Management/filter.pipe';
 import { FilterComponent } from './Sprint_Management/Reusable_Components/filter/filter.component';
 import { AvailableResourceListComponent } from './Sprint_Management/available-resource-list/available-resource-list.component';
 import { AvailabiilityComponent } from './Sprint_Management/availabiility/availabiility.component';
@@ -60,6 +57,7 @@ import { FunctionButtonComponent } from './admin-dashboard/function-button/funct
 import { UserDetailComponent } from './admin-dashboard/user-detail/user-detail.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SpinnerComponent } from './spinner/spinner/spinner.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -97,7 +95,7 @@ import { SpinnerComponent } from './spinner/spinner/spinner.component';
     AddedResourceListComponent,
     // AlertBoxComponent,
     ListComponent,
-    TablesComponent
+    TablesComponent,
     ResourceDetailsComponent,
     ResourceEditFormComponent,
     FilterPipe,
@@ -119,7 +117,7 @@ import { SpinnerComponent } from './spinner/spinner/spinner.component';
     NgxSpinnerModule,
     BrowserAnimationsModule,//BrowserAnimationModule ws added for the spinner
   ],
-  
+
   providers: [
     provideClientHydration(),
     provideHttpClient() 
