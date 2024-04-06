@@ -1,0 +1,28 @@
+/* .container {
+  max-width: 697px;
+  margin-left: 640px;
+  margin-top: -680px;
+  
+} */
+
+.text5 {
+  color: #190482;
+  text-align: center;
+  font-size: 12px;
+  font-family: Montserrat;
+  border-style: hidden;
+  outline: none;
+}
+
+.boxclr {
+  background-color: #7752fe;
+}
+
+.text2 {
+  color: #7752fe;
+  font-size: 20px;
+  font-family: Montserrat;
+}
+
+
+/* Adjust styles for the rest of your components as needed */

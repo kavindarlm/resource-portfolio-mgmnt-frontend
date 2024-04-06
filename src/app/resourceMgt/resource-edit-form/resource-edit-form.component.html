@@ -1,0 +1,57 @@
+<div class="formBox">
+    <div class="container mt-3">
+        <div class="topic">
+            <h6>Resource Details</h6>
+        </div>
+        <form [formGroup]="formValue">
+            <div class="formDetailBox">
+                <div class="form-group mb-3">
+                    <br>
+                    <div class="inputField">
+                        <p>Resource Name :</p>
+                        <input type="text" formControlName="resourceName" class="form-control" id="resourceName"
+                            placeholder="Enter Name">
+
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="inputField">
+                        <p>Resource ID :</p>
+                        <input type="text" formControlName="resourceId" class="form-control" id="resourceID"
+                            placeholder="Enter Resource ID">
+
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="inputField">
+                        <p>Job Role :</p>
+                        <select class="form-select" formControlName="roleId"
+                            id="jobRole"><!-- style="color: #c3c0ce; -->
+
+                            <option value="">Select Job Role</option>
+                            <option *ngFor="let roles of jobroles" [value]="roles.roleId">{{roles.roleName}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="inputField">
+                        <p>Org Unit :</p>
+                        <select class="form-select" formControlName="unitId" id="orgUnit">
+
+                            <option value="">Select Organizational Unit</option>
+                            <option *ngFor="let units of orgunits" [value]="units.unitId">{{units.unitName}}</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="edit">
+                    <button type="button" (click)="onEditResource(this.formValue.value)" class="editButton">Edit
+                        Resource</button>
+                </div>
+            </div>
+            <div class="delete">
+                <button type="button" (click)="onDeleteResource()" class="deleteButton">Delete Resource</button>
+            </div>
+        </form>
+    </div>
+</div>

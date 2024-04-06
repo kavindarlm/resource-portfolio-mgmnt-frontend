@@ -1,0 +1,109 @@
+.formBox {
+    width: 90%;
+    float: right;
+    margin: 10px 20px 10px 0;
+    /* margin-right: 20px; */
+    padding-bottom: 10px;
+    padding-left: 10px;
+    border: 1px #ced2d9 solid;
+    border-radius: 5px;
+}
+
+.topic {
+    background-color: #7752fe;
+    padding: 5px;
+    text-align: center;
+    width: 80%;
+    margin: 5px auto;
+    color: white;
+    border-radius: 5px;
+}
+
+.form-label {
+    color: #7752fe;
+    font-weight: bold;
+}
+
+.form-group p {
+    margin-right: 10px;  
+    float: left;
+    width: 25%;
+    /* margin-left: 20%; */
+  } 
+
+::placeholder {
+    color: #c3c0ce;
+}
+
+.form-group label {
+    display: block;
+
+}
+
+.form-group p,
+.form-group .form-control,
+.form-group .form-select {
+    display: inline;
+}
+
+.form-group .form-control,
+.form-group .form-select {
+    width: 75%;
+}
+
+.addButton {
+    /* padding : 2px 100px;  */
+    width: 40%;
+    color: #7752fe;
+    background-color: white;
+    border: rgb(203, 203, 203) 1px solid;
+    border-radius: 5px;
+    margin: 0 25%;
+    padding: 5px;
+}
+
+.addButton:hover {
+    transition: 0.5s;
+    background-color: #04175a;
+    color: white;
+}
+
+.inputField {
+    display: flex;
+    justify-content: center;
+    color: #7752fe;
+}
+
+.inputField p {
+
+    float: left;
+    margin-left: 5%;
+    margin-right: 3%;
+}
+
+.add {
+    display: flex;
+    justify-content: center;
+}
+
+/* Form responsiveness */
+@media screen and (max-width: 768px) {
+    .formBox {
+        width: 90%; /* Adjust width for smaller screens */
+    }
+
+    .inputField p {
+        margin-left: 0; /* Remove left margin */
+        margin-right: 3%; /* Add right margin */
+    }
+
+    .inputField .form-control,
+    .inputField .form-select {
+        width: 100%; /* Full width inputs */
+    }
+
+    .addButton {
+        width: 70%; /* Adjust button width */
+        margin: 0 15%; /* Adjust button margins */
+    }
+}

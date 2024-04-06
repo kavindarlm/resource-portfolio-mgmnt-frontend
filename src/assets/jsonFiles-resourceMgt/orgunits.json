@@ -1,0 +1,32 @@
+{
+    "data" : [
+        {
+            "unitId": 1,
+            "unitName": "Unit 1"
+        },
+        {
+            "unitId": 2,
+            "unitName": "Unit 2"
+        },
+        {
+            "unitId": 3,
+            "unitName": "Unit 3"
+        },
+        {
+            "unitId": 4,
+            "unitName": "Unit 4"
+        },
+        {
+            "unitId": 5,
+            "unitName": "Unit 5"
+        },
+        {
+            "unitId": 6,
+            "unitName": "Unit 6"
+        },
+        {
+            "unitId": 7,
+            "unitName": "Unit 7"
+        }
+    ]
+}
