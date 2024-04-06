@@ -1,0 +1,131 @@
+.formBox {
+    width: 90%;
+    float: right;
+    margin: 10px 20px 10px 0;
+    /* margin-right: 20px; */
+    padding-bottom: 10px;
+    border: 1px #ced2d9 solid;
+    border-radius: 5px;
+    box-sizing: border-box; /* Include padding and border in the width calculation */
+}
+
+.topic {
+    background-color: #7752fe;
+    padding: 5px;
+    text-align: center;
+    width: 80%;
+    margin: 5px auto;
+    color: white;
+    border-radius: 5px;
+}
+
+/* Adjust the form-group styles */
+.form-group {
+    margin-bottom: 20px; /* Add some space between form groups */
+}
+
+.form-label {
+    color: #7752fe;
+    font-weight: bold;
+}
+
+::placeholder {
+  color: #c3c0ce; /* Change this to your desired color */
+}
+
+.form-group label {
+    display: block;
+}
+
+.form-group p,
+.form-group .form-control,
+.form-group .form-select {
+  display: inline;
+}
+
+.form-group .form-control,
+.form-group .form-select {
+  width: 75%;
+}
+
+.form-group p {
+  margin-right: 20px;  
+} 
+
+.editButton {
+    /* padding : 2px 100px;  */
+   width: 40%;
+   color: #7752fe;
+   background-color: white;
+   border: rgb(203, 203, 203) 1px solid;
+   border-radius: 5px;
+   margin:0 5%;
+   padding: 5px;
+   display: inline-block;
+}
+
+.deleteButton {
+        /* padding : 2px 100px;  */
+   width: 40%;
+   color: red;
+   background-color: white;
+   border: red 1px solid;
+   border-radius: 5px;
+   margin:0 5%;
+   padding: 5px;
+   display: inline-block;
+}
+
+.editButton:hover  {
+    transition: 0.5s;
+   background-color: #04175a;
+   color: white;
+}
+
+.deleteButton:hover {
+    transition: 0.5s;
+    background-color: red;
+    color: white;
+}
+
+.editButton {
+    float: left;
+}
+
+.deleteButton {
+    float: right;
+}
+
+.details {
+    /* display: flex; */
+    border: #c3c0ce 1px solid;
+    padding: 5% 0;
+    border-radius: 5px;
+}
+
+.details p {
+    color: #7752fe;
+    margin-left: 7%;
+}
+
+.detailButton {
+    float: inline-end;
+    /* margin-right: 7%; */
+    width: 60%;
+    border: 1px solid #cbcacd;
+    background-color: white;
+    border-radius: 5px;
+    color: #7752fe;
+    /* display: inline; */
+    margin: 0 5px; /* Add space around buttons */
+    padding: 5px 10px; /* Add padding to buttons */
+    /* display: inline-block; Ensure buttons are displayed in a line */
+}
+
+
+/* Adjust the width of the detailButton based on the screen size */
+@media screen and (max-width: 768px) {
+    .detailButton {
+        flex-basis: 100%; /* Set the flex basis to 100% on smaller screens */
+    }
+}
