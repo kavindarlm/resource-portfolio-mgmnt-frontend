@@ -1,70 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
+import { UserModel } from '../dashboard-model/userModel';
+import { DashboardService } from '../admin-dashboard-services/dashboard.service';
+import { NgxSpinnerService } from 'ngx-spinner'; // for spinner
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css'
 })
-export class UserListComponent {
+export class UserListComponent implements OnInit {
 
-  constructor (private router: Router){}
- userdetails = [
-    {
-      "userName": "JohnDoe",
-      "userId": "001",
-      "email": "johndoe@example.com"
-    },
-    {
-      "userName": "JanyeeDoe",
-      "userId": "002",
-      "email": "janedoe@example.com"
-    },
-    {
-      "userName": "MikeSmith",
-      "userId": "003",
-      "email": "mikesmith@example.com"
-    },
-    {
-      "userName": "SaraJones",
-      "userId": "004",
-      "email": "sarajones@example.com"
-    },
-    {
-      "userName": "WillBrown",
-      "userId": "005",
-      "email": "willbrown@example.com"
-    },
-    {
-      "userName": "EmilyClark",
-      "userId": "006",
-      "email": "emilyclark@example.com"
-    },
-    {
-      "userName": "DerekWard",
-      "userId": "007",
-      "email": "derekward@example.com"
-    },
-    {
-      "userName": "AnnaPeterson",
-      "userId": "008",
-      "email": "annapeterson@example.com"
-    },
-    {
-      "userName": "ChrisLee",
-      "userId": "009",
-      "email": "chrislee@example.com"
-    },
-    {
-      "userName": "OliviaGarcia",
-      "userId": "010",
-      "email": "oliviagarcia@example.com"
+  constructor(private router: Router, private dashboardService: DashboardService, private spinner: NgxSpinnerService) { }
+
+  usersData: undefined | UserModel[];
+
+  ngOnInit(): void {
+    this.getAllUsers();
+  }
+  async getAllUsers() {
+    try {
+      this.spinner.show();
+      await (await this.dashboardService.getUser()).subscribe(res => {
+        this.usersData = res;
+        this.spinner.hide();
+      });
+    } catch (error) {
+      console.log("error", error)
     }
-  
- ];
-hello(user: any){
-  console.log(user.userId);
-  this.router.navigate(['admin-dashboard/userDetail']);
-}
+  }
+
 }
