@@ -34,8 +34,9 @@ export class AddNewUserComponent implements OnInit {
         console.log(res);
         this.userForm.reset();
         this.sharedService.updateFunctionIds([]);
+        this.sharedService.refreshUserList();
       });
-      this.router.navigate(['admin-dashboard']); // Redirect to the admin dashboard
+
     }
     else {
       console.log('Form is invalid');

@@ -11,7 +11,7 @@
           </div>
         </div>
 
-        <div class="container">
+        <div class="container mt-2 ">
           <table class="table table-bordered table-striped table-hover table-sm">
             <thead class="thead-dark fs-6 fst-normal">
               <tr>
@@ -21,13 +21,36 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let user of usersData" routerLink="userDetail/{{user.user_id}}">
-                <!-- <th scope="row">{{user.userId}}</th> -->
-                <td>{{user.user_name}}</td>
-                <td>{{user.user_email}}</td>
+              <tr
+                *ngFor="let user of usersData | slice: (currentPage-1) * itemsPerPage : currentPage * itemsPerPage; let i = index"
+                routerLink="userDetail/{{user?.user_id}}">
+                <!-- <th scope="row">{{user?.userId}}</th> -->
+                <td>{{user?.user_name}}</td>
+                <td>{{user?.user_email}}</td>
               </tr>
             </tbody>
           </table>
+          <!-- table pagination -->
+          <div>
+              <ul class="pagination pagination-sm justify-content-center">
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                  <a class="page-link" (click)="currentPage = currentPage - 1" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                </li>
+                <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index"
+                  [class.active]="currentPage === i + 1">
+                  <a class="page-link" (click)="currentPage = i + 1">{{ i + 1 }}</a>
+                </li>
+                <li class="page-item" [class.disabled]="currentPage === totalPages">
+                  <a class="page-link" (click)="currentPage = currentPage + 1" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </li>
+              </ul>
+          </div>
         </div>
       </div>
       <button type="button" class="btn btn-outline-primary w-50 mt-3 custom-button btn-sm curser"
