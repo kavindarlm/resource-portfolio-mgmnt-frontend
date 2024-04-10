@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { DashboardService } from '../admin-dashboard-services/dashboard.service';
 import { FunctionModel } from '../dashboard-model/functionModel';
 import { SharedService } from '../admin-dashboard-services/shared.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { SharedService } from '../admin-dashboard-services/shared.service';
 })
 export class FunctionManagementComponent implements OnInit {
 
-  constructor(private router: Router, private dashboardService: DashboardService, private sharedService : SharedService) { }
+  constructor(private router: Router, private dashboardService: DashboardService, private sharedService: SharedService, private spinner: NgxSpinnerService) { }
 
   functionData: undefined | FunctionModel[];
 
@@ -23,10 +24,16 @@ export class FunctionManagementComponent implements OnInit {
   }
 
   // Function to get all the functions
-  getAllFunctions() {
-    this.dashboardService.getFunction().subscribe(res => {
-      this.functionData = res;
-    });
+  async getAllFunctions() {
+    try {
+      this.spinner.show();
+      await this.dashboardService.getFunction().subscribe(res => {
+        this.functionData = res;
+        this.spinner.hide();
+      });
+    } catch (error) {
+      console.error('Error getting functions:', error);
+    }
   }
 
   functionIds: number[] = []; //for store the fuc_id as array
@@ -41,7 +48,7 @@ export class FunctionManagementComponent implements OnInit {
       // If func_id is not in the array, add it
       this.functionIds.push(function_id);
     }
-    console.log(this.functionIds);
+    // console.log(this.functionIds);
     this.sharedService.updateFunctionIds(this.functionIds);
   }
 

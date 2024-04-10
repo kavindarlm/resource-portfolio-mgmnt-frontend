@@ -58,6 +58,7 @@ import { UserDetailComponent } from './admin-dashboard/user-detail/user-detail.c
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SpinnerComponent } from './spinner/spinner/spinner.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -116,6 +117,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,//BrowserAnimationModule ws added for the spinner
+    ToastrModule.forRoot(),
   ],
 
   providers: [
