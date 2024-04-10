@@ -1,5 +1,6 @@
-<div class="formBox" *ngIf="!showResourceEditForm">
-    <div class="container mt-3">
+<div class="container-fluid">
+    <div class="formBox" *ngIf="!showResourceEditForm">
+
         <div class="topic">
             <h6>Resource Details</h6>
         </div>
@@ -7,18 +8,18 @@
         <div class="form-group mb-3">
             <br>
 
-            <div class="details">
+            <div class="details mb-5">
                 <div>
-                    <p>Resource Name:</p><button class="detailButton">{{ sharedData?.resourceName }}</button>
+                    <p class="font-color1">Resource Name:</p><button class="detailButton">{{ sharedData?.resourceName }}</button>
                 </div><br>
                 <div>
-                    <p>Resource ID:</p><button class="detailButton">{{ sharedData?.resourceId }}</button>
+                    <p class="font-color1">Resource ID:</p><button class="detailButton">{{ sharedData?.resourceId }}</button>
                 </div><br>
                 <div>
-                    <p>Job Role:</p><button class="detailButton">{{ sharedData?.roleId }}</button>
+                    <p class="font-color1">Job Role:</p><button class="detailButton">{{ getRoleName(selectedResource.roleId) }}</button>
                 </div><br>
                 <div>
-                    <p>Org. Unit:</p><button class="detailButton">{{ sharedData?.unitId }}</button>
+                    <p class="font-color1">Org. Unit:</p><button class="detailButton">{{ getUnitName(selectedResource.unitId) }}</button>
                 </div>
             </div>
 

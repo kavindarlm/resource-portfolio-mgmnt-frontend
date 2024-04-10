@@ -6,27 +6,27 @@
         <form [formGroup]="resourceForm">
             <div class="form-group mb-3">
                 <br>
-                <label for="resourceName" class="form-label">Resource Name *</label>
+                <label for="resourceName" class="form-label font-color1">Resource Name *</label>
                 <div class="inputField">
-                    <p>Name :</p>
+                    <p class="font-color2">Name :</p>
                     <input type="text" formControlName="resourceName" [ngClass]="{'is-invalid': resourceForm.controls['resourceName'].invalid && resourceForm.controls['resourceName'].touched}"
                      class="form-control inputBox" id="resourceName"
                         placeholder="Enter Name">
                 </div>
             </div>
             <div class="form-group mb-3">
-                <label for="resourceID" class="form-label">Resource ID *</label>
+                <label for="resourceID" class="form-label font-color1">Resource ID *</label>
                 <div class="inputField">
-                    <p>ID :</p>
+                    <p class="font-color2">ID :</p>
                     <input type="text" formControlName="resourceId" [ngClass]="{'is-invalid': resourceForm.controls['resourceId'].invalid && resourceForm.controls['resourceId'].touched}"
                     class="form-control inputBox" id="resourceID"
                         placeholder="Enter Resource ID">
                 </div>
             </div>
             <div class="form-group mb-3">
-                <label for="jobRole" class="form-label">Job Role *</label>
+                <label for="jobRole" class="form-label font-color1">Job Role *</label>
                 <div class="inputField">
-                    <p>Job Role :</p>
+                    <p class="font-color2">Job Role :</p>
                     <select class="form-select inputBox" formControlName="roleId" [ngClass]="{'is-invalid': resourceForm.controls['roleId'].invalid && resourceForm.controls['roleId'].touched}"
                     id="jobRole">
                         <option disabled selected="selected">Select Job Role</option>
@@ -35,9 +35,9 @@
                 </div>
             </div>
             <div class="form-group mb-3">
-                <label for="orgUnit" class="form-label">Organizational Unit</label>
+                <label for="orgUnit" class="form-label font-color1">Organizational Unit</label>
                 <div class="inputField">
-                    <p>Org Unit :</p>
+                    <p class="font-color2">Org Unit :</p>
                     <select class="form-select inputBox" formControlName="unitId" [ngClass]="{'is-invalid': resourceForm.controls['unitId'].invalid && resourceForm.controls['unitId'].touched}"
                      id="orgUnit">
                         <option disabled selected="selected">Select Organizational Unit</option>

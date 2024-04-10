@@ -9,7 +9,7 @@
 
 .mainBox {
     position: relative;
-    width: 100%;
+    /* width: 100%; */
     padding: 10px 20px 20px 20px;
     margin: 10px;
     border: 1px #c6cad0 solid;
@@ -18,10 +18,15 @@
 }
 
 .box2 {
-    width: 100%;
+    /* width: 100%; */
     /* width: fit-content; */
     height: 100%;
     display: inline-block;
+    margin: 10px;
+}
+
+.search-bar {
+    float: right;
 }
 
 .topic {
@@ -57,30 +62,24 @@
     border-radius: 5px;
 }
 
-.table-headers .headers {
-    margin: 5% 5%;
-    width: 90%;
-    padding: 2px 45px;
-    background-color: #c2d9ff;
-    color: #04175a;
-    font-weight: bold;
-    border: 1px #93b8f3 solid;
-    border-radius: 5px;
-}
-
 .table-headers {
     border-top: 1px white solid;
     border-left: 1px white solid;
     border-right: 1px white solid;
 }
 
-.table-body {
-    text-align: center;
-}
 
 .clickable-row td {
-    color: #7752fe;
+    /* color: #7752fe; */
+    color:rgba(0, 0, 255, 0.575);
+    font-weight: 400;
 }
+
+th{
+    color: #1e3895e1;
+    font-weight: 500;
+}
+
 
 .clickable-row:hover td {
     transition: 0.5s;
@@ -97,9 +96,4 @@
     .mainBox {
         margin: 10px;
     }
-}
-
-.table-headers .headers {
-    padding: 2px 20px;
-    /* Adjust header button padding for smaller screens */
 }

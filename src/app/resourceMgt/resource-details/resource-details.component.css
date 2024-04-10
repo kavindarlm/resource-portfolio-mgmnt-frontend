@@ -1,12 +1,9 @@
 .formBox {
-    width: 90%;
+    width: 100%;
     float: right;
-    margin: 10px 20px 10px 0;
-    /* margin-right: 20px; */
     padding-bottom: 10px;
     border: 1px #ced2d9 solid;
     border-radius: 5px;
-    box-sizing: border-box; /* Include padding and border in the width calculation */
 }
 
 .topic {
@@ -14,43 +11,14 @@
     padding: 5px;
     text-align: center;
     width: 80%;
-    margin: 5px auto;
+    margin: 3% auto;
     color: white;
     border-radius: 5px;
 }
 
-/* Adjust the form-group styles */
-.form-group {
-    margin-bottom: 20px; /* Add some space between form groups */
-}
-
-.form-label {
-    color: #7752fe;
-    font-weight: bold;
-}
-
-::placeholder {
-  color: #c3c0ce; /* Change this to your desired color */
-}
-
-.form-group label {
-    display: block;
-}
-
-.form-group p,
-.form-group .form-control,
-.form-group .form-select {
+.form-group p {
   display: inline;
 }
-
-.form-group .form-control,
-.form-group .form-select {
-  width: 75%;
-}
-
-.form-group p {
-  margin-right: 20px;  
-} 
 
 .editButton {
     /* padding : 2px 100px;  */
@@ -101,10 +69,12 @@
     border: #c3c0ce 1px solid;
     padding: 5% 0;
     border-radius: 5px;
+    margin: 2%;
 }
 
-.details p {
-    color: #7752fe;
+.font-color1{
+    color: #1e3895e1;
+    font-weight: 500;
     margin-left: 7%;
 }
 
@@ -115,7 +85,9 @@
     border: 1px solid #cbcacd;
     background-color: white;
     border-radius: 5px;
-    color: #7752fe;
+    color:rgba(0, 0, 255, 0.575);
+    font-weight: 400;
+    /* color: #7752fe; */
     /* display: inline; */
     margin: 0 5px; /* Add space around buttons */
     padding: 5px 10px; /* Add padding to buttons */

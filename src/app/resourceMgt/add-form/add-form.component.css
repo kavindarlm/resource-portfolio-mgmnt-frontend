@@ -1,7 +1,7 @@
 .formBox {
-    width: 90%;
+    width: 100%;
     float: right;
-    margin: 10px 20px 10px 0;
+    /* margin: 10px 20px 10px 0; */
     /* margin-right: 20px; */
     padding-bottom: 10px;
     padding-left: 10px;
@@ -19,13 +19,19 @@
     border-radius: 5px;
 }
 
-.form-label {
-    color: #7752fe;
-    font-weight: bold;
+.font-color1{
+    color: #1e3895e1;
+    font-weight: 500;
 }
 
+.font-color2{
+    color:rgba(0, 0, 255, 0.575);
+    font-weight: 400;
+}
+
+
 .form-group p {
-    margin-right: 10px;  
+    /* margin-right: 50px;   */
     float: left;
     width: 25%;
     /* margin-left: 20%; */

@@ -1,52 +1,56 @@
-<div class="grid-container">
-    <div class="mainBox">
-        <div class="topic">
-            <h6>System Resource List</h6>
-        </div>
-        <!-- search bar -->
-        <div class="input-group rounded">
-            <input type="search" class="form-control rounded" placeholder="Search.." aria-label="Search"
-                aria-describedby="search-addon" />
-        </div>
-        <!-- <div class="input-group">
-            <div class="form-outline" data-mdb-input-init>
-              <input type="search" id="form1" class="form-control" placeholder="Search.." />
-            </div>
-            <button type="button" class="btn btn-primary" data-mdb-ripple-init>
-              <i class="fas fa-search"></i>
-            </button>
-          </div> -->
-        <!-- <app-search-bar></app-search-bar> -->
+<div class="container-fluid">
+    <div class="row">
 
-        <table class="table table-bordered">
-            <thead class="table-headers">
-                <tr>
-                    <th><button class="headers">Resource ID</button></th>
-                    <th><button class="headers">Job Role</button></th>
-                    <th><button class="headers">Org. Unit</button></th>
-                </tr>
-            </thead>
-            <tbody class="table-body">
-                <tr *ngFor="let resource of resourceList" (click)="rowClick($event, resource)" class="clickable-row">
-                    <td>{{resource.resourceId}}</td>
-                    <td>{{resource.roleId}}</td>
-                    <td>{{resource.unitId}}</td>
-                </tr>
-            </tbody>
-        </table>
-        <br>
-        <div>
-            <app-button (click)="showcomponent()"></app-button>
+        <div class="mainBox col">
+            <div>
+                <div class="topic ">
+                    <h6 class="align-middle">System Resource List</h6>
+                </div>
+                <!-- search bar -->
+                <div class="search-bar col-sm-6 mt-3 mb-3">
+                    <input type="search" [(ngModel)]="searchText" id="form1" class="form-control" placeholder="Search"
+                        aria-label="search">
+                </div>
+
+                <!-- <app-search-bar></app-search-bar> -->
+                <!-- <div class="table-responsive"> -->
+                    <table class="table table-striped">
+                        <thead class="table-headers thead-dark fs-6 fst-normal text-center">
+                            <tr>
+                                <th>Resource ID</th>
+                                <th>Job Role</th>
+                                <th>Org. Unit</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-body text-center">
+                            <tr *ngFor="let resource of resourceList | search: searchText" (click)="rowClick($event, resource)"
+                                class="clickable-row">
+                                <td>{{resource.resourceId}}</td>
+                                <td>{{getRoleName(resource.roleId)}}</td>
+                                <td>{{getUnitName(resource.unitId)}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <!-- </div> -->
+                
+                <br>
+                <div>
+                    <app-button (click)="showcomponent()"></app-button>
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+
+        </div>
+        <div class="box2 col">
+            <app-add-form *ngIf="showForm"></app-add-form>
+            <router-outlet></router-outlet>
+            <app-resource-details *ngIf="showResourceDetails"></app-resource-details>
             <router-outlet></router-outlet>
         </div>
+
+
+
+
+
     </div>
-
-
-    <div class="box2">
-        <app-add-form *ngIf="showForm"></app-add-form>
-        <router-outlet></router-outlet>
-        <app-resource-details *ngIf="showResourceDetails"></app-resource-details>
-        <router-outlet></router-outlet>
-    </div>
-
 </div>
