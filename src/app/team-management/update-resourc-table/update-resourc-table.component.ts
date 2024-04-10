@@ -2,14 +2,12 @@ import { Component } from '@angular/core';
 import { ServiceService } from '../shared/service.service';
 import { ResourceService } from '../shared/resource.service';
 
-
 @Component({
-  selector: 'app-resource-table',
-  templateUrl: './resource-table.component.html',
-  styleUrl: './resource-table.component.css'
+  selector: 'app-update-resourc-table',
+  templateUrl: './update-resourc-table.component.html',
+  styleUrl: './update-resourc-table.component.css'
 })
-export class ResourceTableComponent {
-
+export class UpdateResourcTableComponent {
   selectedResources: any[] = []; // Array to store selected resources -new
   resources:any=[
     {
@@ -115,6 +113,4 @@ export class ResourceTableComponent {
   //new code -search bar
   searchtext:any;
   
-
-
 }

@@ -1,81 +1,89 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-6">
-    <form [formGroup]="teamForm" class="form border rounded" >
-      <div>
-        <button class="new-team btn btn-primary">Create New Team</button>
-      </div>
+    <div class="col-12 col-md-6 ">
 
-      <div class="title-team">
-        <p>Team Name:</p>
-      </div>
+      <!-- display team form  -->
+      <form [formGroup]="teamForm" class="form border rounded p-2 ">
 
-      <div class="form-group">
-        <label for="team-name">Name</label>
-        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter Team Name" formControlName="teamName">
-      </div>
+        <div>
+          <button class="new-team btn border rounded text-center">Create New Team</button>
+        </div>
 
-      <div class="title-description">
-        <p>Description:</p>
-      </div>
+        <div class="title-team">
+          <p class="font-weight-bold">Team Name:</p>
+        </div>
 
-      <div class="form-group">
-        <label for="description">Description</label>
-        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter Description" formControlName="description">
-      </div>
+        <div class="form-group align-items-center">
+            <label for="team-name">Name</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter Team Name"
+              formControlName="teamName">
+        </div>
 
-      <hr>
+        <div class="title-description">
+          <p class="font-weight-bold">Description:</p>
+        </div>
 
-      <div>
-        <button class="new-resource btn btn-primary btn-md">Team Resource List</button>
-      </div>
+        <div class="form-group align-items-center">
+          <label for="description">Description</label>
+          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter Description"
+            formControlName="description">
+        </div>
 
-      <table class="table table-bordered">
+        <hr>
 
-        <thead>
-          <tr>
-            <th scope="col" class="col-4">
-              <div class="tbtn">Resource Id</div>
-            </th>
-            <th scope="col" class="col-4">
-              <div class="tbtn">Job Role</div>
-            </th>
-            <th scope="col" class="col-4">
-              <div class="tbtn">Org. Unit</div>
-            </th>
-          </tr>
-        </thead>
+        <div>
+          <button class="new-resource btn border rounded text-center mb-2">Team Resource List</button>
+        </div>
 
-        <tbody>
-          <tr *ngFor="let selectedResource of selectedResources">
-            <td class="col-4">{{ selectedResource.resourceName }}</td>
-            <td class="col-4">{{ selectedResource.role }}</td>
-            <td class="col-4">{{ selectedResource.OrgUnit }}</td>
-            
-          </tr>
-        </tbody>
+        <!-- tabel to display selected resources for the team -->
 
-      </table>
+        <table class="table table-bordered mt-2">
 
-      <div class="addResourceBtn col-6">
-        <app-new-team-button [text]="'Add Resources ID'" (click)="toggleResourceTable()"></app-new-team-button>
-      </div>
+          <thead>
+            <tr class="border-0">
+              <th scope="col" class="col-4 border-0">
+                <div class="tbtn border rounded text-center p-1">Resource Id</div>
+              </th>
+              <th scope="col" class="col-4 border-0">
+                <div class="tbtn border rounded text-center p-1">Job Role</div>
+              </th>
+              <th scope="col" class="col-4 border-0">
+                <div class="tbtn border rounded text-center p-1">Org. Unit</div>
+              </th>
+            </tr>
+          </thead>
 
-      <hr>
+          <tbody>
+            <tr *ngFor="let selectedResource of selectedResources" class="border text-center">
+              <td class="col-4 border text-center">{{ selectedResource.resourceId }}</td>
+              <td class="col-4 border text-center">{{ selectedResource.roleName}}</td>
+              <td class="col-4 border text-center">{{ selectedResource.unitName}}</td>
 
-      <div class="addResourceBtn col-6">
-        <app-new-team-button [text]="'Create Team '"  value="Create Team" (click)="onFormSubmit()"></app-new-team-button>
-      </div>
+            </tr>
+          </tbody>
+
+        </table>
+
+        <div class="addResourceBtn col-6">
+          <app-new-team-button [text]="'Add Resources ID'" (click)="toggleResourceTable()"></app-new-team-button>
+        </div>
+
+        <hr>
+
+        <div class="addResourceBtn col-6">
+          <app-new-team-button [text]="'Create Team'" value="Create Team"
+            (click)="onFormSubmit()"></app-new-team-button>
+        </div>
 
       </form>
 
     </div>
 
-  
 
-  <div class="col-6" >
-    <app-resource-table *ngIf="showResourceTable"></app-resource-table>
+    <!-- display resource table to select resources for the team -->
+    <div class="col-12 col-md-6">
+      <app-resource-table *ngIf="showResourceTable"></app-resource-table>
+    </div>
   </div>
-</div>
 
 </div>

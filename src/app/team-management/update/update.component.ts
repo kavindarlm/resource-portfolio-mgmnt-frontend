@@ -12,8 +12,9 @@ import { GeneralService } from '../shared/general.service';
 })
 export class UpdateComponent implements OnInit {
   public dataid!: number;
-  public teamData: dataModel = { id:0 , teamName: '', description: '', selectedResources: [] }; // Adjust the model based on your API response structure
+  public teamData: dataModel = { id:0 , teamName: '', description: '', resources: [] }; // Adjust the model based on your API response structure
   showResourceTable = false;
+
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -39,6 +40,8 @@ export class UpdateComponent implements OnInit {
     });
 
   }
+
+  
 
 //edit team data
 edit() {

@@ -1,68 +1,42 @@
+.main{
+    margin-left: 1%;
+}
 
-/* this is the form */
-.formm {
-    padding: 2%;
-
+.form {
+    color: #7752FE;
 
 }
 
-
-/* buttons which used to display titles */
 .new-team,
 .new-resource{
     background-color: #7752FE;
-    border: 2px solid #7752FE;
-    border-radius: 8px;
+    border-color: #7752FE;
     color: #FEFEFE;
-    text-align: center;
-    text-decoration: none;
     width: 100%;
-    margin-bottom: 2%;
-
- 
+    pointer-events: none;
 }
 
-/* p tags which used to name input fields */
 .title-team,
 .title-description{
     font-weight: bold;
 }
 
-/* div which carry labels and input feilds  */
 .form-group {
-    margin-bottom: 10px; 
+    margin-bottom: 1%; 
     display: flex; 
-    align-items: center; 
-    margin-left: 25px;
+    margin-left: 5%;
+   
 }
 
-/* labels used to name input feilds */
 label {
     display: inline-block; 
-    width: 100px; 
-    margin-right: 10px; 
-    margin-bottom: 5px; 
+    width: 25%; 
+    margin-right: 1%; 
+    
 }
 
-
-/* submit button */
-button[type="submit"] {
-    display: block;
-    /* margin: 0 auto; */
-    width: 150px;
-    padding: 10px; 
-    margin-top: 10px;
-    background-color: #1E3895;
-    color: #FEFEFE;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-}
-
-
- td {
-    border: 1px solid #8691A833;
-    text-align: center;
+td {
+    border: solid #8691A833;
     color: #7752FE;
     
 }
@@ -70,15 +44,13 @@ button[type="submit"] {
 
 .tbtn{
     background-color:  #C2D9FF;
-    border: 1px solid #C2D9FF;
-    border-radius: 4px;
+    border-color:#C2D9FF;
     color: #190482;
-    text-align: center;
     width: 100%;
-    margin: 0;
-   
+    
    
 }
+
 
 
 /* placeholder for input feilds */
@@ -91,10 +63,9 @@ input.ng-invalid.ng-touched {
     border: red 2px solid;
 }
 
-/* add resource id button */
 .addResourceBtn{
-    align-items: center;
-    margin-left: 70px;
+    margin-left: 20%;
+    
 }
 
 /* create team button */

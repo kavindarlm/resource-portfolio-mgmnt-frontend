@@ -13,9 +13,9 @@ import { dataModel } from '../team-form/team-form.model';
 })
 export class DeletePopupComponent {
   public dataid!: number;
-  public teamData: dataModel = { id:0 , teamName: '', description: '', selectedResources: [] };
+  public teamData: dataModel = { id:0 , teamName: '', description: '', resources: [] };
 
-  http: any;
+ 
   
   constructor(public generalservice: GeneralService,
     private api: ApiService,

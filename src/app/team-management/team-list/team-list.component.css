@@ -1,21 +1,19 @@
-
-.teamListBox{
-    width:100%;
-    
-}
-
 .teamListBtn{
     background-color: #7752FE;
     border: 2px solid #7752FE;
-    border-radius: 8px;
     color: #FEFEFE;
-    text-align: center;
-    text-decoration: none;
     width: 100%;
-    height: 39px;
     pointer-events: none;
-    margin-top: 10px;
+}
 
+.team-data{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 10px 0;
+    max-height: 83vh;
+    overflow-y: scroll;
+    
 }
 
 .teamNameBtn{
@@ -26,13 +24,17 @@
     text-align: center;
     text-decoration: none;
     width: 100%;
-    height: 39px;
-    margin-top: 10px;
    
 }
+
+/* .teamListBox{
+    width:100%;
+    
+}
+
 .tableList{
     width: 100%;
-}
+} */
 
 .row.no-gutters {
     margin-right: 0;
@@ -49,27 +51,11 @@
     overflow-y: scroll;
 }
 
-.table-container{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
 
-}
-
-.table-data{
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin: 10px 0;
-    max-height: 83vh;
-    overflow-y: scroll;
-    
-}
-
-.table-data::-webkit-scrollbar {
+.team-data::-webkit-scrollbar {
     width: 0; 
   }
   
-  .table-data {
+.team-data {
     scrollbar-width: none; 
-  }
+}

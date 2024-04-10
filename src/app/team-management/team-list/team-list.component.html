@@ -1,14 +1,18 @@
 <div class="container-fluid">
   <div class="row no-gutters">
-    <div class="col-2">
-      <div class="table-container border-top">
-        <div>
-          <button class="teamListBtn btn btn-primary btn-md">Team List</button>
+    <div class=" col-12 col-md-2">
+
+      <!-- display created team list -->
+
+      <div class="team-data-container border-top">
+
+        <div class="mt-2">
+          <button class="teamListBtn btn border rounded">Team List</button>
         </div>
 
-        <div class="table-data">
-          <div *ngFor="let team of teams " class="btns">
-            <button class="teamNameBtn btn btn-primary" routerLink="update/{{team.id}}"
+        <div class="team-data">
+          <div *ngFor="let team of teams " class="mt-2">
+            <button class="teamNameBtn btn" routerLink="update/{{team.id}}"
               routerLinkActive="active">{{team.teamName}}</button>
           </div>
         </div>
@@ -17,11 +21,12 @@
           <app-new-team-button [text]="'New Team'" routerLink="TeamForm"></app-new-team-button>
         </div>
       </div>
+
     </div>
 
-    <div class="col-10 ">
+    <!-- display team form -->
+    <div class="col-12 col-md-10">
       <router-outlet></router-outlet>
-      
     </div>
 
   </div>
