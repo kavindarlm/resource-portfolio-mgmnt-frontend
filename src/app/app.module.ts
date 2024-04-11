@@ -10,6 +10,7 @@ import { UnitFormComponent } from './orgUnitMgt/unit-form/unit-form.component';
 import { ReuseButtonComponent } from './orgUnitMgt/reuse-button/reuse-button.component';
 import { UnitNodeComponent } from './orgUnitMgt/unit-node/unit-node.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration()

@@ -12,4 +12,8 @@ export class OrgUnitMgtService {
     getOrgUnits() {
         return this.http.get<OrganizationalUnitModel[]>("http://localhost:3000/org-unit");
     }
+
+    createOrgUnit(data: OrganizationalUnitModel) {
+        return this.http.post<OrganizationalUnitModel>("http://localhost:3000/org-unit", data);
+    }
 }
