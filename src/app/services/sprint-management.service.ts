@@ -19,15 +19,6 @@ export class SprintManagementService {
     return this.http.post<any>(url, sprintData);
   }
 
-  private sprintName: string = '';
-
-  setSprintName(name: string): void {
-    this.sprintName = name;
-  }
-
-  getSprintName(): string {
-    return this.sprintName;
-  }
 
   
 }

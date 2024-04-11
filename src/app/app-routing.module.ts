@@ -26,6 +26,7 @@ import { UserDetailComponent } from './admin-dashboard/user-detail/user-detail.c
 import { UpdateComponent } from './team-management/update/update.component';
 import { TeamListComponent } from './team-management/team-list/team-list.component';
 import { DeletePopupComponent } from './team-management/delete-popup/delete-popup.component';
+import { SprintMgtComponent } from './Sprint_Management/sprint-mgt/sprint-mgt.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -60,7 +61,9 @@ const routes: Routes = [
           { path: 'createform', component: CreateFormComponent,
         children:[
           {path: 'availableResources', component:AvailableResourceListComponent}
-        ]}
+        ]},
+        { path: 'sprintmgt/:Sname', component: SprintMgtComponent },
+        // { path: 'sprintmgt', component: SprintMgtComponent }
         ]},
     ]
   },

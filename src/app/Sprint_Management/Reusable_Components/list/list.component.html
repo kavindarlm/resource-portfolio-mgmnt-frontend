@@ -16,15 +16,16 @@
                             <tr *ngFor="let sprint of sprints">
                                 <td>
                                     <app-project-buttuns [btnClss]="'btn-costom'"
-                                        [text]="sprint.Sname"></app-project-buttuns>
+                                        [text]="sprint.Sname" routerLink="sprintmgt/{Sname:sprint.Sname}"></app-project-buttuns>
                                 </td>
                             </tr>
 
                             <!-- <tr *ngFor="let sprint of sprints">
                                 <td>
-                                    <app-project-buttuns [btnClss]="'btn-costom'" [text]="sprint.Sname" (click)="detectComp('sprintmgt', sprint.Sname)"></app-project-buttuns>
+                                    <a [routerLink]="['/sprintmgt', { Sname: sprint.Sname }]">{{ sprint.Sname }}</a>
                                 </td>
-                            </tr>   -->
+                            </tr> -->
+                            
 
                             <tr>
                                 <td>
@@ -40,9 +41,7 @@
             </div>
         </div>
         <div class="col-10">
-            <!-- <ng-container *ngComponentOutlet="comp"></ng-container> -->
             <router-outlet></router-outlet>
         </div>
     </div>
 </div>
-<!-- (click)="detectComp('createform')" -->

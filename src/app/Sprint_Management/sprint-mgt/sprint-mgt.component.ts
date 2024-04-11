@@ -1,4 +1,5 @@
 import { Component,OnInit} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { SprintManagementService } from '../../services/sprint-management.service';
 
 @Component({
@@ -19,11 +20,12 @@ resources = [
 ];
 
 sprintName: string = '';
-constructor(private sprintService: SprintManagementService) { }
+constructor(private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
-    // Get the sprint name from SprintManagementService
-    this.sprintName = this.sprintService.getSprintName();
-  }
+ngOnInit(): void {
+  this.route.params.subscribe(params => {
+    this.sprintName = params['sprintName'];
+  });
+}
 
 }

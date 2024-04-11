@@ -14,17 +14,6 @@ export class ListComponent {
   sprints!: any[];
 
 
-  // comp:any ;
-  // detectComp(comp:any){
-  //   if(comp==="createform"){
-  //     this.comp = CreateFormComponent;
-  //   }
-  //   else if(comp==="sprintmgt"){
-  //     this.comp = SprintMgtComponent;
-  //     // this.sprintService.setSprintName(sprintName);
-  //   }
-  // }
-
   constructor(private sprintService: SprintManagementService) {}
 
   ngOnInit(): void {
