@@ -115,9 +115,71 @@ import { error } from 'console';
 //   };
 // }
 
+////////////////////////////////////////////////////////////////////////////////////
+
+
+// export class UnitTreeComponent implements OnInit {
+
+//   treeData: OrganizationalUnitModel[] | undefined;//declaring an array for orgUnits
+
+//   constructor(private http: HttpClient, private orgUnitMgtService: OrgUnitMgtService) {}
+
+//   ngOnInit(): void {
+//     this.loadOrgUnits();
+//   }
+
+//   loadOrgUnits() {
+//     this.orgUnitMgtService.getOrgUnits()
+//     .pipe(
+//       catchError((error) => {
+//         console.error('Error fetching org units:', error);
+//         alert('An error occurred while fetching org units. Please try again');
+//         return throwError('Error fetching org units');
+//       })
+//     )
+//     .subscribe((res: any) => {
+//       this.treeData = res;
+//       console.log(this.treeData);
+//     },
+//     (error) => {
+//       console.error('Error:', error);
+//       alert('An error occurred. Please try again');
+//     }
+//   );
+//   }
+
+//   // Recursive function to build tree structure
+//   private buildTree(orgUnits: OrganizationalUnitModel[]): OrganizationalUnitModel[] {
+//     const map: { [unitId: number]: OrganizationalUnitModel } = {};
+//     const roots: OrganizationalUnitModel[] = [];
+
+//     // Create a map of units for easy access
+//     orgUnits.forEach(unit => {
+//       map[unit.unitId] = unit;
+//       unit.children = [];
+//     });
+
+//    // Connect children to their parent
+//   orgUnits.forEach(unit => {
+//   if (unit.parentId && map[unit.parentId]) {
+//     // Using optional chaining to access children safely
+//     map[unit.parentId]!.children = map[unit.parentId]!.children || [];
+//     map[unit.parentId]!.children!.push(unit);
+//   } else {
+//     roots.push(unit); // If no parent, it's a root node
+//   }
+// });
+
+
+//     return roots;
+//   }
+// }
+
+///////////////////////////////
+
 export class UnitTreeComponent implements OnInit {
 
-  treeData: OrganizationalUnitModel[] | undefined;//declaring an array for orgUnits
+  treeData: OrganizationalUnitModel[] = [];
 
   constructor(private http: HttpClient, private orgUnitMgtService: OrgUnitMgtService) {}
 
@@ -127,21 +189,47 @@ export class UnitTreeComponent implements OnInit {
 
   loadOrgUnits() {
     this.orgUnitMgtService.getOrgUnits()
-    .pipe(
-      catchError((error) => {
-        console.error('Error fetching org units:', error);
-        alert('An error occurred while fetching org units. Please try again');
-        return throwError('Error fetching org units');
-      })
-    )
-    .subscribe((res: any) => {
-      this.treeData = res;
-      console.log(this.treeData);
-    },
-    (error) => {
-      console.error('Error:', error);
-      alert('An error occurred. Please try again');
-    }
-  );
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching org units:', error);
+          alert('An error occurred while fetching org units. Please try again');
+          return throwError('Error fetching org units');
+        })
+      )
+      .subscribe((res: OrganizationalUnitModel[]) => {
+        // Convert flat data to hierarchical structure
+        this.treeData = this.buildTree(res);
+        console.log(this.treeData);
+      },
+      (error) => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again');
+      }
+    );
+  }
+
+  // Recursive function to build tree structure
+  private buildTree(orgUnits: OrganizationalUnitModel[]): OrganizationalUnitModel[] {
+    const map: { [unitId: number]: OrganizationalUnitModel } = {};
+    const roots: OrganizationalUnitModel[] = [];
+
+    // Create a map of units for easy access
+    orgUnits.forEach(unit => {
+      map[unit.unitId] = unit;
+      unit.children = [];
+    });
+
+    // Connect children to their parent
+    orgUnits.forEach(unit => {
+      if (unit.parentId && map[unit.parentId]) {
+        // Using optional chaining to access children safely
+        map[unit.parentId]!.children = map[unit.parentId]!.children || [];
+        map[unit.parentId]!.children!.push(unit);
+      } else {
+        roots.push(unit); // If no parent, it's a root node
+      }
+    });
+
+    return roots;
   }
 }
