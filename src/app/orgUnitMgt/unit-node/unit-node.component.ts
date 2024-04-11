@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { OrganizationalUnitModel } from '../unit-form/unit-form.model';
 
 @Component({
   selector: 'app-unit-node',
@@ -6,5 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './unit-node.component.css'
 })
 export class UnitNodeComponent {
-  @Input() node: any;
+  @Input() node: OrganizationalUnitModel[] | undefined;
 }
