@@ -1,12 +1,15 @@
-.form-container{
+.font-color {
+    color: #1E3895;
+}
+/* .form-container{
     width: 100%;
     border-left: solid 1px #ccc;
     border-right: solid 1px #ccc;
     background-color: #FEFEFE;
-    /* padding: 10px; */
     
-}
-.pm-label{
+    
+} */
+/* .pm-label{
     font-size: 1.0rem;
     font-weight: 600px;
     color: #7752FE;
@@ -30,40 +33,40 @@
 
 .form-control{
     color: #7752FE;
-}
+} */
 
 select {
     border: 1px solid #ccc;
     border-radius: 5px;
-    color: #7752FE; /* Text color when not focused */
-    background-color: #fff; /* Background color when not focused */
+    /* color: #7752FE;  */
+    background-color: #fff; 
     opacity: .5;
 }
 
 /* Style the select element when it is focused */
-select:focus {
-    border-color: #7752FE; /* Border color when focused */
-    color: #7752FE; /* Text color when focused */
-}
+/* select:focus {
+    border-color: #7752FE; 
+    color: #7752FE; 
+} */
 
 /* Style the options inside the dropdown */
-select option {
-    color: #7752FE; /* Text color of options */
-    background-color: #fff; /* Background color of options */
-}
+/* select option {
+    color: #7752FE; 
+    background-color: #fff; 
+} */
 
 /* Style the options when hovered */
-select option:hover {
-    background-color: #7752FE; /* Background color of options when hovered */
-    color: #fff; /* Text color of options when hovered */
-}
+/* select option:hover {
+    background-color: #7752FE; 
+    color: #fff; 
+} */
 
 
 #projectStartDate::-webkit-datetime-edit-text,
 #projectStartDate::-webkit-datetime-edit-month-field,
 #projectStartDate::-webkit-datetime-edit-day-field,
 #projectStartDate::-webkit-datetime-edit-year-field {
-    color: #7752FE;
+    /* color: #7752FE; */
     opacity: .5;
     outline: none;
     caret-color: transparent;
@@ -73,13 +76,13 @@ select option:hover {
 #projectEndDate::-webkit-datetime-edit-month-field,
 #projectEndDate::-webkit-datetime-edit-day-field,
 #projectEndDate::-webkit-datetime-edit-year-field {
-    color: #7752FE;
+    /* color: #7752FE; */
     opacity: .5;
     outline: none;
     caret-color: transparent;
 }
 
-.button-edit{
+/* .button-edit{
     color: #7752FE;
     border: solid 1.5px #7752FE;
     font-weight: semibold;
@@ -108,4 +111,4 @@ select option:hover {
     background-color: #FF0000;
     font-weight: semibold;
     border: solid 1px #FF0000;
-}
+} */

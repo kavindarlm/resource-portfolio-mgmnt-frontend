@@ -36,7 +36,7 @@ export class CreateProjectComponent implements OnInit {
     alert('Form Submitted Successfully');
     this.api.addProject(data).subscribe((res=>{
       this.projectform.reset();
-      this.router.navigate(['projectlist']);
+      this.router.navigate(['pages-body/projectlist']);
     }))
   }
 }
