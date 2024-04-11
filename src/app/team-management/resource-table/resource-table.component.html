@@ -1,45 +1,47 @@
 <div class="container-fluid">
     <div class="row border rounded">
         <div class="col-12 col-md-12">
-            <div class="resourcebody p-2">
+            <div class="resourcebody p-1 mt-1">
                 <div>
                     <button class="systemResource btn border rounded text-center mb-1">System Resource List</button>
                 </div>
 
                 <!-- new code-for search bar -->
-                <div class="col-sm-14">
+                <div>
                     <!-- search box -->
                     <input type="search" [(ngModel)]="searchtext" id="form1" class="form-control" placeholder="Search"
                         aria-label="search">
                 </div>
 
-                <table class="table table-bordered p-1 m-1">
-                    <thead>
-                        <tr class="border-0">
-                            <th scope="col" class="col-4 border-0">
-                                <div class="tbtn border rounded text-center ">Resource Id</div>
-                            </th>
-                            <th scope="col" class="col-4 border-0">
-                                <div class="tbtn border rounded text-center ">Job Role</div>
-                            </th>
-                            <th scope="col" class="col-4 border-0">
-                                <div class="tbtn border rounded text-center  ">Org.Unit</div>
-                            </th>
-                            <th class="border-0"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let resource of resources | filter:searchtext">
-                          <td class="text-center ">{{resource.resourceId}}</td>
-                          <td class="text-center ">{{resource.roleName}}</td>
-                          <td class="text-center ">{{resource.unitName}}</td>
-                          <td>
-                            <button class="selectBtn btn border rounded" (click)="onSelect(resource)"
-                              [ngClass]="{ 'selected': isSelected(resource) }">Select</button>
-                          </td>
-                        </tr>
-                      </tbody>
-                </table>
+                <div class="table-responsive-sm  table-responsive-md table-responsive">
+                    <table class="table table-bordered p-1">
+                        <thead>
+                            <tr class="border-0">
+                                <th scope="col" class="col-3 border-0">
+                                    <div class="tbtn border rounded text-center ">Resource Id</div>
+                                </th>
+                                <th scope="col" class="col-3 border-0">
+                                    <div class="tbtn border rounded text-center ">Job Role</div>
+                                </th>
+                                <th scope="col" class="col-3 border-0">
+                                    <div class="tbtn border rounded text-center  ">Org.Unit</div>
+                                </th>
+                                <th class="border-0 col-3"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let resource of resources | filter:searchtext">
+                                <td class="text-center ">{{resource.resourceId}}</td>
+                                <td class="text-center ">{{resource.roleName}}</td>
+                                <td class="text-center ">{{resource.unitName}}</td>
+                                <td>
+                                    <button class="selectBtn btn border rounded" (click)="onSelect(resource)"
+                                        [ngClass]="{ 'selected': isSelected(resource) }">Select</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

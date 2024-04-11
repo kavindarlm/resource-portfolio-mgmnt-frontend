@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { ApiService } from '../shared/api.service';
 import { dataModel } from '../team-form/team-form.model';
 import { GeneralService } from '../shared/general.service';
-
+import { ResourceService } from '../shared/resource.service';
 
 @Component({
   selector: 'app-update',
@@ -12,19 +12,18 @@ import { GeneralService } from '../shared/general.service';
 })
 export class UpdateComponent implements OnInit {
   public dataid!: number;
-  public teamData: dataModel = { id:0 , teamName: '', description: '', resources: [] }; // Adjust the model based on your API response structure
+  public teamData: dataModel = { id:0 , teamName: '', description: '', resources: [] };
   showResourceTable = false;
-
-
+  
   constructor(
     private activatedroute: ActivatedRoute,
-     private router: Router, 
-     private api: ApiService,
-     public generalservice: GeneralService
-     ) 
-     { 
+    private router: Router, 
+    private api: ApiService,
+    public generalservice: GeneralService,
+    private resourceService: ResourceService
+  ) { 
     this.showResourceTable = false;
-    }
+  }
 
   toggleResourceTable() {
     this.showResourceTable = !this.showResourceTable;
@@ -32,31 +31,25 @@ export class UpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedroute.paramMap.subscribe((params: Params) => {
-      this.dataid = params['get']('id'); // Use 'get' instead of '[]' to get the parameter value
+      this.dataid = params['get']('id');
 
       this.api.fetchData(this.dataid).subscribe((data: dataModel) => {
         this.teamData = data;
+
+        
       });
     });
-
   }
 
-  
-
-//edit team data
-edit() {
-  this.api.updateTeam(this.dataid, this.teamData).subscribe(
-    (_res: any) => { 
-      this.router.navigate(['/']); 
-    },
-    (_error: any) => { 
-    }
-  );
-}
-
-  //delete team data
  
+
+  edit() {
+    this.api.updateTeam(this.dataid, this.teamData).subscribe(
+      (_res: any) => { 
+        this.router.navigate(['/']); 
+      },
+      (_error: any) => { 
+      }
+    );
+  }
 }
-  
-  
-  

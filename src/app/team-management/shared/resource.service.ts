@@ -16,4 +16,8 @@ export class ResourceService {
    getResources(): Observable<any> {
      return this.http.get(`${this.baseUrl}`);
    }
+
+   getResourcesByTeamIdAndNull(teamId: number): Observable<{resourceId: number, roleName: string, unitName: string }[]> {
+    return this.http.get<{resourceId: number, roleName: string, unitName: string }[]>(`${this.baseUrl}/${teamId}`);
+  }
 }
