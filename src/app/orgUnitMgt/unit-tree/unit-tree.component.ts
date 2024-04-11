@@ -136,6 +136,7 @@ export class UnitTreeComponent implements OnInit {
     )
     .subscribe((res: any) => {
       this.treeData = res;
+      console.log(this.treeData);
     },
     (error) => {
       console.error('Error:', error);

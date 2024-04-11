@@ -3,5 +3,5 @@ export interface OrganizationalUnitModel {
     unitName: string;
     parentId?: number;
     description: string;
-    children?: OrganizationalUnitModel[];
+    children: OrganizationalUnitModel[];
 }

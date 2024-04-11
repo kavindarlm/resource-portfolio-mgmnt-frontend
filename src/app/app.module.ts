@@ -9,6 +9,7 @@ import { UnitListComponent } from './orgUnitMgt/unit-list/unit-list.component';
 import { UnitFormComponent } from './orgUnitMgt/unit-form/unit-form.component';
 import { ReuseButtonComponent } from './orgUnitMgt/reuse-button/reuse-button.component';
 import { UnitNodeComponent } from './orgUnitMgt/unit-node/unit-node.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { UnitNodeComponent } from './orgUnitMgt/unit-node/unit-node.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration()
