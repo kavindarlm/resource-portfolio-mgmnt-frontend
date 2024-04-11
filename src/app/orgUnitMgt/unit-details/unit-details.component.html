@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <div class="formBox" *ngIf="!showUnitEditForm">
+        <div class="topic border rounded text-center col-6 mb-3 mt-1 pt-1 pb-1 text-white bg-primary ">
+            {{unit?.unitName}}
+        </div>
+
+        <div class="form-group mb-3">
+            <div class="details mb-5">
+                <div>
+                    <button class="detailButton col-6">
+                        {{unit?.description}}
+                    </button>
+                </div>
+            </div>
+
+            <div class="topic border rounded text-center col-6 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">
+                <h6>Current Navigation</h6>
+                <!--Add the navigation here-->
+            </div>
+
+            <div class="editAndDelete">
+                <button type="button" class="btn btn-outline-primary editButton" (click)="onEdit()">Edit Org.Unit</button>
+            </div>
+
+            <div class="editAndDelete">
+                <button type="button" class="btn btn-outline-danger deleteButton">Delete Org.Unit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-unit-edit-form *ngIf="showUnitEditForm"></app-unit-edit-form>

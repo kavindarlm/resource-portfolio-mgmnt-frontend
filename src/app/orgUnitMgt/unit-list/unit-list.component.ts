@@ -10,6 +10,7 @@ import { OrgUnitMgtService } from '../../shared/orgUnitMgt_services/orgUnitMgt.s
 export class UnitListComponent implements OnInit{
   showForm = false;
   orgunits : OrganizationalUnitModel[] | undefined;
+  selectedUnit: OrganizationalUnitModel | undefined;
   constructor(private orgUnitMgtService: OrgUnitMgtService) {
     this.showForm=false;
   }
@@ -26,6 +27,10 @@ export class UnitListComponent implements OnInit{
     this.orgUnitMgtService.getOrgUnits().subscribe(res=>{
       this.orgunits = res;
     })
+  }
+
+  showUnitDetails(unit: OrganizationalUnitModel): void {
+    this.selectedUnit = unit;
   }
 
   // unitList: any = [

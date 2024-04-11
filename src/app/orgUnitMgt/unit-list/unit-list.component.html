@@ -9,7 +9,7 @@
 
                 <div class="table-data">
                     <div *ngFor="let unit of orgunits " class="btns">
-                        <button class="btn">{{unit.unitName}}</button>
+                        <button class="btn unit-button" (click)="showUnitDetails(unit)">{{unit.unitName}}</button>
                     </div>
                 </div>
 
@@ -26,3 +26,4 @@
 </div>
 
 <app-unit-form *ngIf="showForm"></app-unit-form>
+<app-unit-details *ngIf="selectedUnit" [unit]="selectedUnit"></app-unit-details>

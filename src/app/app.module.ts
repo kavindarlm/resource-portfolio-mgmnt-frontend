@@ -11,6 +11,8 @@ import { ReuseButtonComponent } from './orgUnitMgt/reuse-button/reuse-button.com
 import { UnitNodeComponent } from './orgUnitMgt/unit-node/unit-node.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UnitDetailsComponent } from './orgUnitMgt/unit-details/unit-details.component';
+import { UnitEditFormComponent } from './orgUnitMgt/unit-edit-form/unit-edit-form.component';
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     UnitFormComponent,
     ReuseButtonComponent,
     UnitNodeComponent,
+    UnitDetailsComponent,
+    UnitEditFormComponent,
 
   ],
   imports: [
