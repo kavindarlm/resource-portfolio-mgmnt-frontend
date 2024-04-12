@@ -46,54 +46,16 @@
     margin-left: 5%;
 }
 
-/* .editButton {
-    width: 40%;
-    color: #7752fe;
-    background-color: white;
-    border: rgb(203, 203, 203) 1px solid;
-    border-radius: 5px;
-    margin: 5% 25% 0 25%;
-    padding: 5px;
-}
-
-.editButton:hover {
-    transition: 0.5s;
-    background-color: #04175a;
-    color: white;
-} */
-
 .inputField {
-    /* margin-left: 10px; */
     display: flex;
     justify-content: center;
     color: #7752fe;
 }
-
-/* .edit {
-    display: flex;
-    justify-content: center;
-} */
-
-/* .deleteButton {
-    width: 40%;
-    color: red;
-    background-color: white;
-    border: red 1px solid;
-    border-radius: 5px;
-    margin: 0 5%;
-    padding: 5px;
-    display: inline-block;
-} */
 
 .deleteButton {
     float: right;
 }
 
-/* .deleteButton:hover {
-    transition: 0.5s;
-    background-color: red;
-    color: white;
-} */
 
 /* Adjust styles for smaller screens */
 @media screen and (max-width: 768px) {
