@@ -18,4 +18,5 @@ export class UnitDetailsComponent implements OnInit{
   onEdit() {
     this.showUnitEditForm = true;
   }
+
 }

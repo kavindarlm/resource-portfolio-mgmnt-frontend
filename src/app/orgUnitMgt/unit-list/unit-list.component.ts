@@ -31,6 +31,7 @@ export class UnitListComponent implements OnInit{
 
   showUnitDetails(unit: OrganizationalUnitModel): void {
     this.selectedUnit = unit;
+    this.orgUnitMgtService.setData(this.selectedUnit);
   }
 
   // unitList: any = [

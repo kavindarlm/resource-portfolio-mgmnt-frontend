@@ -28,9 +28,14 @@
                     <textarea name="description" class="form-control" formControlName="description" id="description" cols="50" rows="5"></textarea>
                 </div>
             </div>
-            <!-- <div class="add">
-                <button type="submit" class="addButton" (click)="sendData(this.unitForm.value)">Add Unit</button>
-            </div> -->
+            
+            <div class="editAndDelete">
+                <button type="button" class="btn btn-outline-secondary cancelButton" >Cancel</button>
+           </div>
+
+           <div class="editAndDelete">
+               <button type="button" class="btn btn-outline-primary editButton">Edit</button><!--(click)="onEdit()"-->
+           </div> 
         </form>
     </div>
 </div>

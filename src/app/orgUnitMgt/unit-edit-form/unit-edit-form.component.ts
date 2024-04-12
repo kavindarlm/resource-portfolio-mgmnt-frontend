@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { OrganizationalUnitModel } from '../unit-form/unit-form.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { catchError, throwError } from 'rxjs';
@@ -10,20 +10,34 @@ import { OrgUnitMgtService } from '../../shared/orgUnitMgt_services/orgUnitMgt.s
   templateUrl: './unit-edit-form.component.html',
   styleUrl: './unit-edit-form.component.css'
 })
-export class UnitEditFormComponent {
+export class UnitEditFormComponent implements OnInit {
 
   unitForm !: FormGroup;
   orgunits: OrganizationalUnitModel[] | undefined;
+  selectedUnit: any;
 
   constructor(private http: HttpClient,private formBuilder: FormBuilder, private orgUnitMgtService: OrgUnitMgtService) {}
 
   ngOnInit(): void {
     this.loadOrgUnits();
 
+
     this.unitForm = this.formBuilder.group ({
       unitName: [''],
       parentId:[''],
       description: ['']
+    });
+
+    this.selectedUnit = this.orgUnitMgtService.getData();
+    console.log('Selected Unit:', this.selectedUnit);
+    this.setFormData();
+  }
+
+  setFormData() {
+    this.unitForm.patchValue({
+      unitName: this.selectedUnit.unitName,
+      parentId: this.selectedUnit.parentId,
+      description: this.selectedUnit.description
     });
   }
 
