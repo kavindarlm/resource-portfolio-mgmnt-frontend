@@ -6,62 +6,18 @@
     border-radius: 5px;
 }
 
-.topic {
-    background-color: #7752fe;
-    padding: 5px;
-    text-align: center;
-    width: 80%;
-    margin: 3% auto;
-    color: white;
-    border-radius: 5px;
-}
-
 .form-group p {
   display: inline;
 }
 
 .editButton {
-    /* padding : 2px 100px;  */
-   width: 40%;
-   color: #7752fe;
-   background-color: white;
-   border: rgb(203, 203, 203) 1px solid;
-   border-radius: 5px;
-   margin:0 5%;
-   padding: 5px;
-   display: inline-block;
-}
-
-.deleteButton {
-        /* padding : 2px 100px;  */
-   width: 40%;
-   color: red;
-   background-color: white;
-   border: red 1px solid;
-   border-radius: 5px;
-   margin:0 5%;
-   padding: 5px;
-   display: inline-block;
-}
-
-.editButton:hover  {
-    transition: 0.5s;
-   background-color: #04175a;
-   color: white;
-}
-
-.deleteButton:hover {
-    transition: 0.5s;
-    background-color: red;
-    color: white;
-}
-
-.editButton {
     float: left;
+    margin-left: 5%;
 }
 
 .deleteButton {
     float: right;
+    margin-right: 5%;
 }
 
 .details {

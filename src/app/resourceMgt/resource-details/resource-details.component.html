@@ -1,8 +1,9 @@
 <div class="container-fluid">
     <div class="formBox" *ngIf="!showResourceEditForm">
 
-        <div class="topic">
-            <h6>Resource Details</h6>
+        <div class="d-flex justify-content-center">
+            <!-- <h6>Resource Details</h6> -->
+            <div class="border rounded text-center col-11  mb-2 mt-3 pt-1 pb-1 text-white bg-primary ">Resource Details</div>
         </div>
 
         <div class="form-group mb-3">
@@ -26,10 +27,10 @@
         </div>
 
         <div class="editAndDelete">
-            <button type="button" class="editButton" (click)="onEdit()">Edit Resource</button>
+            <button type="button" class="btn btn-outline-primary col-5 editButton" (click)="onEdit()">Edit Resource</button>
         </div>
         <div class="editAndDelete">
-            <button type="button" class="deleteButton" (click)="onDelete()">Delete Resource</button>
+            <button type="button" class="btn btn-outline-danger col-5 deleteButton" (click)="onDelete()">Delete Resource</button>
         </div>
 
 

@@ -1,9 +1,9 @@
 <div class="container-fluid">
     <div class="row">
         <div class="formBox col">
-            <div class="topic">
-                <h6>Resource Details</h6>
-            </div>
+            <!-- <div class="topic"> -->
+                <div class="border rounded text-center col-12  mb-2 mt-3 pt-1 pb-1 text-white bg-primary ">Edit Resource</div>
+            <!-- </div> -->
             <form [formGroup]="formValue">
                 <div class="formDetailBox">
                     <div class="form-group mb-3">
@@ -50,13 +50,13 @@
                         </div>
     
                     </div>
-                    <div class="edit">
-                        <button type="button" (click)="onEditResource(this.formValue.value)" class="editButton">Edit
+                    <div class="edit d-flex justify-content-center">
+                        <button type="button" (click)="onEditResource(this.formValue.value)" class="btn btn-outline-primary col-5 editButton">Edit
                             Resource</button>
                     </div>
                 </div>
                 <div class="delete">
-                    <button type="button" (click)="onDeleteResource()" class="deleteButton">Delete Resource</button>
+                    <button type="button" (click)="onDeleteResource()" class="btn btn-outline-danger col-5 deleteButton">Delete Resource</button>
                 </div>
             </form>
         </div>

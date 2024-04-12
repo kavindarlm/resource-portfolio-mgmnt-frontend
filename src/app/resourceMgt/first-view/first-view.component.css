@@ -1,20 +1,14 @@
-.grid-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    /* Set a single column layout by default */
-    /* border: 1px #0e3270 solid; */
-    column-gap: 10px;
-    /* height: 100%; */
+
+.border{
+    border: 1px solid #1E3895;
 }
 
 .mainBox {
     position: relative;
-    /* width: 100%; */
-    padding: 10px 20px 20px 20px;
-    margin: 10px;
     border: 1px #c6cad0 solid;
     display: inline-block;
     border-radius: 5px;
+    padding: 0 2%;
 }
 
 .box2 {
@@ -22,52 +16,12 @@
     /* width: fit-content; */
     height: 100%;
     display: inline-block;
-    margin: 10px;
+    /* margin: 1%; */
 }
 
 .search-bar {
     float: right;
 }
-
-.topic {
-    background-color: #7752fe;
-    padding: 5px;
-    text-align: center;
-    width: 80%;
-    margin: 5px auto;
-    color: white;
-    border-radius: 5px;
-}
-
-.input-group {
-    width: 30%;
-    position: relative;
-    float: right;
-    right: 0px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-#exampleModalLabel {
-    color: #7752fe;
-}
-
-.form-label {
-    color: #8e8ffa;
-}
-
-.table .table-bordered {
-    position: relative;
-    width: 100%;
-    border-radius: 5px;
-}
-
-.table-headers {
-    border-top: 1px white solid;
-    border-left: 1px white solid;
-    border-right: 1px white solid;
-}
-
 
 .clickable-row td {
     /* color: #7752fe; */
@@ -93,7 +47,7 @@ th{
         /* Use a two-column layout on larger screens */
     }
 
-    .mainBox {
+    /* .mainBox {
         margin: 10px;
-    }
+    } */
 }

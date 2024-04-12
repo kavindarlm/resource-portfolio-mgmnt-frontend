@@ -6,22 +6,6 @@
     border-radius: 5px;
 }
 
-
-.topic {
-    background-color: #7752fe;
-    padding: 5px;
-    text-align: center;
-    width: 80%;
-    margin: 3% auto;
-    color: white;
-    border-radius: 5px;
-}
-
-/* .form-label {
-    color: #7752fe;
-    font-weight: bold;
-} */
-
 .font-color1{
     color: #1e3895e1;
     font-weight: 500;
@@ -62,8 +46,7 @@
     margin-left: 5%;
 }
 
-.editButton {
-    /* padding : 2px 100px;  */
+/* .editButton {
     width: 40%;
     color: #7752fe;
     background-color: white;
@@ -77,7 +60,7 @@
     transition: 0.5s;
     background-color: #04175a;
     color: white;
-}
+} */
 
 .inputField {
     /* margin-left: 10px; */
@@ -86,13 +69,12 @@
     color: #7752fe;
 }
 
-.edit {
+/* .edit {
     display: flex;
     justify-content: center;
-}
+} */
 
-.deleteButton {
-    /* padding : 2px 100px;  */
+/* .deleteButton {
     width: 40%;
     color: red;
     background-color: white;
@@ -101,17 +83,17 @@
     margin: 0 5%;
     padding: 5px;
     display: inline-block;
-}
+} */
 
 .deleteButton {
     float: right;
 }
 
-.deleteButton:hover {
+/* .deleteButton:hover {
     transition: 0.5s;
     background-color: red;
     color: white;
-}
+} */
 
 /* Adjust styles for smaller screens */
 @media screen and (max-width: 768px) {

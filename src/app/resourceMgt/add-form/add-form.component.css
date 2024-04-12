@@ -1,21 +1,8 @@
 .formBox {
     width: 100%;
     float: right;
-    /* margin: 10px 20px 10px 0; */
-    /* margin-right: 20px; */
-    padding-bottom: 10px;
-    padding-left: 10px;
+    padding: 0 3%;
     border: 1px #ced2d9 solid;
-    border-radius: 5px;
-}
-
-.topic {
-    background-color: #7752fe;
-    padding: 5px;
-    text-align: center;
-    width: 80%;
-    margin: 5px auto;
-    color: white;
     border-radius: 5px;
 }
 
@@ -29,13 +16,10 @@
     font-weight: 400;
 }
 
-
 .form-group p {
-    /* margin-right: 50px;   */
     float: left;
     width: 25%;
-    /* margin-left: 20%; */
-  } 
+} 
 
 ::placeholder {
     color: #c3c0ce;
@@ -58,20 +42,37 @@
 }
 
 .addButton {
-    /* padding : 2px 100px;  */
-    width: 40%;
-    color: #7752fe;
-    background-color: white;
-    border: rgb(203, 203, 203) 1px solid;
-    border-radius: 5px;
-    margin: 0 25%;
-    padding: 5px;
+    width: 75%;
+    /* Set the width for desktop */
+    height: 40px;
+    font-weight: 500;
+    background-color: #fefefe;
+    border: .5px solid #b4a0ff88;
+    border-radius: 10px;
+    color: #1e3895;
+    /* margin-top: 3%;
+    margin-left: 3%; */
+    margin: 3% 3%;
+    content: fit-content;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    /* Add subtle elevation */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Add padding */
+    padding: 0 15px;
+    /* Center text vertically */
+    line-height: 40px;
+    /* Ensure text fits within the button */
+    white-space: nowrap;
+    /* Prevent wrapping */
+    overflow: hidden;
+    /* Hide overflow text */
+    text-overflow: ellipsis;
 }
-
-.addButton:hover {
-    transition: 0.5s;
-    background-color: #04175a;
-    color: white;
+  
+.addButton:hover,
+.addButton:active {
+    background-color: #1e3895;
+    color: #FEFEFE;
 }
 
 .inputField {
@@ -81,7 +82,6 @@
 }
 
 .inputField p {
-
     float: left;
     margin-left: 5%;
     margin-right: 3%;
