@@ -1,10 +1,10 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2">
+        <div class="unitList col-md-2 col-lg-2 col-sm-4 mt-3">
             <div class="table-container">
-                <div>
-                    <h6>Unit List</h6>
+                <div class="d-flex justify-content-center">
+                    <div class="border rounded text-center col-10 mb-3 mt-1 pt-1 pb-1 text-white bg-primary ">Unit List</div>
                 </div>
 
                 <div class="table-data">
@@ -18,12 +18,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
-            <router-outlet></router-outlet>
-        </div>
-    </div>
+
+<div class="unitForms col-md-5 col-lg-5 col-sm-8">
+    <app-unit-form *ngIf="showForm"></app-unit-form>
+    <app-unit-details *ngIf="selectedUnit" [unit]="selectedUnit"></app-unit-details>
+</div>
+
 
 </div>
 
-<app-unit-form *ngIf="showForm"></app-unit-form>
-<app-unit-details *ngIf="selectedUnit" [unit]="selectedUnit"></app-unit-details>
+</div>

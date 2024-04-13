@@ -12,6 +12,7 @@ import { OrgUnitMgtService } from '../../shared/orgUnitMgt_services/orgUnitMgt.s
 })
 export class UnitEditFormComponent implements OnInit {
 
+  showForm: boolean = true;
   unitForm !: FormGroup;
   orgunits: OrganizationalUnitModel[] | undefined;
   selectedUnit: any;
@@ -59,5 +60,23 @@ export class UnitEditFormComponent implements OnInit {
       alert('An error occurred. Please try again.');
     }
   );
+  }
+
+  onEditUnit(data: OrganizationalUnitModel) {
+    console.log(data);
+    this.orgUnitMgtService.updateOrgUnit(this.selectedUnit.unitId, data)
+      .subscribe(
+        (res: any) => {
+          console.log('Unit updated successfully:', res);
+          alert('Unit updated successfully');
+        },
+        (error) => {
+          console.error('Error occurred while updating unit:', error);
+        }
+      );
+  }
+
+  onCancel() {
+    this.showForm = false;
   }
 }

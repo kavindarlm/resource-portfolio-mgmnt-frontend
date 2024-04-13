@@ -2,8 +2,20 @@
     border: 1px solid #1E3895;
 }
 
+.formBox {
+    width: 100%;
+    float: inline-start;
+    /* margin-top: 10px; */
+    /* padding-bottom: 10px; */
+    padding-left: 2%;
+    padding-right: 2%;
+    border: 1px #ced2d9 solid;
+    border-radius: 5px;
+    position: relative;
+}
+
 .detailButton {
-    /* width: 95%; */
+    width: 95%;
     /* Set the width for desktop */
     height: 40px;
     font-weight: 500;
@@ -27,4 +39,12 @@
     overflow: hidden;
     /* Hide overflow text */
     text-overflow: ellipsis;
+}
+
+.editButton {
+    float: left;
+}
+
+.deleteButton {
+    float: right;
 }

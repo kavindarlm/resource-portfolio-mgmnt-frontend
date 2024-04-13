@@ -1,43 +1,43 @@
-<div class="formBox">
-    <div class="container mt-3">
-        <div class="topic">
-            <h6>Create New Unit</h6>
-        </div>
+<div class="container" *ngIf="showForm">
+    <div class="formBox mt-3 pb-3">
+        <div class="topic border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary ">Edit Unit
+            Details</div>
         <form [formGroup]="unitForm">
             <div class="form-group mb-3">
                 <br>
-                
-                <div class="inputField">
+
+                <div class="inputField d-flex justify-content-center">
                     <label for="unitName" class="form-label">Unit Name: </label>
-                    <input type="text" class="form-control" formControlName="unitName" id="unitName" placeholder="Enter Unit Name">
+                    <input type="text" class="form-control" formControlName="unitName" id="unitName"
+                        placeholder="Enter Unit Name">
                 </div>
             </div>
             <div class="form-group mb-3">
-                
-                <div class="inputField">
+
+                <div class="inputField d-flex justify-content-center">
                     <label for="parentUnit" class="form-label">Parent Unit: </label>
-                    <select class="form-select" formControlName="parentId" id="parentUnit" style="color: #c3c0ce;">
+                    <select class="form-select" formControlName="parentId" id="parentUnit">
                         <option disabled selected>Select Parent Unit</option>
                         <option *ngFor="let unit of orgunits" [value]="unit.unitId">{{unit.unitId}}</option>
                     </select>
                 </div>
             </div>
             <div class="form-group mb-3">
-                <div class="inputField">
+                <div class="inputField d-flex justify-content-center">
                     <label for="description" class="form-label">Description: </label>
-                    <textarea name="description" class="form-control" formControlName="description" id="description" cols="50" rows="5"></textarea>
+                    <textarea name="description" class="form-control" formControlName="description" id="description"
+                        cols="50" rows="5"></textarea>
                 </div>
             </div>
-            
-            <div class="editAndDelete">
-                <button type="button" class="btn btn-outline-secondary cancelButton" >Cancel</button>
-           </div>
 
-           <div class="editAndDelete">
-               <button type="button" class="btn btn-outline-primary editButton">Edit</button><!--(click)="onEdit()"-->
-           </div> 
+            <div class="editAndDelete">
+                <button type="button" class="btn btn-outline-secondary cancelButton col-4" (click)="onCancel()">Cancel</button>
+            </div>
+
+            <div class="editAndDelete">
+                <button type="button" class="btn btn-outline-primary editButton col-4"
+                    (click)="onEditUnit(this.unitForm.value)">Edit</button><!--(click)="onEdit()"-->
+            </div>
         </form>
     </div>
 </div>
-
-

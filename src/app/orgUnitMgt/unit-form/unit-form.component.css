@@ -1,30 +1,20 @@
+
 .formBox {
-    width: 50%;
     float: inline-start;
-    margin-top: 10px;
-    padding-bottom: 10px;
+    padding-left: 2%;
+    padding-right: 2%;
     border: 1px #ced2d9 solid;
     border-radius: 5px;
     position: relative;
 }
 
-.topic {
-    background-color: #7752fe;
-    padding: 5px;
-    text-align: center;
-    width: 50%;
-    margin: 5px auto;
-    color: white;
-    border-radius: 5px;
-}
-
 .form-label {
-    color: #7752fe;
-    font-weight: bold;
+    color: #1e3895e1;
+    font-weight: 500;
 }
 
 ::placeholder {
-  color: #c3c0ce; /* Change this to your desired color */
+  color: #c3c0ce;
 }
 
 .form-group label {
@@ -46,42 +36,34 @@
 } 
 
 .addButton {
-    /* padding : 2px 100px;  */
-   width: 20%;
-   color: #7752fe;
-   background-color: white;
-   border: #7752fe 1px solid;
-   border-radius: 5px;
-   margin:0 25%;
-   /* display: flex;
-   align-items: center;
-   justify-content: center; */
-   padding: 5px;
+    width: 70%;
+    /* Set the width for desktop */
+    height: 40px;
+    font-weight: 500;
+    background-color: #fefefe;
+    border: .5px solid #b4a0ff88;
+    border-radius: 10px;
+    color: #1e3895;
+    margin-top: 3%;
+    margin-left: 2%;
+    content: fit-content;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    /* Add subtle elevation */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Add padding */
+    padding: 0 15px;
+    /* Center text vertically */
+    line-height: 40px;
+    /* Ensure text fits within the button */
+    white-space: nowrap;
+    /* Prevent wrapping */
+    overflow: hidden;
+    /* Hide overflow text */
+    text-overflow: ellipsis;
 }
 
-.addButton:hover {
-   background-color: #04175a;
-   color: white;
-}
-
-.inputField {
-    /* margin-left: 10px; */
-    display: flex;
-    justify-content: center;
-    color: #7752fe;
-}
-
-/* .inputField p {
-    flex: 50%;
-    float: right;
-}
-
-.inputField .form-control {
-    flex: 50%;
-    float: left;
-} */
-
-.add {
-    display: flex;
-    justify-content: center;
+.addButton:hover,
+.addButton:active {
+    background-color: #1e3895;
+    color: #FEFEFE;
 }
