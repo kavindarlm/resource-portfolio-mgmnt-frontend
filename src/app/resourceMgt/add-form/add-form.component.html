@@ -28,7 +28,7 @@
                     <select class="form-select inputBox" formControlName="roleId"
                         [ngClass]="{'is-invalid': resourceForm.controls['roleId'].invalid && resourceForm.controls['roleId'].touched}"
                         id="jobRole">
-                        <option disabled selected="selected">Select Job Role</option>
+                        <option disabled selected value="">Select Job Role</option>
                         <option *ngFor="let role of jobroles" [value]="role.roleId">{{role.roleName}}</option>
                     </select>
                 </div>
@@ -40,7 +40,7 @@
                     <select class="form-select inputBox" formControlName="unitId"
                         [ngClass]="{'is-invalid': resourceForm.controls['unitId'].invalid && resourceForm.controls['unitId'].touched}"
                         id="orgUnit">
-                        <option disabled selected="selected">Select Organizational Unit</option>
+                        <option disabled selected value="">Select Organizational Unit</option>
                         <option *ngFor="let unit of orgunits" [value]="unit.unitId">{{unit.unitName}}</option>
                     </select>
                 </div>
