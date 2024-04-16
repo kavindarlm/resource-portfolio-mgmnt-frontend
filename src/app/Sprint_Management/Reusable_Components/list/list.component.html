@@ -16,7 +16,7 @@
                             <tr *ngFor="let sprint of sprints">
                                 <td>
                                     <app-project-buttuns [btnClss]="'btn-costom'"
-                                        [text]="sprint.Sname" routerLink="sprintmgt/{Sname:sprint.Sname}"></app-project-buttuns>
+                                        [text]="sprint.Sname" routerLink="sprintmgt/{{sprint.Sname}}"></app-project-buttuns>
                                 </td>
                             </tr>
 
@@ -29,8 +29,8 @@
 
                             <tr>
                                 <td>
-                                    <app-project-buttuns [btnClss]="'addproject'" [text]="'Add New Sprint'"
-                                        routerLink="createform"></app-project-buttuns>
+                                    <button 
+                                        routerLink="createform">Add New Sprint</button>
 
                                 </td>
                             </tr>

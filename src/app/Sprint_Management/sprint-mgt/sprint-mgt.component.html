@@ -13,10 +13,10 @@
 
   <div class="row mb-5">
     <div class="col">
-      <div class="mx-auto border rounded p-3 text5 fw-bold">Start Date - 2024/01/01</div>
+      <div class="mx-auto border rounded p-3 text5 fw-bold">Start Date  - {{ startDate }}</div>
     </div>
     <div class="col">
-      <div class="mx-auto border rounded p-3 text5 fw-bold">End Date - 2024/01/01</div>
+      <div class="mx-auto border rounded p-3 text5 fw-bold">End Date- {{ endDate }}</div>
     </div>
   </div>
 
@@ -30,10 +30,17 @@
       <button class="btn btn-primary text5 fw-bold" type="button">Edit Sprint</button>
     </div>
     <div class="float-end">
-      <button type="button" class="btn btn-outline-danger text6 fw-bold">Delete Sprint</button>
+      <button type="button" class="btn btn-outline-danger text6 fw-bold" routerLink="deleteSprint/{{ sprintName }}" >Delete Sprint</button>
     </div>
+      
   </div>
 
   <br/>
 
 </div>
+
+<router-outlet></router-outlet>
+
+
+
+

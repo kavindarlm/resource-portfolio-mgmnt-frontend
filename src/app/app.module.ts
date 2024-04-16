@@ -58,6 +58,7 @@ import { UserDetailComponent } from './admin-dashboard/user-detail/user-detail.c
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SpinnerComponent } from './spinner/spinner/spinner.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DeleteSprintPopupComponent } from './Sprint_Management/Reusable_Components/delete-sprint-popup/delete-sprint-popup.component';
 
 
 @NgModule({
@@ -105,7 +106,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FunctionManagementComponent,
     FunctionButtonComponent,
     UserDetailComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    DeleteSprintPopupComponent
   ],
   imports: [
     BrowserModule,

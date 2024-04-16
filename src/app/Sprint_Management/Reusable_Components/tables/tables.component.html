@@ -1,36 +1,42 @@
+<div class="row">
 <div class="table-responsive">
-    <table class="table text spacing table-hover">
-      <thead>
-        <tr>
-          <th class="headingblock" *ngFor="let head of HeadArray">{{ head }}</th>
+  <table class="table text spacing table-hover">
+    <!-- Table header -->
+    <thead>
+      <tr>
+        <th class="headingblock" *ngFor="let head of HeadArray">{{ head }}</th>
+      </tr>
+    </thead>
+    <!-- Table body -->
+    <tbody>
+      <!-- Iterate over GridArray to populate table rows -->
+      <ng-container *ngFor="let items of GridArray">
+        <tr (click)="navigateToAvailability(items.Resource_ID)">
+          <td *ngFor="let head of HeadArray">{{ items[head] }}</td>
         </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngFor="let items of GridArray">
-          <tr (click)="detectComp('availability')">
-            <td *ngFor="let head of HeadArray">{{ items[head] }}</td>
-          </tr>
-        </ng-container>
-      </tbody>
-    </table>
-    <nav>
-      <ul class="pagination d-flex justify-content-center">
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">&lsaquo;</span>
-          </a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">...</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Next">
-            <span aria-hidden="true">&rsaquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <ng-container *ngComponentOutlet="comp"></ng-container>
-  
-  
+      </ng-container>
+    </tbody>
+  </table>
+  <!-- Pagination -->
+  <nav>
+    <ul class="pagination d-flex justify-content-center">
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&lsaquo;</span>
+        </a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">...</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&rsaquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+<router-outlet></router-outlet>
+</div>
+<!-- Router Outlet to display the navigated component -->
+

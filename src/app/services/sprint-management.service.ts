@@ -19,6 +19,15 @@ export class SprintManagementService {
     return this.http.post<any>(url, sprintData);
   }
 
+  getSprintDetailsByName(sprintName: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/sprint/${sprintName}`);
+  }
+
+  deleteSprint(sprintName: string): Observable<any> {
+    const url = `${this.baseUrl}/sprint/${sprintName}`;
+    return this.http.delete<any>(url);
+  }
+
 
   
 }

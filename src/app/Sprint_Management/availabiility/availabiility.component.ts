@@ -1,11 +1,42 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener} from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ResourceService } from '../../services/resource.service';
 @Component({
   selector: 'app-availabiility',
   templateUrl: './availabiility.component.html',
   styleUrl: './availabiility.component.css'
 })
 export class AvailabiilityComponent  {
+
+  resourceId: string = '';
+  resourceDetails: any = {};
+
+  constructor(
+    private route: ActivatedRoute,
+    private resourceService: ResourceService
+  ) {}
+
+  ngOnInit(): void {
+    // Retrieve resource ID from route parameters
+    this.route.params.subscribe(params => {
+      this.resourceId = params['id'];
+      // Fetch resource details using the resource ID
+      this.fetchResourceDetails();
+    });
+  }
+  fetchResourceDetails(): void {
+    // Call the resource service to fetch resource details
+    this.resourceService.getResourceById(this.resourceId).subscribe(
+      (data: any) => {
+        this.resourceDetails = data;
+      },
+      (error: any) => { // Specify the type of error parameter explicitly
+        console.error('Error fetching resource details:', error);
+      }
+    );
+  }
+  
+
   deleteContent(){
     
   }
@@ -16,37 +47,5 @@ export class AvailabiilityComponent  {
   AddPercentages(){
     
   }
-  // inputValue: number = 0;
   
-  // @ViewChild('range', { static: true }) rangeInput!: ElementRef;
-
-  // ngOnInit() {
-  //   this.updateThumbPosition();
-  // }
-
-  // @HostListener('window:resize', ['$event'])
-  // onResize(event: Event) {
-  //   this.updateThumbPosition();
-  // }
-
-  // onRangeInput() {
-  //   this.updateThumbPosition();
-  // }
-
-  // private updateThumbPosition() {
-  //   const rangeInput = this.rangeInput.nativeElement as HTMLInputElement;
-  //   const thumb = document.querySelector('.range-thumb') as HTMLElement;
-
-  //   if (rangeInput) {
-  //     const max = parseInt(rangeInput.max, 10);
-  //     const thumbWidth = thumb.clientWidth;
-
-  //     const value = parseInt(rangeInput.value, 10);
-  //     const text = value >= max ? '100' : value;
-  //     const xPX = (value * (rangeInput.clientWidth - thumbWidth)) / max;
-
-  //     thumb.style.left = `${xPX}px`;
-  //     thumb.setAttribute('data-val', text.toString());
-  //   }
-  // }
 }

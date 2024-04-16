@@ -33,32 +33,6 @@
   background-color: #7752fe;
 }
 
-
-/* Add media queries for responsiveness */
-/* @media (min-width: 576px) {
-  .box1 {
-      max-width: 540px;
-  }
-}
-
-@media (min-width: 768px) {
-  .box1 {
-      max-width: 720px;
-  }
-}
-
-@media (min-width: 992px) {
-  .box1 {
-      max-width: 960px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .box1 {
-      max-width: 1140px;
-  }
-} */
-
 /* Button Styles */
 .btn-primary {
   display: inline-block;
