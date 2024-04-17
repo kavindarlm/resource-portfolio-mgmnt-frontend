@@ -1,4 +1,4 @@
-import { Component, OnInit,OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 import { UserModel } from '../dashboard-model/userModel';
@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 })
 export class UserListComponent implements OnInit, OnDestroy {
 
-  constructor(private router: Router, private dashboardService: DashboardService, private spinner: NgxSpinnerService ,private sharedService : SharedService) { }
+  constructor(private router: Router, private dashboardService: DashboardService, private spinner: NgxSpinnerService, private sharedService: SharedService) { }
 
   usersData: undefined | UserModel[];
   private subscription!: Subscription;
@@ -28,7 +28,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
@@ -43,6 +43,11 @@ export class UserListComponent implements OnInit, OnDestroy {
     } catch (error) {
       console.log("error", error)
     }
+  }
+
+  addNewUser() {
+    this.sharedService.setAddNewUserClicked(true);
+    this.sharedService.updateFunctionIds([]);
   }
 
 }

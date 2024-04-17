@@ -6,6 +6,7 @@ import { SharedService } from '../admin-dashboard-services/shared.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UsersFunctionModel } from '../dashboard-model/usersFunctionModel';
+import { take } from 'rxjs/operators';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { UsersFunctionModel } from '../dashboard-model/usersFunctionModel';
   styleUrl: './add-new-user.component.css'
 })
 export class AddNewUserComponent implements OnInit {
-  constructor(private router: Router, private formBuilder: FormBuilder, private userService: DashboardService, private sharedService: SharedService, private toastr : ToastrService) { }
+  constructor(private router: Router, private formBuilder: FormBuilder, private userService: DashboardService, private sharedService: SharedService, private toastr: ToastrService) { }
 
   userForm!: FormGroup;
 
@@ -37,19 +38,18 @@ export class AddNewUserComponent implements OnInit {
         // this.sharedService.updateFunctionIds([]);
         this.sharedService.refreshUserList();
         this.showSuccess(Userdata.user_name);
-  
         const userId = res.user_id;
 
-        this.sharedService.functionIds$.subscribe(functionIds => {
-          console.log('Function IDs:', functionIds, 'User ID:', userId);
+        this.sharedService.functionIds$.pipe(take(1)).subscribe(functionIds => {
 
           const userFunctionModel: UsersFunctionModel = {
             user_id: userId,
             functionIds: functionIds
           };
-          console.log('UserFunctionModel:', userFunctionModel);
-          this.userService.addUserFunction(userFunctionModel).subscribe
 
+          this.userService.addUserFunction(userFunctionModel).subscribe((res) => {
+          });
+          // this.sharedService.updateFunctionIds([]);
         });
         this.router.navigate(['/admin-dashboard']);
       });
@@ -59,7 +59,7 @@ export class AddNewUserComponent implements OnInit {
   }
 
   showSuccess(username: string) {
-    this.toastr.success(`${username} added successfully`, 'User Added',{
+    this.toastr.success(`${username} added successfully`, 'User Added', {
       timeOut: 3000,
     });
   }

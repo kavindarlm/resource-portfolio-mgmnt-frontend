@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Console } from 'console';
 import { DashboardService } from '../admin-dashboard-services/dashboard.service';
@@ -6,6 +6,8 @@ import { UserModel } from '../dashboard-model/userModel';
 import { SharedService } from '../admin-dashboard-services/shared.service';
 import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { UsersFunctionModel } from '../dashboard-model/usersFunctionModel';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-detail',
@@ -13,10 +15,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrl: './user-detail.component.css'
 })
 export class UserDetailComponent implements OnInit, OnDestroy {
-  constructor(private activeRoutData: ActivatedRoute, private dashboardService: DashboardService, private router: Router, private sharedService: SharedService, private spinner: NgxSpinnerService) { }
+  constructor(private activeRoutData: ActivatedRoute, private dashboardService: DashboardService, private router: Router, private sharedService: SharedService, private spinner: NgxSpinnerService, private toastr: ToastrService) { }
 
   public userid!: number;
   private subscription!: Subscription;
+  public functionIds!: number[];
 
   userForm: UserModel =
     {
@@ -24,6 +27,11 @@ export class UserDetailComponent implements OnInit, OnDestroy {
       user_email: '',
       user_id: 0
     };
+
+  functionForm: UsersFunctionModel = {
+    user_id: 0,
+    functionIds: []
+  };
 
   ngOnInit(): void {
     this.getuserIdFromrout();
@@ -35,14 +43,15 @@ export class UserDetailComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
     }
   }
-  
+
   // Function to get the user_id from the route
   async getuserIdFromrout() {
     try {
       this.activeRoutData.paramMap.subscribe((param: Params) => {
         this.userid = param['get']('id');
-        console.log(this.userid);
+        // console.log(this.userid);
         this.getUserDetail();
+        this.getUserFunctions();
       })
     } catch (error) {
       console.error('Error getting user ID from route:', error);
@@ -56,6 +65,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
       this.spinner.show();
       await this.dashboardService.getSingleUser(this.userid).subscribe((data: UserModel) => {
         this.userForm = data;
+        console.log(this.userForm.user_id);
         this.spinner.hide();
       })
     } catch (error) {
@@ -64,7 +74,6 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   }
 
   // Function to edit the user details
-
   editUserDetail() {
     this.dashboardService.editUser(this.userid, this.userForm).subscribe((res) => {
       console.log(res);
@@ -74,11 +83,52 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
   // Function to delete the user details
   deleteUserDetail() {
-    this.dashboardService.deleteUser(this.userid).subscribe((res) => {
-      console.log(res);
-      this.sharedService.refreshUserList();
-      this.router.navigate(['/admin-dashboard']);
+    this.dashboardService.deleteUser(this.userid).subscribe(
+      (res) => { // Success callback
+        console.log(res);
+        this.sharedService.refreshUserList();
+        this.showSuccess(this.userForm.user_name);
+        this.router.navigate(['/admin-dashboard']);
+      },
+      (err) => { // Error callback
+        console.error('Error deleting user:', err);
+        // Handle the error here. For example, you could show an error message to the user.
+      }
+    );
+  }
+
+  // function to get the user functions
+  getUserFunctions() {
+    this.dashboardService.getUserFunction(this.userid).subscribe((data: UsersFunctionModel) => {
+      this.functionForm = data;
+      this.functionIds = data.functionIds;
+      this.sharedService.updateFunctionIds(this.functionIds);
+      this.sharedService.setFunctionIds1(this.functionIds);
+    });
+  }
+  // Function to edit the user functions
+  editUserFunctions() {
+    this.subscription = this.sharedService.functionIds1$.subscribe(ids => {
+      this.functionForm.functionIds = ids;
+      this.dashboardService.editUserFunction(this.userid, this.functionForm).subscribe((data: UsersFunctionModel) => {
+        this.functionForm = data;
+        this.sharedService.refreshUserList();
+        this.editSuccess(this.userForm.user_name);
+        this.router.navigate(['/admin-dashboard']);
+      });
     });
   }
 
-} 
+  showSuccess(username: string) {
+    this.toastr.success(`${username} Delete successfully`, 'Deleted User', {
+      timeOut: 3000,
+    });
+  }
+
+  editSuccess(username: string) {
+    this.toastr.success(`${username} Edit successfully`, 'Edited User', {
+      timeOut: 3000,
+    });
+  }
+}
+

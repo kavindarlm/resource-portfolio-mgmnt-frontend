@@ -19,7 +19,7 @@ export class DashboardService {
     }
 
     //Get All users
-    async getUser(){
+    async getUser() {
         return await this.http.get<UserModel[]>('http://localhost:3000/api/findAll');
     }
 
@@ -44,8 +44,18 @@ export class DashboardService {
     }
 
     //add user functions
-    addUserFunction(userFunction : UsersFunctionModel){
+    addUserFunction(userFunction: UsersFunctionModel) {
         return this.http.post<UsersFunctionModel>('http://localhost:3000/users-function/registerUsersFunction', userFunction);
+    }
+
+    //get user functions
+    getUserFunction(id: number) {
+        return this.http.get<UsersFunctionModel>('http://localhost:3000/users-function/getUserFunction/' + id);
+    }
+
+    //edit user functions
+    editUserFunction(id: number, userFunction: UsersFunctionModel) {
+        return this.http.patch<UsersFunctionModel>('http://localhost:3000/users-function/updateUserFunction/' + id, userFunction);
     }
 
 }
