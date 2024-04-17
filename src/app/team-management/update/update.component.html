@@ -1,124 +1,105 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-6 ">
-        <form class="form border rounded p-2">
-          <div>
-            <button class="new-team btn border rounded text-center mb-2">
-              Create New Team
-            </button>
-          </div>
+  <div class="row no-gutters">
+    <div class="col-12 col-md-6">
+      <form class="form border rounded p-3">
 
-          <div class="title-team">
-            <p>Team Name:</p>
-          </div>
+        <div>
+          <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Create New Team</div>
+        </div>
 
-          <div class="form-group align-items-center">
-            <label for="team-name">Name</label>
-            <input
-              type="text"
-              class="form-control input"
-              [(ngModel)]="teamData.teamName"
-              name="teamName"
-              placeholder="Enter Team Name"
-            />
+        <div class="form-goup row-label mb-2">
+          <label class="pm-label fw-medium mb-2" for="teamName">Team Name:</label>
+          <div class="form-group row row-label">
+            <div class="form-group align-items-center">
+              <label for="teamName" class="text-primary">Name</label>
+              <input type="text" class="form-control " [(ngModel)]="teamData.teamName" name="teamName"
+                placeholder="Enter Team Name">
+            </div>
           </div>
+        </div>
 
-          <div class="title-description">
-            <p>Description:</p>
+        <div class="form-goup row-label mb-2">
+          <label class="pm-label fw-medium mb-2" for="Description">Description:</label>
+          <div class="form-group row row-label">
+            <div class="form-group align-items-center">
+              <label for="description" class="text-primary">Description</label>
+              <input type="text" class="form-control" [(ngModel)]="teamData.description" name="description"
+                placeholder="Enter Description">
+            </div>
           </div>
+        </div>
 
-          <div class="form-group align-items-center">
-            <label for="description">Description</label>
-            <input
-              type="text"
-              class="form-control input"
-              [(ngModel)]="teamData.description"
-              name="description"
-              placeholder="Enter Description"
-            />
+        <hr />
+
+        <div>
+          <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Team Resource List
           </div>
-          <hr />
+        </div>
 
-          <div>
-            <button class="new-resource btn border rounded text-center mb-2">
-              Team Resource List
-            </button>
-          </div>
+        <!-- <table class="add-resource-table"> -->
+        <div class="table-responsive-sm  table-responsive-md table-responsive">
+          <table class="table table-bordered table-striped table-hover table-sm">
 
-          <!-- <table class="add-resource-table"> -->
-          <table class="table table-bordered mt-2">
-            <thead>
+            <thead class="thead-dark fs-6 fst-normal">
               <tr class="border-0">
                 <th scope="col" class="col-4 border-0">
-                  <div class="tbtn border rounded text-center p-1">
-                    Resource Id
-                  </div>
+                  <div class="tbtn border rounded text-center p-1">Resource Id</div>
                 </th>
                 <th scope="col" class="col-4 border-0">
-                  <div class="tbtn border rounded text-center p-1">
-                    Job Role
-                  </div>
+                  <div class="tbtn border rounded text-center p-1">Job Role</div>
                 </th>
                 <th scope="col" class="col-4 border-0">
-                  <div class="tbtn border rounded text-center p-1">
-                    Org. Unit
-                  </div>
+                  <div class="tbtn border rounded text-center p-1">Org. Unit</div>
                 </th>
               </tr>
             </thead>
-            <!-- changed here -->
-            <tbody *ngFor="let resource of teamData.resources; let i = index">
+            <tbody *ngFor="let resource of teamData.resources; let i = index" class="border text-center">
               <tr>
-                <td class="col-4">
+                <td class="col-4 border text-center">
                   {{ resource.id }}
                 </td>
-                <td class="col-4">
-                  {{ resource.jobRole.role_name }} <!-- updated to access the role_name -->
+                <td class="col-4 border text-center">
+                  {{ resource?.jobRole?.role_name }} <!-- to access the role_name -->
                 </td>
-                <td class="col-4">
-                  {{ resource.orgUnit.unit_name }} <!-- updated to access the unit_name -->
+                <td class="col-4 border text-center">
+                  {{ resource?.orgUnit?.unit_name }} <!-- to access the unit_name -->
                 </td>
               </tr>
             </tbody>
           </table>
+        </div>
 
-          <div class="addResourceBtn col-6">
-            <app-new-team-button
-              [text]="'Add Resources ID'"
-              
-            ></app-new-team-button>
+        <div class="addResourceBtn col-6">
+          <app-new-team-button [text]="'Add Resources ID'" (click)="toggleResourceTable()"></app-new-team-button>
+        </div>
+        <hr />
+
+        <div class="addResourceBtn col-6">
+          <app-new-team-button [text]="'Create Team'" value="Create Team"></app-new-team-button>
+        </div>
+
+        <hr />
+
+        <div class="updatebox row col-12 ">
+          <div class="col-6">
+            <button class="btn  btn-md editbtn w-60 btn-outline-primary ml-1" (click)="edit()">Edit</button>
           </div>
-          <hr />
-
-          <div class="addResourceBtn col-6">
-            <app-new-team-button
-              [text]="'Create Team'"
-              value="Create Team"
-            ></app-new-team-button>
+          <div class="col-6">
+            <button class="btn btn-md btn-outline-danger deletebtn w-60 float-right "
+              (click)="generalservice.showDialog = true"> Delete</button>
           </div>
+        </div>
+      </form>
 
-          <hr />
+    </div>
 
-          <div class="updatebox">
-            <button class="btn editbtn" (click)="edit()">Edit</button>
-            <button
-              class="btn deletebtn"
-              (click)="generalservice.showDialog = true"
-            >
-              Delete
-            </button>
-            <!-- <pre>{{teamData|json}}</pre> -->
-          </div>
-        </form>
-
-      </div>
-
-      <!-- <div class="resourceTableBox"> -->
-      <div class="col-6">
-      <app-update-resourc-table></app-update-resourc-table>
-      </div>
+    <!-- <div class="resourceTableBox"> -->
+    <div class="col-12 col-md-6">
+      <app-update-resourc-table *ngIf="showResourceTable" [teamId]="teamId"
+        (resourceSelected)="handleResourceSelection($event)"></app-update-resourc-table>
     </div>
   </div>
+</div>
 
 
 <!-- delete popup -->

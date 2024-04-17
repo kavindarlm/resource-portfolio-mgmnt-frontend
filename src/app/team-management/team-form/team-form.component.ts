@@ -26,11 +26,6 @@ export class TeamFormComponent implements OnInit {
       description: ['', Validators.required],
       selectedResources: this.formbuilder.array([]) // Initialize selectedResources as a FormArray
     });
-
-    // this.service.selectedResources$.subscribe((resources) => {
-    //   this.selectedResources = resources;
-    //   this.updateSelectedResourcesFormArray();
-    // });
     this.service.selectedResources$.subscribe(
       data => {
         this.selectedResources = data;
@@ -39,9 +34,6 @@ export class TeamFormComponent implements OnInit {
         console.error(error);
       }
     );
-
-
-  
   }
 
   toggleResourceTable() {

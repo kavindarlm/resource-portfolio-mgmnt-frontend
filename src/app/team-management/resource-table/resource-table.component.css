@@ -4,16 +4,20 @@ table{
      
 }
 
- td {
-    color: #7752FE;
+th{
+    color: #1e3895e1;
+    font-weight: 500;
 }
 
+td{
+    color:rgba(0, 0, 255, 0.575);
+    font-weight: 300;
+}
 
-.tbtn{
-    background-color:  #C2D9FF;
-    border: 1px solid #C2D9FF;
-    color: #190482;
-
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #3b5edd;
+    color: white;
+    cursor: pointer;
 }
 
 .systemResource{
@@ -24,16 +28,13 @@ table{
     
 }
 
-.selectBtn{
-    background-color:  #FEFEFE;
-    border-color: #7752FE ;
-    color: #7752FE;
-   
-
+.row.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
 }
 
+.row.no-gutters > [class^="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}
 
-.selectBtn.selected {
-    background-color: #1E3895;
-    color: white;
-  }

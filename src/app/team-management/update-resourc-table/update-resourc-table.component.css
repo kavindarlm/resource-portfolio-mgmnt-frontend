@@ -1,34 +1,38 @@
-
-table{
-    width:100% ;
-     
-}
-
- td {
-    color: #7752FE;
-}
-
-
-.tbtn{
-    background-color:  #C2D9FF;
-    border: 1px solid #C2D9FF;
-    color: #190482;
+table {
+    width: 100%;
 
 }
 
-.systemResource{
+th {
+    color: #1e3895e1;
+    font-weight: 500;
+}
+
+td {
+    color: rgba(0, 0, 255, 0.575);
+    font-weight: 300;
+}
+
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+    background-color: #3b5edd;
+    color: white;
+    cursor: pointer;
+}
+
+.systemResource {
     background-color: #7752FE;
     color: #FEFEFE;
     width: 100%;
-    
-    
+
+
 }
 
-.selectBtn{
-    background-color:  #FEFEFE;
-    border-color: #7752FE ;
+.selectBtn {
+    background-color: #FEFEFE;
+    border-color: #7752FE;
     color: #7752FE;
-   
+
 
 }
 
@@ -36,4 +40,18 @@ table{
 .selectBtn.selected {
     background-color: #1E3895;
     color: white;
-  }
+}
+
+.same-team {
+    background-color: red;
+}
+
+.row.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.row.no-gutters>[class^="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}

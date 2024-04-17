@@ -1,19 +1,14 @@
-.main{
-    margin-left: 1%;
-}
-
 .form {
-    color: #7752FE;
+    color: #1e3895e1;
 
 }
 
-.new-team,
-.new-resource{
-    background-color: #7752FE;
-    border-color: #7752FE;
-    color: #FEFEFE;
-    width: 100%;
-    pointer-events: none;
+.form-group {
+    margin-bottom: 1%; 
+    display: flex; 
+    margin-left: 1%;
+    
+   
 }
 
 .title-team,
@@ -21,124 +16,64 @@
     font-weight: bold;
 }
 
-.form-group {
-    margin-bottom: 1%; 
-    display: flex; 
-    margin-left: 5%;
-   
-}
-
 label {
     display: inline-block; 
-    width: 25%; 
-    margin-right: 1%; 
+    margin-right: 1%;
+    
     
 }
 
-td {
-    border: solid #8691A833;
-    color: #7752FE;
-    
+th{
+    color: #1e3895e1;
+    font-weight: 500;
+}
+
+td{
+    color:rgba(0, 0, 255, 0.575);
+    font-weight: 300;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #3b5edd;
+    color: white;
+    cursor: pointer;
 }
 
 
-.tbtn{
-    background-color:  #C2D9FF;
-    border-color:#C2D9FF;
-    color: #190482;
-    width: 100%;
-    
-   
-}
-
-
-
-/* placeholder for input feilds */
-::placeholder {
-    color: #C2D9FF;
-}
-
-/* form validation input feild getting red */
-input.ng-invalid.ng-touched {
-    border: red 2px solid;
-}
 
 .addResourceBtn{
     margin-left: 20%;
     
 }
 
-/* create team button */
-.createTeamBtn{
-    background-color: #FEFEFE;
-    border: 2px solid #CBCBCB;
-    border-radius: 8px;
-    color: #7752FE;
-    text-align: center;
-    text-decoration: bold;
-    display: inline-block;
-    width: 188px;
-    height: 39px;
-    margin-top: 1px;
-    margin-left: 80px;
-    margin-right: 10px;
+::placeholder {
+    color: #C2D9FF;
 }
 
-/* div for whole form and table */
-.formBox{
-    width: fit-content;
-    height: 100%;  
-    border: 1px solid #ccc;  
-    margin: 10px;
-    border-radius: 8px; 
-}
-
-.resourceTableBox{
-    width: fit-content;
-    height: 100%;  
-    /* border: 1px solid #ccc;  
-    margin: 10px;
-    border-radius: 8px;  */
-
-    
-}
-
-.box{
-  display: grid;
-  grid-template-columns: auto auto;
-  column-gap: 10px;
+input.ng-invalid.ng-touched {
+    border: red 2px solid;
 }
 
 
-.tableinputfeild{
-    background-color: none;
-    width: 100px;
-    border: none;
-}
-
-.updatebox{
-    display: grid;
-    grid-template-columns: auto auto;
-
-}
 
 .editbtn{
-    border:1px solid #7752FE;
-    border-radius: 2px;
-    color:#7752FE;
-    width: 50%;
     margin-left: 15%;
 }
- 
-.deletebtn{
-    border:1px solid red;
-    border-radius: 2px;
-    color:red;
-    width:40%;
-    margin-left: 35%;
 
+.deletebtn{
+    margin-left: 50%;
 }
 
 .input{
     color:#7752FE;
+}
+
+.row.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.row.no-gutters > [class^="col-"] {
+    padding-right: 0;
+    padding-left: 0;
 }

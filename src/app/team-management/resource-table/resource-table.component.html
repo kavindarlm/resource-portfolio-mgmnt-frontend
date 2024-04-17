@@ -1,9 +1,9 @@
 <div class="container-fluid">
-    <div class="row border rounded">
+    <div class="row border rounded no-gutters p-2">
         <div class="col-12 col-md-12">
-            <div class="resourcebody p-1 mt-1">
+            <div class="resourcebody ">
                 <div>
-                    <button class="systemResource btn border rounded text-center mb-1">System Resource List</button>
+                    <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">System Resource List</div>
                 </div>
 
                 <!-- new code-for search bar -->
@@ -14,8 +14,8 @@
                 </div>
 
                 <div class="table-responsive-sm  table-responsive-md table-responsive">
-                    <table class="table table-bordered p-1">
-                        <thead>
+                    <table class="table table-bordered table-striped table-hover table-sm text-center">
+                        <thead class="thead-dark fs-6 fst-normal">
                             <tr class="border-0">
                                 <th scope="col" class="col-3 border-0">
                                     <div class="tbtn border rounded text-center ">Resource Id</div>
@@ -35,12 +35,29 @@
                                 <td class="text-center ">{{resource.roleName}}</td>
                                 <td class="text-center ">{{resource.unitName}}</td>
                                 <td>
-                                    <button class="selectBtn btn border rounded" (click)="onSelect(resource)"
+                                    <button class="btn btn-outline-primary w-100  custom-button btn-sm curser " (click)="onSelect(resource)"
                                         [ngClass]="{ 'selected': isSelected(resource) }">Select</button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                    <nav>
+                        <ul class="pagination d-flex justify-content-center">
+                          <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                              <span aria-hidden="true">&lsaquo;</span>
+                            </a>
+                          </li>
+                          <li class="page-item"><a class="page-link" href="#">1</a></li>
+                          <li class="page-item"><a class="page-link" href="#">2</a></li>
+                          <li class="page-item"><a class="page-link" href="#">...</a></li>
+                          <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                              <span aria-hidden="true">&rsaquo;</span>
+                            </a>
+                          </li>
+                        </ul>
+                      </nav>
                 </div>
             </div>
         </div>

@@ -11,10 +11,12 @@ export interface OrgUnit {
 }
 
 export interface Resource {
+  resourceId: any;
   id: number;
   resourceName: string;
   jobRole: JobRole;
   orgUnit: OrgUnit;
+  teamId: number;
 }
 
 export interface dataModel {
