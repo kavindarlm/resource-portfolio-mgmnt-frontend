@@ -21,10 +21,6 @@
     width: 25%;
 } 
 
-::placeholder {
-    color: #c3c0ce;
-}
-
 .form-group label {
     display: block;
 
