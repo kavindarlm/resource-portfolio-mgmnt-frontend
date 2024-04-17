@@ -15,15 +15,18 @@ import { OrgUnitService } from '../../shared/sevices_resourceMgt/orgUnit.service
 export class FirstViewComponent implements OnInit {
 
   showResourceDetails: boolean = false;//first not to show the form
-  searchText:any;
-  // searchText: '';
+  // searchText:ResourceModel[] | undefined;
+  searchText: any;
   resourceList: ResourceModel[] | undefined;
   jobroles: JobRoleModel[] | undefined; //creating an array for jobroles
   orgunits: OrgUnitModel[] | undefined; //creating an array for orgunits
   resourceObject: any;
   showForm = false;
 
-  constructor(private http: HttpClient, private resourceService: ResourceService, private jobRoleService: JobRoleService, private orgUnitService: OrgUnitService) { }
+  constructor(private http: HttpClient, private resourceService: ResourceService, private jobRoleService: JobRoleService, private orgUnitService: OrgUnitService) {
+    // this.resourceService.getResources();
+    // this.searchText = this.resourceList;
+   }
 
 
   ngOnInit(): void {

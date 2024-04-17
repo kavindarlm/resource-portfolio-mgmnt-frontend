@@ -17,16 +17,16 @@
 }
 
 .formDetailBox {
-    border: #c3c0ce 1px solid;
-    padding-right: 5px;
+    border: 1px #ced2d9 solid;
+    padding-right: 2%;
     padding-bottom: 3%;
     border-radius: 5px;
     margin: 3%;
 }
 
-.form-group label {
+/* .form-group label {
     display: block;
-}
+} */
 
 .form-group p,
 .form-group .form-control,
@@ -40,16 +40,18 @@
 }
 
 .form-group p {
-    margin-right: 10px;
+    margin-right: 3%;
     float: left;
     width: 30%;
     margin-left: 5%;
 }
 
-.inputField {
-    display: flex;
-    justify-content: center;
-    color: #7752fe;
+@media (min-width: 768px) {
+    .inputField {
+        display: flex;
+        justify-content: center;
+        color: #7752fe;
+    }
 }
 
 .deleteButton {
@@ -61,11 +63,7 @@
 @media screen and (max-width: 768px) {
     .formBox {
         width: 100%;
-        margin: 10px 0;
-    }
-
-    .topic {
-        width: 90%;
+        margin: 3% 0;
     }
 
     .editButton {
@@ -78,12 +76,10 @@
         margin: 0 5%;
     }
 
-    .inputField .form-control,
-    .inputField .form-select {
-        width: 90%;
-    }
 
-    .form-group p {
-        margin-right: 5px;
-    }
+.form-group .form-control,
+.form-group .form-select {
+    width: 90%;
+    margin-left: 5%;
+}
 }

@@ -1,13 +1,13 @@
 .formBox {
     width: 100%;
     float: right;
-    padding-bottom: 10px;
+    padding-bottom: 3%;
     border: 1px #ced2d9 solid;
     border-radius: 5px;
 }
 
 .form-group p {
-  display: inline;
+  display: inline-block;
 }
 
 .editButton {
@@ -23,7 +23,7 @@
 .details {
     /* display: flex; */
     border: #c3c0ce 1px solid;
-    padding: 5% 0;
+    padding: 5% 0 5% 0;
     border-radius: 5px;
     margin: 2%;
 }
@@ -53,7 +53,16 @@
 
 /* Adjust the width of the detailButton based on the screen size */
 @media screen and (max-width: 768px) {
+    .details {
+        padding-bottom: 20%;
+    }
+
+    .form-group p {
+        display: block;
+    }
+
     .detailButton {
-        flex-basis: 100%; /* Set the flex basis to 100% on smaller screens */
+        width: 90%;
+        margin-bottom: 2%;
     }
 }

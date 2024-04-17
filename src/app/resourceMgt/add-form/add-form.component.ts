@@ -7,6 +7,7 @@ import { catchError } from 'rxjs';
 import { throwError } from 'rxjs';
 import { JobRoleService } from '../../shared/sevices_resourceMgt/jobRole.service';
 import { OrgUnitService } from '../../shared/sevices_resourceMgt/orgUnit.service';
+// import { v4 as uuidv4 } from 'uuid';
 
 
 @Component({
@@ -24,12 +25,15 @@ export class AddFormComponent implements OnInit {
 
   constructor(private http: HttpClient, private resourceService: ResourceService, private formBuilder: FormBuilder, private jobRoleService: JobRoleService, private orgUnitService: OrgUnitService) { } // Have to include the HttpClient Module in app.model too
   ngOnInit(): void {
+    //Generating a unique Id for the resource
+    var d = new Date().getTime().toString();
+    console.log(d);
     this.loadJobRoles();// calling the loadJobRoles Method
     this.loadOrgUnits();
 
     this.resourceForm = this.formBuilder.group({
       resourceName: ['', Validators.required],
-      resourceId: ['', Validators.required],
+      resourceId: [d],
       roleId: ['', Validators.required],
       unitId: ['', Validators.required]
     });
