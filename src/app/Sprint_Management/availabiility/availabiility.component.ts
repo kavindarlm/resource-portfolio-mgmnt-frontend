@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ResourceService } from '../../services/resource.service';
+import { ResourceAllocationService } from '../../services/resource_allocation.service';
+import { TaskService } from '../../services/task.service';
+
 @Component({
   selector: 'app-availabiility',
   templateUrl: './availabiility.component.html',
@@ -10,18 +13,20 @@ export class AvailabiilityComponent  {
 
   resourceId: string = '';
   resourceDetails: any = {};
+  tasks: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private resourceService: ResourceService
+    private resourceService: ResourceService,
+    private resourceAllocationServices: ResourceAllocationService,
+    private taskService: TaskService 
   ) {}
 
   ngOnInit(): void {
-    // Retrieve resource ID from route parameters
     this.route.params.subscribe(params => {
       this.resourceId = params['id'];
-      // Fetch resource details using the resource ID
       this.fetchResourceDetails();
+      this.fetchTasks();
     });
   }
   fetchResourceDetails(): void {
@@ -35,6 +40,18 @@ export class AvailabiilityComponent  {
       }
     );
   }
+
+  fetchTasks(): void {
+    this.resourceAllocationServices.getTasksByResourceId(this.resourceId).subscribe(
+      (tasks: any[]) => {
+        this.tasks = tasks;
+      },
+      (error: any) => {
+        console.error('Error fetching tasks:', error);
+      }
+    );
+  }
+
   
 
   deleteContent(){

@@ -1,7 +1,7 @@
 <div class="border rounded container">
     <div class="row">
         <div class="col-10">
-            <div class="p-3 mt-3 mb-2 bg-primary text-white text-center border rounded">Availability</div>
+            <div class="p-2 mt-3 mb-2 bg-primary text-white text-center border rounded">Availability</div>
         </div>
         <div class="col-2">
             <button class="border btn shadow-none bd-highlight shadow p-3 mb-3 w-100 mt-3" (click)="deleteContent()">
@@ -26,13 +26,13 @@
         </div>
         <div class="col-7">
             <div class="rounded border mb-5 p-3 ">
-                <div class="p-3 mb-2 bg-secondary text-white text-center rounded border">Add Percentage</div>
+                <div class="p-2 mb-2 bg-primary text-white text-center rounded border bg-opacity-50">Add Percentage
+                </div>
 
-                <div *ngFor="let index of [1,2]" class="row">
-                    <div class="col-4">Project Name
+                <div class="row" *ngFor="let task of tasks">
+                    <div class="col-4">{{ task.projectName }}
                     </div>
-                    <div class="col-4 ms-1">Task Name
-                    </div>
+                    <div class="col-4 ms-1">{{ task.task_name }}</div>
                     <div class="col-2">
                         p
                     </div>
