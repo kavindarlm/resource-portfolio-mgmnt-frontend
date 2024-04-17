@@ -1,7 +1,23 @@
 <div class="border rounded container">
 
-  <div class="d-grid rounded text-white text-center boxclr bd-highlight mx-auto shadow p-3 mb-5 w-100 text mt-3 ">Added
+  <div class="p-3 mt-3 bg-primary text-white text-center border rounded">Added
     Resource List</div>
-  <!-- <app-tables [HeadArray]="HeadArray" [GridArray]="tablecontents"></app-tables> -->
 
-</div>
+  <div class="table-responsive">
+    <table class="table text spacing table-hover">
+      <!-- Table header -->
+      <thead>
+        <tr>
+          <th class="headingblock" *ngFor="let head of HeadArray">{{ head }}</th>
+        </tr>
+      </thead>
+      <!-- Table body -->
+      <tbody>
+
+        <ng-container *ngFor="let items of tablecontents">
+          <tr>
+            <td *ngFor="let head of HeadArray">{{ items[head] }}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>

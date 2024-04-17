@@ -7,30 +7,20 @@
                         <thead>
                             <tr>
                                 <th class="">
-                                    <app-project-buttuns [btnClss]="'label-project'"
-                                        [text]="listTopic"></app-project-buttuns>
+                                    <div class="Menu-Labal">Sprint List</div>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let sprint of sprints">
                                 <td>
-                                    <app-project-buttuns [btnClss]="'btn-costom'"
-                                        [text]="sprint.Sname" routerLink="sprintmgt/{{sprint.Sname}}"></app-project-buttuns>
+                                    <button class="menu-button" routerLink="sprintmgt/{{sprint.Sname}}">{{sprint.Sname}}</button>
                                 </td>
                             </tr>
-
-                            <!-- <tr *ngFor="let sprint of sprints">
-                                <td>
-                                    <a [routerLink]="['/sprintmgt', { Sname: sprint.Sname }]">{{ sprint.Sname }}</a>
-                                </td>
-                            </tr> -->
-                            
-
+     
                             <tr>
                                 <td>
-                                    <button 
-                                        routerLink="createform">Add New Sprint</button>
+                                    <button class="menu-button" routerLink="createform"> + Add New Sprint</button>
 
                                 </td>
                             </tr>

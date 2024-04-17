@@ -10,7 +10,6 @@ import { SprintManagementService } from '../../../services/sprint-management.ser
 })
 export class ListComponent {
 
-  listTopic: string = 'Sprint List';
   sprints!: any[];
 
 
