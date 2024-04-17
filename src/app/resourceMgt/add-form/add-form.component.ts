@@ -26,14 +26,16 @@ export class AddFormComponent implements OnInit {
   constructor(private http: HttpClient, private resourceService: ResourceService, private formBuilder: FormBuilder, private jobRoleService: JobRoleService, private orgUnitService: OrgUnitService) { } // Have to include the HttpClient Module in app.model too
   ngOnInit(): void {
     //Generating a unique Id for the resource
-    var d = new Date().getTime().toString();
-    console.log(d);
+    // var d = new Date().getTime().toString();
+    // console.log(d);
     this.loadJobRoles();// calling the loadJobRoles Method
     this.loadOrgUnits();
 
+    const resourceId = this.generateUniqueId();
+
     this.resourceForm = this.formBuilder.group({
       resourceName: ['', Validators.required],
-      resourceId: [d],
+      resourceId: [resourceId],
       roleId: ['', Validators.required],
       unitId: ['', Validators.required]
     });
@@ -41,6 +43,14 @@ export class AddFormComponent implements OnInit {
 
   }
 
+
+  generateUniqueId(): string {
+    const sequentialNumber = Math.floor(Math.random() * 10000);
+    const paddedNumber = String(sequentialNumber).padStart(4, '0');
+    const randomLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+    return paddedNumber + randomLetter;
+  }
+  
   loadJobRoles() {
     this.jobRoleService.getJobRoles()
     .pipe(
