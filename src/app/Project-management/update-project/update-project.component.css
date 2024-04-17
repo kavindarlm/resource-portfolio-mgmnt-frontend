@@ -1,39 +1,6 @@
 .font-color {
     color: #1E3895;
 }
-/* .form-container{
-    width: 100%;
-    border-left: solid 1px #ccc;
-    border-right: solid 1px #ccc;
-    background-color: #FEFEFE;
-    
-    
-} */
-/* .pm-label{
-    font-size: 1.0rem;
-    font-weight: 600px;
-    color: #7752FE;
-    margin-top: 1%;
-}
-
-.col-label{
-    font-size: 1.0rem;
-    color: #7752FE;   
-    text-align: right;
-}
-
-.row-label{
-    margin-top: 1%;
-    margin-bottom: 1%;
-}
-::placeholder{
-    color: #7752FE;
-    opacity: .5;
-}
-
-.form-control{
-    color: #7752FE;
-} */
 
 select {
     border: 1px solid #ccc;
@@ -42,24 +9,6 @@ select {
     background-color: #fff; 
     opacity: .5;
 }
-
-/* Style the select element when it is focused */
-/* select:focus {
-    border-color: #7752FE; 
-    color: #7752FE; 
-} */
-
-/* Style the options inside the dropdown */
-/* select option {
-    color: #7752FE; 
-    background-color: #fff; 
-} */
-
-/* Style the options when hovered */
-/* select option:hover {
-    background-color: #7752FE; 
-    color: #fff; 
-} */
 
 
 #projectStartDate::-webkit-datetime-edit-text,
@@ -81,34 +30,3 @@ select {
     outline: none;
     caret-color: transparent;
 }
-
-/* .button-edit{
-    color: #7752FE;
-    border: solid 1.5px #7752FE;
-    font-weight: semibold;
-    width: 30%;
-    margin-top: 3%;
-    margin-left: 35%;
-    height: 10%;
-}
-.button-edit:hover{
-    color: #FEFEFE;
-    background-color: #1E3895;
-    font-weight: semibold;
-    border: solid 1px #7752FE;
-}
-.button-delete{
-    color: #FF0000;
-    border: solid 1.5px #FF0000;
-    font-weight: semibold;
-    width: 20%;
-    margin-top: 3%;
-    margin-left: 65%;
-    height: 8%;
-}
-.button-delete:hover{
-    color: #FEFEFE;
-    background-color: #FF0000;
-    font-weight: semibold;
-    border: solid 1px #FF0000;
-} */

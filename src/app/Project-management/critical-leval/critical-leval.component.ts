@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ApiService } from '../service/api.service';
-import { error } from 'console';
+import { error } from 'console'; 
 
 @Component({
   selector: 'app-critical-leval',

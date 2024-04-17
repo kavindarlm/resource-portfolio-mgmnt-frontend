@@ -9,6 +9,10 @@
                     <input type="text" class="form-control" id="projectName" placeholder="Enter Project Name"
                         formControlName="projectName"
                         [ngClass]="{'is-invalid': projectform.controls['projectName'].invalid && projectform.controls['projectName'].touched}">
+                    <div class="invalid-feedback"
+                        *ngIf="projectform.controls['projectName'].invalid && projectform.controls['projectName'].touched">
+                        Project Name is required
+                    </div>
                 </div>
             </div>
 
@@ -19,6 +23,10 @@
                     <input type="date" class="form-control" id="projectStartDate" placeholder="Enter projectStartDate"
                         required formControlName="projectStartDate"
                         [ngClass]="{'is-invalid': projectform.controls['projectStartDate'].invalid && projectform.controls['projectStartDate'].touched}">
+                    <div class="invalid-feedback"
+                        *ngIf="projectform.controls['projectStartDate'].invalid && projectform.controls['projectStartDate'].touched">
+                        Project start date is required
+                    </div>
                 </div>
             </div>
 
@@ -29,6 +37,11 @@
                     <input type="date" class="form-control" id="projectEndDate" placeholder="Enter projectEndDate"
                         required formControlName="projectEndDate"
                         [ngClass]="{'is-invalid': projectform.controls['projectEndDate'].invalid && projectform.controls['projectEndDate'].touched}">
+                    <div class="invalid-feedback" 
+                        *ngIf="projectform.controls['projectEndDate'].invalid && projectform.controls['projectEndDate'].touched">
+                        Project end date is required
+                    </div>
+                    <p *ngIf="projectform.errors?.['dateValid'] && (projectform.touched ||projectform.dirty)">Please add a valid from and to date</p>
                 </div>
             </div>
 
@@ -43,6 +56,10 @@
                         <option>Medium</option>
                         <option>Low</option>
                     </select>
+                    <div class="invalid-feedback"
+                        *ngIf="projectform.controls['criticality'].invalid && projectform.controls['criticality'].touched">
+                        Project criticality is required
+                    </div>
                 </div>
             </div>
 
@@ -53,6 +70,10 @@
                     <input type="text" class="form-control" id="projectManager" placeholder="Enter Project Manager ID"
                         required formControlName="projectManager"
                         [ngClass]="{'is-invalid': projectform.controls['projectManager'].invalid && projectform.controls['projectManager'].touched}">
+                    <div class="invalid-feedback"
+                        *ngIf="projectform.controls['projectManager'].invalid && projectform.controls['projectManager'].touched">
+                        Project Manager ID is required
+                    </div>
                 </div>
             </div>
 
@@ -63,6 +84,10 @@
                     <input type="text" class="form-control" id="deliveryManager" placeholder="Enter Delivery Manager ID"
                         required formControlName="deliveryManager"
                         [ngClass]="{'is-invalid': projectform.controls['deliveryManager'].invalid && projectform.controls['deliveryManager'].touched}">
+                    <div class="invalid-feedback"
+                        *ngIf="projectform.controls['deliveryManager'].invalid && projectform.controls['deliveryManager'].touched">
+                        Delivery Manager ID is required
+                    </div>
                 </div>
             </div>
             <label class="fw-medium font-color" for="projectDescription">Project Description</label>
@@ -72,6 +97,10 @@
                     <textarea class="form-control" id="projectDescription" rows="3" placeholder="Enter Description"
                         formControlName="projectDescription"
                         [ngClass]="{'is-invalid': projectform.controls['projectDescription'].invalid && projectform.controls['projectDescription'].touched}"></textarea>
+                    <div class="invalid-feedback"
+                        *ngIf="projectform.controls['projectDescription'].invalid && projectform.controls['projectDescription'].touched">
+                        Project description is required
+                    </div>
                 </div>
             </div>
         </div>
