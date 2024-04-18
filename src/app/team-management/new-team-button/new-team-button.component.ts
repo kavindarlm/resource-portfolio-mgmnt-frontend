@@ -9,19 +9,9 @@ export class NewTeamButtonComponent implements OnInit{
 
   @Input() text: string = '';
 
-  showForm = false;
+  constructor(){}
 
-  constructor(){
-    this.showForm = false;
-  }
-
-  toggleForm(){
-    this.showForm = this.showForm;
-  }
-
-  ngOnInit(): void {
-      
-  }
+  ngOnInit(): void {}
  
 
 }

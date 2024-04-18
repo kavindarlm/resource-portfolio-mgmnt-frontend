@@ -1,4 +1,5 @@
 import { Component,OnInit} from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SprintManagementService } from '../../services/sprint-management.service';
 
 @Component({
@@ -19,11 +20,30 @@ resources = [
 ];
 
 sprintName: string = '';
-constructor(private sprintService: SprintManagementService) { }
+startDate: string = '';
+endDate: string = '';
 
-  ngOnInit(): void {
-    // Get the sprint name from SprintManagementService
-    this.sprintName = this.sprintService.getSprintName();
-  }
+constructor(private route: ActivatedRoute,private sprintService: SprintManagementService,private router: Router) { }
+
+ngOnInit(): void {
+  this.route.params.subscribe(params => {
+    this.sprintName = params['Sname'];
+    this.getSprintDetails(this.sprintName);
+  });
+}
+
+getSprintDetails(sprintName: string): void {
+  this.sprintService.getSprintDetailsByName(sprintName).subscribe(
+    (data: any) => {
+      this.startDate = data.Start_Date;
+      this.endDate = data.End_Date;
+    },
+    error => {
+      console.error('Error fetching sprint details:', error);
+    }
+  );
+}
+
+
 
 }

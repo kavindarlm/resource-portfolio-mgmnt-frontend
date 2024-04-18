@@ -5,87 +5,53 @@
 
       <div class="box1">
 
-        <div
-          class="d-grid rounded text-white text-center boxclr bd-highlight mx-auto shadow p-3 mb-5 w-100 text2 mt-3 ">
+        <div class="p-2 mt-3 mb-2 bg-primary text-white text-center border rounded">
           Create New Sprint</div>
 
-        <div class="form-container">
-          <form #sprintForm="ngForm" (ngSubmit)="getSprintFormData(sprintForm.value)">
 
-            <label class="text2 fw-bold">Sprint Time</label><br>
+        <form #sprintForm="ngForm" (ngSubmit)="getSprintFormData(sprintForm.value)">
 
-            <label class="text3 p-3">From:</label>
-            <input type="date" class="text4 border rounded" [(ngModel)]="startDate" name="startDate" required />
+          <div class="form-group row p-3">
 
-            <!-- <select id="year" name="year" class="text4 border rounded" required>
-                <option value="" disabled selected>Year</option>
-                <option *ngFor="let year of years" [value]="year">{{ year }}</option>
-              </select>
-      
-              <select id="month" name="month" class="text4 border rounded" required>
-                <option value="" disabled selected>Month</option>
-                <option *ngFor="let month of months" [value]="month">{{ month }}</option>
-              </select>
-      
-              <select id="day" name="day" class="text4 border rounded" required>
-                <option value="" disabled selected>Day</option>
-                <option *ngFor="let day of days" [value]="day">{{ day }}</option>
-              </select> -->
+            <label class="text fw-bold">Sprint Time</label><br>
 
-            <br />
+            <div class="form-group col-md-6">
 
-            <label class="text3 p-3">To:</label>
+              <label class="text-primary p-3">From:</label>
+              <input type="date" class="border rounded text-black-50" [(ngModel)]="startDate" name="startDate" required />
 
-            <input type="date" class="text4 border rounded" [(ngModel)]="endDate" name="endDate" required />
-
-            <!-- <select id="yearTo" name="yearTo" class="text4  border rounded" required>
-                <option value="" disabled selected>Year</option>
-                <option *ngFor="let year of years" [value]="year">{{ year }}</option>
-              </select>
-      
-              <select id="monthTo" name="monthTo" class="text4  border rounded" required>
-                <option value="" disabled selected>Month</option>
-                <option *ngFor="let month of months" [value]="month">{{ month }}</option>
-              </select>
-      
-              <select id="dayTo" name="dayTo" class="text4  border rounded" required>
-                <option value="" disabled selected>Day</option>
-                <option *ngFor="let day of days" [value]="day">{{ day }}</option>
-              </select> -->
-            <br />
-            <label class="text2 fw-bold">Sprint Name</label><br>
-            <label class="text3 box3">Name:</label>
-            <input type="text" class="text4 box2" [(ngModel)]="sprintName" name="sprintName" required />
-            <br />
-
-            <app-added-resource-list [HeadArray]="headArray" [tablecontents]="resources"></app-added-resource-list>
-            <br />
-            <div class="d-grid gap-2 col-6 mx-auto border rounded">
-              <button class="btn btn-primary text5 fw-bold text-center" type="button" routerLink="availableResources">
-                Add New Resource </button>
-
-
-              <br />
-
-              <button type="submit" class="btn btn-primary text5 fw-bold">Create Sprint</button>
             </div>
-          </form>
-        </div>
+            <div class="form-group col-md-6">
+
+              <label class="text-primary p-3">To:</label>
+              <input type="date" class="border rounded text-black-50" [(ngModel)]="endDate" name="endDate" required />
+            </div>
+          </div>
+
+          <div class="form-group row p-3">
+            <label class="text fw-bold">Sprint Name</label><br>
+            <label class="text-primary col-sm-2 col-form-label">Name:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="Enter Sprint Name" [(ngModel)]="sprintName"
+                name="sprintName" required />
+            </div>
+
+          </div>
+
+          <app-added-resource-list [HeadArray]="headArray" [tablecontents]="resources"></app-added-resource-list>
+
+          <div class="d-grid gap-2 col-6 mx-auto mb-2">
+            <button type="button" routerLink="availableResources" class="btn btn-outline-primary"> + Add New
+              Resource</button>
+
+          </div>
+          <div class="d-grid gap-2 col-6 mx-auto border rounded">
+            <button type="submit" class="btn btn-primary">Create Sprint</button>
+          </div>
+        </form>
+
       </div>
 
-      <!-- <div class="box1">
-      <app-added-resource-list [HeadArray]="headArray" [tablecontents]="resources"></app-added-resource-list>
-      </div>
-
-      <div class="d-grid gap-2 col-6 mx-auto border rounded">
-        <button class="btn btn-primary text5 fw-bold" type="button" (click)="detectCom('availableResourceList')"> Add New Resource </button>            
-      </div> -->
-
-      <!--   
-      <div>
-        
-        <button type="submit" class="btn btn-primary text5 fw-bold">Create Sprint</button>
-      </div> -->
     </div>
 
     <div class="col-6">
@@ -94,7 +60,3 @@
   </div>
 
 </div>
-
-
-
-<!-- <ng-container *ngComponentOutlet="comp"></ng-container> -->
