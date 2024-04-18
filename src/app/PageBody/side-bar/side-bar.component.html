@@ -1,13 +1,14 @@
 <div class="sidebar" [ngClass]="{ 'sidebarActive': sidebarActivee }">
     <div class="Menu-Labal">Menu List</div>
     <hr class="listmenu-line">
-    <li><button class="menu-button" (click)="selectHeaderName('PROJECT DASHBOARD')">Project Dashboard</button></li>
-    <li><button class="menu-button" (click)="selectHeaderName('RESOURCE MANAGEMENT')">Resource Management</button></li>
+    
+    <li><button class="menu-button" (click)="selectHeaderName('PROJECT DASHBOARD')" routerLink="projectBoard">Project Dashboard</button></li>
+    <li><button class="menu-button" (click)="selectHeaderName('RESOURCE MANAGEMENT')" routerLink="first-view">Resource Management</button></li>
     <li><button class="menu-button" (click)="selectHeaderName('ORGANIZATION UNIT MANAGEMENT')">Org. Unit Management</button></li>
     <li><button class="menu-button" (click)="selectHeaderName('CALENDAR MANAGEMENT')">Calendar Management</button></li>
-    <li><button class="menu-button" (click)="selectHeaderName('TEAM MANAGEMENT')">Team Management</button></li>
-    <li><button class="menu-button" (click)="selectHeaderName('PROJECT MANAGEMENT')">Project Management</button></li>
+    <li><button class="menu-button" (click)="selectHeaderName('TEAM MANAGEMENT')" routerLink="teamlistcomponent">Team Management</button></li>
+    <li><button class="menu-button" (click)="selectHeaderName('PROJECT MANAGEMENT')" routerLink="projectlist">Project Management</button></li>
     <li><button class="menu-button" (click)="selectHeaderName('UPDATE TASK PROGRESS')" routerLink="projectList">Update Task Progress</button></li>
-    <li><button class="menu-button" (click)="selectHeaderName('SPRINT MANAGEMENT')">Sprint Management</button></li>
+    <li><button class="menu-button" (click)="selectHeaderName('SPRINT MANAGEMENT')" routerLink="sprint-management">Sprint Management</button></li>
     <li><button class="menu-button" (click)="selectHeaderName('HANDLE REQUEST RESOURCES')">Handle Request</button></li>
 </div>

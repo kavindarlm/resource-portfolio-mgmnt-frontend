@@ -1,0 +1,34 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-3 justify-content-center border rounded p-2">
+            <div class="table-container">
+                <div>
+                    <!-- <app-project-buttuns [btnClss]="'label-project'" [text]="'Project List'"></app-project-buttuns> -->
+                    <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Project List</div>
+                </div>
+                <div class="">
+                    <!-- search box -->
+                    <input type="search" [(ngModel)]="searchText" id="form1" (ngModelChange)="onSearchChange()" class="form-control" placeholder="Search by Name"
+                        aria-label="search">
+                </div>
+                <div class="table-data">
+                    <div *ngFor="let project of data " class="btns">
+                        <button class="menu-button" routerLink="updatePoject/{{project.projectid}}"
+                            routerLinkActive="active">{{project.projectName}}</button>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button class="btn btn-outline-primary mt-2 custom-button" routerLink="createproject" routerLinkActive="active">Add New
+                        Project</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-9 col-sm-9 justify-content-center">
+            <router-outlet></router-outlet>
+        </div>
+        <div class="col-lg-2 col-md-12 col-sm-12 justify-content-center border rounded p-2">
+            <app-critical-leval></app-critical-leval>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+.formBox {
+    width: 100%;
+    float: right;
+    padding-bottom: 10px;
+    border: 1px #ced2d9 solid;
+    border-radius: 5px;
+}
+
+.font-color1{
+    color: #1e3895e1;
+    font-weight: 500;
+}
+
+::placeholder {
+    color: #c3c0ce;
+    /* Change this to your desired color */
+}
+
+.formDetailBox {
+    border: 1px #ced2d9 solid;
+    padding-right: 2%;
+    padding-bottom: 3%;
+    border-radius: 5px;
+    margin: 3%;
+}
+
+/* .form-group label {
+    display: block;
+} */
+
+.form-group p,
+.form-group .form-control,
+.form-group .form-select {
+    display: inline;
+}
+
+.form-group .form-control,
+.form-group .form-select {
+    width: 75%;
+}
+
+.form-group p {
+    margin-right: 3%;
+    float: left;
+    width: 30%;
+    margin-left: 5%;
+}
+
+@media (min-width: 768px) {
+    .inputField {
+        display: flex;
+        justify-content: center;
+        color: #7752fe;
+    }
+}
+
+.deleteButton {
+    float: right;
+}
+
+
+/* Adjust styles for smaller screens */
+@media screen and (max-width: 768px) {
+    .formBox {
+        width: 100%;
+        margin: 3% 0;
+    }
+
+    .editButton {
+        width: 90%;
+        margin: 0 5%;
+    }
+
+    .deleteButton {
+        width: 90%;
+        margin: 0 5%;
+    }
+
+
+.form-group .form-control,
+.form-group .form-select {
+    width: 90%;
+    margin-left: 5%;
+}
+}

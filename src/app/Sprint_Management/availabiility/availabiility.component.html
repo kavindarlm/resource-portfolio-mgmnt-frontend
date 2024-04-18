@@ -1,0 +1,52 @@
+<div class="border rounded container">
+    <div class="row">
+        <div class="col-10">
+            <div class="p-2 mt-3 mb-2 bg-primary text-white text-center border rounded">Availability</div>
+        </div>
+        <div class="col-2">
+            <button class="border btn shadow-none bd-highlight shadow p-3 mb-3 w-100 mt-3" (click)="deleteContent()">
+                <i class="bi bi-x"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-5">
+            <div class="row">
+                <div class="col rounded border border-4 mb-5 p-3 ">
+                    <div class="d-flex justify-content-center ">{{ resourceDetails.resource_id }}</div>
+                    <div class="d-flex justify-content-center text-primary">{{ resourceDetails.resource_name }}</div>
+                    <div class="d-flex justify-content-center text-black-50">{{ resourceDetails.role_name }}</div>
+                </div>
+                <label class="form-label  fw-bold d-flex justify-content-center">Calendar</label>
+
+                <div class="w-100"></div>
+
+            </div>
+        </div>
+        <div class="col-7">
+            <div class="rounded border mb-5 p-3 ">
+                <div class="p-2 mb-2 bg-primary text-white text-center rounded border bg-opacity-50">Add Percentage
+                </div>
+
+                <div class="row" *ngFor="let task of tasks">
+                    <div class="col-4">{{ task.projectName }}
+                    </div>
+                    <div class="col-4 ms-1">{{ task.task_name }}</div>
+                    <div class="col-2">
+                        p
+                    </div>
+                    <div class="col-1">
+                        <button class="btn shadow-none rounded border mb-1" (click)="AddPercentages()">
+                            <span aria-hidden="true">&checkmark;</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button class="btn btn-outline-primary" type="button"> Add </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+.font-color {
+    color: #1E3895;
+}
+
+.custom-button {
+    border-color: #1E3895;
+}
+
+.custom-button:hover {
+    background-color: #1E3895;
+}
+
+
+.border {
+    border: 1px solid #1E3895;
+}
+
+.toast {
+    width: 80% !important; /* Change this to the width you want */
+    font-size: 2vw !important; /* Change this to the font size you want */
+  }
+
+.toast-success {
+    background-color: #1E3895 !important; /* Change this to the background color you want */
+  }

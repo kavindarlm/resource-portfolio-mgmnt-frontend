@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
-    AppModule,
+    // AppModule,
     ServerModule,
     HttpClientModule
   ],
