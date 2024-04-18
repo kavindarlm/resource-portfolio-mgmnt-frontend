@@ -1,0 +1,43 @@
+<div class="container card-body">
+    <div class="heder-label">
+        Create New Task
+    </div>
+    <div class="container form-body">
+        <form [formGroup]="taskForm">
+
+            <div class="form-group row row-label">
+                <label class="pm-label" for="taskName">Task Name*</label>
+                <label for="taskName" class="col-sm-2 col-form-label col-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="taskName" placeholder="Enter Project Name"
+                        formControlName="taskName">
+                </div>
+            </div>
+            <div class="form-group row row-label">
+                <label class="pm-label" for="expectedStartDate">Expected Start Date*</label>
+                <label for="expectedStartDate" class="col-sm-2 col-form-label col-label">From :</label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control" id="expectedStartDate"
+                        placeholder="Enter Task Expected Start Date" required formControlName="exStartDate">
+                </div>
+            </div>
+            <div class="form-group row row-label">
+                <label class="pm-label" for="expectedEndDate">Expected End Date*</label>
+                <label for="expectedStartDate" class="col-sm-2 col-form-label col-label">To :</label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control" id="expectedEndDate"
+                        placeholder="Enter Task Expected Expected EndDate" required formControlName="exEndDate">
+                </div>
+            </div>
+            <div class="form-group row row-label">
+                <label class="pm-label" for="taskpersentage">Task Percentage*</label>
+                <label for="taskpersentage" class="col-sm-2 col-form-label col-label">Percentage</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="taskpersentage" placeholder="Enter task percentage"
+                        formControlName="taskAllocationPercentage">
+                </div> 
+            </div>
+            <button (click)="submitTaskkform(this.taskForm.value)" class="btn button-project">Add Task</button>
+        </form>
+    </div>
+</div>
