@@ -9,6 +9,7 @@ import { datamodel } from '../create-project/modelproject';
 })
 export class ProjectListComponent {
   data: undefined|datamodel[];
+  searchText: string = '';
   constructor(private api:ApiService){
   }
 
@@ -26,8 +27,15 @@ export class ProjectListComponent {
     // Example: Navigate to a project detail page
     // this.router.navigate(['/project', project.id]);
   }
+  
   getProjectList(){
     this.api.getProjectList().subscribe(res=>{
+      this.data = res;
+    })
+  }
+
+  onSearchChange(){
+    this.api.searchProject(this.searchText).subscribe(res => {
       this.data = res;
     })
   }
