@@ -63,4 +63,13 @@ export class AddNewUserComponent implements OnInit {
       timeOut: 3000,
     });
   }
+
+  capitalizeFirstLetter() {
+    const userNameControl = this.userForm.get('user_name');
+    if (userNameControl && userNameControl.value && userNameControl.value.length > 1) {
+      let words = userNameControl.value.split(' ');
+      words = words.map((word: string) => word.charAt(0).toUpperCase() + word.slice(1));
+      userNameControl.setValue(words.join(' '));
+    }
+  }
 }

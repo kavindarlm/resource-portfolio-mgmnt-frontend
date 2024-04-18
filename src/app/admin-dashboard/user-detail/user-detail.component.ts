@@ -75,6 +75,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
   // Function to edit the user details
   editUserDetail() {
+    if(confirm('Are you sure you want to edit this user?'))
     this.dashboardService.editUser(this.userid, this.userForm).subscribe((res) => {
       console.log(res);
       this.sharedService.refreshUserList();
@@ -83,6 +84,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
   // Function to delete the user details
   deleteUserDetail() {
+    if (confirm('Are you sure you want to delete this user?'))
     this.dashboardService.deleteUser(this.userid).subscribe(
       (res) => { // Success callback
         console.log(res);
