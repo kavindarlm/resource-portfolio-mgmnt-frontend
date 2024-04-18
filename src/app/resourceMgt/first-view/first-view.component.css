@@ -1,86 +1,39 @@
-.grid-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    /* Set a single column layout by default */
-    /* border: 1px #0e3270 solid; */
-    column-gap: 10px;
-    /* height: 100%; */
+
+.border{
+    border: 1px solid #1E3895;
 }
 
 .mainBox {
     position: relative;
-    width: 100%;
-    padding: 10px 20px 20px 20px;
-    margin: 10px;
     border: 1px #c6cad0 solid;
     display: inline-block;
     border-radius: 5px;
+    padding: 0 2%;
 }
 
 .box2 {
-    width: 100%;
+    /* width: 100%; */
     /* width: fit-content; */
     height: 100%;
     display: inline-block;
+    /* margin: 1%; */
 }
 
-.topic {
-    background-color: #7752fe;
-    padding: 5px;
-    text-align: center;
-    width: 80%;
-    margin: 5px auto;
-    color: white;
-    border-radius: 5px;
-}
-
-.input-group {
-    width: 30%;
-    position: relative;
+.search-bar {
     float: right;
-    right: 0px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-#exampleModalLabel {
-    color: #7752fe;
-}
-
-.form-label {
-    color: #8e8ffa;
-}
-
-.table .table-bordered {
-    position: relative;
-    width: 100%;
-    border-radius: 5px;
-}
-
-.table-headers .headers {
-    margin: 5% 5%;
-    width: 90%;
-    padding: 2px 45px;
-    background-color: #c2d9ff;
-    color: #04175a;
-    font-weight: bold;
-    border: 1px #93b8f3 solid;
-    border-radius: 5px;
-}
-
-.table-headers {
-    border-top: 1px white solid;
-    border-left: 1px white solid;
-    border-right: 1px white solid;
-}
-
-.table-body {
-    text-align: center;
 }
 
 .clickable-row td {
-    color: #7752fe;
+    /* color: #7752fe; */
+    color:rgba(0, 0, 255, 0.575);
+    font-weight: 400;
 }
+
+th{
+    color: #1e3895e1;
+    font-weight: 500;
+}
+
 
 .clickable-row:hover td {
     transition: 0.5s;
@@ -94,12 +47,7 @@
         /* Use a two-column layout on larger screens */
     }
 
-    .mainBox {
+    /* .mainBox {
         margin: 10px;
-    }
-}
-
-.table-headers .headers {
-    padding: 2px 20px;
-    /* Adjust header button padding for smaller screens */
+    } */
 }
