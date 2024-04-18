@@ -30,6 +30,7 @@ import { SprintMgtComponent } from './Sprint_Management/sprint-mgt/sprint-mgt.co
 import { DeleteSprintPopupComponent } from './Sprint_Management/Reusable_Components/delete-sprint-popup/delete-sprint-popup.component';
 import { AvailabiilityComponent } from './Sprint_Management/availabiility/availabiility.component';
 import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
+import { ProjectBoardComponent } from './project-dashboard/project-board/project-board.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -39,6 +40,9 @@ const routes: Routes = [
   {
     path: 'pages-body', component: PagesBodyComponent,
     children: [
+      { path: 'projectBoard', component: ProjectBoardComponent,
+        children: []
+      },
       {
         path: 'projectlist', component: ProjectListComponent,
         children: [
