@@ -29,6 +29,7 @@ import { DeletePopupComponent } from './team-management/delete-popup/delete-popu
 import { SprintMgtComponent } from './Sprint_Management/sprint-mgt/sprint-mgt.component';
 import { DeleteSprintPopupComponent } from './Sprint_Management/Reusable_Components/delete-sprint-popup/delete-sprint-popup.component';
 import { AvailabiilityComponent } from './Sprint_Management/availabiility/availabiility.component';
+import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -51,6 +52,7 @@ const routes: Routes = [
           { path: 'NewTeamButton', component: NewTeamButtonComponent },
           { path: 'TeamForm', component: TeamFormComponent },
           { path: 'update/:id', component: UpdateComponent },
+          { path: 'resources/:id', component: UpdateResourcTableComponent },
           { path: 'delete/:id', component: DeletePopupComponent }
         ]
       },
@@ -98,7 +100,7 @@ const routes: Routes = [
       { path: 'userDetail/:id', component: UserDetailComponent }
     ]
   }
-];
+]; 
 
 
 @NgModule({

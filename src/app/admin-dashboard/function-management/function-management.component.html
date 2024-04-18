@@ -13,7 +13,10 @@
           <tbody>
             <tr *ngFor="let function of functionData">
               <td>{{function.function_name}}</td>
-              <td><app-function-button (click)="handleClick(function.function_id)" buttonText="Add"></app-function-button>
+              <td>
+                <app-function-button (click)="handleClick(function.function_id)" [functionId]="function.function_id"
+                  buttonText="Add">
+                </app-function-button>
               </td>
             </tr>
           </tbody>

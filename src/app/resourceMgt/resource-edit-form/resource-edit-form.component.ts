@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ResourceService } from '../../shared/sevices_resourceMgt/resource.service';///////////////////////
-import { ResourceModel } from '../add-form/addformmodel';
+import { JobRoleModel, OrgUnitModel, ResourceModel } from '../add-form/addformmodel';
 import { Observable } from 'rxjs';
 import { FirstViewComponent } from '../first-view/first-view.component';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { JobRoleService } from '../../shared/sevices_resourceMgt/jobRole.service';
+import { OrgUnitService } from '../../shared/sevices_resourceMgt/orgUnit.service';
 
 @Component({
   selector: 'app-resource-edit-form',
@@ -15,14 +17,14 @@ import { throwError } from 'rxjs';
 })
 export class ResourceEditFormComponent implements OnInit{
 
-  jobroles: any[] = []; //creating an array for jobroles
-  orgunits: any[] = []; //creating an array for orgunits
+  jobroles: JobRoleModel[] | undefined; //creating an array for jobroles
+  orgunits: OrgUnitModel[] | undefined;
 
   formValue!: FormGroup; 
   selectedResource: any; 
   resourceObject: any;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private resourceService: ResourceService) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private resourceService: ResourceService, private jobRoleService: JobRoleService, private orgUnitService: OrgUnitService) { }
 
   ngOnInit(): void {
     this.loadJobRoles();// calling the loadJobRoles Method
@@ -49,34 +51,44 @@ export class ResourceEditFormComponent implements OnInit{
     });
   }
 
-  loadJobRoles() { //a function to get data from the json file(jobroles)
-    this.http.get("assets/jsonFiles-resourceMgt/jobRoles.json")
+  loadJobRoles() {
+    this.jobRoleService.getJobRoles()
     .pipe(
       catchError((error) => {
         console.error('Error fetching job roles:', error);
-        // Handle error gracefully, such as showing an alert to the user.
+        alert('An error occurred while fetching job roles. Please try again.');
         return throwError('Error fetching job roles');
       })
     )
     .subscribe((res: any) => {
       debugger;
-      this.jobroles = res.data;//the response from this asset file(jobroles.json) will be stored in this array
-    })
+      this.jobroles = res; // Assuming the response is directly the array of resources
+    },
+      (error) => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+      }
+    );
   }
 
   loadOrgUnits() {
-    this.http.get("assets/jsonFiles-resourceMgt/orgunits.json")
+    this.orgUnitService.getOrgUnits()
     .pipe(
       catchError((error) => {
-        console.error('Error fetching organizational units:', error);
-        // Handle error gracefully, such as showing an alert to the user.
-        return throwError('Error fetching organizational units');
+        console.error('Error fetching org units:', error);
+        alert('An error occurred while fetching org units. Please try again.');
+        return throwError('Error fetching org units');
       })
     )
     .subscribe((res: any) => {
       debugger;
-      this.orgunits = res.data;
-    })
+      this.orgunits = res; // Assuming the response is directly the array of resources
+    },
+      (error) => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+      }
+    );
   }
 
 

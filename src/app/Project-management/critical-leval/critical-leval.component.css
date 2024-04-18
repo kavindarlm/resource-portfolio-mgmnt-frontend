@@ -1,45 +1,8 @@
-.card-cr{
-    /* background-color: aqua; */
-    border-radius: 5px;
-    border: 1px solid #ccc;
+
+.cr-font{
     color: #190482;
-    margin-bottom: 4%;
-}
-.crColumn{
-    /* background-color: blueviolet; */
-    padding: 6%;
-    flex-direction: column;
-    height: 12vh;
-}
-.crColumLeft{
-    /* background-color: blueviolet; */
-    padding: 3%;
-    flex-direction: column;
-    height: 12vh;
-    border-right: 2px solid #190482;
-}
-.crrow{
-    font-size: 1.0rem;
-    text-align: center;
-    padding: 6%;
-}
-.pr-count{
-    font-weight: bold;
-    font-size: 1.5rem;
 }
 .crBox{
-    height: 5vh;
-    width: 3vw;
-    border-radius: 6px;
-    margin-top: 15%;
-    margin-left: 25%;
-}
-.high{
-    background-color: red;
-}
-.medium{
-    background-color: yellow;
-}
-.low{
-    background-color: green;
+    height: 60px;
+    width: 60px;
 }

@@ -1,7 +1,7 @@
 // resource.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { ResourceModel } from '../../resourceMgt/add-form/addformmodel';
 
 
@@ -37,6 +37,38 @@ export class ResourceService {
   deleteResource(id: string): Observable<any> {
     return this.http.delete<any>("http://localhost:3000/resource/"+id);
   }
+
+  // getRoleName(roleId: number): Observable<string> {
+  //   return this.http.get<string>("http://localhost:3000/job-role/"+roleId);
+  // }
+
+  // getUnitName(unitId: number): Observable<string> {
+  //   return this.http.get<string>("http://localhost:3000/org-unit/"+unitId+"/unitName");
+  // }
+
+  getRoleName(roleId: number): Observable<string> {
+    console.log(roleId);
+    return this.http.get<string>(`http://localhost:3000/job-role/${roleId}`)
+      .pipe(
+        tap(roleName => console.log('Role Name:', roleName)),
+        catchError(error => {
+          console.error('Error fetching role name2:', error);
+          return throwError(error);
+        })
+      );
+  }
+  
+  getUnitName(unitId: number): Observable<string> {
+    return this.http.get<string>(`http://localhost:3000/org-unit/${unitId}`)
+      .pipe(
+        tap(unitName => console.log('Unit Name:', unitName)),
+        catchError(error => {
+          console.error('Error fetching unit name:', error);
+          return throwError(error);
+        })
+      );
+  }
+  
 
 }
 

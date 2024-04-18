@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { GeneralService } from '../shared/general.service';
 import { ApiService } from '../shared/api.service';
 import { Router } from '@angular/router';
-import { catchError, map } from 'rxjs';
 import { dataModel } from '../team-form/team-form.model';
 
 
@@ -13,30 +12,25 @@ import { dataModel } from '../team-form/team-form.model';
 })
 export class DeletePopupComponent {
   public dataid!: number;
-  public teamData: dataModel = { id:0 , teamName: '', description: '', selectedResources: [] };
+  public teamData: dataModel = { id:0 , teamName: '', description: '', resources: [] };
 
-  http: any;
-  
   constructor(public generalservice: GeneralService,
     private api: ApiService,
     private router: Router
-    ){
-
-  }
-
-  deleteTeam() {
-    if (!this.dataid) {
-      console.error('Team ID is undefined.');
-      return;
-    }
+    ){}
     
-    this.api.deleteTeam(this.dataid).subscribe(
-      () => {
-        // Redirect to the teams list page after successful deletion
-        this.router.navigate(['/teams']);
+
+  onDeleteTeam(): void {
+    const teamId = this.teamData.id;
+  
+    this.api.deleteTeams(teamId).subscribe(
+      response => {
+        console.log('Team deleted', response);
+        //  add code here to handle the response, such as refreshing the list of teams
       },
-      (error: any) => {
-        console.error('Failed to delete team:', error);
+      error => {
+        console.error('Error deleting team', error);
+        // add code here to handle errors, such as displaying an error message
       }
     );
   }
