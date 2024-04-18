@@ -1,0 +1,185 @@
+
+.heder-label{
+    font-size: 20px;
+    font-weight: semi-bold;
+    text-align: center;
+    background-color: #7752FE;
+    height: 6%;
+    width: 100%;
+    border-radius: 8px;
+    color: white;
+    display: block;
+    padding: 10px;
+    margin-bottom: 2%;
+}
+
+.detailCard{
+    position: relative; 
+    margin-top: 20px;
+    border: 1px double #CBCBCB;
+    border-radius: 8px;
+    margin-bottom: 1%;
+}
+.card-body{
+    width: 100%;
+    color: #7752FE; 
+    font-weight: 600; /* Semi-bold font weight */
+    /* border: 1px solid  #CBCBCB; Border style */
+    padding: 5px;
+}
+.rowOne{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.colBorder{
+    border: 1px double #CBCBCB;
+    padding: 10px;
+    border-radius: 5px;
+}
+.rowTwo{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.colDescription{
+    padding: 10px;
+    height: 300px;
+    border-radius: 5px;
+    border: 1px double #CBCBCB;
+}
+.colCricality{
+    border: 1px double #CBCBCB;
+    padding: 10px;
+    border-radius: 5px;
+    height: 150px;
+}
+.levelSqure{
+    
+}
+.High {
+    background-color: #ff0000;
+    height: 50%;
+    width: 50%;
+    border-radius: 8px;
+    display: block;
+    position: relative;
+    margin: auto;
+}
+
+.Medium {
+    background-color: yellow;
+    height: 50%;
+    width: 50%;
+    border-radius: 8px;
+    display: block;
+    position: relative;
+    margin: auto;
+}
+
+.Low {
+    background-color: green;
+    height: 50%;
+    width: 50%;
+    border-radius: 8px;
+    display: block;
+    position: relative;
+    margin: auto;
+}
+
+.btn-costom{
+        background-color: #C2D9FF;
+        color: #190482;
+        font-family: Montserrat;
+        width: 100%; /* Set the width for desktop */
+        height: 40px;
+        font-weight: 600;
+        border-radius: 6px;
+        text-align: center;
+        padding: 1%;
+}
+
+.tableRow{
+    cursor: pointer;
+    background-color: yellow;
+}
+.table-hover{
+    background-color: aqua !important;
+}
+
+.tableContent{
+    text-align: center;
+    color: #7752FE;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 20px;
+    background-color: #A9BCFF;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 6px;
+    margin-right: 100px;
+    
+}
+
+.slider:hover {
+    opacity: 1;
+}
+/*
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 100px;
+    background: #7752FE;
+    cursor: pointer;
+    position: relative;
+    
+    
+} */
+  input[type="range"] {
+
+    -webkit-appearance: none;
+    appearance: none; 
+    width: 100%;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    border-radius: 16px;
+  }
+  /* Track: Mozilla Firefox */
+  input[type="range"]::-moz-range-track {
+    height: 15px;
+    background: #A9BCFF;
+    border-radius: 16px;
+  }
+  
+  /* Thumb: webkit */
+  input[type="range"]::-webkit-slider-thumb {
+    /* removing default appearance */
+    -webkit-appearance: none;
+    appearance: none; 
+    /* creating a custom design */
+    height: 20px;
+    width: 20px;
+    background-color: #7752FE;
+    border-radius: 50%;
+    border: 2px solid #fdfdfd;
+    /*  slider progress trick  */
+    box-shadow: -407px 0 0 400px #7752FE;
+    position: relative;
+  }
+   
+  /* Thumb: Firefox */
+  input[type="range"]::-moz-range-thumb {
+    height: 20px;
+    width: 0px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 1px solid #7752FE;
+    /*  slider progress trick  */
+    box-shadow: -407px 0 0 400px #7752FE;
+  }
