@@ -1,5 +1,9 @@
 import { NgModule, importProvidersFrom } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { CreateNewtaskComponent } from './TaskManagement/create-newtask/create-newtask.component';
+import { ProjectDetailsComponent } from './TaskManagement/project-details/project-details.component';
+import { UpdateTaskComponent } from './TaskManagement/update-task/update-task.component';
+import { ButtonTusksComponent } from './TaskManagement/button-tusks/button-tusks.component';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -62,12 +66,19 @@ import { DeleteSprintPopupComponent } from './Sprint_Management/Reusable_Compone
 import { SearchPipe } from './resourceMgt/search.pipe';
 import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ProjectBoardComponent } from './project-dashboard/project-board/project-board.component';
+import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { TaskProjectListComponent } from './TaskManagement/task-project-list/task-project-list.component';
 
 
 @NgModule({
   declarations:[
     AppComponent,
     PagesBodyComponent,
+    CreateNewtaskComponent,
+    ProjectDetailsComponent,
+    UpdateTaskComponent,
+    ButtonTusksComponent,
     AddFormComponent,
     ButtonComponent,
     FirstViewComponent,
@@ -113,6 +124,8 @@ import { ToastrModule } from 'ngx-toastr';
     DeleteSprintPopupComponent,
     SearchPipe,
     UpdateResourcTableComponent,
+    ProjectBoardComponent,
+    TaskProjectListComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,6 +137,7 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,//BrowserAnimationModule ws added for the spinner
     NgxSpinnerModule,
     ToastrModule.forRoot(),
+    NgbDatepickerModule,
   ],
 
   providers: [

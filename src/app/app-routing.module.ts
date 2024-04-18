@@ -10,6 +10,9 @@ import path from 'node:path';
 import { LoginAccComponent } from './login-acc/login-acc.component';
 import { FgPsswdComponent } from './fg-psswd/fg-psswd.component';
 import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admin-dasbd-body.component';
+import { ProjectDetailsComponent } from './TaskManagement/project-details/project-details.component';
+import { CreateNewtaskComponent } from './TaskManagement/create-newtask/create-newtask.component';
+import { UpdateTaskComponent } from './TaskManagement/update-task/update-task.component';
 // import { MainComponent } from './Sprint_Management/main/main.component';
 // import { CreateFormComponent } from './Sprint_Management/create-form/create-form.component';
 // import { SprintMgtComponent } from './Sprint_Management/sprint-mgt/sprint-mgt.component';
@@ -30,6 +33,8 @@ import { SprintMgtComponent } from './Sprint_Management/sprint-mgt/sprint-mgt.co
 import { DeleteSprintPopupComponent } from './Sprint_Management/Reusable_Components/delete-sprint-popup/delete-sprint-popup.component';
 import { AvailabiilityComponent } from './Sprint_Management/availabiility/availabiility.component';
 import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
+import { ProjectBoardComponent } from './project-dashboard/project-board/project-board.component';
+import { TaskProjectListComponent } from './TaskManagement/task-project-list/task-project-list.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -39,12 +44,26 @@ const routes: Routes = [
   {
     path: 'pages-body', component: PagesBodyComponent,
     children: [
+      { path: 'projectBoard', component: ProjectBoardComponent,
+        children: []
+      },
       {
         path: 'projectlist', component: ProjectListComponent,
         children: [
           { path: 'createproject', component: CreateProjectComponent },
           { path: 'updatePoject/:id', component: UpdateProjectComponent }
         ]
+      },
+      {
+        path: 'TaskProjectList', component: TaskProjectListComponent,
+        children: [
+          { path: 'projectTaskDetails/:id',component: ProjectDetailsComponent,
+            children: [
+              { path: 'newTask/:id', component: CreateNewtaskComponent },
+              { path: 'updatetask/:id', component: UpdateTaskComponent}
+            ],
+          },
+        ],
       },
       {
         path: 'teamlistcomponent', component: TeamListComponent,
@@ -105,6 +124,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
