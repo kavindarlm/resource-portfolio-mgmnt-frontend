@@ -58,6 +58,7 @@ import { UserDetailComponent } from './admin-dashboard/user-detail/user-detail.c
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SpinnerComponent } from './spinner/spinner/spinner.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DeleteSprintPopupComponent } from './Sprint_Management/Reusable_Components/delete-sprint-popup/delete-sprint-popup.component';
 import { SearchPipe } from './resourceMgt/search.pipe';
 import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
 import { ToastrModule } from 'ngx-toastr';
@@ -109,6 +110,7 @@ import { ToastrModule } from 'ngx-toastr';
     FunctionButtonComponent,
     UserDetailComponent,
     SpinnerComponent,
+    DeleteSprintPopupComponent,
     SearchPipe,
     UpdateResourcTableComponent,
   ],
