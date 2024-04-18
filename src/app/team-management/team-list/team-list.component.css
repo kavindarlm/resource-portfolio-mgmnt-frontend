@@ -1,0 +1,61 @@
+.team-data{
+    display: flex;
+    flex-direction: column;
+    max-height: 83vh;
+    overflow-y: scroll;
+    
+}
+
+/* .teamListBox{
+    width:100%;
+    
+}
+
+.tableList{
+    width: 100%;
+} */
+
+.row.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.row.no-gutters > [class^="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.teamList{
+    height: 80vh;
+    overflow-y: scroll;
+}
+
+
+.team-data::-webkit-scrollbar {
+    width: 0; 
+  }
+  
+.team-data {
+    scrollbar-width: none; 
+}
+
+.menu-button {
+    width: 100%;
+    font-weight: 500;
+    background-color: #fefefe;
+    border: .5px solid #b4a0ff88;
+    color: #1e3895;
+    content: fit-content;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+  }
+  
+  .menu-button:hover,
+  .menu-button:active {
+    background-color: #1e3895;
+    color: #FEFEFE;
+  }
