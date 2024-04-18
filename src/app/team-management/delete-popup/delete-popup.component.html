@@ -1,18 +1,21 @@
 <div id="container">
-  <div class="border rounded-2">
-    <div class="pic">
-      <svg width="57" height="56" viewBox="0 0 57 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10.793 55.518C8.84505 55.518 7.17693 54.9158 5.78859 53.7115C4.40026 52.5072 3.70727 51.0611 3.70964 49.3734V9.43366H0.167969V3.28909H17.8763V0.216797H39.1263V3.28909H56.8346V9.43366H53.293V49.3734C53.293 51.0632 52.5988 52.5102 51.2105 53.7146C49.8221 54.9189 48.1552 55.52 46.2096 55.518H10.793ZM46.2096 9.43366H10.793V49.3734H46.2096V9.43366ZM17.8763 43.2288H24.9596V15.5782H17.8763V43.2288ZM32.043 43.2288H39.1263V15.5782H32.043V43.2288Z" fill="#FF0000"/>
-        </svg>
-    </div>
-
-    <div id="content">Are you sure that you want to delete this data?</div>
-    
-    <div id="actions">
-      <button class="btn cancel" (click)="generalservice.showDialog=false">Cancel</button>
-      <button class="btn delete"  (click)="deleteTeam()">Delete</button>
-       
+<div class="row">
+  <div>
+    <div class=" border rounded-2">
+      <div class="pic">
+        <svg width="57" height="56" viewBox="0 0 57 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10.793 55.518C8.84505 55.518 7.17693 54.9158 5.78859 53.7115C4.40026 52.5072 3.70727 51.0611 3.70964 49.3734V9.43366H0.167969V3.28909H17.8763V0.216797H39.1263V3.28909H56.8346V9.43366H53.293V49.3734C53.293 51.0632 52.5988 52.5102 51.2105 53.7146C49.8221 54.9189 48.1552 55.52 46.2096 55.518H10.793ZM46.2096 9.43366H10.793V49.3734H46.2096V9.43366ZM17.8763 43.2288H24.9596V15.5782H17.8763V43.2288ZM32.043 43.2288H39.1263V15.5782H32.043V43.2288Z" fill="#FF0000"/>
+          </svg>
+      </div>
+  
+      <div id="content">Are you sure that you want to delete this data?</div>
+      
+      <div id="actions">
+        <button class="btn cancel" (click)="generalservice.showDialog=false">Cancel</button>
+        <button class="btn delete"  (click)="onDeleteTeam()">Delete</button>
+         
+      </div>
     </div>
   </div>
-
+</div>
 </div>

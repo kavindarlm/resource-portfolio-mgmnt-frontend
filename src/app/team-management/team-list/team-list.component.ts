@@ -1,25 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../shared/service.service';
 
-
 @Component({
   selector: 'app-team-list',
   templateUrl: './team-list.component.html',
   styleUrl: './team-list.component.css'
 })
-export class TeamListComponent implements OnInit{
-  teams:any=[]=[];
 
+export class TeamListComponent implements OnInit{
+
+  teams:any=[]=[];
   showForm = false;
   showUpdate =false;
 
-  constructor(private service: ServiceService) {
-   
-   }
+  constructor(private service: ServiceService) {}
 
   ngOnInit(): void {
     this.fetchTeamList();
-    
   }
 
 
@@ -34,7 +31,7 @@ export class TeamListComponent implements OnInit{
     });
   }
 
-  
+  searchtext:any;
 
 
 }

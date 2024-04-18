@@ -26,6 +26,7 @@ import { UserDetailComponent } from './admin-dashboard/user-detail/user-detail.c
 import { UpdateComponent } from './team-management/update/update.component';
 import { TeamListComponent } from './team-management/team-list/team-list.component';
 import { DeletePopupComponent } from './team-management/delete-popup/delete-popup.component';
+import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -44,6 +45,7 @@ const routes: Routes = [
           { path: 'NewTeamButton', component: NewTeamButtonComponent},
           { path: 'TeamForm', component: TeamFormComponent },
           { path: 'update/:id', component: UpdateComponent },
+          { path: 'resources/:id', component: UpdateResourcTableComponent },
           { path: 'delete/:id', component: DeletePopupComponent }
       ]},
       {path: 'first-view', component: FirstViewComponent,
@@ -70,7 +72,7 @@ const routes: Routes = [
       {path: 'userDetail/:id' , component:UserDetailComponent}
     ]
   }
-];
+]; 
 
 
 @NgModule({

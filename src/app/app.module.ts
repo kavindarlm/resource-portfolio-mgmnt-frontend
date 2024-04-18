@@ -59,6 +59,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { SpinnerComponent } from './spinner/spinner/spinner.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchPipe } from './resourceMgt/search.pipe';
+import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -107,7 +109,8 @@ import { SearchPipe } from './resourceMgt/search.pipe';
     FunctionButtonComponent,
     UserDetailComponent,
     SpinnerComponent,
-    SearchPipe
+    SearchPipe,
+    UpdateResourcTableComponent,
   ],
   imports: [
     BrowserModule,
@@ -116,8 +119,9 @@ import { SearchPipe } from './resourceMgt/search.pipe';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    NgxSpinnerModule,
     BrowserAnimationsModule,//BrowserAnimationModule ws added for the spinner
+    NgxSpinnerModule,
+    ToastrModule.forRoot(),
   ],
 
   providers: [

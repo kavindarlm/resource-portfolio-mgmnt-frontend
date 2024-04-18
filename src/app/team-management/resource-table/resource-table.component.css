@@ -1,61 +1,40 @@
 
-.resourcebody{
-    padding: 2%;
-   
-}
-
 table{
     width:100% ;
-    padding: 2%;
      
 }
 
- td {
-    border: 1px solid #8691A833;
-    text-align: center;
-    color: #7752FE;
-}
-
 th{
-    background-color: none;
-    border: none;
+    color: #1e3895e1;
+    font-weight: 500;
 }
 
-.tbtn{
-    background-color:  #C2D9FF;
-    border: 1px solid #C2D9FF;
-    border-radius: 4px;
-    color: #190482;
-    text-align: center;
-    text-decoration: none;
-   
+td{
+    color:rgba(0, 0, 255, 0.575);
+    font-weight: 300;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #3b5edd;
+    color: white;
+    cursor: pointer;
 }
 
 .systemResource{
     background-color: #7752FE;
-    border: 2px solid #7752FE;
-    border-radius: 8px;
     color: #FEFEFE;
-    text-align: center;
-    text-decoration: none;
     width: 100%;
-    margin-bottom: 2%;
+    
     
 }
 
-.selectBtn{
-    background-color:  #FEFEFE;
-    border: 2px solid #7752FE;
-    border-radius: 2px;
-    color: #7752FE;
-    text-align: center;
-    text-decoration: none;
-
+.row.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
 }
 
+.row.no-gutters > [class^="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}
 
-.selectBtn.selected {
-    background-color: #1E3895;
-    color: white;
-    border: none;
-  }
