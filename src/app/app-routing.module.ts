@@ -10,6 +10,10 @@ import path from 'node:path';
 import { LoginAccComponent } from './login-acc/login-acc.component';
 import { FgPsswdComponent } from './fg-psswd/fg-psswd.component';
 import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admin-dasbd-body.component';
+import { ProjectListComponent } from './TaskManagement/project-list/project-list.component';
+import { ProjectDetailsComponent } from './TaskManagement/project-details/project-details.component';
+import { CreateNewtaskComponent } from './TaskManagement/create-newtask/create-newtask.component';
+import { UpdateTaskComponent } from './TaskManagement/update-task/update-task.component';
 // import { MainComponent } from './Sprint_Management/main/main.component';
 // import { CreateFormComponent } from './Sprint_Management/create-form/create-form.component';
 // import { SprintMgtComponent } from './Sprint_Management/sprint-mgt/sprint-mgt.component';
@@ -49,6 +53,17 @@ const routes: Routes = [
           { path: 'createproject', component: CreateProjectComponent },
           { path: 'updatePoject/:id', component: UpdateProjectComponent }
         ]
+      },
+      {
+        path: 'projectList', component: ProjectListComponent,
+        children: [
+          { path: 'projectTaskDetails/:id',component: ProjectDetailsComponent,
+            children: [
+              { path: 'newTask/:id', component: CreateNewtaskComponent },
+              { path: 'updatetask/:id', component: UpdateTaskComponent}
+            ],
+          },
+        ],
       },
       {
         path: 'teamlistcomponent', component: TeamListComponent,
@@ -109,6 +124,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

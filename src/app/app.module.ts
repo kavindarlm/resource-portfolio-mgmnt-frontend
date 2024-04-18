@@ -1,5 +1,9 @@
 import { NgModule, importProvidersFrom } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { CreateNewtaskComponent } from './TaskManagement/create-newtask/create-newtask.component';
+import { ProjectDetailsComponent } from './TaskManagement/project-details/project-details.component';
+import { UpdateTaskComponent } from './TaskManagement/update-task/update-task.component';
+import { ButtonTusksComponent } from './TaskManagement/button-tusks/button-tusks.component';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +34,7 @@ import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admi
 import { DashboardHeaderComponent } from './admin-dashboard/dashboard-header/dashboard-header.component';
 import { UserListComponent } from './admin-dashboard/user-list/user-list.component';
 import { SearchBarComponent } from './admin-dashboard/search-bar/search-bar.component';
+import { ProjectListComponent } from './TaskManagement/project-list/project-list.component';
 import { CreateFormComponent } from './Sprint_Management/create-form/create-form.component';
 import { SprintMgtComponent } from './Sprint_Management/sprint-mgt/sprint-mgt.component';
 import { Ng2SearchPipe } from 'ng2-search-filter';
@@ -70,6 +75,10 @@ import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
   declarations:[
     AppComponent,
     PagesBodyComponent,
+    CreateNewtaskComponent,
+    ProjectDetailsComponent,
+    UpdateTaskComponent,
+    ButtonTusksComponent,
     AddFormComponent,
     ButtonComponent,
     FirstViewComponent,
@@ -93,6 +102,7 @@ import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
     DashboardHeaderComponent,
     UserListComponent,
     SearchBarComponent,
+    ProjectListComponent,
     CreateFormComponent,
     SprintMgtComponent,
     FilterComponent,
