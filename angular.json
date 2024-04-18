@@ -40,8 +40,8 @@
               "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
               "node_modules/ngx-spinner/animations/ball-spin-fade-rotating.css",
               "node_modules/ngx-spinner/animations/square-jelly-box.css",
-              "node_modules/ngx-spinner/animations/ball-grid-pulse.css"
-
+              "node_modules/ngx-spinner/animations/ball-grid-pulse.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.min.js"

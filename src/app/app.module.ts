@@ -59,7 +59,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { SpinnerComponent } from './spinner/spinner/spinner.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
-
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -120,6 +120,7 @@ import { UpdateResourcTableComponent } from './team-management/update-resourc-ta
     FormsModule,
     BrowserAnimationsModule,//BrowserAnimationModule ws added for the spinner
     NgxSpinnerModule,
+    ToastrModule.forRoot(),
   ],
 
   providers: [
