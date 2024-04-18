@@ -62,6 +62,8 @@ import { DeleteSprintPopupComponent } from './Sprint_Management/Reusable_Compone
 import { SearchPipe } from './resourceMgt/search.pipe';
 import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ProjectBoardComponent } from './project-dashboard/project-board/project-board.component';
+import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -113,6 +115,7 @@ import { ToastrModule } from 'ngx-toastr';
     DeleteSprintPopupComponent,
     SearchPipe,
     UpdateResourcTableComponent,
+    ProjectBoardComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,6 +127,7 @@ import { ToastrModule } from 'ngx-toastr';
     BrowserAnimationsModule,//BrowserAnimationModule ws added for the spinner
     NgxSpinnerModule,
     ToastrModule.forRoot(),
+    NgbDatepickerModule,
   ],
 
   providers: [
