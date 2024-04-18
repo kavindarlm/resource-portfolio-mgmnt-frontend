@@ -14,7 +14,8 @@
                                     formControlName="user_name" required> -->
                                 <input type="text" id="user_name" formControlName="user_name" class="form-control"
                                     placeholder="Enter User Name"
-                                    [ngClass]="{'is-invalid': userForm.controls['user_name'].invalid && userForm.controls['user_name'].touched}">
+                                    [ngClass]="{'is-invalid': userForm.controls['user_name'].invalid && userForm.controls['user_name'].touched}"
+                                    (keyup)="capitalizeFirstLetter()">
                                 <div class="invalid-feedback"
                                     *ngIf="userForm.controls['user_name'].invalid && userForm.controls['user_name'].touched">
                                     User Name is required
