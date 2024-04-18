@@ -1,0 +1,54 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="mainBox col-lg-6 col-md-6 col-sm-12 mb-3">
+            <div>
+                <div class="border rounded text-center col-12 mb-3 mt-3 pt-1 pb-1 text-white bg-primary ">System
+                    Resource List</div>
+
+                <!-- search bar -->
+                <div class="search-bar col-sm-6 mt-3 mb-3">
+                    <input type="search" [(ngModel)]="searchText" id="form1" class="form-control" placeholder="Search"
+                        aria-label="search">
+                </div>
+
+                <table class="table table-striped">
+                    <thead class="table-headers thead-dark fs-6 fst-normal text-center">
+                        <tr>
+                            <th>Resource ID</th>
+                            <th>Job Role</th>
+                            <th>Org. Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-body text-center">
+                        <tr *ngFor="let resource of resourceList | search: searchText"
+                            (click)="rowClick($event, resource)" class="clickable-row">
+                            <td>{{resource.resourceId}}</td>
+                            <td>{{getRoleName(resource.roleId)}}</td>
+                            <td>{{getUnitName(resource.unitId)}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- </div> -->
+
+                <br>
+                <div>
+                    <app-button (click)="showcomponent()"></app-button>
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+
+        </div>
+        <div class="box2 col-lg-6 col-md-6 col-sm-12">
+            <app-add-form *ngIf="showForm"></app-add-form>
+            <router-outlet></router-outlet>
+            <app-resource-details *ngIf="showResourceDetails"></app-resource-details>
+            <router-outlet></router-outlet>
+        </div>
+
+
+
+
+
+    </div>
+</div>

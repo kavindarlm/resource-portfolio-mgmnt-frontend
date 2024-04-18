@@ -1,0 +1,37 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <div class="container-fluid">
+                <div class="table-container">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th class="">
+                                    <div class="Menu-Labal">Sprint List</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let sprint of sprints">
+                                <td>
+                                    <button class="menu-button" routerLink="sprintmgt/{{sprint.Sname}}">{{sprint.Sname}}</button>
+                                </td>
+                            </tr>
+     
+                            <tr>
+                                <td>
+                                    <button class="menu-button" routerLink="createform"> + Add New Sprint</button>
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-10">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

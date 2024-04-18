@@ -1,0 +1,30 @@
+<div class="site-container position-relative min-vh-100 d-flex flex-column">
+    <div class="background-container position-fixed">
+      <img src="assets/image/backimage1.jpg" class="img-fluid custom-size" alt="Background Image">
+      <!-- <div class="background-overlay"></div> -->
+    </div>
+    <div class="overlay-content position-absolute">
+      <!-- Header -->
+      <app-page-header></app-page-header>
+      <div class="white-div-container ">
+        <div class="contentContainer">
+            <!-- Dashboard Header -->
+          <app-dashboard-header></app-dashboard-header>
+          <div class="content">
+            <!-- content is goes here --> 
+            <div class="row">
+              <div class="col-lg-6 col-md-12 col-sm-12">
+                <app-user-list></app-user-list>
+              </div>
+              <div class="col-lg-6 col-md-12 col-sm-12">
+                <!-- <app-add-new-user></app-add-new-user> -->
+                <router-outlet></router-outlet>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <app-footer></app-footer>
+  </div>

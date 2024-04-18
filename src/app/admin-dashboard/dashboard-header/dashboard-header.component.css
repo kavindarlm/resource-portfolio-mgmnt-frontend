@@ -1,0 +1,75 @@
+.hederContainer{
+    display: flex;
+    width: 100%;
+    min-height: 50px;
+    height: 50px;
+    /* padding: 10px 20px; */
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: space-between;
+    box-shadow: 0px 2px 10px #CBCBCB;
+    border-bottom: 1px double #CBCBCB;
+    overflow-y: hidden;
+    position: relative;
+    
+  }
+  /* .slider-icon{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    cursor: pointer;
+  } */
+  
+  .sidebar-header{
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #190482;
+    width: 100%;
+    text-align: center; 
+    letter-spacing: 0.05rem;
+  }
+  @media only screen and (max-width: 768px) {
+    .hederContainer{
+      position: relative;
+      
+      background-color: white;
+      width: 100%;
+      
+    }
+    .headerActive{
+      left: 200px;
+      width: calc(100% - 200px);
+    }
+  }
+  @media (max-width: 575.98px) {
+    /* Styles for screens less than 576px wide (xs) */
+    .sidebar-header {
+        font-size: 1.1rem;
+    }
+  }
+  @media (min-width: 576px) {
+    /* Styles for screens equal to or greater than 576px wide (sm) */
+    .sidebar-header{
+        font-size: 1.1rem;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    /* Styles for screens equal to or greater than 768px wide (md) */
+    .sidebar-header{
+        font-size: 1.3rem; 
+    }
+  }
+  @media (min-width: 992px) {
+    /* Styles for screens equal to or greater than 992px wide (lg) */
+    .sidebar-header{
+        font-size: 1.4rem;
+    }
+  }
+  @media (min-width: 1200px) {
+    /* Styles for screens equal to or greater than 1200px wide (xl) */
+    .sidebar-header {
+        font-size: 1.5rem;
+    }
+  }
+  
