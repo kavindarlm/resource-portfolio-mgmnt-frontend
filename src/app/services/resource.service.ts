@@ -15,6 +15,8 @@ export class ResourceService {
     return this.http.get<any>(this.apiUrl);
   }
 
-
+  getResourceById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
   
 }
