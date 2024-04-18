@@ -34,7 +34,6 @@ import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admi
 import { DashboardHeaderComponent } from './admin-dashboard/dashboard-header/dashboard-header.component';
 import { UserListComponent } from './admin-dashboard/user-list/user-list.component';
 import { SearchBarComponent } from './admin-dashboard/search-bar/search-bar.component';
-import { ProjectListComponent } from './TaskManagement/project-list/project-list.component';
 import { CreateFormComponent } from './Sprint_Management/create-form/create-form.component';
 import { SprintMgtComponent } from './Sprint_Management/sprint-mgt/sprint-mgt.component';
 import { Ng2SearchPipe } from 'ng2-search-filter';
@@ -69,6 +68,7 @@ import { UpdateResourcTableComponent } from './team-management/update-resourc-ta
 import { ToastrModule } from 'ngx-toastr';
 import { ProjectBoardComponent } from './project-dashboard/project-board/project-board.component';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { TaskProjectListComponent } from './TaskManagement/task-project-list/task-project-list.component';
 
 
 @NgModule({
@@ -102,7 +102,6 @@ import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
     DashboardHeaderComponent,
     UserListComponent,
     SearchBarComponent,
-    ProjectListComponent,
     CreateFormComponent,
     SprintMgtComponent,
     FilterComponent,
@@ -126,6 +125,7 @@ import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
     SearchPipe,
     UpdateResourcTableComponent,
     ProjectBoardComponent,
+    TaskProjectListComponent,
   ],
   imports: [
     BrowserModule,

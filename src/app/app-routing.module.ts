@@ -10,7 +10,6 @@ import path from 'node:path';
 import { LoginAccComponent } from './login-acc/login-acc.component';
 import { FgPsswdComponent } from './fg-psswd/fg-psswd.component';
 import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admin-dasbd-body.component';
-import { ProjectListComponent } from './TaskManagement/project-list/project-list.component';
 import { ProjectDetailsComponent } from './TaskManagement/project-details/project-details.component';
 import { CreateNewtaskComponent } from './TaskManagement/create-newtask/create-newtask.component';
 import { UpdateTaskComponent } from './TaskManagement/update-task/update-task.component';
@@ -35,6 +34,7 @@ import { DeleteSprintPopupComponent } from './Sprint_Management/Reusable_Compone
 import { AvailabiilityComponent } from './Sprint_Management/availabiility/availabiility.component';
 import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
 import { ProjectBoardComponent } from './project-dashboard/project-board/project-board.component';
+import { TaskProjectListComponent } from './TaskManagement/task-project-list/task-project-list.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -55,7 +55,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'projectList', component: ProjectListComponent,
+        path: 'TaskProjectList', component: TaskProjectListComponent,
         children: [
           { path: 'projectTaskDetails/:id',component: ProjectDetailsComponent,
             children: [

@@ -3,11 +3,11 @@ import { projectModel } from '../dataModels/projectModel';
 import { taskApiService } from '../services/taskApi.service';
 
 @Component({
-  selector: 'app-project-list',
-  templateUrl: './project-list.component.html',
-  styleUrl: './project-list.component.css'
+  selector: 'app-task-project-list',
+  templateUrl: './task-project-list.component.html',
+  styleUrl: './task-project-list.component.css'
 })
-export class ProjectListComponent implements OnInit{
+export class TaskProjectListComponent implements OnInit{
   data: undefined|projectModel[];
   constructor(private api:taskApiService){}
   ngOnInit(): void{
