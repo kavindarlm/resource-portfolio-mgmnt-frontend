@@ -58,6 +58,7 @@ import { UserDetailComponent } from './admin-dashboard/user-detail/user-detail.c
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SpinnerComponent } from './spinner/spinner/spinner.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
 import { ToastrModule } from 'ngx-toastr';
 
 
@@ -106,7 +107,9 @@ import { ToastrModule } from 'ngx-toastr';
     FunctionManagementComponent,
     FunctionButtonComponent,
     UserDetailComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    UpdateResourcTableComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -115,8 +118,8 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    NgxSpinnerModule,
     BrowserAnimationsModule,//BrowserAnimationModule ws added for the spinner
+    NgxSpinnerModule,
     ToastrModule.forRoot(),
   ],
 
