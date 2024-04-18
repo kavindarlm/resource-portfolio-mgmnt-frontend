@@ -26,11 +26,6 @@ export class TeamFormComponent implements OnInit {
       description: ['', Validators.required],
       selectedResources: this.formbuilder.array([]) // Initialize selectedResources as a FormArray
     });
-
-    // this.service.selectedResources$.subscribe((resources) => {
-    //   this.selectedResources = resources;
-    //   this.updateSelectedResourcesFormArray();
-    // });
     this.service.selectedResources$.subscribe(
       data => {
         this.selectedResources = data;
@@ -39,9 +34,6 @@ export class TeamFormComponent implements OnInit {
         console.error(error);
       }
     );
-
-
-  
   }
 
   toggleResourceTable() {
@@ -50,9 +42,12 @@ export class TeamFormComponent implements OnInit {
 
   onFormSubmit() {
     if (this.teamForm.valid) {
-      // Combine form data and selectedResources
-      const formData = { ...this.teamForm.value, selectedResources: this.selectedResources };
-
+      // Extract resourceIds from selectedResources
+      const resourceIds = this.selectedResources.map(resource => resource.resourceId);
+  
+      // Combine form data and resourceIds
+      const formData = { ...this.teamForm.value, resourceIds };
+  
       this.service.addTeam(formData).subscribe({
         next: (_val: any) => {
           // alert('Team added successfully');
@@ -63,14 +58,6 @@ export class TeamFormComponent implements OnInit {
       });
     }
   }
+  }
 
-  // Helper function to update the selectedResources FormArray
-  // updateSelectedResourcesFormArray() {
-  //   const selectedResourcesArray = this.teamForm.get('selectedResources') as FormArray;
-  //   selectedResourcesArray.clear();
 
-  //   this.selectedResources.forEach(resource => {
-  //     selectedResourcesArray.push(this.formbuilder.group(resource));
-  //   });
-  // }
-}

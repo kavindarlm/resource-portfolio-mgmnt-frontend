@@ -10,20 +10,8 @@ import { SprintManagementService } from '../../../services/sprint-management.ser
 })
 export class ListComponent {
 
-  listTopic: string = 'Sprint List';
   sprints!: any[];
 
-
-  // comp:any ;
-  // detectComp(comp:any){
-  //   if(comp==="createform"){
-  //     this.comp = CreateFormComponent;
-  //   }
-  //   else if(comp==="sprintmgt"){
-  //     this.comp = SprintMgtComponent;
-  //     // this.sprintService.setSprintName(sprintName);
-  //   }
-  // }
 
   constructor(private sprintService: SprintManagementService) {}
 

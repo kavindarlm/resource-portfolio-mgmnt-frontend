@@ -12,6 +12,6 @@ export class AddedResourceListComponent {
   @Input() HeadArray: any[] = [];
   @Input() tablecontents: any[] = [];
 
-  
+
 
 }
