@@ -16,64 +16,7 @@
   margin-bottom: 20px; /* Added margin for spacing between sections */
 }
 
-.text1,
-.text2,
-.text3,
-.text4,
-.text5 {
-  color: #7752fe;
-  text-align: center;
-  font-family: Montserrat;
-  line-height: auto;
-  border-style: hidden;
-  outline: none;
+.text {
+  color: #1e3895;
 }
 
-.boxclr {
-  background-color: #7752fe;
-}
-
-
-/* Add media queries for responsiveness */
-/* @media (min-width: 576px) {
-  .box1 {
-      max-width: 540px;
-  }
-}
-
-@media (min-width: 768px) {
-  .box1 {
-      max-width: 720px;
-  }
-}
-
-@media (min-width: 992px) {
-  .box1 {
-      max-width: 960px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .box1 {
-      max-width: 1140px;
-  }
-} */
-
-/* Button Styles */
-.btn-primary {
-  display: inline-block;
-  padding: 10px 20px;
-  font-size: 16px; /* Adjust font size based on your design */
-  text-align: center;
-  text-decoration: none;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: white;
-  border: 1px solid #7752fe;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.btn-primary:hover {
-  background-color: #1E3895;
-  color: #ffffff;
-}
