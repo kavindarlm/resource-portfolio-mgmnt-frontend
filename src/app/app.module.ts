@@ -69,6 +69,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ProjectBoardComponent } from './project-dashboard/project-board/project-board.component';
 import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { TaskProjectListComponent } from './TaskManagement/task-project-list/task-project-list.component';
+import { SummaryListComponent } from './project-dashboard/summary-list/summary-list.component';
 
 
 @NgModule({
@@ -126,6 +127,7 @@ import { TaskProjectListComponent } from './TaskManagement/task-project-list/tas
     UpdateResourcTableComponent,
     ProjectBoardComponent,
     TaskProjectListComponent,
+    SummaryListComponent,
   ],
   imports: [
     BrowserModule,
