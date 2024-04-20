@@ -81,9 +81,9 @@ const routes: Routes = [
           { path: 'button', component: ButtonComponent },
           { path: 'add-form', component: AddFormComponent },
           {
-            path: 'resource-details', component: ResourceDetailsComponent,
+            path: 'resource-details/:id', component: ResourceDetailsComponent,
             children: [
-              { path: 'resouce-edit-form', component: ResourceEditFormComponent }
+              { path: 'resouce-edit-form/:id', component: ResourceEditFormComponent }
             ]
           },
         ]
