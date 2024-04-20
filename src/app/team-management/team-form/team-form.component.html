@@ -10,10 +10,10 @@
         </div>
 
         <div class="form-goup row-label mb-2">
-          <label class="pm-label fw-medium mb-2" for="teamName">Team Name:</label>
+          <label class="pm-label fw-medium mb-2" for="teamName">Team Name *</label>
           <div class="form-group row row-label">
             <div class="form-group align-items-center">
-              <label for="teamName" class="text-primary">Name</label>
+              <label for="teamName" class="tn-label text-primary">Name :</label>
               <input type="text" class="form-control " id="formGroupExampleInput1" placeholder="Enter Team Name"
                 formControlName="teamName">
             </div>
@@ -22,10 +22,10 @@
 
         
         <div class="form-goup row-label mb-2">
-          <label class="pm-label fw-medium mb-2" for="Description">Description:</label>
+          <label class="pm-label fw-medium mb-2" for="Description">Description *</label>
           <div class="form-group row row-label">
             <div class="form-group align-items-center">
-              <label for="description" class="text-primary">Description</label>
+              <label for="description" class="d-label text-primary">Description :</label>
               <input type="text" class="form-control" id="formGroupExampleInput1" placeholder="Enter Description"
                 formControlName="description">
             </div>
@@ -45,15 +45,15 @@
         <table class="table table-bordered table-striped table-hover table-sm">
 
           <thead class="thead-dark fs-6 fst-normal">
-            <tr class="border-0">
-              <th scope="col" class="col-4 border-0">
-                <div class="tbtn border rounded text-center p-1">Resource Id</div>
+            <tr class="">
+              <th scope="col" class="col-4 text-center">
+                Resource Id
               </th>
-              <th scope="col" class="col-4 border-0">
-                <div class="tbtn border rounded text-center p-1">Job Role</div>
+              <th scope="col" class="col-4 text-center">
+                Job Role
               </th>
-              <th scope="col" class="col-4 border-0">
-                <div class="tbtn border rounded text-center p-1">Org. Unit</div>
+              <th scope="col" class="col-4 text-center">
+                Org. Unit
               </th>
             </tr>
           </thead>
@@ -79,6 +79,11 @@
         <div class="addResourceBtn col-6">
           <app-new-team-button [text]="'Create Team'" value="Create Team"
             (click)="onFormSubmit()"></app-new-team-button>
+        </div>
+
+        <!-- error message -->
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          {{ errorMessage }}
         </div>
 
       </form>

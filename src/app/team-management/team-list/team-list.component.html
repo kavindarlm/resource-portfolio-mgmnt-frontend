@@ -28,6 +28,11 @@
         </div>
       </div>
 
+      <!-- error message -->
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+      </div>
+
     </div>
 
     <!-- display team form -->

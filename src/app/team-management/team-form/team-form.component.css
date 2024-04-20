@@ -25,11 +25,20 @@
     font-weight: bold;
 }
 
-label {
+.tn-label {
+    display: inline-block; 
+    margin-right: 10%;
+    
+    
+}
+
+.d-label{
     display: inline-block; 
     margin-right: 1%;
-    
-    
+}
+
+input{
+    width: 75%;
 }
 
 th{

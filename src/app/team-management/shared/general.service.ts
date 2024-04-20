@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class GeneralService {
 
+  // Define the properties
   showDialog = false;
 
   constructor() { }

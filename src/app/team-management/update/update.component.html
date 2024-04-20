@@ -41,15 +41,15 @@
           <table class="table table-bordered table-striped table-hover table-sm">
 
             <thead class="thead-dark fs-6 fst-normal">
-              <tr class="border-0">
-                <th scope="col" class="col-4 border-0">
-                  <div class="tbtn border rounded text-center p-1">Resource Id</div>
+              <tr class="">
+                <th scope="col" class="col-4 text-center">
+                  Resource Id
                 </th>
-                <th scope="col" class="col-4 border-0">
-                  <div class="tbtn border rounded text-center p-1">Job Role</div>
+                <th scope="col" class="col-4 text-center">
+                  Job Role
                 </th>
-                <th scope="col" class="col-4 border-0">
-                  <div class="tbtn border rounded text-center p-1">Org. Unit</div>
+                <th scope="col" class="col-4 text-center">
+                  Org. Unit
                 </th>
               </tr>
             </thead>
@@ -89,7 +89,12 @@
               (click)="generalservice.showDialog = true"> Delete</button>
           </div>
         </div>
+      <!-- error message -->
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          {{ errorMessage }}
+        </div>
       </form>
+
 
     </div>
 
