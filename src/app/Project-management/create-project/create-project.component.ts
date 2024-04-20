@@ -5,6 +5,7 @@ import { datamodel } from './modelproject';
 import { ProjectListComponent } from '../project-list/project-list.component';
 import { Router } from '@angular/router';
 import { error } from 'console';
+import { sharedprojectService } from '../service/sharedproject.service';
 
 @Component({
   selector: 'app-create-project',
@@ -14,7 +15,7 @@ import { error } from 'console';
 export class CreateProjectComponent implements OnInit {
  projectform!: FormGroup;
  submited = false;
- constructor(private formbulider: FormBuilder,private api:ApiService, private router: Router){}
+ constructor(private formbulider: FormBuilder,private api:ApiService, private router: Router,private sharedService: sharedprojectService){}
  ngOnInit(): void {
      this.projectform = this.formbulider.group({
       projectName: ['',Validators.required],
@@ -57,7 +58,9 @@ this.api.addProject(data).subscribe((res) => {
   alert('Form Submitted Successfully');
   console.log('Project added successfully:', res);
   this.projectform.reset();
-  this.router.navigate(['pages-body/projectlist']);
+  // this.router.navigate(['pages-body/projectlist']);
+  this.sharedService.refreshProjectList();
+  this.sharedService.refreshProjectCount();
 },
 (error) => {
   alert('Error adding project:' + error.message);

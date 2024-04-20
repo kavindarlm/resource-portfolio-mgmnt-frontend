@@ -1,42 +1,49 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../service/api.service';
 import { datamodel } from '../create-project/modelproject';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Subscription } from 'rxjs';
+import { sharedprojectService } from '../service/sharedproject.service';
 
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
-  styleUrl: './project-list.component.css'
+  styleUrl: './project-list.component.css',
 })
 export class ProjectListComponent {
-  data: undefined|datamodel[];
+  projects: undefined | datamodel[];
   searchText: string = '';
-  constructor(private api:ApiService){
-  }
+  subscrip!: Subscription;
+  constructor(
+    private api: ApiService,
+    private spiner: NgxSpinnerService,
+    private sharedService: sharedprojectService
+  ) {}
 
   ngOnInit(): void {
-    this.getProjectList();
-  }
-  // showupdateproject(){
-  //   this.updateproject = true;
-  // }
-
-  openProject(project: any) {
-    // Implement the logic to open the corresponding project
-    console.log('Opening project:', project.projectName);
-    alert("Opening project:");
-    // Example: Navigate to a project detail page
-    // this.router.navigate(['/project', project.id]);
-  }
-  
-  getProjectList(){
-    this.api.getProjectList().subscribe(res=>{
-      this.data = res;
-    })
+    this.subscrip = this.sharedService.refreshProjectList$.subscribe(() => {
+      this.getProjectList();
+    });
   }
 
-  onSearchChange(){
-    this.api.searchProject(this.searchText).subscribe(res => {
-      this.data = res;
-    })
+  openproject() {
+    console.log('open project');
+    this.sharedService.refreshProjectfetchData();
+  }
+
+  async getProjectList() {
+    this.spiner.show();
+    await this.api.getProjectList().subscribe((res) => {
+      this.projects = res;
+      this.spiner.hide();
+    });
+  }
+
+  onSearchChange() {
+    this.spiner.show();
+    this.api.searchProject(this.searchText).subscribe((res) => {
+      this.projects = res;
+      this.spiner.hide();
+    });
   }
 }

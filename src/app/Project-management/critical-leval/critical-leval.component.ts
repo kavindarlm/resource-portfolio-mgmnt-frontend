@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ApiService } from '../service/api.service';
 import { error } from 'console'; 
+import { Subscription } from 'rxjs';
+import { sharedprojectService } from '../service/sharedproject.service';
 
 @Component({
   selector: 'app-critical-leval',
@@ -8,17 +10,20 @@ import { error } from 'console';
   styleUrl: './critical-leval.component.css'
 })
 export class CriticalLevalComponent implements OnInit{
-  constructor(private apiService:ApiService){}
+  constructor(private apiService:ApiService, private shared: sharedprojectService){}
   projectCount: number | undefined;
   highProjects: number | undefined;
   lowProjects: number | undefined;
   MediumProjects: number | undefined;
+  Countsubscrip!: Subscription;
 
   ngOnInit(): void {
-      this.fetchProjectCount();
-      this.fetchHighProjectCount();
-      this.fetchLowProjectCount();
-      this.fetchMediumProjectCount();
+      this.Countsubscrip = this.shared.refreshProjectCount$.subscribe(() => {
+        this.fetchProjectCount();
+        this.fetchHighProjectCount();
+        this.fetchLowProjectCount();
+        this.fetchMediumProjectCount();
+      });
   }
 
   fetchProjectCount(): void{
