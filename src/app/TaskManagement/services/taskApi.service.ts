@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { projectModel, taskModel, taskUpdateModel } from "../dataModels/projectModel";
 
@@ -35,5 +35,10 @@ export class taskApiService{
     return this.http.put<taskUpdateModel>("http://localhost:3000/task/"+id,data);
   }
 
+  //search Project
+  searchProject(projectName: string){
+    const params = new HttpParams().set('s', projectName);
+    return this.http.get<projectModel[]>("http://localhost:3000/project/searchprojectName/search", {params});
+  }
   
 }

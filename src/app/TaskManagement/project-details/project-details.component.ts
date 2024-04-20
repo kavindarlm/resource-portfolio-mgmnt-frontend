@@ -14,6 +14,9 @@ export class ProjectDetailsComponent implements OnInit{
   public dataid!: string;
   projectData: undefined| projectModel;
   TaskData: undefined| taskModel[];
+  currentPage = 1;
+  itemsPerPage = 8;
+  totalPages!: number;
 
   ngOnInit(): void {
       this.activateDataRout.paramMap.subscribe((param: Params) => {
