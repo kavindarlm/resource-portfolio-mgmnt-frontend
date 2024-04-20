@@ -43,7 +43,6 @@ import { AvailableResourceListComponent } from './Sprint_Management/available-re
 import { AvailabiilityComponent } from './Sprint_Management/availabiility/availabiility.component';
 import { AddedResourceListComponent } from './Sprint_Management/added-resource-list/added-resource-list.component';
 import { ProjectListComponent } from './Project-management/project-list/project-list.component';
-import { ProjectButtunsComponent } from './Project-management/project-buttuns/project-buttuns.component';
 import { ListComponent } from './Sprint_Management/Reusable_Components/list/list.component';
 import { TablesComponent } from './Sprint_Management/Reusable_Components/tables/tables.component';
 import { ResourceDetailsComponent } from './resourceMgt/resource-details/resource-details.component';
@@ -89,7 +88,6 @@ import { TaskProjectListComponent } from './TaskManagement/task-project-list/tas
     ResourceTableComponent,
     CreateProjectComponent,
     ProjectListComponent,
-    ProjectButtunsComponent,
     UpdateProjectComponent,
     FooterComponent,
     PageHeaderComponent,
