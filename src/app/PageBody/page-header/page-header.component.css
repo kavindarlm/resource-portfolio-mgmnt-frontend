@@ -73,3 +73,8 @@
       transform: translateX(-100%);
     }
   }
+
+  .l-bg-blue-dark {
+    background: linear-gradient(to right, #031a51, #4286f4) !important;
+    color: #fff;
+}

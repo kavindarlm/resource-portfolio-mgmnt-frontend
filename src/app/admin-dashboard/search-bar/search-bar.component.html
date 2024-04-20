@@ -1,7 +1,7 @@
-<div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchTerm" (keyup.enter)="onSearch()">
-    <div class="input-group-append">
-        <button class="btn btn-primary" type="button" (click)="onSearch()">Search</button>
-    </div>
+<div class="input-group rounded">
+    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+        aria-describedby="search-addon" />
+    <span class="input-group-text border-0" id="search-addon">
+        <i class="bi bi-search"></i>
+    </span>
 </div>
-

@@ -1,7 +1,7 @@
 .card {
     background-color: #fff;
     color: #1E3895;
-    border-radius: 10px;
+    border-radius: 4px;
     border: none;
     position: relative;
     /* margin-bottom: 30px; */
@@ -15,9 +15,9 @@
 /* .l-bg-blue-dark {
     background: linear-gradient(to right, #373b44, #4286f4) !important;
     color: #fff;
-}
+} */
 
-.l-bg-green-dark {
+/* .l-bg-green-dark {
     background: linear-gradient(to right, #0a504a, #38ef7d) !important;
     color: #fff;
 } */
@@ -42,22 +42,22 @@
     opacity: 0.1;
 } */
 
-.l-bg-cyan {
+/* .l-bg-cyan {
     background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
     color: #fff;
-}
+} */
 
-.l-bg-green {
+/* .l-bg-green {
     background: linear-gradient(135deg, #23bdb8 0%, #43e794 100%) !important;
     color: #fff;
-}
+} */
 
-.l-bg-orange {
+/* .l-bg-orange {
     background: linear-gradient(to right, #f9900e, #ffba56) !important;
     color: #fff;
-}
+} */
 
-.l-bg-cyan {
+/* .l-bg-cyan {
     background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
     color: #fff;
-}
+} */
