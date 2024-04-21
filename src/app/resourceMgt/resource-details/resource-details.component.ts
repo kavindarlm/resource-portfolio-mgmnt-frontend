@@ -7,6 +7,7 @@ import { catchError, throwError } from 'rxjs';
 import { JobRoleService } from '../../shared/sevices_resourceMgt/jobRole.service';
 import { OrgUnitService } from '../../shared/sevices_resourceMgt/orgUnit.service';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-resource-details',
@@ -16,6 +17,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ResourceDetailsComponent {
   sharedData: any;
   showResourceEditForm: boolean = false;//first not to show the form
+  showResourceDetails: boolean = true;
   selectedResource: any;
 
   jobroles: JobRoleModel[] | undefined; //creating an array for jobroles
@@ -24,7 +26,8 @@ export class ResourceDetailsComponent {
   constructor(private resourceService: ResourceService, 
               private jobRoleService: JobRoleService, 
               private orgUnitService: OrgUnitService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private toaster: ToastrService) {
     this.sharedData = this.resourceService.getData();
     this.selectedResource = this.resourceService.getData();
   }
@@ -107,6 +110,8 @@ export class ResourceDetailsComponent {
     this.resourceService.deleteResource(this.selectedResource.resourceId)
     .subscribe((res:ResourceModel)=> {
       console.log('Resource deleted successfully:', res);
+      this.deleteSucceseMassege(this.selectedResource.resourceId);
+      this.showResourceDetails = false;
       this.resourceService.resourceListUpdated.emit(); // Emit the event
     },
     (error) => {
@@ -133,6 +138,15 @@ export class ResourceDetailsComponent {
     }
     return 'Unknown Unit';
   }
+
+    //Delete Success Message
+    deleteSucceseMassege(resourceId: string) {
+      this.toaster.success(
+        `${resourceId} Deleted successfully`,
+        'Resource Deleted Successfully',
+        { timeOut: 3000 }
+      );
+    }
 
 }
 

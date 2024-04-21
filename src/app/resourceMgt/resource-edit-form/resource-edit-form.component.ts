@@ -10,6 +10,7 @@ import { throwError } from 'rxjs';
 import { JobRoleService } from '../../shared/sevices_resourceMgt/jobRole.service';
 import { OrgUnitService } from '../../shared/sevices_resourceMgt/orgUnit.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-resource-edit-form',
@@ -31,7 +32,8 @@ export class ResourceEditFormComponent implements OnInit{
               private resourceService: ResourceService, 
               private jobRoleService: JobRoleService, 
               private orgUnitService: OrgUnitService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private toaster: ToastrService) { }
 
   ngOnInit(): void {
     this.loadJobRoles();// calling the loadJobRoles Method
@@ -120,7 +122,8 @@ export class ResourceEditFormComponent implements OnInit{
         (res: any) => {
           debugger;
           console.log('Resource updated successfully:', res);
-          alert('Resource updated Successfully');
+          // alert('Resource updated Successfully');
+          this.editSucceseMassege(this.selectedResource.resourceId);
           this.formValue.reset();
           this.resourceService.resourceListUpdated.emit(); // Emit the event
           this.router.navigate(['pages-body/first-view']);
@@ -138,6 +141,7 @@ export class ResourceEditFormComponent implements OnInit{
     this.resourceService.deleteResource(this.selectedResource.resourceId)
     .subscribe((res:ResourceModel)=> {
       console.log('Resource deleted successfully:', res);
+      this.deleteSucceseMassege(this.selectedResource.resourceId);
       this.formValue.reset();
       this.resourceService.resourceListUpdated.emit(); // Emit the event
       this.router.navigate(['pages-body/first-view']);
@@ -146,6 +150,24 @@ export class ResourceEditFormComponent implements OnInit{
       console.error('Error occurred while deleting resource:', error);
       // Handle error appropriately, such as displaying an error message to the user.
     }
+    );
+  }
+
+  //Delete Success Message
+  deleteSucceseMassege(resourceId: string) {
+    this.toaster.success(
+      `${resourceId} Deleted successfully`,
+      'Resource Deleted Successfully',
+      { timeOut: 3000 }
+    );
+  }
+
+  //Edit Success Message
+  editSucceseMassege(resourceId: string) {
+    this.toaster.success(
+      `${resourceId} Updated successfully`,
+      'Resource Updated Successfully',
+      { timeOut: 3000 }
     );
   }
 
