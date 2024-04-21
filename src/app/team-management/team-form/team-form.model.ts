@@ -1,3 +1,4 @@
+// Object model for the team form
 export interface JobRole {
   role_id: number;
   role_name: string;
