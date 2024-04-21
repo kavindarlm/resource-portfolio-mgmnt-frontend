@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Params } from '@angular/router';
 import { taskApiService } from '../services/taskApi.service';
 import { ProjectDetailsComponent } from '../project-details/project-details.component';
+import { taskSharedService } from '../services/taskshared.service';
 
 @Component({
   selector: 'app-create-newtask',
@@ -14,7 +15,7 @@ export class CreateNewtaskComponent implements OnInit {
   public projectid!: string;
   submited = false;
 
-  constructor(private formbulder: FormBuilder,private activateDataRout: ActivatedRoute, private taskService: taskApiService,private taskDetails: ProjectDetailsComponent){}
+  constructor(private formbulder: FormBuilder,private activateDataRout: ActivatedRoute, private taskService: taskApiService,private taskDetails: ProjectDetailsComponent, private shared: taskSharedService){}
   ngOnInit(): void {
 
     this.activateDataRout.paramMap.subscribe((param: Params) => {
@@ -38,6 +39,7 @@ export class CreateNewtaskComponent implements OnInit {
       }
       this.taskService.addTask(data,this.projectid).subscribe((res=>{
         console.log(res);
+        this.shared.refreshTaskList();
         this.taskForm.reset();
       }))
       this.taskDetails.getTaskList();

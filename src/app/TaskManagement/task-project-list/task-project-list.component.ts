@@ -10,26 +10,26 @@ import { taskApiService } from '../services/taskApi.service';
 export class TaskProjectListComponent implements OnInit{
   data: undefined|projectModel[];
   searchText: string = '';
-  currentPage = 1;
-  itemsPerPage = 8;
-  totalPages!: number;
   
   constructor(private api:taskApiService){}
   ngOnInit(): void{
     this.getProjectLists();
   }
+
   getProjectLists(){
     this.api.getProjectList().subscribe(res=>{
       this.data = res;
-      // console.log(this.data, 'data')
     })
-     
   }
-
 
   onSearchChange(){
     this.api.searchProject(this.searchText).subscribe(res =>{
       this.data = res;
     })
   }
+
+  openProject(){
+    
+  }
+
 }

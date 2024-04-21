@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { taskModel, taskUpdateModel } from '../dataModels/projectModel';
 import { taskApiService } from '../services/taskApi.service';
+import { taskSharedService } from '../services/taskshared.service';
 
 @Component({
   selector: 'app-update-task',
@@ -23,7 +24,7 @@ export class UpdateTaskComponent implements OnInit {
   taskUpdate: taskUpdateModel={
     taskProgressPercentage: ''
   }
-  constructor(private activateDataRout: ActivatedRoute, private TaskService: taskApiService){}
+  constructor(private activateDataRout: ActivatedRoute, private TaskService: taskApiService, private shared: taskSharedService){}
   ngOnInit(): void {
       this.activateDataRout.paramMap.subscribe((param: Params) => {
         this.taskid = param['get']('id');
@@ -53,6 +54,7 @@ export class UpdateTaskComponent implements OnInit {
     this.TaskService.updatetaskPersentage(this.taskid, this.taskDetails).subscribe((data: taskUpdateModel) =>{
       this.taskUpdate = data;
       alert("Task Updated Successfully");
+      this.shared.refreshTaskList();
     });
   }
 }
