@@ -49,17 +49,17 @@
 
   .white-div-container {
    
-    margin-left: 20px;
+    margin-left: 10px;
     margin-right: 20px;
-    margin-top: 70px;
-    width: calc(100% - 40px);
+    margin-top: 40px;
+    width: calc(100% - 20px);
     border-radius: 10px;
     /*inside content padding 10px*/
     padding: 10px;
     /* Adjust the height as necessary, or remove it to fit content */
-    max-height: 82vh;
+    max-height: 85vh;
     margin-bottom: 75px;
-    height: 82vh;
+    height: 85vh;
     display: flex;
     background-color: rgb(255, 255, 255);
     overflow-y: hidden;
@@ -78,8 +78,9 @@
     overflow-y: scroll;
     padding: 10px;
     box-shadow: 0px 2px 10px #CBCBCB;
-    height: 75vh;
+    height: 85vh;
     flex-direction: column;
+    overflow-x: hidden;
   } 
 
   .title {

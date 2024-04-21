@@ -16,6 +16,7 @@
     /* width: fit-content; */
     height: 100%;
     display: inline-block;
+    /* float: right; */
     /* margin: 1%; */
 }
 
@@ -37,7 +38,7 @@ th{
 
 .clickable-row:hover td {
     transition: 0.5s;
-    background-color: #04175a;
+    background-color: #1e3895e1;
     color: white;
 }
 
@@ -46,8 +47,4 @@ th{
         grid-template-columns: repeat(2, 1fr);
         /* Use a two-column layout on larger screens */
     }
-
-    /* .mainBox {
-        margin: 10px;
-    } */
 }

@@ -1,13 +1,4 @@
-.table-container{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    /* margin-left: 40%;    */
-}
-th, td {
-    padding: 8px; /* Padding for content spacing */
-    text-align: left; /* Text alignment within cells */
-  }
+
 .project-list{
     overflow-y: scroll;
     /* Adjusted height */
@@ -19,52 +10,37 @@ th, td {
 .table-data{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    /* gap: 10px; */
     justify-content: space-between;
-    margin: 10px 0;
-    
+    /* margin: 10px 0; */
+    max-height: 99vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
 }
 
-.addproject{
-    color: #7752FE;
-    border: solid 1.5px #7752FE;
-    font-weight: semibold;
+.menu-button {
     width: 100%;
-    margin-top: 3%;
-}
-
-.addproject:hover{
-    color: #FEFEFE;
-    background-color: #1E3895;
-    font-weight: semibold;
-    border: solid 1px #7752FE;
-
-}
-.btn-costom{
-    background-color: #C2D9FF;
-    color: #7752FE;
-    font-family: Montserrat;
-    width: 100%; /* Set the width for desktop */
     height: 40px;
-    font-weight: semibold;   
-}
+    font-weight: 500;
+    background-color: #fefefe;
+    border: .5px solid #b4a0ff88;
+    border-radius: 10px;
+    color: #1e3895;
+    margin-top: 3%;
+    content: fit-content;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0 15px;
+    line-height: 40px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  } 
 
-.btn-costom:hover{
-    background-color: #1E3895;
+ .menu-button:hover,
+  .menu-button:active {
+    background-color: #1e3895;
     color: #FEFEFE;
-}
-.heder-label{
-    font-size: 20px;
-    font-weight: semi-bold;
-    text-align: center;
-    background-color: #7752FE;
-    height: 6%;
-    width: 100%;
-    border-radius: 8px;
-    color: white;
-    display: block;
-    padding: 10px;
-    margin-top: 2%;
-    margin-bottom: 2%;
-}
+  }
+
 
