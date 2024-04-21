@@ -1,19 +1,24 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-lg-2 col-md-2 col-sm-12 justify-content-center border rounded p-2">
             <div class="table-container">
                 <div>
-                    <div class="heder-label">Project List</div>
+                    <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Project List</div>
                 </div>
-                <div class="table-data"> 
+                <div class="">
+                    <!-- search box -->
+                    <input type="search" [(ngModel)]="searchText" id="form1" (ngModelChange)="onSearchChange()" class="form-control" placeholder="Search by Name"
+                        aria-label="search">
+                </div>
+                <div class="table-data">  
                     <div *ngFor="let project of data " class="btns">
-                        <button class="btn btn-costom" routerLink="projectTaskDetails/{{project.projectid}}"
-                            routerLinkActive="active">{{project.projectName}}</button>
+                        <button class="menu-button" routerLink="projectTaskDetails/{{project.projectid}}"
+                            routerLinkActive="active" (click)="openProject()">{{project.projectName}}</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-10 col-md-10 col-sm-12">
             <router-outlet></router-outlet>
     </div>
 </div>  

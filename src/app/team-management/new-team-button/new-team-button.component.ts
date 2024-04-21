@@ -6,7 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrl: './new-team-button.component.css'
 })
 export class NewTeamButtonComponent implements OnInit{
-
+ 
+  // Define the text property
   @Input() text: string = '';
 
   constructor(){}

@@ -16,20 +16,20 @@
 
             <div class="table-responsive-sm  table-responsive-md table-responsive">
                 <table class="table table-bordered table-striped table-hover table-sm">
-                    <thead class="thead-dark fs-6 fst-normal">
-                        <tr class="border-0">
-                            <th scope="col" class="col-4 border-0">
-                                <div class="tbtn border rounded text-center ">Resource Id</div>
-                            </th>
-                            <th scope="col" class="col-4 border-0">
-                                <div class="tbtn border rounded text-center ">Job Role</div>
-                            </th>
-                            <th scope="col" class="col-4 border-0">
-                                <div class="tbtn border rounded text-center  ">Org.Unit</div>
-                            </th>
-                            <th class="border-0"></th>
-                        </tr>
-                    </thead>
+                  <thead class="thead-dark fs-6 fst-normal">
+                    <tr class="">
+                      <th scope="col" class="col-4 text-center">
+                        Resource Id
+                      </th>
+                      <th scope="col" class="col-4 text-center">
+                        Job Role
+                      </th>
+                      <th scope="col" class="col-4 text-center">
+                        Org. Unit
+                      </th>
+                      <th></th>
+                    </tr>
+                  </thead>
                     <tbody>
                         <tr *ngFor="let resource of resources | filter:searchtext">
                           <td class="text-center ">{{resource.resourceId}}</td>
@@ -62,6 +62,11 @@
                       </li>
                     </ul>
                   </nav>
+
+                  <!-- error message -->
+                  <div *ngIf="errorMessage" class="alert alert-danger">
+                    {{ errorMessage }}
+                  </div>
             </div>
             </div>
         </div>
