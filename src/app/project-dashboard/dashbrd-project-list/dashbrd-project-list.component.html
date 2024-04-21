@@ -1,80 +1,100 @@
 <div class="custom-overflow-y py-0">
     <div class="row">
-        <div class="col-xl-6 col-lg-6 ">
-            <span><i class="bi bi-filter fs-5"></i></span>
-            filter component
+        <div class="col-xl-2 col-lg-2 ">
+            <!-- <span><i class="bi bi-filter fs-5"></i></span> -->
+            <div class="input-group rounded py-0">
+                <span class="input-group-text border-0" id="search-addon">
+                    <i class="bi bi-filter"></i>
+                </span>
+                <input type="input" class="form-control rounded small-text" placeholder="Project Criticality" aria-label="Search"
+                    aria-describedby="search-addon" />
+            </div>
         </div>
-        <div class="col-xl-6 col-lg-6">
+        <div class="col-xl-10 col-lg-10">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                     <!-- Leave this div empty -->
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <app-search-bar></app-search-bar>
                 </div>
             </div>
         </div>
     </div>
     <hr>
-    <div class="row ms-1 me-1 mb-2 row-cols-lg-4 row-cols-md-2">
-        <div class="col-lg-3" *ngFor="let project of projects| slice: (currentPage-1) * itemsPerPage : currentPage * itemsPerPage; let i = index">
-            <div class="card mb-3">
-                <div class="card-body py-2">
-                    <hr class="position-absolute w-100 left-0"
-                        style="top: 10%; border-top: 1px solid rgb(95, 95, 95); margin-left: -15px;">
-                    <div class="border rounded-circle justify-content-center align-items-center d-flex position-relative"
-                        [style.background-color]="project.color" style="z-index: 1; width: 50px; height: 50px;">
-                        <span><i class="bi bi-snow2 fs-4"></i></span>
-                    </div>
-                    <div class="fs-6 fw-semibold font-color mt-1">{{ project.title }}</div>
-                    <div class="progress mt-2">
-                        <div class="progress-bar l-bg-cyan" role="progressbar" [style.width]="project.progress + '%'"
-                            [attr.aria-valuenow]="project.progress" aria-valuemin="0" aria-valuemax="100">{{
-                            project.progress }}%</div>
-                    </div>
-                    <div class="row mt-2 text-black-50 small-text">
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="text-start">
-                                <i class="bi bi-calendar4 me-2"></i>Start
-                                <p>{{ project.startDate }}</p>
+    <div class="row">
+        <div [ngClass]="{'col-6': isViewMoreClicked, 'col-12': !isViewMoreClicked}">
+            <div class="row ms-1 me-1 mb-2 row-cols-lg-4 row-cols-md-2">
+                <div class="card-container" [ngClass]="{'col-lg-6': isViewMoreClicked, 'col-lg-3': !isViewMoreClicked}"
+                    *ngFor="let project of projects| slice: (currentPage-1) * itemsPerPage : currentPage * itemsPerPage; let i = index">
+                    <div class="card mb-3">
+                        <button class="btn btn-primary l-bg-blue-dark btn-sm view-button" (click)="viewMore()">View
+                            More</button>
+                        <div class="card-body py-2">
+                            <hr class="position-absolute w-100 left-0"
+                                style="top: 10%; border-top: 1px solid rgb(95, 95, 95); margin-left: -15px;">
+                            <div class="border rounded-circle justify-content-center align-items-center d-flex position-relative"
+                                [style.background-color]="project.color" style="z-index: 1; width: 50px; height: 50px;">
+                                <span><i class="bi bi-snow2 fs-4"></i></span>
                             </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="text-end">
-                                End<i class="bi bi-calendar4 ms-2"></i>
-                                <p>{{ project.endDate }}</p>
+                            <div class="fs-6 fw-semibold font-color mt-1 text-capitalize">{{ project.title }}</div>
+                            <div class="progress mt-2">
+                                <div class="progress-bar l-bg-cyan" role="progressbar"
+                                    [style.width]="project.progress + '%'" [attr.aria-valuenow]="project.progress"
+                                    aria-valuemin="0" aria-valuemax="100">{{
+                                    project.progress }}%</div>
                             </div>
+                            <div class="row mt-2 text-black-50 small-text">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="text-start">
+                                        <i class="bi bi-calendar4 me-2"></i>Start
+                                        <p>{{ project.startDate }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="text-end">
+                                        End<i class="bi bi-calendar4 ms-2"></i>
+                                        <p>{{ project.endDate }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row"><span>
+                                    <i class="bi bi-person-circle fs-5" style="color: rgb(8, 140, 255);"></i>
+                                    <i class="bi bi-person-circle fs-5" style="color: rgb(8, 140, 255);"></i>
+                                    <i class="bi bi-person-circle fs-5" style="color: rgb(8, 140, 255);"></i>
+                                </span></div>
                         </div>
                     </div>
-                    <div class="row"><span>
-                        <i class="bi bi-person-circle fs-5" style="color: rgb(8, 140, 255);"></i>
-                        <i class="bi bi-person-circle fs-5" style="color: rgb(8, 140, 255);"></i>
-                        <i class="bi bi-person-circle fs-5" style="color: rgb(8, 140, 255);"></i>
-                    </span></div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- table pagination -->
-    <div>
-        <ul class="pagination pagination-sm justify-content-center">
-          <li class="page-item" [class.disabled]="currentPage === 1">
-            <a class="page-link" (click)="currentPage = currentPage - 1" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only">Previous</span>
-            </a>
-          </li>
-          <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index"
-            [class.active]="currentPage === i + 1">
-            <a class="page-link" (click)="currentPage = i + 1">{{ i + 1 }}</a>
-          </li>
-          <li class="page-item" [class.disabled]="currentPage === totalPages">
-            <a class="page-link" (click)="currentPage = currentPage + 1" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
-            </a>
-          </li>
-        </ul>
-      </div>
+
+            <!-- table pagination -->
+            <div>
+                <ul class="pagination pagination-sm justify-content-center">
+                    <li class="page-item" [class.disabled]="currentPage === 1">
+                        <a class="page-link" (click)="currentPage = currentPage - 1" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index"
+                        [class.active]="currentPage === i + 1">
+                        <a class="page-link" (click)="currentPage = i + 1">{{ i + 1 }}</a>
+                    </li>
+                    <li class="page-item" [class.disabled]="currentPage === totalPages">
+                        <a class="page-link" (click)="currentPage = currentPage + 1" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-lg-6" *ngIf="isViewMoreClicked">
+            <app-dashbrd-project-details></app-dashbrd-project-details>
+          </div>
+
+    </div>
 </div>
