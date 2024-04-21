@@ -28,7 +28,7 @@
                 <div class="card-container" [ngClass]="{'col-lg-6': isViewMoreClicked, 'col-lg-3': !isViewMoreClicked}"
                     *ngFor="let project of projects| slice: (currentPage-1) * itemsPerPage : currentPage * itemsPerPage; let i = index">
                     <div class="card mb-3">
-                        <button class="btn btn-primary l-bg-blue-dark btn-sm view-button" (click)="viewMore()">View
+                        <button class="btn fw-medium small-text font-color btn-sm view-button" (click)="viewMore()">View
                             More</button>
                         <div class="card-body py-2">
                             <hr class="position-absolute w-100 left-0"
