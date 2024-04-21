@@ -6,6 +6,7 @@ import { JobRoleModel, OrgUnitModel, ResourceModel } from '../add-form/addformmo
 import { catchError, throwError } from 'rxjs';
 import { JobRoleService } from '../../shared/sevices_resourceMgt/jobRole.service';
 import { OrgUnitService } from '../../shared/sevices_resourceMgt/orgUnit.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-resource-details',
@@ -20,16 +21,43 @@ export class ResourceDetailsComponent {
   jobroles: JobRoleModel[] | undefined; //creating an array for jobroles
   orgunits: OrgUnitModel[] | undefined; //creating an array for orgunits
 
-  constructor(private resourceService: ResourceService, private jobRoleService: JobRoleService, private orgUnitService: OrgUnitService) {
+  constructor(private resourceService: ResourceService, 
+              private jobRoleService: JobRoleService, 
+              private orgUnitService: OrgUnitService,
+              private route: ActivatedRoute) {
     this.sharedData = this.resourceService.getData();
     this.selectedResource = this.resourceService.getData();
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      const resourceId = params['id'];
+      if (resourceId) {
+        this.loadResourceDetails(resourceId);
+      }
+    });
     this.loadJobRoles();// calling the loadJobRoles Method
     this.loadOrgUnits();// calling the loadOrgUnits Method
   }
 
+  loadResourceDetails(resourceId: string) {
+    this.resourceService.getResource(resourceId)
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching resource details:', error);
+          alert('An error occurred while fetching resource details. Please try again.');
+          return throwError('Error fetching resource details');
+        })
+      )
+      .subscribe((res: ResourceModel) => {
+        this.sharedData = res;
+        this.selectedResource = res;
+      },
+      (error) => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+      });
+  }
 
   loadJobRoles() {
     this.jobRoleService.getJobRoles()
@@ -79,6 +107,7 @@ export class ResourceDetailsComponent {
     this.resourceService.deleteResource(this.selectedResource.resourceId)
     .subscribe((res:ResourceModel)=> {
       console.log('Resource deleted successfully:', res);
+      this.resourceService.resourceListUpdated.emit(); // Emit the event
     },
     (error) => {
       console.error('Error occurred while deleting resource:', error);
