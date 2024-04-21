@@ -10,7 +10,7 @@
                     <input type="search" [(ngModel)]="searchText" id="form1" (ngModelChange)="onSearchChange()" class="form-control" placeholder="Search by Name"
                         aria-label="search">
                 </div>
-                <div class="table-data">
+                <div class="table-data">  
                     <div *ngFor="let project of data " class="btns">
                         <button class="menu-button" routerLink="projectTaskDetails/{{project.projectid}}"
                             routerLinkActive="active" (click)="openProject()">{{project.projectName}}</button>
