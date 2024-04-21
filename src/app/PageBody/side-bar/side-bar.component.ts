@@ -14,20 +14,11 @@ export class SideBarComponent implements OnInit{
   ){}
   ngOnInit(): void {
   }
+
+  // Function to set the header name and sidebar active
   selectHeaderName(name:string){
     this.sidebarHeaderService.setHeaderName(name);
-    switch (name) {
-      case 'SPRINT MANAGEMENT':
-        // this.router.navigateByUrl('/sprint-management');
-        break;
-      case 'HANDLE REQUEST RESOURCES':
-        // this.router.navigateByUrl('/sprint-mgt');
-        break;
-      // Add more cases for other buttons if needed
-      default:
-        // Navigate to a default component or do nothing
-        break; 
-    }
+    this.sidebarHeaderService.setSidebarActive();
   }
 
   @Input() sidebarActivee: boolean = false;

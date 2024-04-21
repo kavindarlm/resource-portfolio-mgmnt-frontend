@@ -18,22 +18,24 @@ export class DeletePopupComponent {
     private api: ApiService,
     private router: Router
     ){}
-    
 
-  onDeleteTeam(): void {
-    const teamId = this.teamData.id;
-  
-    this.api.deleteTeams(teamId).subscribe(
-      response => {
-        console.log('Team deleted', response);
-        //  add code here to handle the response, such as refreshing the list of teams
-      },
-      error => {
-        console.error('Error deleting team', error);
-        // add code here to handle errors, such as displaying an error message
-      }
-    );
-  }
+    errorMessage: string = ''; // Define the errorMessage property
+
+    // Method to delete a team
+    onDeleteTeam(): void {
+      const teamId = this.teamData.id;
+    
+      this.api.deleteTeams(teamId).subscribe(
+        response => {
+          console.log('Team deleted', response);
+          this.errorMessage = ''; 
+        },
+        error => {
+          console.error('Error deleting team', error);
+          this.errorMessage = 'There was an error deleting the team. Please try again later.';
+        }
+      );
+    }
 
 
 }
