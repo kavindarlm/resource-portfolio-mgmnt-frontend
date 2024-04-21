@@ -45,7 +45,9 @@ const routes: Routes = [
     path: 'pages-body', component: PagesBodyComponent,
     children: [
       { path: 'projectBoard', component: ProjectBoardComponent,
-        children: []
+        children: [
+          
+        ]
       },
       {
         path: 'projectlist', component: ProjectListComponent,
@@ -81,9 +83,9 @@ const routes: Routes = [
           { path: 'button', component: ButtonComponent },
           { path: 'add-form', component: AddFormComponent },
           {
-            path: 'resource-details', component: ResourceDetailsComponent,
+            path: 'resource-details/:id', component: ResourceDetailsComponent,
             children: [
-              { path: 'resouce-edit-form', component: ResourceEditFormComponent }
+              { path: 'resouce-edit-form/:id', component: ResourceEditFormComponent }
             ]
           },
         ]

@@ -24,8 +24,13 @@
         </div>
 
         <div class="mt-1">
-          <app-new-team-button [text]="'New Team'" routerLink="TeamForm"></app-new-team-button>
+          <app-new-team-button [text]="'Add New Team'" routerLink="TeamForm"></app-new-team-button>
         </div>
+      </div>
+
+      <!-- error message -->
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
       </div>
 
     </div>

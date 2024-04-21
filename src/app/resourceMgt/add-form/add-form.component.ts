@@ -7,6 +7,7 @@ import { catchError } from 'rxjs';
 import { throwError } from 'rxjs';
 import { JobRoleService } from '../../shared/sevices_resourceMgt/jobRole.service';
 import { OrgUnitService } from '../../shared/sevices_resourceMgt/orgUnit.service';
+import { Router } from '@angular/router';
 // import { v4 as uuidv4 } from 'uuid';
 
 
@@ -23,7 +24,12 @@ export class AddFormComponent implements OnInit {
   jobroles: JobRoleModel[] | undefined; //creating an array for jobroles
   orgunits: OrgUnitModel[] | undefined; //creating an array for orgunits
 
-  constructor(private http: HttpClient, private resourceService: ResourceService, private formBuilder: FormBuilder, private jobRoleService: JobRoleService, private orgUnitService: OrgUnitService) { } // Have to include the HttpClient Module in app.model too
+  constructor(private http: HttpClient, 
+              private resourceService: ResourceService, 
+              private formBuilder: FormBuilder, 
+              private jobRoleService: JobRoleService, 
+              private orgUnitService: OrgUnitService,
+              private router: Router) { } // Have to include the HttpClient Module in app.model too
   ngOnInit(): void {
 
     this.loadJobRoles();// calling the loadJobRoles Method
@@ -104,8 +110,23 @@ export class AddFormComponent implements OnInit {
       })
     )
     .subscribe((res => {
-      console.log(data)
+      console.log(data);
+      this.resourceForm.reset();
+      this.resourceService.resourceListUpdated.emit(); // Emit the event
+      this.router.navigate(['pages-body/first-view']);
     }))
   }
 
 }
+
+// this.api.addProject(data).subscribe((res) => {
+//   alert('Form Submitted Successfully');
+//   console.log('Project added successfully:', res);
+//   this.projectform.reset();
+//   this.router.navigate(['pages-body/projectlist']);
+// },
+// (error) => {
+//   alert('Error adding project:' + error.message);
+//   console.log('Error adding project:', error);
+// });
+// }

@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { JobRoleService } from '../../shared/sevices_resourceMgt/jobRole.service';
 import { OrgUnitService } from '../../shared/sevices_resourceMgt/orgUnit.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-first-view',
@@ -22,78 +23,94 @@ export class FirstViewComponent implements OnInit {
   orgunits: OrgUnitModel[] | undefined; //creating an array for orgunits
   resourceObject: any;
   showForm = false;
+  currentPage = 1;
+  itemsPerPage = 10;
+  totalPages!: number;
 
-  constructor(private http: HttpClient, private resourceService: ResourceService, private jobRoleService: JobRoleService, private orgUnitService: OrgUnitService) {
-    // this.resourceService.getResources();
-    // this.searchText = this.resourceList;
-   }
+  constructor(private http: HttpClient, 
+              private resourceService: ResourceService, 
+              private jobRoleService: JobRoleService, 
+              private orgUnitService: OrgUnitService,
+              private spinner: NgxSpinnerService) {
+  }
 
 
   ngOnInit(): void {
     this.loadResources();
     this.loadJobRoles();// calling the loadJobRoles Method
     this.loadOrgUnits();// calling the loadOrgUnits Method
+
+    // Subscribe to the resourceAdded event
+    this.resourceService.resourceListUpdated.subscribe(() => {
+      this.loadResources(); // Reload resource list when a new resource is added
+    });
   }
 
 
   loadResources() {
     this.resourceService.getResources()
-    .pipe(
-      catchError((error) => {
-        console.error('Error fetching resources:', error);
-        alert('An error occurred while fetching resources. Please try again.');
-        return throwError('Error fetching resources');
-      })
-    )
-    .subscribe((res: any) => {
-      debugger;
-      this.resourceList = res; // Assuming the response is directly the array of resources
-    },
-      (error) => {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again.');
-      }
-    );
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching resources:', error);
+          this.spinner.show();
+          // alert('An error occurred while fetching resources. Please try again.');
+          return throwError('Error fetching resources');
+        })
+      )
+      .subscribe((res: any) => {
+        debugger;
+        this.spinner.show();
+        this.resourceList = res; // Assuming the response is directly the array of resources
+        this.spinner.hide();
+        // this.totalPages = Math.ceil(this.resourceList.length / this.itemsPerPage);
+        this.totalPages = this.resourceList ? Math.ceil(this.resourceList.length / this.itemsPerPage) : 0;
+
+      },
+        (error) => {
+          console.error('Error:', error);
+          // alert('An error occurred. Please try again.');
+        }
+      );
   }
 
   loadJobRoles() {
     this.jobRoleService.getJobRoles()
-    .pipe(
-      catchError((error) => {
-        console.error('Error fetching job roles:', error);
-        alert('An error occurred while fetching job roles. Please try again.');
-        return throwError('Error fetching job roles');
-      })
-    )
-    .subscribe((res: any) => {
-      debugger;
-      this.jobroles = res; // Assuming the response is directly the array of resources
-    },
-      (error) => {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again.');
-      }
-    );
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching job roles:', error);
+          alert('An error occurred while fetching job roles. Please try again.');
+          return throwError('Error fetching job roles');
+        })
+      )
+      .subscribe((res: any) => {
+        debugger;
+        this.jobroles = res; // Assuming the response is directly the array of resources
+      },
+        (error) => {
+          console.error('Error:', error);
+          alert('An error occurred. Please try again.');
+        }
+      );
   }
 
   loadOrgUnits() {
     this.orgUnitService.getOrgUnits()
-    .pipe(
-      catchError((error) => {
-        console.error('Error fetching org units:', error);
-        alert('An error occurred while fetching org units. Please try again.');
-        return throwError('Error fetching org units');
-      })
-    )
-    .subscribe((res: any) => {
-      debugger;
-      this.orgunits = res; // Assuming the response is directly the array of resources
-    },
-      (error) => {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again.');
-      }
-    );
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching org units:', error);
+          alert('An error occurred while fetching org units. Please try again.');
+          return throwError('Error fetching org units');
+        })
+      )
+      .subscribe((res: any) => {
+        debugger;
+        this.orgunits = res; // Assuming the response is directly the array of resources
+      },
+        (error) => {
+          console.error('Error:', error);
+          alert('An error occurred. Please try again.');
+        }
+      );
   }
 
   showcomponent(): void {
@@ -140,6 +157,18 @@ export class FirstViewComponent implements OnInit {
       return unit ? unit.unitName : 'Unknown Unit';
     }
     return 'Unknown Unit';
+  }
+
+  // Function to get paginated list of resources
+  getPaginatedResourceList(): ResourceModel[] | undefined {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = Math.min(startIndex + this.itemsPerPage, (this.resourceList?.length || 0));
+    return this.resourceList?.slice(startIndex, endIndex);
+  }
+
+  // Function to set current page
+  setPage(page: number) {
+    this.currentPage = page;
   }
 
 }

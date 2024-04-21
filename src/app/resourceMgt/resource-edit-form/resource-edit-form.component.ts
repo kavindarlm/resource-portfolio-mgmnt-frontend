@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ResourceService } from '../../shared/sevices_resourceMgt/resource.service';///////////////////////
+import { ResourceService } from '../../shared/sevices_resourceMgt/resource.service';
 import { JobRoleModel, OrgUnitModel, ResourceModel } from '../add-form/addformmodel';
 import { Observable } from 'rxjs';
 import { FirstViewComponent } from '../first-view/first-view.component';
@@ -9,6 +9,7 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { JobRoleService } from '../../shared/sevices_resourceMgt/jobRole.service';
 import { OrgUnitService } from '../../shared/sevices_resourceMgt/orgUnit.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-resource-edit-form',
@@ -23,8 +24,14 @@ export class ResourceEditFormComponent implements OnInit{
   formValue!: FormGroup; 
   selectedResource: any; 
   resourceObject: any;
+  router: any;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private resourceService: ResourceService, private jobRoleService: JobRoleService, private orgUnitService: OrgUnitService) { }
+  constructor(private formBuilder: FormBuilder, 
+              private http: HttpClient, 
+              private resourceService: ResourceService, 
+              private jobRoleService: JobRoleService, 
+              private orgUnitService: OrgUnitService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.loadJobRoles();// calling the loadJobRoles Method
@@ -36,6 +43,19 @@ export class ResourceEditFormComponent implements OnInit{
       roleId: [''],
       unitId: ['']
     });
+
+    // this.route.params.subscribe(params => {
+    //   const resourceId = params['resourceId'];
+    //   this.resourceService.getResource(resourceId).subscribe(
+    //     (res: ResourceModel) => {
+    //       this.selectedResource = res;
+    //       this.setFormData();
+    //     },
+    //     (error) => {
+    //       console.error('Error occurred while fetching resource:', error);
+    //     }
+    //   );
+    // });
 
     this.selectedResource = this.resourceService.getData();
     console.log('Selected Resource:', this.selectedResource);// to check the structure and values of this.selectedResource
@@ -101,6 +121,9 @@ export class ResourceEditFormComponent implements OnInit{
           debugger;
           console.log('Resource updated successfully:', res);
           alert('Resource updated Successfully');
+          this.formValue.reset();
+          this.resourceService.resourceListUpdated.emit(); // Emit the event
+          this.router.navigate(['pages-body/first-view']);
           // this.router.navigate([])
           // Optionally, you might want to perform additional actions here, such as showing a success message or navigating to another page.
         },
@@ -115,6 +138,9 @@ export class ResourceEditFormComponent implements OnInit{
     this.resourceService.deleteResource(this.selectedResource.resourceId)
     .subscribe((res:ResourceModel)=> {
       console.log('Resource deleted successfully:', res);
+      this.formValue.reset();
+      this.resourceService.resourceListUpdated.emit(); // Emit the event
+      this.router.navigate(['pages-body/first-view']);
     },
     (error) => {
       console.error('Error occurred while deleting resource:', error);
