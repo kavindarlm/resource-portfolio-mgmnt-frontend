@@ -6,12 +6,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TaskService {
-  private baseUrl = 'http://localhost:3000/tasks'; 
+  private baseUrl = 'http://localhost:3000/tasks';
 
   constructor(private http: HttpClient) { }
 
   getProjectNameByTaskId(taskId: number): Observable<string | null> {
     const url = `${this.baseUrl}/${taskId}/project-name`;
-    return this.http.get<string | null>(url);
+    return this.http.get<string | null>(url, { responseType: 'text' as 'json' });
   }
+
 }
