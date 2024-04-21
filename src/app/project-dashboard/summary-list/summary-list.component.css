@@ -1,0 +1,29 @@
+.card {
+    background-color: #fff;
+    color: #1E3895;
+    border-radius: 4px;
+    border: none;
+    position: relative;
+    box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
+}
+
+/* .l-bg-blue-dark {
+    background: linear-gradient(to right, #373b44, #4286f4) !important;
+    color: #fff;
+} */
+
+/* .l-bg-orange-dark {
+    background: linear-gradient(to right, #a86008,#38ef7d) !important;
+    color: #fff;
+} */
+
+/* .l-bg-cyan {
+    background: linear-gradient(135deg, #289cf5, #84c0ec) !important;
+    color: #fff;
+} */
+
+
+/* .l-bg-orange {
+    background: linear-gradient(to right, #f9900e, #ffba56) !important;
+    color: #fff;
+} */
