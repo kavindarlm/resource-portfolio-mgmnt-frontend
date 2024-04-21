@@ -1,11 +1,11 @@
-* {
+/* * {
 	margin: 0;
 	padding: 0;
-}
+} */
 
 .mainBox {
 	float: right;
-	width: 70%;
+	/* width: 70%; */
 	position: relative;
 }
 
