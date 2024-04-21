@@ -45,7 +45,9 @@ const routes: Routes = [
     path: 'pages-body', component: PagesBodyComponent,
     children: [
       { path: 'projectBoard', component: ProjectBoardComponent,
-        children: []
+        children: [
+          
+        ]
       },
       {
         path: 'projectlist', component: ProjectListComponent,

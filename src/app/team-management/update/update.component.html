@@ -7,23 +7,23 @@
           <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Create New Team</div>
         </div>
 
-        <div class="form-goup row-label mb-2">
-          <label class="pm-label fw-medium mb-2" for="teamName">Team Name:</label>
-          <div class="form-group row row-label">
+        <div class="form-goup row-label mb-2 col-12">
+          <label class="pm-label fw-medium mb-2 col-4" for="teamName">Team Name *</label>
+          <div class="form-group row row-label col-12">
             <div class="form-group align-items-center">
-              <label for="teamName" class="text-primary">Name</label>
-              <input type="text" class="form-control " [(ngModel)]="teamData.teamName" name="teamName"
+              <label for="teamName" class="text-primary col-4">Name :</label>
+              <input type="text" class="tn-input form-control " [(ngModel)]="teamData.teamName" name="teamName"
                 placeholder="Enter Team Name">
             </div>
           </div>
         </div>
 
-        <div class="form-goup row-label mb-2">
-          <label class="pm-label fw-medium mb-2" for="Description">Description:</label>
-          <div class="form-group row row-label">
+        <div class="form-goup row-label mb-2 col-12">
+          <label class="pm-label fw-medium mb-2 col-4" for="Description">Description *</label>
+          <div class="form-group row row-label col-12">
             <div class="form-group align-items-center">
-              <label for="description" class="text-primary">Description</label>
-              <input type="text" class="form-control" [(ngModel)]="teamData.description" name="description"
+              <label for="description" class="text-primary col-4">Description :</label>
+              <input type="text" class="d-input form-control" [(ngModel)]="teamData.description" name="description"
                 placeholder="Enter Description">
             </div>
           </div>
@@ -41,15 +41,15 @@
           <table class="table table-bordered table-striped table-hover table-sm">
 
             <thead class="thead-dark fs-6 fst-normal">
-              <tr class="border-0">
-                <th scope="col" class="col-4 border-0">
-                  <div class="tbtn border rounded text-center p-1">Resource Id</div>
+              <tr class="">
+                <th scope="col" class="col-4 text-center">
+                  Resource Id
                 </th>
-                <th scope="col" class="col-4 border-0">
-                  <div class="tbtn border rounded text-center p-1">Job Role</div>
+                <th scope="col" class="col-4 text-center">
+                  Job Role
                 </th>
-                <th scope="col" class="col-4 border-0">
-                  <div class="tbtn border rounded text-center p-1">Org. Unit</div>
+                <th scope="col" class="col-4 text-center">
+                  Org. Unit
                 </th>
               </tr>
             </thead>
@@ -89,7 +89,12 @@
               (click)="generalservice.showDialog = true"> Delete</button>
           </div>
         </div>
+      <!-- error message -->
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          {{ errorMessage }}
+        </div>
       </form>
+
 
     </div>
 
