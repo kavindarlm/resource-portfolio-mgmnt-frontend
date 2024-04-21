@@ -25,21 +25,15 @@
     font-weight: bold;
 }
 
-.tn-label {
-    display: inline-block; 
-    margin-right: 10%;
-    
-    
+.tn-input{
+    width: 70%;
 }
 
-.d-label{
-    display: inline-block; 
-    margin-right: 1%;
+.d-input{
+    width: 65%;
+
 }
 
-input{
-    width: 75%;
-}
 
 th{
     color: #1e3895e1;
