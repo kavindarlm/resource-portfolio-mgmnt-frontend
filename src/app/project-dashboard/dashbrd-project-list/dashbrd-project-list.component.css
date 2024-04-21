@@ -8,11 +8,6 @@
   color: #fff;
 }
 
-.l-bg-blue-dark {
-  background: linear-gradient(to right, #031a51, #4286f4) !important;
-  color: #fff;
-}
-
 .font-color {
   color: #1E3895;
 }
@@ -50,4 +45,5 @@
 
 .card-container:hover .view-button {
   opacity: 1;
+  background: #ffff;
 }
