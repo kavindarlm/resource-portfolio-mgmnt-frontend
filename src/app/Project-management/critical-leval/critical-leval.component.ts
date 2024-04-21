@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ApiService } from '../service/api.service';
 import { error } from 'console'; 
+import { Subscription } from 'rxjs';
+import { sharedprojectService } from '../service/sharedproject.service';
 
 @Component({
   selector: 'app-critical-leval',
@@ -8,19 +10,23 @@ import { error } from 'console';
   styleUrl: './critical-leval.component.css'
 })
 export class CriticalLevalComponent implements OnInit{
-  constructor(private apiService:ApiService){}
+  constructor(private apiService:ApiService, private shared: sharedprojectService){}
   projectCount: number | undefined;
   highProjects: number | undefined;
   lowProjects: number | undefined;
   MediumProjects: number | undefined;
+  Countsubscrip!: Subscription;
 
   ngOnInit(): void {
-      this.fetchProjectCount();
-      this.fetchHighProjectCount();
-      this.fetchLowProjectCount();
-      this.fetchMediumProjectCount();
+      this.Countsubscrip = this.shared.refreshProjectCount$.subscribe(() => {
+        this.fetchProjectCount();
+        this.fetchHighProjectCount();
+        this.fetchLowProjectCount();
+        this.fetchMediumProjectCount();
+      });
   }
 
+  //Fetch Project Count
   fetchProjectCount(): void{
     this.apiService.getProjectCount().subscribe(
       (count: number) => {
@@ -30,9 +36,9 @@ export class CriticalLevalComponent implements OnInit{
         console.error('Failed to fetch project count:', error);
       }
     )
-    // console.log(this.projectCount);
   }
 
+  //Fetch High Project Count
   fetchHighProjectCount(): void{
     this.apiService.getHighCriticalProjectCount().subscribe(
       (count: number) =>{
@@ -42,9 +48,9 @@ export class CriticalLevalComponent implements OnInit{
         console.error('Failed to fetch High project count:', error);
       }
     )
-    // console.log(this.highProjects);
   }
 
+  //Fetch Low Project Count
   fetchLowProjectCount(): void{
     this.apiService.getLowCriticalProjectCount().subscribe(
       (count: number) =>{
@@ -54,9 +60,9 @@ export class CriticalLevalComponent implements OnInit{
         console.error('Failed to fetch Low project count:', error);
       }
     )
-    // console.log(this.lowProjects);
   }
 
+  //Fetch Medium Project Count
   fetchMediumProjectCount(): void{
     this.apiService.getMediumCriticalProjectCount().subscribe( 
       (count: number) =>{

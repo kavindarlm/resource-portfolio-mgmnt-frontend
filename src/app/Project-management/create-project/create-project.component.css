@@ -30,3 +30,11 @@ select {
     caret-color: transparent;
 }
 
+.custom-button {
+    border-color: #1E3895;
+}
+
+.custom-button:hover {
+    background-color: #1E3895;
+}
+
