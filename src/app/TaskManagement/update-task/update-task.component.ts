@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { taskModel, taskUpdateModel } from '../dataModels/projectModel';
 import { taskApiService } from '../services/taskApi.service';
 import { taskSharedService } from '../services/taskshared.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-update-task',
@@ -10,7 +11,11 @@ import { taskSharedService } from '../services/taskshared.service';
   styleUrl: './update-task.component.css'
 })
 export class UpdateTaskComponent implements OnInit {
+  // Define the taskid property
   public taskid! : string;
+  private subcription! : Subscription;
+
+  // Define the taskDetails and taskUpdate properties
   taskDetails: taskModel={
     taskid: '',
     taskName: '',
@@ -26,16 +31,20 @@ export class UpdateTaskComponent implements OnInit {
   }
   constructor(private activateDataRout: ActivatedRoute, private TaskService: taskApiService, private shared: taskSharedService){}
   ngOnInit(): void {
+    // Get the task id from the route
       this.activateDataRout.paramMap.subscribe((param: Params) => {
         this.taskid = param['get']('id');
         console.log(this.taskid);
       });
-      this.getTaskDetails();
+
+      this.subcription = this.shared.refreshTaskList$.subscribe(() => {
+        this.getTaskDetails();
+      });
   }
 
+  // Define the sliderValue and trackGradient properties
   sliderValue: number = 1;
-  trackGradient: string= ''; // CSS variable to hold the track gradient
-
+  trackGradient: string= '';
   updateProgress(event: any) {
     this.sliderValue = event.target.value;
 
@@ -44,12 +53,14 @@ export class UpdateTaskComponent implements OnInit {
     this.trackGradient = `linear-gradient(to right, #A9BCFF 0%, #A9BCFF ${percentage}%, #7752FE ${percentage}%, #7752FE 100%)`;
   }
 
+  // Implement the getTaskDetails method
   getTaskDetails(){
     this.TaskService.getTaskByid(this.taskid).subscribe((data: taskModel) =>{
       this.taskDetails = data;
     })
   }
 
+  // Implement the updatedata method
   updatedata(){
     this.TaskService.updatetaskPersentage(this.taskid, this.taskDetails).subscribe((data: taskUpdateModel) =>{
       this.taskUpdate = data;

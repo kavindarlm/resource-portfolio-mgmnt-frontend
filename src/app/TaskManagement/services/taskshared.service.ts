@@ -5,7 +5,7 @@ import { BehaviorSubject } from "rxjs";
     providedIn: 'root',
 })
 export class taskSharedService{
- //This service is to refresh the taskList after adding a new task
+ //This service is to refresh the taskList after adding updating a new task
  private refreshTaskListSource = new BehaviorSubject<void>(undefined);
  refreshTaskList$ = this.refreshTaskListSource.asObservable();
 

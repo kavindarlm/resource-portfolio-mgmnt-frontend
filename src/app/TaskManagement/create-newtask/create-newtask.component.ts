@@ -11,6 +11,7 @@ import { taskSharedService } from '../services/taskshared.service';
   styleUrl: './create-newtask.component.css'
 })
 export class CreateNewtaskComponent implements OnInit {
+  // Define the taskForm property
   taskForm!: FormGroup;
   public projectid!: string;
   submited = false;
@@ -18,10 +19,12 @@ export class CreateNewtaskComponent implements OnInit {
   constructor(private formbulder: FormBuilder,private activateDataRout: ActivatedRoute, private taskService: taskApiService,private taskDetails: ProjectDetailsComponent, private shared: taskSharedService){}
   ngOnInit(): void {
 
+    // Get the project id from the route
     this.activateDataRout.paramMap.subscribe((param: Params) => {
       this.projectid = param['get']('id');
     });
     
+    // Initialize the taskForm property with a new FormGroup
       this.taskForm = this.formbulder.group({
         taskName: ['',Validators.required],
         exStartDate: ['',Validators.required],
@@ -30,6 +33,8 @@ export class CreateNewtaskComponent implements OnInit {
       });
 
       }
+
+      // Implement the submitTaskkform method
     submitTaskkform(data: any){ 
       console.log(data);
       this.submited = true;
@@ -44,6 +49,4 @@ export class CreateNewtaskComponent implements OnInit {
       }))
       this.taskDetails.getTaskList();
     }
-
-
   }
