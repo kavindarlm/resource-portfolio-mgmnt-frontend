@@ -1,3 +1,4 @@
+// sidebarheader-service.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -5,10 +6,27 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class SidebarheaderServiceService {
-  private headername = new BehaviorSubject<string>('');
-  headername$ = this.headername.asObservable();
-  constructor() { }
-  setHeaderName(name:string){
-    this.headername.next(name)
+  private headerNameKey = 'selectedHeaderName';
+  private headerNameSubject = new BehaviorSubject<string>('');
+  constructor() {
+    const storedHeaderName = localStorage.getItem(this.headerNameKey);
+    if (storedHeaderName) {
+      this.headerNameSubject.next(storedHeaderName);
+    }
+  }
+  getHeaderName() {
+    return this.headerNameSubject.asObservable();
+  }
+  setHeaderName(name: string) {
+    localStorage.setItem(this.headerNameKey, name);
+    this.headerNameSubject.next(name);
+  }
+
+  //This method for sidebar active when click the button
+  private sidebarActive = new BehaviorSubject<void>(undefined);
+  sidebarActive$ = this.sidebarActive.asObservable();
+
+  setSidebarActive(){
+    this.sidebarActive.next();
   }
 }
