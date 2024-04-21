@@ -1,11 +1,11 @@
 <div class="border rounded container">
   <div class="row mb-5">
-    <div class="col-10">
-      <div class="rounded text-white text-center boxclr bd-highlight shadow p-3 w-100 text2 mt-3">{{ sprintName }}</div>
+    <div class="col-11">
+      <div class="p-2 mt-3 mb-2 bg-primary text-white text-center border rounded">{{ sprintName }}</div>
     </div>
-    <div class="col-2">
-      <button class="border btn shadow-none bd-highlight shadow p-3 mb-3 w-100 mt-3" (click)="CloseTab()">
-        <img src="assets/image/cross.png" />
+    <div class="col-1">
+      <button class="border btn shadow-none bd-highlight shadow p-2 mb-3 w-100 mt-3" (click)="CloseTab()">
+        <i class="bi bi-x"></i>
       </button>
     </div>
   </div>
@@ -13,34 +13,40 @@
 
   <div class="row mb-5">
     <div class="col">
-      <div class="mx-auto border rounded p-3 text5 fw-bold">Start Date  - {{ startDate }}</div>
+      <div class="fw-bold border rounded p-2 text-center">
+        <i class="bi bi-calendar"></i>
+        <div class="text">Start Date</div>
+        <div class="text-primary">{{ startDate }}</div>
+      </div>
     </div>
     <div class="col">
-      <div class="mx-auto border rounded p-3 text5 fw-bold">End Date- {{ endDate }}</div>
+      <div class="fw-bold border rounded p-2 text-center">
+        <i class="bi bi-calendar"></i>
+        <div class="text">End Date</div>
+        <div class="text-primary">{{ endDate }}</div>
+      </div>
     </div>
   </div>
 
   <app-added-resource-list [HeadArray]="hArray" [tablecontents]="resources"></app-added-resource-list>
-  
 
-  <br/>
+  <br />
 
-  <div class="clearfix">
-    <div class="float-start">
-      <button class="btn btn-primary text5 fw-bold" type="button">Edit Sprint</button>
+  <div class="row mb-2">
+    <div class="col">
+      <div class="d-grid gap-2 col-6 mx-auto border rounded">
+        <button class="btn btn-outline-primary " type="button">Edit Sprint</button>
+      </div>
     </div>
-    <div class="float-end">
-      <button type="button" class="btn btn-outline-danger text6 fw-bold" routerLink="deleteSprint/{{ sprintName }}" >Delete Sprint</button>
+    <div class="col">
+      <div class="d-grid gap-2 col-6 mx-auto border rounded">
+        <button class="btn btn-outline-danger " type="button" routerLink="deleteSprint/{{ sprintName }}">Delete
+          Sprint</button>
+      </div>
     </div>
-      
   </div>
 
-  <br/>
 
 </div>
 
 <router-outlet></router-outlet>
-
-
-
-

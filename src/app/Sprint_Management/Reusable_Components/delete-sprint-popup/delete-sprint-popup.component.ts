@@ -20,7 +20,6 @@ export class DeleteSprintPopupComponent {
   }
 
   deleteSprint() {
-    if (confirm('Are you sure you want to delete this sprint?')) {
       this.sprintService.deleteSprint(this.sprintName).subscribe(
         () => {
           console.log('Sprint deleted successfully');
@@ -30,7 +29,7 @@ export class DeleteSprintPopupComponent {
           console.error('Error deleting sprint:', error);
         }
       );
-    }
+    
   }
 
   cancelDelete() {
