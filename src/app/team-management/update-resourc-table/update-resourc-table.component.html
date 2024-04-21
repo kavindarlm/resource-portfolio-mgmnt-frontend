@@ -1,0 +1,74 @@
+<div class="container-fluid">
+    <div class="row border rounded no-gutters p-2">
+        <div class="col-12 col-md-12">
+            <div class="resourcebody ">
+                
+                <div>
+                    <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">System Resource List</div>
+                </div>
+
+                <!-- new code-for search bar -->
+                <div class="col-sm-14">
+                    <!-- search box -->
+                    <input type="search" [(ngModel)]="searchtext" id="form1" class="form-control" placeholder="Search"
+                        aria-label="search">
+                </div>
+
+            <div class="table-responsive-sm  table-responsive-md table-responsive">
+                <table class="table table-bordered table-striped table-hover table-sm">
+                  <thead class="thead-dark fs-6 fst-normal">
+                    <tr class="">
+                      <th scope="col" class="col-4 text-center">
+                        Resource Id
+                      </th>
+                      <th scope="col" class="col-4 text-center">
+                        Job Role
+                      </th>
+                      <th scope="col" class="col-4 text-center">
+                        Org. Unit
+                      </th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                    <tbody>
+                        <tr *ngFor="let resource of resources | filter:searchtext">
+                          <td class="text-center ">{{resource.resourceId}}</td>
+                          <td class="text-center ">{{resource.roleName}}</td>
+                          <td class="text-center ">{{resource.unitName}}</td>
+                          <td>
+                            <button class="btn btn-outline-primary w-100 custom-button btn-sm curser" 
+                              (click)="handleResourceSelection(resource)"
+                              [ngClass]="{ 'selected': isSelected(resource) }"
+                              [style.backgroundColor]="!isTeamResource(resource) ? 'blue' : 'transparent'"
+                              [ngStyle]="{'background-color': resource.selected ? 'transparent' : 'blue'}">Select</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                </table>
+                <nav>
+                    <ul class="pagination d-flex justify-content-center">
+                      <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                          <span aria-hidden="true">&lsaquo;</span>
+                        </a>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">...</a></li>
+                      <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                          <span aria-hidden="true">&rsaquo;</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+
+                  <!-- error message -->
+                  <div *ngIf="errorMessage" class="alert alert-danger">
+                    {{ errorMessage }}
+                  </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

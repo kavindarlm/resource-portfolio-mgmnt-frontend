@@ -1,0 +1,39 @@
+.font-color {
+    color: #1E3895;
+}
+
+select {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    /* color: #7752FE; Text color when not focused */
+    background-color: #fff; /* Background color when not focused */
+    opacity: .5;
+}
+
+#expectedStartDate::-webkit-datetime-edit-text,
+#expectedStartDate::-webkit-datetime-edit-month-field,
+#expectedStartDate::-webkit-datetime-edit-day-field,
+#expectedStartDate::-webkit-datetime-edit-year-field {
+    /* color: #7752FE; */
+    opacity: .5;
+    outline: none;
+    caret-color: transparent;
+}
+
+#expectedEndDate::-webkit-datetime-edit-text,
+#expectedEndDate::-webkit-datetime-edit-month-field,
+#expectedEndDate::-webkit-datetime-edit-day-field,
+#expectedEndDate::-webkit-datetime-edit-year-field {
+    /* color: #7752FE; */
+    opacity: .5;
+    outline: none;
+    caret-color: transparent;
+}
+
+.custom-button{
+    border-color: #1E3895;
+ }
+ 
+ .custom-button:hover{
+     background-color: #1E3895;
+ }

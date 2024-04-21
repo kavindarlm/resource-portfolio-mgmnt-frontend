@@ -1,11 +1,11 @@
 <div class="col-lg-12 col-md-12 col-sm-12 justify-content-center">
-    <div class="border rounded p-2 custom-card">
+    <div class="border rounded p-2">
         <div class="d-flex flex-column justify-content-center align-items-center">
             <div class="border rounded text-center col-10 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Add New User</div>
             <div class="container-lg form-container font-color">
                 <form [formGroup]="userForm" class="fs-6">
                     <div class="form-goup row-label mb-2">
-                        <label class="pm-label fw-medium" for="projectName">User Full Name *</label>
+                        <label class="pm-label fw-medium" for="userName">User Full Name *</label>
                         <div class="form-group row row-label">
                             <label for="userName"
                                 class="col-3 col-form-label col-label ps-5 fst-normal text-primary">Full Name :</label>
@@ -14,7 +14,8 @@
                                     formControlName="user_name" required> -->
                                 <input type="text" id="user_name" formControlName="user_name" class="form-control"
                                     placeholder="Enter User Name"
-                                    [ngClass]="{'is-invalid': userForm.controls['user_name'].invalid && userForm.controls['user_name'].touched}">
+                                    [ngClass]="{'is-invalid': userForm.controls['user_name'].invalid && userForm.controls['user_name'].touched}"
+                                    (keyup)="capitalizeFirstLetter()">
                                 <div class="invalid-feedback"
                                     *ngIf="userForm.controls['user_name'].invalid && userForm.controls['user_name'].touched">
                                     User Name is required
@@ -23,10 +24,10 @@
                         </div>
                     </div>
                     <div class="form-goup row-label mb-2">
-                        <label class="pm-label fw-medium" for="projectName">User Email *</label>
+                        <label class="pm-label fw-medium" for="userEmail">User Email *</label>
                         <div class="form-group row row-label">
-                            <label for="projectName"
-                                class="col-3 col-form-label col-label ps-5 fst-normal text-primary">Name :</label>
+                            <label for="userEmail"
+                                class="col-3 col-form-label col-label ps-5 fst-normal text-primary">Email :</label>
                             <div class="col-9">
                                 <!-- <input type="email" class="form-control" id="email" placeholder="Enter Email"
                                     formControlName="user_email" required> -->

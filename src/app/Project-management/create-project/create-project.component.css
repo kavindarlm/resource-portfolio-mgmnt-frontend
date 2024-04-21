@@ -1,0 +1,32 @@
+.font-color {
+    color: #1E3895;
+}
+
+select {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    /* color: #7752FE; Text color when not focused */
+    background-color: #fff; /* Background color when not focused */
+    opacity: .5;
+}
+
+#projectStartDate::-webkit-datetime-edit-text,
+#projectStartDate::-webkit-datetime-edit-month-field,
+#projectStartDate::-webkit-datetime-edit-day-field,
+#projectStartDate::-webkit-datetime-edit-year-field {
+    /* color: #7752FE; */
+    opacity: .5;
+    outline: none;
+    caret-color: transparent;
+}
+
+#projectEndDate::-webkit-datetime-edit-text,
+#projectEndDate::-webkit-datetime-edit-month-field,
+#projectEndDate::-webkit-datetime-edit-day-field,
+#projectEndDate::-webkit-datetime-edit-year-field {
+    /* color: #7752FE; */
+    opacity: .5;
+    outline: none;
+    caret-color: transparent;
+}
+

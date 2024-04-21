@@ -1,0 +1,81 @@
+.form {
+    color: #1e3895e1;
+
+}
+
+.form-group {
+    margin-bottom: 1%; 
+    display: flex; 
+    margin-left: 1%;
+    
+   
+}
+
+.title-team,
+.title-description{
+    font-weight: bold;
+}
+
+.tn-input{
+    width: 70%;
+}
+
+.d-input{
+    width: 65%;
+
+}
+
+th{
+    color: #1e3895e1;
+    font-weight: 500;
+}
+
+td{
+    color:rgba(0, 0, 255, 0.575);
+    font-weight: 300;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #3b5edd;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+.addResourceBtn{
+    margin-left: 20%;
+    
+}
+
+::placeholder {
+    color: #C2D9FF;
+}
+
+input.ng-invalid.ng-touched {
+    border: red 2px solid;
+}
+
+
+
+.editbtn{
+    margin-left: 15%;
+}
+
+.deletebtn{
+    margin-left: 50%;
+}
+
+.input{
+    color:#7752FE;
+}
+
+.row.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.row.no-gutters > [class^="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}

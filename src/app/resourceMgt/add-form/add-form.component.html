@@ -1,0 +1,46 @@
+<div class="container-fluid col-sm-12">
+    <div class="formBox mb-3">
+        <div class="border rounded text-center col-12 mb-3 mt-3 pt-1 pb-1 text-white bg-primary ">Add New Resource</div>
+        <form [formGroup]="resourceForm">
+            <div class="form-group mb-3">
+                <br>
+                <label for="resourceName" class="form-label font-color1">Resource Name *</label>
+                <div class="inputField">
+                    <p class="font-color2">Name :</p>
+                    <input type="text" formControlName="resourceName"
+                        [ngClass]="{'is-invalid': resourceForm.controls['resourceName'].invalid && resourceForm.controls['resourceName'].touched}"
+                        class="form-control inputBox" id="resourceName" placeholder="Enter Name">
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="jobRole" class="form-label font-color1">Job Role *</label>
+                <div class="inputField">
+                    <p class="font-color2">Job Role :</p>
+                    <select class="form-select inputBox" formControlName="roleId"
+                        [ngClass]="{'is-invalid': resourceForm.controls['roleId'].invalid && resourceForm.controls['roleId'].touched}"
+                        id="jobRole">
+                        <option disabled selected value="">Select Job Role</option>
+                        <option *ngFor="let role of jobroles" [value]="role.roleId">{{role.roleName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="orgUnit" class="form-label font-color1">Organizational Unit</label>
+                <div class="inputField">
+                    <p class="font-color2">Org Unit :</p>
+                    <select class="form-select inputBox" formControlName="unitId"
+                        [ngClass]="{'is-invalid': resourceForm.controls['unitId'].invalid && resourceForm.controls['unitId'].touched}"
+                        id="orgUnit">
+                        <option disabled selected value="">Select Organizational Unit</option>
+                        <option *ngFor="let unit of orgunits" [value]="unit.unitId">{{unit.unitName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="add mb-3">
+                <button type="submit" class="addButton" (click)="sendData(this.resourceForm.value)">Add
+                    Resource</button>
+            </div>
+        </form>
+
+    </div>
+</div>

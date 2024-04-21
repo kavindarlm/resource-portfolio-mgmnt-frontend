@@ -1,0 +1,42 @@
+.project-list{
+    overflow-y: scroll;
+    /* Adjusted height */
+    border: solid 1px black;
+    width: 100%; /* Set the width for desktop */
+}
+
+.table-data{
+    display: flex;
+    flex-direction: column;
+    /* gap: 10px; */
+    justify-content: space-between;
+    /* margin: 10px 0; */
+    max-height: 99vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+.menu-button {
+    width: 100%;
+    height: 40px;
+    font-weight: 500;
+    background-color: #fefefe;
+    border: .5px solid #b4a0ff88;
+    border-radius: 10px;
+    color: #1e3895;
+    margin-top: 3%;
+    content: fit-content;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0 15px;
+    line-height: 40px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  } 
+
+ .menu-button:hover,
+  .menu-button:active {
+    background-color: #1e3895;
+    color: #FEFEFE;
+  }

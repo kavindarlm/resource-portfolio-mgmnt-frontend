@@ -1,0 +1,16 @@
+{
+    "data" : [
+        {
+            "roleId": 1,
+            "roleName": "Software Engineer"
+        },
+        {
+            "roleId": 2,
+            "roleName": "UI/UX Engineer"
+        },
+        {
+            "roleId": 3,
+            "roleName": "Software Architect"
+        }
+    ]
+}

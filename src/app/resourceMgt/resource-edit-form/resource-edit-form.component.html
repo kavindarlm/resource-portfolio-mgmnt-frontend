@@ -1,0 +1,51 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="formBox col">
+                <div class="border rounded text-center col-12  mb-2 mt-3 pt-1 pb-1 text-white bg-primary ">Edit Resource</div>
+            <form [formGroup]="formValue">
+                <div class="formDetailBox">
+                    <div class="form-group mb-3">
+                        <br>
+                        <div class="inputField">
+                                <p class="font-color1">Name :</p>
+                                <input type="text" formControlName="resourceName" class="form-control" id="resourceName"
+                                placeholder="Enter Name">
+                            
+    
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="inputField">
+                            <p class="font-color1">Job Role :</p>
+                            <select class="form-select" formControlName="roleId"
+                                id="jobRole"><!-- style="color: #c3c0ce; -->
+    
+                                <option value="">Select Job Role</option>
+                                <option *ngFor="let roles of jobroles" [value]="roles.roleId">{{roles.roleName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="inputField">
+                            <p class="font-color1">Org Unit :</p>
+                            <select class="form-select" formControlName="unitId" id="orgUnit">
+    
+                                <option value="">Select Organizational Unit</option>
+                                <option *ngFor="let units of orgunits" [value]="units.unitId">{{units.unitName}}</option>
+                            </select>
+                        </div>
+    
+                    </div>
+                    <div class="edit d-flex justify-content-center">
+                        <button type="button" (click)="onEditResource(this.formValue.value)" class="btn btn-outline-primary col-5 editButton">Edit
+                            Resource</button>
+                    </div>
+                </div>
+                <div class="delete">
+                    <button type="button" (click)="onDeleteResource()" class="btn btn-outline-danger col-5 deleteButton">Delete Resource</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+</div>
