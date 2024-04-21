@@ -25,11 +25,15 @@ export class SideBarHeaderComponent implements OnInit{
   constructor(private sidebarHeaderService: SidebarheaderServiceService){}
   ngOnInit(): void {
     this.headerNameSubscription = this.sidebarHeaderService.getHeaderName().subscribe((name: string) => {
+      setTimeout(() => {
       this.selectedButton = name;
+      });
     });
 
     this.subcriptioSidebarctive = this.sidebarHeaderService.sidebarActive$.subscribe(() => {
+      setTimeout(() => {
       this.togglrSidebar();
+      });
     });
   }
   ngOnDestroy(): void {
