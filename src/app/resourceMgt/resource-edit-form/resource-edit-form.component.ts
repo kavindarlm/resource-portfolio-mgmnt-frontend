@@ -11,6 +11,7 @@ import { JobRoleService } from '../../shared/sevices_resourceMgt/jobRole.service
 import { OrgUnitService } from '../../shared/sevices_resourceMgt/orgUnit.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-resource-edit-form',
@@ -33,7 +34,8 @@ export class ResourceEditFormComponent implements OnInit{
               private jobRoleService: JobRoleService, 
               private orgUnitService: OrgUnitService,
               private route: ActivatedRoute,
-              private toaster: ToastrService) { }
+              private toaster: ToastrService,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.loadJobRoles();// calling the loadJobRoles Method
@@ -46,25 +48,14 @@ export class ResourceEditFormComponent implements OnInit{
       unitId: ['']
     });
 
-    // this.route.params.subscribe(params => {
-    //   const resourceId = params['resourceId'];
-    //   this.resourceService.getResource(resourceId).subscribe(
-    //     (res: ResourceModel) => {
-    //       this.selectedResource = res;
-    //       this.setFormData();
-    //     },
-    //     (error) => {
-    //       console.error('Error occurred while fetching resource:', error);
-    //     }
-    //   );
-    // });
-
     this.selectedResource = this.resourceService.getData();
     console.log('Selected Resource:', this.selectedResource);// to check the structure and values of this.selectedResource
     this.setFormData();
+
   }
 
   setFormData() {
+
     this.formValue.patchValue({
       resourceName: this.selectedResource.resourceName,
       resourceId: this.selectedResource.resourceId,
@@ -74,6 +65,7 @@ export class ResourceEditFormComponent implements OnInit{
   }
 
   loadJobRoles() {
+    this.spinner.show();
     this.jobRoleService.getJobRoles()
     .pipe(
       catchError((error) => {
@@ -85,10 +77,11 @@ export class ResourceEditFormComponent implements OnInit{
     .subscribe((res: any) => {
       debugger;
       this.jobroles = res; // Assuming the response is directly the array of resources
+      this.spinner.hide();
     },
       (error) => {
         console.error('Error:', error);
-        alert('An error occurred. Please try again.');
+        // alert('An error occurred. Please try again.');
       }
     );
   }
@@ -127,12 +120,10 @@ export class ResourceEditFormComponent implements OnInit{
           this.formValue.reset();
           this.resourceService.resourceListUpdated.emit(); // Emit the event
           this.router.navigate(['pages-body/first-view']);
-          // this.router.navigate([])
-          // Optionally, you might want to perform additional actions here, such as showing a success message or navigating to another page.
         },
         (error) => {
           console.error('Error occurred while updating resource:', error);
-          // Handle error appropriately, such as displaying an error message to the user.
+          //display an error message to the user.
         }
       );
   }

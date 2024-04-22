@@ -1,3 +1,4 @@
+<app-spinner></app-spinner>
 <div class="container-fluid">
     <div class="row">
         <div class="formBox col">
@@ -18,7 +19,7 @@
                         <div class="inputField">
                             <p class="font-color1">Job Role :</p>
                             <select class="form-select" formControlName="roleId"
-                                id="jobRole"><!-- style="color: #c3c0ce; -->
+                                id="jobRole">
     
                                 <option value="">Select Job Role</option>
                                 <option *ngFor="let roles of jobroles" [value]="roles.roleId">{{roles.roleName}}</option>

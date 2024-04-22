@@ -37,6 +37,7 @@ export class AddFormComponent implements OnInit {
     this.loadJobRoles();// calling the loadJobRoles Method
     this.loadOrgUnits();
 
+    //Call generate Id method and store the id in resourceId
     const resourceId = this.generateUniqueId();
 
     this.resourceForm = this.formBuilder.group({
@@ -129,6 +130,15 @@ export class AddFormComponent implements OnInit {
           timeOut: 3000,
         }
       );
+    }
+
+    capitalizeFirstLetter() {
+      const resourceNameControl = this.resourceForm.get('resourceName');
+      if (resourceNameControl && resourceNameControl.value && resourceNameControl.value.length > 1) {
+        let words = resourceNameControl.value.split(' ');
+        words = words.map((word: string) => word.charAt(0).toUpperCase() + word.slice(1));
+        resourceNameControl.setValue(words.join(' '));
+      }
     }
 
 }
