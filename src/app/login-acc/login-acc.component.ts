@@ -13,7 +13,7 @@ export class LoginAccComponent {
   constructor(private router: Router) { }
 
   user = {
-    email: '',
+    user_email: '',
     password: ''
   };
 
@@ -26,7 +26,7 @@ export class LoginAccComponent {
     try {
       const response = await axios.post('http://localhost:3000/api/login', {
         // Data to be sent to the server
-        email: this.user.email,
+        user_email: this.user.user_email,
         password: this.user.password
       }, {
         headers: {

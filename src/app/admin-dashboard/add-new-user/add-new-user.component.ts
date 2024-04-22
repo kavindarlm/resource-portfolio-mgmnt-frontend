@@ -54,6 +54,7 @@ export class AddNewUserComponent implements OnInit {
         this.router.navigate(['/admin-dashboard']);
       });
     } else {
+      if(confirm('Form is invalid'))
       console.log('Form is invalid');
     }
   }

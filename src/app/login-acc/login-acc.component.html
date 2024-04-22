@@ -21,7 +21,7 @@
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label fw-medium">User Name</label>
                                 <!-- Email Input -->
-                                <input type="email" class="form-control" #exampleFormControlInput1 [value]="user.email" (change)="user.email = exampleFormControlInput1.value" placeholder="Enter your email" required>
+                                <input type="email" class="form-control" #exampleFormControlInput1 [value]="user.user_email" (change)="user.user_email = exampleFormControlInput1.value" placeholder="Enter your email" required>
                             </div>
                             <label for="inputPassword5" class="form-label fw-medium">Password</label>
                             <input type="password" #inputPassword class="form-control" [value]="user.password" (change)="user.password = inputPassword.value" placeholder="Password" required>
