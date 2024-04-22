@@ -15,7 +15,7 @@
                 </div>
 
             <div class="table-responsive-sm  table-responsive-md table-responsive">
-                <table class="table table-bordered table-striped table-hover table-sm">
+                <table class="table table-bordered table-striped table-hover table-sm mt-1">
                   <thead class="thead-dark fs-6 fst-normal">
                     <tr class="">
                       <th scope="col" class="col-4 text-center">
@@ -31,7 +31,7 @@
                     </tr>
                   </thead>
                     <tbody>
-                        <tr *ngFor="let resource of resources | filter:searchtext">
+                        <tr *ngFor="let resource of getPaginatedResourceList() | filter:searchtext">
                           <td class="text-center ">{{resource.resourceId}}</td>
                           <td class="text-center ">{{resource.roleName}}</td>
                           <td class="text-center ">{{resource.unitName}}</td>
@@ -39,30 +39,34 @@
                             <button class="btn btn-outline-primary w-100 custom-button btn-sm curser" 
                               (click)="handleResourceSelection(resource)"
                               [ngClass]="{ 'selected': isSelected(resource) }"
-                              [style.backgroundColor]="!isTeamResource(resource) ? 'blue' : 'transparent'"
-                              [ngStyle]="{'background-color': resource.selected ? 'transparent' : 'blue'}">Select</button>
+                                [style.backgroundColor]="!isTeamResource(resource) ? 'blue' : 'transparent'"
+                                [style.color]="!isTeamResource(resource) ? 'white' : 'blue'"
+                              [ngStyle]="{'background-color': resource.selected ? 'transparent' : 'blue'}"
+                              >Select</button>
                           </td>
                         </tr>
                       </tbody>
                 </table>
-                <nav>
-                    <ul class="pagination d-flex justify-content-center">
-                      <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                          <span aria-hidden="true">&lsaquo;</span>
-                        </a>
-                      </li>
-                      <li class="page-item"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">...</a></li>
-                      <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                          <span aria-hidden="true">&rsaquo;</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </nav>
-
+                <div>
+                  <ul class="pagination pagination-sm justify-content-center">
+                    <li class="page-item" [class.disabled]="currentPage === 1">
+                      <a class="page-link" (click)="currentPage = currentPage - 1" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                    </li>
+                    <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index"
+                      [class.active]="currentPage === i + 1">
+                      <a class="page-link" (click)="currentPage = i + 1">{{ i + 1 }}</a>
+                    </li>
+                    <li class="page-item" [class.disabled]="currentPage === totalPages">
+                      <a class="page-link" (click)="currentPage = currentPage + 1" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
                   <!-- error message -->
                   <div *ngIf="errorMessage" class="alert alert-danger">
                     {{ errorMessage }}

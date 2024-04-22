@@ -8,7 +8,7 @@ interface Resource {
   resourceId: number;
   roleName: string;
   unitName: string;
-  teamId: number;
+  teamId?: number;
 }
 
 @Component({
@@ -22,10 +22,15 @@ export class UpdateResourcTableComponent {
   selectedResources: any[] = []; // Define the selectedResources property
   teamResources: Resource[] = []; // Define the teamResources property
   searchtext: any; // Define the searchtext property
-  resources: { resourceId: number; roleName: string; unitName: string; }[] = []; // Define the resources property
+  errorMessage: string = ''; // Define the errorMessage property
+  currentPage = 1;
+  itemsPerPage = 5;
+  totalPages!: number;
+  resources: Resource[] = []; // Define the resources property
+  // resources: { resourceId: number; roleName: string; unitName: string; }[] = []; // Define the resources property
   @Input() teamId: number | undefined = undefined; // Define the teamId property
   @Output() resourcesSelected = new EventEmitter<any[]>(); // Define the resourcesSelected property
-  errorMessage: string = ''; // Define the errorMessage property
+
 
   constructor(private service: ServiceService,
     private resourceService: ResourceService,
@@ -34,7 +39,6 @@ export class UpdateResourcTableComponent {
 
   ngOnInit() {
     try {
-      // Ensure backend connection here
       // get the team resource data
       this.route.params.subscribe(params => {
         const teamId = +params['teamId'];
@@ -91,6 +95,7 @@ export class UpdateResourcTableComponent {
       const index = this.selectedResources.findIndex(selectedResource => selectedResource.resourceId === resource.resourceId);
       if (index > -1) {
         // If the resource is already in selectedResources, remove it
+       
         this.selectedResources = [
           ...this.selectedResources.slice(0, index),
           ...this.selectedResources.slice(index + 1)
@@ -113,4 +118,23 @@ export class UpdateResourcTableComponent {
   isSelected(resource: any): boolean {
     return this.selectedResources.some(selectedResource => selectedResource.resourceId === resource.resourceId);
   }
+
+  // Function to get paginated list of resources
+  getPaginatedResourceList(): Resource[] | undefined {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = Math.min(startIndex + this.itemsPerPage, (this.resources?.length || 0));
+    return this.resources?.slice(startIndex, endIndex);
+  }
+
+
+
+  // Function to set current page
+  setPage(page: number) {
+    this.currentPage = page;
+  }
+
+ 
+
+
+
 }

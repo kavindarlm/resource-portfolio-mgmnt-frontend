@@ -73,7 +73,8 @@ export class UpdateComponent implements OnInit {
     try {
       this.api.updateTeam(this.dataid, this.teamData).subscribe(
         (_res: any) => {
-          this.router.navigate(['/']);
+          this.generalservice.refreshTeamList(); // Refresh the team list
+          this.router.navigate(['/pages-body/teamlistcomponent']); // Navigate to the team list page
           this.errorMessage = ''; // Clear the error message when the request is successful
         },
         (error: any) => {
