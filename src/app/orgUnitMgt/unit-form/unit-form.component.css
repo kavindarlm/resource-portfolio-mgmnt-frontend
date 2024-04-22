@@ -13,9 +13,9 @@
     font-weight: 500;
 }
 
-::placeholder {
+/* ::placeholder {
   color: #c3c0ce;
-}
+} */
 
 .form-group label {
     display: block;

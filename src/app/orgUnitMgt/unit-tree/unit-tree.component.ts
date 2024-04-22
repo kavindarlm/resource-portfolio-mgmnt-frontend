@@ -10,8 +10,13 @@ import { error } from 'console';
   templateUrl: './unit-tree.component.html',
   styleUrl: './unit-tree.component.css'
 })
-// export class UnitTreeComponent {
-//   //get the org unit data from the backend and pass them to treeData
+
+
+////////////////////////////////////////////////////////////////////////////////////
+
+
+// export class UnitTreeComponent implements OnInit {
+
 //   treeData = {
 //     unitName: 'Unit 1',
 //     unitId:1,
@@ -113,14 +118,8 @@ import { error } from 'console';
 //       }
 //     ]
 //   };
-// }
 
-////////////////////////////////////////////////////////////////////////////////////
-
-
-// export class UnitTreeComponent implements OnInit {
-
-//   treeData: OrganizationalUnitModel[] | undefined;//declaring an array for orgUnits
+//   //treeData: OrganizationalUnitModel[] | undefined;//declaring an array for orgUnits
 
 //   constructor(private http: HttpClient, private orgUnitMgtService: OrgUnitMgtService) {}
 
@@ -175,7 +174,7 @@ import { error } from 'console';
 //   }
 // }
 
-///////////////////////////////
+////////////////////////////////
 
 export class UnitTreeComponent implements OnInit {
 
