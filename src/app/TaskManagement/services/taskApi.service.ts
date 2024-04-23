@@ -42,5 +42,15 @@ export class taskApiService{
     const params = new HttpParams().set('s', projectName);
     return this.http.get<projectModel[]>("http://localhost:3000/project/searchprojectName/search", {params});
   }
+
+  //Edit Task Details
+  editTaskDetails(id:string,data: taskModel){
+    return this.http.put<taskModel>("http://localhost:3000/task/updateTaskProgress/"+id,data);
+  }
+
+  //Delete Task
+  deleteTask(id:string){
+    return this.http.delete<taskModel>("http://localhost:3000/task/"+id);
+  }
   
 }

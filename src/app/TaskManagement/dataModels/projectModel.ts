@@ -24,3 +24,4 @@ export interface taskModel {
 export interface taskUpdateModel{
   taskProgressPercentage: '';
 }
+
