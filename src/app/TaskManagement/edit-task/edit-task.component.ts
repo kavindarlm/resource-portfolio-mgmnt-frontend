@@ -48,7 +48,7 @@ export class EditTaskComponent implements OnInit {
   DeleteTask(){
     this.taskApiService.deleteTask(this.Routetaskid).subscribe((data: taskModel) => {
       alert("Task Deleted Successfully");
-      this.router.navigate(['/pages-body/TaskProjectList/projectTaskDetails']);
-    })
+      this.router.navigate(['/pages-body/TaskProjectList']);
+    });
   }
 }
