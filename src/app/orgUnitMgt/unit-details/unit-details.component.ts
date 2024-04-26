@@ -12,16 +12,40 @@ export class UnitDetailsComponent implements OnInit{
   unit!: OrganizationalUnitModel;
 
   showUnitEditForm: boolean = false;
+  navigationList: OrganizationalUnitModel[] = [];
+
 
   constructor(private orgUnitMgtService: OrgUnitMgtService) {}
 
   ngOnInit(): void {
     console.log(this.unit);
+    this.generateNavigationList(this.unit);
   }
 
   onEdit() {
     this.showUnitEditForm = true;
   }
+
+  // generateNavigationList(unit: OrganizationalUnitModel) {
+  //   this.navigationList.unshift(unit);
+  //   if (unit.parentId) {
+  //     this.orgUnitMgtService.getOrgUnitById(unit.parentId)
+  //       .subscribe((parentUnit: OrganizationalUnitModel) => {
+  //         this.generateNavigationList(unit.parentUnit);
+  //       });
+  //   }
+  // }
+
+  generateNavigationList(unit: OrganizationalUnitModel) {
+    this.navigationList.unshift(unit);
+    if (unit.parentId) {
+      this.orgUnitMgtService.getOrgUnitById(unit.parentId)
+        .subscribe((parentUnit: OrganizationalUnitModel) => {
+          this.generateNavigationList(parentUnit);
+        });
+    }
+    console.log(this.navigationList);
+}
 
   onDeleteUnit() {
     this.orgUnitMgtService.deleteOrgUnit(this.unit.unitId)
