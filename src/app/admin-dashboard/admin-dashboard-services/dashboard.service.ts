@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserModel } from '../dashboard-model/userModel';
 import { FunctionModel } from '../dashboard-model/functionModel';
@@ -69,4 +69,8 @@ export class DashboardService {
         return this.http.patch<UsersFunctionModel>('http://localhost:3000/users-function/updateUserFunction/' + id, userFunction);
     }
 
+    searchUser(username: string) {
+        const params = new HttpParams().set('s', username);
+        return this.http.get<UserModel[]>("http://localhost:3000/api/searchUserName/search", {params});
+    }
 }

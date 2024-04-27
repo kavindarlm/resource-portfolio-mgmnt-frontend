@@ -5,7 +5,7 @@ import { UserModel } from '../dashboard-model/userModel';
 import { DashboardService } from '../admin-dashboard-services/dashboard.service';
 import { NgxSpinnerService } from 'ngx-spinner'; // for spinner
 import { SharedService } from '../admin-dashboard-services/shared.service';
-import { Subscription } from 'rxjs';
+import { Subscription, catchError } from 'rxjs';
 
 @Component({
   selector: 'app-user-list',
@@ -17,6 +17,8 @@ export class UserListComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private dashboardService: DashboardService, private spinner: NgxSpinnerService, private sharedService: SharedService) { }
 
   usersData: undefined | UserModel[];
+  searchText: string = '';
+  error: any;
   private subscription!: Subscription;
   currentPage = 1;
   itemsPerPage = 8;
@@ -48,6 +50,18 @@ export class UserListComponent implements OnInit, OnDestroy {
   addNewUser() {
     this.sharedService.setAddNewUserClicked(true);
     this.sharedService.updateFunctionIds([]);
+  }
+
+  //Search Users
+  onSearchChange() {
+    this.dashboardService.searchUser(this.searchText).pipe(
+      catchError(error => {
+        this.error = error; // Assign error to the variable for display
+        return []; // Return empty array to prevent further processing
+      })
+    ).subscribe((res: UserModel[]) => {
+      this.usersData = res;
+    });
   }
 
 }
