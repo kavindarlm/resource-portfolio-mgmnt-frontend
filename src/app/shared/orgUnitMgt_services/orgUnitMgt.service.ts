@@ -41,4 +41,8 @@ export class OrgUnitMgtService {
     deleteOrgUnit(id: number): Observable<any> {
         return this.http.delete<any>("http://localhost:3000/org-unit/"+id);
     }
+ 
+    getOrgUnitData(): Observable<any>{
+        return this.http.get<any>("http://localhost:3000/org-unit/hierarchy/data")
+    }
 }

@@ -1,8 +1,17 @@
 <!-- <button [class]="'level' + node.level">{{ node.unitName }}</button> -->
-<button class="unitNode">{{ node?.unitName }}</button>
+<button class="unitNode">{{ node.unitName }}</button>
 <ul *ngIf="node.children && node.children.length > 0">
   <li *ngFor="let child of node.children">
     <app-unit-node [node]="child"></app-unit-node>
   </li> 
 </ul>
+
+<!-- <div *ngFor="let unit of node">
+  <button class="unitNode">{{ unit.unitName }}</button>
+  <ul *ngIf="unit.children && unit.children.length > 0">
+    <li *ngFor="let child of unit.children">
+      <app-unit-node [node]="child"></app-unit-node>
+    </li> 
+  </ul>
+</div> -->
 

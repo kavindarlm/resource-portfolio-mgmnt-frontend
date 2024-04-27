@@ -11,6 +11,6 @@ export class UnitNodeComponent implements OnInit {
   @Input() node: any;
 
   ngOnInit() {
-    console.log(this.node);
+    // console.log(this.node);
   }
 }
