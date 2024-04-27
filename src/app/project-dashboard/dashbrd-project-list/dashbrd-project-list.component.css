@@ -19,7 +19,6 @@
 
 .small-text {
   font-size: 0.75rem;
-  /* Adjust as needed */
 }
 
 .card-container {
@@ -28,8 +27,7 @@
 }
 
 .card-container:hover .card {
-  /* filter: blur(2px); */
-  background-color: #92929276;
+  background-color: #5f5f5fb0;
   border: 1px solid rgb(212, 206, 206);
 }
 
@@ -46,4 +44,16 @@
 .card-container:hover .view-button {
   opacity: 1;
   background: #ffff;
+}
+
+.High{
+  background-color: rgb(255, 97, 97);
+}
+
+.Medium{
+  background-color: rgb(255, 218, 97);
+}
+
+.Low{
+  background-color: rgb(97, 229, 255);
 }

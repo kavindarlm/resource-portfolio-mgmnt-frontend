@@ -35,6 +35,7 @@ import { AvailabiilityComponent } from './Sprint_Management/availabiility/availa
 import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
 import { ProjectBoardComponent } from './project-dashboard/project-board/project-board.component';
 import { TaskProjectListComponent } from './TaskManagement/task-project-list/task-project-list.component';
+import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-project-details/dashbrd-project-details.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -46,7 +47,7 @@ const routes: Routes = [
     children: [
       { path: 'projectBoard', component: ProjectBoardComponent,
         children: [
-          
+          { path: 'dashboard-projectdetails/:id', component: DashbrdProjectDetailsComponent}
         ]
       },
       {

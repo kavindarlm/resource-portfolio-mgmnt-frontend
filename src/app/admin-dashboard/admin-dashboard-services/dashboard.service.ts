@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserModel } from '../dashboard-model/userModel';
 import { FunctionModel } from '../dashboard-model/functionModel';
 import { UsersFunctionModel } from '../dashboard-model/usersFunctionModel';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 
 
@@ -15,8 +17,17 @@ export class DashboardService {
 
     //Add users
     createUser(user: UserModel) {
-        return this.http.post<UserModel>('http://localhost:3000/api/register', user);
-    }
+        return this.http.post<UserModel>('http://localhost:3000/api/register', user).pipe(
+          catchError(this.handleError)
+        );
+      }
+
+    private handleError(error: HttpErrorResponse) {
+        if (error.status === 400 && error.error.message === 'Email already exists') {
+          return throwError('Email already exists');
+        }
+        return throwError('An error occurred');
+      }
 
     //Get All users
     async getUser() {

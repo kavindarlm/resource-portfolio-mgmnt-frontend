@@ -30,6 +30,8 @@ th{
 td{
     color:rgba(0, 0, 255, 0.575);
     font-weight: 300;
+    font-size: 0.93rem;
+    
 }
 
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {

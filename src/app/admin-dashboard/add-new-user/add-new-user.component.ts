@@ -18,6 +18,7 @@ export class AddNewUserComponent implements OnInit {
   constructor(private router: Router, private formBuilder: FormBuilder, private userService: DashboardService, private sharedService: SharedService, private toastr: ToastrService) { }
 
   userForm!: FormGroup;
+  errormessage: string = '';
 
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
@@ -30,28 +31,42 @@ export class AddNewUserComponent implements OnInit {
     return this.userForm.valid;
   }
 
-  submitUserForm(Userdata: any) {
+  submitUserForm() {
     if (this.isFormValid()) {
-      this.userService.createUser(Userdata).subscribe((res) => {
-        console.log(res);
-        this.userForm.reset();
-        // this.sharedService.updateFunctionIds([]);
-        this.sharedService.refreshUserList();
-        this.showSuccess(Userdata.user_name);
-        const userId = res.user_id;
-
-        this.sharedService.functionIds$.pipe(take(1)).subscribe(functionIds => {
-
-          const userFunctionModel: UsersFunctionModel = {
-            user_id: userId,
-            functionIds: functionIds
-          };
-
-          this.userService.addUserFunction(userFunctionModel).subscribe((res) => {
-          });
-          // this.sharedService.updateFunctionIds([]);
-        });
-        this.router.navigate(['/admin-dashboard']);
+      const Userdata = {
+        user_name: this.userForm.get('user_name')?.value,
+        user_email: this.userForm.get('user_email')?.value
+      };
+      this.userService.createUser(Userdata).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.userForm.reset();
+          this.sharedService.refreshUserList();
+          this.showSuccess(Userdata.user_name);
+          
+          if (res.user_id !== undefined) {
+            const userId = res.user_id;
+  
+            this.sharedService.functionIds$.pipe(take(1)).subscribe(functionIds => {
+              const userFunctionModel: UsersFunctionModel = {
+                user_id: userId,
+                functionIds: functionIds
+              };
+    
+              this.userService.addUserFunction(userFunctionModel).subscribe((res) => {});
+            });
+            this.router.navigate(['/admin-dashboard']);
+          } else {
+            console.error('user_id is undefined');
+          }
+        },
+        error: (message) => {
+          if (message === 'Email already exists') {
+            alert('Email already exists');
+          } else {
+            console.error(message);
+          }
+        }
       });
     } else {
       if(confirm('Form is invalid'))
