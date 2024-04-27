@@ -18,8 +18,10 @@ export class PageHeaderComponent {
       this.greeting = 'Good Morning';
     } else if (hour >= 12 && hour < 15) {
       this.greeting = 'Good Afternoon';
-    } else {
+    } else if (hour >= 15 && hour < 21) {
       this.greeting = 'Good Evening';
+    }else {
+      this.greeting = 'Good Night';
     }
   }
 }
