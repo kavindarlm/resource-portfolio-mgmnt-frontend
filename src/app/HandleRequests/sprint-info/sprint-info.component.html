@@ -1,12 +1,34 @@
-<div class="container">
+<div class="">
     <div class="row">
-        <div class="col-12 col-sm-6">
-            <div class="border rounded">
-                <p>sprint-info works!</p>
+        <div class="col">
+            <div class="border rounded p-2">
+                <div class="p-2 mt-3 mb-2 bg-primary text-white text-center border rounded">{{ sprintName }}</div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <div class="fw-bold border rounded p-2 text-center">
+                            <i class="bi bi-calendar fa-lg"></i>
+                            <div class="text">Start Date</div>
+                            <div class="text-primary">{{ startDate }}</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="fw-bold border rounded p-2 text-center">
+                            <i class="bi bi-calendar fa-lg"></i>
+                            <div class="text">End Date</div>
+                            <div class="text-primary">{{ endDate }}</div>
+                        </div>
+                    </div>
+                </div>
+                <app-added-resources [HeadArray]="hArray" [tablecontents]="resources"></app-added-resources>
+                <div class="text-center">
+                    <button class="btn btn-outline-primary mb-3" routerLink="allocatedInfo">Add New Resource</button>
+                </div>
+                
             </div>
+
         </div>
-        <div class="col-12 col-sm-6">
-            <p>sprint-info works!</p>
+        <div class="col">
+            <router-outlet></router-outlet> 
         </div>
     </div>
 </div>

@@ -1,0 +1,14 @@
+.text {
+    color: #1e3895;
+  }
+  
+  /* Button hover color change */
+  button.btn:hover {
+    background: #1e3895;
+    color: #ffffff; 
+    border-color: #1e3895; 
+  }
+  
+  i{
+    color: #1e3895;
+  }

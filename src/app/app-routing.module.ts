@@ -37,6 +37,7 @@ import { ProjectBoardComponent } from './project-dashboard/project-board/project
 import { TaskProjectListComponent } from './TaskManagement/task-project-list/task-project-list.component';
 import { HandleRequestsListComponent } from './HandleRequests/handle-requests-list/handle-requests-list.component';
 import { SprintInfoComponent } from './HandleRequests/sprint-info/sprint-info.component';
+import { AllocatedResourceInfoComponent } from './HandleRequests/allocated-resource-info/allocated-resource-info.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -96,7 +97,10 @@ const routes: Routes = [
         path: 'handle-request', component: HandleRequestsListComponent,
         children: [
           {
-            path: 'sprintInfo', component: SprintInfoComponent
+            path: 'sprintInfo/:Sname', component: SprintInfoComponent,
+            children:[
+              {path: 'allocatedInfo/:id' , component: AllocatedResourceInfoComponent}
+            ]
           }
         ]
       },

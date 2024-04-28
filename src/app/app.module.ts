@@ -73,6 +73,8 @@ import { DashbrdProjectListComponent } from './project-dashboard/dashbrd-project
 import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-project-details/dashbrd-project-details.component';
 import { HandleRequestsListComponent } from './HandleRequests/handle-requests-list/handle-requests-list.component';
 import { SprintInfoComponent } from './HandleRequests/sprint-info/sprint-info.component';
+import { AllocatedResourceInfoComponent } from './HandleRequests/allocated-resource-info/allocated-resource-info.component';
+import { AddedResourcesComponent } from './HandleRequests/added-resources/added-resources.component';
 
 
 @NgModule({
@@ -134,6 +136,8 @@ import { SprintInfoComponent } from './HandleRequests/sprint-info/sprint-info.co
     DashbrdProjectDetailsComponent,
     HandleRequestsListComponent,
     SprintInfoComponent,
+    AllocatedResourceInfoComponent,
+    AddedResourcesComponent,
   ],
   imports: [
     BrowserModule,
