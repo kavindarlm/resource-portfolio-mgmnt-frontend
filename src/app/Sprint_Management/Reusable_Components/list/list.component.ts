@@ -1,6 +1,4 @@
 import { Component , Input } from '@angular/core';
-import { CreateFormComponent } from '../../create-form/create-form.component';
-import { SprintMgtComponent } from '../../sprint-mgt/sprint-mgt.component';
 import { SprintManagementService } from '../../../services/sprint-management.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 

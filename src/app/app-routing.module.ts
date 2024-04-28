@@ -35,6 +35,8 @@ import { AvailabiilityComponent } from './Sprint_Management/availabiility/availa
 import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
 import { ProjectBoardComponent } from './project-dashboard/project-board/project-board.component';
 import { TaskProjectListComponent } from './TaskManagement/task-project-list/task-project-list.component';
+import { HandleRequestsListComponent } from './HandleRequests/handle-requests-list/handle-requests-list.component';
+import { SprintInfoComponent } from './HandleRequests/sprint-info/sprint-info.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -88,6 +90,14 @@ const routes: Routes = [
               { path: 'resouce-edit-form/:id', component: ResourceEditFormComponent }
             ]
           },
+        ]
+      },
+      {
+        path: 'handle-request', component: HandleRequestsListComponent,
+        children: [
+          {
+            path: 'sprintInfo', component: SprintInfoComponent
+          }
         ]
       },
       {
