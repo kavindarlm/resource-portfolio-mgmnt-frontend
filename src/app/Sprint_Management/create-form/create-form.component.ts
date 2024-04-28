@@ -24,7 +24,6 @@ export class CreateFormComponent {
 getSprintFormData(data: any) {
     const today = new Date();
 
-    // Reset error message
     this.dateErrorMessage = null;
     this.statusMessage = null;
 
