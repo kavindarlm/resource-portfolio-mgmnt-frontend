@@ -27,6 +27,7 @@ export class ProjectDetailsComponent implements OnInit{
   // Define the currentPage, itemsPerPage, and totalPages properties
   currentPage = 1;
   itemsPerPage = 8;
+  searchText = '';
   totalPages!: number;
 
   ngOnInit(): void {

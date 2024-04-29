@@ -32,9 +32,9 @@
                 <div class="border rounded col-3 mb-3 mt-1 pt-1 pb-1">
                     <div class="">
                         Project Criticality:
-                        <div [ngClass]="projectData?.criticality" class="levelSqure">
+                        <div [ngClass]="projectData?.criticality_id" class="levelSqure">
                         </div>
-                        {{projectData?.criticality}}
+                        {{projectData?.criticality_id}}
                     </div>
                 </div>
             </div>
@@ -43,6 +43,15 @@
                 Tasks Details
             </div>
             <div class="taskTable">
+                <div class="row mb-2">
+                <div class="col-6">
+                    
+                </div>
+                <div class="col-6">
+                    <input type="search" [(ngModel)]="searchText" id="form1" class="form-control"
+                        placeholder="Search task" aria-label="search">
+                </div>
+            </div>
                 <table class="table table-bordered table-striped table-hover table-sm text-center">
                     <thead class="thead-dark fs-6 fst-normal">
                         <tr>

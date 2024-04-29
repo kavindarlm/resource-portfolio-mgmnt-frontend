@@ -41,6 +41,9 @@
                         *ngIf="taskForm.controls['exEndDate'].invalid && taskForm.controls['exEndDate'].touched">
                         Expected task end date is required
                     </div>
+                    <div *ngIf="taskForm.errors?.['dateRangeError'] && (taskForm.dirty || taskForm.touched)">
+                        <span class="text-danger">End date must be after start date.</span>
+                      </div>
                 </div>
             </div>
             
@@ -51,8 +54,11 @@
                     <input type="text" class="form-control" id="taskpersentage" placeholder="Enter task percentage"
                         formControlName="taskAllocationPercentage" [ngClass]="{'is-invalid': taskForm.controls['taskAllocationPercentage'].invalid && taskForm.controls['taskAllocationPercentage'].touched}">
                         <div class="invalid-feedback"
-                        *ngIf="taskForm.controls['taskAllocationPercentage'].invalid && taskForm.controls['taskAllocationPercentage'].touched">
-                        Task allocation percentage is required
+                        *ngIf="taskForm.get('taskAllocationPercentage')?.invalid && taskForm.get('taskAllocationPercentage')?.touched">
+                        Task allocation percentage is required and must be between 0 and 100.
+                    </div>
+                    <div *ngIf="taskForm.errors?.['invalidAllocationPercentage'] && (taskForm.dirty || taskForm.touched)">
+                        <span class="text-danger">Invalid allocation percentage.</span>
                     </div>
                 </div>
             </div>

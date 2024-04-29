@@ -17,8 +17,8 @@ export class TaskProjectListComponent implements OnInit{
   constructor(private api:taskApiService, private shared: taskSharedService, private spinner: NgxSpinnerService){}
   ngOnInit(): void{
     this.getProjectLists();
-    
   }
+  
   // Implement the getProjectLists method
   getProjectLists(){
     this.spinner.show();
@@ -27,6 +27,7 @@ export class TaskProjectListComponent implements OnInit{
     this.spinner.hide();
     })
   }
+  
   // Implement the onSearchChange method
   onSearchChange(){
     this.api.searchProject(this.searchText).subscribe(res =>{

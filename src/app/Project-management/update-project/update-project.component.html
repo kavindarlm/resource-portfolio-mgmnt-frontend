@@ -35,11 +35,11 @@
                     :</label>
                 <div class="col-9">
                     <select id="inputState" class="form-control" required id="criticality"
-                        [(ngModel)]="projectForm.criticality" name="criticality">
+                        [(ngModel)]="projectForm.criticality_id" name="criticality">
                         <option disabled selected value="">Select Project Criticality</option>
-                        <option>High</option>
-                        <option>Medium</option>
-                        <option>Low</option>
+                        <option [value]="1" [selected]="+projectForm.criticality_id ===1">High</option>
+                        <option [value]="2" [selected]="+projectForm.criticality_id === 2">Medium</option>
+                        <option [value]="3" [selected]="+projectForm.criticality_id === 3">Low</option>
                     </select>
                 </div>
             </div>
