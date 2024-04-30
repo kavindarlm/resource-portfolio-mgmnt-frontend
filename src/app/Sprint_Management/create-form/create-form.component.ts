@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SprintManagementService } from '../../services/sprint-management.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +12,7 @@ export class CreateFormComponent {
   startDate: Date = new Date();
   endDate: Date = new Date();
 
-  constructor(private sprintService: SprintManagementService, private router: Router) { }
+  constructor( private router: Router) { }
 
   headArray = ['Resource_ID', 'Team', 'Job_Role', 'Org_Unit', 'Availability'];
   resources = [];
@@ -46,19 +45,6 @@ getSprintFormData(data: any) {
         End_Date: this.endDate
     };
 
-    // Call the saveSprint method with error handling
-    this.sprintService.saveSprint(sprintData).subscribe(
-        (response) => {
-            // Handle successful response
-            console.log('Sprint saved successfully:', response);
-            this.statusMessage = 'Sprint saved successfully!';
-        },
-        (error) => {
-            // Handle error response
-            console.error('Error saving sprint:', error);
-            this.statusMessage = 'Error saving sprint. Please try again later.';
-        }
-    );
 }
 
 }
