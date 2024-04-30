@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { sprintApiService } from '../services/sprintApi.service';
 
 @Component({
   selector: 'app-create-form',
@@ -12,7 +13,7 @@ export class CreateFormComponent {
   startDate: Date = new Date();
   endDate: Date = new Date();
 
-  constructor( private router: Router) { }
+  constructor( private router: Router, private sprintApiService: sprintApiService) { }
 
   headArray = ['Resource_ID', 'Team', 'Job_Role', 'Org_Unit', 'Availability'];
   resources = [];
@@ -20,7 +21,7 @@ export class CreateFormComponent {
   dateErrorMessage: string | null = null;
   statusMessage: string | null = null;
 
-getSprintFormData(data: any) {
+  getSprintFormData(data: any) {
     const today = new Date();
 
     // Reset error message
@@ -39,12 +40,29 @@ getSprintFormData(data: any) {
         return;
     }
 
+    // Prepare sprint data
     const sprintData = {
-        Sname: this.sprintName,
-        Start_Date: this.startDate,
-        End_Date: this.endDate
+        sprint_name: this.sprintName,
+        start_Date: this.startDate,
+        end_Date: this.endDate
     };
 
+    // Call the sprintApiService to create a new sprint
+    this.sprintApiService.createSprint(sprintData).subscribe(
+        (response) => {
+            // Handle success (e.g., show a success message)
+            this.statusMessage = 'Sprint created successfully!';
+            // Reset form
+            this.sprintName = '';
+            this.startDate = new Date();
+            this.endDate = new Date();
+        },
+        (error) => {
+            // Handle error (e.g., show an error message)
+            console.error('Error creating sprint:', error);
+            this.statusMessage = 'Failed to create sprint. Please try again.';
+        }
+    );
 }
 
 }

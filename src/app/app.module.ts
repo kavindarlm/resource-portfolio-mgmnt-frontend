@@ -38,7 +38,6 @@ import { CreateFormComponent } from './Sprint_Management/create-form/create-form
 import { SprintMgtComponent } from './Sprint_Management/sprint-mgt/sprint-mgt.component';
 import { Ng2SearchPipe } from 'ng2-search-filter';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { FilterComponent } from './Sprint_Management/Reusable_Components/filter/filter.component';
 import { AvailableResourceListComponent } from './Sprint_Management/available-resource-list/available-resource-list.component';
 import { AvailabiilityComponent } from './Sprint_Management/availabiility/availabiility.component';
 import { AddedResourceListComponent } from './Sprint_Management/added-resource-list/added-resource-list.component';
@@ -105,7 +104,6 @@ import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-proj
     SearchBarComponent,
     CreateFormComponent,
     SprintMgtComponent,
-    FilterComponent,
     AvailableResourceListComponent,
     AvailabiilityComponent,
     AddedResourceListComponent,

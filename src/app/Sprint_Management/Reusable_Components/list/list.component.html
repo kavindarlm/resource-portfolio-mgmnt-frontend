@@ -10,7 +10,7 @@
             </div>
             <div class="table-data">
                 <div *ngFor="let sprint of sprints">
-                    <button class="menu-button" routerLink="sprintmgt/{{sprint.Sname}}">{{sprint.Sname}}</button>
+                    <button class="menu-button" routerLink="sprintmgt/{{sprint.sprint_id}}">{{sprint.sprint_name}}</button>
                 </div>
                 <div>
                     <button class="menu-button" routerLink="createform">Add New Sprint</button>
