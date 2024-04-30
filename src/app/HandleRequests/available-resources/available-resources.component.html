@@ -1,0 +1,12 @@
+<div class="border rounded container">
+
+    <div class="p-2 mt-3 mb-2 bg-primary text-white text-center border rounded">Available Resource List</div>
+  
+    <div>
+      <app-filter [options1]="teams" label1="Filter by: Team Name" [options2]="OrgUnit" label2="Filter by: Org.Unit"
+        filter1="Team" filter2="Org_Unit" [hArray]="headArray" [gArray]="resources">
+      </app-filter>
+    </div>
+  
+  
+  </div>

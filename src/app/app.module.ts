@@ -75,6 +75,8 @@ import { HandleRequestsListComponent } from './HandleRequests/handle-requests-li
 import { SprintInfoComponent } from './HandleRequests/sprint-info/sprint-info.component';
 import { AllocatedResourceInfoComponent } from './HandleRequests/allocated-resource-info/allocated-resource-info.component';
 import { AddedResourcesComponent } from './HandleRequests/added-resources/added-resources.component';
+import { AvailableResourcesComponent } from './HandleRequests/available-resources/available-resources.component';
+import { AvailablePercentageComponent } from './HandleRequests/available-percentage/available-percentage.component';
 
 
 @NgModule({
@@ -138,6 +140,8 @@ import { AddedResourcesComponent } from './HandleRequests/added-resources/added-
     SprintInfoComponent,
     AllocatedResourceInfoComponent,
     AddedResourcesComponent,
+    AvailableResourcesComponent,
+    AvailablePercentageComponent,
   ],
   imports: [
     BrowserModule,

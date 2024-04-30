@@ -38,6 +38,7 @@ import { TaskProjectListComponent } from './TaskManagement/task-project-list/tas
 import { HandleRequestsListComponent } from './HandleRequests/handle-requests-list/handle-requests-list.component';
 import { SprintInfoComponent } from './HandleRequests/sprint-info/sprint-info.component';
 import { AllocatedResourceInfoComponent } from './HandleRequests/allocated-resource-info/allocated-resource-info.component';
+import { AvailableResourcesComponent } from './HandleRequests/available-resources/available-resources.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -47,9 +48,10 @@ const routes: Routes = [
   {
     path: 'pages-body', component: PagesBodyComponent,
     children: [
-      { path: 'projectBoard', component: ProjectBoardComponent,
+      {
+        path: 'projectBoard', component: ProjectBoardComponent,
         children: [
-          
+
         ]
       },
       {
@@ -62,10 +64,11 @@ const routes: Routes = [
       {
         path: 'TaskProjectList', component: TaskProjectListComponent,
         children: [
-          { path: 'projectTaskDetails/:id',component: ProjectDetailsComponent,
+          {
+            path: 'projectTaskDetails/:id', component: ProjectDetailsComponent,
             children: [
               { path: 'newTask/:id', component: CreateNewtaskComponent },
-              { path: 'updatetask/:id', component: UpdateTaskComponent}
+              { path: 'updatetask/:id', component: UpdateTaskComponent }
             ],
           },
         ],
@@ -98,8 +101,9 @@ const routes: Routes = [
         children: [
           {
             path: 'sprintInfo/:Sname', component: SprintInfoComponent,
-            children:[
-              {path: 'allocatedInfo/:id' , component: AllocatedResourceInfoComponent}
+            children: [
+              { path: 'allocatedInfo/:id', component: AllocatedResourceInfoComponent },
+              { path: 'AvailableList', component: AvailableResourcesComponent }
             ]
           }
         ]
@@ -135,11 +139,11 @@ const routes: Routes = [
       { path: 'userDetail/:id', component: UserDetailComponent }
     ]
   }
-]; 
+];
 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
