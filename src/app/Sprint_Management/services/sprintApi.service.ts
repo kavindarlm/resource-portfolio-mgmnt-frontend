@@ -16,6 +16,12 @@ export class sprintApiService {
         return this.http.get<any[]>(this.apiUrl);
     }
 
+    //Method to fetch sprints by ID
+    findOneById(sprintId: number): Observable<any> {
+        const url = `${this.apiUrl}/${sprintId}`;
+        return this.http.get<any>(url);
+    }
+
     // Method to create a new sprint
     createSprint(sprintData: any): Observable<any> {
         return this.http.post<any>(this.apiUrl, sprintData);

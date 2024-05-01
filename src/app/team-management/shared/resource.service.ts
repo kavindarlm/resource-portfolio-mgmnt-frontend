@@ -17,6 +17,10 @@ export class ResourceService {
     // Send a GET request to the '/ForSprint' endpoint
     return this.http.get<any[]>(`${this.baseUrl}/ForSprint`);
   }
+
+  findOneResource(resourceId: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${resourceId}`);
+  }
  
    // Method to get resources
    getResources(): Observable<any> {

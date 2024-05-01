@@ -104,7 +104,7 @@ const routes: Routes = [
             ]
           },
           {
-            path: 'sprintmgt/:Sname', component: SprintMgtComponent,
+            path: 'sprintmgt/:id', component: SprintMgtComponent,
             children: [
               { path: 'deleteSprint/:Sname', component: DeleteSprintPopupComponent }
             ]
