@@ -26,4 +26,16 @@ export class sprintApiService {
     createSprint(sprintData: any): Observable<any> {
         return this.http.post<any>(this.apiUrl, sprintData);
     }
+
+    // Method to get the last sprint ID
+    getLastSprintId(): Observable<number | null> {
+        const url = `${this.apiUrl}/last-id`;
+        return this.http.get<number | null>(url);
+    }
+
+    // Method to fetch sprint by name
+    findOneByName(sprintName: string): Observable<any> {
+        const url = `${this.apiUrl}/name/${sprintName}`;
+        return this.http.get<any>(url);
+    }
 }

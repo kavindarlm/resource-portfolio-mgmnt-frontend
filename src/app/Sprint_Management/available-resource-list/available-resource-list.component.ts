@@ -20,6 +20,7 @@ export class AvailableResourceListComponent implements OnInit {
         private resourceService: ResourceService,
         private serviceService: ServiceService
     ) {}
+    
 
     ngOnInit(): void {
         // Fetch resources and team names from backend

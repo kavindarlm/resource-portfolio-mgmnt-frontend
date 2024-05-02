@@ -18,6 +18,7 @@ export class ResourceService {
     return this.http.get<any[]>(`${this.baseUrl}/ForSprint`);
   }
 
+  //Method to find one resource by ID
   findOneResource(resourceId: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/${resourceId}`);
   }
