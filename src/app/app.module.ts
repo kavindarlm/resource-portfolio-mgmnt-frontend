@@ -70,6 +70,7 @@ import { TaskProjectListComponent } from './TaskManagement/task-project-list/tas
 import { SummaryListComponent } from './project-dashboard/summary-list/summary-list.component';
 import { DashbrdProjectListComponent } from './project-dashboard/dashbrd-project-list/dashbrd-project-list.component';
 import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-project-details/dashbrd-project-details.component';
+import { AllocatedResourceInformationComponent } from './Sprint_Management/allocated-resource-information/allocated-resource-information.component';
 
 
 @NgModule({
@@ -128,6 +129,7 @@ import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-proj
     SummaryListComponent,
     DashbrdProjectListComponent,
     DashbrdProjectDetailsComponent,
+    AllocatedResourceInformationComponent,
   ],
   imports: [
     BrowserModule,

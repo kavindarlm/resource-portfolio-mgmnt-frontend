@@ -12,20 +12,18 @@
 
 
     <div>
-
         <div class="col rounded border border-4 ms-2 p-3 mb-2 text-center">
             <i class="bi bi-person"></i>
             <div>{{ resourceDetails.resourceId }}</div>
             <div class="text-primary">{{ resourceDetails.resourceName }}</div>
             <div class="text-black-50">{{ resourceDetails.job_role?.roleName }}</div>
         </div>
-
     </div>
     <div>
         <div class="rounded border mb-5 p-1">
             
             <div class="p-2 mb-2 bg-primary text-white text-center rounded border bg-opacity-50">Add Percentage</div>
-            
+                      
             <div class="row mb-1" *ngFor="let task of tasks">
                 <div class="col-4 text-center">{{ task.projectName }}</div>
                 <div class="col-3 ms-1 text-center">{{ task.taskName }}</div>
