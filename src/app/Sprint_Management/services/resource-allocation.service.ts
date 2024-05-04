@@ -12,8 +12,14 @@ export class ResourceAllocationService {
 
   constructor(private http: HttpClient) { }
 
-  getTasksByResourceId(resourceId: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/${resourceId}`);
+  getTasksByResourceId(resourceId: string): Observable<{ task: any, resourceAllocation: any }[]> {
+    return this.http.get<{ task: any, resourceAllocation: any }[]>(`${this.baseUrl}/${resourceId}`).pipe(
+      catchError(error => {
+        console.error('Error fetching tasks and resource allocations:', error);
+        // Return an empty array or a suitable fallback value in case of an error
+        return of([]);
+      })
+    );
   }
 
   createResourceAllocation(resourceAllocation: any): Observable<any> {
@@ -37,10 +43,24 @@ export class ResourceAllocationService {
     );
   }
 
-    // Method to delete a resource allocation by ID
-    deleteResourceAllocationById(resourceAllocationId: number): Observable<void> {
-      const url = `${this.baseUrl}/${resourceAllocationId}`;
-      return this.http.delete<void>(url);
-    }
+  // Method to delete a resource allocation by ID
+  deleteResourceAllocationById(resourceAllocationId: number): Observable<void> {
+    const url = `${this.baseUrl}/${resourceAllocationId}`;
+    return this.http.delete<void>(url);
+  }
+
+  // Method to update a resource allocation by ID
+  updateResourceAllocation(id: number, updateData: any): Observable<any> {
+    const url = `${this.baseUrl}/${id}`; // Construct the URL with the base URL and resource ID
+    return this.http.patch<any>(url, updateData).pipe(
+      catchError((error) => {
+        console.error('Error updating resource allocation:', error);
+        // Return a null or suitable fallback value in case of an error
+        return of(null);
+      })
+    );
+  }
+
+
 
 }

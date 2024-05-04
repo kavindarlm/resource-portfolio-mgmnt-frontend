@@ -71,6 +71,9 @@ import { SummaryListComponent } from './project-dashboard/summary-list/summary-l
 import { DashbrdProjectListComponent } from './project-dashboard/dashbrd-project-list/dashbrd-project-list.component';
 import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-project-details/dashbrd-project-details.component';
 import { AllocatedResourceInformationComponent } from './Sprint_Management/allocated-resource-information/allocated-resource-information.component';
+import { UpdatePercentageComponent } from './Sprint_Management/update-percentage/update-percentage.component';
+import { DeleteResourceAllocationComponent } from './Sprint_Management/delete-resource-allocation/delete-resource-allocation.component';
+import { UpdateTaskInSprintComponent } from './Sprint_Management/update-task-in-sprint/update-task-in-sprint.component';
 
 
 @NgModule({
@@ -130,6 +133,9 @@ import { AllocatedResourceInformationComponent } from './Sprint_Management/alloc
     DashbrdProjectListComponent,
     DashbrdProjectDetailsComponent,
     AllocatedResourceInformationComponent,
+    UpdatePercentageComponent,
+    DeleteResourceAllocationComponent,
+    UpdateTaskInSprintComponent,
   ],
   imports: [
     BrowserModule,

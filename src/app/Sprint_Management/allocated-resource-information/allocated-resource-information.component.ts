@@ -4,6 +4,12 @@ import { ResourceService } from '../../team-management/shared/resource.service';
 import { ResourceAllocationService } from '../services/resource-allocation.service';
 import { taskApiService } from '../../TaskManagement/services/taskApi.service';
 
+// Define a type to store both the task and its corresponding resource allocation data
+interface TaskWithResourceAllocation {
+  task: any; // Task entity
+  resourceAllocation: any; // Resource allocation data
+}
+
 @Component({
   selector: 'app-allocated-resource-information',
   templateUrl: './allocated-resource-information.component.html',
@@ -44,74 +50,69 @@ export class AllocatedResourceInformationComponent {
       }
     );
   }
-
-// Function to fetch tasks and filter them based on common task names with resource allocation data
-fetchTasksWithProjectNames(): void {
-  // Fetch resource allocations by sprintId
-  this.fetchResourceAllocationsBySprintId().then((resourceAllocationData: any[]) => {
-    // Create a mapping of task names to resource allocation IDs
-    const taskNameToAllocationId: Record<string, number> = {};
-    resourceAllocationData.forEach(allocation => {
-      taskNameToAllocationId[allocation.task.taskName] = allocation.id;
-    });
-
-    // Fetch tasks by resourceId
+  fetchTasksWithProjectNames(): void {
+    // Fetch tasks and resource allocations by resourceId
     this.resourceAllocationServices.getTasksByResourceId(this.resourceId).subscribe(
-      (tasks: any[]) => {
-        // Filter tasks with common task names and assign resource allocation IDs
-        this.tasks = tasks.filter(task => taskNameToAllocationId.hasOwnProperty(task.taskName))
-                          .map(task => {
-                            task.resourceAllocationId = taskNameToAllocationId[task.taskName];
-                            return task;
-                          });
+      (response: { task: any, resourceAllocation: any }[]) => {
+        // Iterate through the tasks and resource allocations
+        response.forEach(item => {
+          const task = item.task;
+          const resourceAllocation = item.resourceAllocation;
 
-        // Assign project names to filtered tasks
-        this.tasks.forEach(task => {
-          this.taskApiService.getProjectNameByTaskId(task.taskid).subscribe(
-            (projectName: string | null) => {
-              task.projectName = projectName;
+          // Fetch project information for each task
+          this.taskApiService.getProjectInfoByTaskId(task.taskid).subscribe(
+            (projectInfo: { projectName: string, projectId: number } | null) => {
+              if (projectInfo) {
+                // Assign project name and project ID to the task
+                task.projectName = projectInfo.projectName;
+                task.projectId = projectInfo.projectId;
+              } else {
+                console.warn(`No project information found for task ${task.taskid}`);
+              }
             },
             error => {
-              console.error(`Error fetching project name for task ${task.taskid}:`, error);
+              console.error(`Error fetching project info for task ${task.taskid}:`, error);
             }
           );
         });
+
+        // Assign the response data to this.tasks
+        this.tasks = response;
       },
       error => {
-        console.error('Error fetching tasks:', error);
+        console.error('Error fetching tasks and resource allocations:', error);
       }
     );
-  });
-}
+  }
 
-// Fetch resource allocation data by sprintId
-fetchResourceAllocationsBySprintId(): Promise<any[]> {
-  return new Promise((resolve, reject) => {
-    this.resourceAllocationServices.getResourceAllocationBySprintId(parseInt(this.sprintId)).subscribe(
-      data => resolve(data),
+  // Fetch resource allocation data by sprintId
+  fetchResourceAllocationsBySprintId(): Promise<any[]> {
+    return new Promise((resolve, reject) => {
+      this.resourceAllocationServices.getResourceAllocationBySprintId(parseInt(this.sprintId)).subscribe(
+        data => resolve(data),
+        error => {
+          console.error('Error fetching resource allocations by sprintId:', error);
+          reject(error);
+        }
+      );
+    });
+  }
+
+
+  // Method to handle delete button click
+  handleDeleteTask(resourceAllocationId: number, index: number): void {
+    // Call the delete method from the service
+    this.resourceAllocationServices.deleteResourceAllocationById(resourceAllocationId).subscribe(
+      () => {
+        // Remove the task from the tasks array using the index
+        this.tasks.splice(index, 1);
+        console.log(`Resource allocation with ID ${resourceAllocationId} deleted successfully.`);
+      },
       error => {
-        console.error('Error fetching resource allocations by sprintId:', error);
-        reject(error);
+        console.error(`Error deleting resource allocation with ID ${resourceAllocationId}:`, error);
       }
     );
-  });
-}
-
-
-// Method to handle delete button click
-handleDeleteTask(resourceAllocationId: number, index: number): void {
-  // Call the delete method from the service
-  this.resourceAllocationServices.deleteResourceAllocationById(resourceAllocationId).subscribe(
-    () => {
-      // Remove the task from the tasks array using the index
-      this.tasks.splice(index, 1);
-      console.log(`Resource allocation with ID ${resourceAllocationId} deleted successfully.`);
-    },
-    error => {
-      console.error(`Error deleting resource allocation with ID ${resourceAllocationId}:`, error);
-    }
-  );
-}
+  }
 
 
 }

@@ -36,6 +36,9 @@ import { UpdateResourcTableComponent } from './team-management/update-resourc-ta
 import { ProjectBoardComponent } from './project-dashboard/project-board/project-board.component';
 import { TaskProjectListComponent } from './TaskManagement/task-project-list/task-project-list.component';
 import { AllocatedResourceInformationComponent } from './Sprint_Management/allocated-resource-information/allocated-resource-information.component';
+import { UpdatePercentageComponent } from './Sprint_Management/update-percentage/update-percentage.component';
+import { DeleteResourceAllocationComponent } from './Sprint_Management/delete-resource-allocation/delete-resource-allocation.component';
+import { UpdateTaskInSprintComponent } from './Sprint_Management/update-task-in-sprint/update-task-in-sprint.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -111,7 +114,13 @@ const routes: Routes = [
             children: [
               {
                 path: 'allocated-resource/:sprintId/:resourceId', component: AllocatedResourceInformationComponent,
-              }
+                children:[
+                  { path: 'DeleteAllocation/:sprintId/:resourceId', component: DeleteResourceAllocationComponent},
+                  
+                ]
+              },
+              { path: 'UpdatePercentage/:sprintId/:resourceId', component: UpdatePercentageComponent, },
+              { path: 'UpdateTask/:sprintId/:resourceId', component: UpdateTaskInSprintComponent, }
             ]
           },
         ]

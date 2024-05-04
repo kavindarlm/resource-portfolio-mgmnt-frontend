@@ -1,0 +1,50 @@
+<div class="border rounded container">
+    <div class="row">
+        <div class="col-10">
+            <div class="p-2 mt-3 mb-2 bg-primary text-white text-center border rounded">Allocated Resource Information
+            </div>
+        </div>
+        <div class="col-2">
+            <button class="border btn shadow-none bd-highlight shadow p-2 mb-3 w-100 mt-3 Hover">
+                <i class="bi bi-x"></i>
+            </button>
+        </div>
+    </div>
+
+    <div>
+        <div class="col rounded border border-4 ms-2 p-3 mb-2 text-center">
+            <i class="bi bi-person"></i>
+            <div>{{ resourceDetails.resourceId }}</div>
+            <div class="text-primary">{{ resourceDetails.resourceName }}</div>
+            <div class="text-black-50">{{ resourceDetails.job_role?.roleName }}</div>
+        </div>
+    </div>
+
+    <div class="row mb-1" *ngFor="let task of tasks; let i = index">
+        <!-- Display project name -->
+        <div class="col-4 text-center">{{ task.task.projectName }}</div>
+        <!-- Display task name -->
+        <div class="col-3 ms-1 text-center">{{ task.task.taskName }}</div>
+        <!-- Input for editing task allocation percentage -->
+        <div class="col-2 text-center">
+            <input [(ngModel)]="task.resourceAllocation.percentage" (change)="onTaskAllocationChange(task)"
+                type="number" class="form-control" min="0" max="100" />
+        </div>
+        <!-- Confirm task change -->
+        <div class="col-2 text-center">
+            <button type="button" class="btn" [ngClass]="{
+                    'btn-outline-success': !task.isModified && !task.isConfirmed,
+                    'btn-success': task.isModified || task.isConfirmed
+                }" (click)="confirmTaskChange(task)">
+                <i class="bi bi-check" [ngStyle]="{ 'color': task.isConfirmed ? 'white' : 'black' }"></i>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Apply changes button -->
+    <div class="d-flex justify-content-center mb-2 mt-2">
+        <button class="btn btn-outline-primary Hover" type="button" (click)="applyChanges()">Edit Percentage</button>
+    </div>
+
+</div>
