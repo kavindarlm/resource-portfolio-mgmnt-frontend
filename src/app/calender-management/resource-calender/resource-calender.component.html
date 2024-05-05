@@ -1,0 +1,30 @@
+
+<div class="container-fluid ">
+    <div class="row no-gutters">
+      <div class="col-12 border rounded p-2">
+         <div>
+  
+          <div class="grid-container-gc-btn mt-2 mb-2">
+            <button class="btn btn-outline-primary w-100  custom-button btn-sm curser" (click)="accessCalenderAdd()" >Add New Holiday</button>
+          </div>
+  
+          <div class="grid-container-gc-addbox ">
+            <div class="border rounded col-12 mb-2 d-flex justify-content-center" *ngIf="showCalenderAdd" >
+              <app-common-calender [actionType]="'add'" [holidayType]="holidayType" (addEvent)="onAddEvent($event)" ></app-common-calender>
+            </div>
+          </div>
+  
+          <div class="grid-container-gc-btn ">
+            <button class="btn btn-outline-primary w-100  custom-button btn-sm curser" (click)="accessCalenderEdit()" >Edit Holidays</button>
+          </div>
+  
+          <div class="grid-container-gc-editbox">
+            <div class="border rounded col-12 mb-2 d-flex justify-content-center" *ngIf="showCalenderEdit">
+              <app-common-calender [actionType]="'edit'" [holidayType]="holidayType"></app-common-calender> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

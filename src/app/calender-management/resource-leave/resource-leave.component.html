@@ -1,0 +1,27 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="resourceleave ">
+            <div class="col-12 border rounded p-2">
+                <div>
+                    <div class="border rounded text-center col-12 mb-1 mt-1 pt-1 pb-1 text-white bg-primary">Add Leaves</div>
+                </div>
+               <div class="border rounded mt-2">
+                <div class="mt-1 d-flex justify-content-center">
+                    <div class="border rounded-circle p-5 ">
+                        <!-- <div class="border rounded-circle"></div> -->
+                    </div>
+                </div>
+
+                <div *ngIf="resource" class="text-center lh-1 mt-1">
+                    <p>{{ resource.resourceId }}</p>
+                    <p>{{resource.resourceName}}</p> <!-- Display resourceName -->
+                    <p>{{resource.roleName}}</p> <!-- Display roleName -->
+                </div>
+               </div>
+
+               <div class="mt-1">
+                <app-resource-calender></app-resource-calender>
+               </div>
+        </div>
+    </div>
+</div>

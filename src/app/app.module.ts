@@ -66,11 +66,21 @@ import { SearchPipe } from './resourceMgt/search.pipe';
 import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ProjectBoardComponent } from './project-dashboard/project-board/project-board.component';
-import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TaskProjectListComponent } from './TaskManagement/task-project-list/task-project-list.component';
 import { SummaryListComponent } from './project-dashboard/summary-list/summary-list.component';
 import { DashbrdProjectListComponent } from './project-dashboard/dashbrd-project-list/dashbrd-project-list.component';
 import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-project-details/dashbrd-project-details.component';
+import { CalenderButtonComponent } from './calender-management/calender-button/calender-button.component';
+import { CalenderMainBoxComponent } from './calender-management/calender-main-box/calender-main-box.component';
+import { CalenderTypeComponent } from './calender-management/calender-type/calender-type.component';
+import { GlobalCalenderComponent } from './calender-management/global-calender/global-calender.component';
+import { ResourceListComponent } from './calender-management/resource-list/resource-list.component';
+import { CommonCalenderComponent } from './calender-management/common-calender/common-calender.component';
+import { ResourceLeaveComponent } from './calender-management/resource-leave/resource-leave.component';
+import { ResourceCalenderComponent } from './calender-management/resource-calender/resource-calender.component';
+
+
 
 
 @NgModule({
@@ -130,6 +140,21 @@ import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-proj
     SummaryListComponent,
     DashbrdProjectListComponent,
     DashbrdProjectDetailsComponent,
+    CalenderButtonComponent,
+    CalenderMainBoxComponent,
+    CalenderTypeComponent,
+    GlobalCalenderComponent,
+    ResourceListComponent,
+    CommonCalenderComponent,
+    ResourceLeaveComponent,
+    UpdateComponent,
+    ResourceCalenderComponent,
+ 
+    
+    
+    
+  
+    
   ],
   imports: [
     BrowserModule,
@@ -142,6 +167,9 @@ import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-proj
     NgxSpinnerModule,
     ToastrModule.forRoot(),
     NgbDatepickerModule,
+    NgbModule,
+    FormsModule,
+   
   ],
 
   providers: [
