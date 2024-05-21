@@ -19,9 +19,20 @@ export interface taskModel {
   taskDescription: '';
   taskAllocationPercentage: '';
   taskProgressPercentage: '';
+
+   // Define an optional error property
+   error?: {
+    message: string;
+  };
 }
 
 export interface taskUpdateModel{
   taskProgressPercentage: '';
+}
+
+export interface TaskApiResponse {
+  success: boolean;
+  message: string;
+  // Add other properties if needed
 }
 

@@ -38,20 +38,30 @@
                     </div>
                 </div>
             </div>
+            <div class="row ms-1 me-1 custom">
+                <div class="border rounded col-12 mb-3 mt-1 pt-1 pb-1">
+                    <div class="">
+                        Project Progress: {{projectProgress}} %
+                        <div *ngIf="errorMessage">
+                            {{ errorMessage }}
+                          </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">
                 Tasks Details
             </div>
             <div class="taskTable">
-                <div class="row mb-2">
-                <div class="col-6">
-                    
+                <div class="row mb-3 custom">
+                    <div class="border rounded col-5 ms-3 mt-1 pt-1 pb-1">
+                        Sum of Allocation : {{allcationSum}} %
+                    </div>
+                    <div class="col-6 ms-3">
+                        <input type="search" [(ngModel)]="searchText" id="form1" class="form-control"
+                            placeholder="Search task" aria-label="search">
+                    </div>
                 </div>
-                <div class="col-6">
-                    <input type="search" [(ngModel)]="searchText" id="form1" class="form-control"
-                        placeholder="Search task" aria-label="search">
-                </div>
-            </div>
                 <table class="table table-bordered table-striped table-hover table-sm text-center">
                     <thead class="thead-dark fs-6 fst-normal">
                         <tr>

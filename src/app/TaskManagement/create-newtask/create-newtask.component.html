@@ -10,8 +10,9 @@
                 <label for="taskName" class="col-3 ps-5 fst-normal text-primary ">Name:</label>
                 <div class="col-9">
                     <input type="text" class="form-control" id="taskName" placeholder="Enter Project Name"
-                        formControlName="taskName" [ngClass]="{'is-invalid': taskForm.controls['taskName'].invalid && taskForm.controls['taskName'].touched}">
-                        <div class="invalid-feedback"
+                        formControlName="taskName"
+                        [ngClass]="{'is-invalid': taskForm.controls['taskName'].invalid && taskForm.controls['taskName'].touched}">
+                    <div class="invalid-feedback"
                         *ngIf="taskForm.controls['taskName'].invalid && taskForm.controls['taskName'].touched">
                         Task Name is required
                     </div>
@@ -23,41 +24,45 @@
                 <label for="expectedStartDate" class="col-3 ps-5 fst-normal text-primary">From:</label>
                 <div class="col-9">
                     <input type="date" class="form-control" id="expectedStartDate"
-                        placeholder="Enter Task Expected Start Date" required formControlName="exStartDate" [ngClass]="{'is-invalid': taskForm.controls['exStartDate'].invalid && taskForm.controls['exStartDate'].touched}">
-                        <div class="invalid-feedback"
+                        placeholder="Enter Task Expected Start Date" required formControlName="exStartDate"
+                        [ngClass]="{'is-invalid': taskForm.controls['exStartDate'].invalid && taskForm.controls['exStartDate'].touched}">
+                    <div class="invalid-feedback"
                         *ngIf="taskForm.controls['exStartDate'].invalid && taskForm.controls['exStartDate'].touched">
                         Expected task start date is required
                     </div>
                 </div>
             </div>
-            
-                <label class="fw-medium font-color" for="expectedEndDate">Expected End Date*</label>
-                <div class="form-group row mt-2 mb-3">
+
+            <label class="fw-medium font-color" for="expectedEndDate">Expected End Date*</label>
+            <div class="form-group row mt-2 mb-3">
                 <label for="expectedStartDate" class="col-3 ps-5 fst-normal text-primary">To :</label>
                 <div class="col-9">
                     <input type="date" class="form-control" id="expectedEndDate"
-                        placeholder="Enter Task Expected Expected EndDate" required formControlName="exEndDate" [ngClass]="{'is-invalid': taskForm.controls['exEndDate'].invalid && taskForm.controls['exEndDate'].touched}">
-                        <div class="invalid-feedback"
+                        placeholder="Enter Task Expected Expected EndDate" required formControlName="exEndDate"
+                        [ngClass]="{'is-invalid': taskForm.controls['exEndDate'].invalid && taskForm.controls['exEndDate'].touched}">
+                    <div class="invalid-feedback"
                         *ngIf="taskForm.controls['exEndDate'].invalid && taskForm.controls['exEndDate'].touched">
                         Expected task end date is required
                     </div>
                     <div *ngIf="taskForm.errors?.['dateRangeError'] && (taskForm.dirty || taskForm.touched)">
                         <span class="text-danger">End date must be after start date.</span>
-                      </div>
+                    </div>
                 </div>
             </div>
-            
-                <label class="fw-medium font-color" for="taskpersentage">Task Percentage*</label>
-                <div class="form-group row mt-2 mb-3">
+
+            <label class="fw-medium font-color" for="taskpersentage">Task Percentage*</label>
+            <div class="form-group row mt-2 mb-3">
                 <label for="taskpersentage" class="col-3 ps-5 fst-normal text-primary">Percentage:</label>
                 <div class="col-9">
                     <input type="text" class="form-control" id="taskpersentage" placeholder="Enter task percentage"
-                        formControlName="taskAllocationPercentage" [ngClass]="{'is-invalid': taskForm.controls['taskAllocationPercentage'].invalid && taskForm.controls['taskAllocationPercentage'].touched}">
-                        <div class="invalid-feedback"
+                        formControlName="taskAllocationPercentage"
+                        [ngClass]="{'is-invalid': taskForm.controls['taskAllocationPercentage'].invalid && taskForm.controls['taskAllocationPercentage'].touched}">
+                    <div class="invalid-feedback"
                         *ngIf="taskForm.get('taskAllocationPercentage')?.invalid && taskForm.get('taskAllocationPercentage')?.touched">
                         Task allocation percentage is required and must be between 0 and 100.
                     </div>
-                    <div *ngIf="taskForm.errors?.['invalidAllocationPercentage'] && (taskForm.dirty || taskForm.touched)">
+                    <div
+                        *ngIf="taskForm.errors?.['invalidAllocationPercentage'] && (taskForm.dirty || taskForm.touched)">
                         <span class="text-danger">Invalid allocation percentage.</span>
                     </div>
                 </div>
@@ -67,5 +72,10 @@
             <button class="btn btn-outline-primary w-50 mt-3 custom-button btn-sm "
                 (click)="submitTaskkform(this.taskForm.value)">Add Task</button>
         </div>
+        <div class="d-flex justify-content-center mt-1">
+        <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+        </div>
+    </div>
     </form>
 </div>

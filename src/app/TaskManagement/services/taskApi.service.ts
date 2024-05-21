@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { projectModel, taskModel, taskUpdateModel } from "../dataModels/projectModel";
+import { TaskApiResponse, projectModel, taskModel, taskUpdateModel } from "../dataModels/projectModel";
+import { Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -23,8 +24,8 @@ export class taskApiService{
   }
 
   //Function to Add Task
-  addTask(data: taskModel,id: string){
-    return this.http.post<taskModel>("http://localhost:3000/task/newtask/"+id,data);
+  addTask(data: taskModel,id: string): Observable<TaskApiResponse>{
+    return this.http.post<TaskApiResponse>("http://localhost:3000/task/newtask/"+id,data);
   }
 
   //Function to Get Task By Id
@@ -50,7 +51,19 @@ export class taskApiService{
 
   //Delete Task
   deleteTask(id:string){
-    return this.http.delete<taskModel>("http://localhost:3000/task/"+id);
+    return this.http.delete<taskModel>("http://localhost:3000/task/deletetask/"+id);
   }
-  
+
+  //Get the Task sum of task allocation percentage
+  getProjectTaskSumByProjectId(id: string){
+    return this.http.get<number>("http://localhost:3000/task/sum-allocation/"+id);
+  }
+
+  //Get the overoll Project Progress
+  // getProjectProgress(id: string){
+  //   return this.http.get<number>("http://localhost:3000/task/project-progress/"+id);
+  // }
+  getProjectProgress(id: string): Observable<number> {
+    return this.http.get<number>("http://localhost:3000/task/project-progress/"+id);
+  }
 }
