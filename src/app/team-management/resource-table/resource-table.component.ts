@@ -27,23 +27,16 @@ export class ResourceTableComponent {
 
   // Method to load resources
   loadResources() {
-    try {
-      this.resourceService.getResources().subscribe(
-        data => {
-          this.resources = data;
-          this.errorMessage = ''; // Clear the error message when the request is successful
-        },
-        error => {
-          console.error('An error occurred while loading resources:', error);
-          // Set the error message when there's an error
-          this.errorMessage = 'An error occurred while loading resources. Please try again later.';
-        }
-      );
-    } catch (error) {
-      console.error('An error occurred while loading resources:', error);
-      // Set the error message when there's an error
-      this.errorMessage = 'An error occurred while loading resources. Please try again later.';
-    }
+    this.resourceService.getResourcesByTeamIdNull().subscribe(
+      data => {
+        this.resources = data;
+        this.totalPages = Math.ceil(this.resources.length / this.itemsPerPage);
+      },
+      error => {
+        console.error('An error occurred while loading resources:', error);
+        this.errorMessage = 'An error occurred while loading resources. Please try again later.';
+      }
+    );
   }
 
   // Method to select a resource

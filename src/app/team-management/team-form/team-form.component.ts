@@ -27,7 +27,7 @@ export class TeamFormComponent implements OnInit {
     //initialize the form
     this.teamForm = this.formbuilder.group({
       teamName: ['', Validators.required],
-      description: ['', Validators.required],
+      team_description: ['', Validators.required], // Changed from 'teamdescription' to 'team_description'
       selectedResources: this.formbuilder.array([])
     });
 

@@ -13,8 +13,8 @@ import { dataModel } from '../team-form/team-form.model';
 
 export class DeletePopupComponent {
   public dataid!: number; 
-  public teamData: dataModel = { id:0 , teamName: '', description: '', resources: [] };
-  @Input() teamId: number = 0;
+  public teamData: dataModel = { teamId:0 , team_Name: '', team_description: '', resources: [] };
+  @Input() team_Id: number = 0;
   errorMessage: string = ''; // Define the errorMessage property
 
   constructor(public generalservice: GeneralService,
@@ -24,8 +24,8 @@ export class DeletePopupComponent {
 
    
     // Method to delete a team
-    onDeleteTeam(teamId: number): void {
-      this.api.deleteTeams(teamId).subscribe(
+    onDeleteTeam(team_Id: number): void {
+      this.api.deleteTeams(team_Id).subscribe(
         response => {
           console.log('Team deleted', response);
           this.errorMessage = '';

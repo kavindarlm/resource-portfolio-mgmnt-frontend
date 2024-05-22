@@ -7,26 +7,29 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class ResourceService {
 
-   //service to get resources from the database
+  //service to get resources from the database
 
-   private baseUrl = 'http://localhost:3000/resources'; // Adjust the port if needed
+  private baseUrl = 'http://localhost:3000/resource'; // Adjust the port if needed
 
-   constructor(private http: HttpClient) { }
- 
-   // Method to get resources
-   getResources(): Observable<any> {
-     return this.http.get(`${this.baseUrl}`);
-   }
+  constructor(private http: HttpClient) { }
 
-   // Method to get resources by team id
-   getResourcesByTeamIdAndNull(teamId: number): Observable<{resourceId: number, roleName: string, unitName: string }[]> {
-    return this.http.get<{resourceId: number, roleName: string, unitName: string }[]>(`${this.baseUrl}/${teamId}`);
+  getResourcesByTeamIdNull(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/no-team`);
   }
   
+  // Method to get resources by team id and null
+  getResourcesByTeamIdAndNull(teamId: number): Observable<{resourceId: string, roleName: string, unitName: string }[]> {
+    return this.http.get<{resourceId: string, roleName: string, unitName: string }[]>(`${this.baseUrl}/team/null/${teamId}`);
+  }
+
   // Method to get resources by team id
-  getResourcesByTeamId(teamId: number): Observable<{resourceId: number, roleName: string, unitName: string, teamId: number }[]> {
-    return this.http.get<{resourceId: number, roleName: string, unitName: string, teamId: number }[]>(`${this.baseUrl}/${teamId}`);
+  getResourcesByTeamId(teamId: number): Observable<{resourceId: string, roleName: string, unitName: string, teamId: number }[]> {
+    return this.http.get<{resourceId: string, roleName: string, unitName: string, teamId: number }[]>(`${this.baseUrl}/team/${teamId}`);
+  }
+
+  // Method to get resources for team
+  getResourcesForTeam(): Observable<{resourceId: string, roleName: string, unitName: string }[]> {
+    return this.http.get<{resourceId: string, roleName: string, unitName: string }[]>(`${this.baseUrl}/team`);
   }
 
 }
-
