@@ -7,9 +7,11 @@ import { Component } from '@angular/core';
 })
 export class PageHeaderComponent {
   greeting!: string;
+  username!: string;
 
   ngOnInit() {
     this.setGreeting();
+    this.username = 'John Doe';
   }
   
   setGreeting() {
@@ -21,5 +23,10 @@ export class PageHeaderComponent {
     } else {
       this.greeting = 'Good Evening';
     }
+  }
+
+  isSubMenuVisible: boolean = false;
+  toggleSubMenu() {
+    this.isSubMenuVisible = !this.isSubMenuVisible;
   }
 }
