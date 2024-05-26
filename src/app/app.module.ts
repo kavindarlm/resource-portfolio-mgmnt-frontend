@@ -72,6 +72,7 @@ import { SummaryListComponent } from './project-dashboard/summary-list/summary-l
 import { DashbrdProjectListComponent } from './project-dashboard/dashbrd-project-list/dashbrd-project-list.component';
 import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-project-details/dashbrd-project-details.component';
 import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
+import { ResetPasswordComponent } from './PageBody/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -132,6 +133,7 @@ import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.componen
     DashbrdProjectListComponent,
     DashbrdProjectDetailsComponent,
     EditTaskComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
