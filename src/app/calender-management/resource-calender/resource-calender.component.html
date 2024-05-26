@@ -1,4 +1,3 @@
-
 <div class="container-fluid ">
     <div class="row no-gutters">
       <div class="col-12 border rounded p-2">
@@ -10,7 +9,7 @@
   
           <div class="grid-container-gc-addbox ">
             <div class="border rounded col-12 mb-2 d-flex justify-content-center" *ngIf="showCalenderAdd" >
-              <app-common-calender [actionType]="'add'" [holidayType]="holidayType" (addEvent)="onAddEvent($event)" ></app-common-calender>
+              <app-common-calender [actionType]="'add'" [holidayType]="'resource'"  [resourceId]="resourceId" (resourceAddEvent)="onAddEvent($event)"></app-common-calender>
             </div>
           </div>
   
@@ -20,7 +19,7 @@
   
           <div class="grid-container-gc-editbox">
             <div class="border rounded col-12 mb-2 d-flex justify-content-center" *ngIf="showCalenderEdit">
-              <app-common-calender [actionType]="'edit'" [holidayType]="holidayType"></app-common-calender> 
+              <app-common-calender [actionType]="'edit'" [holidayType]="'resource'" [resourceId]="resourceId"></app-common-calender> 
             </div>
           </div>
         </div>

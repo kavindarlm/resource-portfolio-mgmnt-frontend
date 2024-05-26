@@ -1,5 +1,5 @@
 export interface Holiday {
-    id: number;
+    holy_id: number;
     date: Date;
     holy_type: string;
     resourceHolidays: ResourceHoliday[];
@@ -12,6 +12,6 @@ export interface Holiday {
   }
   
   export interface Resource {
-    id: number;
+    id: string;
    
   }

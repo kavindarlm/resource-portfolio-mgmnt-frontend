@@ -10,8 +10,6 @@ import { ResourceleaveService } from '../shared/resourceleave.service';
   styleUrl: './resource-list.component.css'
 })
 export class ResourceListComponent {
-
- 
   resources: any; // Define the resources property
   errorMessage: string = ''; // Define the errorMessage property
   searchtext: any;// Define the searchText property
@@ -63,8 +61,10 @@ rowClick(event: any, resource: any) {
   // Do something when the row is clicked, (get data to the console)
   console.log("Row clicked: ", resource);
   console.log("Clicked Resource:", resource); // Log clicked resource data
+  this.resourceleave.setData(resource); 
 
   // Navigate to the resourceleave/:id route relative to the current route
   this.router.navigate([ 'resourceleave', resource.resourceId], { relativeTo: this.route });
+
 }
 }

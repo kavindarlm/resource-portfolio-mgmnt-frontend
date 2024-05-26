@@ -14,9 +14,20 @@ export class ApiServiceService {
 
   constructor(private http: HttpClient) { }
 
+  // post public,bank,mercantile hoildays to all resourceIds
   addEvent(selectedDates: NgbDate[], holidayType: string): Observable<any> {
     const event = { selectedDates, holidayType };
     return this.http.post(this.apiUrl, event);
+  }
+
+  //new api to post resource holiday use if only if it is a holiday type of resource
+  resourceAddEvent(selectedDates: NgbDate[], holidayType: string, resourceIds: string[]): Observable<any> {
+    const event = {
+      selectedDates: selectedDates.map(date => ({ year: date.year, month: date.month, day: date.day })),
+      holidayType,
+      resourceIds
+    };
+    return this.http.post(`${this.apiUrl}/resource`, event);
   }
 
   // In api-service.service.ts
@@ -25,9 +36,21 @@ export class ApiServiceService {
   // return this.http.get(`http://localhost:3000/holiday/events?holidayType=${holidayType}`);
   // }
 
+  // getEvents(holidayType: string): Observable<Holiday[]> {
+  //   return this.http.get<Holiday[]>(`${this.apiUrl}/${holidayType}`);
+  // }
+
   getEvents(holidayType: string): Observable<Holiday[]> {
-    return this.http.get<Holiday[]>(`${this.apiUrl}/${holidayType}`);
+    const url = `${this.apiUrl}/${holidayType}`;
+    return this.http.get<Holiday[]>(url);
   }
+  
+// api-service.service.ts
+resourceGetEvents(holidayType: string, resourceId: string) {
+  const url = `${this.apiUrl}/${holidayType}?resourceId=${resourceId}`;
+  return this.http.get<any>(url); // Change this to any
+}
+
 
   updateHoliday(id: string, holidayData: any): Observable<Holiday[]> {
     const url = `${this.apiUrl}/${id}`; // Add a slash (/) between apiUrl and id
@@ -48,7 +71,7 @@ export class ApiServiceService {
 
     //method to get resource details by id to resource calender
     getResourceDetails(resourceId: string) {
-      return this.http.get(`http://localhost:3000/resources/holiday/${resourceId}`);
+      return this.http.get(`http://localhost:3000/resource/holiday/${resourceId}`);
     }
 
     

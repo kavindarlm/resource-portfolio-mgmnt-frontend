@@ -69,122 +69,118 @@ ngb-datepicker {
 export class CommonCalenderComponent {
   hoveredDate: NgbDate | null = null;
   selectedDates: NgbDate[] = [];
-  showSelectedDates = false;
   holidays: { date: NgbDate, id: number }[] = [];
-  
+  deselectedHolidays: Holiday[] = [];
 
-  @Input() actionType: 'add' | 'edit' = 'add'; 
-  //get the selected dates and holiday type
-  @Output() addEvent = new EventEmitter<{selectedDates: NgbDate[], holidayType: string}>();
-  //define holiday type
+  @Input() actionType: 'add' | 'edit' = 'add';
+  @Output() addEvent = new EventEmitter<{ selectedDates: NgbDate[], holidayType: string }>();
   @Input() holidayType: string = '';
+  @Input() resourceId: string | null = null; // Add this line to accept resource ID
+  //new code to post resource holiday
+  @Output() resourceAddEvent = new EventEmitter<{ selectedDates: NgbDate[], holidayType: string, resourceId: string }>();
 
-  constructor(private calendar: NgbCalendar, private apiService: ApiServiceService) { }
 
+  constructor(private calendar: NgbCalendar, private apiService: ApiServiceService) {}
+
+  ngOnInit() {
+    this.loadHolidays();
+  }
+
+  loadHolidays() {
+    if (this.holidayType === 'resource' && this.resourceId) {
+      this.apiService.resourceGetEvents(this.holidayType, this.resourceId).subscribe((holidays: Holiday[]) => {
+        this.holidays = holidays.map((holiday: Holiday) => {
+          const date = new Date(holiday.date);
+          return {
+            date: new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
+            id: holiday.holy_id
+          };
+        });
+      });
+    } else {
+      this.apiService.getEvents(this.holidayType).subscribe((holidays: Holiday[]) => {
+        this.holidays = holidays.map((holiday: Holiday) => {
+          const date = new Date(holiday.date);
+          return {
+            date: new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
+            id: holiday.holy_id
+          };
+        });
+      });
+    }
+  }
 
   onDateSelection(date: NgbDate) {
     if (this.actionType === 'edit') {
-      const holidayIndex = this.holidays.findIndex((holiday) =>
-        holiday.date.equals(date)
-      );
-  
+      const holidayIndex = this.holidays.findIndex((holiday) => holiday.date.equals(date));
       if (holidayIndex !== -1) {
-        // Date is a holiday, remove it
         const [deselectedHoliday] = this.holidays.splice(holidayIndex, 1);
         this.onHolidayDeselected(deselectedHoliday);
       } else {
-        // Date is not a holiday, add it to the list
-        // Using a placeholder value for the ID of the new holiday
         this.holidays.push({ date: date, id: 0 });
       }
-    } else if (!this.showSelectedDates) {
-      const dateIndex = this.selectedDates.findIndex((selectedDate) =>
-        selectedDate.equals(date)
-      );
-  
+    } else {
+      const dateIndex = this.selectedDates.findIndex((selectedDate) => selectedDate.equals(date));
       if (dateIndex !== -1) {
-        // Date already selected, remove it
         this.selectedDates.splice(dateIndex, 1);
       } else {
-        // Date not selected, add it to the list
         this.selectedDates.push(date);
       }
     }
   }
 
   isHovered(date: NgbDate) {
-    return (
-      this.hoveredDate &&
-      this.selectedDates.length === 1 &&
-      date.after(this.selectedDates[0]) &&
-      date.before(this.hoveredDate)
-    );
+    return this.hoveredDate && this.selectedDates.length === 1 && date.after(this.selectedDates[0]) && date.before(this.hoveredDate);
   }
 
   isInside(date: NgbDate) {
     return this.selectedDates.length === 1 && date.after(this.selectedDates[0]);
   }
 
-isSelected(date: NgbDate) {
-  return this.selectedDates.some((selectedDate) => selectedDate.equals(date)) || 
-         this.holidays.some((holiday) => holiday.date.equals(date));
-}
-
-  // get selected dates and holiday type to the console
+  isSelected(date: NgbDate) {
+    return this.selectedDates.some((selectedDate) => selectedDate.equals(date)) || this.holidays.some((holiday) => holiday.date.equals(date));
+  }
   onAddButtonClick() {
-    this.addEvent.emit({selectedDates: this.selectedDates, holidayType: this.holidayType});
-    
+    //new code to post resource hoilday 
+    if (this.holidayType === 'resource' && this.resourceId) {
+      this.resourceAddEvent.emit({ selectedDates: this.selectedDates, holidayType: this.holidayType, resourceId: this.resourceId });
+    } else {
+      this.addEvent.emit({ selectedDates: this.selectedDates, holidayType: this.holidayType });
+    }
   }
 
-  ngOnInit() {
-    console.log(this.holidayType);
-    this.apiService.getEvents(this.holidayType).subscribe((holidays: Holiday[]) => {
-      console.log(holidays);
-      this.holidays = holidays.map((holiday: Holiday) => {
-        const date = new Date(holiday.date);
-        return {
-          date: new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
-          id: holiday.id
-        };
-      });
-      console.log(this.holidays);
-    });
-  }
-
- // Add this property to your component
-deselectedHolidays: Holiday[] = [];
-
-onHolidayDeselected(holiday: { date: NgbDate; id: number; }) {
-  const deselectedHoliday: Holiday = {
-    id: holiday.id,
-    date: new Date(holiday.date.year, holiday.date.month - 1, holiday.date.day),
-    holy_type: this.holidayType,
-    resourceHolidays: [] // Replace with the actual value
-  };
-  this.deselectedHolidays.push(deselectedHoliday);
-}
-
-onEditButtonClick() {
-  // Update holidays as before
-  this.holidays.forEach((holiday) => {
-    const holidayId = holiday.id.toString();
-    const holidayData = {
-      date: new Date(holiday.date.year, holiday.date.month - 1, holiday.date.day).toISOString(),
-      holy_type: this.holidayType
+  onHolidayDeselected(holiday: { date: NgbDate; id: number }) {
+    const deselectedHoliday: Holiday = {
+      holy_id: holiday.id,
+      date: new Date(holiday.date.year, holiday.date.month - 1, holiday.date.day),
+      holy_type: this.holidayType,
+      resourceHolidays: [] // Replace with the actual value
     };
-    this.apiService.updateHoliday(holidayId, holidayData).subscribe(response => {
-      console.log(response);
-    });
-  });
+    this.deselectedHolidays.push(deselectedHoliday);
+  }
 
-  // Delete deselected holidays
-  this.deselectedHolidays.forEach((holiday) => {
-    this.apiService.deleteHoliday(holiday.id.toString()).subscribe(response => {
-      console.log(response);
+  onEditButtonClick() {
+    this.holidays.forEach((holiday) => {
+      const holidayId = holiday.id.toString();
+      const holidayData: any = {
+        date: new Date(holiday.date.year, holiday.date.month - 1, holiday.date.day).toISOString(),
+        holy_type: this.holidayType
+      };
+      if (this.holidayType === 'resource' && this.resourceId) {
+        holidayData.resource_id = this.resourceId;
+      }
+      this.apiService.updateHoliday(holidayId, holidayData).subscribe(response => {
+        console.log(response);
+      });
     });
-  });
 
-  // Clear the array of deselected holidays
-  this.deselectedHolidays = [];
+    this.deselectedHolidays.forEach((holiday) => {
+      this.apiService.deleteHoliday(holiday.holy_id.toString()).subscribe(response => {
+        console.log(response);
+      });
+    });
+
+    this.deselectedHolidays = [];
+  }
 }
-}
+

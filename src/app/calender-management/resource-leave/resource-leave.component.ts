@@ -20,18 +20,18 @@ ngOnInit(): void {
   this.resourceleave.clickedResource.subscribe(resource => {
     this.resource = resource;
 
-    // Fetch resource details
-    this.apiService.getResourceDetails(resource.resourceId).subscribe(
-      (data: any) => { // 'data' is any
-        console.log(data); // Log the response from the backend
+    // // Fetch resource details
+    // this.apiService.getResourceDetails(resource.resourceId).subscribe(
+    //   (data: any) => { // 'data' is any
+    //     console.log(data); // Log the response from the backend
 
-        // Assign the properties of 'data' to 'this.resource'
-        this.resource.resourceName = data.resourceName;
-      },
-      error => {
-        console.error('An error occurred while fetching resource details:', error);
-      }
-    );
+    //     // Assign the properties of 'data' to 'this.resource'
+    //     this.resource.resourceName = data.resourceName;
+    //   },
+    //   error => {
+    //     console.error('An error occurred while fetching resource details:', error);
+    //   }
+    // );
   });
 }
 }
