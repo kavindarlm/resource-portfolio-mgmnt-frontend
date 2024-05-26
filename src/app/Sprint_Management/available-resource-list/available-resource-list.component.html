@@ -1,12 +1,36 @@
 <div class="border rounded container">
-
   <div class="p-2 mt-3 mb-2 bg-primary text-white text-center border rounded">Available Resource List</div>
-
   <div>
-    <app-filter [options1]="teams" label1="Filter by: Team Name" [options2]="OrgUnit" label2="Filter by: Org.Unit"
-      filter1="Team" filter2="Org_Unit" [hArray]="headArray" [gArray]="resources">
-    </app-filter>
+      <div class="row mx-auto mb-2 mt-3">
+          <div class="col">
+              <div class="gap-2 col rounded text mx-auto mb-2 mt-3">
+                  <select class="form-select" [(ngModel)]="teamFilter">
+                      <!-- Placeholder for filtering by Team Name -->
+                      <option value="" disabled selected>Filter by: Team Name</option>
+                      <option *ngFor="let team of teams" [value]="team">{{ team }}</option>
+                  </select>
+              </div>
+          </div>
+          <div class="col">
+              <div class="gap-2 col rounded text mx-auto mb-2 mt-3">
+                  <select class="form-select" [(ngModel)]="orgUnitFilter">
+                      <!-- Placeholder for filtering by Org.Unit -->
+                      <option value="" disabled selected>Filter by: Org.Unit</option>
+                      <option *ngFor="let orgunit of OrgUnit" [value]="orgunit">{{ orgunit }}</option>
+                  </select>
+              </div>
+          </div>
+          <div class="col-auto mx-auto mb-2 mt-3">
+              <div class="rounded">
+                  <!-- Search button with click event -->
+                  <button class="btn shadow-none" (click)="filterResources()">
+                      <i class="bi bi-search"></i>
+                  </button>
+              </div>
+          </div>
+      </div>
+
+      <!-- Display filtered contents -->
+      <app-tables [HeadArray]="headArray" [GridArray]="filteredContents"></app-tables>
   </div>
-
-
 </div>

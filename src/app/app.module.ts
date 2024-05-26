@@ -38,7 +38,6 @@ import { CreateFormComponent } from './Sprint_Management/create-form/create-form
 import { SprintMgtComponent } from './Sprint_Management/sprint-mgt/sprint-mgt.component';
 import { Ng2SearchPipe } from 'ng2-search-filter';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { FilterComponent } from './Sprint_Management/Reusable_Components/filter/filter.component';
 import { AvailableResourceListComponent } from './Sprint_Management/available-resource-list/available-resource-list.component';
 import { AvailabiilityComponent } from './Sprint_Management/availabiility/availabiility.component';
 import { AddedResourceListComponent } from './Sprint_Management/added-resource-list/added-resource-list.component';
@@ -71,6 +70,10 @@ import { TaskProjectListComponent } from './TaskManagement/task-project-list/tas
 import { SummaryListComponent } from './project-dashboard/summary-list/summary-list.component';
 import { DashbrdProjectListComponent } from './project-dashboard/dashbrd-project-list/dashbrd-project-list.component';
 import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-project-details/dashbrd-project-details.component';
+import { AllocatedResourceInformationComponent } from './Sprint_Management/allocated-resource-information/allocated-resource-information.component';
+import { UpdatePercentageComponent } from './Sprint_Management/update-percentage/update-percentage.component';
+import { DeleteResourceAllocationComponent } from './Sprint_Management/delete-resource-allocation/delete-resource-allocation.component';
+import { UpdateTaskInSprintComponent } from './Sprint_Management/update-task-in-sprint/update-task-in-sprint.component';
 import { UnitDetailsComponent } from './orgUnitMgt/unit-details/unit-details.component';
 import { UnitEditFormComponent } from './orgUnitMgt/unit-edit-form/unit-edit-form.component';
 import { UnitFormComponent } from './orgUnitMgt/unit-form/unit-form.component';
@@ -87,7 +90,6 @@ import { ResourceLeaveComponent } from './calender-management/resource-leave/res
 import { ResourceCalenderComponent } from './calender-management/resource-calender/resource-calender.component';
 import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
 import { ResetPasswordComponent } from './PageBody/reset-password/reset-password.component';
-
 
 @NgModule({
   declarations:[
@@ -121,7 +123,6 @@ import { ResetPasswordComponent } from './PageBody/reset-password/reset-password
     SearchBarComponent,
     CreateFormComponent,
     SprintMgtComponent,
-    FilterComponent,
     AvailableResourceListComponent,
     AvailabiilityComponent,
     AddedResourceListComponent,
@@ -146,6 +147,10 @@ import { ResetPasswordComponent } from './PageBody/reset-password/reset-password
     SummaryListComponent,
     DashbrdProjectListComponent,
     DashbrdProjectDetailsComponent,
+    AllocatedResourceInformationComponent,
+    UpdatePercentageComponent,
+    DeleteResourceAllocationComponent,
+    UpdateTaskInSprintComponent,
     UnitDetailsComponent,
     UnitEditFormComponent,
     UnitFormComponent,

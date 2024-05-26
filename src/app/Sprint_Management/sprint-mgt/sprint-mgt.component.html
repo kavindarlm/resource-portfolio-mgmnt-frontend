@@ -1,52 +1,80 @@
-<div class="border rounded container">
-  <div class="row mb-5">
-    <div class="col-11">
-      <div class="p-2 mt-3 mb-2 bg-primary text-white text-center border rounded">{{ sprintName }}</div>
+<div class="row">
+  <div class="col-6 border rounded">
+    <div class="row mb-5">
+      <div class="col-11">
+        <div class="p-2 mt-3 mb-2 bg-primary text-white text-center border rounded">{{ sprintName }}</div>
+      </div>
+      <div class="col-1">
+        <button class="border btn shadow-none bd-highlight shadow p-2 mb-3 w-100 mt-3">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
     </div>
-    <div class="col-1">
-      <button class="border btn shadow-none bd-highlight shadow p-2 mb-3 w-100 mt-3" (click)="CloseTab()">
-        <i class="bi bi-x"></i>
-      </button>
+
+
+    <div class="row mb-5">
+      <div class="col">
+        <div class="fw-bold border rounded p-2 text-center">
+          <i class="bi bi-calendar"></i>
+          <div class="text">Start Date</div>
+          <div class="text-primary">{{ startDate }}</div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="fw-bold border rounded p-2 text-center">
+          <i class="bi bi-calendar"></i>
+          <div class="text">End Date</div>
+          <div class="text-primary">{{ endDate }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Added Resource List -->
+
+    <div class="border rounded container">
+
+      <div class="p-2 mt-3 mb-2 bg-primary text-white text-center border rounded">Added
+        Resource List</div>
+
+      <div>
+        <table class="table table-bordered table-striped table-sm">
+          <!-- Table header -->
+          <thead class="thead-dark fs-6 fst-normal">
+            <tr>
+              <th class="text" *ngFor="let head of HeadArray">{{ head }}</th>
+            </tr>
+          </thead>
+          <!-- Table body -->
+          <tbody>
+
+            <ng-container *ngFor="let items of ResourcesOfSprint">
+              <tr (click)="onRowClick(items.Resource_ID)">
+                <td *ngFor="let head of HeadArray">{{ items[head] }}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+
+        </table>
+
+        <div class="row mb-2">
+          <div class="col">
+            <div class="d-grid gap-2 col-6 mx-auto border rounded">
+              <button class="btn btn-outline-primary hover" type="button">Edit Sprint</button>
+            </div>
+          </div>
+          <div class="col">
+            <div class="d-grid gap-2 col-6 mx-auto border rounded">
+              <button class="btn btn-outline-danger " type="button" routerLink="deleteSprint/{{ sprintName }}">Delete
+                Sprint</button>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
     </div>
   </div>
-
-
-  <div class="row mb-5">
-    <div class="col">
-      <div class="fw-bold border rounded p-2 text-center">
-        <i class="bi bi-calendar"></i>
-        <div class="text">Start Date</div>
-        <div class="text-primary">{{ startDate }}</div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="fw-bold border rounded p-2 text-center">
-        <i class="bi bi-calendar"></i>
-        <div class="text">End Date</div>
-        <div class="text-primary">{{ endDate }}</div>
-      </div>
-    </div>
+  <div class="col-6">
+    <router-outlet></router-outlet>
   </div>
-
-  <app-added-resource-list [HeadArray]="hArray" [tablecontents]="resources"></app-added-resource-list>
-
-  <br />
-
-  <div class="row mb-2">
-    <div class="col">
-      <div class="d-grid gap-2 col-6 mx-auto border rounded">
-        <button class="btn btn-outline-primary " type="button">Edit Sprint</button>
-      </div>
-    </div>
-    <div class="col">
-      <div class="d-grid gap-2 col-6 mx-auto border rounded">
-        <button class="btn btn-outline-danger " type="button" routerLink="deleteSprint/{{ sprintName }}">Delete
-          Sprint</button>
-      </div>
-    </div>
-  </div>
-
-
 </div>
-
-<router-outlet></router-outlet>
