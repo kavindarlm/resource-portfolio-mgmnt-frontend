@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { ApiService } from '../service/api.service';
-import { datamodel } from '../create-project/modelproject';
+import { criticalityModel, datamodel } from '../create-project/modelproject';
 import { ProjectListComponent } from '../project-list/project-list.component';
 import { sharedprojectService } from '../service/sharedproject.service';
 import { Subscription, catchError } from 'rxjs';
@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './update-project.component.html',
   styleUrl: './update-project.component.css',
 })
+
 export class UpdateProjectComponent implements OnInit {
   public dataid!: string;
   subscrib!: Subscription;
@@ -22,12 +23,12 @@ export class UpdateProjectComponent implements OnInit {
     projectName: '',
     projectStartDate: '',
     projectEndDate: '',
-    criticality: '',
+    criticality_id: '',
     projectManager: '',
     deliveryManager: '',
     projectDescription: '',
   };
-  constructor(
+  constructor( 
     private activatedroute: ActivatedRoute,
     private router: Router,
     private api: ApiService,
@@ -121,5 +122,16 @@ export class UpdateProjectComponent implements OnInit {
       'Project Updated Successfully',
       { timeOut: 3000 }
     );
+  }
+
+  // Validate start date and end date
+  validateDates(): boolean {
+    const startDate = new Date(this.projectForm.projectStartDate);
+    const endDate = new Date(this.projectForm.projectEndDate);
+    if (startDate > endDate) {
+      this.toaster.error('End date must be after start date.', 'Date Validation Error');
+      return false;
+    }
+    return true;
   }
 }

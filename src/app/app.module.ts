@@ -79,8 +79,8 @@ import { ResourceListComponent } from './calender-management/resource-list/resou
 import { CommonCalenderComponent } from './calender-management/common-calender/common-calender.component';
 import { ResourceLeaveComponent } from './calender-management/resource-leave/resource-leave.component';
 import { ResourceCalenderComponent } from './calender-management/resource-calender/resource-calender.component';
-
-
+import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
+import { ResetPasswordComponent } from './PageBody/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -149,12 +149,8 @@ import { ResourceCalenderComponent } from './calender-management/resource-calend
     ResourceLeaveComponent,
     UpdateComponent,
     ResourceCalenderComponent,
- 
-    
-    
-    
-  
-    
+    EditTaskComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

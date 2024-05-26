@@ -40,6 +40,7 @@ import { CalenderTypeComponent } from './calender-management/calender-type/calen
 import { CommonCalenderComponent } from './calender-management/common-calender/common-calender.component';
 import { ResourceListComponent } from './calender-management/resource-list/resource-list.component';
 import { ResourceLeaveComponent } from './calender-management/resource-leave/resource-leave.component';
+import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -67,7 +68,11 @@ const routes: Routes = [
           { path: 'projectTaskDetails/:id',component: ProjectDetailsComponent,
             children: [
               { path: 'newTask/:id', component: CreateNewtaskComponent },
-              { path: 'updatetask/:id', component: UpdateTaskComponent}
+              { path: 'updatetask/:id', component: UpdateTaskComponent,
+                children: [
+                  {path: 'updateTask/:id', component: EditTaskComponent}
+                ]
+              }
             ],
           },
         ],

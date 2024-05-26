@@ -29,4 +29,19 @@ export class SidebarheaderServiceService {
   setSidebarActive(){
     this.sidebarActive.next();
   }
+
+  private EditpasswordVisible = new BehaviorSubject<boolean>(false);
+  EditpasswordVisible$ = this.EditpasswordVisible.asObservable();
+
+  showEditPasswardComponent() {
+    this.EditpasswordVisible.next(true);
+  }
+
+  hideEditPasswardComponent() {
+    this.EditpasswordVisible.next(false);
+  }
+
+  toggleEditPasswardComponent() {
+    this.EditpasswordVisible.next(!this.EditpasswordVisible.value);
+  }
 }
