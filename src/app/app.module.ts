@@ -71,6 +71,8 @@ import { TaskProjectListComponent } from './TaskManagement/task-project-list/tas
 import { SummaryListComponent } from './project-dashboard/summary-list/summary-list.component';
 import { DashbrdProjectListComponent } from './project-dashboard/dashbrd-project-list/dashbrd-project-list.component';
 import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-project-details/dashbrd-project-details.component';
+import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
+import { ResetPasswordComponent } from './PageBody/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -130,6 +132,8 @@ import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-proj
     SummaryListComponent,
     DashbrdProjectListComponent,
     DashbrdProjectDetailsComponent,
+    EditTaskComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
