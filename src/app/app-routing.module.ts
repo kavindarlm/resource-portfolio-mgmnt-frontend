@@ -39,6 +39,18 @@ import { AllocatedResourceInformationComponent } from './Sprint_Management/alloc
 import { UpdatePercentageComponent } from './Sprint_Management/update-percentage/update-percentage.component';
 import { DeleteResourceAllocationComponent } from './Sprint_Management/delete-resource-allocation/delete-resource-allocation.component';
 import { UpdateTaskInSprintComponent } from './Sprint_Management/update-task-in-sprint/update-task-in-sprint.component';
+import { UnitListComponent } from './orgUnitMgt/unit-list/unit-list.component';
+import { UnitTreeComponent } from './orgUnitMgt/unit-tree/unit-tree.component';
+import { UnitNodeComponent } from './orgUnitMgt/unit-node/unit-node.component';
+import { UnitFormComponent } from './orgUnitMgt/unit-form/unit-form.component';
+import { UnitDetailsComponent } from './orgUnitMgt/unit-details/unit-details.component';
+import { UnitEditFormComponent } from './orgUnitMgt/unit-edit-form/unit-edit-form.component';
+import { CalenderMainBoxComponent } from './calender-management/calender-main-box/calender-main-box.component';
+import { CalenderTypeComponent } from './calender-management/calender-type/calender-type.component';
+import { CommonCalenderComponent } from './calender-management/common-calender/common-calender.component';
+import { ResourceListComponent } from './calender-management/resource-list/resource-list.component';
+import { ResourceLeaveComponent } from './calender-management/resource-leave/resource-leave.component';
+import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -68,7 +80,11 @@ const routes: Routes = [
             path: 'projectTaskDetails/:id', component: ProjectDetailsComponent,
             children: [
               { path: 'newTask/:id', component: CreateNewtaskComponent },
-              { path: 'updatetask/:id', component: UpdateTaskComponent }
+              { path: 'updatetask/:id', component: UpdateTaskComponent,
+                children: [
+                  {path: 'updateTask/:id', component: EditTaskComponent}
+                ]
+              }
             ],
           },
         ],
@@ -84,6 +100,20 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'calendertypecomponent', component: CalenderTypeComponent,
+        children: [
+          {path: 'calendermainbox', component:CalenderMainBoxComponent},
+          {path: 'commoncalender/:type', component:CommonCalenderComponent},
+          {path: 'resourcelist', component: ResourceListComponent,
+            children: [
+              { path: 'resourceleave/:id', component: ResourceLeaveComponent }
+            ]
+          }
+          
+        ]
+
+      },
+      {
         path: 'first-view', component: FirstViewComponent,
         children: [
           { path: 'button', component: ButtonComponent },
@@ -94,6 +124,22 @@ const routes: Routes = [
               { path: 'resouce-edit-form/:id', component: ResourceEditFormComponent }
             ]
           },
+        ]
+      },
+      {
+        path: 'unit-list', component: UnitListComponent,
+        children: [
+          { path: 'unit-form', component: UnitFormComponent },
+          { path: 'unit-details', component: UnitDetailsComponent ,
+            children: [
+              { path: 'unit-edit-form', component: UnitEditFormComponent }
+            ]
+          },
+          { path: 'unit-tree', component: UnitTreeComponent,
+            children: [
+              { path: 'unit-node', component: UnitNodeComponent }
+            ]
+          }
         ]
       },
       {

@@ -7,6 +7,8 @@ import { catchError, throwError } from 'rxjs';
 import { JobRoleService } from '../../shared/sevices_resourceMgt/jobRole.service';
 import { OrgUnitService } from '../../shared/sevices_resourceMgt/orgUnit.service';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-resource-details',
@@ -16,6 +18,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ResourceDetailsComponent {
   sharedData: any;
   showResourceEditForm: boolean = false;//first not to show the form
+  showResourceDetails: boolean = true;//first to show the resource details
   selectedResource: any;
 
   jobroles: JobRoleModel[] | undefined; //creating an array for jobroles
@@ -24,12 +27,18 @@ export class ResourceDetailsComponent {
   constructor(private resourceService: ResourceService, 
               private jobRoleService: JobRoleService, 
               private orgUnitService: OrgUnitService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private toaster: ToastrService,
+              private spinner: NgxSpinnerService) {
+              
+              
     this.sharedData = this.resourceService.getData();
     this.selectedResource = this.resourceService.getData();
+
   }
 
   ngOnInit(): void {
+    //To get the resource details according to the resource id selected
     this.route.params.subscribe(params => {
       const resourceId = params['id'];
       if (resourceId) {
@@ -41,6 +50,7 @@ export class ResourceDetailsComponent {
   }
 
   loadResourceDetails(resourceId: string) {
+    this.spinner.show();
     this.resourceService.getResource(resourceId)
       .pipe(
         catchError((error) => {
@@ -52,10 +62,7 @@ export class ResourceDetailsComponent {
       .subscribe((res: ResourceModel) => {
         this.sharedData = res;
         this.selectedResource = res;
-      },
-      (error) => {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again.');
+        this.spinner.hide();
       });
   }
 
@@ -100,18 +107,22 @@ export class ResourceDetailsComponent {
   }
 
   onEdit() {
+    this.spinner.show();
     this.showResourceEditForm = true; // Show the AddFormComponent
+    this.spinner.hide();
   }
 
   onDelete() {
     this.resourceService.deleteResource(this.selectedResource.resourceId)
     .subscribe((res:ResourceModel)=> {
       console.log('Resource deleted successfully:', res);
+      this.deleteSucceseMassege(this.selectedResource.resourceId);
+      this.showResourceDetails = false;
       this.resourceService.resourceListUpdated.emit(); // Emit the event
     },
     (error) => {
       console.error('Error occurred while deleting resource:', error);
-      // Handle error appropriately, such as displaying an error message to the user.
+      // display an error message to the user.
     }
     );
   }
@@ -133,6 +144,15 @@ export class ResourceDetailsComponent {
     }
     return 'Unknown Unit';
   }
+
+    //Delete Success Message
+    deleteSucceseMassege(resourceId: string) {
+      this.toaster.success(
+        `${resourceId} Deleted successfully`,
+        'Resource Deleted Successfully',
+        { timeOut: 3000 }
+      );
+    }
 
 }
 

@@ -48,28 +48,22 @@ export class FirstViewComponent implements OnInit {
 
 
   loadResources() {
+    this.spinner.show();
     this.resourceService.getResources()
       .pipe(
         catchError((error) => {
           console.error('Error fetching resources:', error);
-          this.spinner.show();
-          // alert('An error occurred while fetching resources. Please try again.');
           return throwError('Error fetching resources');
         })
       )
       .subscribe((res: any) => {
         debugger;
-        this.spinner.show();
         this.resourceList = res; // Assuming the response is directly the array of resources
         this.spinner.hide();
-        // this.totalPages = Math.ceil(this.resourceList.length / this.itemsPerPage);
+        //To set the total no of pages
         this.totalPages = this.resourceList ? Math.ceil(this.resourceList.length / this.itemsPerPage) : 0;
 
-      },
-        (error) => {
-          console.error('Error:', error);
-          // alert('An error occurred. Please try again.');
-        }
+      }
       );
   }
 
