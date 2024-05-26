@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ResourceService } from '../../team-management/shared/resource.service';
 import { ResourceAllocationService } from '../services/resource-allocation.service';
 import { taskApiService } from '../../TaskManagement/services/taskApi.service';
+import { forkJoin } from 'rxjs';
 
 // Define a type to store both the task and its corresponding resource allocation data
 interface TaskWithResourceAllocation {
@@ -22,6 +23,9 @@ export class AllocatedResourceInformationComponent {
   resourceDetails: any = {};
 
   tasks: any[] = [];
+  taskIds: string[] = []; // Array to store task IDs
+  taskids: string[] = [];
+  commonTaskIds: string[] = []; // Array to store common task IDs
 
   constructor(
     private route: ActivatedRoute,
@@ -36,7 +40,8 @@ export class AllocatedResourceInformationComponent {
       this.resourceId = params['resourceId'];
       this.fetchResourceDetails();
       this.fetchTasksWithProjectNames();
-      this.fetchResourceAllocationsBySprintId();
+      this.fetchTasksWithSprintIDs();
+      this.findCommonTaskIds();
     });
   }
 
@@ -50,6 +55,7 @@ export class AllocatedResourceInformationComponent {
       }
     );
   }
+
   fetchTasksWithProjectNames(): void {
     // Fetch tasks and resource allocations by resourceId
     this.resourceAllocationServices.getTasksByResourceId(this.resourceId).subscribe(
@@ -58,6 +64,9 @@ export class AllocatedResourceInformationComponent {
         response.forEach(item => {
           const task = item.task;
           const resourceAllocation = item.resourceAllocation;
+
+          // Store task ID in the array
+          this.taskIds.push(task.taskid);
 
           // Fetch project information for each task
           this.taskApiService.getProjectInfoByTaskId(task.taskid).subscribe(
@@ -76,6 +85,9 @@ export class AllocatedResourceInformationComponent {
           );
         });
 
+        // Log the array of task IDs
+        console.log('Task IDs:', this.taskIds);
+
         // Assign the response data to this.tasks
         this.tasks = response;
       },
@@ -85,20 +97,74 @@ export class AllocatedResourceInformationComponent {
     );
   }
 
-  // Fetch resource allocation data by sprintId
-  fetchResourceAllocationsBySprintId(): Promise<any[]> {
-    return new Promise((resolve, reject) => {
-      this.resourceAllocationServices.getResourceAllocationBySprintId(parseInt(this.sprintId)).subscribe(
-        data => resolve(data),
-        error => {
-          console.error('Error fetching resource allocations by sprintId:', error);
-          reject(error);
-        }
-      );
-    });
+  fetchTasksWithSprintIDs(): void {
+    // Call your service method to get resource allocation data by sprint ID
+    this.resourceAllocationServices.getResourceAllocationBySprintId(Number(this.sprintId)).subscribe(
+      (resourceAllocations: any[]) => {
+        // Extract task IDs and store them in the taskIds array
+        this.taskids = resourceAllocations.map(resourceAllocation => resourceAllocation.task.taskid);
+        console.log('Task IDs:', this.taskids);
+  
+        // Now that taskids are fetched, find common task IDs
+        this.findCommonTaskIds();
+      },
+      (error: any) => {
+        console.error('Error fetching resource allocation data by sprint ID:', error);
+      }
+    );
+  }
+  
+
+  findCommonTaskIds(): void {
+    // Use filter to find the common task IDs between taskIds and taskids arrays
+    this.commonTaskIds = this.taskIds.filter(taskId => this.taskids.includes(taskId));
+    console.log('Common Task IDs:', this.commonTaskIds);
   }
 
+fetchProjectInfoForCommonTasks(): void {
+  if (this.commonTaskIds.length === 0) {
+    return; // No common task IDs to fetch project info for
+  }
 
+  // Convert commonTaskIds array elements from string to number
+  const taskIdsAsNumbers: number[] = this.commonTaskIds.map(taskId => parseInt(taskId, 10));
+
+  // Array to store observables for each HTTP request
+  const observables = taskIdsAsNumbers.map(taskId => {
+    return this.taskApiService.getProjectInfoByTaskId(taskId);
+  });
+
+  // Use forkJoin to handle multiple HTTP requests concurrently
+  forkJoin(observables).subscribe(
+    (projectInfos: Array<{ projectName: string, projectId: number } | null>) => {
+      // projectInfos is an array containing project information for each task ID
+      console.log('Project Info for Common Tasks:', projectInfos);
+
+      // Array to store project information objects
+      const projects: { projectName: string, projectId: number }[] = [];
+
+      // Iterate over projectInfos and store project information in the projects array
+      projectInfos.forEach(info => {
+        if (info) {
+          const project = {
+            projectName: info.projectName,
+            projectId: Number(info.projectId) // Convert projectId to number
+          };
+          projects.push(project);
+        }
+      });
+
+      // Now you have the project information in the projects array
+      console.log('Projects:', projects);
+
+      // You can handle the projects array here, such as assigning it to a property
+      // or performing further processing
+    },
+    error => {
+      console.error('Error fetching project info for common tasks:', error);
+    }
+  );
+}
   // Method to handle delete button click
   handleDeleteTask(resourceAllocationId: number, index: number): void {
     // Call the delete method from the service

@@ -22,11 +22,11 @@
 
     <div class="row mb-1" *ngFor="let item of tasks; let i = index">
         <!-- Display project name -->
-        <div class="col-4 text-center">{{ item.task.projectName }}</div>
+        <div class="col-4 text-center">project name</div>
         <!-- Display task name -->
-        <div class="col-3 ms-1 text-center">{{ item.task.taskName }}</div>
+        <div class="col-3 ms-1 text-center">task name</div>
         <!-- Display resource allocation percentage -->
-        <div class="col-2 text-center">{{ item.resourceAllocation.percentage }}</div>
+        <div class="col-2 text-center">percentage</div>
         <!-- Display a delete button -->
         <div class="col-2 text-center">
             <button type="button" class="btn btn-outline-danger" (click)="handleDeleteTask(item.resourceAllocation.id, i)">
@@ -50,4 +50,45 @@
     </div>
 
 </div>
+
+<!-- allocated-resource-information.component.html -->
+<div>
+    <h2>Resource Details</h2>
+    <p>{{ resourceDetails | json }}</p>
+    
+    <h2>Task IDs of resource</h2>
+    <ul>
+      <li *ngFor="let taskId of taskIds">
+        {{ taskId }}
+      </li>
+    </ul>
+  </div>
+
+  <div>
+  
+    <!-- Optional: Display tasks with other details -->
+    <h2>sprint tasks</h2>
+    <div *ngIf="taskids && taskids.length > 0">
+        <h3>Task IDs:</h3>
+        <ul>
+          <li *ngFor="let taskId of taskids">{{ taskId }}</li>
+        </ul>
+      </div>
+      <div *ngIf="!taskids || taskids.length === 0">
+        <p>No task IDs available.</p>
+      </div>
+      
+      <!-- allocated-resource-information.component.html -->
+
+<div *ngIf="commonTaskIds.length > 0">
+    <h3>Common Task IDs:</h3>
+    <ul>
+      <li *ngFor="let taskId of commonTaskIds">{{ taskId }}</li>
+    </ul>
+  </div>
+  <div *ngIf="commonTaskIds.length === 0">
+    <p>No common task IDs found.</p>
+  </div>
+  
+  
 <router-outlet></router-outlet>
