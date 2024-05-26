@@ -36,6 +36,9 @@ import { UpdateResourcTableComponent } from './team-management/update-resourc-ta
 import { ProjectBoardComponent } from './project-dashboard/project-board/project-board.component';
 import { TaskProjectListComponent } from './TaskManagement/task-project-list/task-project-list.component';
 import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-project-details/dashbrd-project-details.component';
+import { AuthGuard } from './guard/auth.guard';
+import { FunctionGuardService } from './guard/function.guard';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -44,14 +47,20 @@ const routes: Routes = [
   { path: 'forgot-password', component: FgPsswdComponent },
   {
     path: 'pages-body', component: PagesBodyComponent,
+    canActivate: [AuthGuard],
+    data: { roles : ['user'] },
     children: [
       { path: 'projectBoard', component: ProjectBoardComponent,
+      canActivate:[FunctionGuardService],
+      data : { functionId : 1},
         children: [
           { path: 'dashboard-projectdetails/:id', component: DashbrdProjectDetailsComponent}
         ]
       },
       {
         path: 'projectlist', component: ProjectListComponent,
+        canActivate:[FunctionGuardService],
+        data : { functionId : 6},
         children: [
           { path: 'createproject', component: CreateProjectComponent },
           { path: 'updatePoject/:id', component: UpdateProjectComponent }
@@ -59,6 +68,8 @@ const routes: Routes = [
       },
       {
         path: 'TaskProjectList', component: TaskProjectListComponent,
+        canActivate:[FunctionGuardService],
+        data : { functionId : 7},
         children: [
           { path: 'projectTaskDetails/:id',component: ProjectDetailsComponent,
             children: [
@@ -70,6 +81,8 @@ const routes: Routes = [
       },
       {
         path: 'teamlistcomponent', component: TeamListComponent,
+        canActivate:[FunctionGuardService],
+        data : { functionId : 5},
         children: [
           { path: 'NewTeamButton', component: NewTeamButtonComponent },
           { path: 'TeamForm', component: TeamFormComponent },
@@ -80,6 +93,8 @@ const routes: Routes = [
       },
       {
         path: 'first-view', component: FirstViewComponent,
+        canActivate:[FunctionGuardService],
+        data : { functionId : 2},
         children: [
           { path: 'button', component: ButtonComponent },
           { path: 'add-form', component: AddFormComponent },
@@ -93,6 +108,8 @@ const routes: Routes = [
       },
       {
         path: 'sprint-management', component: ListComponent,
+        canActivate:[FunctionGuardService],
+        data : { functionId : 8},
         children: [
           {
             path: 'createform', component: CreateFormComponent,
@@ -106,6 +123,7 @@ const routes: Routes = [
           },
           {
             path: 'sprintmgt/:Sname', component: SprintMgtComponent,
+            canActivate:[FunctionGuardService],
             children: [
               { path: 'deleteSprint/:Sname', component: DeleteSprintPopupComponent }
             ]
@@ -117,10 +135,15 @@ const routes: Routes = [
   },
   {
     path: 'admin-dashboard', component: AdminDasbdBodyComponent,
+    canActivate: [AuthGuard],
+    data: { roles : ['admin'] },
     children: [
       { path: 'addNewUser', component: AddNewUserComponent },
       { path: 'userDetail/:id', component: UserDetailComponent }
     ]
+  },
+  {
+    path: 'page-not-found', component: PageNotFoundComponent,
   }
 ]; 
 

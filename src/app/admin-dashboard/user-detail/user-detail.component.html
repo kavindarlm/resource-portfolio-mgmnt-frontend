@@ -28,7 +28,7 @@
                     </div>
                 </form>
             </div>
-            <div class="d-flex justify-content-center flex-column col-lg-12 col-md-12 col-sm-12 mt-3">
+            <div class="d-flex justify-content-center flex-column col-lg-12 col-md-12 col-sm-12 mt-3" *ngIf="userForm.user_role=== 'user'">
                 <app-function-management></app-function-management>
             </div>
             <div class="row container">

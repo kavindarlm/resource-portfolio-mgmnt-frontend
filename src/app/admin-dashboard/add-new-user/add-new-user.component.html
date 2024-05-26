@@ -31,8 +31,8 @@
                             <div class="col-9">
                                 <!-- <input type="email" class="form-control" id="email" placeholder="Enter Email"
                                     formControlName="user_email" required> -->
-                                <input type="email" id="user_email" formControlName="user_email" class="form-control small"
-                                    placeholder="Enter Email"
+                                <input type="email" id="user_email" formControlName="user_email"
+                                    class="form-control small" placeholder="Enter Email"
                                     [ngClass]="{'is-invalid': userForm.controls['user_email'].invalid && userForm.controls['user_email'].touched}">
                                 <div class="invalid-feedback"
                                     *ngIf="userForm.controls['user_email'].invalid && userForm.controls['user_email'].touched">
@@ -41,9 +41,31 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-center flex-column col-lg-12 col-md-12 col-sm-12 mt-3">
-                        <app-function-management></app-function-management>
+                    <div class="form-goup row-label mb-2">
+                        <label class="pm-label fw-medium" for="userEmail">User Role *</label>
+                        <div class="form-group row row-label">
+                            <label for="userEmail"
+                                class="col-3 col-form-label col-label ps-5 fst-normal text-primary">Role :</label>
+                            <div class="col-9">
+                                <select id="user_role" formControlName="user_role" class="form-control small" style="color :rgb(90, 90, 90)"
+                                    [ngClass]="{'is-invalid': userForm.controls['user_role'].invalid && userForm.controls['user_role'].touched}">
+                                    <option value="" disabled selected>Select Role</option>
+                                    <option value="user">User</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                                <div class="invalid-feedback"
+                                    *ngIf="userForm.controls['user_role'].invalid && userForm.controls['user_role'].touched">
+                                    User Role is required
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <!-- <div class="d-flex justify-content-center flex-column col-lg-12 col-md-12 col-sm-12 mt-3" >
+                        <app-function-management></app-function-management>
+                    </div> -->
+                    <div class="d-flex justify-content-center flex-column col-lg-12 col-md-12 col-sm-12 mt-3" *ngIf="selectedRole === 'user'">
+                        <app-function-management></app-function-management>
+                      </div>
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-outline-primary w-25 mt-3 custom-button btn-sm "
                             (click)="submitUserForm()">Add User</button>

@@ -1,44 +1,90 @@
-<!-- Background Image -->
-<div class="background-wrapper">
-    <img src="assets/image/backimage1.jpg" class="img-fluid" alt="Background Image">
-</div>
-<!-- page content  -->
-<div class="container mt-5 mb-5" style="width: 100%;">
-    <div class="pt-5 pb-5 container" style="background-color: #f3f8ff; border-radius: 8px;">
-        <div class="row">
-            <div class="col-md-6 d-flex justify-content-center align-items-center col-md-border">
-                <div class="text-center container">
-                    <img src="assets/image/taprologo.png" class="logo" alt="Tapro Logo" >
-                </div>
-            </div>
-            <div class=" col-md-6 d-flex col-md-border flex-column pt-3 pb-3">
-                <div class="cntainer text-center ">
-                    <div>
-                        <img id="key" src="/assets/image/User-Profile.png" alt="logo" class="logo" />
-                        <p class="fs-4 fw-bold text-color">Log In</p>
-                        <p class="fs-6 fw-medium text-color lh-1"> Please Log In to your Account</p>
-                        <div class="text-start container-sm text-color px-5">
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label fw-medium">User Name</label>
-                                <!-- Email Input -->
-                                <input type="email" class="form-control" #exampleFormControlInput1 [value]="user.user_email" (change)="user.user_email = exampleFormControlInput1.value" placeholder="Enter your email" required>
-                            </div>
-                            <label for="inputPassword5" class="form-label fw-medium">Password</label>
-                            <input type="password" #inputPassword class="form-control" [value]="user.password" (change)="user.password = inputPassword.value" placeholder="Password" required>
-                            <div class="text-center">
-                                <p><a routerLink="/forgot-password" class="fw-normal text-color justify-content-center link-offset-2 link-underline link-underline-opacity-0">Forgot Your Password ?</a></p>
-                            </div>
-                            <div class="d-grid gap-2 ">
-                                <button class="btn btn-outline-color" (click)="login()">Log In</button>
-                            </div>
-                        </div>
-                    </div>    
-                </div>
-            </div>
+<section class="background-radial-gradient overflow-hidden min-vh-100 justify-content-center align-items-center d-flex">
+    <style>
+      .background-radial-gradient {
+        background-color: hsl(218, 41%, 15%);
+        background-image: radial-gradient(650px circle at 0% 0%,
+            hsl(218, 41%, 35%) 15%,
+            hsl(218, 41%, 30%) 35%,
+            hsl(218, 41%, 20%) 75%,
+            hsl(218, 41%, 19%) 80%,
+            transparent 100%),
+          radial-gradient(1250px circle at 100% 100%,
+            hsl(218, 41%, 45%) 15%,
+            hsl(218, 41%, 30%) 35%,
+            hsl(218, 41%, 20%) 75%,
+            hsl(218, 41%, 19%) 80%,
+            transparent 100%);
+      }
+  
+      #radius-shape-1 {
+        height: 220px;
+        width: 220px;
+        top: -60px;
+        left: -130px;
+        background: radial-gradient(#000e6b, #1f93ff);
+        overflow: hidden;
+      }
+  
+      #radius-shape-2 {
+        border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+        bottom: -60px;
+        right: -110px;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(#000e6b, #1f93ff);
+        overflow: hidden;
+      }
+  
+      .bg-glass {
+        background-color: hsla(0, 0%, 100%, 0.9) !important;
+        backdrop-filter: saturate(200%) blur(25px);
+      }
+    </style>
+  
+    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+      <div class="row gx-lg-5 align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+          <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
+            Enhance your,<br />
+            <span style="color: hsl(218, 81%, 75%)">Project management processes</span>
+          </h1>
+          <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
+            Welcome to our cutting-edge Project Management Application! Empower your team to effortlessly track project progress, streamline work allocation, and boost collaboration, ensuring your company's projects are managed with precision and efficiency.          </p>
         </div>
+  
+        <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+          <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
+          <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+  
+          <div class="card bg-glass">
+            <div class="card-body px-4 py-5 px-md-5">
+
+                <p class="fs-4 fw-bold text-color">Log In</p>
+                <p class="fs-6 fw-medium text-color"> Please Log In to your Account</p>
+  
+                <!-- Email input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                  <input type="email" id="form3Example3" class="form-control" [(ngModel)]="user.user_email" required />
+                  <label class="form-label" for="form3Example3">Email address</label>
+                </div>
+  
+                <!-- Password input -->
+                <div data-mdb-input-init class="form-outline mb-4">
+                  <input type="password" id="form3Example4" class="form-control" [(ngModel)]="user.password" required/>
+                  <label class="form-label" for="form3Example4">Password</label>
+                </div>
+  
+                <div class="text-center">
+                    <p><a routerLink="/forgot-password" class="fw-normal text-color justify-content-center link-offset-2 link-underline link-underline-opacity-0">Forgot Your Password ?</a></p>
+                </div>
+  
+                <!-- Submit button -->
+                <div class="d-grid gap-2 ">
+                    <button class="btn btn-outline-color" (click)="login()">Log In</button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
-<!-- footer company name -->
-<div>
-    <p class="text-center text-uppercase fs-1 fw-bold" style="color: #ffffff;">Tapro Technologies</p>
-</div>
+  </section>

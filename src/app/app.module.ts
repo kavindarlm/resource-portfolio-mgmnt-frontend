@@ -49,7 +49,7 @@ import { ResourceDetailsComponent } from './resourceMgt/resource-details/resourc
 import { ResourceEditFormComponent } from './resourceMgt/resource-edit-form/resource-edit-form.component';
 import { FilterPipe } from './team-management/filter.pipe';
 import { UpdateComponent } from './team-management/update/update.component';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { TeamListComponent } from './team-management/team-list/team-list.component';
 import { TeamFormComponent } from './team-management/team-form/team-form.component';
 import { ResourceTableComponent } from './team-management/resource-table/resource-table.component';
@@ -71,6 +71,8 @@ import { TaskProjectListComponent } from './TaskManagement/task-project-list/tas
 import { SummaryListComponent } from './project-dashboard/summary-list/summary-list.component';
 import { DashbrdProjectListComponent } from './project-dashboard/dashbrd-project-list/dashbrd-project-list.component';
 import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-project-details/dashbrd-project-details.component';
+import { AuthInterceptor } from './services/auth.interceptor';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -130,6 +132,7 @@ import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-proj
     SummaryListComponent,
     DashbrdProjectListComponent,
     DashbrdProjectDetailsComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -146,7 +149,8 @@ import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-proj
 
   providers: [
     provideClientHydration(),
-    provideHttpClient() 
+    provideHttpClient(),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })

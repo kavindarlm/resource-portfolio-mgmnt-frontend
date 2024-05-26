@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import axios from 'axios';
 import { Router } from '@angular/router'; // Import Router
+import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../services/auth.service';
+
+interface LoginResponse {
+  user_id: number;
+  status: number;
+}
 
 @Component({
   selector: 'app-login-acc',
@@ -10,36 +16,21 @@ import { Router } from '@angular/router'; // Import Router
 export class LoginAccComponent {
   data: any;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http: HttpClient, private authService: AuthService) { }
 
   user = {
     user_email: '',
-    password: ''
+    password: '',
+    user_id: ''
   };
 
   ngOnInit() {
   }
 
-  async login() {
-    // console.log(this.user);
-    console.log('Login processing!');
-    try {
-      const response = await axios.post('http://localhost:3000/api/login', {
-        // Data to be sent to the server
-        user_email: this.user.user_email,
-        password: this.user.password
-      }, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-
-      if (response.status === 201) {
-        this.router.navigate(['./admin-dashboard']);
-        console.log('Login successful');
-      }
-    } catch (error) {
-      console.log("Login failed");
-    }
+  login() {
+    this.authService.login(this.user.user_email, this.user.password).subscribe({
+      next: () => console.log('Login successful'),
+      error: () => console.log('Login failed')
+    });
   }
 }

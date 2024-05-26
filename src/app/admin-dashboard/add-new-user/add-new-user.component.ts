@@ -19,11 +19,16 @@ export class AddNewUserComponent implements OnInit {
 
   userForm!: FormGroup;
   errormessage: string = '';
+  selectedRole!: string;
 
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
       user_name: ['', Validators.required],
       user_email: ['', [Validators.required, Validators.email]],
+      user_role: ['', Validators.required],
+    });
+    this.userForm.controls['user_role'].valueChanges.subscribe(value => {
+      this.selectedRole = value;
     });
   }
 
@@ -35,7 +40,8 @@ export class AddNewUserComponent implements OnInit {
     if (this.isFormValid()) {
       const Userdata = {
         user_name: this.userForm.get('user_name')?.value,
-        user_email: this.userForm.get('user_email')?.value
+        user_email: this.userForm.get('user_email')?.value,
+        user_role: this.userForm.get('user_role')?.value,
       };
       this.userService.createUser(Userdata).subscribe({
         next: (res) => {

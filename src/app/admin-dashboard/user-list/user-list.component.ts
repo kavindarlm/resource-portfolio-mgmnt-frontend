@@ -23,10 +23,12 @@ export class UserListComponent implements OnInit, OnDestroy {
   currentPage = 1;
   itemsPerPage = 8;
   totalPages!: number;
+  selectedRole: string = 'User';
+  isClicked: boolean = false;
 
   ngOnInit(): void {
     this.subscription = this.sharedService.refreshUserList$.subscribe(() => {
-      this.getAllUsers();
+      this.onRoleChange(this.selectedRole);
     });
   }
 
@@ -34,10 +36,45 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  async getAllUsers() {
+  onRoleChange(role: string) {
+    this.selectedRole = role;
+    if (this.selectedRole === 'User') {
+      this.getAllUsers();
+    } else if (this.selectedRole === 'Admin') {
+      this.getAllAdmins();
+    }
+}
+
+  async getAll() {
     try {
       this.spinner.show();
       await (await this.dashboardService.getUser()).subscribe(res => {
+        this.usersData = res;
+        this.totalPages = Math.ceil(this.usersData.length / this.itemsPerPage);
+        this.spinner.hide();
+      });
+    } catch (error) {
+      console.log("error", error)
+    }
+  }
+
+  async getAllUsers() {
+    try {
+      this.spinner.show();
+      await (await this.dashboardService.getAllUsers()).subscribe(res => {
+        this.usersData = res;
+        this.totalPages = Math.ceil(this.usersData.length / this.itemsPerPage);
+        this.spinner.hide();
+      });
+    } catch (error) {
+      console.log("error", error)
+    }
+  }
+
+  async getAllAdmins() {
+    try {
+      this.spinner.show();
+      await (await this.dashboardService.getAllAdmins()).subscribe(res => {
         this.usersData = res;
         this.totalPages = Math.ceil(this.usersData.length / this.itemsPerPage);
         this.spinner.hide();

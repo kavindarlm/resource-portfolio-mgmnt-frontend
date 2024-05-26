@@ -4,7 +4,7 @@ import { UserModel } from '../dashboard-model/userModel';
 import { FunctionModel } from '../dashboard-model/functionModel';
 import { UsersFunctionModel } from '../dashboard-model/usersFunctionModel';
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 
 
@@ -29,9 +29,19 @@ export class DashboardService {
         return throwError('An error occurred');
       }
 
-    //Get All users
+    //Get All
     async getUser() {
         return await this.http.get<UserModel[]>('http://localhost:3000/api/findAll');
+    }
+
+    //Get All users
+    async getAllUsers() {
+        return await this.http.get<UserModel[]>('http://localhost:3000/api/findAllUsers');
+    }
+
+    //Get All admins
+    async getAllAdmins() {
+        return await this.http.get<UserModel[]>('http://localhost:3000/api/findAllAdmins');
     }
 
     //Get single user

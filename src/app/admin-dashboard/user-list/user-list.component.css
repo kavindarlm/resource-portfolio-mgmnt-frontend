@@ -5,36 +5,38 @@
 }
 
 input.search-input::placeholder {
-    color: #b8b8b8; /* Replace with your desired color */
-    text-align: center; 
+    color: #b8b8b8;
+    /* Replace with your desired color */
+    text-align: center;
 }
 
-.custom-button{
-   border-color: #1E3895;
+.custom-button {
+    border-color: #1E3895;
 }
 
-.custom-button:hover{
+.custom-button:hover {
     background-color: #1E3895;
 }
 
 
-.border{
+.border {
     border: 1px solid #1E3895;
 }
 
-th{
+th {
     color: #1e3895e1;
     font-weight: 500;
 }
 
-td{
-    color:rgba(0, 0, 255, 0.575);
+td {
+    color: rgba(0, 0, 255, 0.575);
     font-weight: 300;
     font-size: 0.93rem;
-    
+
 }
 
-.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
     background-color: #3b5edd;
     color: white;
     cursor: pointer;
@@ -43,4 +45,9 @@ td{
 .small-text {
     font-size: 0.75rem;
     /* Adjust as needed */
-  }
+}
+
+.btn-clicked {
+    background-color:  #1E3895;
+    color: white;
+}

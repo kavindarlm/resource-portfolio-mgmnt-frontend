@@ -25,6 +25,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     {
       user_name: '',
       user_email: '',
+      user_role: '',
       user_id: 0
     };
 
