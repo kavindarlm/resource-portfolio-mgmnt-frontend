@@ -1,3 +1,4 @@
+<app-spinner></app-spinner>
 <div class="container-fluid">
     <div class="row">
 
@@ -30,7 +31,6 @@
                         </tr>
                     </tbody>
                 </table>
-                <!-- </div> -->
 
                 <!-- table pagination -->
           <div>
@@ -63,11 +63,10 @@
 
         </div>
         <div class="box2 col-lg-6 col-md-6 col-sm-12">
-            <!-- <router-outlet *ngIf="showForm></router-outlet> -->
+          <!-- Calling the add-form component -->
             <app-add-form *ngIf="showForm"></app-add-form>
+            <!-- Calling the resource-details component -->
             <router-outlet *ngIf="showResourceDetails"></router-outlet>
-            <!-- <app-resource-details *ngIf="showResourceDetails"></app-resource-details> -->
-            <!-- <router-outlet></router-outlet> -->
         </div>
     </div>
 </div>

@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { datamodel } from '../create-project/modelproject';
+import { criticalityModel, datamodel } from '../create-project/modelproject';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -55,5 +55,10 @@ export class ApiService {
   searchProject(projectName: string){
     const params = new HttpParams().set('s', projectName);
     return this.http.get<datamodel[]>("http://localhost:3000/project/searchprojectName/search", {params});
+  }
+
+  //GetCriticality
+  getCriticality(){
+    return this.http.get<criticalityModel[]>("http://localhost:3000/criticality");
   }
 }
