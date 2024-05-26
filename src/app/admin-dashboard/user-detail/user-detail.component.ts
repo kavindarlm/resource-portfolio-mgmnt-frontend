@@ -25,6 +25,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     {
       user_name: '',
       user_email: '',
+      user_role: '',
       user_id: 0
     };
 
@@ -75,11 +76,15 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
   // Function to edit the user details
   editUserDetail() {
-    if(confirm('Are you sure you want to edit this user?'))
+    if(confirm('Are you sure you want to edit this user?')){
     this.dashboardService.editUser(this.userid, this.userForm).subscribe((res) => {
       console.log(res);
       this.sharedService.refreshUserList();
-    });
+      this.editUserFunctions();
+    });}
+    else{
+      this.getUserFunctions();
+    }
   }
 
   // Function to delete the user details
