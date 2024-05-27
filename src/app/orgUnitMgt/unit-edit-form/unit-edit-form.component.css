@@ -1,0 +1,43 @@
+.formBox {
+    float: inline-start;
+    padding-left: 2%;
+    padding-right: 2%;
+    border: 1px #ced2d9 solid;
+    border-radius: 5px;
+    position: relative;
+}
+
+.form-label {
+    color: #1e3895e1;
+    font-weight: 500;
+}
+
+::placeholder {
+  color: #c3c0ce;
+}
+
+.form-group label {
+    display: block;
+}
+
+.form-group .form-control,
+.form-group .form-select {
+  display: inline;
+}
+
+.form-group .form-control,
+.form-group .form-select {
+  width: 75%;
+}
+
+.form-group .form-label {
+  margin-right: 20px;  
+}
+
+.cancelButton {
+    float: left;
+}
+
+.editButton {
+    float: right;
+}

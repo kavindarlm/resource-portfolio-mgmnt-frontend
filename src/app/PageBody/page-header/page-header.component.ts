@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { SidebarheaderServiceService } from '../side-bar-header-service/sidebarheader-service.service';
 
 @Component({
   selector: 'app-page-header',
@@ -8,11 +9,15 @@ import { AuthService } from '../../services/auth.service';
 })
 export class PageHeaderComponent {
   greeting!: string;
+  username!: string;
+
+  constructor( private visibilityService: SidebarheaderServiceService) {}
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.setGreeting();
+    this.username = 'John Doe';
   }
   
   setGreeting() {
@@ -30,5 +35,15 @@ export class PageHeaderComponent {
 
   logout() {
     this.authService.logout();
+  }
+
+  isSubMenuVisible: boolean = false;
+  toggleSubMenu() {
+    this.isSubMenuVisible = !this.isSubMenuVisible;
+  }
+
+  toggleComponentOne() {
+    this.visibilityService.toggleEditPasswardComponent();
+    this.toggleSubMenu()
   }
 }

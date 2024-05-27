@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="unitList col-md-2 col-lg-2 col-sm-4 mt-3">
+            <div class="table-container">
+                <div class="d-flex justify-content-center mt-2">
+                    <div class="border rounded text-center col-10 mb-3 mt-1 pt-1 pb-1 text-white bg-primary ">Unit List
+                    </div>
+                </div>
+
+                <div class="table-data">
+                    <div *ngFor="let unit of orgunits " class="btns">
+                        <button class="btn unit-button" (click)="showUnitDetails(unit)">{{unit.unitName}}</button>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="addButton" (click)="showcomponent()">New Unit</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="unitForms col-md-9 col-lg-9 col-sm-12">
+            <app-unit-form *ngIf="showForm"></app-unit-form>
+            <router-outlet></router-outlet>
+            <app-unit-details *ngIf="selectedUnit" [unit]="selectedUnit"></app-unit-details>
+            <div class="unitTree mt-3">
+                <app-unit-tree></app-unit-tree>
+            </div>
+            
+        </div>
+
+        <!-- <div class="unitTree col-md-9 col-lg-9 col-sm-12">
+            <app-unit-tree></app-unit-tree>
+        </div> -->
+
+
+
+
+
+
+    </div>
+
+</div>

@@ -9,7 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ApiService } from '../service/api.service';
-import { datamodel } from './modelproject';
+import { criticalityModel, datamodel } from './modelproject';
 import { ProjectListComponent } from '../project-list/project-list.component';
 import { Router } from '@angular/router';
 import { error } from 'console';
@@ -25,6 +25,7 @@ import { timeout } from 'rxjs';
 export class CreateProjectComponent implements OnInit {
   projectform!: FormGroup;
   submited = false;
+  criticalityType: undefined| criticalityModel[];
   constructor(
     private formbulider: FormBuilder,
     private api: ApiService,
@@ -37,16 +38,19 @@ export class CreateProjectComponent implements OnInit {
       projectName: ['', Validators.required],
       projectStartDate: ['', Validators.required],
       projectEndDate: ['', Validators.required],
-      criticality: ['', Validators.required],
+      criticality_id: ['', Validators.required],
       projectManager: ['', Validators.required],
       deliveryManager: ['', Validators.required],
       projectDescription: ['', [Validators.required, Validators.minLength(3)]],
     });
+
+    this.getCriticality();
   }
 
   //Add Project function
   addProject(data: datamodel) {
     this.submited = true;
+    console.log('Project Data:', data);
     if (this.projectform.invalid) {
       alert('Form Invalid');
       return;
@@ -74,6 +78,19 @@ export class CreateProjectComponent implements OnInit {
       'Created Project',
       {
         timeOut: 3000,
+      }
+    );
+  }
+
+  // Get criticality
+  getCriticality() {
+    this.api.getCriticality().subscribe(
+      (res) => {
+        console.log('Criticality:', res);
+        this.criticalityType = res;
+      },
+      (error) => {
+        console.error('Failed to fetch criticality:', error);
       }
     );
   }
