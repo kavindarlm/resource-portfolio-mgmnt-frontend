@@ -1,0 +1,60 @@
+<div class="border rounded container">
+    <div class="row">
+        <div class="col-10">
+            <div class="p-2 mt-3 mb-2 bg-primary text-white text-center border rounded">Allocated Resource Information
+            </div>
+        </div>
+        <div class="col-2">
+            <button class="border btn shadow-none bd-highlight shadow p-2 mb-3 w-100 mt-3 Hover">
+                <i class="bi bi-x"></i>
+            </button>
+        </div>
+    </div>
+
+    <div>
+        <div class="col rounded border border-4 ms-2 p-3 mb-2 text-center">
+            <i class="bi bi-person"></i>
+            <div>{{ resourceDetails.resourceId }}</div>
+            <div class="text-primary">{{ resourceDetails.resourceName }}</div>
+            <div class="text-black-50">{{ resourceDetails.job_role?.roleName }}</div>
+        </div>
+    </div>
+
+    <!-- <div class="row mb-1" *ngFor="let task of tasks; let i = index">
+        <div class="col-4 text-center">{{ task.projectName }}</div>
+        <div class="col-3 ms-1 text-center">{{ task.taskName }}</div>
+        <div class="col-2 text-center">{{ task.taskAllocationPercentage }}</div>
+        <div class="col-2 text-center">
+            <button type="button" class="btn btn-outline-danger">
+                <i class="bi bi-trash"></i>
+            </button>
+        </div>
+    </div> -->
+    <div class="row mb-1" *ngFor="let task of tasks; let i = index">
+        <div class="col-4 text-center">{{ task.projectName }}</div>
+        <div class="col-3 ms-1 text-center">
+            <select [(ngModel)]="task.taskName" class="form-select">
+                <!-- Default value is the current task.taskName -->
+                <option *ngFor="let taskName of projectTaskNames" [value]="taskName">
+                    {{ taskName }}
+                </option>
+            </select>
+        </div>
+        <div class="col-2 text-center">{{ task.taskAllocationPercentage }}</div>
+        <div class="col-2 text-center">
+            <button type="button" class="btn btn-outline-danger">
+                <i class="bi bi-trash"></i>
+            </button>
+        </div>
+    </div>
+     
+
+
+    <div class="d-flex justify-content-center mb-2 mt-2">
+        <button class="btn btn-outline-primary Hover" type="button">Edit Percentage</button>
+    </div>
+
+
+
+    
+</div>

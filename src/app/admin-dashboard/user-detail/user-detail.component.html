@@ -28,13 +28,13 @@
                     </div>
                 </form>
             </div>
-            <div class="d-flex justify-content-center flex-column col-lg-12 col-md-12 col-sm-12 mt-3">
+            <div class="d-flex justify-content-center flex-column col-lg-12 col-md-12 col-sm-12 mt-3" *ngIf="userForm.user_role=== 'user'">
                 <app-function-management></app-function-management>
             </div>
             <div class="row container">
                 <div class="col d-flex justify-content-start">
                     <button type="submit" class="btn btn-outline-primary mt-3 custom-button btn-sm"
-                        (click)="[editUserDetail(), editUserFunctions()]">Edit User</button>
+                        (click)="[editUserDetail()]">Edit User</button>
                 </div>
                 <div class="col d-flex justify-content-end">
                     <button type="submit" class="btn btn-outline-danger mt-3 btn-sm" (click)="deleteUserDetail()">Delete

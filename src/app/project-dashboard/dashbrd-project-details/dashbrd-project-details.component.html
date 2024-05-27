@@ -1,16 +1,65 @@
 <div>
     <div class="container border py-2 rounded">
-        <!-- <div class="d-flex justify-content-center align-items-center">
-        <div class="border rounded text-center col-10 mb-3 mt-1 pt-1 pb-1 text-primary">Transport service App</div>
-        </div> -->
         <div class="position-relative w-100">
             <hr class="position-absolute w-100 left-0 mt-4" style="border-top: 1px solid rgb(95, 95, 95); z-index: 1;">
+            <button type="button" class="btn btn-outline-primary btn-sm close position-absolute top-0 end-0 me-1 py-0"
+                aria-label="Close" (click)="close()">
+                <span aria-hidden="true">&times;</span>
+            </button>
             <div class="border rounded-circle justify-content-center align-items-center d-flex position-relative"
-                style="z-index: 2; width: 50px; height: 50px; background-color: rgb(255, 97, 97);">
-                <span><i class="bi bi-snow2 fs-4"></i></span>
+                [ngClass]="projectData?.criticality" style="z-index: 2; width: 40px; height: 40px;">
+                <span><i class="bi bi-snow2"></i></span>
             </div>
         </div>
-        <div class="font-color fs-6">Transport Service App</div>
-        
+        <div class="font-color fs-6 text-capitalize">{{projectData?.projectName}} </div>
+        <div class="row mt-2 text-black-50 small-text">
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="text-start">
+                    <i class="bi bi-calendar4 me-2"></i>Start
+                    <p>{{projectData?.projectStartDate }}</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="text-start">
+                    <i class="bi bi-calendar4 me-2"></i>End
+                    <p>{{ projectData?.projectEndDate}}</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="text-start">
+                    <i class="bi bi-person-workspace me-2"></i>No. of staff
+                    <p class="font-color text-center">10</p>
+                </div>
+            </div>
+        </div>
+        <div class="small-text font-color">
+            <p class="fw-normal text-capitalize">Project Manager : {{projectData?.projectManager}}</p>
+        </div>
+        <div class="row font-color fs-6">
+            <div class="col-6">
+              <div class="small-text">
+                <div class="row lh-1" *ngFor="let name of names.slice(0, 10)">
+                  <div class="col-lg-1 col-md-1 col-sm-1">
+                    <i class="bi bi-person-circle" style="color: rgb(8, 140, 255);"></i>
+                  </div>
+                  <div class="col-lg-10 col-md-10 col-sm-10">
+                    <p class="fw-normal text-capitalize">{{ name }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="small-text">
+                <div class="row lh-1" *ngFor="let name of names.slice(10)">
+                  <div class="col-lg-1 col-md-1 col-sm-1">
+                    <i class="bi bi-person-circle" style="color: rgb(8, 140, 255);"></i>
+                  </div>
+                  <div class="col-lg-10 col-md-10 col-sm-10">
+                    <p class="fw-normal text-capitalize">{{ name }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
     </div>
 </div>

@@ -1,28 +1,27 @@
 // Object model for the team form
 export interface JobRole {
-  role_id: number;
-  role_name: string;
+  roleId: number;
+  roleName: string;
   
 }
 
 export interface OrgUnit {
-  org_unit_id: number;
-  unit_name: string;
+  unitId: number;
+  unitName: string;
  
 }
 
+// In team-form.model.ts
 export interface Resource {
-  resourceId: any;
-  id: number;
-  resourceName: string;
-  jobRole: JobRole;
-  orgUnit: OrgUnit;
-  teamId: number;
+  resourceId: string;
+  roleName: string; // was jobRole
+  unitName: string; // was orgUnit
+  teamId?: number;
 }
 
 export interface dataModel {
-  id: number;
-  teamName: string;
-  description: string;
+  teamId: number;
+  team_Name: string;
+  team_description: string;
   resources: Resource[];
 }

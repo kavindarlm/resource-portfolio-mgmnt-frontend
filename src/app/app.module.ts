@@ -38,7 +38,6 @@ import { CreateFormComponent } from './Sprint_Management/create-form/create-form
 import { SprintMgtComponent } from './Sprint_Management/sprint-mgt/sprint-mgt.component';
 import { Ng2SearchPipe } from 'ng2-search-filter';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { FilterComponent } from './Sprint_Management/Reusable_Components/filter/filter.component';
 import { AvailableResourceListComponent } from './Sprint_Management/available-resource-list/available-resource-list.component';
 import { AvailabiilityComponent } from './Sprint_Management/availabiility/availabiility.component';
 import { AddedResourceListComponent } from './Sprint_Management/added-resource-list/added-resource-list.component';
@@ -49,7 +48,7 @@ import { ResourceDetailsComponent } from './resourceMgt/resource-details/resourc
 import { ResourceEditFormComponent } from './resourceMgt/resource-edit-form/resource-edit-form.component';
 import { FilterPipe } from './team-management/filter.pipe';
 import { UpdateComponent } from './team-management/update/update.component';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { TeamListComponent } from './team-management/team-list/team-list.component';
 import { TeamFormComponent } from './team-management/team-form/team-form.component';
 import { ResourceTableComponent } from './team-management/resource-table/resource-table.component';
@@ -79,8 +78,20 @@ import { ResourceListComponent } from './calender-management/resource-list/resou
 import { CommonCalenderComponent } from './calender-management/common-calender/common-calender.component';
 import { ResourceLeaveComponent } from './calender-management/resource-leave/resource-leave.component';
 import { ResourceCalenderComponent } from './calender-management/resource-calender/resource-calender.component';
-
-
+import { AuthInterceptor } from './services/auth.interceptor';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AllocatedResourceInformationComponent } from './Sprint_Management/allocated-resource-information/allocated-resource-information.component';
+import { UpdatePercentageComponent } from './Sprint_Management/update-percentage/update-percentage.component';
+import { DeleteResourceAllocationComponent } from './Sprint_Management/delete-resource-allocation/delete-resource-allocation.component';
+import { UpdateTaskInSprintComponent } from './Sprint_Management/update-task-in-sprint/update-task-in-sprint.component';
+import { UnitDetailsComponent } from './orgUnitMgt/unit-details/unit-details.component';
+import { UnitEditFormComponent } from './orgUnitMgt/unit-edit-form/unit-edit-form.component';
+import { UnitFormComponent } from './orgUnitMgt/unit-form/unit-form.component';
+import { UnitListComponent } from './orgUnitMgt/unit-list/unit-list.component';
+import { UnitNodeComponent } from './orgUnitMgt/unit-node/unit-node.component';
+import { UnitTreeComponent } from './orgUnitMgt/unit-tree/unit-tree.component';
+import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
+import { ResetPasswordComponent } from './PageBody/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -115,7 +126,6 @@ import { ResourceCalenderComponent } from './calender-management/resource-calend
     SearchBarComponent,
     CreateFormComponent,
     SprintMgtComponent,
-    FilterComponent,
     AvailableResourceListComponent,
     AvailabiilityComponent,
     AddedResourceListComponent,
@@ -147,14 +157,20 @@ import { ResourceCalenderComponent } from './calender-management/resource-calend
     ResourceListComponent,
     CommonCalenderComponent,
     ResourceLeaveComponent,
-    UpdateComponent,
     ResourceCalenderComponent,
- 
-    
-    
-    
-  
-    
+    PageNotFoundComponent,
+    AllocatedResourceInformationComponent,
+    UpdatePercentageComponent,
+    DeleteResourceAllocationComponent,
+    UpdateTaskInSprintComponent,
+    UnitDetailsComponent,
+    UnitEditFormComponent,
+    UnitFormComponent,
+    UnitListComponent,
+    UnitNodeComponent,
+    UnitTreeComponent,
+    EditTaskComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -174,7 +190,8 @@ import { ResourceCalenderComponent } from './calender-management/resource-calend
 
   providers: [
     provideClientHydration(),
-    provideHttpClient() 
+    provideHttpClient(),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })

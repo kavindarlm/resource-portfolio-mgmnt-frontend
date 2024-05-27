@@ -50,15 +50,13 @@
             <div class="form-group row mt-2 mb-3">
                 <label for="ProjectCriticality" class="col-3 ps-5 fst-normal text-primary">Criticality :</label>
                 <div class="col-9">
-                    <select id="inputState" class="form-control" required id="criticality" formControlName="criticality"
-                        [ngClass]="{'is-invalid': projectform.controls['criticality'].invalid && projectform.controls['criticality'].touched}">
+                    <select class="form-control" required id="criticality_id" formControlName="criticality_id"
+                        [ngClass]="{'is-invalid': projectform.controls['criticality_id'].invalid && projectform.controls['criticality_id'].touched}">
                         <option disabled selected value="">Select Project Criticality</option>
-                        <option>High</option>
-                        <option>Medium</option>
-                        <option>Low</option>
+                        <option *ngFor="let criticality of criticalityType" [value]="criticality.criticality_id">{{criticality.type}}</option>
                     </select>
                     <div class="invalid-feedback"
-                        *ngIf="projectform.controls['criticality'].invalid && projectform.controls['criticality'].touched">
+                        *ngIf="projectform.controls['criticality_id'].invalid && projectform.controls['criticality_id'].touched">
                         Project criticality is required
                     </div>
                 </div>
