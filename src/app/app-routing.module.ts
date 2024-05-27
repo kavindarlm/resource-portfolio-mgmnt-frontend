@@ -41,6 +41,7 @@ import { UnitNodeComponent } from './orgUnitMgt/unit-node/unit-node.component';
 import { UnitFormComponent } from './orgUnitMgt/unit-form/unit-form.component';
 import { UnitDetailsComponent } from './orgUnitMgt/unit-details/unit-details.component';
 import { UnitEditFormComponent } from './orgUnitMgt/unit-edit-form/unit-edit-form.component';
+import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -68,7 +69,11 @@ const routes: Routes = [
           { path: 'projectTaskDetails/:id',component: ProjectDetailsComponent,
             children: [
               { path: 'newTask/:id', component: CreateNewtaskComponent },
-              { path: 'updatetask/:id', component: UpdateTaskComponent}
+              { path: 'updatetask/:id', component: UpdateTaskComponent,
+                children: [
+                  {path: 'updateTask/:id', component: EditTaskComponent}
+                ]
+              }
             ],
           },
         ],

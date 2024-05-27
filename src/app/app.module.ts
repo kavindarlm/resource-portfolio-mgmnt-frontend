@@ -77,6 +77,8 @@ import { UnitFormComponent } from './orgUnitMgt/unit-form/unit-form.component';
 import { UnitListComponent } from './orgUnitMgt/unit-list/unit-list.component';
 import { UnitNodeComponent } from './orgUnitMgt/unit-node/unit-node.component';
 import { UnitTreeComponent } from './orgUnitMgt/unit-tree/unit-tree.component';
+import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
+import { ResetPasswordComponent } from './PageBody/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -142,6 +144,8 @@ import { UnitTreeComponent } from './orgUnitMgt/unit-tree/unit-tree.component';
     UnitListComponent,
     UnitNodeComponent,
     UnitTreeComponent,
+    EditTaskComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

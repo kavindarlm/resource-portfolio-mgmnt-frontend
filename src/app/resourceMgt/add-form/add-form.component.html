@@ -9,7 +9,7 @@
                     <p class="font-color2">Name :</p>
                     <input type="text" formControlName="resourceName"
                         [ngClass]="{'is-invalid': resourceForm.controls['resourceName'].invalid && resourceForm.controls['resourceName'].touched}"
-                        class="form-control inputBox" id="resourceName" placeholder="Enter Name">
+                        class="form-control inputBox" id="resourceName" placeholder="Enter Name" (keyup)="capitalizeFirstLetter()">
                 </div>
             </div>
             <div class="form-group mb-3">

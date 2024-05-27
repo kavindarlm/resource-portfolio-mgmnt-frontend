@@ -8,6 +8,7 @@ import { throwError } from 'rxjs';
 import { JobRoleService } from '../../shared/sevices_resourceMgt/jobRole.service';
 import { OrgUnitService } from '../../shared/sevices_resourceMgt/orgUnit.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 // import { v4 as uuidv4 } from 'uuid';
 
 
@@ -29,12 +30,14 @@ export class AddFormComponent implements OnInit {
               private formBuilder: FormBuilder, 
               private jobRoleService: JobRoleService, 
               private orgUnitService: OrgUnitService,
-              private router: Router) { } // Have to include the HttpClient Module in app.model too
+              private router: Router,
+              private toaster: ToastrService) { } 
   ngOnInit(): void {
 
     this.loadJobRoles();// calling the loadJobRoles Method
     this.loadOrgUnits();
 
+    //Call generate Id method and store the id in resourceId
     const resourceId = this.generateUniqueId();
 
     this.resourceForm = this.formBuilder.group({
@@ -66,7 +69,7 @@ export class AddFormComponent implements OnInit {
     )
     .subscribe((res: any) => {
       debugger;
-      this.jobroles = res; // Assuming the response is directly the array of resources
+      this.jobroles = res; // Assuming the response is directly the array of jobroles
     },
       (error) => {
         console.error('Error:', error);
@@ -86,7 +89,7 @@ export class AddFormComponent implements OnInit {
     )
     .subscribe((res: any) => {
       debugger;
-      this.orgunits = res; // Assuming the response is directly the array of resources
+      this.orgunits = res; // Assuming the response is directly the array of orgunits
     },
       (error) => {
         console.error('Error:', error);
@@ -112,21 +115,30 @@ export class AddFormComponent implements OnInit {
     .subscribe((res => {
       console.log(data);
       this.resourceForm.reset();
+      this.addsuccesemassege(data.resourceId);
       this.resourceService.resourceListUpdated.emit(); // Emit the event
       this.router.navigate(['pages-body/first-view']);
     }))
   }
 
-}
+    //This is for success message
+    addsuccesemassege(resourceId: string) {
+      this.toaster.success(
+        `${resourceId} Added successfully`,
+        'Created Resource',
+        {
+          timeOut: 3000,
+        }
+      );
+    }
 
-// this.api.addProject(data).subscribe((res) => {
-//   alert('Form Submitted Successfully');
-//   console.log('Project added successfully:', res);
-//   this.projectform.reset();
-//   this.router.navigate(['pages-body/projectlist']);
-// },
-// (error) => {
-//   alert('Error adding project:' + error.message);
-//   console.log('Error adding project:', error);
-// });
-// }
+    capitalizeFirstLetter() {
+      const resourceNameControl = this.resourceForm.get('resourceName');
+      if (resourceNameControl && resourceNameControl.value && resourceNameControl.value.length > 1) {
+        let words = resourceNameControl.value.split(' ');
+        words = words.map((word: string) => word.charAt(0).toUpperCase() + word.slice(1));
+        resourceNameControl.setValue(words.join(' '));
+      }
+    }
+
+}
