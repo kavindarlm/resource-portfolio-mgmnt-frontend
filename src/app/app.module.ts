@@ -71,6 +71,12 @@ import { TaskProjectListComponent } from './TaskManagement/task-project-list/tas
 import { SummaryListComponent } from './project-dashboard/summary-list/summary-list.component';
 import { DashbrdProjectListComponent } from './project-dashboard/dashbrd-project-list/dashbrd-project-list.component';
 import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-project-details/dashbrd-project-details.component';
+import { UnitDetailsComponent } from './orgUnitMgt/unit-details/unit-details.component';
+import { UnitEditFormComponent } from './orgUnitMgt/unit-edit-form/unit-edit-form.component';
+import { UnitFormComponent } from './orgUnitMgt/unit-form/unit-form.component';
+import { UnitListComponent } from './orgUnitMgt/unit-list/unit-list.component';
+import { UnitNodeComponent } from './orgUnitMgt/unit-node/unit-node.component';
+import { UnitTreeComponent } from './orgUnitMgt/unit-tree/unit-tree.component';
 import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
 import { ResetPasswordComponent } from './PageBody/reset-password/reset-password.component';
 
@@ -132,6 +138,12 @@ import { ResetPasswordComponent } from './PageBody/reset-password/reset-password
     SummaryListComponent,
     DashbrdProjectListComponent,
     DashbrdProjectDetailsComponent,
+    UnitDetailsComponent,
+    UnitEditFormComponent,
+    UnitFormComponent,
+    UnitListComponent,
+    UnitNodeComponent,
+    UnitTreeComponent,
     EditTaskComponent,
     ResetPasswordComponent,
   ],
