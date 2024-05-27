@@ -1,3 +1,19 @@
 .font-color {
-    color: #1E3895;
-  }
+  color: #1E3895;
+}
+
+.small-text {
+  font-size: 0.85rem;
+}
+
+.High {
+  background-color: rgb(255, 97, 97);
+}
+
+.Medium {
+  background-color: rgb(255, 218, 97);
+}
+
+.Low {
+  background-color: rgb(97, 229, 255);
+}

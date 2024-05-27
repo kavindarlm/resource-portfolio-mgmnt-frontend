@@ -1,2 +1,10 @@
+/* Button hover color change */
+.Hover:hover {
+    background: #1e3895;
+    color: #ffffff;
+    border-color: #1e3895;
+}
 
-
+.text {
+    color: #1e3895;
+}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { GeneralService } from '../shared/general.service';
 import { ApiService } from '../shared/api.service';
 import { Router } from '@angular/router';
@@ -10,25 +10,27 @@ import { dataModel } from '../team-form/team-form.model';
   templateUrl: './delete-popup.component.html',
   styleUrls: ['./delete-popup.component.css']
 })
+
 export class DeletePopupComponent {
-  public dataid!: number;
-  public teamData: dataModel = { id:0 , teamName: '', description: '', resources: [] };
+  public dataid!: number; 
+  public teamData: dataModel = { teamId:0 , team_Name: '', team_description: '', resources: [] };
+  @Input() team_Id: number = 0;
+  errorMessage: string = ''; // Define the errorMessage property
 
   constructor(public generalservice: GeneralService,
     private api: ApiService,
     private router: Router
     ){}
 
-    errorMessage: string = ''; // Define the errorMessage property
-
+   
     // Method to delete a team
-    onDeleteTeam(): void {
-      const teamId = this.teamData.id;
-    
-      this.api.deleteTeams(teamId).subscribe(
+    onDeleteTeam(team_Id: number): void {
+      this.api.deleteTeams(team_Id).subscribe(
         response => {
           console.log('Team deleted', response);
-          this.errorMessage = ''; 
+          this.errorMessage = '';
+          this.generalservice.refreshTeamList();
+          this.router.navigate(['/pages-body/teamlistcomponent']);
         },
         error => {
           console.error('Error deleting team', error);
@@ -36,6 +38,4 @@ export class DeletePopupComponent {
         }
       );
     }
-
-
 }

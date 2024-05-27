@@ -4,13 +4,25 @@
       <img src="assets/image/taprologo.png" width="30" height="30" class="d-inline-block align-top border" alt="">
       TAPRO TECHNOLOGIES
     </a>
+    <button (click)="logout()">Logout</button>
     <div class="d-flex me-3 align-items-center">
       <div class="fs-5 me-3 text-capitalize fw-medium">{{greeting}}</div>
       <div class="dropdown">
-        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-          aria-expanded="false" style="color: aliceblue;">
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" style="color: aliceblue;"
+          (click)="toggleSubMenu()">
           <span><i class="bi bi-person-circle fs-4" style="color: aliceblue;"></i></span>
         </button>
+
+      </div>
+      <div class="sub-menu-wrap" [ngClass]="{'hide': !isSubMenuVisible}">
+        <div class="sub-menu">
+          <div class="user-info">
+            <div class="username">{{username}}</div>
+            <hr>
+            <button class="btn btn-outline-primary w-100 mt-3 custom-button btn-sm" (click)="toggleComponentOne()">Edit Password</button>
+            <button class="btn btn-outline-danger w-100 mt-3 btn-sm">Logout</button>
+          </div>
+        </div>
       </div>
     </div>
   </nav>

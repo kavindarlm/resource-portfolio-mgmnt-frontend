@@ -6,8 +6,8 @@
                 <span class="input-group-text border-0" id="search-addon">
                     <i class="bi bi-filter"></i>
                 </span>
-                <input type="input" class="form-control rounded small-text" placeholder="Project Criticality" aria-label="Search"
-                    aria-describedby="search-addon" />
+                <input type="input" class="form-control rounded small-text" placeholder="Project Criticality"
+                    aria-label="Search" aria-describedby="search-addon" />
             </div>
         </div>
         <div class="col-xl-10 col-lg-10">
@@ -26,35 +26,37 @@
         <div [ngClass]="{'col-6': isViewMoreClicked, 'col-12': !isViewMoreClicked}">
             <div class="row ms-1 me-1 mb-2 row-cols-lg-4 row-cols-md-2">
                 <div class="card-container" [ngClass]="{'col-lg-6': isViewMoreClicked, 'col-lg-3': !isViewMoreClicked}"
-                    *ngFor="let project of projects| slice: (currentPage-1) * itemsPerPage : currentPage * itemsPerPage; let i = index">
+                    *ngFor="let project of projectdata| slice: (currentPage-1) * itemsPerPage : currentPage * itemsPerPage; let i = index">
                     <div class="card mb-3">
-                        <button class="btn btn-primary l-bg-blue-dark btn-sm view-button" (click)="viewMore()">View
+                        <button class="btn fw-medium small-text font-color btn-sm view-button" (click)="viewMore()"
+                            routerLink="dashboard-projectdetails/{{project.projectid}}">View
                             More</button>
                         <div class="card-body py-2">
                             <hr class="position-absolute w-100 left-0"
                                 style="top: 10%; border-top: 1px solid rgb(95, 95, 95); margin-left: -15px;">
                             <div class="border rounded-circle justify-content-center align-items-center d-flex position-relative"
-                                [style.background-color]="project.color" style="z-index: 1; width: 50px; height: 50px;">
+                                [ngClass]="project.criticality" style="z-index: 1; width: 50px; height: 50px;">
                                 <span><i class="bi bi-snow2 fs-4"></i></span>
                             </div>
-                            <div class="fs-6 fw-semibold font-color mt-1 text-capitalize">{{ project.title }}</div>
-                            <div class="progress mt-2">
+                            <div class="fs-6 fw-semibold font-color mt-1 text-capitalize">{{ project.projectName }}
+                            </div>
+                            <!-- <div class="progress mt-2">
                                 <div class="progress-bar l-bg-cyan" role="progressbar"
                                     [style.width]="project.progress + '%'" [attr.aria-valuenow]="project.progress"
                                     aria-valuemin="0" aria-valuemax="100">{{
                                     project.progress }}%</div>
-                            </div>
+                            </div> -->
                             <div class="row mt-2 text-black-50 small-text">
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="text-start">
                                         <i class="bi bi-calendar4 me-2"></i>Start
-                                        <p>{{ project.startDate }}</p>
+                                        <p>{{ project.projectStartDate }}</p>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="text-end">
                                         End<i class="bi bi-calendar4 ms-2"></i>
-                                        <p>{{ project.endDate }}</p>
+                                        <p>{{ project.projectEndDate}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -92,9 +94,9 @@
             </div>
         </div>
 
-        <div class="col-lg-6" *ngIf="isViewMoreClicked">
-            <app-dashbrd-project-details></app-dashbrd-project-details>
-          </div>
-
+        <div class="col-lg-6">
+            <!-- <app-dashbrd-project-details></app-dashbrd-project-details> -->
+            <router-outlet></router-outlet>
+        </div>
     </div>
 </div>

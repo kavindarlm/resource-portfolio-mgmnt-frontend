@@ -1,0 +1,21 @@
+<div class="container-fluid">
+    <div class="row no-gutters">
+        <div class="col-2">
+            
+            <div class="typeBox float left border-top ">
+                <button class="border rounded text-center col-12  mt-2 pt-1 pb-1 text-white bg-primary">Type</button>
+                
+            <hr/>
+                <app-calender-button [text]="'Global Calender'"  routerLink="calendermainbox"></app-calender-button>
+                <app-calender-button [text]="'Resource Calender'"  routerLink="resourcelist"></app-calender-button>
+            </div>
+
+        </div>
+
+        <div class="col-10">
+           <router-outlet></router-outlet>
+        </div>
+
+    </div>
+</div>
+      
