@@ -1,0 +1,32 @@
+<div class="row mx-auto mb-5 mt-3">
+
+  <div class="col">
+    <div class="gap-2 col rounded text mx-auto mb-5 mt-3">
+      <select class="form-select" [(ngModel)]="searchText">
+        <option disabled selected>{{ label1 }}</option>
+        <option *ngFor="let option1 of options1" [value]="option1">{{ option1 }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class=" gap-2 col rounded text mx-auto mb-5 mt-3">
+      <select class="form-select" [(ngModel)]="searchText">
+        <option disabled selected>{{ label2 }}</option>
+        <option *ngFor="let option2 of options2" [value]="option2">{{ option2 }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="col-auto mx-auto mb-5 mt-3">
+    <div class="rounded">
+      <button class="btn shadow-none" (click)="filterContents()">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </div>
+
+
+  <app-tables [HeadArray]="hArray" [GridArray]="filteredContents"></app-tables>
+
+</div>

@@ -1,100 +1,90 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, forkJoin, mergeMap, map } from 'rxjs';
-import { sprintApiService } from '../services/sprintApi.service';
-import { ResourceService } from '../../team-management/shared/resource.service';
-import { ResourceAllocationService } from '../services/resource-allocation.service';
+import { SprintManagementService } from '../../services/sprint-management.service';
+import { ResourceAllocationService } from '../../services/resource_allocation.service';
+import { ResourceService } from '../../services/resource.service';
 
 @Component({
   selector: 'app-sprint-mgt',
   templateUrl: './sprint-mgt.component.html',
-  styleUrls: ['./sprint-mgt.component.css']
+  styleUrl: './sprint-mgt.component.css'
 })
 export class SprintMgtComponent implements OnInit {
-  // Parameters to hold sprint data
-  sprint_id: string = '';
+
+  CloseTab() {
+
+  }
+
+  hArray = ['Resource_ID', 'Team', 'Job_Role', 'Org_Unit', 'Availability'];
+
+  resources: any[] = [];
+  resourceIds: number[] = [];
+
   sprintName: string = '';
   startDate: string = '';
   endDate: string = '';
 
-  // Define the headers and resource data array
-  HeadArray = ['Resource_ID', 'Team', 'Job_Role', 'Org_Unit', 'Availability'];
-  ResourcesOfSprint: any[] = [];
 
-  clickedResourceId: string | null = null;
-
-  // Constructor injection
   constructor(
     private route: ActivatedRoute,
+    private sprintService: SprintManagementService,
     private router: Router,
-    private sprintApiService: sprintApiService,
-    private resourceService: ResourceService,
-    private resourceAllocationService: ResourceAllocationService
-  ) { }
+    private resourceAllocationService: ResourceAllocationService,
+    private resourceService: ResourceService) { }
 
   ngOnInit(): void {
-    // Subscribe to route parameters
     this.route.params.subscribe(params => {
-      this.sprint_id = params['id']; // Retrieve sprint ID from route parameter
-
-      // Fetch sprint data
-      this.sprintApiService.findOneById(parseInt(this.sprint_id)).subscribe(
-        (sprint: any) => {
-          // Assign sprint data to component properties
-          this.sprintName = sprint.sprint_name;
-          this.startDate = sprint.start_Date;
-          this.endDate = sprint.end_Date;
-
-          // Fetch resource allocation data and populate ResourcesOfSprint
-          this.fetchAndPopulateResourcesOfSprint();
-        },
-        (error: any) => {
-          // Handle error
-          console.error('Error fetching sprint data:', error);
-        }
-      );
+      this.sprintName = params['Sname'];
+      this.getSprintDetails(this.sprintName);
     });
   }
 
-  // Fetch and populate the ResourcesOfSprint array
-  fetchAndPopulateResourcesOfSprint(): void {
-    this.resourceAllocationService.getResourceAllocationBySprintId(parseInt(this.sprint_id))
-      .pipe(
-        // Extract resource IDs and fetch resources data
-        mergeMap((data: any[]) => {
-          const resourceIds = data.map(allocation => allocation.resource.resourceId);
-          const resourceObservables: Observable<any>[] = resourceIds.map(resourceId => this.resourceService.findOneResource(resourceId));
-          return forkJoin(resourceObservables);
-        }),
-        // Map over fetched resources to extract the desired properties
-        map((resources: any[]) => {
-          return resources.map(resource => ({
-            Resource_ID: resource.resourceId,
-            Team: resource.job_role.team_name,
-            Job_Role: resource.job_role.roleName,
-            Org_Unit: resource.org_unit.unitName,
-            Availability: 'y'
-          }));
-        })
-      )
-      .subscribe(
-        (resourcesOfSprint: any[]) => {
-          // Assign the fetched and transformed data to ResourcesOfSprint
-          this.ResourcesOfSprint = resourcesOfSprint;
-          console.log('ResourcesOfSprint:', this.ResourcesOfSprint);
-        },
-        error => {
-          console.error('Error fetching and populating ResourcesOfSprint:', error);
-        }
-      );
+
+  getSprintDetails(sprintName: string): void {
+    // Clear the resources array each time the sprint name changes
+    this.resources = [];
+
+    this.sprintService.getSprintDetailsByName(sprintName).subscribe(
+      (data: any) => {
+        this.startDate = data.Start_Date;
+        this.endDate = data.End_Date;
+        const sprintId = data.id;
+
+        // Fetch resource IDs for the sprint ID
+        this.resourceAllocationService.getResourceIdsBySprintId(sprintId).subscribe(
+          (resourceIds: number[]) => {
+            this.resourceIds = resourceIds;
+
+            // Fetch resource details for each resource ID
+            resourceIds.forEach(resourceId => {
+              this.resourceService.getResourceById(resourceId.toString()).subscribe(
+                resourceData => {
+                  // Transform resource data into desired format
+                  const formattedResource = {
+                    Resource_ID: resourceData.resource_id,
+                    Team: resourceData.team_name,
+                    Job_Role: resourceData.role_name,
+                    Org_Unit: resourceData.org_unit_name,
+                    Availability: 'y'
+                  };
+                  // Add the formatted resource data to the resources array
+                  this.resources.push(formattedResource);
+                },
+                error => {
+                  console.error('Error fetching resource data:', error);
+                }
+              );
+            });
+          },
+          error => {
+            console.error('Error fetching resource IDs:', error);
+          }
+        );
+      },
+      error => {
+        console.error('Error fetching sprint details:', error);
+      }
+    );
   }
 
-  // Function to handle row click events and assign the clicked resource ID
-  onRowClick(resourceId: string): void {
-    // Save the clicked resource ID
-    this.clickedResourceId = resourceId;
-
-    // Navigate to the child route using the clicked resource ID
-    this.router.navigate([`allocated-resource/${this.sprint_id}/${resourceId}`], { relativeTo: this.route });
-  }
 }

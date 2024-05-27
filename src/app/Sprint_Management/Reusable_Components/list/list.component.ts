@@ -1,8 +1,7 @@
 import { Component , Input } from '@angular/core';
 import { CreateFormComponent } from '../../create-form/create-form.component';
 import { SprintMgtComponent } from '../../sprint-mgt/sprint-mgt.component';
-import { sprintApiService } from '../../services/sprintApi.service';
-
+import { SprintManagementService } from '../../../services/sprint-management.service';
 
 @Component({
   selector: 'app-list',
@@ -14,17 +13,14 @@ export class ListComponent {
   sprints!: any[];
 
 
-  constructor(private sprintApiService: sprintApiService) {} // Inject the SprintApiService
-
+  constructor(private sprintService: SprintManagementService) {}
 
   ngOnInit(): void {
     this.fetchSprints();
   }
 
-  // Fetch all sprints using SprintApiService
-
   fetchSprints(): void {
-    this.sprintApiService.getAllSprints().subscribe(
+    this.sprintService.getAllSprints().subscribe(
       (data: any[]) => {
         this.sprints = data;
       },
