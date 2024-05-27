@@ -10,6 +10,8 @@ import { throwError } from 'rxjs';
 import { JobRoleService } from '../../shared/sevices_resourceMgt/jobRole.service';
 import { OrgUnitService } from '../../shared/sevices_resourceMgt/orgUnit.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-resource-edit-form',
@@ -31,7 +33,9 @@ export class ResourceEditFormComponent implements OnInit{
               private resourceService: ResourceService, 
               private jobRoleService: JobRoleService, 
               private orgUnitService: OrgUnitService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private toaster: ToastrService,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.loadJobRoles();// calling the loadJobRoles Method
@@ -44,25 +48,14 @@ export class ResourceEditFormComponent implements OnInit{
       unitId: ['']
     });
 
-    // this.route.params.subscribe(params => {
-    //   const resourceId = params['resourceId'];
-    //   this.resourceService.getResource(resourceId).subscribe(
-    //     (res: ResourceModel) => {
-    //       this.selectedResource = res;
-    //       this.setFormData();
-    //     },
-    //     (error) => {
-    //       console.error('Error occurred while fetching resource:', error);
-    //     }
-    //   );
-    // });
-
     this.selectedResource = this.resourceService.getData();
     console.log('Selected Resource:', this.selectedResource);// to check the structure and values of this.selectedResource
     this.setFormData();
+
   }
 
   setFormData() {
+
     this.formValue.patchValue({
       resourceName: this.selectedResource.resourceName,
       resourceId: this.selectedResource.resourceId,
@@ -72,6 +65,7 @@ export class ResourceEditFormComponent implements OnInit{
   }
 
   loadJobRoles() {
+    this.spinner.show();
     this.jobRoleService.getJobRoles()
     .pipe(
       catchError((error) => {
@@ -83,10 +77,11 @@ export class ResourceEditFormComponent implements OnInit{
     .subscribe((res: any) => {
       debugger;
       this.jobroles = res; // Assuming the response is directly the array of resources
+      this.spinner.hide();
     },
       (error) => {
         console.error('Error:', error);
-        alert('An error occurred. Please try again.');
+        // alert('An error occurred. Please try again.');
       }
     );
   }
@@ -120,16 +115,15 @@ export class ResourceEditFormComponent implements OnInit{
         (res: any) => {
           debugger;
           console.log('Resource updated successfully:', res);
-          alert('Resource updated Successfully');
+          // alert('Resource updated Successfully');
+          this.editSucceseMassege(this.selectedResource.resourceId);
           this.formValue.reset();
           this.resourceService.resourceListUpdated.emit(); // Emit the event
           this.router.navigate(['pages-body/first-view']);
-          // this.router.navigate([])
-          // Optionally, you might want to perform additional actions here, such as showing a success message or navigating to another page.
         },
         (error) => {
           console.error('Error occurred while updating resource:', error);
-          // Handle error appropriately, such as displaying an error message to the user.
+          //display an error message to the user.
         }
       );
   }
@@ -138,6 +132,7 @@ export class ResourceEditFormComponent implements OnInit{
     this.resourceService.deleteResource(this.selectedResource.resourceId)
     .subscribe((res:ResourceModel)=> {
       console.log('Resource deleted successfully:', res);
+      this.deleteSucceseMassege(this.selectedResource.resourceId);
       this.formValue.reset();
       this.resourceService.resourceListUpdated.emit(); // Emit the event
       this.router.navigate(['pages-body/first-view']);
@@ -146,6 +141,24 @@ export class ResourceEditFormComponent implements OnInit{
       console.error('Error occurred while deleting resource:', error);
       // Handle error appropriately, such as displaying an error message to the user.
     }
+    );
+  }
+
+  //Delete Success Message
+  deleteSucceseMassege(resourceId: string) {
+    this.toaster.success(
+      `${resourceId} Deleted successfully`,
+      'Resource Deleted Successfully',
+      { timeOut: 3000 }
+    );
+  }
+
+  //Edit Success Message
+  editSucceseMassege(resourceId: string) {
+    this.toaster.success(
+      `${resourceId} Updated successfully`,
+      'Resource Updated Successfully',
+      { timeOut: 3000 }
     );
   }
 

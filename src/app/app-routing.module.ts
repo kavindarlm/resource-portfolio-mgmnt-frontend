@@ -35,10 +35,26 @@ import { AvailabiilityComponent } from './Sprint_Management/availabiility/availa
 import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
 import { ProjectBoardComponent } from './project-dashboard/project-board/project-board.component';
 import { TaskProjectListComponent } from './TaskManagement/task-project-list/task-project-list.component';
+import { CalenderMainBoxComponent } from './calender-management/calender-main-box/calender-main-box.component';
+import { CalenderTypeComponent } from './calender-management/calender-type/calender-type.component';
+import { CommonCalenderComponent } from './calender-management/common-calender/common-calender.component';
+import { ResourceListComponent } from './calender-management/resource-list/resource-list.component';
+import { ResourceLeaveComponent } from './calender-management/resource-leave/resource-leave.component';
 import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-project-details/dashbrd-project-details.component';
 import { AuthGuard } from './guard/auth.guard';
 import { FunctionGuardService } from './guard/function.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AllocatedResourceInformationComponent } from './Sprint_Management/allocated-resource-information/allocated-resource-information.component';
+import { UpdatePercentageComponent } from './Sprint_Management/update-percentage/update-percentage.component';
+import { DeleteResourceAllocationComponent } from './Sprint_Management/delete-resource-allocation/delete-resource-allocation.component';
+import { UpdateTaskInSprintComponent } from './Sprint_Management/update-task-in-sprint/update-task-in-sprint.component';
+import { UnitListComponent } from './orgUnitMgt/unit-list/unit-list.component';
+import { UnitTreeComponent } from './orgUnitMgt/unit-tree/unit-tree.component';
+import { UnitNodeComponent } from './orgUnitMgt/unit-node/unit-node.component';
+import { UnitFormComponent } from './orgUnitMgt/unit-form/unit-form.component';
+import { UnitDetailsComponent } from './orgUnitMgt/unit-details/unit-details.component';
+import { UnitEditFormComponent } from './orgUnitMgt/unit-edit-form/unit-edit-form.component';
+import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -71,10 +87,15 @@ const routes: Routes = [
         canActivate:[FunctionGuardService],
         data : { functionId : 7},
         children: [
-          { path: 'projectTaskDetails/:id',component: ProjectDetailsComponent,
+          {
+            path: 'projectTaskDetails/:id', component: ProjectDetailsComponent,
             children: [
               { path: 'newTask/:id', component: CreateNewtaskComponent },
-              { path: 'updatetask/:id', component: UpdateTaskComponent}
+              { path: 'updatetask/:id', component: UpdateTaskComponent,
+                children: [
+                  {path: 'updateTask/:id', component: EditTaskComponent}
+                ]
+              }
             ],
           },
         ],
@@ -92,6 +113,22 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'calendertypecomponent', component: CalenderTypeComponent,
+        canActivate:[FunctionGuardService],
+        data : { functionId : 4},
+        children: [
+          {path: 'calendermainbox', component:CalenderMainBoxComponent},
+          {path: 'commoncalender/:type', component:CommonCalenderComponent},
+          {path: 'resourcelist', component: ResourceListComponent,
+            children: [
+              { path: 'resourceleave/:id', component: ResourceLeaveComponent }
+            ]
+          }
+          
+        ]
+
+      },
+      {
         path: 'first-view', component: FirstViewComponent,
         canActivate:[FunctionGuardService],
         data : { functionId : 2},
@@ -104,6 +141,22 @@ const routes: Routes = [
               { path: 'resouce-edit-form/:id', component: ResourceEditFormComponent }
             ]
           },
+        ]
+      },
+      {
+        path: 'unit-list', component: UnitListComponent,
+        children: [
+          { path: 'unit-form', component: UnitFormComponent },
+          { path: 'unit-details', component: UnitDetailsComponent ,
+            children: [
+              { path: 'unit-edit-form', component: UnitEditFormComponent }
+            ]
+          },
+          { path: 'unit-tree', component: UnitTreeComponent,
+            children: [
+              { path: 'unit-node', component: UnitNodeComponent }
+            ]
+          }
         ]
       },
       {
@@ -122,13 +175,19 @@ const routes: Routes = [
             ]
           },
           {
-            path: 'sprintmgt/:Sname', component: SprintMgtComponent,
-            canActivate:[FunctionGuardService],
+            path: 'sprintmgt/:id', component: SprintMgtComponent,
             children: [
-              { path: 'deleteSprint/:Sname', component: DeleteSprintPopupComponent }
+              {
+                path: 'allocated-resource/:sprintId/:resourceId', component: AllocatedResourceInformationComponent,
+                children:[
+                  { path: 'DeleteAllocation/:sprintId/:resourceId', component: DeleteResourceAllocationComponent},
+                  
+                ]
+              },
+              { path: 'UpdatePercentage/:sprintId/:resourceId', component: UpdatePercentageComponent, },
+              { path: 'UpdateTask/:sprintId/:resourceId', component: UpdateTaskInSprintComponent, }
             ]
           },
-
         ]
       },
     ]
@@ -145,11 +204,11 @@ const routes: Routes = [
   {
     path: 'page-not-found', component: PageNotFoundComponent,
   }
-]; 
+];
 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

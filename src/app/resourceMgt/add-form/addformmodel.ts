@@ -1,17 +1,18 @@
+//Resource Model
 export interface ResourceModel{
-    // id : number;
     resourceName : string ;
     resourceId : string; 
     roleId : number ;
     unitId : number;
 };
 
+//Job Role Model
 export interface JobRoleModel {
     roleId : number;
     roleName : string;
 }
 
-//until the orgUnit feature is done
+//Organizational Unit model
 export interface OrgUnitModel {
     unitId : number;
     unitName : string;

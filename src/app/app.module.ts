@@ -38,7 +38,6 @@ import { CreateFormComponent } from './Sprint_Management/create-form/create-form
 import { SprintMgtComponent } from './Sprint_Management/sprint-mgt/sprint-mgt.component';
 import { Ng2SearchPipe } from 'ng2-search-filter';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { FilterComponent } from './Sprint_Management/Reusable_Components/filter/filter.component';
 import { AvailableResourceListComponent } from './Sprint_Management/available-resource-list/available-resource-list.component';
 import { AvailabiilityComponent } from './Sprint_Management/availabiility/availabiility.component';
 import { AddedResourceListComponent } from './Sprint_Management/added-resource-list/added-resource-list.component';
@@ -66,13 +65,33 @@ import { SearchPipe } from './resourceMgt/search.pipe';
 import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ProjectBoardComponent } from './project-dashboard/project-board/project-board.component';
-import { NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDatepickerModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TaskProjectListComponent } from './TaskManagement/task-project-list/task-project-list.component';
 import { SummaryListComponent } from './project-dashboard/summary-list/summary-list.component';
 import { DashbrdProjectListComponent } from './project-dashboard/dashbrd-project-list/dashbrd-project-list.component';
 import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-project-details/dashbrd-project-details.component';
+import { CalenderButtonComponent } from './calender-management/calender-button/calender-button.component';
+import { CalenderMainBoxComponent } from './calender-management/calender-main-box/calender-main-box.component';
+import { CalenderTypeComponent } from './calender-management/calender-type/calender-type.component';
+import { GlobalCalenderComponent } from './calender-management/global-calender/global-calender.component';
+import { ResourceListComponent } from './calender-management/resource-list/resource-list.component';
+import { CommonCalenderComponent } from './calender-management/common-calender/common-calender.component';
+import { ResourceLeaveComponent } from './calender-management/resource-leave/resource-leave.component';
+import { ResourceCalenderComponent } from './calender-management/resource-calender/resource-calender.component';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AllocatedResourceInformationComponent } from './Sprint_Management/allocated-resource-information/allocated-resource-information.component';
+import { UpdatePercentageComponent } from './Sprint_Management/update-percentage/update-percentage.component';
+import { DeleteResourceAllocationComponent } from './Sprint_Management/delete-resource-allocation/delete-resource-allocation.component';
+import { UpdateTaskInSprintComponent } from './Sprint_Management/update-task-in-sprint/update-task-in-sprint.component';
+import { UnitDetailsComponent } from './orgUnitMgt/unit-details/unit-details.component';
+import { UnitEditFormComponent } from './orgUnitMgt/unit-edit-form/unit-edit-form.component';
+import { UnitFormComponent } from './orgUnitMgt/unit-form/unit-form.component';
+import { UnitListComponent } from './orgUnitMgt/unit-list/unit-list.component';
+import { UnitNodeComponent } from './orgUnitMgt/unit-node/unit-node.component';
+import { UnitTreeComponent } from './orgUnitMgt/unit-tree/unit-tree.component';
+import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
+import { ResetPasswordComponent } from './PageBody/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -107,7 +126,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     SearchBarComponent,
     CreateFormComponent,
     SprintMgtComponent,
-    FilterComponent,
     AvailableResourceListComponent,
     AvailabiilityComponent,
     AddedResourceListComponent,
@@ -132,7 +150,27 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     SummaryListComponent,
     DashbrdProjectListComponent,
     DashbrdProjectDetailsComponent,
+    CalenderButtonComponent,
+    CalenderMainBoxComponent,
+    CalenderTypeComponent,
+    GlobalCalenderComponent,
+    ResourceListComponent,
+    CommonCalenderComponent,
+    ResourceLeaveComponent,
+    ResourceCalenderComponent,
     PageNotFoundComponent,
+    AllocatedResourceInformationComponent,
+    UpdatePercentageComponent,
+    DeleteResourceAllocationComponent,
+    UpdateTaskInSprintComponent,
+    UnitDetailsComponent,
+    UnitEditFormComponent,
+    UnitFormComponent,
+    UnitListComponent,
+    UnitNodeComponent,
+    UnitTreeComponent,
+    EditTaskComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -145,6 +183,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     NgxSpinnerModule,
     ToastrModule.forRoot(),
     NgbDatepickerModule,
+    NgbModule,
+    FormsModule,
+   
   ],
 
   providers: [

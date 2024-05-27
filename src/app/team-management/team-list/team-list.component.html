@@ -1,3 +1,4 @@
+<app-spinner></app-spinner>
 <div class="container-fluid">
   <div class="row no-gutters">
     <div class=" col-12 col-md-2">
@@ -18,13 +19,13 @@
 
         <div class="team-data">
           <div *ngFor="let team of teams " class="mt-2">
-            <button class="menu-button btn btn-md border rounded " routerLink="update/{{team.id}}"
-              routerLinkActive="active">{{team.teamName}}</button>
+            <button class="menu-button btn btn-md border rounded " routerLink="update/{{team.teamId}}"
+              routerLinkActive="active">{{team.team_Name}}</button>
           </div>
         </div>
 
         <div class="mt-1">
-          <app-new-team-button [text]="'Add New Team'" routerLink="TeamForm"></app-new-team-button>
+          <app-new-team-button [text]="'Add Team'" routerLink="TeamForm"></app-new-team-button>
         </div>
       </div>
 
