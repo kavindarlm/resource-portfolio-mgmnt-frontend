@@ -32,6 +32,7 @@ export class PageHeaderComponent {
   }
 
   logout() {
+    if (confirm('Are you sure you want to logout?'))
     this.authService.logout();
   }
 

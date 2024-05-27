@@ -64,6 +64,9 @@ export class AuthService {
     return this.isLoggedIn() ? localStorage.getItem('user_role') : null;
   }
 
+  getUserId(): number | null {
+    return this.isLoggedIn() ? Number(localStorage.getItem('userId')) : null;
+  }
   // getToken(): string | null {
   //   return this.isLoggedIn() ? localStorage.getItem(this.tokenKey) : null;
   // }
