@@ -74,6 +74,14 @@ import { AllocatedResourceInformationComponent } from './Sprint_Management/alloc
 import { UpdatePercentageComponent } from './Sprint_Management/update-percentage/update-percentage.component';
 import { DeleteResourceAllocationComponent } from './Sprint_Management/delete-resource-allocation/delete-resource-allocation.component';
 import { UpdateTaskInSprintComponent } from './Sprint_Management/update-task-in-sprint/update-task-in-sprint.component';
+import { UnitDetailsComponent } from './orgUnitMgt/unit-details/unit-details.component';
+import { UnitEditFormComponent } from './orgUnitMgt/unit-edit-form/unit-edit-form.component';
+import { UnitFormComponent } from './orgUnitMgt/unit-form/unit-form.component';
+import { UnitListComponent } from './orgUnitMgt/unit-list/unit-list.component';
+import { UnitNodeComponent } from './orgUnitMgt/unit-node/unit-node.component';
+import { UnitTreeComponent } from './orgUnitMgt/unit-tree/unit-tree.component';
+import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
+import { ResetPasswordComponent } from './PageBody/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -136,6 +144,14 @@ import { UpdateTaskInSprintComponent } from './Sprint_Management/update-task-in-
     UpdatePercentageComponent,
     DeleteResourceAllocationComponent,
     UpdateTaskInSprintComponent,
+    UnitDetailsComponent,
+    UnitEditFormComponent,
+    UnitFormComponent,
+    UnitListComponent,
+    UnitNodeComponent,
+    UnitTreeComponent,
+    EditTaskComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

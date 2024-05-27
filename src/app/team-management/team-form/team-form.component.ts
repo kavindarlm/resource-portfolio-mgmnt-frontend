@@ -3,6 +3,8 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { catchError } from 'rxjs/operators';
 import { ServiceService } from '../shared/service.service';
 import { of } from 'rxjs';
+import { GeneralService } from '../shared/general.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-team-form',
@@ -17,13 +19,15 @@ export class TeamFormComponent implements OnInit {
   errorMessage: string = ''; // Define the errorMessage property
 
   constructor(private formbuilder: FormBuilder,
-    private service: ServiceService) { }
+    private service: ServiceService, 
+    private genaralService: GeneralService, 
+    private router: Router) { }
 
   ngOnInit(): void {
     //initialize the form
     this.teamForm = this.formbuilder.group({
       teamName: ['', Validators.required],
-      description: ['', Validators.required],
+      team_description: ['', Validators.required], // Changed from 'teamdescription' to 'team_description'
       selectedResources: this.formbuilder.array([])
     });
 
@@ -63,6 +67,9 @@ export class TeamFormComponent implements OnInit {
         next: (_val: any) => {
           // Success handling
           this.errorMessage = ''; // Clear the error message when the request is successful
+          this.genaralService.refreshTeamList(); // Refresh the team list
+          this.teamForm.reset(); // Reset the form
+          this.router.navigate(['/pages-body/teamlistcomponent']); // Navigate to the team list page
         }
       });
     }
