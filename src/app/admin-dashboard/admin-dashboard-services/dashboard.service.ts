@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserModel } from '../dashboard-model/userModel';
 import { FunctionModel } from '../dashboard-model/functionModel';
 import { UsersFunctionModel } from '../dashboard-model/usersFunctionModel';
+import { catchError } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
 
 
 
@@ -15,12 +17,31 @@ export class DashboardService {
 
     //Add users
     createUser(user: UserModel) {
-        return this.http.post<UserModel>('http://localhost:3000/api/register', user);
+        return this.http.post<UserModel>('http://localhost:3000/api/register', user).pipe(
+          catchError(this.handleError)
+        );
+      }
+
+    private handleError(error: HttpErrorResponse) {
+        if (error.status === 400 && error.error.message === 'Email already exists') {
+          return throwError('Email already exists');
+        }
+        return throwError('An error occurred');
+      }
+
+    //Get All
+    async getUser() {
+        return await this.http.get<UserModel[]>('http://localhost:3000/api/findAll');
     }
 
     //Get All users
-    async getUser() {
-        return await this.http.get<UserModel[]>('http://localhost:3000/api/findAll');
+    async getAllUsers() {
+        return await this.http.get<UserModel[]>('http://localhost:3000/api/findAllUsers');
+    }
+
+    //Get All admins
+    async getAllAdmins() {
+        return await this.http.get<UserModel[]>('http://localhost:3000/api/findAllAdmins');
     }
 
     //Get single user
@@ -58,4 +79,8 @@ export class DashboardService {
         return this.http.patch<UsersFunctionModel>('http://localhost:3000/users-function/updateUserFunction/' + id, userFunction);
     }
 
+    searchUser(username: string) {
+        const params = new HttpParams().set('s', username);
+        return this.http.get<UserModel[]>("http://localhost:3000/api/searchUserName/search", {params});
+    }
 }

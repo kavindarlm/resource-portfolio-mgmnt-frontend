@@ -5,9 +5,29 @@
       <div class="border rounded text-center col-10 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">User List</div>
       <div class="border rounded col-12">
 
-        <div class="container mt-3 d-flex justify-content-end">
-          <div class="col-lg-5 col-md-5 col-sm-12">
-            <app-search-bar></app-search-bar>
+        <div class="container mt-3 d-flex">
+          <div class="col-lg-2 col-md-2 col-sm-3">
+            <button type="button" class="btn btn-outline-primary w-75 custom-button btn-sm curser small-text"
+                    [class.btn-clicked]="selectedRole === 'User'" (click)="onRoleChange('User'); selectedRole = 'User'">
+              <i class="bi bi-person-fill"></i> Users
+            </button>
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-3">
+            <button type="button" class="btn btn-outline-primary w-75 custom-button btn-sm curser small-text"
+                    [class.btn-clicked]="selectedRole === 'Admin'" (click)="onRoleChange('Admin'); selectedRole = 'Admin'">
+              <i class="bi bi-person-fill"></i> Admins
+            </button>
+          </div>
+          <div class="col-lg-8 col-md-8 col-sm-6 d-flex justify-content-end">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+              <div class="input-group rounded">
+                <input type="search" class="form-control rounded small-text " placeholder="Search" aria-label="Search"
+                  aria-describedby="search-addon" [(ngModel)]="searchText" (ngModelChange)="onSearchChange()" />
+                <span class="input-group-text border-0" id="search-addon">
+                  <i class="bi bi-search"></i>
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -24,7 +44,6 @@
               <tr
                 *ngFor="let user of usersData | slice: (currentPage-1) * itemsPerPage : currentPage * itemsPerPage; let i = index"
                 routerLink="userDetail/{{user?.user_id}}">
-                <!-- <th scope="row">{{user?.userId}}</th> -->
                 <td>{{user?.user_name}}</td>
                 <td>{{user?.user_email}}</td>
               </tr>

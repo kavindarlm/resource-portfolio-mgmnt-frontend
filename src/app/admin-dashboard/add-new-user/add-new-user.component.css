@@ -23,3 +23,7 @@
 .toast-success {
     background-color: #1E3895 !important; /* Change this to the background color you want */
   }
+
+.small {
+    font-size: 0.93rem !important;
+  }
