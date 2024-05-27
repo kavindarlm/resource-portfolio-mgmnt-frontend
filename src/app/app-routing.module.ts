@@ -35,6 +35,11 @@ import { AvailabiilityComponent } from './Sprint_Management/availabiility/availa
 import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
 import { ProjectBoardComponent } from './project-dashboard/project-board/project-board.component';
 import { TaskProjectListComponent } from './TaskManagement/task-project-list/task-project-list.component';
+import { CalenderMainBoxComponent } from './calender-management/calender-main-box/calender-main-box.component';
+import { CalenderTypeComponent } from './calender-management/calender-type/calender-type.component';
+import { CommonCalenderComponent } from './calender-management/common-calender/common-calender.component';
+import { ResourceListComponent } from './calender-management/resource-list/resource-list.component';
+import { ResourceLeaveComponent } from './calender-management/resource-leave/resource-leave.component';
 import { DashbrdProjectDetailsComponent } from './project-dashboard/dashbrd-project-details/dashbrd-project-details.component';
 import { AuthGuard } from './guard/auth.guard';
 import { FunctionGuardService } from './guard/function.guard';
@@ -106,6 +111,22 @@ const routes: Routes = [
           { path: 'resources/:id', component: UpdateResourcTableComponent },
           { path: 'delete/:id', component: DeletePopupComponent }
         ]
+      },
+      {
+        path: 'calendertypecomponent', component: CalenderTypeComponent,
+        canActivate:[FunctionGuardService],
+        data : { functionId : 4},
+        children: [
+          {path: 'calendermainbox', component:CalenderMainBoxComponent},
+          {path: 'commoncalender/:type', component:CommonCalenderComponent},
+          {path: 'resourcelist', component: ResourceListComponent,
+            children: [
+              { path: 'resourceleave/:id', component: ResourceLeaveComponent }
+            ]
+          }
+          
+        ]
+
       },
       {
         path: 'first-view', component: FirstViewComponent,
