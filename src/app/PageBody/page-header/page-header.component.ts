@@ -11,9 +11,7 @@ export class PageHeaderComponent {
   greeting!: string;
   username!: string;
 
-  constructor( private visibilityService: SidebarheaderServiceService) {}
-
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService , private visibilityService: SidebarheaderServiceService) { }
 
   ngOnInit() {
     this.setGreeting();
