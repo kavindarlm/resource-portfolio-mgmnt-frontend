@@ -35,6 +35,10 @@ import { AvailabiilityComponent } from './Sprint_Management/availabiility/availa
 import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
 import { ProjectBoardComponent } from './project-dashboard/project-board/project-board.component';
 import { TaskProjectListComponent } from './TaskManagement/task-project-list/task-project-list.component';
+import { AllocatedResourceInformationComponent } from './Sprint_Management/allocated-resource-information/allocated-resource-information.component';
+import { UpdatePercentageComponent } from './Sprint_Management/update-percentage/update-percentage.component';
+import { DeleteResourceAllocationComponent } from './Sprint_Management/delete-resource-allocation/delete-resource-allocation.component';
+import { UpdateTaskInSprintComponent } from './Sprint_Management/update-task-in-sprint/update-task-in-sprint.component';
 import { UnitListComponent } from './orgUnitMgt/unit-list/unit-list.component';
 import { UnitTreeComponent } from './orgUnitMgt/unit-tree/unit-tree.component';
 import { UnitNodeComponent } from './orgUnitMgt/unit-node/unit-node.component';
@@ -51,9 +55,10 @@ const routes: Routes = [
   {
     path: 'pages-body', component: PagesBodyComponent,
     children: [
-      { path: 'projectBoard', component: ProjectBoardComponent,
+      {
+        path: 'projectBoard', component: ProjectBoardComponent,
         children: [
-          
+
         ]
       },
       {
@@ -66,7 +71,8 @@ const routes: Routes = [
       {
         path: 'TaskProjectList', component: TaskProjectListComponent,
         children: [
-          { path: 'projectTaskDetails/:id',component: ProjectDetailsComponent,
+          {
+            path: 'projectTaskDetails/:id', component: ProjectDetailsComponent,
             children: [
               { path: 'newTask/:id', component: CreateNewtaskComponent },
               { path: 'updatetask/:id', component: UpdateTaskComponent,
@@ -131,12 +137,19 @@ const routes: Routes = [
             ]
           },
           {
-            path: 'sprintmgt/:Sname', component: SprintMgtComponent,
+            path: 'sprintmgt/:id', component: SprintMgtComponent,
             children: [
-              { path: 'deleteSprint/:Sname', component: DeleteSprintPopupComponent }
+              {
+                path: 'allocated-resource/:sprintId/:resourceId', component: AllocatedResourceInformationComponent,
+                children:[
+                  { path: 'DeleteAllocation/:sprintId/:resourceId', component: DeleteResourceAllocationComponent},
+                  
+                ]
+              },
+              { path: 'UpdatePercentage/:sprintId/:resourceId', component: UpdatePercentageComponent, },
+              { path: 'UpdateTask/:sprintId/:resourceId', component: UpdateTaskInSprintComponent, }
             ]
           },
-
         ]
       },
     ]
@@ -148,11 +161,11 @@ const routes: Routes = [
       { path: 'userDetail/:id', component: UserDetailComponent }
     ]
   }
-]; 
+];
 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

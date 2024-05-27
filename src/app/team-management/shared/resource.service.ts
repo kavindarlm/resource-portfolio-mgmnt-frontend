@@ -9,9 +9,24 @@ export class ResourceService {
 
   //service to get resources from the database
 
-  private baseUrl = 'http://localhost:3000/resource'; // Adjust the port if needed
+   private baseUrl = 'http://localhost:3000/resource'; // Adjust the port if needed
 
-  constructor(private http: HttpClient) { }
+   constructor(private http: HttpClient) { }
+
+   getResourcesForSprint(): Observable<any[]> {
+    // Send a GET request to the '/ForSprint' endpoint
+    return this.http.get<any[]>(`${this.baseUrl}/ForSprint`);
+  }
+
+  //Method to find one resource by ID
+  findOneResource(resourceId: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${resourceId}`);
+  }
+ 
+   // Method to get resources
+   getResources(): Observable<any> {
+     return this.http.get(`${this.baseUrl}`);
+   }
 
   getResourcesByTeamIdNull(): Observable<any> {
     return this.http.get(`${this.baseUrl}/no-team`);
