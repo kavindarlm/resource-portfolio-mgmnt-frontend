@@ -9,13 +9,13 @@ import { SidebarheaderServiceService } from '../side-bar-header-service/sidebarh
 })
 export class PageHeaderComponent {
   greeting!: string;
-  username!: string;
+  username : string | null = '';
 
   constructor(private authService: AuthService , private visibilityService: SidebarheaderServiceService) { }
 
   ngOnInit() {
     this.setGreeting();
-    this.username = 'John Doe';
+    this.username = this.authService.getUserName();
   }
   
   setGreeting() {

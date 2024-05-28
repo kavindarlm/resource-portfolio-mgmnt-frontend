@@ -15,13 +15,14 @@ export class ResetPasswordComponent implements OnInit {
   resetform!: FormGroup;
   show = true;
   isVisible = true;
-  constructor(private formBuilder: FormBuilder, private visibilityService: SidebarheaderServiceService, private passwordService: PasswordService, private au: AuthService, private toastr: ToastrService) { }
+  constructor(private formBuilder: FormBuilder, private visibilityService: SidebarheaderServiceService, private passwordService: PasswordService, private authService: AuthService, private toastr: ToastrService) { }
 
   openpopup() {
     this.show = true;
   }
   closepopup() {
     this.isVisible = false;
+    this.visibilityService.hideEditPasswardComponent();
   }
   ngOnInit(): void {
     this.resetform = this.formBuilder.group({
@@ -40,7 +41,7 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   submitResetForm() {
-    const userId = this.au.getUserId();
+    const userId = this.authService.getUserId();
     if (userId === null) {
       console.log('User ID is null');
       return;
