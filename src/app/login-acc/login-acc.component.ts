@@ -1,12 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; // Import Router
-import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
-
-interface LoginResponse {
-  user_id: number;
-  status: number;
-}
 
 @Component({
   selector: 'app-login-acc',
@@ -14,9 +7,8 @@ interface LoginResponse {
   styleUrl: './login-acc.component.css'
 })
 export class LoginAccComponent {
-  data: any;
 
-  constructor(private router: Router, private http: HttpClient, private authService: AuthService) { }
+  constructor(private authService: AuthService) { }
 
   user = {
     user_email: '',

@@ -19,23 +19,11 @@
     border-radius: 4px;
   }
   
-  
-  .user-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .username {
-    font-weight: 500;
-    font-size: 1.2em;
-  }
-  
   .sub-menu hr {
     border: 0;
     height: 1px;
     width: 100%;
-    background: #ccc;
+    background: #a5a5a5;
     margin: 10px 0;
   }
 

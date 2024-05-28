@@ -60,17 +60,17 @@
             <div class="card-body px-4 py-5 px-md-5">
 
                 <p class="fs-4 fw-bold text-color">Forgot Password?</p>
-                <p class="fs-6 fw-medium text-color">Enter your emails to send password reset link</p>
+                <p class="fs-6 fw-medium text-color">Enter your emails to send a new temparary password through the emai</p>
   
                 <!-- Email input -->
                 <div data-mdb-input-init class="form-outline mb-4">
-                  <input type="email" id="form3Example3" class="form-control" />
+                  <input type="email" id="form3Example3" class="form-control" [(ngModel)]="user.user_email" required/>
                   <label class="form-label" for="form3Example3">Email address</label>
                 </div>
   
                 <!-- Submit button -->
                 <div class="d-grid gap-2 ">
-                    <button class="btn btn-outline-color" type="submit">Send Password Reset Link</button>
+                    <button class="btn btn-outline-color" type="submit" (click)="fogotPassword()">Send New Password</button>
                 </div>
             </div>
           </div>
