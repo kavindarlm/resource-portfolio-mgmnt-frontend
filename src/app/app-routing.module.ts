@@ -145,6 +145,8 @@ const routes: Routes = [
       },
       {
         path: 'unit-list', component: UnitListComponent,
+        canActivate:[FunctionGuardService],
+        data : { functionId : 3},
         children: [
           { path: 'unit-form', component: UnitFormComponent },
           { path: 'unit-details', component: UnitDetailsComponent ,
