@@ -66,6 +66,7 @@ export class ResetPasswordComponent implements OnInit {
         next: (res) => {
           this.resetform.reset();
           this.showSuccess();
+          this.closepopup();
         },
         error: (err) => {
           this.resetform.reset();
