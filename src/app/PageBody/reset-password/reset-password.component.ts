@@ -18,6 +18,7 @@ export class ResetPasswordComponent implements OnInit{
   }
   closepopup() {
     this.isVisible = false;
+    this.visivilityService.hideEditPasswardComponent();
   }
   ngOnInit(): void {
       this.resetform = this.formBuilder.group({
