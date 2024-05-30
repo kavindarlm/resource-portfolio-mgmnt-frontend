@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { EventEmitter, Injectable } from "@angular/core";
 import { OrganizationalUnitModel } from "../../orgUnitMgt/unit-form/unit-form.model";
 import { Observable } from "rxjs";
 
@@ -10,6 +10,7 @@ import { Observable } from "rxjs";
 export class OrgUnitMgtService {
 
     selectedUnit: OrganizationalUnitModel | undefined;
+    unitListUpdated = new EventEmitter<void>();
 
     constructor(private http:HttpClient) {}
 
@@ -44,5 +45,9 @@ export class OrgUnitMgtService {
  
     getOrgUnitData(): Observable<any>{
         return this.http.get<any>("http://localhost:3000/org-unit/hierarchy/data")
+    }
+
+    getAncestors(unitId: number): Observable<OrganizationalUnitModel[]> {
+        return this.http.get<OrganizationalUnitModel[]>(`http://localhost:3000/org-unit/${unitId}/ancestors`);
     }
 }

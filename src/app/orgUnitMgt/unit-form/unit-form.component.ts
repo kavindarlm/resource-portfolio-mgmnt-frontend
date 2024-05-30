@@ -4,6 +4,8 @@ import { OrganizationalUnitModel } from './unit-form.model';
 import { HttpClient } from '@angular/common/http';
 import { OrgUnitMgtService } from '../../shared/orgUnitMgt_services/orgUnitMgt.service';
 import { catchError, throwError } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 import { error } from 'console';
 
 @Component({
@@ -16,7 +18,11 @@ export class UnitFormComponent implements OnInit{
   unitForm !: FormGroup;
   orgunits: OrganizationalUnitModel[] | undefined;
 
-  constructor(private http: HttpClient,private formBuilder: FormBuilder, private orgUnitMgtService: OrgUnitMgtService) {}
+  constructor(private http: HttpClient,
+              private formBuilder: FormBuilder,
+              private orgUnitMgtService: OrgUnitMgtService,
+              private toaster: ToastrService,
+              private router: Router) {}
 
   ngOnInit(): void {
     this.loadOrgUnits();
@@ -61,6 +67,31 @@ export class UnitFormComponent implements OnInit{
     )
     .subscribe((res => {
       console.log(data);
+      this.unitForm.reset();
+      this.addsuccesemassege(data.unitName);
+      this.orgUnitMgtService.unitListUpdated.emit();
+      this.router.navigate(['pages-body/unit-list']);
     }))
   }
+
+   //This is for success message
+    addsuccesemassege(unitName: string) {
+      this.toaster.success(
+        `${unitName} Added successfully`,
+        'Created Org. Unit',
+        {
+          timeOut: 3000,
+        }
+      );
+    }
+
+  //   capitalizeFirstLetter() {
+  //     const resourceNameControl = this.resourceForm.get('resourceName');
+  //     if (resourceNameControl && resourceNameControl.value && resourceNameControl.value.length > 1) {
+  //       let words = resourceNameControl.value.split(' ');
+  //       words = words.map((word: string) => word.charAt(0).toUpperCase() + word.slice(1));
+  //       resourceNameControl.setValue(words.join(' '));
+  //     }
+  //   }
+
 }
