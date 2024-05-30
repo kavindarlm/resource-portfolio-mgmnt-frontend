@@ -15,3 +15,8 @@ export interface criticalityModel{
     type: string;
     create_date: string;
 }
+
+export interface resourceIdNameModel{
+    resourceName: string;
+    resourceId: string;
+}
