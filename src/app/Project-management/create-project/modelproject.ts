@@ -4,8 +4,8 @@ export interface datamodel{
     projectStartDate: string;
     projectEndDate: string;
     criticality_id: string;
-    projectManager: string;
-    deliveryManager: string;
+    projectManager_id: string;
+    deliveryManager_id: string;
     projectDescription: string;
 }
 

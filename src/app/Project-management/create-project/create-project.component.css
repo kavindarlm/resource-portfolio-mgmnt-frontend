@@ -38,3 +38,13 @@ select {
     background-color: #1E3895;
 }
 
+.custom-button.active{
+    background-color: #1E3895;
+    color: #fff;
+}
+
+input::placeholder, 
+textarea::placeholder {
+    opacity: .6; 
+}
+

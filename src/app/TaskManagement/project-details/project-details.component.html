@@ -58,7 +58,7 @@
                         Sum of Allocation : {{allcationSum}} %
                     </div>
                     <div class="col-6 ms-3">
-                        <input type="search" [(ngModel)]="searchText" id="form1" class="form-control"
+                        <input type="search" [(ngModel)]="searchText" id="form1" (ngModelChange)="onSearchChange()" class="form-control"
                             placeholder="Search task" aria-label="search">
                     </div>
                 </div>

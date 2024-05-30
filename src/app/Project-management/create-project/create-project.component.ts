@@ -17,6 +17,17 @@ import { sharedprojectService } from '../service/sharedproject.service';
 import { ToastrService } from 'ngx-toastr';
 import { timeout } from 'rxjs';
 
+function dateRangeValidator(control: FormGroup): ValidationErrors | null {
+  const startDate = control.get('projectStartDate')?.value;
+  const endDate = control.get('projectEndDate')?.value;
+
+  if (startDate && endDate && new Date(startDate) > new Date(endDate)) {
+    return { dateRangeError: true };
+  }
+
+  return null;
+}
+
 @Component({
   selector: 'app-create-project',
   templateUrl: './create-project.component.html',
@@ -39,10 +50,12 @@ export class CreateProjectComponent implements OnInit {
       projectStartDate: ['', Validators.required],
       projectEndDate: ['', Validators.required],
       criticality_id: ['', Validators.required],
-      projectManager: ['', Validators.required],
-      deliveryManager: ['', Validators.required],
+      projectManager_id: ['', Validators.required],
+      deliveryManager_id: ['', Validators.required],
       projectDescription: ['', [Validators.required, Validators.minLength(3)]],
-    });
+    },
+    {validator: dateRangeValidator}
+  );
 
     this.getCriticality();
   }
@@ -86,8 +99,9 @@ export class CreateProjectComponent implements OnInit {
   getCriticality() {
     this.api.getCriticality().subscribe(
       (res) => {
-        console.log('Criticality:', res);
+        
         this.criticalityType = res;
+        console.log('Criticality:', this.criticalityType);
       },
       (error) => {
         console.error('Failed to fetch criticality:', error);
