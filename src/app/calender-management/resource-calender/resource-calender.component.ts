@@ -62,14 +62,22 @@ export class ResourceCalenderComponent implements OnInit {
   loadEvents() {
     console.log('Resource ID:', this.resourceId);
     if (this.resourceId) {
-      this.apiService.resourceGetEvents(this.holidayType, this.resourceId)
+      this.apiService.resourceGetEvents(this.resourceId)
         .pipe(
           map((response: any) => response as any[]) // Change this to your actual type
         )
         .subscribe(
           (events: any[]) => { // Change this to your actual type
             console.log('Events:', events); // Log the events
-            this.holidays = events.map((event: { year: number; month: number; day: number; }) => new NgbDate(event.year, event.month, event.day));
+            this.holidays = events.map((event) => {
+              const date = new Date(event.holiday.date);
+              return {
+                date: new NgbDate(date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate()),
+                id: event.id // Add other properties if needed
+              };
+            });
+            // After updating holidays array
+           console.log('holidays array after update:', this.holidays);
           },
           (error) => {
             console.error('Error:', error);
