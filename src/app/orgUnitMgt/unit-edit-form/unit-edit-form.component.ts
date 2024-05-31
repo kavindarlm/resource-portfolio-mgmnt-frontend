@@ -4,6 +4,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { catchError, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { OrgUnitMgtService } from '../../shared/orgUnitMgt_services/orgUnitMgt.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-unit-edit-form',
@@ -17,7 +20,11 @@ export class UnitEditFormComponent implements OnInit {
   orgunits: OrganizationalUnitModel[] | undefined;
   selectedUnit: any;
 
-  constructor(private http: HttpClient,private formBuilder: FormBuilder, private orgUnitMgtService: OrgUnitMgtService) {}
+  constructor(private http: HttpClient,private formBuilder: FormBuilder,
+              private orgUnitMgtService: OrgUnitMgtService,
+              private spinner: NgxSpinnerService,
+              private router: Router,
+              private toaster: ToastrService) {}
 
   ngOnInit(): void {
     this.loadOrgUnits();
@@ -43,6 +50,7 @@ export class UnitEditFormComponent implements OnInit {
   }
 
   loadOrgUnits() {
+    this.spinner.show();
     this.orgUnitMgtService.getOrgUnits()
     .pipe(
       catchError((error) => {
@@ -54,6 +62,7 @@ export class UnitEditFormComponent implements OnInit {
     .subscribe((res: any) => {
       debugger;
       this.orgunits = res;
+      this.spinner.hide();
     },
     (error: any) => {
       console.error('Error:', error);
@@ -68,12 +77,25 @@ export class UnitEditFormComponent implements OnInit {
       .subscribe(
         (res: any) => {
           console.log('Unit updated successfully:', res);
-          alert('Unit updated successfully');
+          // alert('Unit updated successfully');
+          this.editSucceseMassege(this.selectedUnit.unitName);
+          this.unitForm.reset();
+          this.orgUnitMgtService.unitListUpdated.emit(); // Emit the event
+          this.router.navigate(['pages-body/unit-list']);
         },
         (error) => {
           console.error('Error occurred while updating unit:', error);
         }
       );
+  }
+
+  //Edit Success Message
+  editSucceseMassege(unitName: string) {
+    this.toaster.success(
+      `${unitName} Updated successfully`,
+      'Unit Updated Successfully',
+      { timeOut: 3000 }
+    );
   }
 
   onCancel() {

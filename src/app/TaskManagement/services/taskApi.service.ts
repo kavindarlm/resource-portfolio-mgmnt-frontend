@@ -39,7 +39,7 @@ export class taskApiService {
 
   //Function to Get Task By Id
   getTaskByid(id: string) {
-    return this.http.get<taskModel>("http://localhost:3000/task/" + id);
+    return this.http.get<taskModel>("http://localhost:3000/task/getTask/" + id);
   }
 
   //Function to Update Task Persentage
@@ -69,10 +69,14 @@ export class taskApiService {
   }
 
   //Get the overoll Project Progress
-  // getProjectProgress(id: string){
-  //   return this.http.get<number>("http://localhost:3000/task/project-progress/"+id);
-  // }
   getProjectProgress(id: string): Observable<number> {
     return this.http.get<number>("http://localhost:3000/task/project-progress/"+id);
   }
+
+  //Serch Task
+  searchTaskByName(taskName: string){
+    const params = new HttpParams().set('s', taskName);
+    return this.http.get<taskModel[]>("http://localhost:3000/task/searchtaskName/search", { params });
+  }
+  
 }
