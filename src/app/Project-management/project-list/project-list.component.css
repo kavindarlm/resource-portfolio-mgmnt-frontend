@@ -44,8 +44,15 @@
 
 .custom-button {
   border-color: #1E3895;
+  color: #1E3895;
 }
 
 .custom-button:hover {
   background-color: #1E3895;
+  color: #FEFEFE;
+}
+
+.custom-button:active{
+  background-color: #1E3895;
+  color: #FEFEFE;
 }

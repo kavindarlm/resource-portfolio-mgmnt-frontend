@@ -43,20 +43,20 @@
                     </select>
                 </div>
             </div>
-            <label class="fw-medium font-color" for="projectManager">Project Manager *</label>
+            <label class="fw-medium font-color" for="projectManager_id">Project Manager *</label>
             <div class="form-group row mt-2 mb-3">
-                <label for="projectManager" class="col-3 ps-5 fst-normal text-primary">Assigner :</label>
+                <label for="projectManager_id" class="col-3 ps-5 fst-normal text-primary">Assigner :</label>
                 <div class="col-9">
                     <input type="text" class="form-control" placeholder="Enter Project Manager ID"
-                        [(ngModel)]="projectForm.projectManager" name="projectManager" required>
+                        [(ngModel)]="projectForm.projectManager_id" name="projectManager_id" required>
                 </div>
             </div>
-            <label class="fw-medium font-color" for="deliveryManager">Delivery Manager *</label>
+            <label class="fw-medium font-color" for="deliveryManager_id">Delivery Manager *</label>
             <div class="form-group row mt-2 mb-3">
-                <label for="deliveryManager" class="col-3 ps-5 fst-normal text-primary">Assigner :</label>
+                <label for="deliveryManager_id" class="col-3 ps-5 fst-normal text-primary">Assigner :</label>
                 <div class="col-9">
-                    <input type="text" class="form-control" [(ngModel)]="projectForm.deliveryManager"
-                        name="deliveryManager" placeholder="Enter Delivery Manager ID" required>
+                    <input type="text" class="form-control" [(ngModel)]="projectForm.deliveryManager_id"
+                        name="deliveryManager_id" placeholder="Enter Delivery Manager ID" required>
                 </div>
             </div>
             <label class="fw-medium font-color" for="projectDescription">Project Description</label>

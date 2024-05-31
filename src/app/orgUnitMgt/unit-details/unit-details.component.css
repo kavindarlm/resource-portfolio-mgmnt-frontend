@@ -14,8 +14,13 @@
     position: relative;
 }
 
+.topic {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .detailButton {
-    width: 95%;
+    width: 100%;
     /* Set the width for desktop */
     height: 40px;
     font-weight: 500;
@@ -24,7 +29,7 @@
     border-radius: 10px;
     color: #1e3895;
     margin-top: 3%;
-    margin-left: 2%;
+    /* margin-left: 2%; */
     content: fit-content;
     transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
     /* Add subtle elevation */
@@ -43,8 +48,10 @@
 
 .editButton {
     float: left;
+    margin-left: 10%;
 }
 
 .deleteButton {
     float: right;
+    margin-right: 10%;
 }

@@ -68,7 +68,7 @@ export class AddFormComponent implements OnInit {
       })
     )
     .subscribe((res: any) => {
-      debugger;
+      // debugger;
       this.jobroles = res; // Assuming the response is directly the array of jobroles
     },
       (error) => {
@@ -88,7 +88,7 @@ export class AddFormComponent implements OnInit {
       })
     )
     .subscribe((res: any) => {
-      debugger;
+      // debugger;
       this.orgunits = res; // Assuming the response is directly the array of orgunits
     },
       (error) => {
