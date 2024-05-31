@@ -24,8 +24,8 @@ export class UpdateProjectComponent implements OnInit {
     projectStartDate: '',
     projectEndDate: '',
     criticality_id: '',
-    projectManager: '',
-    deliveryManager: '',
+    projectManager_id: '',
+    deliveryManager_id: '',
     projectDescription: '',
   };
   constructor( 
@@ -61,6 +61,7 @@ export class UpdateProjectComponent implements OnInit {
       )
       .subscribe((data: datamodel) => {
         this.spiner.show();
+        console.log(data)
         this.projectForm = data;
         this.spiner.hide();
       });
