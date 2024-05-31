@@ -6,8 +6,8 @@ export interface projectModel {
   projectStartDate: '';
   projectEndDate: '';
   criticality_id: '';
-  projectManager: '';
-  deliveryManager: '';
+  projectManager_id: '';
+  deliveryManager_id: '';
   projectDescription: '';
 }
 

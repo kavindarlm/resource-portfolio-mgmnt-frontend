@@ -7,6 +7,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { ApiServiceService } from '../shared/api-service.service';
 import { Holiday } from '../calender.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-common-calender ',
@@ -71,6 +72,9 @@ export class CommonCalenderComponent {
   selectedDates: NgbDate[] = [];
   holidays: { date: NgbDate, id: number }[] = [];
   deselectedHolidays: Holiday[] = [];
+  // Declare a new BehaviorSubject to hold the holidays array
+ // Declare a new BehaviorSubject to hold the holidays array
+holidays$ = new BehaviorSubject<{ date: NgbDate, id: number }[]>([]);
 
   @Input() actionType: 'add' | 'edit' = 'add';
   @Output() addEvent = new EventEmitter<{ selectedDates: NgbDate[], holidayType: string }>();
@@ -86,9 +90,33 @@ export class CommonCalenderComponent {
     this.loadHolidays();
   }
 
+  // loadHolidays() {
+  //   if (this.holidayType === 'resource' && this.resourceId) {
+  //     this.apiService.resourceGetEvents(this.resourceId).subscribe((holidays: Holiday[]) => {
+  //       this.holidays = holidays.map((holiday: Holiday) => {
+  //         const date = new Date(holiday.date);
+  //         return {
+  //           date: new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
+  //           id: holiday.holy_id
+  //         };
+  //       });
+  //     });
+  //   } else {
+  //     this.apiService.getEvents(this.holidayType).subscribe((holidays: Holiday[]) => {
+  //       this.holidays = holidays.map((holiday: Holiday) => {
+  //         const date = new Date(holiday.date);
+  //         return {
+  //           date: new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
+  //           id: holiday.holy_id
+  //         };
+  //       });
+  //     });
+  //   }
+  // }
+
   loadHolidays() {
     if (this.holidayType === 'resource' && this.resourceId) {
-      this.apiService.resourceGetEvents(this.holidayType, this.resourceId).subscribe((holidays: Holiday[]) => {
+      this.apiService.resourceGetEvents(this.resourceId).subscribe((holidays: Holiday[]) => {
         this.holidays = holidays.map((holiday: Holiday) => {
           const date = new Date(holiday.date);
           return {
@@ -96,6 +124,8 @@ export class CommonCalenderComponent {
             id: holiday.holy_id
           };
         });
+        // Update the BehaviorSubject with the new holidays array
+        this.holidays$.next(this.holidays);
       });
     } else {
       this.apiService.getEvents(this.holidayType).subscribe((holidays: Holiday[]) => {
@@ -106,6 +136,8 @@ export class CommonCalenderComponent {
             id: holiday.holy_id
           };
         });
+        // Update the BehaviorSubject with the new holidays array
+        this.holidays$.next(this.holidays);
       });
     }
   }
@@ -137,9 +169,26 @@ export class CommonCalenderComponent {
     return this.selectedDates.length === 1 && date.after(this.selectedDates[0]);
   }
 
+ 
+  
+
   isSelected(date: NgbDate) {
-    return this.selectedDates.some((selectedDate) => selectedDate.equals(date)) || this.holidays.some((holiday) => holiday.date.equals(date));
+    const holidays = this.holidays$.getValue();
+    console.log('isSelected called with date:', date);
+    console.log('holidays array:', this.holidays);
+    if (this.holidayType === 'resource') {
+      const isResourceHoliday = this.holidays.some(holiday => holiday.date.year === date.year && holiday.date.month === date.month && holiday.date.day === date.day);
+      console.log('isResourceHoliday:', isResourceHoliday);
+      return isResourceHoliday;
+    } else {
+      const isSelectedDate = this.selectedDates.some(selectedDate => selectedDate.year === date.year && selectedDate.month === date.month && selectedDate.day === date.day);
+      const isHoliday = this.holidays.some(holiday => holiday.date.year === date.year && holiday.date.month === date.month && holiday.date.day === date.day);
+      console.log('isSelectedDate:', isSelectedDate);
+      console.log('isHoliday:', isHoliday);
+      return isSelectedDate || isHoliday;
+    }
   }
+
   onAddButtonClick() {
     //new code to post resource hoilday 
     if (this.holidayType === 'resource' && this.resourceId) {

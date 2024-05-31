@@ -5,12 +5,12 @@
     <div class="row ms-1 me-1 custom">
         <div class="border rounded col-6 mb-3 mt-1 pt-1 pb-1">
             <div class="">
-                ProjectStartDate: {{taskDetails.exStartDate| date: 'dd-MM-yyyy'}}
+                Expected Start Date: {{taskDetails.exStartDate| date: 'dd-MM-yyyy'}}
             </div>
         </div>
         <div class="border rounded col-6 mb-3 mt-1 pt-1 pb-1">
             <div class="">
-                PojectEndDate: {{taskDetails.exEndDate | date: 'dd-MM-yyyy'}}
+                Expected End Date: {{taskDetails.exEndDate | date: 'dd-MM-yyyy'}}
             </div>
         </div>
     </div>
@@ -18,6 +18,14 @@
         <div class="border rounded col-12 mb-3 mt-1 pt-1 pb-1">
             <div class="">
                 Expected Total Task Percentage: {{taskDetails.taskAllocationPercentage}}%
+            </div>
+        </div> 
+    </div>
+
+    <div class="row ms-1 me-1 custom">
+        <div class="border rounded col-12 mb-3 mt-1 pt-1 pb-1">
+            <div class="">
+                Task Description: {{taskDetails.taskDescription}}
             </div>
         </div>
     </div>
@@ -52,8 +60,8 @@
             </div>
         </div>
         <div class="d-flex justify-content-center mb-1">
-            <button class="btn btn-outline-primary w-25 mt-3 custom-button btn-sm " routerLink="updateTask/{{taskDetails.taskid}}">Edit Task</button>
+            <button class="btn btn-outline-primary w-25 mt-3 custom-button btn-sm " routerLink="editTask/{{taskDetails.taskid}}">Edit Task</button>
         </div>
     </div>
 </div>
-<router-outlet></router-outlet>
+<router-outlet></router-outlet> 

@@ -19,6 +19,20 @@
                 </div>
             </div>
 
+            <label class="fw-medium font-color" for="taskDescription">Task Description*</label>
+            <div class="form-group row mt-2 mb-3">
+                <label for="taskName" class="col-3 ps-5 fst-normal text-primary ">Description:</label>
+                <div class="col-9">
+                    <input type="text" class="form-control" id="taskDescription" placeholder="Enter task description"
+                        formControlName="taskDescription"
+                        [ngClass]="{'is-invalid': taskForm.controls['taskDescription'].invalid && taskForm.controls['taskDescription'].touched}">
+                    <div class="invalid-feedback"
+                        *ngIf="taskForm.controls['taskDescription'].invalid && taskForm.controls['taskDescription'].touched">
+                        Task Description is required
+                    </div>
+                </div>
+            </div>
+
             <label class="fw-medium font-color" for="expectedStartDate">Expected Start Date*</label>
             <div class="form-group row mt-2 mb-3">
                 <label for="expectedStartDate" class="col-3 ps-5 fst-normal text-primary">From:</label>

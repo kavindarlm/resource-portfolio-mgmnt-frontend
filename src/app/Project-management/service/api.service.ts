@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { criticalityModel, datamodel } from '../create-project/modelproject';
+import { criticalityModel, datamodel, resourceIdNameModel } from '../create-project/modelproject';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -60,5 +60,10 @@ export class ApiService {
   //GetCriticality
   getCriticality(){
     return this.http.get<criticalityModel[]>("http://localhost:3000/criticality");
+  }
+
+  //Get Resource id and Name
+  getResourceNameAndId(): Observable<resourceIdNameModel[]> {
+    return this.http.get<resourceIdNameModel[]>('http://localhost:3000/project/getResoure/bynameAndId');
   }
 }
