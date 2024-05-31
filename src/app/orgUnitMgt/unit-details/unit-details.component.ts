@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { OrganizationalUnitModel } from '../unit-form/unit-form.model';
 import { OrgUnitMgtService } from '../../shared/orgUnitMgt_services/orgUnitMgt.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-unit-details',
@@ -13,54 +15,40 @@ export class UnitDetailsComponent implements OnInit{
 
   showUnitEditForm: boolean = false;
   navigationList: OrganizationalUnitModel[] = [];
+  ancestors: OrganizationalUnitModel[] = [];
 
-
-  constructor(private orgUnitMgtService: OrgUnitMgtService) {}
+  constructor(private orgUnitMgtService: OrgUnitMgtService,
+              private router: Router,
+              private toaster: ToastrService
+  ) {}
 
   ngOnInit(): void {
     console.log(this.unit);
     // this.generateNavigationList(this.unit);
+    // if (this.unit) {
+    //   this.generateNavigationList(this.unit);
+    // }
+
+    if (this.unit) {
+      this.loadAncestors(this.unit.unitId);
+    }
   }
 
   onEdit() {
     this.showUnitEditForm = true;
   }
 
-
-
-//   generateNavigationList(unit: OrganizationalUnitModel) {
-//     this.navigationList.unshift(unit);
-//     if (unit.parentId) {
-//       this.orgUnitMgtService.getOrgUnitById(unit.parentId)
-//         .subscribe((parentUnit: OrganizationalUnitModel) => {
-//           this.generateNavigationList(parentUnit);
-//         });
-//     }
-//     console.log(this.navigationList);
-// }
-
-// generateNavigationList(unit: OrganizationalUnitModel) {
-//   this.navigationList.unshift(unit);
-//   if (unit.parentId !== null && typeof unit.parentId !== 'undefined') {
-//       this.orgUnitMgtService.getOrgUnitById(unit.parentId)
-//           .subscribe((parentUnit: OrganizationalUnitModel) => {
-//               this.generateNavigationList(parentUnit);
-//           });
-//   }
-//   console.log(this.navigationList);
-//   // Fetch ancestors recursively until reaching the root unit
-//   this.fetchAncestors(unit.parentId);
-// }
-
-// fetchAncestors(parentId: number | null) {
-//   if (parentId !== null && parentId !== undefined) {
-//       this.orgUnitMgtService.getOrgUnitById(parentId)
-//           .subscribe((parentUnit: OrganizationalUnitModel) => {
-//               this.navigationList.unshift(parentUnit); // Add parent unit to the navigation list
-//               this.fetchAncestors(parentUnit.parentId); // Recursively fetch ancestors
-//           });
-//   }
-// }
+  loadAncestors(unitId: number) {
+    this.orgUnitMgtService.getAncestors(unitId).subscribe(
+      (data: OrganizationalUnitModel[]) => {
+        this.ancestors = data;
+        console.log("Ancestors :" , this.ancestors);
+      },
+      (error) => {
+        console.error('Error fetching ancestors:', error);
+      }
+    );
+  }
 
   onDeleteUnit() {
       // Check if the unit has children units
@@ -79,5 +67,30 @@ export class UnitDetailsComponent implements OnInit{
     
     );
   }
+
+    // onDeleteResource() {
+  //   this.resourceService.deleteResource(this.selectedResource.resourceId)
+  //   .subscribe((res:ResourceModel)=> {
+  //     console.log('Resource deleted successfully:', res);
+  //     this.deleteSucceseMassege(this.selectedResource.resourceId);
+  //     this.formValue.reset();
+  //     this.resourceService.resourceListUpdated.emit(); // Emit the event
+  //     this.router.navigate(['pages-body/first-view']);
+  //   },
+  //   (error) => {
+  //     console.error('Error occurred while deleting resource:', error);
+  //     // Handle error appropriately, such as displaying an error message to the user.
+  //   }
+  //   );
+  // }
+
+  // //Delete Success Message
+  // deleteSucceseMassege(unitName: string) {
+  //   this.toaster.success(
+  //     `${unitName} Deleted successfully`,
+  //     'Unit Deleted Successfully',
+  //     { timeOut: 3000 }
+  //   );
+  // }
 
 }
