@@ -14,9 +14,6 @@ import { OrgUnit } from './org-unitmodel';
 })
 
 
-////////////////////////////////////////////////////////////////////////////////////
-
-
 export class UnitTreeComponent implements OnInit {
 
   Data: undefined|OrgUnit[] = [];

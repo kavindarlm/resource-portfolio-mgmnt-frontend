@@ -88,12 +88,12 @@ const routes: Routes = [
         data : { functionId : 7},
         children: [
           {
-            path: 'projectTaskDetails/:id', component: ProjectDetailsComponent,
+            path: 'projectTaskDetails/:projectId', component: ProjectDetailsComponent,
             children: [
               { path: 'newTask/:id', component: CreateNewtaskComponent },
               { path: 'updatetask/:id', component: UpdateTaskComponent,
                 children: [
-                  {path: 'updateTask/:id', component: EditTaskComponent}
+                  {path: 'editTask/:id', component: EditTaskComponent}
                 ]
               }
             ],

@@ -10,7 +10,7 @@ import { Holiday } from '../calender.model';
 export class ApiServiceService {
 
   private apiUrl = 'http://localhost:3000/holiday';
-  
+
 
   constructor(private http: HttpClient) { }
 
@@ -30,49 +30,41 @@ export class ApiServiceService {
     return this.http.post(`${this.apiUrl}/resource`, event);
   }
 
-  // In api-service.service.ts
-  // getEvents(holidayType: string) {
-  // // Replace with your actual API endpoint
-  // return this.http.get(`http://localhost:3000/holiday/events?holidayType=${holidayType}`);
-  // }
-
-  // getEvents(holidayType: string): Observable<Holiday[]> {
-  //   return this.http.get<Holiday[]>(`${this.apiUrl}/${holidayType}`);
-  // }
-
+  //get holiday by holiday type
   getEvents(holidayType: string): Observable<Holiday[]> {
     const url = `${this.apiUrl}/${holidayType}`;
     return this.http.get<Holiday[]>(url);
   }
-  
-// api-service.service.ts
-resourceGetEvents(holidayType: string, resourceId: string) {
-  const url = `${this.apiUrl}/${holidayType}?resourceId=${resourceId}`;
-  return this.http.get<any>(url); // Change this to any
-}
 
+  //get the resource holidays by resourceId
+  resourceGetEvents( resourceId: string) {
+    const url = `http://localhost:3000/resource-holiday/${resourceId}`;
+    return this.http.get<any>(url); 
+  }
 
+  //update global holidays
   updateHoliday(id: string, holidayData: any): Observable<Holiday[]> {
-    const url = `${this.apiUrl}/${id}`; // Add a slash (/) between apiUrl and id
+    const url = `${this.apiUrl}/${id}`; 
     return this.http.put(url, holidayData).pipe(
       map(response => response as Holiday[])
     );
   }
 
+  //delete global holidays
   deleteHoliday(id: string): Observable<any> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.delete(url);
   }
 
-    // Method to get all resources to the table 
-    getResources(): Observable<any> {
-      return this.http.get(`${this.apiUrl}`);
-    }
+  // Method to get all resources to the table 
+  getResources(): Observable<any> {
+    return this.http.get(`${this.apiUrl}`);
+  }
 
-    //method to get resource details by id to resource calender
-    getResourceDetails(resourceId: string) {
-      return this.http.get(`http://localhost:3000/resource/holiday/${resourceId}`);
-    }
+  //method to get resource details by id to resource calender
+  getResourceDetails(resourceId: string) {
+    return this.http.get(`http://localhost:3000/resource/holiday/${resourceId}`);
+  }
 
-    
+
 }
