@@ -19,7 +19,7 @@
             <div class="row ms-1 me-1 custom">
                 <div class="border rounded col-12 mb-3 mt-1 pt-1 pb-1">
                     <div class="">
-                        DeliveryManager: {{projectData?.deliveryManager}}
+                        DeliveryManager: {{projectData?.deliveryManager_id}}
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                         Sum of Allocation : {{allcationSum}} %
                     </div>
                     <div class="col-6 ms-3">
-                        <input type="search" [(ngModel)]="searchText" id="form1" class="form-control"
+                        <input type="search" [(ngModel)]="searchText" id="form1" (ngModelChange)="onSearchChange()" class="form-control"
                             placeholder="Search task" aria-label="search">
                     </div>
                 </div>
