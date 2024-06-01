@@ -1,5 +1,6 @@
-<div class="container-fluid col-md-9 col-lg-9">
+<div class="container-fluid col-md-9 col-lg-9" *ngIf="unit">
     <div class="formBox mt-3 pb-3" *ngIf="!showUnitEditForm">
+        <div class="detailBox pb-3">
         <div class="topic border rounded text-center col-9 mb-3 mt-3 pt-1 pb-1 text-white bg-primary ">
             {{unit.unitName}}
         </div>
@@ -13,18 +14,36 @@
                 </div>
             </div>
 
+        </div>
+
             <div class="topic border rounded text-center col-9 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">
                 Current Navigation
             </div>
 
-            <div class="mb-3">
+            <!-- <div class="mb-3">
                 <ng-container *ngIf="ancestors && ancestors.length > 0">
                     <div *ngFor="let ancestor of ancestors; let i = index">
                         <span>{{ ancestor.unitName }}</span>
                         <span *ngIf="i !== ancestors.length - 1"> / </span>
                     </div>
                 </ng-container>
+            </div> -->
+
+            <!-- To display the ancestor units -->
+            <!-- <div class="connector-wrapper">
+                <ul *ngIf="ancestors && ancestors.length > 0">
+                    <li *ngFor="let ancestor of ancestors;">{{ ancestor.unitName }}</li>
+                </ul>
+            </div> -->
+
+            <div class="connector-wrapper">
+                <ul>
+                    <li>Unit 1</li>
+                    <li>Unit 2</li>
+                    <li>Unit 3</li>
+                </ul>
             </div>
+            
 
             <div class="editAndDelete">
                 <button type="button" class="btn btn-outline-primary editButton" (click)="onEdit()">Edit

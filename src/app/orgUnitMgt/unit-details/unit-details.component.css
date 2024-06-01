@@ -19,6 +19,12 @@
     margin-right: auto;
 }
 
+.detailBox {
+    border: 1px solid #ced2d9;
+    margin: 3% auto;
+    border-radius: 5px;
+}
+
 .detailButton {
     width: 100%;
     /* Set the width for desktop */
@@ -49,9 +55,40 @@
 .editButton {
     float: left;
     margin-left: 10%;
+    margin-top: 5%;
 }
 
 .deleteButton {
     float: right;
     margin-right: 10%;
+    margin-top: 5%;
+}
+
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    padding: 2%;
+    background: rgb(119, 183, 210);
+    border-radius: 5px;
+    margin-bottom: 10px;
+    position: relative;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+li:not(:last-child):after {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    height: 20px;
+    width: 1px;
+    background-color: #828282;
 }

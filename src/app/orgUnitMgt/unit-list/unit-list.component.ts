@@ -20,6 +20,11 @@ export class UnitListComponent implements OnInit{
 
   ngOnInit(): void {
     this.loadOrgUnits();
+
+       // Subscribe to the resourceAdded event
+       this.orgUnitMgtService.unitListUpdated.subscribe(() => {
+        this.loadOrgUnits(); // Reload resource list when a new resource is added
+      });
   }
 
   showcomponent(){

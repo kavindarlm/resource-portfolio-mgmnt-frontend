@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { EventEmitter, Injectable } from "@angular/core";
 import { OrganizationalUnitModel } from "../../orgUnitMgt/unit-form/unit-form.model";
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -10,9 +10,11 @@ import { Observable } from "rxjs";
 export class OrgUnitMgtService {
 
     selectedUnit: OrganizationalUnitModel | undefined;
+
+    //Event to update the unit-list
     unitListUpdated = new EventEmitter<void>();
 
-    constructor(private http:HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     setData(data: any) {
         this.selectedUnit = data;
@@ -28,7 +30,7 @@ export class OrgUnitMgtService {
     }
 
     getOrgUnitById(id: number) {
-        return this.http.get<OrganizationalUnitModel>("http://localhost:3000/org-unit/"+id)
+        return this.http.get<OrganizationalUnitModel>("http://localhost:3000/org-unit/" + id)
     }
 
     createOrgUnit(data: OrganizationalUnitModel) {
@@ -36,14 +38,14 @@ export class OrgUnitMgtService {
     }
 
     updateOrgUnit(id: number, unitData: OrganizationalUnitModel) {
-        return this.http.put<OrganizationalUnitModel>("http://localhost:3000/org-unit/"+id, unitData);
+        return this.http.put<OrganizationalUnitModel>("http://localhost:3000/org-unit/" + id, unitData);
     }
 
     deleteOrgUnit(id: number): Observable<any> {
-        return this.http.delete<any>("http://localhost:3000/org-unit/"+id);
+        return this.http.delete<any>("http://localhost:3000/org-unit/" + id);
     }
- 
-    getOrgUnitData(): Observable<any>{
+
+    getOrgUnitData(): Observable<any> {
         return this.http.get<any>("http://localhost:3000/org-unit/hierarchy/data")
     }
 
