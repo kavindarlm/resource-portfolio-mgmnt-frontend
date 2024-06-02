@@ -20,22 +20,6 @@
                 Current Navigation
             </div>
 
-            <!-- <div class="mb-3">
-                <ng-container *ngIf="ancestors && ancestors.length > 0">
-                    <div *ngFor="let ancestor of ancestors; let i = index">
-                        <span>{{ ancestor.unitName }}</span>
-                        <span *ngIf="i !== ancestors.length - 1"> / </span>
-                    </div>
-                </ng-container>
-            </div> -->
-
-            <!-- To display the ancestor units -->
-            <!-- <div class="connector-wrapper">
-                <ul *ngIf="ancestors && ancestors.length > 0">
-                    <li *ngFor="let ancestor of ancestors;">{{ ancestor.unitName }}</li>
-                </ul>
-            </div> -->
-
             <div class="connector-wrapper">
                 <ul *ngFor="let parntUnits of ParentUnit">
                     <li>{{parntUnits.unitName}}</li>

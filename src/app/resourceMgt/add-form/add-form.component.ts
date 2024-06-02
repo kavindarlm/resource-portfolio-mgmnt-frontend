@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { ResourceService } from '../../shared/sevices_resourceMgt/resource.service'; // Adjust the path as necessary
+import { ResourceService } from '../../shared/sevices_resourceMgt/resource.service'; 
 import { JobRoleModel, OrgUnitModel, ResourceModel } from './addformmodel';
 import { catchError } from 'rxjs';
 import { throwError } from 'rxjs';
@@ -20,6 +20,7 @@ import { ToastrService } from 'ngx-toastr';
 
 export class AddFormComponent implements OnInit {
   resourceForm !: FormGroup;
+  showForm = false;
   
 
   jobroles: JobRoleModel[] | undefined; //creating an array for jobroles
@@ -46,6 +47,11 @@ export class AddFormComponent implements OnInit {
       roleId: ['', Validators.required],
       unitId: ['', Validators.required]
     });
+
+        // Subscribe to the jobRoleAdded event
+        this.jobRoleService.jobRoleListUpdated.subscribe(() => {
+          this.loadJobRoles(); // Reload resource list when a new resource is added
+        });
 
 
   }
@@ -139,6 +145,18 @@ export class AddFormComponent implements OnInit {
         words = words.map((word: string) => word.charAt(0).toUpperCase() + word.slice(1));
         resourceNameControl.setValue(words.join(' '));
       }
+    }
+
+    //Event call to call the function to add a new job role
+    onJobRoleChange(event: any) {
+      if (event.target.value === 'other') {
+        this.addNewJobRole();
+      }
+    }
+  
+    addNewJobRole() {
+      this.showForm = !this.showForm;
+      // alert('Add new job role functionality triggered!');
     }
 
 }

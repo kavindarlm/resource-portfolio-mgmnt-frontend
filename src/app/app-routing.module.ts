@@ -149,9 +149,9 @@ const routes: Routes = [
         data : { functionId : 3},
         children: [
           { path: 'unit-form', component: UnitFormComponent },
-          { path: 'unit-details', component: UnitDetailsComponent ,
+          { path: 'unit-details/:id', component: UnitDetailsComponent ,
             children: [
-              { path: 'unit-edit-form', component: UnitEditFormComponent }
+              { path: 'unit-edit-form/:id', component: UnitEditFormComponent }
             ]
           },
           { path: 'unit-tree', component: UnitTreeComponent,

@@ -15,6 +15,14 @@ export class OrgUnitMgtService {
     //Event to update the unit-list
     unitListUpdated = new EventEmitter<void>();
 
+        // This service is for fetching the project details after updating the project
+        private refreshUnitfetch = new BehaviorSubject<void>(undefined);
+        refreshUnitfetch$ = this.refreshUnitfetch.asObservable();
+    
+        refreshUnitfetchData() {
+            this.refreshUnitfetch.next();
+        }
+
     constructor(private http: HttpClient) { }
 
     setData(data: any) {

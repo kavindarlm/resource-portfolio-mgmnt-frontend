@@ -17,8 +17,8 @@ export class UnitDetailsComponent implements OnInit{
   ParentUnit!: OrgUnitRecrsive[];
 
   showUnitEditForm: boolean = false;
-  // navigationList: OrganizationalUnitModel[] = [];
-  ancestors: OrganizationalUnitModel[] = [];
+
+  // ancestors: OrganizationalUnitModel[] = [];
 
   constructor(private orgUnitMgtService: OrgUnitMgtService,
               private route: ActivatedRoute,
@@ -26,58 +26,36 @@ export class UnitDetailsComponent implements OnInit{
               private toaster: ToastrService
   ) {}
 
-   //before routing
   ngOnInit(): void {
-    console.log(this.unit);
-    this.OrgUnitid= this.unit.unitId;
-    this.getParentOrgUnitsByUnitId(this.OrgUnitid);
+    // console.log(this.unit);
+    // this.OrgUnitid= this.unit.unitId;
+    // this.getParentOrgUnitsByUnitId(this.OrgUnitid);
 
-    if (this.unit) {
-      // this.loadAncestors(this.unit.unitId);
-      console.log('Unit details:', this.unit);
-    }
+    // if (this.unit) {
+    //   // this.loadAncestors(this.unit.unitId);
+    //   console.log('Unit details:', this.unit);
+    // }
+
+    //After adding routing
+    this.route.params.subscribe(params => {
+      const unitId = +params['id']; // Retrieve unit ID from route parameters
+      if (unitId) {
+        this.loadUnitDetails(unitId);
+      }
+    });
+  }
+
+  loadUnitDetails(unitId: number) {
+    this.orgUnitMgtService.getOrgUnitById(unitId).subscribe(unit => {
+      this.unit = unit;
+      this.OrgUnitid = unit.unitId;
+      this.getParentOrgUnitsByUnitId(this.OrgUnitid);
+    });
   }
 
   onEdit() {
     this.showUnitEditForm = true;
   }
-
-//load ancestors from backend
-  // loadAncestors(unitId: number) {
-  //   this.orgUnitMgtService.getAncestors(unitId).subscribe(
-  //     (data: OrganizationalUnitModel[]) => {
-  //       this.ancestors = data;
-  //       console.log("Ancestors :" , this.ancestors);
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching ancestors:', error);
-  //     }
-  //   );
-  // }
-
-//static method to display ancestors
-
-// loadAncestors(unitId: number) {
-//   // Static data for ancestors demonstration
-//   const allUnits = OrganizationalUnitModel[] = [
-//     { unitId: 1, unitName: 'Unit 1', parentId: null, description: 'Description of Unit 1' },
-//     { unitId: 3, unitName: 'Unit 3', parentId: 1, description: 'Description of Unit 3' },
-//     { unitId: 5, unitName: 'Unit 5', parentId: 3, description: 'Description of Unit 5' }
-//   ];
-
-//   this.ancestors = [];
-//   let currentUnit = allUnits.find(unit => unit.unitId === unitId);
-
-//   while (currentUnit && currentUnit.parentId !== null) {
-//     currentUnit = allUnits.find(unit => unit.unitId === currentUnit.parentId);
-//     if (currentUnit) {
-//       this.ancestors.unshift(currentUnit); // Add to the beginning of the ancestors array
-//     }
-//   }
-
-//   console.log("Ancestors :", this.ancestors);
-// }
-
 
   onDeleteUnit() {
       // Check if the unit has children units
@@ -96,31 +74,6 @@ export class UnitDetailsComponent implements OnInit{
     
     );
   }
-
-    // onDeleteResource() {
-  //   this.resourceService.deleteResource(this.selectedResource.resourceId)
-  //   .subscribe((res:ResourceModel)=> {
-  //     console.log('Resource deleted successfully:', res);
-  //     this.deleteSucceseMassege(this.selectedResource.resourceId);
-  //     this.formValue.reset();
-  //     this.resourceService.resourceListUpdated.emit(); // Emit the event
-  //     this.router.navigate(['pages-body/first-view']);
-  //   },
-  //   (error) => {
-  //     console.error('Error occurred while deleting resource:', error);
-  //     // Handle error appropriately, such as displaying an error message to the user.
-  //   }
-  //   );
-  // }
-
-  // //Delete Success Message
-  // deleteSucceseMassege(unitName: string) {
-  //   this.toaster.success(
-  //     `${unitName} Deleted successfully`,
-  //     'Unit Deleted Successfully',
-  //     { timeOut: 3000 }
-  //   );
-  // }
 
   //get all the parent units belong to the org unitId
   getParentOrgUnitsByUnitId(unitId: number) {
