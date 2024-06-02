@@ -3,6 +3,7 @@ import { OrganizationalUnitModel } from '../unit-form/unit-form.model';
 import { OrgUnitMgtService } from '../../shared/orgUnitMgt_services/orgUnitMgt.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { OrgUnitRecrsive } from '../unit-tree/org-unitmodel';
 
 @Component({
   selector: 'app-unit-details',
@@ -12,6 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 export class UnitDetailsComponent implements OnInit{
   @Input()
   unit!: OrganizationalUnitModel;
+  OrgUnitid: number | undefined;
+  ParentUnit!: OrgUnitRecrsive[];
 
   showUnitEditForm: boolean = false;
   // navigationList: OrganizationalUnitModel[] = [];
@@ -26,29 +29,31 @@ export class UnitDetailsComponent implements OnInit{
    //before routing
   ngOnInit(): void {
     console.log(this.unit);
+    this.OrgUnitid= this.unit.unitId;
+    this.getParentOrgUnitsByUnitId(this.OrgUnitid);
 
     if (this.unit) {
-      this.loadAncestors(this.unit.unitId);
+      // this.loadAncestors(this.unit.unitId);
+      console.log('Unit details:', this.unit);
     }
   }
-
 
   onEdit() {
     this.showUnitEditForm = true;
   }
 
 //load ancestors from backend
-  loadAncestors(unitId: number) {
-    this.orgUnitMgtService.getAncestors(unitId).subscribe(
-      (data: OrganizationalUnitModel[]) => {
-        this.ancestors = data;
-        console.log("Ancestors :" , this.ancestors);
-      },
-      (error) => {
-        console.error('Error fetching ancestors:', error);
-      }
-    );
-  }
+  // loadAncestors(unitId: number) {
+  //   this.orgUnitMgtService.getAncestors(unitId).subscribe(
+  //     (data: OrganizationalUnitModel[]) => {
+  //       this.ancestors = data;
+  //       console.log("Ancestors :" , this.ancestors);
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching ancestors:', error);
+  //     }
+  //   );
+  // }
 
 //static method to display ancestors
 
@@ -116,6 +121,14 @@ export class UnitDetailsComponent implements OnInit{
   //     { timeOut: 3000 }
   //   );
   // }
+
+  //get all the parent units belong to the org unitId
+  getParentOrgUnitsByUnitId(unitId: number) {
+    this.orgUnitMgtService.getOrgUnitRecursiveData(unitId).subscribe(res => {
+      this.ParentUnit = res;
+      console.log(this.ParentUnit);
+    });
+  }
 
 }
 

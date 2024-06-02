@@ -37,10 +37,8 @@
             </div> -->
 
             <div class="connector-wrapper">
-                <ul>
-                    <li>Unit 1</li>
-                    <li>Unit 2</li>
-                    <li>Unit 3</li>
+                <ul *ngFor="let parntUnits of ParentUnit">
+                    <li>{{parntUnits.unitName}}</li>
                 </ul>
             </div>
             

@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { EventEmitter, Injectable } from "@angular/core";
 import { OrganizationalUnitModel } from "../../orgUnitMgt/unit-form/unit-form.model";
 import { BehaviorSubject, Observable } from "rxjs";
+import { OrgUnitRecrsive } from "../../orgUnitMgt/unit-tree/org-unitmodel";
 
 @Injectable({
     providedIn: 'root'
@@ -51,5 +52,9 @@ export class OrgUnitMgtService {
 
     getAncestors(unitId: number): Observable<OrganizationalUnitModel[]> {
         return this.http.get<OrganizationalUnitModel[]>(`http://localhost:3000/org-unit/${unitId}/ancestors`);
+    }
+
+    getOrgUnitRecursiveData(unitId: number): Observable<OrgUnitRecrsive[]>{
+        return this.http.get<OrgUnitRecrsive[]>("http://localhost:3000/org-unit/parent/" + unitId);
     }
 }
