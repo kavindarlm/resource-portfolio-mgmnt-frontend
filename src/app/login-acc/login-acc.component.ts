@@ -39,10 +39,14 @@ export class LoginAccComponent {
   }
 
   showSuccess() {
-    this.toastr.success('Login Successful');
+    this.toastr.success('Login Successful', 'Welcome',{
+      timeOut: 2000
+    });
   }
 
   showError() {
-    this.toastr.error('Login Failed');
+    this.toastr.error('Login Failed', 'Invalid Credentials',{
+      timeOut: 2000
+    });
   }
 }
