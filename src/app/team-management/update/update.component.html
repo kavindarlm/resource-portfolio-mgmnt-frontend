@@ -35,15 +35,17 @@
 
         <div class="table-responsive-sm  table-responsive-md table-responsive">
           <table class="table table-bordered table-striped table-hover table-sm">
+  
             <thead class="thead-dark fs-6 fst-normal">
-              <tr>
+              <tr class="">
                 <th scope="col" class="col-4 text-center">Resource Id</th>
                 <th scope="col" class="col-4 text-center">Job Role</th>
                 <th scope="col" class="col-4 text-center">Org. Unit</th>
               </tr>
             </thead>
-            <tbody *ngFor="let resource of teamData.resources; let i = index" class="border text-center">
-              <tr>
+            
+            <tbody>
+              <tr  *ngFor="let resource of teamData.resources; let i = index" class="border text-center">
                 <td class="col-4 border text-center">{{ resource.resourceId }}</td>
                 <td class="col-4 border text-center">{{ resource.roleName }}</td>
                 <td class="col-4 border text-center">{{ resource.unitName }}</td>

@@ -24,6 +24,11 @@ export class UpdateResourcTableComponent implements OnChanges {
   @Input() inputSelectedResources: any[] = [];
   @Input() resources: any[] = []; // Make sure this line is present
 
+  jobRoles: string[] = []; // array to store job roles for filtering
+  orgUnits: string[] = []; // array to store org units for filtering
+  selectedJobRole!: string; // selected job role in drop down
+  selectedOrgUnit!: string; //selected org unit in drop down
+
   constructor(
     private service: ServiceService,
     private resourceService: ResourceService,
@@ -47,12 +52,14 @@ export class UpdateResourcTableComponent implements OnChanges {
         this.errorMessage = 'Invalid id. Please check the URL.';
       }
     });
+    this.resourceService.getJobRoles().subscribe(jobRoles => this.jobRoles = jobRoles);// get job roles to fiter resources
+    this.resourceService.getOrgUnits().subscribe(orgUnits => this.orgUnits = orgUnits);//get org units to filter resources
   }
 
-  loadResources(teamId: number): void {
+  loadResources(teamId: number, jobRole?: string, orgUnit?: string): void {
     forkJoin({
-      resourcesByTeamId: this.resourceService.getResourcesByTeamId(teamId),
-      resourcesByTeamIdNull: this.resourceService.getResourcesByTeamIdNull()
+      resourcesByTeamId: this.resourceService.getResourcesByTeamId(teamId, jobRole, orgUnit),
+      resourcesByTeamIdNull: this.resourceService.getResourcesByTeamIdNull(jobRole, orgUnit)
     }).subscribe(results => {
       this.teamResources = results.resourcesByTeamId.map((resource: { resourceId: string, roleName: string, unitName: string, teamId: number }) => ({
         ...resource,
