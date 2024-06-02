@@ -72,9 +72,7 @@ export class CommonCalenderComponent {
   selectedDates: NgbDate[] = [];
   holidays: { date: NgbDate, id: number }[] = [];
   deselectedHolidays: Holiday[] = [];
-  // Declare a new BehaviorSubject to hold the holidays array
- // Declare a new BehaviorSubject to hold the holidays array
-holidays$ = new BehaviorSubject<{ date: NgbDate, id: number }[]>([]);
+
 
   @Input() actionType: 'add' | 'edit' = 'add';
   @Output() addEvent = new EventEmitter<{ selectedDates: NgbDate[], holidayType: string }>();
@@ -90,42 +88,18 @@ holidays$ = new BehaviorSubject<{ date: NgbDate, id: number }[]>([]);
     this.loadHolidays();
   }
 
-  // loadHolidays() {
-  //   if (this.holidayType === 'resource' && this.resourceId) {
-  //     this.apiService.resourceGetEvents(this.resourceId).subscribe((holidays: Holiday[]) => {
-  //       this.holidays = holidays.map((holiday: Holiday) => {
-  //         const date = new Date(holiday.date);
-  //         return {
-  //           date: new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
-  //           id: holiday.holy_id
-  //         };
-  //       });
-  //     });
-  //   } else {
-  //     this.apiService.getEvents(this.holidayType).subscribe((holidays: Holiday[]) => {
-  //       this.holidays = holidays.map((holiday: Holiday) => {
-  //         const date = new Date(holiday.date);
-  //         return {
-  //           date: new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
-  //           id: holiday.holy_id
-  //         };
-  //       });
-  //     });
-  //   }
-  // }
-
   loadHolidays() {
     if (this.holidayType === 'resource' && this.resourceId) {
-      this.apiService.resourceGetEvents(this.resourceId).subscribe((holidays: Holiday[]) => {
-        this.holidays = holidays.map((holiday: Holiday) => {
-          const date = new Date(holiday.date);
+      console.log('resourceId', this.resourceId);
+      this.apiService.resourceGetEvents(this.resourceId).subscribe((holidays: any[]) => {
+        this.holidays = holidays.map((holidayData: any) => {
+          const date = new Date(holidayData.holiday.date);
           return {
             date: new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
-            id: holiday.holy_id
+            id: holidayData.holiday.holy_id
           };
         });
-        // Update the BehaviorSubject with the new holidays array
-        this.holidays$.next(this.holidays);
+        console.log ('holidays', this.holidays);
       });
     } else {
       this.apiService.getEvents(this.holidayType).subscribe((holidays: Holiday[]) => {
@@ -136,11 +110,10 @@ holidays$ = new BehaviorSubject<{ date: NgbDate, id: number }[]>([]);
             id: holiday.holy_id
           };
         });
-        // Update the BehaviorSubject with the new holidays array
-        this.holidays$.next(this.holidays);
       });
     }
   }
+
 
   onDateSelection(date: NgbDate) {
     if (this.actionType === 'edit') {
@@ -169,24 +142,9 @@ holidays$ = new BehaviorSubject<{ date: NgbDate, id: number }[]>([]);
     return this.selectedDates.length === 1 && date.after(this.selectedDates[0]);
   }
 
- 
-  
-
   isSelected(date: NgbDate) {
-    const holidays = this.holidays$.getValue();
-    console.log('isSelected called with date:', date);
-    console.log('holidays array:', this.holidays);
-    if (this.holidayType === 'resource') {
-      const isResourceHoliday = this.holidays.some(holiday => holiday.date.year === date.year && holiday.date.month === date.month && holiday.date.day === date.day);
-      console.log('isResourceHoliday:', isResourceHoliday);
-      return isResourceHoliday;
-    } else {
-      const isSelectedDate = this.selectedDates.some(selectedDate => selectedDate.year === date.year && selectedDate.month === date.month && selectedDate.day === date.day);
-      const isHoliday = this.holidays.some(holiday => holiday.date.year === date.year && holiday.date.month === date.month && holiday.date.day === date.day);
-      console.log('isSelectedDate:', isSelectedDate);
-      console.log('isHoliday:', isHoliday);
-      return isSelectedDate || isHoliday;
-    }
+    return this.selectedDates.some((selectedDate) => selectedDate.equals(date)) || 
+           this.holidays.some((holiday) => holiday.date.equals(date));
   }
 
   onAddButtonClick() {
