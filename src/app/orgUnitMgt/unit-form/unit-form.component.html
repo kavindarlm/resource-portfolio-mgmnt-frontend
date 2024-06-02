@@ -7,15 +7,18 @@
 
                 <div class="inputField d-flex justify-content-center">
                     <label for="unitName" class="form-label">Unit Name: </label>
-                    <input type="text" class="form-control" formControlName="unitName" id="unitName"
-                        placeholder="Enter Unit Name">
+                    <input type="text" class="form-control" formControlName="unitName"
+                    [ngClass]="{'is-invalid': unitForm.controls['unitName'].invalid && unitForm.controls['unitName'].touched}" 
+                    id="unitName" placeholder="Enter Unit Name" (keyup)="capitalizeFirstLetter()">
                 </div>
             </div>
             <div class="form-group mb-3">
 
                 <div class="inputField d-flex justify-content-center">
                     <label for="parentUnit" class="form-label">Parent Unit: </label>
-                    <select class="form-select" formControlName="parentId" id="parentUnit">
+                    <select class="form-select" formControlName="parentId"
+                    [ngClass]="{'is-invalid': unitForm.controls['parentId'].invalid && unitForm.controls['parentId'].touched}" 
+                    id="parentUnit">
                         <option disabled selected value="">Select Parent Unit</option>
                         <option *ngFor="let unit of orgunits" [value]="unit.unitId">{{unit.unitName}}</option>
                     </select>
@@ -24,7 +27,9 @@
             <div class="form-group mb-3">
                 <div class="inputField d-flex justify-content-center">
                     <label for="description" class="form-label">Description: </label>
-                    <textarea name="description" class="form-control" formControlName="description" id="description"
+                    <textarea name="description" class="form-control" formControlName="description" 
+                    [ngClass]="{'is-invalid': unitForm.controls['description'].invalid && unitForm.controls['description'].touched}"
+                    id="description"
                         cols="50" rows="5" placeholder="Add a description"></textarea>
                 </div>
             </div>

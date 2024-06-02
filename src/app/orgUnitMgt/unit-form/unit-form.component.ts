@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OrganizationalUnitModel } from './unit-form.model';
 import { HttpClient } from '@angular/common/http';
 import { OrgUnitMgtService } from '../../shared/orgUnitMgt_services/orgUnitMgt.service';
@@ -28,9 +28,9 @@ export class UnitFormComponent implements OnInit{
     this.loadOrgUnits();
 
     this.unitForm = this.formBuilder.group ({
-      unitName: [''],
-      parentId:[''],
-      description: ['']
+      unitName: ['', Validators.required],
+      parentId:['', Validators.required],
+      description: ['', Validators.required]
     });
   }
 
@@ -67,9 +67,9 @@ export class UnitFormComponent implements OnInit{
     )
     .subscribe((res => {
       console.log(data);
-      this.unitForm.reset();
       this.addsuccesemassege(data.unitName);
-      this.orgUnitMgtService.unitListUpdated.emit();
+      this.orgUnitMgtService.unitListUpdated.emit(); //Call the event to refresh the list
+      this.unitForm.reset();
       this.router.navigate(['pages-body/unit-list']);
     }))
   }
@@ -85,13 +85,13 @@ export class UnitFormComponent implements OnInit{
       );
     }
 
-  //   capitalizeFirstLetter() {
-  //     const resourceNameControl = this.resourceForm.get('resourceName');
-  //     if (resourceNameControl && resourceNameControl.value && resourceNameControl.value.length > 1) {
-  //       let words = resourceNameControl.value.split(' ');
-  //       words = words.map((word: string) => word.charAt(0).toUpperCase() + word.slice(1));
-  //       resourceNameControl.setValue(words.join(' '));
-  //     }
-  //   }
+    capitalizeFirstLetter() {
+      const unitNameControl = this.unitForm.get('unitName');
+      if (unitNameControl && unitNameControl.value && unitNameControl.value.length > 1) {
+        let words = unitNameControl.value.split(' ');
+        words = words.map((word: string) => word.charAt(0).toUpperCase() + word.slice(1));
+        unitNameControl.setValue(words.join(' '));
+      }
+    }
 
 }
