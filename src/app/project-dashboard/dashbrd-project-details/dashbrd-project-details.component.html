@@ -27,17 +27,19 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4">
                 <div class="text-start">
-                    <i class="bi bi-person-workspace me-2"></i>No. of staff
-                    <p class="font-color text-center">10</p>
+                    <i class="bi bi-person-workspace me-2"></i>No. of Resources
+                    <p class="font-color text-center">{{resource_count}}</p>
                 </div>
             </div>
         </div>
         <div class="small-text font-color">
-            <p class="fw-normal text-capitalize">Project Manager : {{projectData?.projectManager_id}}</p>
+            <p class="fw-normal text-capitalize" style="line-height: 0.8;"><span class="text-black-50">Project Manager : </span>{{managerDetails?.resourceName}}</p>
+            <p class="fw-normal text-capitalize" style="line-height: 0.8;"><span class="text-black-50">Delivary Manager : </span>{{delivaryManagerDetails?.resourceName}}</p>
         </div>
         <div class="row font-color fs-6">
             <div class="col-6">
               <div class="small-text">
+                <p class="fw-normal text-capitalize text-black-50" style="line-height: 0.8;">Resources :</p>
                 <div class="row lh-1" *ngFor="let resource_name of resource_names.slice(0, 10)">
                   <div class="col-lg-1 col-md-1 col-sm-1">
                     <i class="bi bi-person-circle" style="color: rgb(8, 140, 255);"></i>

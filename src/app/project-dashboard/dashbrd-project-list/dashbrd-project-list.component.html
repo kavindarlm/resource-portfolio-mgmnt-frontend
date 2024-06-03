@@ -1,24 +1,30 @@
 <app-spinner></app-spinner>
 <div class="custom-overflow-y py-0">
     <div class="row">
-        <div class="col-xl-2 col-lg-2 ">
+        <div class="col-xl-3 col-lg-3 ">
             <div class="input-group rounded py-0">
                 <span class="input-group-text border-0" id="search-addon">
                     <i class="bi bi-filter"></i>
                 </span>
-                <input type="input" class="form-control rounded small-text" placeholder="Project Criticality"
-                    aria-label="Search" aria-describedby="search-addon" />
+                <select class="form-select rounded small-text w-25" [(ngModel)]="selectedCriticality"
+                    (ngModelChange)="onCriticalityChange()" aria-placeholder="Select">
+                    <option value="">All</option>
+                    <option value="1">High Criticality</option>
+                    <option value="2">Medium Criticality</option>
+                    <option value="3">Low Criticality</option>
+                </select>
             </div>
         </div>
-        <div class="col-xl-10 col-lg-10">
+        <div class="col-xl-9 col-lg-9">
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <!-- Leave this div empty -->
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-5">
                     <div class="input-group rounded">
-                        <input type="search" class="form-control rounded small-text" placeholder="Search" aria-label="Search"
-                            aria-describedby="search-addon" [(ngModel)]="searchText" (ngModelChange)="onSearchChange()" />
+                        <input type="search" class="form-control rounded small-text" placeholder="Search"
+                            aria-label="Search" aria-describedby="search-addon" [(ngModel)]="searchText"
+                            (ngModelChange)="onSearchChange()" />
                         <span class="input-group-text border-0" id="search-addon">
                             <i class="bi bi-search"></i>
                         </span>
@@ -37,9 +43,11 @@
                         <button class="btn fw-medium small-text font-color btn-sm view-button" (click)="viewMore()"
                             routerLink="dashboard-projectdetails/{{project.projectid}}">ViewMore</button>
                         <div class="card-body py-2">
-                            <hr class="position-absolute w-100 left-0" style="top: 10%; border-top: 1px solid rgb(95, 95, 95); margin-left: -15px;">
+                            <hr class="position-absolute w-100 left-0"
+                                style="top: 10%; border-top: 1px solid rgb(95, 95, 95); margin-left: -15px;">
                             <div class="border rounded-circle justify-content-center align-items-center d-flex position-relative"
-                                [ngClass]="getCriticalityClass(project.criticality_id)" style="z-index: 1; width: 50px; height: 50px;">
+                                [ngClass]="getCriticalityClass(project.criticality_id)"
+                                style="z-index: 1; width: 50px; height: 50px;">
                                 <span><i class="bi bi-snow2 fs-4"></i></span>
                             </div>
                             <div class="fs-6 fw-semibold font-color mt-1 text-capitalize">{{ project.projectName }}
