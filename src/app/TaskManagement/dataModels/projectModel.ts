@@ -36,3 +36,8 @@ export interface TaskApiResponse {
   // Add other properties if needed
 }
 
+export interface ResourceNameandId{
+  resourceId: '';
+  resourceName: '';
+}
+

@@ -83,8 +83,12 @@ export class UpdateComponent implements OnInit {
     console.log('Received resourceSelected event', event);
     if (event.selected) {
       this.teamData.resources.push(event.resource);
+      this.selectedResources.push(event.resource);
     } else {
       this.teamData.resources = this.teamData.resources.filter(
+        (resource: Resource) => resource.resourceId !== event.resource.resourceId
+      );
+      this.selectedResources = this.selectedResources.filter(
         (resource: Resource) => resource.resourceId !== event.resource.resourceId
       );
     }
