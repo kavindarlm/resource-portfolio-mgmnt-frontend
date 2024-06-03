@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login-acc',
@@ -8,7 +9,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginAccComponent {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private toastr: ToastrService) { }
 
   user = {
     user_email: '',
@@ -21,8 +22,31 @@ export class LoginAccComponent {
 
   login() {
     this.authService.login(this.user.user_email, this.user.password).subscribe({
-      next: () => console.log('Login successful'),
-      error: () => console.log('Login failed')
+      next: () => {
+        console.log('Login successful');
+        this.showSuccess();
+      },
+      error: () => {
+        console.log('Login failed');
+        this.showError();
+        this.user = {
+          user_email: '',
+          password: '',
+          user_id: ''
+        };
+      }
+    });
+  }
+
+  showSuccess() {
+    this.toastr.success('Login Successful', 'Welcome',{
+      timeOut: 2000
+    });
+  }
+
+  showError() {
+    this.toastr.error('Login Failed', 'Invalid Credentials',{
+      timeOut: 2000
     });
   }
 }
