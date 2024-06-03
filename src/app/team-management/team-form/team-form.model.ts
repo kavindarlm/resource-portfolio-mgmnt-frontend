@@ -17,6 +17,7 @@ export interface Resource {
   roleName: string; // was jobRole
   unitName: string; // was orgUnit
   teamId?: number;
+  isSelected?: boolean; // Add this line
 }
 
 export interface dataModel {

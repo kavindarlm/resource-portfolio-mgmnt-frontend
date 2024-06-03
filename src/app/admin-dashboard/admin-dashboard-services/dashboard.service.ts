@@ -83,4 +83,14 @@ export class DashboardService {
         const params = new HttpParams().set('s', username);
         return this.http.get<UserModel[]>("http://localhost:3000/api/searchUserName/search", {params});
     }
+
+    //is admin
+    isAdmin(id: number) {
+        return this.http.get<UserModel>('http://localhost:3000/api/isAdmin/' + id);
+    }
+
+    //get admin count
+    getAdminCount() {
+        return this.http.get('http://localhost:3000/api/adminCount');
+    }
 }

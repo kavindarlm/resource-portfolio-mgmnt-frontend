@@ -18,9 +18,11 @@
                     <p class="font-color2">Job Role :</p>
                     <select class="form-select inputBox" formControlName="roleId"
                         [ngClass]="{'is-invalid': resourceForm.controls['roleId'].invalid && resourceForm.controls['roleId'].touched}"
-                        id="jobRole">
+                        id="jobRole" (change)="onJobRoleChange($event)"> <!--Add an event to call the function to add a new job-role-->
                         <option disabled selected value="">Select Job Role</option>
                         <option *ngFor="let role of jobroles" [value]="role.roleId">{{role.roleName}}</option>
+                        <!-- To add a job role which is not in the database yet -->
+                        <option value="other">Other</option>
                     </select>
                 </div>
             </div>
@@ -44,3 +46,6 @@
 
     </div>
 </div>
+
+<!-- To call the add-jobrole component -->
+<app-add-jobrole *ngIf="showForm"></app-add-jobrole>

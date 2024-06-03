@@ -1,7 +1,7 @@
 export interface OrganizationalUnitModel {
     unitId: number;
     unitName: string;
-    parentId?: number;
+    parentId: number | null;
     description: string;
     children?: OrganizationalUnitModel[];
 }

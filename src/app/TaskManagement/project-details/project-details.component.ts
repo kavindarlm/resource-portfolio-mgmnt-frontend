@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { taskApiService } from '../services/taskApi.service';
-import { projectModel, taskModel } from '../dataModels/projectModel';
+import { ResourceNameandId, projectModel, taskModel } from '../dataModels/projectModel';
 import { taskSharedService } from '../services/taskshared.service';
 import { Subscription, catchError, of } from 'rxjs';
 
@@ -26,6 +26,8 @@ export class ProjectDetailsComponent implements OnInit {
   allcationSum!: number;
   projectProgress: number | null = null;
   errorMessage: string | null = null;
+  resoureIdAndName: undefined | ResourceNameandId;
+  delivaryMangerId!: string;
 
   // Define the subscription and subscriptionTwo properties
   private subscription!: Subscription;
@@ -61,6 +63,8 @@ export class ProjectDetailsComponent implements OnInit {
   getProjectDetails() {
     this.api.fetchProject(this.dataid).subscribe((data: projectModel) => {
       this.projectData = data;
+      this.delivaryMangerId = data.deliveryManager_id;
+      this.getResourceName();
     });
   }
 
@@ -110,5 +114,11 @@ export class ProjectDetailsComponent implements OnInit {
     this.api.searchTaskByName(this.searchText).subscribe((res) => {
       this.TaskData = res;
     });
+  }
+
+  getResourceName(){
+    this.api.getResourceNameByResourceId(this.delivaryMangerId).subscribe(res => {
+      this.resoureIdAndName = res;
+    })
   }
 }

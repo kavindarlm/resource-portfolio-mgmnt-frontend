@@ -72,6 +72,8 @@ export class TeamFormComponent implements OnInit {
           this.router.navigate(['/pages-body/teamlistcomponent']); // Navigate to the team list page
         }
       });
+    }else {
+      this.errorMessage = 'Please fill out all required fields.';
     }
   }
 }

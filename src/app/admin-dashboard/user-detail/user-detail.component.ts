@@ -87,21 +87,40 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Function to delete the user details
+  // Function to check the user details before the delete
   deleteUserDetail() {
-    if (confirm('Are you sure you want to delete this user?'))
-    this.dashboardService.deleteUser(this.userid).subscribe(
-      (res) => { // Success callback
-        console.log(res);
-        this.sharedService.refreshUserList();
-        this.showSuccess(this.userForm.user_name);
-        this.router.navigate(['/admin-dashboard']);
-      },
-      (err) => { // Error callback
-        console.error('Error deleting user:', err);
-        // Handle the error here. For example, you could show an error message to the user.
+    this.dashboardService.isAdmin(this.userid).subscribe(isAdmin => {
+      if (isAdmin) {
+        this.dashboardService.getAdminCount().subscribe(adminCount => {
+          if (Number(adminCount) > 1) {
+            this.deleteUser();
+          } else {
+            console.error('Cannot delete the only admin');
+            this.cantDelete();
+          }
+        });
+      } else {
+        this.deleteUser();
       }
-    );
+    });
+  }
+  
+  // Function to delete the user
+  deleteUser() {
+    if (confirm('Are you sure you want to delete this user?')) {
+      this.dashboardService.deleteUser(this.userid).subscribe(
+        (res) => { // Success callback
+          console.log(res);
+          this.sharedService.refreshUserList();
+          this.deleteSuccess(this.userForm.user_name);
+          this.router.navigate(['/admin-dashboard']);
+        },
+        (err) => { // Error callback
+          console.error('Error deleting user:', err);
+          // Handle the error here. For example, you could show an error message to the user.
+        }
+      );
+    }
   }
 
   // function to get the user functions
@@ -126,14 +145,23 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  showSuccess(username: string) {
+  // Function to Delete success message
+  deleteSuccess(username: string) {
     this.toastr.success(`${username} Delete successfully`, 'Deleted User', {
       timeOut: 3000,
     });
   }
 
+  // Function to Edit success message
   editSuccess(username: string) {
     this.toastr.success(`${username} Edit successfully`, 'Edited User', {
+      timeOut: 3000,
+    });
+  }
+
+  // Function to show error message when trying to delete the only admin
+  cantDelete() {
+    this.toastr.error('Cannot delete the only admin', 'Error', {
       timeOut: 3000,
     });
   }
