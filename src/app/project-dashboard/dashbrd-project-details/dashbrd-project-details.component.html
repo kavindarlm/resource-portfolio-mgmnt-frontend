@@ -7,7 +7,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             <div class="border rounded-circle justify-content-center align-items-center d-flex position-relative"
-                [ngClass]="projectData?.criticality" style="z-index: 2; width: 40px; height: 40px;">
+                [ngClass]="getCriticalityClass()" style="z-index: 2; width: 40px; height: 40px;">
                 <span><i class="bi bi-snow2"></i></span>
             </div>
         </div>
@@ -27,35 +27,37 @@
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4">
                 <div class="text-start">
-                    <i class="bi bi-person-workspace me-2"></i>No. of staff
-                    <p class="font-color text-center">10</p>
+                    <i class="bi bi-person-workspace me-2"></i>No. of Resources
+                    <p class="font-color text-center">{{resource_count}}</p>
                 </div>
             </div>
         </div>
         <div class="small-text font-color">
-            <p class="fw-normal text-capitalize">Project Manager : {{projectData?.projectManager}}</p>
+            <p class="fw-normal text-capitalize" style="line-height: 0.8;"><span class="text-black-50">Project Manager : </span>{{managerDetails?.resourceName}}</p>
+            <p class="fw-normal text-capitalize" style="line-height: 0.8;"><span class="text-black-50">Delivary Manager : </span>{{delivaryManagerDetails?.resourceName}}</p>
         </div>
         <div class="row font-color fs-6">
             <div class="col-6">
               <div class="small-text">
-                <div class="row lh-1" *ngFor="let name of names.slice(0, 10)">
+                <p class="fw-normal text-capitalize text-black-50" style="line-height: 0.8;">Resources :</p>
+                <div class="row lh-1" *ngFor="let resource_name of resource_names.slice(0, 10)">
                   <div class="col-lg-1 col-md-1 col-sm-1">
                     <i class="bi bi-person-circle" style="color: rgb(8, 140, 255);"></i>
                   </div>
                   <div class="col-lg-10 col-md-10 col-sm-10">
-                    <p class="fw-normal text-capitalize">{{ name }}</p>
+                    <p class="fw-normal text-capitalize">{{ resource_name }}</p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-6">
               <div class="small-text">
-                <div class="row lh-1" *ngFor="let name of names.slice(10)">
+                <div class="row lh-1" *ngFor="let resource_name of resource_names.slice(10)">
                   <div class="col-lg-1 col-md-1 col-sm-1">
                     <i class="bi bi-person-circle" style="color: rgb(8, 140, 255);"></i>
                   </div>
                   <div class="col-lg-10 col-md-10 col-sm-10">
-                    <p class="fw-normal text-capitalize">{{ name }}</p>
+                    <p class="fw-normal text-capitalize">{{ resource_name }}</p>
                   </div>
                 </div>
               </div>

@@ -14,8 +14,32 @@
             aria-label="search">
         </div>
 
+        <!-- filter by unit -->
+        <div class="row col-12 mt-1">
+          <div class="col-6">
+            <label for="jobRole">Filter by Job Role:</label>
+            <select [(ngModel)]="selectedJobRole" (ngModelChange)="loadResources(selectedJobRole, selectedOrgUnit)"
+              class="col-12">
+              <option value="" disabled selected>Filter by Job Role</option>
+              <option *ngFor="let jobRole of jobRoles" [value]="jobRole">{{ jobRole }}</option>
+              <option value="">None</option>
+            </select>
+          </div>
+
+          <!-- filter by job -->
+          <div class="col-6">
+            <label for="orgUnit">Filter by Org. Unit:</label>
+            <select [(ngModel)]="selectedOrgUnit" (ngModelChange)="loadResources(selectedJobRole, selectedOrgUnit)"
+              class="col-12">
+              <option value="" disabled selected>Filter by Org Unit</option>
+              <option *ngFor="let orgUnit of orgUnits" [value]="orgUnit">{{ orgUnit }}</option>
+              <option value="">None</option>
+            </select>
+          </div>
+        </div>
+
         <div class="table-responsive-sm  table-responsive-md table-responsive">
-          <table class="table table-bordered table-striped table-hover table-sm text-center mt-1">
+          <table class="table table-bordered table-striped table-hover table-sm text-center mt-2">
             <thead class="thead-dark fs-6 fst-normal">
               <tr class="">
                 <th scope="col" class="col-4 text-center">
@@ -36,8 +60,8 @@
                 <td class="text-center ">{{resource.roleName}}</td>
                 <td class="text-center ">{{resource.unitName}}</td>
                 <td>
-                  <button class="btn btn-outline-primary w-100  custom-button btn-sm curser "
-                    (click)="onSelect(resource)" [ngClass]="{ 'selected': isSelected(resource) }">Select</button>
+                  <button class="btn w-100 custom-button btn-sm curser" (click)="onSelect(resource)"
+                  [ngClass]="isSelected(resource) ? 'btn-success' : 'btn-outline-success'" > {{ isSelected(resource) ? 'Selected' : 'Select' }} </button>
                 </td>
               </tr>
             </tbody>

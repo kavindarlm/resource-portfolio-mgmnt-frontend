@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { TaskApiResponse, projectModel, taskModel, taskUpdateModel } from "../dataModels/projectModel";
+import { ResourceNameandId, TaskApiResponse, projectModel, taskModel, taskUpdateModel } from "../dataModels/projectModel";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -77,6 +77,12 @@ export class taskApiService {
   searchTaskByName(taskName: string){
     const params = new HttpParams().set('s', taskName);
     return this.http.get<taskModel[]>("http://localhost:3000/task/searchtaskName/search", { params });
+  }
+
+  
+  //Get Resource Name by ResourceId
+  getResourceNameByResourceId(resourceId: string){
+    return this.http.get<ResourceNameandId>("http://localhost:3000/project/resourceNameById/"+resourceId);
   }
   
 }

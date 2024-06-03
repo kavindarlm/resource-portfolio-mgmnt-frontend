@@ -16,14 +16,19 @@ import { OrgUnit } from './org-unitmodel';
 
 export class UnitTreeComponent implements OnInit {
 
-  Data: undefined|OrgUnit[] = [];
+  Data: undefined | OrgUnit[] = [];
 
 
   ngOnInit(): void {
-      this.fetchData(); 
+    this.fetchData();
+
+    // Subscribe to the unitListUpdated event
+    this.orgUnitMgtService.unitListUpdated.subscribe(() => {
+      this.fetchData(); // Fetch data when a unit is added, updated or deleted
+    });
   }
 
-  constructor(private orgUnitMgtService: OrgUnitMgtService) {}
+  constructor(private orgUnitMgtService: OrgUnitMgtService) { }
   tr: any;
   fetchData(): void {
     this.orgUnitMgtService.getOrgUnitData().subscribe(
@@ -31,11 +36,11 @@ export class UnitTreeComponent implements OnInit {
         this.Data = res;
         console.log(this.Data);
 
-      },   
-      (error) => { 
+      },
+      (error) => {
         console.error('Error fetching data:', error);
       }
-    );  
+    );
   }
-} 
+}
 
