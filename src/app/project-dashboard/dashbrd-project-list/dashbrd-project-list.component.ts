@@ -8,19 +8,20 @@ import { catchError } from 'rxjs';
 @Component({
   selector: 'app-dashbrd-project-list',
   templateUrl: './dashbrd-project-list.component.html',
-  styleUrl: './dashbrd-project-list.component.css'
+  styleUrls: ['./dashbrd-project-list.component.css']
 })
-export class DashbrdProjectListComponent implements OnInit{
+export class DashbrdProjectListComponent implements OnInit {
 
-  projectdata: undefined| projectDataModel[];
-  progress: {[key: string]: number} = {};
+  projectdata: projectDataModel[] = [];
+  progress: { [key: string]: number } = {};
   isViewMoreClicked = false;
   currentPage = 1;
   itemsPerPage = 8;
   searchText: string = '';
-  error : any;
+  selectedCriticality: string = '';
+  error: any;
 
-  constructor(private projectDashboardServicee: ProjectDashboardService, private sharedService : DashbrdSharedService, private spinner : NgxSpinnerService) { 
+  constructor(private projectDashboardServicee: ProjectDashboardService, private sharedService: DashbrdSharedService, private spinner: NgxSpinnerService) {
     this.sharedService.viewMore$.subscribe(value => {
       this.isViewMoreClicked = value;
       this.itemsPerPage = 8;
@@ -28,10 +29,9 @@ export class DashbrdProjectListComponent implements OnInit{
   }
 
   get totalPages() {
-      return this.projectdata ? Math.ceil(this.projectdata.length / this.itemsPerPage) : 0;
-
+    return this.projectdata ? Math.ceil(this.projectdata.length / this.itemsPerPage) : 0;
   }
-  
+
   ngOnInit(): void {
     this.getAllprojects();
   }
@@ -39,20 +39,19 @@ export class DashbrdProjectListComponent implements OnInit{
   viewMore() {
     this.isViewMoreClicked = true;
     this.itemsPerPage = 4;
-    // this.currentPage = 1;
   }
 
-  getAllprojects(){
-    try{
-    this.spinner.show();
-    this.projectDashboardServicee.getAllProject().subscribe((data: projectDataModel[]) => {
-      this.projectdata = data;
-      this.projectdata.forEach(project => {
-        this.getProjectProgress(project.projectid);
-      });
-      this.spinner.hide();
-    })}
-    catch(error){
+  getAllprojects() {
+    try {
+      this.spinner.show();
+      this.projectDashboardServicee.getAllProject().subscribe((data: projectDataModel[]) => {
+        this.projectdata = data;
+        this.projectdata.forEach(project => {
+          this.getProjectProgress(project.projectid);
+        });
+        this.spinner.hide();
+      })
+    } catch (error) {
       console.log("error", error)
     }
   }
@@ -66,7 +65,7 @@ export class DashbrdProjectListComponent implements OnInit{
     }
   }
 
-  getProjectProgress(projectid : string){
+  getProjectProgress(projectid: string) {
     this.projectDashboardServicee.fetchProjectProgress(projectid).subscribe((data) => {
       this.progress[projectid] = data as number;
     });
@@ -75,11 +74,26 @@ export class DashbrdProjectListComponent implements OnInit{
   onSearchChange() {
     this.projectDashboardServicee.searchProject(this.searchText).pipe(
       catchError(error => {
-        this.error = error; // Assign error to the variable for display
-        return []; // Return empty array to prevent further processing
+        this.error = error;
+        return [];
       })
     ).subscribe((res: projectDataModel[]) => {
       this.projectdata = res;
     });
+  }
+
+  onCriticalityChange() {
+    if (this.selectedCriticality) {
+      this.projectDashboardServicee.filterProjectByCriticality(this.selectedCriticality).pipe(
+        catchError(error => {
+          this.error = error;
+          return [];
+        })
+      ).subscribe((res: projectDataModel[]) => {
+        this.projectdata = res;
+      });
+    } else {
+      this.getAllprojects(); // If no criticality selected, get all projects
+    }
   }
 }

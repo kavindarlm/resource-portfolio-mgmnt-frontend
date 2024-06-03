@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../admin-dashboard/admin-dashboard-services/dashboard.service';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { ProjectDashboardService } from '../services/projectDashboard.service';
-import { projectDataModel, resourceDataModel } from '../projct-dshbrd-model/dshbrd-project';
+import { ProjectMangerNameandIdModel, projectDataModel, resourceDataModel } from '../projct-dshbrd-model/dshbrd-project';
 import { DashbrdSharedService } from '../services/dshbrdshared.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -16,6 +16,8 @@ export class DashbrdProjectDetailsComponent implements OnInit {
   projectData: undefined | projectDataModel;
   resourceData: undefined | resourceDataModel;
   isviewMoreClicked = true;
+  projectManagerDetails: undefined | ProjectMangerNameandIdModel;
+  projectMangerId!: string;
 
   constructor(private projectdashboardservice: ProjectDashboardService, private activatedRoute: ActivatedRoute, private router: Router, private sharedService: DashbrdSharedService, private spinner: NgxSpinnerService) { }
 
@@ -33,6 +35,8 @@ export class DashbrdProjectDetailsComponent implements OnInit {
     this.projectdashboardservice.fetchProjectbyId(this.projectid).subscribe((data) => {
       this.projectData = data;
       console.log(this.projectData);
+      this.projectMangerId = this.projectData.projectManager_id;
+      this.getProjectmangerDetails();
     });
   }
 
@@ -66,5 +70,11 @@ export class DashbrdProjectDetailsComponent implements OnInit {
       case 3: return 'Low';
       default: return '';
     }
+  }
+
+  getProjectmangerDetails(){
+    this.projectdashboardservice.getProjectManagerById(this.projectMangerId).subscribe(res => {
+      this.projectManagerDetails = res;
+    });
   }
 }

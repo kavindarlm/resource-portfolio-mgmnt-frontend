@@ -16,3 +16,8 @@ export interface resourceDataModel{
     teamId: number;
     resourceAllocation: string;
 }
+
+export interface ProjectMangerNameandIdModel{
+    resourceId: '';
+    resourceName: '';
+  }
