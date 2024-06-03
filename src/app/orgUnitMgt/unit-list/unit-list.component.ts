@@ -3,6 +3,7 @@ import { OrganizationalUnitModel } from '../unit-form/unit-form.model';
 // import { OrgUnitMgtService } from '../../shared/orgUnitMgt_services/orgUnitMgt.service';
 import { OrgUnitMgtService } from '../../shared/orgUnitMgt_services/orgUnitMgt.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-unit-list',
@@ -14,12 +15,18 @@ export class UnitListComponent implements OnInit{
   orgunits : OrganizationalUnitModel[] | undefined;
   selectedUnit: OrganizationalUnitModel | undefined;
   constructor(private orgUnitMgtService: OrgUnitMgtService,
-              private spinner: NgxSpinnerService) {
+              private spinner: NgxSpinnerService,
+              private router: Router) {
     this.showForm=false;
   }
 
   ngOnInit(): void {
     this.loadOrgUnits();
+
+       // Subscribe to the resourceAdded event
+       this.orgUnitMgtService.unitListUpdated.subscribe(() => {
+        this.loadOrgUnits(); // Reload resource list when a new resource is added
+      });
   }
 
   showcomponent(){
@@ -37,6 +44,8 @@ export class UnitListComponent implements OnInit{
   showUnitDetails(unit: OrganizationalUnitModel): void {
     this.selectedUnit = unit;
     this.orgUnitMgtService.setData(this.selectedUnit);
+    // this.router.navigate(['pages-body/unit-list/unit-details', this.selectedUnit.unitId]); // Navigate to unit details with unit ID
+    this.orgUnitMgtService.refreshUnitfetchData();
   }
   
 }
