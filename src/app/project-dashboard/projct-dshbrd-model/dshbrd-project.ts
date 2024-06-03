@@ -17,7 +17,7 @@ export interface resourceDataModel{
     resourceAllocation: string;
 }
 
-export interface ProjectMangerNameandIdModel{
+export interface MangerNameandIdModel{
     resourceId: '';
     resourceName: '';
   }

@@ -91,6 +91,9 @@ export class DashbrdProjectListComponent implements OnInit {
         })
       ).subscribe((res: projectDataModel[]) => {
         this.projectdata = res;
+        this.projectdata.forEach(project => {
+          this.getProjectProgress(project.projectid);
+        });
       });
     } else {
       this.getAllprojects(); // If no criticality selected, get all projects
