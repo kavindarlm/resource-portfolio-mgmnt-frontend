@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { dataModel } from "../../team-management/team-form/team-form.model";
-import { projectDataModel, resourceDataModel } from "../projct-dshbrd-model/dshbrd-project";
+import { MangerNameandIdModel, projectDataModel, resourceDataModel } from "../projct-dshbrd-model/dshbrd-project";
 
 @Injectable({
     providedIn: 'root'
@@ -38,5 +38,15 @@ export class ProjectDashboardService {
   searchProject(projectName: string){
     const params = new HttpParams().set('s', projectName);
     return this.http.get<projectDataModel[]>("http://localhost:3000/project/searchprojectName/search", {params});
+  }
+
+  //getProjectBycriticalityId
+  filterProjectByCriticality(criticality_id: string){
+    return this.http.get<projectDataModel[]>("http://localhost:3000/project/getProjectByCriticalityId/"+criticality_id)
+  }
+
+  //getProjectByManagerId
+  getProjectManagerById(projectManager_id: string){
+    return this.http.get<MangerNameandIdModel>("http://localhost:3000/project/resourceNameById/"+projectManager_id)
   }
 }
