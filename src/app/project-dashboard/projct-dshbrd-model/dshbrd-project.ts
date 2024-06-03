@@ -3,8 +3,16 @@ export interface projectDataModel{
     projectName: string;
     projectStartDate: string;
     projectEndDate: string;
-    criticality: string;
-    projectManager: string;
-    deliveryManager: string;
-    projectDescription: string;
+    criticality_id: number;
+    projectManager_id: string;
+    deliveryManager_id: string;
+}
+
+export interface resourceDataModel{
+    resourceId: string;
+    resourceName: string;
+    roleId: number;
+    unitId: number;
+    teamId: number;
+    resourceAllocation: string;
 }
