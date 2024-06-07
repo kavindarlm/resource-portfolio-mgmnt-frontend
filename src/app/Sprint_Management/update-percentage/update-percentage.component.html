@@ -20,30 +20,28 @@
         </div>
     </div>
 
-    <div class="row mb-1" *ngFor="let task of tasks; let i = index">
+    <div class="row mb-1" *ngFor="let taskInfo of tasksWithProjectInfo; let i = index">
         <!-- Display project name -->
-        <div class="col-4 text-center">{{ task.task.projectName }}</div>
+        <div class="col-4 text-center">{{ taskInfo.projectName }}</div>
         <!-- Display task name -->
-        <div class="col-3 ms-1 text-center">{{ task.task.taskName }}</div>
+        <div class="col-3 ms-1 text-center">{{ taskInfo.taskName }}</div>
         <!-- Input for editing task allocation percentage -->
         <div class="col-2 text-center">
-            <input [(ngModel)]="task.resourceAllocation.percentage" (change)="onTaskAllocationChange(task)"
+            <input [(ngModel)]="taskInfo.percentage" 
                 type="number" class="form-control" min="0" max="100" />
         </div>
         <!-- Confirm task change -->
         <div class="col-2 text-center">
-            <button type="button" class="btn" [ngClass]="{
-                    'btn-outline-success': !task.isModified && !task.isConfirmed,
-                    'btn-success': task.isModified || task.isConfirmed
-                }" (click)="confirmTaskChange(task)">
-                <i class="bi bi-check" [ngStyle]="{ 'color': task.isConfirmed ? 'white' : 'black' }"></i>
+            <button type="button" class="btn btn-outline-success" (click)="confirmTaskChange(taskInfo)">
+                <i class="bi bi-check"></i>
             </button>
         </div>
     </div>
-
+    
     <!-- Apply changes button -->
     <div class="d-flex justify-content-center mb-2 mt-2">
-        <button class="btn btn-outline-primary Hover" type="button" (click)="applyChanges()">Edit Percentage</button>
+        <button class="btn btn-outline-primary Hover" type="button" (click)="updatePercentage()">Edit Percentage</button>
     </div>
+    
 
 </div>
