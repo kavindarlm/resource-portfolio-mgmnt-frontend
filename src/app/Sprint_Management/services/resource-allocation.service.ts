@@ -12,7 +12,7 @@ export class ResourceAllocationService {
 
   constructor(private http: HttpClient) { }
 
-  getTasksByResourceId(resourceId: string): Observable<{ task: any, resourceAllocation: any }[]> {
+  getTasksByResourceId(resourceId: string): Observable<{  resourceAllocation: any }[]> {
     return this.http.get<{ task: any, resourceAllocation: any }[]>(`${this.baseUrl}/${resourceId}`).pipe(
       catchError(error => {
         console.error('Error fetching tasks and resource allocations:', error);

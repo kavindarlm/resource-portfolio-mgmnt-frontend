@@ -49,7 +49,6 @@ export class AvailabiilityComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.resourceId = params['id'];
       this.fetchResourceDetails();
-      this.fetchTasksWithProjectNames();
       this.fetchProjects();
     });
   }
@@ -65,62 +64,7 @@ export class AvailabiilityComponent implements OnInit {
     );
   }
 
-  fetchTasksWithProjectNames(): void {
-    // Fetch tasks and resource allocations by resourceId
-    this.resourceAllocationServices.getTasksByResourceId(this.resourceId).subscribe(
-        (response: { task: any, resourceAllocation: any }[]) => {
-            // Create an array to hold the final data structure
-            const finalData: { taskName: string, projectName: string, resourceAllocationPercentage: number }[] = [];
-
-            // Keep track of the number of pending project info requests
-            let pendingRequests = response.length;
-
-            // Iterate through each task and its associated resource allocation
-            response.forEach((item, index) => {
-                const task = item.task;
-                const resourceAllocation = item.resourceAllocation;
-
-                // Fetch project information for each task
-                this.taskApiService.getProjectInfoByTaskId(task.taskid).subscribe(
-                    (projectInfo: { projectName: string, projectId: number } | null) => {
-                        if (projectInfo) {
-                            // Create a new object with task name, project name, and resource allocation percentage
-                            finalData.push({
-                                taskName: task.taskName,
-                                projectName: projectInfo.projectName,
-                                resourceAllocationPercentage: resourceAllocation.percentage,
-                            });
-                        } else {
-                            console.warn(`No project information found for task ${task.taskid}`);
-                        }
-
-                        // Decrement pending requests count
-                        pendingRequests--;
-
-                        // If all pending requests are completed, assign finalData to this.tasks
-                        if (pendingRequests === 0) {
-                            this.tasks = finalData;
-                        }
-                    },
-                    (error: any) => {
-                        console.error(`Error fetching project information for task ${task.taskid}:`, error);
-                        pendingRequests--;
-
-                        // Check if all pending requests are completed
-                        if (pendingRequests === 0) {
-                            this.tasks = finalData;
-                        }
-                    }
-                );
-            });
-        },
-        (error: any) => {
-            console.error('Error fetching tasks and resource allocations:', error);
-        }
-    );
-}
-
-
+  
   fetchProjects(): void {
     this.projectApiService.getProjectList().subscribe(
       (projects: any[]) => {

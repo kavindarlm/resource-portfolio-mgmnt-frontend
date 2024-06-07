@@ -35,7 +35,6 @@ export class UpdatePercentageComponent {
       this.sprintId = params['sprintId'];
       this.resourceId = params['resourceId'];
       this.fetchResourceDetails();
-      this.fetchTasksWithProjectNames();
       this.fetchResourceAllocationsBySprintId();
     });
   }
@@ -51,48 +50,6 @@ export class UpdatePercentageComponent {
     );
   }
 
-  fetchTasksWithProjectNames(): void {
-    this.fetchResourceAllocationsBySprintId().then(resourceAllocationData => {
-      const taskNameToAllocationId: Record<string, number> = {};
-      resourceAllocationData.forEach(allocation => {
-        taskNameToAllocationId[allocation.task.taskName] = allocation.id;
-      });
-
-      this.resourceAllocationServices.getTasksByResourceId(this.resourceId).subscribe(
-        (response: { task: any, resourceAllocation: any }[]) => {
-          // Process each response item
-          response.forEach(item => {
-            const task = item.task;
-            const resourceAllocation = item.resourceAllocation;
-            // Store the original percentage value and track if the task is modified
-            this.originalPercentages[resourceAllocation.id] = resourceAllocation.percentage;
-            this.modifiedTasks[resourceAllocation.id] = false;
-
-            // Fetch project information for each task
-            this.taskApiService.getProjectInfoByTaskId(task.taskid).subscribe(
-              (projectInfo: { projectName: string, projectId: number } | null) => {
-                if (projectInfo) {
-                  // Assign project name and project ID to the task
-                  task.projectName = projectInfo.projectName;
-                  task.projectId = projectInfo.projectId;
-                } else {
-                  console.warn(`No project information found for task ${task.taskid}`);
-                }
-              },
-              error => {
-                console.error(`Error fetching project info for task ${task.taskid}:`, error);
-              }
-            );
-          });
-          // Assign the response data to this.tasks
-          this.tasks = response;
-        },
-        error => {
-          console.error('Error fetching tasks and resource allocations:', error);
-        }
-      );
-    });
-  }
 
   fetchResourceAllocationsBySprintId(): Promise<any[]> {
     return new Promise((resolve, reject) => {

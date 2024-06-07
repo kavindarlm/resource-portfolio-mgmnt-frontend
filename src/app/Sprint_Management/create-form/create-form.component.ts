@@ -79,7 +79,7 @@ export class CreateFormComponent {
                 // After creating the sprint, find the sprint ID using the sprint name
                 this.sprintApiService.findOneByName(sprintData.sprint_name).subscribe(
                     (sprint) => {
-                        const sprintId = sprint.id; // Get the sprint ID
+                        const sprintId = sprint.sprint_id; // Get the sprint ID
     
                         // Get the resource allocation data from the shared service
                         this.sharedService.data$.subscribe(resourceAllocations => {
