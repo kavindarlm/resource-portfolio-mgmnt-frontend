@@ -50,7 +50,7 @@ export class ResourceAllocationService {
   }
 
   // Method to update a resource allocation by ID
-  updateResourceAllocation(id: number, updateData: any): Observable<any> {
+  updateResourceAllocationPercentage(id: number, updateData: any): Observable<any> {
     const url = `${this.baseUrl}/${id}`; // Construct the URL with the base URL and resource ID
     return this.http.patch<any>(url, updateData).pipe(
       catchError((error) => {
@@ -61,6 +61,15 @@ export class ResourceAllocationService {
     );
   }
 
-
+  // Method to update the task ID for a resource allocation
+  updateResourceAllocationTaskId(id: number, taskId: number): Observable<any> {
+    const url = `${this.baseUrl}/${id}/task/${taskId}`;
+    return this.http.patch<any>(url, {}).pipe(
+      catchError((error) => {
+        console.error('Error updating resource allocation task ID:', error);
+        return of(null);
+      })
+    );
+  }
 
 }

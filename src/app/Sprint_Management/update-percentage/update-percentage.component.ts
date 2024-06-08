@@ -105,7 +105,7 @@ export class UpdatePercentageComponent implements OnInit {
   }
 
   updateResourceAllocation(taskInfo: TaskWithProjectInfo): void {
-    this.resourceAllocationService.updateResourceAllocation(taskInfo.resourceAllocationId, { percentage: taskInfo.percentage })
+    this.resourceAllocationService.updateResourceAllocationPercentage(taskInfo.resourceAllocationId, { percentage: taskInfo.percentage })
       .subscribe(
         (updatedResourceAllocation) => {
           // Handle success, maybe display a success message
