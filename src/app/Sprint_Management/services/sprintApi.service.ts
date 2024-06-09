@@ -45,5 +45,11 @@ export class sprintApiService {
         return this.http.put<any>(url, updateSprintDto);
     }
 
+    // Method to delete a sprint by ID
+    deleteSprint(sprintId: number): Observable<void> {
+        const url = `${this.apiUrl}/${sprintId}`;
+        return this.http.delete<void>(url);
+    }
+
 
 }
