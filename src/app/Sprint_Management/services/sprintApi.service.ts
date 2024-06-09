@@ -38,4 +38,12 @@ export class sprintApiService {
         const url = `${this.apiUrl}/name/${sprintName}`;
         return this.http.get<any>(url);
     }
+
+    // Method to update a sprint
+    updateSprint(sprintId: number, updateSprintDto: any): Observable<any> {
+        const url = `${this.apiUrl}/${sprintId}`;
+        return this.http.put<any>(url, updateSprintDto);
+    }
+
+
 }

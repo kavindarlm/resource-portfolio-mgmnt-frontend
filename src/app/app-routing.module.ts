@@ -13,9 +13,6 @@ import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admi
 import { ProjectDetailsComponent } from './TaskManagement/project-details/project-details.component';
 import { CreateNewtaskComponent } from './TaskManagement/create-newtask/create-newtask.component';
 import { UpdateTaskComponent } from './TaskManagement/update-task/update-task.component';
-// import { MainComponent } from './Sprint_Management/main/main.component';
-// import { CreateFormComponent } from './Sprint_Management/create-form/create-form.component';
-// import { SprintMgtComponent } from './Sprint_Management/sprint-mgt/sprint-mgt.component';
 import { ListComponent } from './Sprint_Management/Reusable_Components/list/list.component';
 import { CreateFormComponent } from './Sprint_Management/create-form/create-form.component';
 import { AvailableResourceListComponent } from './Sprint_Management/available-resource-list/available-resource-list.component';
@@ -30,7 +27,6 @@ import { UpdateComponent } from './team-management/update/update.component';
 import { TeamListComponent } from './team-management/team-list/team-list.component';
 import { DeletePopupComponent } from './team-management/delete-popup/delete-popup.component';
 import { SprintMgtComponent } from './Sprint_Management/sprint-mgt/sprint-mgt.component';
-import { DeleteSprintPopupComponent } from './Sprint_Management/Reusable_Components/delete-sprint-popup/delete-sprint-popup.component';
 import { AvailabiilityComponent } from './Sprint_Management/availabiility/availabiility.component';
 import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
 import { ProjectBoardComponent } from './project-dashboard/project-board/project-board.component';
@@ -55,6 +51,7 @@ import { UnitFormComponent } from './orgUnitMgt/unit-form/unit-form.component';
 import { UnitDetailsComponent } from './orgUnitMgt/unit-details/unit-details.component';
 import { UnitEditFormComponent } from './orgUnitMgt/unit-edit-form/unit-edit-form.component';
 import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
+import { EditSprintFormComponent } from './Sprint_Management/edit-sprint-form/edit-sprint-form.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -187,7 +184,8 @@ const routes: Routes = [
                 ]
               },
               { path: 'UpdatePercentage/:sprintId/:resourceId', component: UpdatePercentageComponent, },
-              { path: 'UpdateTask/:sprintId/:resourceId', component: UpdateTaskInSprintComponent, }
+              { path: 'UpdateTask/:sprintId/:resourceId', component: UpdateTaskInSprintComponent, },
+              { path: 'EditSprint/:sprintId', component: EditSprintFormComponent, }
             ]
           },
         ]
