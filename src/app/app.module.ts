@@ -43,7 +43,6 @@ import { AvailabiilityComponent } from './Sprint_Management/availabiility/availa
 import { AddedResourceListComponent } from './Sprint_Management/added-resource-list/added-resource-list.component';
 import { ProjectListComponent } from './Project-management/project-list/project-list.component';
 import { ListComponent } from './Sprint_Management/Reusable_Components/list/list.component';
-import { TablesComponent } from './Sprint_Management/Reusable_Components/tables/tables.component';
 import { ResourceDetailsComponent } from './resourceMgt/resource-details/resource-details.component';
 import { ResourceEditFormComponent } from './resourceMgt/resource-edit-form/resource-edit-form.component';
 import { FilterPipe } from './team-management/filter.pipe';
@@ -133,7 +132,6 @@ import { EditSprintFormComponent } from './Sprint_Management/edit-sprint-form/ed
     AddedResourceListComponent,
     // AlertBoxComponent,
     ListComponent,
-    TablesComponent,
     ResourceDetailsComponent,
     ResourceEditFormComponent,
     FilterPipe,

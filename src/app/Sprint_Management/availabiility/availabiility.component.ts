@@ -1,12 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResourceService } from '../../team-management/shared/resource.service';
-import { ResourceAllocationService } from '../services/resource-allocation.service';
 import { taskApiService } from '../../TaskManagement/services/taskApi.service';
 import { ApiService } from '../../Project-management/service/api.service';
-import { sprintApiService } from '../services/sprintApi.service';
-import { Observable } from 'rxjs';
 import { SharedService } from '../services/shared.service';
+import { ToastrService } from 'ngx-toastr';
 
 interface ProjectTaskData {
   resourceId: string;
@@ -14,16 +12,10 @@ interface ProjectTaskData {
   percentage: number | null;
 }
 
-// Define a type to store both the task and its corresponding resource allocation data
-interface TaskWithResourceAllocation {
-  task: any; // Task entity
-  resourceAllocation: any; // Resource allocation data
-}
-
 @Component({
   selector: 'app-availabiility',
   templateUrl: './availabiility.component.html',
-  styleUrl: './availabiility.component.css'
+  styleUrls: ['./availabiility.component.css']
 })
 export class AvailabiilityComponent implements OnInit {
 
@@ -39,7 +31,7 @@ export class AvailabiilityComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private resourceService: ResourceService, // Injecting the ResourceService
-    private resourceAllocationServices: ResourceAllocationService,
+    private toastr: ToastrService,
     private taskApiService: taskApiService,
     private projectApiService: ApiService,
     private sharedService: SharedService
@@ -64,7 +56,6 @@ export class AvailabiilityComponent implements OnInit {
     );
   }
 
-  
   fetchProjects(): void {
     this.projectApiService.getProjectList().subscribe(
       (projects: any[]) => {
@@ -114,6 +105,12 @@ export class AvailabiilityComponent implements OnInit {
   }
 
   removeSet(index: number): void {
+    // Check if there's only one set left, if yes, prevent removal
+    if (this.sets.length === 1) {
+      this.toastr.error('At least one set should be there.', 'Error');
+      return;
+    }
+
     // Remove the set at the specified index
     this.sets.splice(index, 1);
   }
@@ -136,6 +133,6 @@ export class AvailabiilityComponent implements OnInit {
   }
 
   deleteContent() {
-    this.router.navigate(['availableResources']);
+    this.router.navigate(['/pages-body/sprint-management/createform/availableResources']);
   }
 }

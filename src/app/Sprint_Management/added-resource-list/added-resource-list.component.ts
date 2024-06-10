@@ -51,7 +51,7 @@ export class AddedResourceListComponent {
           Team: resource.team_name,
           Job_Role: resource.role_name,
           Org_Unit: resource.org_unit_name,
-          Availability: 'y' // Placeholder for availability
+          Availability: 'y'
         }));
 
         console.log('Filtered resources:', this.tablecontents);

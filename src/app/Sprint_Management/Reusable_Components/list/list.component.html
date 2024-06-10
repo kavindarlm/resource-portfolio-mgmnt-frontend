@@ -6,11 +6,11 @@
             </div>
             <div class="">
                 <!-- search box -->
-                <input type="search" id="form1" class="form-control" placeholder="Search by Name" aria-label="search">
+                <input type="search" id="form1" class="form-control" placeholder="Search by Name" aria-label="search" (input)="searchSprints($event)">
             </div>
             <div class="table-data">
-                <div *ngFor="let sprint of sprints">
-                    <button class="menu-button" routerLink="sprintmgt/{{sprint.sprint_id}}">{{sprint.sprint_name}}</button>
+                <div *ngFor="let sprint of filteredSprints">
+                    <button class="menu-button" [routerLink]="'sprintmgt/' + sprint.sprint_id">{{sprint.sprint_name}}</button>
                 </div>
                 <div>
                     <button class="menu-button" routerLink="createform">Add New Sprint</button>
