@@ -51,26 +51,27 @@
             </ng-container>
           </tbody>
         </table>
-        
+
 
         <div class="row mb-2">
           <div class="col">
             <div class="d-grid gap-2 col-6 mx-auto border rounded">
-              <button class="btn btn-outline-primary hover" type="button" routerLink="EditSprint/{{ sprint_id }}">Edit Sprint</button>
+              <button class="btn btn-outline-primary hover" type="button" routerLink="EditSprint/{{ sprint_id }}">Edit
+                Sprint</button>
             </div>
           </div>
           <div class="col">
             <div class="d-grid gap-2 col-6 mx-auto border rounded">
-              <button class="btn btn-outline-danger " type="button" >Delete Sprint</button>
+              <button class="btn btn-outline-danger" type="button" (click)="openDeletePopup()">Delete Sprint</button>
             </div>
           </div>
         </div>
-
-
+      </div>
+      <div class="col-6">
+        <router-outlet></router-outlet>
       </div>
     </div>
-  </div>
-  <div class="col-6">
-    <router-outlet></router-outlet>
-  </div>
-</div>
+
+    <div *ngIf="showPopup">
+      <app-delete-sprint-popup (confirmDelete)="deleteSprint()" (cancelDelete)="closePopup()"></app-delete-sprint-popup>
+    </div>

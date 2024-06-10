@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+// sprint-mgt.component.ts
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin, of } from 'rxjs';
 import { mergeMap, map, catchError } from 'rxjs/operators';
 import { sprintApiService } from '../services/sprintApi.service';
 import { ResourceService } from '../../team-management/shared/resource.service';
 import { ResourceAllocationService } from '../services/resource-allocation.service';
+import { DeleteSprintPopupComponent } from '../Reusable_Components/delete-sprint-popup/delete-sprint-popup.component';
 
 @Component({
   selector: 'app-sprint-mgt',
@@ -12,6 +14,8 @@ import { ResourceAllocationService } from '../services/resource-allocation.servi
   styleUrls: ['./sprint-mgt.component.css']
 })
 export class SprintMgtComponent implements OnInit {
+  @ViewChild(DeleteSprintPopupComponent) deletePopup!: DeleteSprintPopupComponent;
+
   sprint_id: string = '';
   sprintName: string = '';
   startDate: string = '';
@@ -20,6 +24,8 @@ export class SprintMgtComponent implements OnInit {
   HeadArray = ['Resource_ID', 'Team', 'Job_Role', 'Org_Unit', 'Availability'];
   ResourcesOfSprint: any[] = [];
   clickedResourceId: string | null = null;
+
+  showPopup: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -83,10 +89,33 @@ export class SprintMgtComponent implements OnInit {
                 console.error('Error fetching and populating ResourcesOfSprint:', error);
             }
         );
-}
+  }
 
   onRowClick(resourceId: string): void {
     this.clickedResourceId = resourceId;
     this.router.navigate([`allocated-resource/${this.sprint_id}/${resourceId}`], { relativeTo: this.route });
+  }
+
+  openDeletePopup(): void {
+    this.showPopup = true;
+  }
+
+  closePopup(): void {
+    this.showPopup = false;
+  }
+
+  deleteSprint(): void {
+    const sprintId = parseInt(this.sprint_id);
+    
+    this.resourceAllocationService.deleteResourceAllocationsBySprintId(sprintId).pipe(
+      mergeMap(() => this.sprintApiService.deleteSprint(sprintId)),
+      catchError(error => {
+        console.error('Error deleting sprint and resource allocations:', error);
+        return of(undefined); // Return undefined or a suitable fallback value in case of an error
+      })
+    ).subscribe(() => {
+      console.log('Sprint and associated resource allocations deleted successfully');
+      this.closePopup(); // Hide the popup
+    });
   }
 }
