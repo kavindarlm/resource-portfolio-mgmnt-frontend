@@ -7,6 +7,7 @@ import { sprintApiService } from '../services/sprintApi.service';
 import { ResourceService } from '../../team-management/shared/resource.service';
 import { ResourceAllocationService } from '../services/resource-allocation.service';
 import { DeleteSprintPopupComponent } from '../Reusable_Components/delete-sprint-popup/delete-sprint-popup.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sprint-mgt',
@@ -32,7 +33,8 @@ export class SprintMgtComponent implements OnInit {
     private router: Router,
     private sprintApiService: sprintApiService,
     private resourceService: ResourceService,
-    private resourceAllocationService: ResourceAllocationService
+    private resourceAllocationService: ResourceAllocationService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -41,8 +43,11 @@ export class SprintMgtComponent implements OnInit {
       this.fetchSprintData();
     });
   }
-
+  
   fetchSprintData(): void {
+    // Clear the resources list before fetching new sprint data
+    this.ResourcesOfSprint = [];
+  
     this.sprintApiService.findOneById(parseInt(this.sprint_id)).subscribe(
       (sprint: any) => {
         this.sprintName = sprint.sprint_name;
@@ -54,7 +59,7 @@ export class SprintMgtComponent implements OnInit {
         console.error('Error fetching sprint data:', error);
       }
     );
-  }
+  }  
 
   fetchAndPopulateResourcesOfSprint(): void {
     this.resourceAllocationService.getResourceAllocationBySprintId(parseInt(this.sprint_id))
@@ -110,12 +115,17 @@ export class SprintMgtComponent implements OnInit {
     this.resourceAllocationService.deleteResourceAllocationsBySprintId(sprintId).pipe(
       mergeMap(() => this.sprintApiService.deleteSprint(sprintId)),
       catchError(error => {
-        console.error('Error deleting sprint and resource allocations:', error);
+        this.toastr.error('Error deleting sprint and resource allocations. Please try again.', 'Error');
         return of(undefined); // Return undefined or a suitable fallback value in case of an error
       })
     ).subscribe(() => {
-      console.log('Sprint and associated resource allocations deleted successfully');
+      this.toastr.success('Sprint and associated resource allocations deleted successfully', 'Success');
       this.closePopup(); // Hide the popup
     });
   }
+
+  deleteContent() {
+    this.router.navigate(['/pages-body/sprint-management']);
+  }
+
 }

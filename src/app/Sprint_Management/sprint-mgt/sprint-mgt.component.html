@@ -5,24 +5,23 @@
         <div class="p-2 mt-3 mb-2 bg-primary text-white text-center border rounded">{{ sprintName }}</div>
       </div>
       <div class="col-1">
-        <button class="border btn shadow-none bd-highlight shadow p-2 mb-3 w-100 mt-3">
+        <button class="border btn shadow-none bd-highlight shadow p-2 mb-3 w-100 mt-3" (click)="deleteContent()">
           <i class="bi bi-x"></i>
         </button>
       </div>
     </div>
 
-
     <div class="row mb-5">
       <div class="col">
         <div class="fw-bold border rounded p-2 text-center">
-          <i class="bi bi-calendar"></i>
+          <i class="bi bi-calendar fa-2x"></i>
           <div class="text">Start Date</div>
           <div class="text-primary">{{ startDate }}</div>
         </div>
       </div>
       <div class="col">
         <div class="fw-bold border rounded p-2 text-center">
-          <i class="bi bi-calendar"></i>
+          <i class="bi bi-calendar fa-2x"></i>
           <div class="text">End Date</div>
           <div class="text-primary">{{ endDate }}</div>
         </div>
@@ -30,12 +29,8 @@
     </div>
 
     <!-- Added Resource List -->
-
     <div class="border rounded container">
-
-      <div class="p-2 mt-3 mb-2 bg-primary text-white text-center border rounded">Added
-        Resource List</div>
-
+      <div class="p-2 mt-3 mb-2 bg-primary text-white text-center border rounded">Added Resource List</div>
       <div>
         <table class="table table-bordered table-striped table-sm">
           <thead class="thead-dark fs-6 fst-normal">
@@ -51,13 +46,10 @@
             </ng-container>
           </tbody>
         </table>
-
-
         <div class="row mb-2">
           <div class="col">
             <div class="d-grid gap-2 col-6 mx-auto border rounded">
-              <button class="btn btn-outline-primary hover" type="button" routerLink="EditSprint/{{ sprint_id }}">Edit
-                Sprint</button>
+              <button class="btn btn-outline-primary hover" type="button" [routerLink]="'EditSprint/' + sprint_id">Edit Sprint</button>
             </div>
           </div>
           <div class="col">
@@ -67,11 +59,14 @@
           </div>
         </div>
       </div>
-      <div class="col-6">
-        <router-outlet></router-outlet>
-      </div>
     </div>
 
     <div *ngIf="showPopup">
       <app-delete-sprint-popup (confirmDelete)="deleteSprint()" (cancelDelete)="closePopup()"></app-delete-sprint-popup>
     </div>
+  </div>
+
+  <div class="col-6">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -5,9 +5,9 @@
       </div>
     </div>
     <div class="col-2">
-      <button class="border btn shadow-none bd-highlight shadow p-2 mb-3 w-100 mt-3 Hover">
+      <button class="border btn shadow-none bd-highlight shadow p-2 mb-3 w-100 mt-3" (click)="deleteContent()">
         <i class="bi bi-x"></i>
-      </button>
+        </button>
     </div>
   </div>
 
@@ -29,13 +29,15 @@
     <div class="col-2 text-center">{{ taskInfo.percentage }}%</div>
     <!-- Display a delete button -->
     <div class="col-2 text-center">
-      <button type="button" class="btn btn-outline-danger" (click)="handleDeleteTask(taskInfo.resourceAllocationId, i)">
+      <button type="button" class="btn btn-outline-danger" (click)="openDeletePopup(taskInfo.resourceAllocationId, i)">
         <i class="bi bi-trash"></i>
       </button>
     </div>
   </div>
 
-
+  <div *ngIf="isDeletePopupVisible">
+    <app-delete-sprint-popup (confirmDelete)="confirmDeleteTask()" (cancelDelete)="cancelDeleteTask()"></app-delete-sprint-popup>
+  </div>
 
   <div class="d-flex justify-content-center mb-2 mt-2">
     <button class="btn btn-outline-primary Hover" type="button"
@@ -50,7 +52,5 @@
   </div>
 
 </div>
-
-
 
 <router-outlet></router-outlet>

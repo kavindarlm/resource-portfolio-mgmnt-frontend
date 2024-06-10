@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ResourceService } from '../../team-management/shared/resource.service';
 import { ResourceAllocationService } from '../services/resource-allocation.service';
 import { taskApiService } from '../../TaskManagement/services/taskApi.service';
 import { forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
-// Define a type to store both the task and its corresponding project information
 interface TaskWithProjectInfo {
   resourceAllocationId: number;
   taskName: string;
-  percentage: number; // Changed from taskAllocationPercentage
+  percentage: number;
   projectName: string;
   projectId: number;
 }
@@ -21,7 +21,6 @@ interface TaskWithProjectInfo {
   styleUrls: ['./allocated-resource-information.component.css']
 })
 export class AllocatedResourceInformationComponent implements OnInit {
-
   resourceId: string = '';
   sprintId: string = '';
   resourceDetails: any = {};
@@ -30,12 +29,18 @@ export class AllocatedResourceInformationComponent implements OnInit {
   sprintAllocations: any[] = [];
   tasksWithProjectInfo: TaskWithProjectInfo[] = [];
   commonTaskIds: string[] = [];
+  
+  isDeletePopupVisible: boolean = false;
+  deleteResourceAllocationId: number | null = null;
+  deleteTaskIndex: number | null = null;
 
   constructor(
     private route: ActivatedRoute,
     private resourceService: ResourceService,
     private resourceAllocationService: ResourceAllocationService,
-    private taskApiService: taskApiService
+    private taskApiService: taskApiService,
+    private router: Router,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -77,7 +82,7 @@ export class AllocatedResourceInformationComponent implements OnInit {
       this.taskApiService.getProjectInfoByTaskId(Number(taskId)).pipe(
         catchError(error => {
           console.error(`Error fetching project info for task ID ${taskId}:`, error);
-          return of(null); // Return null if there is an error
+          return of(null);
         })
       )
     );
@@ -102,17 +107,40 @@ export class AllocatedResourceInformationComponent implements OnInit {
     });
   }
 
-  handleDeleteTask(resourceAllocationId: number, index: number): void {
-    if (resourceAllocationId) {
-      this.resourceAllocationService.deleteResourceAllocationById(resourceAllocationId).subscribe(
+  openDeletePopup(resourceAllocationId: number, index: number): void {
+    this.deleteResourceAllocationId = resourceAllocationId;
+    this.deleteTaskIndex = index;
+    this.isDeletePopupVisible = true;
+  }
+  confirmDeleteTask(): void {
+    if (this.deleteResourceAllocationId !== null && this.deleteTaskIndex !== null) {
+      this.resourceAllocationService.deleteResourceAllocationById(this.deleteResourceAllocationId).subscribe(
         () => {
-          this.tasksWithProjectInfo.splice(index, 1);
-          console.log(`Resource allocation with ID ${resourceAllocationId} deleted successfully.`);
+          if (typeof this.deleteTaskIndex === 'number') {
+            this.tasksWithProjectInfo.splice(this.deleteTaskIndex, 1);
+          }
+          console.log(`Resource allocation with ID ${this.deleteResourceAllocationId} deleted successfully.`);
+          this.toastr.success('Resource Allocation deleted successfully!', 'Success');
+          this.resetDeletePopup();
         },
         error => {
-          console.error(`Error deleting resource allocation with ID ${resourceAllocationId}:`, error);
+          this.toastr.error('Error deleting resource allocation', 'Error');
+          this.resetDeletePopup();
         }
       );
     }
+  }
+  cancelDeleteTask(): void {
+    this.resetDeletePopup();
+  }
+
+  resetDeletePopup(): void {
+    this.isDeletePopupVisible = false;
+    this.deleteResourceAllocationId = null;
+    this.deleteTaskIndex = null;
+  }
+
+  deleteContent() {
+    this.router.navigate(['/pages-body/sprint-management/sprintmgt/', this.sprintId]);
   }
 }

@@ -36,6 +36,7 @@ export class CreateFormComponent implements OnInit {
     
     headArray = ['Resource_ID', 'Team', 'Job_Role', 'Org_Unit', 'Availability'];
     resources = [];
+    
 
     getSprintFormData(data: any) {
         const today = new Date();

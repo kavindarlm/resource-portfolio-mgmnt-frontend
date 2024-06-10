@@ -5,6 +5,8 @@ import { taskApiService } from '../../TaskManagement/services/taskApi.service';
 import { ApiService } from '../../Project-management/service/api.service';
 import { SharedService } from '../services/shared.service';
 import { ToastrService } from 'ngx-toastr';
+import { ResourceAllocationService } from '../services/resource-allocation.service';
+import { forkJoin, map, switchMap } from 'rxjs';
 
 interface ProjectTaskData {
   resourceId: string;
@@ -27,6 +29,8 @@ export class AvailabiilityComponent implements OnInit {
   Tasks: any[] = [];
   sets: any[] = [{ projectId: '', taskId: '', percentage: null }]; // Initialize with one set of data
 
+  taskProjectDetails: { taskName: string, projectName: string, percentage: number }[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -34,6 +38,7 @@ export class AvailabiilityComponent implements OnInit {
     private toastr: ToastrService,
     private taskApiService: taskApiService,
     private projectApiService: ApiService,
+    private ResourceAllocationService : ResourceAllocationService, 
     private sharedService: SharedService
   ) { }
 
@@ -42,6 +47,7 @@ export class AvailabiilityComponent implements OnInit {
       this.resourceId = params['id'];
       this.fetchResourceDetails();
       this.fetchProjects();
+      this.fetchTasksAndProjectsByResourceId(this.resourceId); // Fetch tasks and project details
     });
   }
 
@@ -52,6 +58,30 @@ export class AvailabiilityComponent implements OnInit {
       },
       (error: any) => {
         console.error('Error fetching resource details:', error);
+      }
+    );
+  }
+  fetchTasksAndProjectsByResourceId(resourceId: string): void {
+    this.ResourceAllocationService.getTasksByResourceId(resourceId).pipe(
+      switchMap(tasks => {
+        const projectDetailsObservables = tasks.map(task => 
+          this.taskApiService.getProjectInfoByTaskId(task.resourceAllocation.task.taskid).pipe(
+            map(project => ({
+              taskName: task.resourceAllocation.task.taskName,
+              projectName: project?.projectName || 'Unknown',
+              percentage: task.resourceAllocation.percentage
+            }))
+          )
+        );
+        return forkJoin(projectDetailsObservables);
+      })
+    ).subscribe(
+      taskProjectDetails => {
+        this.taskProjectDetails = taskProjectDetails;
+        console.log('Task and project details:', this.taskProjectDetails);
+      },
+      error => {
+        console.error('Error fetching task and project details:', error);
       }
     );
   }
