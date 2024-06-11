@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ResourceService } from '../../team-management/shared/resource.service';
-import { ServiceService } from '../../team-management/shared/service.service';
+import { ResourceAllocationService } from '../services/resource-allocation.service';
 import { SharedService } from '../services/shared.service';
+import { forkJoin, map } from 'rxjs';
 
 interface ProjectTaskData {
   resourceId: string;
@@ -12,38 +13,32 @@ interface ProjectTaskData {
 @Component({
   selector: 'app-added-resource-list',
   templateUrl: './added-resource-list.component.html',
-  styleUrl: './added-resource-list.component.css'
+  styleUrls: ['./added-resource-list.component.css']
 })
-export class AddedResourceListComponent {
-
-
+export class AddedResourceListComponent implements OnInit {
   @Input() HeadArray: any[] = [];
   @Input() tablecontents: any[] = [];
 
-  sharedData: ProjectTaskData[] = []; // Initialize a variable to hold shared service data
+  sharedData: ProjectTaskData[] = [];
 
   constructor(
     private resourceService: ResourceService,
-    private serviceService: ServiceService,
+    private resourceAllocationService: ResourceAllocationService,
     private sharedService: SharedService
   ) { }
 
   ngOnInit(): void {
-
-    // Subscribe to the shared service's data observable
     this.sharedService.data$.subscribe(data => {
-      this.sharedData = data; // Store the shared data in a variable
-      this.fetchResources(); // Fetch and filter resources based on the latest shared data
+      this.sharedData = data;
+      this.fetchResources();
     });
 
-    // Fetch resources and team names from backend
     this.fetchResources();
   }
 
   fetchResources(): void {
     this.resourceService.getResourcesForSprint().subscribe(
       (data: any[]) => {
-        // Filter resources based on the resource IDs in the shared data
         this.tablecontents = data.filter(resource =>
           this.sharedData.some(shared => shared.resourceId === resource.resource_id)
         ).map(resource => ({
@@ -51,18 +46,40 @@ export class AddedResourceListComponent {
           Team: resource.team_name,
           Job_Role: resource.role_name,
           Org_Unit: resource.org_unit_name,
-          Availability: 'y'
+          Availability: '' // Placeholder for availability
         }));
-
-        console.log('Filtered resources:', this.tablecontents);
+        this.calculateAvailability();
       },
       error => {
         console.error('Error fetching resources:', error);
       }
     );
   }
+
+  calculateAvailability(): void {
+    const availabilityObservables = this.tablecontents.map(resource =>
+      this.resourceAllocationService.getTasksByResourceId(resource.Resource_ID).pipe(
+        map(tasks => {
+          const totalAllocation = tasks.reduce((total, task) => {
+            const allocationPercentage = task.resourceAllocation.percentage || 0;
+            return total + allocationPercentage;
+          }, 0);
+          return {
+            ...resource,
+            Availability: totalAllocation >= 100 ? 'Not Available' : 'Available'
+          };
+        })
+      )
+    );
+
+    // Use forkJoin to wait for all observables to complete
+    forkJoin(availabilityObservables).subscribe(
+      updatedResources => {
+        this.tablecontents = updatedResources;
+      },
+      error => {
+        console.error('Error calculating availability:', error);
+      }
+    );
+  }
 }
-
-
-
-

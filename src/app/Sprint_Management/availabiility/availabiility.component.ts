@@ -61,7 +61,13 @@ export class AvailabiilityComponent implements OnInit {
       }
     );
   }
+
   fetchTasksAndProjectsByResourceId(resourceId: string): void {
+    // Reset the arrays before fetching new data
+    this.taskProjectDetails = [];
+    this.tasks = []; // Assuming you have a tasks array to reset, even if it's not used in the method
+    this.Projects = []; // Reset Projects array if needed
+  
     this.ResourceAllocationService.getTasksByResourceId(resourceId).pipe(
       switchMap(tasks => {
         const projectDetailsObservables = tasks.map(task => 
@@ -85,6 +91,7 @@ export class AvailabiilityComponent implements OnInit {
       }
     );
   }
+  
 
   fetchProjects(): void {
     this.projectApiService.getProjectList().subscribe(

@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute , Router} from '@angular/router';
 import { ResourceService } from '../../team-management/shared/resource.service';
 import { ResourceAllocationService } from '../services/resource-allocation.service';
 import { taskApiService } from '../../TaskManagement/services/taskApi.service';
 import { forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 interface TaskWithProjectInfo {
   resourceAllocationId: number;
   taskName: string;
   percentage: number;
+  initialPercentage: number; // Ensure it's always defined as a number
   projectName: string;
   projectId: number;
+  isUpdated?: boolean;  // New property to track update status
 }
 
 @Component({
@@ -31,9 +34,11 @@ export class UpdatePercentageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private resourceService: ResourceService,
     private resourceAllocationService: ResourceAllocationService,
-    private taskApiService: taskApiService
+    private taskApiService: taskApiService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -91,6 +96,7 @@ export class UpdatePercentageComponent implements OnInit {
               resourceAllocationId: task.resourceAllocation ? task.resourceAllocation.id : null,
               taskName: task.resourceAllocation ? task.resourceAllocation.task.taskName : task.task.taskName,
               percentage: task.resourceAllocation ? task.resourceAllocation.percentage : null,
+              initialPercentage: task.resourceAllocation ? task.resourceAllocation.percentage : null,
               projectName: projectInfo.projectName,
               projectId: projectInfo.projectId
             });
@@ -101,27 +107,44 @@ export class UpdatePercentageComponent implements OnInit {
   }
 
   confirmTaskChange(taskInfo: TaskWithProjectInfo): void {
-    this.updateResourceAllocation(taskInfo);
+    if (taskInfo.isUpdated) {
+      taskInfo.percentage = taskInfo.initialPercentage; // Reset the percentage
+      taskInfo.isUpdated = false; // Reset the update status
+    } else {
+      this.updateResourceAllocation(taskInfo); // Update the percentage
+    }
   }
 
   updateResourceAllocation(taskInfo: TaskWithProjectInfo): void {
-    this.resourceAllocationService.updateResourceAllocationPercentage(taskInfo.resourceAllocationId, { percentage: taskInfo.percentage })
-      .subscribe(
-        (updatedResourceAllocation) => {
-          // Handle success, maybe display a success message
-          console.log('Percentage updated successfully:', updatedResourceAllocation);
-        },
-        (error) => {
-          // Handle error, maybe display an error message
-          console.error('Error updating percentage:', error);
-        }
-      );
+    // Store the initial percentage value before updating if it's not already set
+    if (taskInfo.initialPercentage === undefined) {
+      taskInfo.initialPercentage = taskInfo.percentage;
+    }
+
+    taskInfo.isUpdated = true; // Mark as updated locally
   }
 
   updatePercentage(): void {
     // Loop through tasksWithProjectInfo and call updateResourceAllocation for each task
     this.tasksWithProjectInfo.forEach(taskInfo => {
-      this.updateResourceAllocation(taskInfo);
+      // Only update the resource allocation if it's marked as updated locally
+      if (taskInfo.isUpdated) {
+        this.resourceAllocationService.updateResourceAllocationPercentage(taskInfo.resourceAllocationId, { percentage: taskInfo.percentage })
+          .subscribe(
+            (updatedResourceAllocation) => {
+              this.toastr.success('Percentage updated successfully!', 'Success');
+              taskInfo.isUpdated = false; // Reset the local update status after successful update
+            },
+            (error) => {
+              this.toastr.error('Error updating percentage. Please try again.', 'Error');
+            }
+          );
+      }
     });
   }
+
+  deleteContent() {
+    this.router.navigate(['/pages-body/sprint-management/sprintmgt/',this.sprintId]);
+  }
+
 }
