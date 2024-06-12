@@ -69,7 +69,7 @@ export class SprintMgtComponent implements OnInit {
                 const resourceObservables: Observable<any>[] = resourceIds.map(resourceId => this.resourceService.findOneResource(resourceId));
                 return forkJoin(resourceObservables);
             }),
-            map((resources: any[]) => {
+            mergeMap((resources: any[]) => {
                 const uniqueResources = new Map<number, any>(); // Map to store unique resources by resourceId
                 resources.forEach(resource => {
                     if (!uniqueResources.has(resource.resourceId)) {
@@ -78,11 +78,28 @@ export class SprintMgtComponent implements OnInit {
                             Team: resource.job_role ? resource.job_role.team_name : 'N/A',
                             Job_Role: resource.job_role ? resource.job_role.roleName : 'N/A',
                             Org_Unit: resource.org_unit ? resource.org_unit.unitName : 'N/A',
-                            Availability: 'y'
+                            Availability: '' // Placeholder for availability
                         });
                     }
                 });
-                return Array.from(uniqueResources.values());
+
+                // Fetch tasks for each resource to calculate availability
+                const availabilityObservables = Array.from(uniqueResources.values()).map(resource =>
+                    this.resourceAllocationService.getTasksByResourceId(resource.Resource_ID).pipe(
+                        map(tasks => {
+                          const filteredTasks = tasks.filter(task => task.resourceAllocation.task.taskProgressPercentage < 100);
+                          const totalAllocation = filteredTasks.reduce((total, task) => {
+                            const allocationPercentage = task.resourceAllocation.percentage || 0; // Assuming the field name is 'percentage'
+                            return total + allocationPercentage;
+                            }, 0);
+                            return {
+                                ...resource,
+                                Availability: totalAllocation >= 100 ? 'Not Available' : 'Available'
+                            };
+                        })
+                    )
+                );
+                return forkJoin(availabilityObservables);
             })
         )
         .subscribe(
@@ -94,7 +111,8 @@ export class SprintMgtComponent implements OnInit {
                 console.error('Error fetching and populating ResourcesOfSprint:', error);
             }
         );
-  }
+}
+
 
   onRowClick(resourceId: string): void {
     this.clickedResourceId = resourceId;

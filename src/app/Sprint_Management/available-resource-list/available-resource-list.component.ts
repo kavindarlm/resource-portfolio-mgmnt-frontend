@@ -65,12 +65,12 @@ export class AvailableResourceListComponent implements OnInit {
       }
     );
   }
-
   calculateAvailability(): void {
     const observables = this.resources.map(resource => 
       this.ResourceAllocationService.getTasksByResourceId(resource.Resource_ID).pipe(
         map(tasks => {
-          const totalAllocation = tasks.reduce((total, task) => {
+          const filteredTasks = tasks.filter(task => task.resourceAllocation.task.taskProgressPercentage < 100);
+          const totalAllocation = filteredTasks.reduce((total, task) => {
             const allocationPercentage = task.resourceAllocation.percentage || 0; // Assuming the field name is 'percentage'
             return total + allocationPercentage;
           }, 0);
@@ -80,8 +80,8 @@ export class AvailableResourceListComponent implements OnInit {
           };
         })
       )
-    );  
-
+    );
+  
     forkJoin(observables).subscribe(
       updatedResources => {
         this.resources = updatedResources;

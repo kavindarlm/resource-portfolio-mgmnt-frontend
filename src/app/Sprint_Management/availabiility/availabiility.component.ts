@@ -93,6 +93,7 @@ export class AvailabiilityComponent implements OnInit {
   }
   
 
+ 
   fetchProjects(): void {
     this.projectApiService.getProjectList().subscribe(
       (projects: any[]) => {
@@ -107,21 +108,14 @@ export class AvailabiilityComponent implements OnInit {
   onProjectSelect(event: Event, index: number): void {
     const selectElement = event.target as HTMLSelectElement;
     const projectId = selectElement.value;
-
-    // Save the selected project ID in the correct set
     this.sets[index].projectId = projectId;
-
-    // Fetch tasks based on the selected project
     this.fetchTasksByProjectId(projectId, index);
   }
 
   fetchTasksByProjectId(projectId: string, index: number): void {
     this.taskApiService.getTaskList(projectId).subscribe(
       (tasks: any[]) => {
-        // Store tasks in the Tasks array
-        this.Tasks = tasks;
-
-        // Optionally, you can handle additional logic here if needed
+        this.sets[index].Tasks = tasks; // Store tasks in the specific set
         console.log(`Fetched tasks for project ID ${projectId}:`, tasks);
       },
       (error: any) => {
@@ -132,10 +126,8 @@ export class AvailabiilityComponent implements OnInit {
 
   onTaskSelect(event: Event, index: number): void {
     const selectElement = event.target as HTMLSelectElement;
-    // Save the selected task ID in the correct set
     this.sets[index].taskId = selectElement.value;
   }
-
   addSet(): void {
     // Add a new set of project-task-percentage to the array
     this.sets.push({ projectId: '', taskId: '', percentage: null });

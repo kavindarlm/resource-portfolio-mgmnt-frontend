@@ -60,8 +60,9 @@ export class AddedResourceListComponent implements OnInit {
     const availabilityObservables = this.tablecontents.map(resource =>
       this.resourceAllocationService.getTasksByResourceId(resource.Resource_ID).pipe(
         map(tasks => {
-          const totalAllocation = tasks.reduce((total, task) => {
-            const allocationPercentage = task.resourceAllocation.percentage || 0;
+          const filteredTasks = tasks.filter(task => task.resourceAllocation.task.taskProgressPercentage < 100);
+          const totalAllocation = filteredTasks.reduce((total, task) => {
+            const allocationPercentage = task.resourceAllocation.percentage || 0; // Assuming the field name is 'percentage'
             return total + allocationPercentage;
           }, 0);
           return {

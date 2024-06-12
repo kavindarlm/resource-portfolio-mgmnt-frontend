@@ -12,7 +12,7 @@
     </div>
 
     <div>
-        <div class="col rounded border border-4 ms-2 p-3 mb-2 text-center">
+        <div class="col rounded border border-4 ms-2 p-3 mb-2 text-center" *ngFor="let taskInfo of tasksWithProjectInfo">
             <i class="bi bi-person-circle fa-2x"></i>
             <div>{{ resourceDetails.resourceId }}</div>
             <div class="text-primary">{{ resourceDetails.resourceName }}</div>
@@ -34,8 +34,10 @@
         <!-- Display a check button with conditional classes -->
         <div class="col-2 text-center">
             <button type="button"
-                [ngClass]="{'btn btn-success': taskInfo.isChecked, 'btn btn-outline-success': !taskInfo.isChecked}"
-                (click)="onCheck(taskInfo)">
+                class='btn'
+                [class.btn-outline-success]="!taskInfo.checked"
+                [class.btn-success]="taskInfo.checked"
+                (click)="onSaveTask(taskInfo)">
                 <i class="bi bi-check"></i>
             </button>
         </div>
@@ -44,5 +46,4 @@
     <div class="d-flex justify-content-center mb-2 mt-2">
         <button class="btn btn-outline-primary Hover" type="button" (click)="onEditTask()">Edit Task</button>
     </div>
-
 </div>

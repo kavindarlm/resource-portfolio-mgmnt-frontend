@@ -14,7 +14,7 @@ interface TaskWithProjectInfo {
   projectId: string;
   relatedTasks: any[];
   selectedTaskId: string;
-  isChecked: boolean; // Add this property
+  checked: boolean;
 }
 
 @Component({
@@ -33,6 +33,7 @@ export class UpdateTaskInSprintComponent implements OnInit {
   tasksWithProjectInfo: TaskWithProjectInfo[] = [];
   commonTaskIds: string[] = [];
   updatedTasks: { resourceAllocationId: number, taskId: number }[] = [];
+  changedTasks: Set<number> = new Set(); // Track temporarily changed tasks
 
   constructor(
     private route: ActivatedRoute,
@@ -84,7 +85,7 @@ export class UpdateTaskInSprintComponent implements OnInit {
         })
       )
     );
-  
+
     forkJoin(projectInfoRequests).subscribe(projectInfos => {
       projectInfos.forEach((projectInfo, index) => {
         if (projectInfo) {
@@ -100,7 +101,7 @@ export class UpdateTaskInSprintComponent implements OnInit {
               projectId: projectInfo.projectId.toString(),
               relatedTasks: [],
               selectedTaskId: task.resourceAllocation ? task.resourceAllocation.task.taskid : task.task.taskid,
-              isChecked: false // Initialize isChecked
+              checked: false // Initially not checked
             };
             this.tasksWithProjectInfo.push(taskWithProjectInfo);
             this.fetchRelatedTasks(projectInfo.projectId.toString(), this.tasksWithProjectInfo.length - 1);
@@ -109,7 +110,7 @@ export class UpdateTaskInSprintComponent implements OnInit {
       });
     });
   }
-  
+
 
   fetchRelatedTasks(projectId: string, taskIndex: number): void {
     this.taskApiService.getTaskList(projectId).subscribe(
@@ -122,31 +123,27 @@ export class UpdateTaskInSprintComponent implements OnInit {
     );
   }
 
-  // Method to handle task selection change
   onTaskChange(taskInfo: TaskWithProjectInfo, event: Event): void {
     const target = event.target as HTMLSelectElement;
-    const taskId = target.value;
-    taskInfo.selectedTaskId = taskId; // Update the selectedTaskId
-    const updatedTaskIndex = this.updatedTasks.findIndex(item => item.resourceAllocationId === taskInfo.resourceAllocationId);
-    if (updatedTaskIndex >= 0) {
-      this.updatedTasks[updatedTaskIndex].taskId = Number(taskId);
-    } else {
-      this.updatedTasks.push({ resourceAllocationId: taskInfo.resourceAllocationId, taskId: Number(taskId) });
-    }
-    taskInfo.isChecked = false; // Reset isChecked when a new task is selected
+    const taskId = Number(target.value);
+    taskInfo.selectedTaskId = taskId.toString(); // Update the selectedTaskId
+    this.changedTasks.add(taskInfo.resourceAllocationId); // Save temporarily changed task
     console.log('Updated Tasks:', this.updatedTasks);
   }
-  
-  // Method to handle check button click
-   
-  onCheck(taskInfo: TaskWithProjectInfo): void {
-    const selectedTask = taskInfo.relatedTasks.find(task => task.taskid === taskInfo.selectedTaskId);
-    if (selectedTask) {
-      taskInfo.isChecked = true; // Set isChecked to true when check button is clicked
+
+  onSaveTask(taskInfo: TaskWithProjectInfo): void {
+    const taskAllocationId = taskInfo.resourceAllocationId;
+    const selectedTaskId = Number(taskInfo.selectedTaskId);
+    const updatedTaskIndex = this.updatedTasks.findIndex(item => item.resourceAllocationId === taskAllocationId);
+    if (updatedTaskIndex >= 0) {
+      this.updatedTasks[updatedTaskIndex].taskId = selectedTaskId;
+    } else {
+      this.updatedTasks.push({ resourceAllocationId: taskAllocationId, taskId: selectedTaskId });
     }
+    this.changedTasks.delete(taskAllocationId); // Remove from temporarily changed tasks
+    taskInfo.checked = true; // Change button appearance to success
   }
-  
-  // Method to handle Edit Task button click
+
   onEditTask(): void {
     const updateRequests = this.updatedTasks.map(update =>
       this.resourceAllocationService.updateResourceAllocationTaskId(update.resourceAllocationId, update.taskId)

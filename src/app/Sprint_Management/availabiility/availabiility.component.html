@@ -1,9 +1,9 @@
 <div class="border rounded container">
     <div class="row">
-        <div class="col-10">
+        <div class="col-11">
             <div class="p-2 mt-3 mb-2 bg-primary text-white text-center border rounded">Availability</div>
         </div>
-        <div class="col-2">
+        <div class="col-1">
             <button class="border btn shadow-none bd-highlight shadow p-2 mb-3 w-100 mt-3" (click)="deleteContent()">
                 <i class="bi bi-x"></i>
             </button>
@@ -42,6 +42,7 @@
             </div>
 
             <div *ngFor="let set of sets; let i = index" class="row mb-1">
+
                 <div class="col-4">
                     <select class="form-select" (change)="onProjectSelect($event, i)">
                         <option value="" disabled selected>Project</option>
@@ -52,9 +53,12 @@
                 <div class="col-3 ms-1">
                     <select class="form-select" (change)="onTaskSelect($event, i)">
                         <option value="" disabled selected>Task</option>
-                        <option *ngFor="let task of Tasks" [value]="task.taskid">{{ task.taskName }}</option>
+                        <option *ngFor="let task of set.Tasks" [value]="task.taskid" [disabled]="task.taskProgressPercentage === 100" [ngClass]="{'highlighted-task': task.taskProgressPercentage === 100}">
+                            {{ task.taskName }}
+                        </option>
                     </select>
                 </div>
+                
                 <div class="col-2">
                     <input type="number" class="form-control" [(ngModel)]="set.percentage" placeholder="%" min="0"
                         max="100">

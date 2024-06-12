@@ -8,3 +8,8 @@
 .text {
     color: #1e3895;
 }
+
+.highlighted-task {
+    color: rgb(227, 113, 113);
+  }
+  
