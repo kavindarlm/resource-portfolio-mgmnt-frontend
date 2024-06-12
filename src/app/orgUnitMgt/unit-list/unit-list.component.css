@@ -46,3 +46,13 @@
       margin-left: 7%;
       display: inline-block;
     }
+
+    /* Styles for screens 768px or smaller */
+@media screen and (max-width: 768px) {
+  .unitTree {
+    margin-left: 7%;
+    display: inline-block;
+    width: 90%;
+  }
+}
+
