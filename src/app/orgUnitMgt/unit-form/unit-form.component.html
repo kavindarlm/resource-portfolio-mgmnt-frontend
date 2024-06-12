@@ -5,32 +5,43 @@
             <div class="form-group mb-3">
                 <br>
 
-                <div class="inputField d-flex justify-content-center">
+                <div class="inputField">
                     <label for="unitName" class="form-label">Unit Name: </label>
                     <input type="text" class="form-control" formControlName="unitName"
                     [ngClass]="{'is-invalid': unitForm.controls['unitName'].invalid && unitForm.controls['unitName'].touched}" 
-                    id="unitName" placeholder="Enter Unit Name" (keyup)="capitalizeFirstLetter()">
+                    id="unitName" placeholder="Enter Unit Name" (keyup)="capitalizeUnitName()">
+                    <div class="invalid-feedback"
+                        *ngIf="unitForm.controls['unitName'].invalid && unitForm.controls['unitName'].touched">
+                        Unit Name is required
+                    </div>
                 </div>
             </div>
             <div class="form-group mb-3">
 
-                <div class="inputField d-flex justify-content-center">
+                <div class="inputField">
                     <label for="parentUnit" class="form-label">Parent Unit: </label>
                     <select class="form-select" formControlName="parentId"
                     [ngClass]="{'is-invalid': unitForm.controls['parentId'].invalid && unitForm.controls['parentId'].touched}" 
                     id="parentUnit">
-                        <option disabled selected value="">Select Parent Unit</option>
+                        <option class="selected" disabled selected value="">Select Parent Unit</option>
                         <option *ngFor="let unit of orgunits" [value]="unit.unitId">{{unit.unitName}}</option>
                     </select>
+                    <div class="invalid-feedback"
+                        *ngIf="unitForm.controls['parentId'].invalid && unitForm.controls['parentId'].touched">
+                        Parent Unit is required
+                    </div>
                 </div>
             </div>
             <div class="form-group mb-3">
-                <div class="inputField d-flex justify-content-center">
+                <div class="inputField">
                     <label for="description" class="form-label">Description: </label>
                     <textarea name="description" class="form-control" formControlName="description" 
                     [ngClass]="{'is-invalid': unitForm.controls['description'].invalid && unitForm.controls['description'].touched}"
-                    id="description"
-                        cols="50" rows="5" placeholder="Add a description"></textarea>
+                    id="description" cols="50" rows="5" placeholder="Add a description" (keyup)="capitalizedescription()"></textarea>
+                    <div class="invalid-feedback"
+                        *ngIf="unitForm.controls['description'].invalid && unitForm.controls['description'].touched">
+                        Description is required
+                    </div>
                 </div>
             </div>
             <div class="add d-flex justify-content-center">

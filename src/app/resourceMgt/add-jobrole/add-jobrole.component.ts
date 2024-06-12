@@ -71,6 +71,15 @@ export class AddJobroleComponent implements OnInit{
         );
       }
 
+      capitalizeFirstLetter() {
+        const jobRoleNameControl = this.jobRoleForm.get('roleName');
+        if (jobRoleNameControl && jobRoleNameControl.value && jobRoleNameControl.value.length > 1) {
+          let words = jobRoleNameControl.value.split(' ');
+          words = words.map((word: string) => word.charAt(0).toUpperCase() + word.slice(1));
+          jobRoleNameControl.setValue(words.join(' '));
+        }
+      }
+
       cancelForm() {
         this.isVisible = !this.isVisible;
       }

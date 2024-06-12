@@ -108,6 +108,7 @@ export class AddFormComponent implements OnInit {
     console.log(data);
     // debugger;
     if (this.resourceForm.invalid) {
+      this.toaster.error("Please fill the required fields to add a new resource.");
       return;
     }
     const dataToSend = this.resourceForm.value;
@@ -156,7 +157,6 @@ export class AddFormComponent implements OnInit {
   
     addNewJobRole() {
       this.showForm = !this.showForm;
-      // alert('Add new job role functionality triggered!');
     }
 
 }

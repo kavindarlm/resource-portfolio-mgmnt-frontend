@@ -21,8 +21,10 @@
             </div>
 
             <div class="connector-wrapper">
-                <ul *ngFor="let parntUnits of ParentUnit">
-                    <li>{{parntUnits.unitName}}</li>
+                <ul>
+                <li *ngFor="let parntUnits of ParentUnit">
+                   {{parntUnits.unitName}}
+                </li>
                 </ul>
             </div>
             

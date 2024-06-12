@@ -11,6 +11,7 @@
 .form-label {
     color: #1e3895e1;
     font-weight: 500;
+    font-size: 0.9rem;
 }
 
 /* ::placeholder {
@@ -24,6 +25,7 @@
 .form-group .form-control,
 .form-group .form-select {
   display: inline;
+  font-size: 0.9rem;
 }
 
 .form-group .form-control,
@@ -34,6 +36,10 @@
 .form-group .form-label {
   margin-right: 20px;  
 } 
+
+.form-select .selected {
+  opacity: 0.5;
+}
 
 .addButton {
     width: 70%;
@@ -66,4 +72,18 @@
 .addButton:active {
     background-color: #1e3895;
     color: #FEFEFE;
+}
+
+.inputField {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  flex-wrap: wrap;
+  color: #7752fe;
+}
+
+.invalid-feedback {
+  display:block;
+  width: 100%;
+  text-align: right;
 }

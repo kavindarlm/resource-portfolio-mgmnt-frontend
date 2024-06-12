@@ -28,10 +28,12 @@
 .form-group .form-control,
 .form-group .form-select {
   width: 75%;
+  font-size: 0.9rem;
 }
 
 .form-group .form-label {
-  margin-right: 20px;  
+  margin-right: 20px; 
+  font-size: 0.9rem; 
 }
 
 .cancelButton {

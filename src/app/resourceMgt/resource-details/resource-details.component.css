@@ -32,6 +32,7 @@
     color: #1e3895e1;
     font-weight: 500;
     margin-left: 7%;
+    font-size: 0.9rem;
 }
 
 .detailButton {
@@ -43,6 +44,7 @@
     border-radius: 5px;
     color:rgba(0, 0, 255, 0.575);
     font-weight: 400;
+    font-size: 0.9rem;
     /* color: #7752fe; */
     /* display: inline; */
     margin: 0 5px; /* Add space around buttons */
