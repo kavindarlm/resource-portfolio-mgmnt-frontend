@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute , Router } from '@angular/router';
 import { ResourceService } from '../../team-management/shared/resource.service';
 import { ResourceAllocationService } from '../services/resource-allocation.service';
 import { taskApiService } from '../../TaskManagement/services/taskApi.service';
@@ -14,6 +14,7 @@ interface TaskWithProjectInfo {
   projectId: string;
   relatedTasks: any[];
   selectedTaskId: string;
+  initialTaskId: string;  // Track the initial task ID
   checked: boolean;
 }
 
@@ -39,7 +40,8 @@ export class UpdateTaskInSprintComponent implements OnInit {
     private route: ActivatedRoute,
     private resourceService: ResourceService,
     private resourceAllocationService: ResourceAllocationService,
-    private taskApiService: taskApiService
+    private taskApiService: taskApiService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -101,6 +103,7 @@ export class UpdateTaskInSprintComponent implements OnInit {
               projectId: projectInfo.projectId.toString(),
               relatedTasks: [],
               selectedTaskId: task.resourceAllocation ? task.resourceAllocation.task.taskid : task.task.taskid,
+              initialTaskId: task.resourceAllocation ? task.resourceAllocation.task.taskid : task.task.taskid, // Store initial task ID
               checked: false // Initially not checked
             };
             this.tasksWithProjectInfo.push(taskWithProjectInfo);
@@ -111,11 +114,13 @@ export class UpdateTaskInSprintComponent implements OnInit {
     });
   }
 
-
   fetchRelatedTasks(projectId: string, taskIndex: number): void {
     this.taskApiService.getTaskList(projectId).subscribe(
       relatedTasks => {
-        this.tasksWithProjectInfo[taskIndex].relatedTasks = relatedTasks;
+        this.tasksWithProjectInfo[taskIndex].relatedTasks = relatedTasks.map(task => ({
+          ...task,
+          disabled: Number(task.taskProgressPercentage) === 100
+        }));
       },
       error => {
         console.error(`Error fetching related tasks for project ID ${projectId}:`, error);
@@ -134,14 +139,26 @@ export class UpdateTaskInSprintComponent implements OnInit {
   onSaveTask(taskInfo: TaskWithProjectInfo): void {
     const taskAllocationId = taskInfo.resourceAllocationId;
     const selectedTaskId = Number(taskInfo.selectedTaskId);
-    const updatedTaskIndex = this.updatedTasks.findIndex(item => item.resourceAllocationId === taskAllocationId);
-    if (updatedTaskIndex >= 0) {
-      this.updatedTasks[updatedTaskIndex].taskId = selectedTaskId;
+
+    if (taskInfo.checked) {
+      // If already checked, reset to initial value
+      taskInfo.selectedTaskId = taskInfo.initialTaskId;
+      const resetTaskIndex = this.updatedTasks.findIndex(item => item.resourceAllocationId === taskAllocationId);
+      if (resetTaskIndex >= 0) {
+        this.updatedTasks.splice(resetTaskIndex, 1); // Remove from updated tasks
+      }
     } else {
-      this.updatedTasks.push({ resourceAllocationId: taskAllocationId, taskId: selectedTaskId });
+      // If not checked, save the new task ID
+      const updatedTaskIndex = this.updatedTasks.findIndex(item => item.resourceAllocationId === taskAllocationId);
+      if (updatedTaskIndex >= 0) {
+        this.updatedTasks[updatedTaskIndex].taskId = selectedTaskId;
+      } else {
+        this.updatedTasks.push({ resourceAllocationId: taskAllocationId, taskId: selectedTaskId });
+      }
     }
+
     this.changedTasks.delete(taskAllocationId); // Remove from temporarily changed tasks
-    taskInfo.checked = true; // Change button appearance to success
+    taskInfo.checked = !taskInfo.checked; // Toggle the checked state
   }
 
   onEditTask(): void {
@@ -159,4 +176,9 @@ export class UpdateTaskInSprintComponent implements OnInit {
       }
     );
   }
+
+  deleteContent() {
+    this.router.navigate(['/pages-body/sprint-management/sprintmgt/',this.sprintId]);
+  }
+
 }
