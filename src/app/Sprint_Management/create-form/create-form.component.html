@@ -1,12 +1,12 @@
-<div>
+<div class="container-fluid">
   <div class="row">
-    <div class="col-6 border rounded">
+    <div class="col-lg-6 col-md-6 col-sm-12 justify-content-center border rounded p-2">
       <div>
-        <div class="p-2 mt-3 mb-2 bg-primary text-white text-center rounded">Create New Sprint</div>
-          
+        <!-- <div class="p-2 mt-3 mb-2 bg-primary text-white text-center rounded">Create New Sprint</div> -->
+        <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Create New Sprint</div>
         <form #sprintForm="ngForm" (ngSubmit)="getSprintFormData(sprintForm.value)">
-          <div class="form-group row p-3">
-            <label class="text fw-bold">Sprint Time *</label><br>
+          <div class="form-group row p-3 mt-2 mb-2">
+            <label class="text fw-medium">Sprint Time *</label>
             <div class="form-group col-md-6">
               <label class="text-primary p-3">From:</label>
               <input type="date" class="border rounded text-black-50" [(ngModel)]="startDate" name="startDate" required />
@@ -17,8 +17,8 @@
             </div>
           </div>
 
-          <div class="form-group row p-3">
-            <label class="text fw-bold">Sprint Name *</label><br>
+          <div class="form-group row p-3 mb-3">
+            <label class="text fw-medium mb-2">Sprint Name *</label>
             <label class="text-primary col-sm-2 col-form-label">Name:</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" placeholder="Enter Sprint Name" [(ngModel)]="sprintName" name="sprintName" required />
@@ -28,15 +28,15 @@
           <app-added-resource-list [HeadArray]="headArray" [tablecontents]="resources"></app-added-resource-list>
 
           <div class="d-grid gap-2 col-6 mx-auto mb-2">
-            <button type="button" routerLink="availableResources" class="btn btn-outline-primary">+ Add New Resource</button>
+            <button type="button" routerLink="availableResources" class="btn btn-outline-primary">Add New Resource</button>
           </div>
-          <div class="d-grid gap-2 col-6 mx-auto border rounded">
+          <div class="d-grid gap-2 col-6 mx-auto rounded">
             <button type="submit" class="btn btn-outline-primary mb-3">Create Sprint</button>
           </div>
         </form>
       </div>
     </div>
-    <div class="col-6">
+    <div class="col-lg-6 col-md-6 col-sm-12">
       <router-outlet></router-outlet>
     </div>
   </div>

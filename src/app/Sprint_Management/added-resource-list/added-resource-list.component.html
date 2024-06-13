@@ -1,11 +1,14 @@
-<div class="border rounded container">
-  <div class="p-2 mt-3 mb-2 bg-primary text-white text-center border rounded">Added Resource List</div>
+<!-- <div class="border rounded container"> -->
   <div>
-    <table class="table table-bordered table-striped table-sm">
+  <!-- <div class="p-2 mt-3 mb-2 bg-primary text-white text-center border rounded">Added Resource List</div> -->
+  <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Added Resource List</div>
+  <div>
+    <!-- <table class="table table-bordered table-striped table-sm"> -->
+      <table class="table table-bordered table-striped table-hover table-sm text-center">
       <!-- Table header -->
       <thead class="thead-dark fs-6 fst-normal">
         <tr>
-          <th class="text" *ngFor="let head of HeadArray">{{ head }}</th>
+          <th scope="col" class="col-4" *ngFor="let head of HeadArray">{{ head }}</th>
         </tr>
       </thead>
       <!-- Table body -->

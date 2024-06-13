@@ -1,18 +1,18 @@
-<div class="border rounded container">
+<div class="border rounded container mt-2 p-2">
   <div class="row">
     <div class="col-11">
-      <div class="p-2 mt-3 mb-2 bg-primary text-white text-center border rounded">Allocated Resource Information
+      <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Allocated Resource Information
       </div>
     </div>
     <div class="col-1">
-      <button class="border btn shadow-none bd-highlight shadow p-2 mb-3 w-100 mt-3" (click)="deleteContent()">
+      <button class="border btn shadow-none bd-highlight shadow p-1 mt-1 mb-3 me-1" (click)="deleteContent()">
         <i class="bi bi-x"></i>
         </button>
     </div>
   </div>
 
   <div>
-    <div class="col rounded border border-4 ms-2 p-3 mb-2 text-center">
+    <div class="col rounded border border-4 p-3 mb-3 text-center">
       <i class="bi bi-person-circle fa-2x"></i>
       <div>{{ resourceDetails.resourceId }}</div>
       <div class="text-primary">{{ resourceDetails.resourceName }}</div>
