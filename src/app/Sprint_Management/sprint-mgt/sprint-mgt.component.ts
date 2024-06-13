@@ -1,4 +1,3 @@
-// sprint-mgt.component.ts
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, forkJoin, of } from 'rxjs';
@@ -8,6 +7,7 @@ import { ResourceService } from '../../team-management/shared/resource.service';
 import { ResourceAllocationService } from '../services/resource-allocation.service';
 import { DeleteSprintPopupComponent } from '../Reusable_Components/delete-sprint-popup/delete-sprint-popup.component';
 import { ToastrService } from 'ngx-toastr';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-sprint-mgt',
@@ -34,7 +34,8 @@ export class SprintMgtComponent implements OnInit {
     private sprintApiService: sprintApiService,
     private resourceService: ResourceService,
     private resourceAllocationService: ResourceAllocationService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private sharedService: SharedService
   ) { }
 
   ngOnInit(): void {
@@ -113,7 +114,6 @@ export class SprintMgtComponent implements OnInit {
         );
 }
 
-
   onRowClick(resourceId: string): void {
     this.clickedResourceId = resourceId;
     this.router.navigate([`allocated-resource/${this.sprint_id}/${resourceId}`], { relativeTo: this.route });
@@ -139,11 +139,11 @@ export class SprintMgtComponent implements OnInit {
     ).subscribe(() => {
       this.toastr.success('Sprint and associated resource allocations deleted successfully', 'Success');
       this.closePopup(); // Hide the popup
+      this.sharedService.notifySprintDeleted(); // Notify about the deletion
     });
   }
 
   deleteContent() {
     this.router.navigate(['/pages-body/sprint-management']);
   }
-
 }

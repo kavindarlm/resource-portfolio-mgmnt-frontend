@@ -96,6 +96,7 @@ export class CreateFormComponent implements OnInit {
                 // If no allocations to process, show success message and navigate
                 this.toastr.success('Sprint created successfully!', 'Success');
                 this.router.navigate(['/pages-body/sprint-management/createform']);
+                this.sharedService.notifySprintCreated();
               } else {
                 uniqueAllocations.forEach(allocation => {
                   // Create the resource allocation data object
@@ -114,6 +115,7 @@ export class CreateFormComponent implements OnInit {
                         // Show success message and navigate only after all allocations are processed
                         this.toastr.success('Sprint created successfully!', 'Success');
                         this.router.navigate(['/pages-body/sprint-management/createform']);
+                        this.sharedService.notifySprintCreated();
                       }
                     },
                     (error) => {

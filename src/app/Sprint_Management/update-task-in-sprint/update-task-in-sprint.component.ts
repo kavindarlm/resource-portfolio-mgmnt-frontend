@@ -5,6 +5,8 @@ import { ResourceAllocationService } from '../services/resource-allocation.servi
 import { taskApiService } from '../../TaskManagement/services/taskApi.service';
 import { forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import { SharedService } from '../services/shared.service';
 
 interface TaskWithProjectInfo {
   resourceAllocationId: number;
@@ -42,6 +44,8 @@ export class UpdateTaskInSprintComponent implements OnInit {
     private resourceAllocationService: ResourceAllocationService,
     private taskApiService: taskApiService,
     private router: Router,
+    private toastr: ToastrService,
+    private sharedService: SharedService
   ) { }
 
   ngOnInit(): void {
@@ -133,7 +137,6 @@ export class UpdateTaskInSprintComponent implements OnInit {
     const taskId = Number(target.value);
     taskInfo.selectedTaskId = taskId.toString(); // Update the selectedTaskId
     this.changedTasks.add(taskInfo.resourceAllocationId); // Save temporarily changed task
-    console.log('Updated Tasks:', this.updatedTasks);
   }
 
   onSaveTask(taskInfo: TaskWithProjectInfo): void {
@@ -166,19 +169,22 @@ export class UpdateTaskInSprintComponent implements OnInit {
       this.resourceAllocationService.updateResourceAllocationTaskId(update.resourceAllocationId, update.taskId)
     );
 
-    forkJoin(updateRequests).subscribe(
+    forkJoin(updateRequests).subscribe
+    (
       results => {
-        console.log('Tasks updated successfully:', results);
-        // Optionally, refetch data or update the UI to reflect changes
+        this.toastr.success('Tasks updated successfully!', 'Success');
+        this.sharedService.notifyTaskUpdated(); // Notify shared service about task update
+        // Optionally, you can re-fetch data or update the UI to reflect changes
+        // Example: this.fetchData();
       },
       error => {
-        console.error('Error updating tasks:', error);
+        this.toastr.error('Error updating tasks. Please try again.', 'Error');
       }
     );
   }
 
   deleteContent() {
-    this.router.navigate(['/pages-body/sprint-management/sprintmgt/',this.sprintId]);
+    this.router.navigate(['/pages-body/sprint-management/sprintmgt/', this.sprintId]);
   }
 
 }

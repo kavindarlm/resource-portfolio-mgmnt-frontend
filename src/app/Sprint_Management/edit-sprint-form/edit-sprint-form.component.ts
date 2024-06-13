@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router'; // Import Router
 import { sprintApiService } from '../services/sprintApi.service';
+import { SharedService } from '../services/shared.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-sprint-form',
@@ -17,7 +19,10 @@ export class EditSprintFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private sprintApiService: sprintApiService
+    private router: Router, // Inject Router
+    private sprintApiService: sprintApiService,
+    private sharedService: SharedService,
+    private toastr: ToastrService
   ) { }
 
   openpopup() {
@@ -26,6 +31,7 @@ export class EditSprintFormComponent implements OnInit {
 
   closepopup() {
     this.isVisible = false;
+    this.router.navigate(['/pages-body//sprint-management/sprintmgt/',this.sprintId]); 
   }
 
   ngOnInit(): void {
@@ -64,11 +70,12 @@ export class EditSprintFormComponent implements OnInit {
       const updateSprintDto = this.editSprintForm.value;
       this.sprintApiService.updateSprint(this.sprintId, updateSprintDto).subscribe(
         response => {
-          console.log('Sprint updated successfully', response);
+          this.toastr.success('Sprint updated successfully!', 'Success');
           this.closepopup();
+          this.sharedService.notifySprintUpdated(); // Notify about the update
         },
         error => {
-          console.error('Error updating sprint', error);
+          this.toastr.error('Error updating sprint. Please try again.', 'Error');
         }
       );
     }
