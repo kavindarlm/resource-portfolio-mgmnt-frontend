@@ -7,6 +7,7 @@ import { sharedprojectService } from '../service/sharedproject.service';
 import { Subscription, catchError } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { taskApiService } from '../../TaskManagement/services/taskApi.service';
 
 @Component({
   selector: 'app-update-project',
@@ -17,6 +18,8 @@ import { ToastrService } from 'ngx-toastr';
 export class UpdateProjectComponent implements OnInit {
   public dataid!: string;
   subscrib!: Subscription;
+  delivarManagerName!: string;
+  projectManagerName!: string;
 
   projectForm: datamodel = {
     projectid: '',
@@ -28,14 +31,15 @@ export class UpdateProjectComponent implements OnInit {
     deliveryManager_id: '',
     projectDescription: '',
   };
-  constructor( 
+  constructor(
     private activatedroute: ActivatedRoute,
     private router: Router,
     private api: ApiService,
     private projectList: ProjectListComponent,
     private shared: sharedprojectService,
     private spiner: NgxSpinnerService,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+    private taskApiService: taskApiService
   ) {}
 
   ngOnInit(): void {
@@ -63,6 +67,7 @@ export class UpdateProjectComponent implements OnInit {
         this.spiner.show();
         console.log(data)
         this.projectForm = data;
+        this.getResourceNameById(data.deliveryManager_id, data.projectManager_id);
         this.spiner.hide();
       });
   }
@@ -134,5 +139,16 @@ export class UpdateProjectComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  //Get Resource Name
+  getResourceNameById(delivaryMangerIdid: string, projectManagerId: string) {
+    this.taskApiService.getResourceNameByResourceId(delivaryMangerIdid).subscribe(res => {
+      this.delivarManagerName = res.resourceName;
+    });
+
+    this.taskApiService.getResourceNameByResourceId(projectManagerId).subscribe(res => {
+      this.projectManagerName = res.resourceName;
+    });
   }
 }

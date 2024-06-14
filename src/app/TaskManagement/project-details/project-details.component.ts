@@ -28,6 +28,7 @@ export class ProjectDetailsComponent implements OnInit {
   errorMessage: string | null = null;
   resoureIdAndName: undefined | ResourceNameandId;
   delivaryMangerId!: string;
+  criticalityName!: string;
 
   // Define the subscription and subscriptionTwo properties
   private subscription!: Subscription;
@@ -65,6 +66,7 @@ export class ProjectDetailsComponent implements OnInit {
       this.projectData = data;
       this.delivaryMangerId = data.deliveryManager_id;
       this.getResourceName();
+      this.getCriticalityName(data.criticality_id);
     });
   }
 
@@ -121,4 +123,19 @@ export class ProjectDetailsComponent implements OnInit {
       this.resoureIdAndName = res;
     })
   }
+
+  getCriticalityName(criticality_id: string | number){
+    if(criticality_id === 3){
+      this.criticalityName = 'Low';
+    }else if(criticality_id === 2){ 
+      this.criticalityName = 'Medium';
+  }
+    else if(criticality_id === 1){
+      this.criticalityName = 'High';
+    }
+    else {
+      this.criticalityName = 'Not Set';
+    }
+  }
 }
+ 
