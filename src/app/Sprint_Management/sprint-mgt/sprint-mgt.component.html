@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-6 col-md-6 col-sm-12 justify-content-center border rounded p-2 ms-2">
+    <div class="col-lg-6 col-md-6 col-sm-12 justify-content-center border rounded p-2">
       <div class="row mb-5">
         <div class="col-11">
           <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">{{ sprintName }}
@@ -33,7 +33,7 @@
       <!-- Added Resource List -->
       <div class="container">
         <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Added Resource List</div>
-        <div>
+        <div  class="table-responsive">
           <table class="table table-bordered table-striped table-hover table-sm text-center">
             <thead class="thead-dark fs-6 fst-normal">
               <tr>
@@ -69,7 +69,6 @@
           (cancelDelete)="closePopup()"></app-delete-sprint-popup>
       </div>
     </div>
-
     <div class="col-lg-6 col-md-6 col-sm-12">
       <router-outlet></router-outlet>
     </div>

@@ -65,9 +65,12 @@ export class AddedResourceListComponent implements OnInit {
             const allocationPercentage = task.resourceAllocation.percentage || 0; // Assuming the field name is 'percentage'
             return total + allocationPercentage;
           }, 0);
+
+          const availabilityPercentage = totalAllocation;
+
           return {
             ...resource,
-            Availability: totalAllocation >= 100 ? 'Not Available' : 'Available'
+            Availability: availabilityPercentage
           };
         })
       )

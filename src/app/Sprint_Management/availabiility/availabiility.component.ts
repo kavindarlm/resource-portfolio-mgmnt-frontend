@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ResourceService } from '../../team-management/shared/resource.service';
 import { taskApiService } from '../../TaskManagement/services/taskApi.service';
 import { ApiService } from '../../Project-management/service/api.service';
@@ -7,39 +8,41 @@ import { SharedService } from '../services/shared.service';
 import { ToastrService } from 'ngx-toastr';
 import { ResourceAllocationService } from '../services/resource-allocation.service';
 import { forkJoin, map, switchMap } from 'rxjs';
+import { ApiServiceService } from '../../calender-management/shared/api-service.service';
 
 interface ProjectTaskData {
   resourceId: string;
   taskId: string;
   percentage: number | null;
 }
-
 @Component({
   selector: 'app-availabiility',
   templateUrl: './availabiility.component.html',
   styleUrls: ['./availabiility.component.css']
 })
+
 export class AvailabiilityComponent implements OnInit {
 
   resourceId: string = '';
   resourceDetails: any = {};
   tasks: any[] = [];
-
   Projects: any[] = [];
   Tasks: any[] = [];
   sets: any[] = [{ projectId: '', taskId: '', percentage: null }]; // Initialize with one set of data
-
   taskProjectDetails: { taskName: string, projectName: string, percentage: number }[] = [];
+  holidays: NgbDateStruct[] = []; // Store holidays
+  availabilityPercentage: number = 0; 
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private resourceService: ResourceService, // Injecting the ResourceService
+    private resourceService: ResourceService,
     private toastr: ToastrService,
     private taskApiService: taskApiService,
     private projectApiService: ApiService,
-    private ResourceAllocationService : ResourceAllocationService, 
-    private sharedService: SharedService
+    private ResourceAllocationService: ResourceAllocationService, 
+    private sharedService: SharedService,
+    private ApiServiceService: ApiServiceService
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +51,10 @@ export class AvailabiilityComponent implements OnInit {
       this.fetchResourceDetails();
       this.fetchProjects();
       this.fetchTasksAndProjectsByResourceId(this.resourceId); // Fetch tasks and project details
+      this.fetchHolidays(this.resourceId); // Fetch holidays
+    });
+    this.route.queryParams.subscribe(queryParams => {
+      this.availabilityPercentage = queryParams['availability'];
     });
   }
 
@@ -63,7 +70,6 @@ export class AvailabiilityComponent implements OnInit {
   }
 
   fetchTasksAndProjectsByResourceId(resourceId: string): void {
-    // Reset the arrays before fetching new data
     this.taskProjectDetails = [];
     this.tasks = []; 
     this.Projects = []; // Reset Projects array if needed
@@ -86,12 +92,12 @@ export class AvailabiilityComponent implements OnInit {
         this.taskProjectDetails = taskProjectDetails;
         console.log('Task and project details:', this.taskProjectDetails);
       },
-      error => {
+      error=> {
         console.error('Error fetching task and project details:', error);
       }
     );
   }
- 
+
   fetchProjects(): void {
     this.projectApiService.getProjectList().subscribe(
       (projects: any[]) => {
@@ -99,6 +105,24 @@ export class AvailabiilityComponent implements OnInit {
       },
       (error: any) => {
         console.error('Error fetching projects:', error);
+      }
+    );
+  }
+
+  fetchHolidays(resourceId: string): void {
+    this.ApiServiceService.resourceGetEvents(resourceId).subscribe(
+      (holidays: any[]) => {
+        this.holidays = holidays.map(holiday => {
+          const date = new Date(holiday.holiday.date);
+          return {
+            year: date.getFullYear(),
+            month: date.getMonth() + 1, // Month is 0-based in JavaScript
+            day: date.getDate()
+          };
+        });
+      },
+      (error: any) => {
+        console.error('Error fetching holidays:', error);
       }
     );
   }
@@ -126,6 +150,7 @@ export class AvailabiilityComponent implements OnInit {
     const selectElement = event.target as HTMLSelectElement;
     this.sets[index].taskId = selectElement.value;
   }
+
   addSet(): void {
     // Add a new set of project-task-percentage to the array
     this.sets.push({ projectId: '', taskId: '', percentage: null });
@@ -161,5 +186,17 @@ export class AvailabiilityComponent implements OnInit {
 
   deleteContent() {
     this.router.navigate(['/pages-body/sprint-management/createform/availableResources']);
+  }
+
+  disableAllDates(): boolean {
+    return true;
+  }
+
+  isHoliday(date: NgbDateStruct): boolean {
+    return this.holidays.some(holiday => 
+      holiday.year === date.year && 
+      holiday.month === date.month && 
+      holiday.day === date.day
+    );
   }
 }
