@@ -61,13 +61,22 @@
                 <div class="col-4">{{ detail.percentage }}%</div>
             </div>
             <div *ngFor="let set of sets; let i = index" class="row mb-1">
-                <div class="col-4">
-                    <select class="form-select" (change)="onProjectSelect($event, i)">
-                        <option value="" disabled selected>Project</option>
-                        <option *ngFor="let project of Projects" [value]="project.projectid">{{ project.projectName }}
-                        </option>
-                    </select>
+
+                <div class="form-group col-3 ms-1" *ngFor="let set of sets; let i = index">
+                    <div class="dropdown">
+                        <button class="form-select" type="button" (click)="toggleDropdown(i)">
+                            {{ selectedProjectNames[i] || 'Project' }}
+                        </button>
+                        <div class="dropdown-menu" [class.show]="dropdownOpen[i]">
+                            <input type="text" [(ngModel)]="searchText[i]" placeholder="Search Projects" class="form-control mb-2" (input)="filterProjects(i)">
+                            <button class="dropdown-item" *ngFor="let project of filteredProjects[i]" (click)="selectProject(i, project)">
+                                {{ project.projectName }}
+                            </button>
+                        </div>
+                    </div>
                 </div>
+                
+                
                 <div class="col-3 ms-1">
                     <select class="form-select" (change)="onTaskSelect($event, i)">
                         <option value="" disabled selected>Task</option>

@@ -7,3 +7,84 @@
 .text {
     color: #1e3895;
 }
+
+.highlighted-task {
+    color: rgb(227, 113, 113);
+}
+
+.custom-day {
+    position: relative;
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    text-align: center;
+    line-height: 2rem;
+}
+
+.custom-day.holiday {
+    border-color: rgb(227, 113, 113);
+    color: rgb(227, 113, 113);
+}
+
+.custom-day.holiday::after {
+    content: '✖';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2rem;
+}
+
+.slider {
+    width: 90%;
+    height: 20px;
+    background-color: #A9BCFF;
+    outline: none;
+    opacity: 1;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 6px;
+    margin-right: 100px;
+
+}
+
+input[type="range"] {
+
+    -webkit-appearance: none;
+    appearance: none;
+    width: 90%;
+    cursor: pointer;
+    outline: none;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+/* Track: Mozilla Firefox */
+input[type="range"]::-moz-range-track {
+    height: 15px;
+    background: #A9BCFF;
+    border-radius: 16px;
+}
+
+/* Thumb: webkit */
+input[type="range"]::-webkit-slider-thumb {
+    /* removing default appearance */
+    -webkit-appearance: none;
+    appearance: none;
+    /* creating a custom design */
+    height: 20px;
+    width: 20px;
+    background-color: #007bff;
+    border-radius: 50%;
+    border: 2px solid #fdfdfd;
+    /*  slider progress trick  */
+    box-shadow: -407px 0 0 400px #007bff;
+    position: relative;
+}
+
+.form-select option input.form-control {
+    display: block;
+    width: 100%;
+    border: none;
+    padding: 0.375rem 0.75rem;
+}

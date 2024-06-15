@@ -6,6 +6,8 @@ import { forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { ApiServiceService } from '../../calender-management/shared/api-service.service';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 interface TaskWithProjectInfo {
   resourceAllocationId: number;
@@ -29,6 +31,8 @@ export class AllocatedResourceInformationComponent implements OnInit {
   sprintAllocations: any[] = [];
   tasksWithProjectInfo: TaskWithProjectInfo[] = [];
   commonTaskIds: string[] = [];
+  holidays: NgbDateStruct[] = []; // Store holidays
+  availabilityPercentage: number = 0; 
   
   isDeletePopupVisible: boolean = false;
   deleteResourceAllocationId: number | null = null;
@@ -40,7 +44,8 @@ export class AllocatedResourceInformationComponent implements OnInit {
     private resourceAllocationService: ResourceAllocationService,
     private taskApiService: taskApiService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private ApiServiceService: ApiServiceService
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +53,9 @@ export class AllocatedResourceInformationComponent implements OnInit {
       this.sprintId = params['sprintId'];
       this.resourceId = params['resourceId'];
       this.fetchData();
+    });
+    this.route.queryParams.subscribe(queryParams => {
+      this.availabilityPercentage = queryParams['availability'];
     });
   }
 
@@ -105,6 +113,36 @@ export class AllocatedResourceInformationComponent implements OnInit {
         }
       });
     });
+  }
+
+  fetchHolidays(resourceId: string): void {
+    this.ApiServiceService.resourceGetEvents(resourceId).subscribe(
+      (holidays: any[]) => {
+        this.holidays = holidays.map(holiday => {
+          const date = new Date(holiday.holiday.date);
+          return {
+            year: date.getFullYear(),
+            month: date.getMonth() + 1, // Month is 0-based in JavaScript
+            day: date.getDate()
+          };
+        });
+      },
+      (error: any) => {
+        console.error('Error fetching holidays:', error);
+      }
+    );
+  }
+
+  disableAllDates(): boolean {
+    return true;
+  }
+  
+  isHoliday(date: NgbDateStruct): boolean {
+    return this.holidays.some(holiday => 
+      holiday.year === date.year && 
+      holiday.month === date.month && 
+      holiday.day === date.day
+    );
   }
 
   openDeletePopup(resourceAllocationId: number, index: number): void {

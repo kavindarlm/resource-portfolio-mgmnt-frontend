@@ -40,7 +40,6 @@ import { Ng2SearchPipe } from 'ng2-search-filter';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AvailableResourceListComponent } from './Sprint_Management/available-resource-list/available-resource-list.component';
 import { AvailabiilityComponent } from './Sprint_Management/availabiility/availabiility.component';
-import { AddedResourceListComponent } from './Sprint_Management/added-resource-list/added-resource-list.component';
 import { ProjectListComponent } from './Project-management/project-list/project-list.component';
 import { ListComponent } from './Sprint_Management/Reusable_Components/list/list.component';
 import { ResourceDetailsComponent } from './resourceMgt/resource-details/resource-details.component';
@@ -93,7 +92,7 @@ import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.componen
 import { ResetPasswordComponent } from './PageBody/reset-password/reset-password.component';
 import { AddJobroleComponent } from './resourceMgt/add-jobrole/add-jobrole.component';
 import { EditSprintFormComponent } from './Sprint_Management/edit-sprint-form/edit-sprint-form.component';
-
+import { SprintListComponent } from './Handle_Request/sprint-list/sprint-list.component';
 
 @NgModule({
   declarations:[
@@ -129,7 +128,6 @@ import { EditSprintFormComponent } from './Sprint_Management/edit-sprint-form/ed
     SprintMgtComponent,
     AvailableResourceListComponent,
     AvailabiilityComponent,
-    AddedResourceListComponent,
     // AlertBoxComponent,
     ListComponent,
     ResourceDetailsComponent,
@@ -173,6 +171,8 @@ import { EditSprintFormComponent } from './Sprint_Management/edit-sprint-form/ed
     ResetPasswordComponent,
     AddJobroleComponent,
     EditSprintFormComponent,
+    SprintListComponent,
+  
   ],
   imports: [
     BrowserModule,

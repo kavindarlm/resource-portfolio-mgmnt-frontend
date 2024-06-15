@@ -52,6 +52,7 @@ import { UnitDetailsComponent } from './orgUnitMgt/unit-details/unit-details.com
 import { UnitEditFormComponent } from './orgUnitMgt/unit-edit-form/unit-edit-form.component';
 import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
 import { EditSprintFormComponent } from './Sprint_Management/edit-sprint-form/edit-sprint-form.component';
+import { SprintListComponent } from './Handle_Request/sprint-list/sprint-list.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -61,19 +62,20 @@ const routes: Routes = [
   {
     path: 'pages-body', component: PagesBodyComponent,
     canActivate: [AuthGuard],
-    data: { roles : ['user'] },
+    data: { roles: ['user'] },
     children: [
-      { path: 'projectBoard', component: ProjectBoardComponent,
-      canActivate:[FunctionGuardService],
-      data : { functionId : 1},
+      {
+        path: 'projectBoard', component: ProjectBoardComponent,
+        canActivate: [FunctionGuardService],
+        data: { functionId: 1 },
         children: [
-          { path: 'dashboard-projectdetails/:id', component: DashbrdProjectDetailsComponent}
+          { path: 'dashboard-projectdetails/:id', component: DashbrdProjectDetailsComponent }
         ]
       },
       {
         path: 'projectlist', component: ProjectListComponent,
-        canActivate:[FunctionGuardService],
-        data : { functionId : 6},
+        canActivate: [FunctionGuardService],
+        data: { functionId: 6 },
         children: [
           { path: 'createproject', component: CreateProjectComponent },
           { path: 'updatePoject/:id', component: UpdateProjectComponent }
@@ -81,16 +83,17 @@ const routes: Routes = [
       },
       {
         path: 'TaskProjectList', component: TaskProjectListComponent,
-        canActivate:[FunctionGuardService],
-        data : { functionId : 7},
+        canActivate: [FunctionGuardService],
+        data: { functionId: 7 },
         children: [
           {
             path: 'projectTaskDetails/:projectId', component: ProjectDetailsComponent,
             children: [
               { path: 'newTask/:id', component: CreateNewtaskComponent },
-              { path: 'updatetask/:id', component: UpdateTaskComponent,
+              {
+                path: 'updatetask/:id', component: UpdateTaskComponent,
                 children: [
-                  {path: 'editTask/:id', component: EditTaskComponent}
+                  { path: 'editTask/:id', component: EditTaskComponent }
                 ]
               }
             ],
@@ -99,8 +102,8 @@ const routes: Routes = [
       },
       {
         path: 'teamlistcomponent', component: TeamListComponent,
-        canActivate:[FunctionGuardService],
-        data : { functionId : 5},
+        canActivate: [FunctionGuardService],
+        data: { functionId: 5 },
         children: [
           { path: 'NewTeamButton', component: NewTeamButtonComponent },
           { path: 'TeamForm', component: TeamFormComponent },
@@ -111,24 +114,25 @@ const routes: Routes = [
       },
       {
         path: 'calendertypecomponent', component: CalenderTypeComponent,
-        canActivate:[FunctionGuardService],
-        data : { functionId : 4},
+        canActivate: [FunctionGuardService],
+        data: { functionId: 4 },
         children: [
-          {path: 'calendermainbox', component:CalenderMainBoxComponent},
-          {path: 'commoncalender/:type', component:CommonCalenderComponent},
-          {path: 'resourcelist', component: ResourceListComponent,
+          { path: 'calendermainbox', component: CalenderMainBoxComponent },
+          { path: 'commoncalender/:type', component: CommonCalenderComponent },
+          {
+            path: 'resourcelist', component: ResourceListComponent,
             children: [
               { path: 'resourceleave/:id', component: ResourceLeaveComponent }
             ]
           }
-          
+
         ]
 
       },
       {
         path: 'first-view', component: FirstViewComponent,
-        canActivate:[FunctionGuardService],
-        data : { functionId : 2},
+        canActivate: [FunctionGuardService],
+        data: { functionId: 2 },
         children: [
           { path: 'button', component: ButtonComponent },
           { path: 'add-form', component: AddFormComponent },
@@ -142,16 +146,18 @@ const routes: Routes = [
       },
       {
         path: 'unit-list', component: UnitListComponent,
-        canActivate:[FunctionGuardService],
-        data : { functionId : 3},
+        canActivate: [FunctionGuardService],
+        data: { functionId: 3 },
         children: [
           { path: 'unit-form', component: UnitFormComponent },
-          { path: 'unit-details/:id', component: UnitDetailsComponent ,
+          {
+            path: 'unit-details/:id', component: UnitDetailsComponent,
             children: [
               { path: 'unit-edit-form/:id', component: UnitEditFormComponent }
             ]
           },
-          { path: 'unit-tree', component: UnitTreeComponent,
+          {
+            path: 'unit-tree', component: UnitTreeComponent,
             children: [
               { path: 'unit-node', component: UnitNodeComponent }
             ]
@@ -160,8 +166,8 @@ const routes: Routes = [
       },
       {
         path: 'sprint-management', component: ListComponent,
-        canActivate:[FunctionGuardService],
-        data : { functionId : 8},
+        canActivate: [FunctionGuardService],
+        data: { functionId: 8 },
         children: [
           {
             path: 'createform', component: CreateFormComponent,
@@ -178,9 +184,9 @@ const routes: Routes = [
             children: [
               {
                 path: 'allocated-resource/:sprintId/:resourceId', component: AllocatedResourceInformationComponent,
-                children:[
-                  { path: 'DeleteAllocation/:sprintId/:resourceId', component: DeleteResourceAllocationComponent},
-                  
+                children: [
+                  { path: 'DeleteAllocation/:sprintId/:resourceId', component: DeleteResourceAllocationComponent },
+
                 ]
               },
               { path: 'UpdatePercentage/:sprintId/:resourceId', component: UpdatePercentageComponent, },
@@ -190,12 +196,33 @@ const routes: Routes = [
           },
         ]
       },
+      {
+        path: 'handle-request', component: SprintListComponent,
+        canActivate: [FunctionGuardService],
+        data: { functionId: 9 },
+        children: [
+          {
+            path: 'sprintmgt/:id', component: SprintMgtComponent,
+            children: [
+              {
+                path: 'allocated-resource/:sprintId/:resourceId', component: AllocatedResourceInformationComponent,
+                children: [
+                  { path: 'DeleteAllocation/:sprintId/:resourceId', component: DeleteResourceAllocationComponent },
+
+                ]
+              },
+              { path: 'UpdatePercentage/:sprintId/:resourceId', component: UpdatePercentageComponent, },
+              { path: 'UpdateTask/:sprintId/:resourceId', component: UpdateTaskInSprintComponent, },
+              { path: 'EditSprint/:sprintId', component: EditSprintFormComponent, }
+            ]
+          }]
+      }
     ]
   },
   {
     path: 'admin-dashboard', component: AdminDasbdBodyComponent,
     canActivate: [AuthGuard],
-    data: { roles : ['admin'] },
+    data: { roles: ['admin'] },
     children: [
       { path: 'addNewUser', component: AddNewUserComponent },
       { path: 'userDetail/:id', component: UserDetailComponent }

@@ -15,14 +15,13 @@ interface ProjectTaskData {
   taskId: string;
   percentage: number | null;
 }
+
 @Component({
   selector: 'app-availabiility',
   templateUrl: './availabiility.component.html',
   styleUrls: ['./availabiility.component.css']
 })
-
 export class AvailabiilityComponent implements OnInit {
-
   resourceId: string = '';
   resourceDetails: any = {};
   tasks: any[] = [];
@@ -32,6 +31,10 @@ export class AvailabiilityComponent implements OnInit {
   taskProjectDetails: { taskName: string, projectName: string, percentage: number }[] = [];
   holidays: NgbDateStruct[] = []; // Store holidays
   availabilityPercentage: number = 0; 
+  searchText: string[] = [];
+  filteredProjects: any[][] = [];
+  dropdownOpen: boolean[] = [];
+  selectedProjectNames: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -50,11 +53,17 @@ export class AvailabiilityComponent implements OnInit {
       this.resourceId = params['id'];
       this.fetchResourceDetails();
       this.fetchProjects();
-      this.fetchTasksAndProjectsByResourceId(this.resourceId); // Fetch tasks and project details
-      this.fetchHolidays(this.resourceId); // Fetch holidays
+      this.fetchTasksAndProjectsByResourceId(this.resourceId);
+      this.fetchHolidays(this.resourceId);
     });
     this.route.queryParams.subscribe(queryParams => {
       this.availabilityPercentage = queryParams['availability'];
+    });
+    this.sets.forEach((_, index) => {
+      this.searchText[index] = '';
+      this.filteredProjects[index] = [];
+      this.dropdownOpen[index] = false;
+      this.selectedProjectNames[index] = '';
     });
   }
 
@@ -72,7 +81,7 @@ export class AvailabiilityComponent implements OnInit {
   fetchTasksAndProjectsByResourceId(resourceId: string): void {
     this.taskProjectDetails = [];
     this.tasks = []; 
-    this.Projects = []; // Reset Projects array if needed
+    this.Projects = []; 
   
     this.ResourceAllocationService.getTasksByResourceId(resourceId).pipe(
       switchMap(tasks => {
@@ -92,7 +101,7 @@ export class AvailabiilityComponent implements OnInit {
         this.taskProjectDetails = taskProjectDetails;
         console.log('Task and project details:', this.taskProjectDetails);
       },
-      error=> {
+      error => {
         console.error('Error fetching task and project details:', error);
       }
     );
@@ -102,6 +111,9 @@ export class AvailabiilityComponent implements OnInit {
     this.projectApiService.getProjectList().subscribe(
       (projects: any[]) => {
         this.Projects = projects;
+        this.sets.forEach((_, index) => {
+          this.filteredProjects[index] = [...this.Projects];
+        });
       },
       (error: any) => {
         console.error('Error fetching projects:', error);
@@ -116,7 +128,7 @@ export class AvailabiilityComponent implements OnInit {
           const date = new Date(holiday.holiday.date);
           return {
             year: date.getFullYear(),
-            month: date.getMonth() + 1, // Month is 0-based in JavaScript
+            month: date.getMonth() + 1,
             day: date.getDate()
           };
         });
@@ -137,7 +149,7 @@ export class AvailabiilityComponent implements OnInit {
   fetchTasksByProjectId(projectId: string, index: number): void {
     this.taskApiService.getTaskList(projectId).subscribe(
       (tasks: any[]) => {
-        this.sets[index].Tasks = tasks; // Store tasks in the specific set
+        this.sets[index].Tasks = tasks;
         console.log(`Fetched tasks for project ID ${projectId}:`, tasks);
       },
       (error: any) => {
@@ -146,42 +158,63 @@ export class AvailabiilityComponent implements OnInit {
     );
   }
 
+  filterProjects(index: number): void {
+    this.filteredProjects[index] = this.Projects.filter(project =>
+      project.projectName.toLowerCase().includes(this.searchText[index].toLowerCase())
+    );
+  }
+
+  toggleDropdown(index: number): void {
+    this.dropdownOpen[index] = !this.dropdownOpen[index];
+  }
+
+  selectProject(index: number, project: any): void {
+    this.sets[index].projectId = project.projectid;
+    this.selectedProjectNames[index] = project.projectName;
+    this.dropdownOpen[index] = false;
+    this.fetchTasksByProjectId(project.projectid, index);
+  }
+
   onTaskSelect(event: Event, index: number): void {
     const selectElement = event.target as HTMLSelectElement;
     this.sets[index].taskId = selectElement.value;
   }
 
   addSet(): void {
-    // Add a new set of project-task-percentage to the array
     this.sets.push({ projectId: '', taskId: '', percentage: null });
+    const newIndex = this.sets.length - 1;
+    this.searchText[newIndex] = '';
+    this.filteredProjects[newIndex] = [...this.Projects];
+    this.dropdownOpen[newIndex] = false;
+    this.selectedProjectNames[newIndex] = '';
   }
 
   removeSet(index: number): void {
-    // Check if there's only one set left, if yes, prevent removal
     if (this.sets.length === 1) {
       this.toastr.error('At least one set should be there.', 'Error');
       return;
     }
-
-    // Remove the set at the specified index
     this.sets.splice(index, 1);
+    this.searchText.splice(index, 1);
+    this.filteredProjects.splice(index, 1);
+    this.dropdownOpen.splice(index, 1);
+    this.selectedProjectNames.splice(index, 1);
   }
 
   onAddClick(): void {
-    // Iterate through the sets array and create a ProjectTaskData object for each set
     this.sets.forEach(set => {
       const projectTaskData: ProjectTaskData = {
         resourceId: this.resourceId,
         taskId: set.taskId,
         percentage: set.percentage
       };
-
-      // Use the addData method from the shared service to add each set separately
       this.sharedService.addData(projectTaskData);
     });
-
-    // Clear the sets array after adding data
     this.sets = [{ projectId: '', taskId: '', percentage: null }];
+    this.searchText = [''];
+    this.filteredProjects = [this.Projects];
+    this.dropdownOpen = [false];
+    this.selectedProjectNames = [''];
   }
 
   deleteContent() {

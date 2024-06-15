@@ -4,7 +4,15 @@ import { sprintApiService } from '../services/sprintApi.service';
 import { ActivatedRoute } from '@angular/router';
 import { SharedService } from '../services/shared.service';
 import { ResourceAllocationService } from '../services/resource-allocation.service';
+import { ResourceService } from '../../team-management/shared/resource.service';
 import { ToastrService } from 'ngx-toastr';
+import { forkJoin, map } from 'rxjs';
+
+interface ProjectTaskData {
+  resourceId: string;
+  taskId: string;
+  percentage: number | null;
+}
 
 @Component({
   selector: 'app-create-form',
@@ -12,18 +20,21 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./create-form.component.css']
 })
 export class CreateFormComponent implements OnInit {
+
   sprintName: string = '';
   startDate: Date = new Date();
   endDate: Date = new Date();
   processedDataIds: Set<string> = new Set();
 
   headArray = ['Resource_ID', 'Team', 'Job_Role', 'Org_Unit', 'Availability'];
-  resources = [];
+  tablecontents: any[] = [];
+  sharedData: ProjectTaskData[] = [];
 
   constructor(
     private router: Router,
     private sprintApiService: sprintApiService,
     private route: ActivatedRoute,
+    private resourceService: ResourceService,
     private sharedService: SharedService,
     private resourceAllocationService: ResourceAllocationService,
     private toastr: ToastrService) { }
@@ -33,7 +44,10 @@ export class CreateFormComponent implements OnInit {
     this.sharedService.data$.subscribe(data => {
       // Handle the received data
       console.log('Received data:', data);
+      this.sharedData = data;
+      this.fetchResources();
     });
+    this.fetchResources();
   }
 
   getSprintFormData(data: any) {
@@ -145,6 +159,57 @@ export class CreateFormComponent implements OnInit {
 
   // Method to clear the resources array
   clearResources(): void {
-    this.resources = [];
+    this.tablecontents = [];
+  }
+
+  fetchResources(): void {
+    this.resourceService.getResourcesForSprint().subscribe(
+      (data: any[]) => {
+        this.tablecontents = data.filter(resource =>
+          this.sharedData.some(shared => shared.resourceId === resource.resource_id)
+        ).map(resource => ({
+          Resource_ID: resource.resource_id,
+          Team: resource.team_name,
+          Job_Role: resource.role_name,
+          Org_Unit: resource.org_unit_name,
+          Availability: '' // Placeholder for availability
+        }));
+        this.calculateAvailability();
+      },
+      error => {
+        console.error('Error fetching resources:', error);
+      }
+    );
+  }
+
+  calculateAvailability(): void {
+    const availabilityObservables = this.tablecontents.map(resource =>
+      this.resourceAllocationService.getTasksByResourceId(resource.Resource_ID).pipe(
+        map(tasks => {
+          const filteredTasks = tasks.filter(task => task.resourceAllocation.task.taskProgressPercentage < 100);
+          const totalAllocation = filteredTasks.reduce((total, task) => {
+            const allocationPercentage = task.resourceAllocation.percentage || 0;
+            return total + allocationPercentage;
+          }, 0);
+
+          const availabilityPercentage = totalAllocation;
+
+          return {
+            ...resource,
+            Availability: availabilityPercentage
+          };
+        })
+      )
+    );
+
+    // Use forkJoin to wait for all observables to complete
+    forkJoin(availabilityObservables).subscribe(
+      updatedResources => {
+        this.tablecontents = updatedResources;
+      },
+      error => {
+        console.error('Error calculating availability:', error);
+      }
+    );
   }
 }

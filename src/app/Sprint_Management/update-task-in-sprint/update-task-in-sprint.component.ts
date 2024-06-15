@@ -7,6 +7,8 @@ import { forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { SharedService } from '../services/shared.service';
+import { ApiServiceService } from '../../calender-management/shared/api-service.service';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 
 interface TaskWithProjectInfo {
   resourceAllocationId: number;
@@ -37,6 +39,8 @@ export class UpdateTaskInSprintComponent implements OnInit {
   commonTaskIds: string[] = [];
   updatedTasks: { resourceAllocationId: number, taskId: number }[] = [];
   changedTasks: Set<number> = new Set(); // Track temporarily changed tasks
+  availabilityPercentage: number = 0; 
+  holidays: NgbDateStruct[] = []; 
 
   constructor(
     private route: ActivatedRoute,
@@ -45,7 +49,8 @@ export class UpdateTaskInSprintComponent implements OnInit {
     private taskApiService: taskApiService,
     private router: Router,
     private toastr: ToastrService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private ApiServiceService: ApiServiceService
   ) { }
 
   ngOnInit(): void {
@@ -54,6 +59,9 @@ export class UpdateTaskInSprintComponent implements OnInit {
       this.resourceId = params['resourceId'];
       this.fetchData();
     });
+    this.route.queryParams.subscribe(params => {
+      this.availabilityPercentage = params['availability']; 
+    });  
   }
 
   fetchData(): void {
@@ -74,6 +82,36 @@ export class UpdateTaskInSprintComponent implements OnInit {
       error => {
         console.error('Error fetching data:', error);
       }
+    );
+  }
+
+  fetchHolidays(resourceId: string): void {
+    this.ApiServiceService.resourceGetEvents(resourceId).subscribe(
+      (holidays: any[]) => {
+        this.holidays = holidays.map(holiday => {
+          const date = new Date(holiday.holiday.date);
+          return {
+            year: date.getFullYear(),
+            month: date.getMonth() + 1, // Month is 0-based in JavaScript
+            day: date.getDate()
+          };
+        });
+      },
+      (error: any) => {
+        console.error('Error fetching holidays:', error);
+      }
+    );
+  }
+
+  disableAllDates(): boolean {
+    return true;
+  }
+  
+  isHoliday(date: NgbDateStruct): boolean {
+    return this.holidays.some(holiday => 
+      holiday.year === date.year && 
+      holiday.month === date.month && 
+      holiday.day === date.day
     );
   }
 

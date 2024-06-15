@@ -93,7 +93,7 @@ export class SprintMgtComponent implements OnInit {
                             const allocationPercentage = task.resourceAllocation.percentage || 0; // Assuming the field name is 'percentage'
                             return total + allocationPercentage;
                             }, 0);
-                            const availabilityPercentage = totalAllocation;
+                            const availabilityPercentage = totalAllocation+ '%';
                             return {
                                 ...resource,
                                 Availability: availabilityPercentage
@@ -117,7 +117,15 @@ export class SprintMgtComponent implements OnInit {
 
   onRowClick(resourceId: string): void {
     this.clickedResourceId = resourceId;
-    this.router.navigate([`allocated-resource/${this.sprint_id}/${resourceId}`], { relativeTo: this.route });
+    const resource = this.ResourcesOfSprint.find(res => res.Resource_ID === resourceId);
+
+    if (resource) {
+      const availability = resource.Availability;
+      this.router.navigate([`allocated-resource/${this.sprint_id}/${resourceId}`], {
+        relativeTo: this.route,
+        queryParams: { availability: availability }
+      });
+    }
   }
 
   openDeletePopup(): void {
