@@ -1,81 +1,92 @@
-<app-spinner></app-spinner>
 <div class="col-lg-12 col-md-12 col-sm-12 justify-content-center border rounded p-2">
     <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Update Project</div>
-    <form>
-        <div class="form-goup row-label mb-2">
+    <form (ngSubmit)="editProjectDetails()">
+        <!-- Project Name -->
+        <div class="form-group row-label mb-2">
             <label class="fw-medium font-color" for="projectName">Project Name *</label>
             <div class="form-group row mt-2 mb-3">
                 <label for="projectName" class="col-3 ps-5 fst-normal text-primary">Name :</label>
                 <div class="col-9">
-                    <input type="text" class="form-control" [(ngModel)]="projectForm.projectName" name="projectName"
-                        placeholder="Enter Project Name">
+                    <input type="text" class="form-control" [(ngModel)]="projectForm.projectName" name="projectName" placeholder="Enter Project Name">
                 </div>
             </div>
+
+            <!-- Project Start Date -->
             <label class="fw-medium font-color" for="projectStartDate">Project Start Date *</label>
             <div class="form-group row mt-2 mb-3">
                 <label for="projectStartDate" class="col-3 ps-5 fst-normal text-primary">From :</label>
                 <div class="col-9">
-                    <input type="date" class="form-control" [(ngModel)]="projectForm.projectStartDate"
-                        name="projectStartDate" placeholder="Enter projectStartDate">
+                    <input type="date" class="form-control" [(ngModel)]="projectForm.projectStartDate" name="projectStartDate" placeholder="Enter projectStartDate">
                 </div>
             </div>
 
+            <!-- Project End Date -->
             <label class="fw-medium font-color" for="projectEndDate">Project End Date *</label>
             <div class="form-group row mt-2 mb-3">
                 <label for="projectEndDate" class="col-3 ps-5 fst-normal text-primary">To :</label>
                 <div class="col-9">
-                    <input type="date" class="form-control" [(ngModel)]="projectForm.projectEndDate"
-                        name="projectEndDate" placeholder="Enter projectEndDate" required>
+                    <input type="date" class="form-control" [(ngModel)]="projectForm.projectEndDate" name="projectEndDate" placeholder="Enter projectEndDate" required>
                 </div>
             </div>
 
-            <label class="fw-medium font-color" for="ProjectCriticality">Project Criticallity *</label>
+            <!-- Project Criticality -->
+            <label class="fw-medium font-color" for="ProjectCriticality">Project Criticality *</label>
             <div class="form-group row mt-2 mb-3">
-                <label for="ProjectCriticality" class="col-3 ps-5 fst-normal text-primary">Criticality
-                    :</label>
+                <label for="ProjectCriticality" class="col-3 ps-5 fst-normal text-primary">Criticality :</label>
                 <div class="col-9">
-                    <select id="inputState" class="form-control" required id="criticality"
-                        [(ngModel)]="projectForm.criticality_id" name="criticality">
+                    <select id="inputState" class="form-control" required [(ngModel)]="projectForm.criticality_id" name="criticality">
                         <option disabled selected value="">Select Project Criticality</option>
-                        <option [value]="1" [selected]="+projectForm.criticality_id ===1">High</option>
+                        <option [value]="1" [selected]="+projectForm.criticality_id === 1">High</option>
                         <option [value]="2" [selected]="+projectForm.criticality_id === 2">Medium</option>
                         <option [value]="3" [selected]="+projectForm.criticality_id === 3">Low</option>
                     </select>
                 </div>
             </div>
+
+            <!-- Project Manager -->
             <label class="fw-medium font-color" for="projectManager_id">Project Manager *</label>
             <div class="form-group row mt-2 mb-3">
                 <label for="projectManager_id" class="col-3 ps-5 fst-normal text-primary">Assigner :</label>
                 <div class="col-9">
-                    <input type="text" class="form-control" placeholder="Enter Project Manager ID"
-                        [(ngModel)]="projectManagerName" name="projectManager_id" required>
+                    <input type="text" class="form-control" placeholder="Enter Project Manager" (input)="filterManagers('projectManager')" (click)="toggleManagerDropdown('projectManager')" [(ngModel)]="projectManagerName" name="projectManager_id" required>
+                    <div *ngIf="showManagerDropdown" class="dropdown-content show">
+                        <ul>
+                            <li *ngFor="let manager of filteredManagers" (click)="selectManager(manager, 'projectManager')">{{ manager.resourceName }}</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+
+            <!-- Delivery Manager -->
             <label class="fw-medium font-color" for="deliveryManager_id">Delivery Manager *</label>
             <div class="form-group row mt-2 mb-3">
                 <label for="deliveryManager_id" class="col-3 ps-5 fst-normal text-primary">Assigner :</label>
                 <div class="col-9">
-                    <input type="text" class="form-control" [(ngModel)]="delivarManagerName"
-                        name="deliveryManager_id" placeholder="Enter Delivery Manager ID" required>
+                    <input type="text" class="form-control" placeholder="Enter Delivery Manager" (input)="filterManagers('deliveryManager')" (click)="toggleManagerDropdown('deliveryManager')" [(ngModel)]="delivarManagerName" name="deliveryManager_id" required>
+                    <div *ngIf="showDeliveryDropdown" class="dropdown-content show">
+                        <ul>
+                            <li *ngFor="let manager of filteredManagers" (click)="selectManager(manager, 'deliveryManager')">{{ manager.resourceName }}</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+
+            <!-- Project Description -->
             <label class="fw-medium font-color" for="projectDescription">Project Description</label>
             <div class="form-group row mt-2 mb-3">
-                <label for="projectDescription" class="col-3 ps-5 fst-normal text-primary">Description
-                    :</label>
+                <label for="projectDescription" class="col-3 ps-5 fst-normal text-primary">Description :</label>
                 <div class="col-9">
-                    <textarea class="form-control" rows="3" [(ngModel)]="projectForm.projectDescription"
-                        name="projectDescription" placeholder="Enter Description"></textarea>
+                    <textarea class="form-control" rows="3" [(ngModel)]="projectForm.projectDescription" name="projectDescription" placeholder="Enter Description"></textarea>
                 </div>
             </div>
         </div>
+
+        <!-- Buttons -->
         <div class="d-flex justify-content-center">
-            <button class="btn btn-outline-primary w-25 mt-3 custom-button btn-sm " (click)="editProjectDetails()">Edit
-                Project</button>
+            <button type="submit" class="btn btn-outline-primary w-25 mt-3 custom-button btn-sm">Edit Project</button>
         </div>
         <div class="d-flex justify-content-end">
-            <button class="btn btn btn-outline-danger w-15 mt-3 btn-sm me-5" (click)="deleteProjectDetails()">Delete
-                Project</button>
+            <button type="button" class="btn btn-outline-danger w-15 mt-3 btn-sm me-5" (click)="deleteProjectDetails()">Delete Project</button>
         </div>
     </form>
 </div>
