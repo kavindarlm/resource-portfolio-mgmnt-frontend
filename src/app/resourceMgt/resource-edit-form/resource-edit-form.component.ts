@@ -74,7 +74,7 @@ export class ResourceEditFormComponent implements OnInit{
       })
     )
     .subscribe((res: any) => {
-      debugger;
+      // debugger;
       this.jobroles = res; // Assuming the response is directly the array of resources
       this.spinner.hide();
     },
@@ -95,7 +95,6 @@ export class ResourceEditFormComponent implements OnInit{
       })
     )
     .subscribe((res: any) => {
-      debugger;
       this.orgunits = res; // Assuming the response is directly the array of resources
     },
       (error) => {
@@ -112,9 +111,7 @@ export class ResourceEditFormComponent implements OnInit{
     this.resourceService.updateResource(this.selectedResource.resourceId, data)
       .subscribe(
         (res: any) => {
-          debugger;
           console.log('Resource updated successfully:', res);
-          // alert('Resource updated Successfully');
           this.editSucceseMassege(this.selectedResource.resourceId);
           this.formValue.reset();
           this.resourceService.resourceListUpdated.emit(); // Emit the event

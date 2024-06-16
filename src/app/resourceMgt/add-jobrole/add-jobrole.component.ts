@@ -40,6 +40,7 @@ export class AddJobroleComponent implements OnInit{
     console.log(data);
     // debugger;
     if (this.jobRoleForm.invalid) {
+      this.toastr.error("Please enter the required field to add a new job role.");
       return;
     }
     const dataToSend = this.jobRoleForm.value;
