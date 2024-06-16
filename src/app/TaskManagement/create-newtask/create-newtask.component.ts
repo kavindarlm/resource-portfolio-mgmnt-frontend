@@ -79,6 +79,16 @@ export class CreateNewtaskComponent implements OnInit {
       },
       { validator: dateRangeValidator }
     );
+
+        //form value to uppercase
+        this.taskForm.valueChanges.subscribe(val =>{
+          if(val.taskName && val.taskName.length === 1) {
+            this.taskForm.patchValue({taskName: val.taskName.toUpperCase()});
+          }
+          if(val.taskDescription && val.taskDescription.length == 1) {
+            this.taskForm.patchValue({taskDescription: val.taskDescription.toUpperCase()});
+          }
+        })
   }
 
   // Implement the submitTaskkform method

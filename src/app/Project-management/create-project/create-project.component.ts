@@ -70,6 +70,16 @@ export class CreateProjectComponent implements OnInit {
     );
 
     this.getCriticality();
+
+    //form value to uppercase
+    this.projectform.valueChanges.subscribe(val =>{
+      if(val.projectName && val.projectName.length === 1) {
+        this.projectform.patchValue({projectName: val.projectName.toUpperCase()});
+      }
+      if(val.projectDescription && val.projectDescription.length == 1) {
+        this.projectform.patchValue({projectDescription: val.projectDescription.toUpperCase()});
+      }
+    })
   }
 
   private _filter(value: string, field: string): resourceIdNameModel[] {
