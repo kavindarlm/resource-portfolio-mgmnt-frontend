@@ -15,19 +15,31 @@
             <div class="form-group align-items-center">
               <label for="teamName" class="tn-label text-primary col-4 ">Name :</label>
               <input type="text" class="form-control tn-input" id="formGroupExampleInput1" placeholder="Enter Team Name"
-                formControlName="teamName">
+                formControlName="teamName"
+                [ngClass]="{'is-invalid': teamForm.controls['teamName'].invalid && teamForm.controls['teamName'].touched}">
+            </div>
+            <!-- Error message -->
+            <div class="error-message "
+              *ngIf="teamForm.controls['teamName'].touched && teamForm.controls['teamName'].invalid">
+              Team name is required
             </div>
           </div>
         </div>
 
-        
+
         <div class="form-goup row-label mb-2 col-12">
           <label class="pm-label fw-medium mb-2 col-4" for="Description">Description *</label>
           <div class="form-group row row-label">
             <div class="form-group align-items-center">
               <label for="description" class="d-label text-primary col-4 ">Description :</label>
-              <input type="text" class="form-control d-input" id="formGroupExampleInput1" placeholder="Enter Description"
-                formControlName="team_description">
+              <input type="text" class="form-control d-input" id="formGroupExampleInput1"
+                placeholder="Enter Description" formControlName="team_description"
+                [ngClass]="{'is-invalid': teamForm.controls['team_description'].invalid && teamForm.controls['team_description'].touched}">
+            </div>
+            <!-- Error message -->
+            <div class="error-message"
+              *ngIf="teamForm.controls['team_description'].touched && teamForm.controls['team_description'].invalid">
+              Description is required
             </div>
           </div>
         </div>
@@ -42,36 +54,34 @@
         <!-- tabel to display selected resources for the team -->
 
         <div class="table-responsive-sm  table-responsive-md table-responsive">
-        <table class="table table-bordered table-striped table-hover table-sm">
+          <table class="table table-bordered table-striped table-hover table-sm">
+            <thead class="thead-dark fs-6 fst-normal">
+              <tr class="">
+                <th scope="col" class="col-4 text-center">
+                  Resource Id
+                </th>
+                <th scope="col" class="col-4 text-center">
+                  Job Role
+                </th>
+                <th scope="col" class="col-4 text-center">
+                  Org. Unit
+                </th>
+              </tr>
+            </thead>
 
-          <thead class="thead-dark fs-6 fst-normal">
-            <tr class="">
-              <th scope="col" class="col-4 text-center">
-                Resource Id
-              </th>
-              <th scope="col" class="col-4 text-center">
-                Job Role
-              </th>
-              <th scope="col" class="col-4 text-center">
-                Org. Unit
-              </th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr *ngFor="let selectedResource of selectedResources" class="border text-center">
-              <td class="col-4 border text-center">{{ selectedResource.resourceId }}</td>
-              <td class="col-4 border text-center">{{ selectedResource.roleName}}</td>
-              <td class="col-4 border text-center">{{ selectedResource.unitName}}</td>
-
-            </tr>
-          </tbody>
-
-        </table>
+            <tbody>
+              <tr *ngFor="let selectedResource of selectedResources" class="border text-center">
+                <td class="col-4 border text-center">{{ selectedResource.resourceId }}</td>
+                <td class="col-4 border text-center">{{ selectedResource.roleName}}</td>
+                <td class="col-4 border text-center">{{ selectedResource.unitName}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <div class="addResourceBtn col-6">
-          <app-new-team-button [text]="'Add Resources ID'" (click)="toggleResourceTable()"></app-new-team-button>
+          <!-- <app-new-team-button [text]="'Add Resources ID'" (click)="toggleResourceTable()"></app-new-team-button> -->
+          <app-new-team-button [text]="'Add Resources ID'" routerLink="resourceTable"></app-new-team-button>
         </div>
 
         <hr>
@@ -93,7 +103,8 @@
 
     <!-- display resource table to select resources for the team -->
     <div class="col-12 col-md-6">
-      <app-resource-table *ngIf="showResourceTable"></app-resource-table>
+      <!-- <app-resource-table *ngIf="showResourceTable"></app-resource-table> -->
+      <router-outlet></router-outlet>
     </div>
   </div>
 

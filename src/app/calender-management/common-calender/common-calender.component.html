@@ -1,29 +1,30 @@
 <div class="container-fluid">
-    <div class="row">
-      <div class="col-12 p-2">
-        <div>
-          <ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="1" [dayTemplate]="t"
-            outsideDays="hidden" class="p-4 mb-2 border rounded" ></ngb-datepicker>
-  
-          <ng-template #t let-date let-focused="focused">
-            <span class="custom-day" [class.focused]="focused" [class.selected]="isSelected(date)"
-              [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
-              (mouseleave)="hoveredDate = null" >
-              {{ date.day }}
-            </span>
-          </ng-template>
-        
-        
-  
-        <!-- Conditionally render the "Add" button based on actionType -->
-        <div class="grid-item-button">
-          <button class="addbtn btn border rounded text-center" *ngIf="actionType === 'add'" (click)="onAddButtonClick()">Add</button>
-          <!-- <pre>Selected Dates: {{ selectedDates | json }} </pre> -->
-          <button class="editbtn  btn border rounded text-center" *ngIf="actionType === 'edit'" (click)="onEditButtonClick()">Edit</button>
+  <div class="row">
+    <div class="col-6 col-md-12 col-lg-12 p-2 ">
+      <div>
+        <ngb-datepicker #dp (dateSelect)="onDateSelection($event)" [displayMonths]="1" [dayTemplate]="t"
+          outsideDays="hidden" class="p-3 mb-2 border rounded"></ngb-datepicker>
+
+        <ng-template #t let-date let-focused="focused">
+          <span class="custom-day" [class.focused]="focused" [class.selected]="isSelected(date)"
+            [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+            (mouseleave)="hoveredDate = null">
+            {{ date.day }}
+          </span>
+        </ng-template>
+
+
+
+        <!-- Conditionally render the "Add" or "Edit" button based on actionType -->
+        <div class="grid-item-button ">
+          <div class="pic d-flex justify-content-center">
+            <button class="addbtn btn border rounded text-center" *ngIf="actionType === 'add'"
+              (click)="onAddButtonClick()">Add</button>
+            <button class="editbtn  btn border rounded text-center" *ngIf="actionType === 'edit'"
+              (click)="onEditButtonClick()">Edit</button>
+          </div>
         </div>
-      </div>
       </div>
     </div>
   </div>
-  
-  
+</div>

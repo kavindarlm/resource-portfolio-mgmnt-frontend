@@ -8,10 +8,10 @@ import { Component, Input } from '@angular/core';
 export class CalenderButtonComponent {
 
   @Input() text: string;
-  @Input() btnClass:string;
+  @Input() btnClass: string;
 
-  constructor(){
-    this.text = '';
+  constructor() {
+    this.text = ''; 
     this.btnClass = '';
 
   }

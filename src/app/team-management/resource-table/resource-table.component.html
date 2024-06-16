@@ -18,8 +18,7 @@
         <div class="row col-12 mt-1">
           <div class="col-6">
             <label for="jobRole">Filter by Job Role:</label>
-            <select [(ngModel)]="selectedJobRole" (ngModelChange)="loadResources(selectedJobRole, selectedOrgUnit)"
-              class="col-12">
+            <select class="form-select rounded small-text w-100" [(ngModel)]="selectedJobRole" (ngModelChange)="loadResources(selectedJobRole, selectedOrgUnit)">
               <option value="" disabled selected>Filter by Job Role</option>
               <option *ngFor="let jobRole of jobRoles" [value]="jobRole">{{ jobRole }}</option>
               <option value="">None</option>
@@ -29,8 +28,7 @@
           <!-- filter by job -->
           <div class="col-6">
             <label for="orgUnit">Filter by Org. Unit:</label>
-            <select [(ngModel)]="selectedOrgUnit" (ngModelChange)="loadResources(selectedJobRole, selectedOrgUnit)"
-              class="col-12">
+            <select class="form-select rounded small-text w-100" [(ngModel)]="selectedOrgUnit" (ngModelChange)="loadResources(selectedJobRole, selectedOrgUnit)">
               <option value="" disabled selected>Filter by Org Unit</option>
               <option *ngFor="let orgUnit of orgUnits" [value]="orgUnit">{{ orgUnit }}</option>
               <option value="">None</option>

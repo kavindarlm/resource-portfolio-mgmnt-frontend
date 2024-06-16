@@ -10,34 +10,35 @@ import { ApiServiceService } from '../shared/api-service.service';
 })
 export class GlobalCalenderComponent {
 
-  @Input() text:string='';
+  @Input() text: string = '';
 
   dates: Date[] = [];
 
   holidays: any[] = [];
 
-  showCalenderAdd=false;
-  showCalenderEdit=false;
-
-  constructor( private apiService: ApiServiceService) {
-    this.showCalenderAdd=false;
-    this.showCalenderEdit=false;
-  }
-  
-
-  accessCalenderAdd(){
-  this.showCalenderAdd=!this.showCalenderAdd;
-  }
-
-  accessCalenderEdit(){
-    this.showCalenderEdit=!this.showCalenderEdit;
-  }
-
   //holiday type public - bank - mercantile
   @Input() holidayType: string = '';
 
   //get selected dates and holiday type from calender
-  @Output() addEvent = new EventEmitter<{selectedDates: NgbDate[], holidayType: string}>();
+  @Output() addEvent = new EventEmitter<{ selectedDates: NgbDate[], holidayType: string }>();
+
+
+  showCalenderAdd = false;
+  showCalenderEdit = false;
+
+  constructor(private apiService: ApiServiceService) {
+    this.showCalenderAdd = false;
+    this.showCalenderEdit = false;
+  }
+
+
+  accessCalenderAdd() {
+    this.showCalenderAdd = !this.showCalenderAdd;
+  }
+
+  accessCalenderEdit() {
+    this.showCalenderEdit = !this.showCalenderEdit;
+  }
 
   //change the image according to the holiday type
   getSvgPath(): string {
@@ -49,23 +50,21 @@ export class GlobalCalenderComponent {
       case 'mercantile':
         return 'M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2'; // Replace with your mercantile holiday SVG path
       default:
-        return ''; 
+        return '';
     }
   }
-  
+
   //method to get selected dates and holiday type from calender - reemit to parent
-    onAddEvent(event: {selectedDates: NgbDate[], holidayType: string}) {
-      this.addEvent.emit(event);
-    }
+  onAddEvent(event: { selectedDates: NgbDate[], holidayType: string }) {
+    this.addEvent.emit(event);
+  }
 
-
-    // In global-calender.component.ts
   ngOnInit() {
     this.apiService.getEvents(this.holidayType).subscribe((events: any) => {
       this.holidays = events.map((event: { year: number; month: number; day: number; }) => new NgbDate(event.year, event.month, event.day));
     });
   }
-  
+
 
 }
 

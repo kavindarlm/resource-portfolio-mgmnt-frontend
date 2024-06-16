@@ -55,6 +55,7 @@ import { UnitFormComponent } from './orgUnitMgt/unit-form/unit-form.component';
 import { UnitDetailsComponent } from './orgUnitMgt/unit-details/unit-details.component';
 import { UnitEditFormComponent } from './orgUnitMgt/unit-edit-form/unit-edit-form.component';
 import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
+import { ResourceTableComponent } from './team-management/resource-table/resource-table.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -106,7 +107,11 @@ const routes: Routes = [
         data : { functionId : 5},
         children: [
           { path: 'NewTeamButton', component: NewTeamButtonComponent },
-          { path: 'TeamForm', component: TeamFormComponent },
+          { path: 'TeamForm', component: TeamFormComponent ,
+          children: [
+            { path: 'resourceTable', component:ResourceTableComponent}
+          ]
+          },
           { path: 'update/:id', component: UpdateComponent },
           { path: 'resources/:id', component: UpdateResourcTableComponent },
           { path: 'delete/:id', component: DeletePopupComponent }

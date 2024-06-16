@@ -1,20 +1,23 @@
-
 <div class="container-fluid p-0 mt-0">
     <div class="row no-gutters">
-                   
-            <div class="publicHoliday col-6 p-0">
-                <app-global-calender  [text]="'Select Public Holiday'" [holidayType]="'public'" (addEvent)="onAddEvent($event)" ></app-global-calender>
-            </div>
+        <!-- public holiday calender -->
+        <div class="publicHoliday col-12 col-sm-12 col-md-6 p-0">
+            <app-global-calender [text]="'Select Public Holiday'" [holidayType]="'public'"
+                (addEvent)="onAddEvent($event)"></app-global-calender>
+        </div>
 
-            <div class="bankHoliday col-6 p-0">
-                <app-global-calender  [text]="'Select Bank Holiday'" [holidayType]="'bank'" (addEvent)="onAddEvent($event)"></app-global-calender>
-            </div>
+        <!-- bank holiday calender -->
+        <div class="bankHoliday col-12 col-md-6 p-0">
+            <app-global-calender [text]="'Select Bank Holiday'" [holidayType]="'bank'"
+                (addEvent)="onAddEvent($event)"></app-global-calender>
+        </div>
     </div>
 
     <div class="row no-gutters">
-        <div class="mercantileHoliday col-6 mt-2 p-0">
-            <app-global-calender  [text]="'Select Mercantile Holiday'" [holidayType]="'mercantile'" (addEvent)="onAddEvent($event)"></app-global-calender>
+        <!-- mercantile holiday calender -->
+        <div class="mercantileHoliday col-12 col-md-6 mt-2 p-0">
+            <app-global-calender [text]="'Select Mercantile Holiday'" [holidayType]="'mercantile'"
+                (addEvent)="onAddEvent($event)"></app-global-calender>
         </div>
-
     </div>
 </div>
