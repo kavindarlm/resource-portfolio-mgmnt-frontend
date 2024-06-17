@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute , Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ResourceService } from '../../team-management/shared/resource.service';
 import { ResourceAllocationService } from '../services/resource-allocation.service';
 import { taskApiService } from '../../TaskManagement/services/taskApi.service';
@@ -13,10 +13,10 @@ interface TaskWithProjectInfo {
   resourceAllocationId: number;
   taskName: string;
   percentage: number;
-  initialPercentage: number; // Ensure it's always defined as a number
+  initialPercentage: number; 
   projectName: string;
   projectId: number;
-  isUpdated?: boolean;  // New property to track update status
+  isUpdated?: boolean; // property to track update status
 }
 
 @Component({
@@ -33,8 +33,8 @@ export class UpdatePercentageComponent implements OnInit {
   sprintAllocations: any[] = [];
   tasksWithProjectInfo: TaskWithProjectInfo[] = [];
   commonTaskIds: string[] = [];
-  availabilityPercentage: number = 0; 
-  holidays: NgbDateStruct[] = []; 
+  availabilityPercentage: number = 0;
+  holidays: NgbDateStruct[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -51,13 +51,18 @@ export class UpdatePercentageComponent implements OnInit {
       this.sprintId = params['sprintId'];
       this.resourceId = params['resourceId'];
       this.fetchData();
+      this.fetchHolidays(this.resourceId); // Fetch holidays for the resource
     });
     this.route.queryParams.subscribe(params => {
-      this.availabilityPercentage = params['availability']; 
-    });  
+      this.availabilityPercentage = params['availability'];
+    });
   }
 
   fetchData(): void {
+    this.tasksWithProjectInfo = []; // Clear previous data
+    this.tasks = []; // Clear previous tasks
+    this.sprintAllocations = []; // Clear previous sprint allocations
+
     forkJoin({
       resourceDetails: this.resourceService.findOneResource(this.resourceId),
       tasks: this.resourceAllocationService.getTasksByResourceId(this.resourceId),
@@ -94,20 +99,24 @@ export class UpdatePercentageComponent implements OnInit {
     );
 
     forkJoin(projectInfoRequests).subscribe(projectInfos => {
+      const processedTaskIds = new Set<string>(); // To track processed task IDs
       projectInfos.forEach((projectInfo, index) => {
         if (projectInfo) {
           const taskId = this.commonTaskIds[index];
-          const task = this.tasks.find(task => task.resourceAllocation.task.taskid === taskId) ||
-                       this.sprintAllocations.find(allocation => allocation.task.taskid === taskId);
-          if (task) {
-            this.tasksWithProjectInfo.push({
-              resourceAllocationId: task.resourceAllocation ? task.resourceAllocation.id : null,
-              taskName: task.resourceAllocation ? task.resourceAllocation.task.taskName : task.task.taskName,
-              percentage: task.resourceAllocation ? task.resourceAllocation.percentage : null,
-              initialPercentage: task.resourceAllocation ? task.resourceAllocation.percentage : null,
-              projectName: projectInfo.projectName,
-              projectId: projectInfo.projectId
-            });
+          if (!processedTaskIds.has(taskId)) {
+            const task = this.tasks.find(task => task.resourceAllocation.task.taskid === taskId) ||
+                         this.sprintAllocations.find(allocation => allocation.task.taskid === taskId);
+            if (task) {
+              this.tasksWithProjectInfo.push({
+                resourceAllocationId: task.resourceAllocation ? task.resourceAllocation.id : null,
+                taskName: task.resourceAllocation ? task.resourceAllocation.task.taskName : task.task.taskName,
+                percentage: task.resourceAllocation ? task.resourceAllocation.percentage : null,
+                initialPercentage: task.resourceAllocation ? task.resourceAllocation.percentage : null,
+                projectName: projectInfo.projectName,
+                projectId: projectInfo.projectId
+              });
+              processedTaskIds.add(taskId); // Mark this task ID as processed
+            }
           }
         }
       });
@@ -121,7 +130,7 @@ export class UpdatePercentageComponent implements OnInit {
           const date = new Date(holiday.holiday.date);
           return {
             year: date.getFullYear(),
-            month: date.getMonth() + 1, // Month is 0-based in JavaScript
+            month: date.getMonth() + 1, 
             day: date.getDate()
           };
         });
@@ -135,11 +144,11 @@ export class UpdatePercentageComponent implements OnInit {
   disableAllDates(): boolean {
     return true;
   }
-  
+
   isHoliday(date: NgbDateStruct): boolean {
-    return this.holidays.some(holiday => 
-      holiday.year === date.year && 
-      holiday.month === date.month && 
+    return this.holidays.some(holiday =>
+      holiday.year === date.year &&
+      holiday.month === date.month &&
       holiday.day === date.day
     );
   }
@@ -182,7 +191,6 @@ export class UpdatePercentageComponent implements OnInit {
   }
 
   deleteContent() {
-    this.router.navigate(['/pages-body/sprint-management/sprintmgt/',this.sprintId]);
+    this.router.navigate(['/pages-body/sprint-management/sprintmgt/', this.sprintId]);
   }
-
 }

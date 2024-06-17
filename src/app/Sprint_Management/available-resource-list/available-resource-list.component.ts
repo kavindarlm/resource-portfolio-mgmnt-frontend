@@ -45,7 +45,7 @@ export class AvailableResourceListComponent implements OnInit {
           Team: resource.team_name,
           Job_Role: resource.role_name,
           Org_Unit: resource.org_unit_name,
-          Availability: '' // Placeholder for availability
+          Availability: '' 
         }));
         this.calculateAvailability();
       },
@@ -75,7 +75,7 @@ export class AvailableResourceListComponent implements OnInit {
         
         // Calculate the total allocation percentage
         const totalAllocation = filteredTasks.reduce((total, task) => {
-          const allocationPercentage = task.resourceAllocation.percentage || 0; // Assuming the field name is 'percentage'
+          const allocationPercentage = task.resourceAllocation.percentage || 0; 
           return total + allocationPercentage;
         }, 0);
 

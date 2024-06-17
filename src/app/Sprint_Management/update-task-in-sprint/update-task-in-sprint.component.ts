@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute , Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ResourceService } from '../../team-management/shared/resource.service';
 import { ResourceAllocationService } from '../services/resource-allocation.service';
 import { taskApiService } from '../../TaskManagement/services/taskApi.service';
@@ -39,8 +39,8 @@ export class UpdateTaskInSprintComponent implements OnInit {
   commonTaskIds: string[] = [];
   updatedTasks: { resourceAllocationId: number, taskId: number }[] = [];
   changedTasks: Set<number> = new Set(); // Track temporarily changed tasks
-  availabilityPercentage: number = 0; 
-  holidays: NgbDateStruct[] = []; 
+  availabilityPercentage: number = 0;
+  holidays: NgbDateStruct[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -58,13 +58,18 @@ export class UpdateTaskInSprintComponent implements OnInit {
       this.sprintId = params['sprintId'];
       this.resourceId = params['resourceId'];
       this.fetchData();
+      this.fetchHolidays(this.resourceId); // Fetch holidays for the resource
     });
     this.route.queryParams.subscribe(params => {
-      this.availabilityPercentage = params['availability']; 
-    });  
+      this.availabilityPercentage = params['availability'];
+    });
   }
 
   fetchData(): void {
+    this.tasksWithProjectInfo = []; // Clear previous data
+    this.tasks = []; // Clear previous tasks
+    this.sprintAllocations = []; // Clear previous sprint allocations
+
     forkJoin({
       resourceDetails: this.resourceService.findOneResource(this.resourceId),
       tasks: this.resourceAllocationService.getTasksByResourceId(this.resourceId),
@@ -106,11 +111,11 @@ export class UpdateTaskInSprintComponent implements OnInit {
   disableAllDates(): boolean {
     return true;
   }
-  
+
   isHoliday(date: NgbDateStruct): boolean {
-    return this.holidays.some(holiday => 
-      holiday.year === date.year && 
-      holiday.month === date.month && 
+    return this.holidays.some(holiday =>
+      holiday.year === date.year &&
+      holiday.month === date.month &&
       holiday.day === date.day
     );
   }
@@ -131,25 +136,29 @@ export class UpdateTaskInSprintComponent implements OnInit {
     );
 
     forkJoin(projectInfoRequests).subscribe(projectInfos => {
+      const processedTaskIds = new Set<string>(); // To track processed task IDs
       projectInfos.forEach((projectInfo, index) => {
         if (projectInfo) {
           const taskId = this.commonTaskIds[index];
-          const task = this.tasks.find(task => task.resourceAllocation.task.taskid === taskId) ||
-                       this.sprintAllocations.find(allocation => allocation.task.taskid === taskId);
-          if (task) {
-            const taskWithProjectInfo: TaskWithProjectInfo = {
-              resourceAllocationId: task.resourceAllocation ? task.resourceAllocation.id : null,
-              taskName: task.resourceAllocation ? task.resourceAllocation.task.taskName : task.task.taskName,
-              percentage: task.resourceAllocation ? task.resourceAllocation.percentage : null,
-              projectName: projectInfo.projectName,
-              projectId: projectInfo.projectId.toString(),
-              relatedTasks: [],
-              selectedTaskId: task.resourceAllocation ? task.resourceAllocation.task.taskid : task.task.taskid,
-              initialTaskId: task.resourceAllocation ? task.resourceAllocation.task.taskid : task.task.taskid, // Store initial task ID
-              checked: false // Initially not checked
-            };
-            this.tasksWithProjectInfo.push(taskWithProjectInfo);
-            this.fetchRelatedTasks(projectInfo.projectId.toString(), this.tasksWithProjectInfo.length - 1);
+          if (!processedTaskIds.has(taskId)) {
+            const task = this.tasks.find(task => task.resourceAllocation.task.taskid === taskId) ||
+                         this.sprintAllocations.find(allocation => allocation.task.taskid === taskId);
+            if (task) {
+              const taskWithProjectInfo: TaskWithProjectInfo = {
+                resourceAllocationId: task.resourceAllocation ? task.resourceAllocation.id : null,
+                taskName: task.resourceAllocation ? task.resourceAllocation.task.taskName : task.task.taskName,
+                percentage: task.resourceAllocation ? task.resourceAllocation.percentage : null,
+                projectName: projectInfo.projectName,
+                projectId: projectInfo.projectId.toString(),
+                relatedTasks: [],
+                selectedTaskId: task.resourceAllocation ? task.resourceAllocation.task.taskid : task.task.taskid,
+                initialTaskId: task.resourceAllocation ? task.resourceAllocation.task.taskid : task.task.taskid, // Store initial task ID
+                checked: false // Initially not checked
+              };
+              this.tasksWithProjectInfo.push(taskWithProjectInfo);
+              this.fetchRelatedTasks(projectInfo.projectId.toString(), this.tasksWithProjectInfo.length - 1);
+              processedTaskIds.add(taskId); // Mark this task ID as processed
+            }
           }
         }
       });
@@ -207,13 +216,10 @@ export class UpdateTaskInSprintComponent implements OnInit {
       this.resourceAllocationService.updateResourceAllocationTaskId(update.resourceAllocationId, update.taskId)
     );
 
-    forkJoin(updateRequests).subscribe
-    (
+    forkJoin(updateRequests).subscribe(
       results => {
         this.toastr.success('Tasks updated successfully!', 'Success');
-        this.sharedService.notifyTaskUpdated(); // Notify shared service about task update
-        // Optionally, you can re-fetch data or update the UI to reflect changes
-        // Example: this.fetchData();
+        this.sharedService.notifyTaskUpdated(); 
       },
       error => {
         this.toastr.error('Error updating tasks. Please try again.', 'Error');
@@ -224,5 +230,4 @@ export class UpdateTaskInSprintComponent implements OnInit {
   deleteContent() {
     this.router.navigate(['/pages-body/sprint-management/sprintmgt/', this.sprintId]);
   }
-
 }

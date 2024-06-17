@@ -28,6 +28,10 @@ export class SprintMgtComponent implements OnInit {
 
   showPopup: boolean = false;
 
+  // Pagination properties
+  currentPage: number = 1;
+  pageSize: number = 5; // Number of items per page
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -44,11 +48,11 @@ export class SprintMgtComponent implements OnInit {
       this.fetchSprintData();
     });
   }
-  
+
   fetchSprintData(): void {
     // Clear the resources list before fetching new sprint data
     this.ResourcesOfSprint = [];
-  
+
     this.sprintApiService.findOneById(parseInt(this.sprint_id)).subscribe(
       (sprint: any) => {
         this.sprintName = sprint.sprint_name;
@@ -60,60 +64,60 @@ export class SprintMgtComponent implements OnInit {
         console.error('Error fetching sprint data:', error);
       }
     );
-  }  
+  }
 
   fetchAndPopulateResourcesOfSprint(): void {
     this.resourceAllocationService.getResourceAllocationBySprintId(parseInt(this.sprint_id))
-        .pipe(
-            mergeMap((data: any[]) => {
-                const resourceIds = data.map(allocation => allocation.resource.resourceId);
-                const resourceObservables: Observable<any>[] = resourceIds.map(resourceId => this.resourceService.findOneResource(resourceId));
-                return forkJoin(resourceObservables);
-            }),
-            mergeMap((resources: any[]) => {
-                const uniqueResources = new Map<number, any>(); // Map to store unique resources by resourceId
-                resources.forEach(resource => {
-                    if (!uniqueResources.has(resource.resourceId)) {
-                        uniqueResources.set(resource.resourceId, {
-                            Resource_ID: resource.resourceId,
-                            Team: resource.job_role ? resource.job_role.team_name : 'N/A',
-                            Job_Role: resource.job_role ? resource.job_role.roleName : 'N/A',
-                            Org_Unit: resource.org_unit ? resource.org_unit.unitName : 'N/A',
-                            Availability: '' // Placeholder for availability
-                        });
-                    }
-                });
-
-                // Fetch tasks for each resource to calculate availability
-                const availabilityObservables = Array.from(uniqueResources.values()).map(resource =>
-                    this.resourceAllocationService.getTasksByResourceId(resource.Resource_ID).pipe(
-                        map(tasks => {
-                          const filteredTasks = tasks.filter(task => task.resourceAllocation.task.taskProgressPercentage < 100);
-                          const totalAllocation = filteredTasks.reduce((total, task) => {
-                            const allocationPercentage = task.resourceAllocation.percentage || 0; // Assuming the field name is 'percentage'
-                            return total + allocationPercentage;
-                            }, 0);
-                            const availabilityPercentage = totalAllocation+ '%';
-                            return {
-                                ...resource,
-                                Availability: availabilityPercentage
-                            };
-                        })
-                    )
-                );
-                return forkJoin(availabilityObservables);
-            })
-        )
-        .subscribe(
-            (resourcesOfSprint: any[]) => {
-                this.ResourcesOfSprint = resourcesOfSprint;
-                console.log('ResourcesOfSprint:', this.ResourcesOfSprint);
-            },
-            error => {
-                console.error('Error fetching and populating ResourcesOfSprint:', error);
+      .pipe(
+        mergeMap((data: any[]) => {
+          const resourceIds = data.map(allocation => allocation.resource.resourceId);
+          const resourceObservables: Observable<any>[] = resourceIds.map(resourceId => this.resourceService.findOneResource(resourceId));
+          return forkJoin(resourceObservables);
+        }),
+        mergeMap((resources: any[]) => {
+          const uniqueResources = new Map<number, any>(); // Map to store unique resources by resourceId
+          resources.forEach(resource => {
+            if (!uniqueResources.has(resource.resourceId)) {
+              uniqueResources.set(resource.resourceId, {
+                Resource_ID: resource.resourceId,
+                Team: resource.job_role ? resource.job_role.team_name : 'N/A',
+                Job_Role: resource.job_role ? resource.job_role.roleName : 'N/A',
+                Org_Unit: resource.org_unit ? resource.org_unit.unitName : 'N/A',
+                Availability: '' // Placeholder for availability
+              });
             }
-        );
-}
+          });
+
+          // Fetch tasks for each resource to calculate availability
+          const availabilityObservables = Array.from(uniqueResources.values()).map(resource =>
+            this.resourceAllocationService.getTasksByResourceId(resource.Resource_ID).pipe(
+              map(tasks => {
+                const filteredTasks = tasks.filter(task => task.resourceAllocation.task.taskProgressPercentage < 100);
+                const totalAllocation = filteredTasks.reduce((total, task) => {
+                  const allocationPercentage = task.resourceAllocation.percentage || 0; // Assuming the field name is 'percentage'
+                  return total + allocationPercentage;
+                }, 0);
+                const availabilityPercentage = totalAllocation + '%';
+                return {
+                  ...resource,
+                  Availability: availabilityPercentage
+                };
+              })
+            )
+          );
+          return forkJoin(availabilityObservables);
+        })
+      )
+      .subscribe(
+        (resourcesOfSprint: any[]) => {
+          this.ResourcesOfSprint = resourcesOfSprint;
+          console.log('ResourcesOfSprint:', this.ResourcesOfSprint);
+        },
+        error => {
+          console.error('Error fetching and populating ResourcesOfSprint:', error);
+        }
+      );
+  }
 
   onRowClick(resourceId: string): void {
     this.clickedResourceId = resourceId;
@@ -138,7 +142,7 @@ export class SprintMgtComponent implements OnInit {
 
   deleteSprint(): void {
     const sprintId = parseInt(this.sprint_id);
-    
+
     this.resourceAllocationService.deleteResourceAllocationsBySprintId(sprintId).pipe(
       mergeMap(() => this.sprintApiService.deleteSprint(sprintId)),
       catchError(error => {
@@ -154,5 +158,25 @@ export class SprintMgtComponent implements OnInit {
 
   deleteContent() {
     this.router.navigate(['/pages-body/sprint-management']);
+  }
+
+  // Pagination methods
+  onPageChange(pageNumber: number): void {
+    this.currentPage = pageNumber;
+    // You may fetch data for the new page here or adjust your existing data array
+    // For simplicity, assuming your data is already in ResourcesOfSprint and just need to slice it
+  }
+
+  get paginatedResources(): any[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    return this.ResourcesOfSprint.slice(startIndex, startIndex + this.pageSize);
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.ResourcesOfSprint.length / this.pageSize);
+  }
+
+  getPaginationArray(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 }

@@ -32,8 +32,8 @@ export class AllocatedResourceInformationComponent implements OnInit {
   tasksWithProjectInfo: TaskWithProjectInfo[] = [];
   commonTaskIds: string[] = [];
   holidays: NgbDateStruct[] = []; // Store holidays
-  availabilityPercentage: number = 0; 
-  
+  availabilityPercentage: number = 0;
+
   isDeletePopupVisible: boolean = false;
   deleteResourceAllocationId: number | null = null;
   deleteTaskIndex: number | null = null;
@@ -52,7 +52,8 @@ export class AllocatedResourceInformationComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.sprintId = params['sprintId'];
       this.resourceId = params['resourceId'];
-      this.fetchData();
+      this.fetchData(); // Fetch data whenever route parameters change
+      this.fetchHolidays(this.resourceId); // Fetch holidays for the resource
     });
     this.route.queryParams.subscribe(queryParams => {
       this.availabilityPercentage = queryParams['availability'];
@@ -60,6 +61,10 @@ export class AllocatedResourceInformationComponent implements OnInit {
   }
 
   fetchData(): void {
+    this.tasksWithProjectInfo = []; // Clear previous data
+    this.tasks = []; // Clear previous tasks
+    this.sprintAllocations = []; // Clear previous sprint allocations
+
     forkJoin({
       resourceDetails: this.resourceService.findOneResource(this.resourceId),
       tasks: this.resourceAllocationService.getTasksByResourceId(this.resourceId),
@@ -96,19 +101,23 @@ export class AllocatedResourceInformationComponent implements OnInit {
     );
 
     forkJoin(projectInfoRequests).subscribe(projectInfos => {
+      const processedTaskIds = new Set<string>(); // To track processed task IDs
       projectInfos.forEach((projectInfo, index) => {
         if (projectInfo) {
           const taskId = this.commonTaskIds[index];
-          const task = this.tasks.find(task => task.resourceAllocation.task.taskid === taskId) ||
-                       this.sprintAllocations.find(allocation => allocation.task.taskid === taskId);
-          if (task) {
-            this.tasksWithProjectInfo.push({
-              resourceAllocationId: task.resourceAllocation ? task.resourceAllocation.id : null,
-              taskName: task.resourceAllocation ? task.resourceAllocation.task.taskName : task.task.taskName,
-              percentage: task.resourceAllocation ? task.resourceAllocation.percentage : null,
-              projectName: projectInfo.projectName,
-              projectId: projectInfo.projectId
-            });
+          if (!processedTaskIds.has(taskId)) {
+            const task = this.tasks.find(task => task.resourceAllocation.task.taskid === taskId) ||
+                        this.sprintAllocations.find(allocation => allocation.task.taskid === taskId);
+            if (task) {
+              this.tasksWithProjectInfo.push({
+                resourceAllocationId: task.resourceAllocation ? task.resourceAllocation.id : null,
+                taskName: task.resourceAllocation ? task.resourceAllocation.task.taskName : task.task.taskName,
+                percentage: task.resourceAllocation ? task.resourceAllocation.percentage : null,
+                projectName: projectInfo.projectName,
+                projectId: projectInfo.projectId
+              });
+              processedTaskIds.add(taskId); // Mark this task ID as processed
+            }
           }
         }
       });
@@ -122,7 +131,7 @@ export class AllocatedResourceInformationComponent implements OnInit {
           const date = new Date(holiday.holiday.date);
           return {
             year: date.getFullYear(),
-            month: date.getMonth() + 1, // Month is 0-based in JavaScript
+            month: date.getMonth() + 1,
             day: date.getDate()
           };
         });
@@ -136,11 +145,11 @@ export class AllocatedResourceInformationComponent implements OnInit {
   disableAllDates(): boolean {
     return true;
   }
-  
+
   isHoliday(date: NgbDateStruct): boolean {
-    return this.holidays.some(holiday => 
-      holiday.year === date.year && 
-      holiday.month === date.month && 
+    return this.holidays.some(holiday =>
+      holiday.year === date.year &&
+      holiday.month === date.month &&
       holiday.day === date.day
     );
   }
@@ -150,6 +159,7 @@ export class AllocatedResourceInformationComponent implements OnInit {
     this.deleteTaskIndex = index;
     this.isDeletePopupVisible = true;
   }
+
   confirmDeleteTask(): void {
     if (this.deleteResourceAllocationId !== null && this.deleteTaskIndex !== null) {
       this.resourceAllocationService.deleteResourceAllocationById(this.deleteResourceAllocationId).subscribe(
@@ -168,6 +178,7 @@ export class AllocatedResourceInformationComponent implements OnInit {
       );
     }
   }
+
   cancelDeleteTask(): void {
     this.resetDeletePopup();
   }
