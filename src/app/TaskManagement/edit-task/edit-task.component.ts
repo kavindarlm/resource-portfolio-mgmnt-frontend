@@ -5,6 +5,7 @@ import { taskApiService } from '../services/taskApi.service';
 import { ToastrService } from 'ngx-toastr';
 import { taskSharedService } from '../services/taskshared.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ConfirmDialogService } from '../../ConfirmDialogBox/confirm-dialog.service';
 
 @Component({
   selector: 'app-edit-task',
@@ -18,7 +19,8 @@ export class EditTaskComponent implements OnInit {
     private router: Router,
     private toaster: ToastrService,
     private tasksharedService: taskSharedService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private confirmDialogService: ConfirmDialogService
   ) {}
   Routetaskid!: string;
   projectId!: string;
@@ -76,6 +78,8 @@ export class EditTaskComponent implements OnInit {
     if (!this.validateTaskDetails()) {
       return;
     }
+    this.confirmDialogService.open('Are you sure you want to edit this task?').subscribe(confirmed => {
+      if (confirmed) {
     this.taskApiService.editTaskDetails(this.Routetaskid, this.taskForm).subscribe((data: taskModel) => {
       this.toaster.success('Task Edited successfully', 'Edited Task', {
         timeOut: 3000,
@@ -84,16 +88,20 @@ export class EditTaskComponent implements OnInit {
       this.router.navigate(['/pages-body/TaskProjectList/projectTaskDetails/' + this.projectId+'/updatetask/'+this.Routetaskid]);
     });
   }
+});
+  }
 
   // Delete Task
   DeleteTask() {
-    if (confirm("Are you sure you want to delete this task?")) {
-      this.taskApiService.deleteTask(this.Routetaskid).subscribe((data: taskModel) => {
-        this.toaster.success('Task Deleted Successfully');
-        this.tasksharedService.refreshTaskList();
-        this.router.navigate(['/pages-body/TaskProjectList/projectTaskDetails/' + this.projectId]);
-      });
-    }
+    this.confirmDialogService.open('Are you sure you want to delete this task?').subscribe(confirmed => {
+      if (confirmed) {
+        this.taskApiService.deleteTask(this.Routetaskid).subscribe((data: taskModel) => {
+          this.toaster.success('Task Deleted Successfully');
+          this.tasksharedService.refreshTaskList();
+          this.router.navigate(['/pages-body/TaskProjectList/projectTaskDetails/' + this.projectId]);
+        });
+      }
+    });
   }
 
   close() {

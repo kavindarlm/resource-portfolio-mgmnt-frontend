@@ -94,6 +94,7 @@ import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.componen
 import { ResetPasswordComponent } from './PageBody/reset-password/reset-password.component';
 import { AddJobroleComponent } from './resourceMgt/add-jobrole/add-jobrole.component';
 import { WellcomeMessageComponent } from './PageBody/wellcome-message/wellcome-message.component';
+import { ConfirmDialogComponent } from './ConfirmDialogBox/confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -175,6 +176,7 @@ import { WellcomeMessageComponent } from './PageBody/wellcome-message/wellcome-m
     ResetPasswordComponent,
     AddJobroleComponent,
     WellcomeMessageComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,
