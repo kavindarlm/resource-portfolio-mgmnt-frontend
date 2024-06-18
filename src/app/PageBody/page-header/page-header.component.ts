@@ -34,6 +34,8 @@ export class PageHeaderComponent {
   logout() {
     if (confirm('Are you sure you want to logout?'))
     this.authService.logout();
+    this.visibilityService.logout();
+    this.visibilityService.clearHeaderName();
   }
 
   isSubMenuVisible: boolean = false;
@@ -45,4 +47,6 @@ export class PageHeaderComponent {
     this.visibilityService.toggleEditPasswardComponent();
     this.toggleSubMenu()
   }
+
+
 }

@@ -207,7 +207,7 @@ export class UpdateProjectComponent implements OnInit {
       return false;
     }
     return true;
-  }
+  } 
 
   getResourceNameById(delivaryMangerIdid: string, projectManagerId: string) {
     this.taskApiService.getResourceNameByResourceId(delivaryMangerIdid).subscribe(res => {

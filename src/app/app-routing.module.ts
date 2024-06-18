@@ -55,6 +55,7 @@ import { UnitFormComponent } from './orgUnitMgt/unit-form/unit-form.component';
 import { UnitDetailsComponent } from './orgUnitMgt/unit-details/unit-details.component';
 import { UnitEditFormComponent } from './orgUnitMgt/unit-edit-form/unit-edit-form.component';
 import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
+import { WellcomeMessageComponent } from './PageBody/wellcome-message/wellcome-message.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -66,6 +67,9 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles : ['user'] },
     children: [
+      {
+        path: 'welcome-page', component: WellcomeMessageComponent,
+      },
       { path: 'projectBoard', component: ProjectBoardComponent,
       canActivate:[FunctionGuardService],
       data : { functionId : 1},

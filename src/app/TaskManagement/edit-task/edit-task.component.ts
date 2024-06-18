@@ -79,4 +79,7 @@ export class EditTaskComponent implements OnInit {
       }
     );
   }
+  close(){
+    
+  }
 }
