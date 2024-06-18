@@ -8,6 +8,7 @@ import {
 } from '../dataModels/projectModel';
 import { taskSharedService } from '../services/taskshared.service';
 import { Subscription, catchError, of } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-project-details',
@@ -18,7 +19,8 @@ export class ProjectDetailsComponent implements OnInit {
   constructor(
     private activateDataRout: ActivatedRoute,
     private api: taskApiService,
-    private shared: taskSharedService
+    private shared: taskSharedService,
+    private spinner: NgxSpinnerService
   ) {}
 
   // Define the dataid property
@@ -73,24 +75,31 @@ export class ProjectDetailsComponent implements OnInit {
     this.getProjectDetails();
     this.getProjectTaskSum();
     this.getProjectProgress();
+
+    // Set project ID in shared service
+    this.shared.setProjectId(this.dataid);
   }
 
   // Fetch project details
   getProjectDetails() {
     this.api.fetchProject(this.dataid).subscribe((data: projectModel) => {
+      this.spinner.show();
       this.projectData = data;
       this.delivaryMangerId = data.deliveryManager_id;
       this.getResourceName();
       this.getCriticalityName(data.criticality_id);
+      this.spinner.hide();
     });
   }
 
   // Fetch task list
   getTaskList() {
     this.api.getTaskList(this.dataid).subscribe((res) => {
+      this.spinner.show();
       this.TaskData = res;
       this.calculateTotalPages();
       this.paginateTasks();
+      this.spinner.hide();
     });
   }
 
@@ -103,7 +112,9 @@ export class ProjectDetailsComponent implements OnInit {
   // Get sum of task allocation percentage
   getProjectTaskSum() {
     this.api.getProjectTaskSumByProjectId(this.dataid).subscribe((res) => {
+      this.spinner.show();
       this.allcationSum = res;
+      this.spinner.hide();
     });
   }
 
@@ -155,7 +166,9 @@ onSearchChange() {
     this.api
       .getResourceNameByResourceId(this.delivaryMangerId)
       .subscribe((res) => {
+        this.spinner.show();
         this.resoureIdAndName = res;
+        this.spinner.hide();
       });
   }
 
