@@ -93,6 +93,7 @@ import { UnitTreeComponent } from './orgUnitMgt/unit-tree/unit-tree.component';
 import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
 import { ResetPasswordComponent } from './PageBody/reset-password/reset-password.component';
 import { AddJobroleComponent } from './resourceMgt/add-jobrole/add-jobrole.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 @NgModule({
@@ -187,7 +188,7 @@ import { AddJobroleComponent } from './resourceMgt/add-jobrole/add-jobrole.compo
     NgbDatepickerModule,
     NgbModule,
     FormsModule,
-   
+    NgApexchartsModule,
   ],
 
   providers: [
