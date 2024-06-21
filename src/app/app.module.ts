@@ -91,6 +91,7 @@ import { UnitTreeComponent } from './orgUnitMgt/unit-tree/unit-tree.component';
 import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
 import { ResetPasswordComponent } from './PageBody/reset-password/reset-password.component';
 import { AddJobroleComponent } from './resourceMgt/add-jobrole/add-jobrole.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { WellcomeMessageComponent } from './PageBody/wellcome-message/wellcome-message.component';
 import { ConfirmDialogComponent } from './ConfirmDialogBox/confirm-dialog/confirm-dialog.component';
 import { EditSprintFormComponent } from './Sprint_Management/edit-sprint-form/edit-sprint-form.component';
@@ -192,7 +193,7 @@ import { ResponsiveTreeComponent } from './orgUnitMgt/responsive-tree/responsive
     NgbDatepickerModule,
     NgbModule,
     FormsModule,
-   
+    NgApexchartsModule,
   ],
 
   providers: [

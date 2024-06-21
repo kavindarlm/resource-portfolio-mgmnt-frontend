@@ -14,12 +14,12 @@ export class ProjectDashboardService {
         return this.http.get<projectDataModel[]>("http://localhost:3000/project");
       }
     
- //FetchProjectDetails
+ //Fetch Project Details
   fetchProjectbyId(id:string){ 
     return this.http.get<projectDataModel>("http://localhost:3000/project/"+id)
   }
 
-  //FetchResourceList
+  //Fetch Resource List
   fetchResourceList(id:string){
     return this.http.get<resourceDataModel>("http://localhost:3000/task/project/"+id+"/resources")
   }
@@ -40,13 +40,18 @@ export class ProjectDashboardService {
     return this.http.get<projectDataModel[]>("http://localhost:3000/project/searchprojectName/search", {params});
   }
 
-  //getProjectBycriticalityId
+  //get Project By criticalityId
   filterProjectByCriticality(criticality_id: string){
     return this.http.get<projectDataModel[]>("http://localhost:3000/project/getProjectByCriticalityId/"+criticality_id)
   }
 
-  //getProjectByManagerId
+  //get Project By ManagerId
   getProjectManagerById(projectManager_id: string){
     return this.http.get<MangerNameandIdModel>("http://localhost:3000/project/resourceNameById/"+projectManager_id)
+  }
+
+  //get criticality count as seperately
+  getCriticalityCount(): Observable< {high: number, medium: number, low: number}>{
+    return this.http.get< {high: number, medium: number, low: number}>("http://localhost:3000/project/criticality/count")
   }
 }
