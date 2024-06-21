@@ -2,13 +2,13 @@
     <div class="container border py-2 rounded">
         <div class="position-relative w-100">
             <hr class="position-absolute w-100 left-0 mt-4" style="border-top: 1px solid rgb(95, 95, 95); z-index: 1;">
-            <button type="button" class="btn btn-outline-primary btn-sm close position-absolute top-0 end-0 me-1 py-0"
+            <button type="button" class="btn btn-outline-danger btn-sm close position-absolute top-0 end-0 me-1 py-0"
                 aria-label="Close" (click)="close()">
                 <span aria-hidden="true">&times;</span>
             </button>
             <div class="border rounded-circle justify-content-center align-items-center d-flex position-relative"
                 [ngClass]="getCriticalityClass()" style="z-index: 2; width: 40px; height: 40px;">
-                <span><i class="bi bi-snow2"></i></span>
+                <span><i class="bi bi-snow2 text-white"></i></span>
             </div>
         </div>
         <div class="font-color fs-6 text-capitalize">{{projectData?.projectName}} </div>
