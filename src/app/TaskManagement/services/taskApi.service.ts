@@ -17,6 +17,7 @@ export class taskApiService {
     // Specify the expected response type as JSON
     return this.http.get<{ projectName: string, projectId: number } | null>(url);
 }
+
   //Function for get projectList
   getProjectList() {
     return this.http.get<projectModel[]>("http://localhost:3000/project");

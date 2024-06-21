@@ -12,7 +12,7 @@ export class ResourceAllocationService {
 
   constructor(private http: HttpClient) { }
 
-  getTasksByResourceId(resourceId: string): Observable<{ task: any, resourceAllocation: any }[]> {
+  getTasksByResourceId(resourceId: string): Observable<{ resourceAllocation: any }[]> {
     return this.http.get<{ task: any, resourceAllocation: any }[]>(`${this.baseUrl}/${resourceId}`).pipe(
       catchError(error => {
         console.error('Error fetching tasks and resource allocations:', error);
@@ -50,7 +50,7 @@ export class ResourceAllocationService {
   }
 
   // Method to update a resource allocation by ID
-  updateResourceAllocation(id: number, updateData: any): Observable<any> {
+  updateResourceAllocationPercentage(id: number, updateData: any): Observable<any> {
     const url = `${this.baseUrl}/${id}`; // Construct the URL with the base URL and resource ID
     return this.http.patch<any>(url, updateData).pipe(
       catchError((error) => {
@@ -61,6 +61,26 @@ export class ResourceAllocationService {
     );
   }
 
-
+  // Method to update the task ID for a resource allocation
+  updateResourceAllocationTaskId(id: number, taskId: number): Observable<any> {
+    const url = `${this.baseUrl}/${id}/task/${taskId}`;
+    return this.http.patch<any>(url, {}).pipe(
+      catchError((error) => {
+        console.error('Error updating resource allocation task ID:', error);
+        return of(null);
+      })
+    );
+  }
+  
+  // Method to delete all resource allocations by sprint ID
+  deleteResourceAllocationsBySprintId(sprintId: number): Observable<void> {
+    const url = `${this.baseUrl}/sprint/${sprintId}`;
+    return this.http.delete<void>(url).pipe(
+      catchError(error => {
+        console.error('Error deleting resource allocations by sprint ID:', error);
+        return of(undefined); // Return undefined or a suitable fallback value in case of an error
+      })
+    );
+  }
 
 }

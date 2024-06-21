@@ -1,23 +1,23 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { sprintApiService } from '../../services/sprintApi.service';
-import { SharedService } from '../../services/shared.service';
+import { sprintApiService } from '../../Sprint_Management/services/sprintApi.service';
+import { SharedService } from '../../Sprint_Management/services/shared.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+  selector: 'app-sprint-list',
+  templateUrl: './sprint-list.component.html',
+  styleUrl: './sprint-list.component.css'
 })
-export class ListComponent implements OnInit, OnDestroy {
+export class SprintListComponent {
 
   sprints: any[] = [];
   filteredSprints: any[] = [];
-  
+
   private sprintCreatedSubscription!: Subscription;
   private sprintDeletedSubscription!: Subscription;
   private sprintUpdatedSubscription!: Subscription;
 
-  constructor(private sprintApiService: sprintApiService, private sharedService: SharedService) {}
+  constructor(private sprintApiService: sprintApiService, private sharedService: SharedService) { }
 
   ngOnInit(): void {
     this.fetchSprints();
