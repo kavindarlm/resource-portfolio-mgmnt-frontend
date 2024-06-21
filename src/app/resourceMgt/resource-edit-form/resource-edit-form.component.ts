@@ -26,14 +26,13 @@ export class ResourceEditFormComponent implements OnInit{
   formValue!: FormGroup; 
   selectedResource: any; 
   resourceObject: any;
-  router: any;
 
   constructor(private formBuilder: FormBuilder, 
               private http: HttpClient, 
               private resourceService: ResourceService, 
               private jobRoleService: JobRoleService, 
               private orgUnitService: OrgUnitService,
-              private route: ActivatedRoute,
+              private router: Router,
               private toaster: ToastrService,
               private spinner: NgxSpinnerService) { }
 
@@ -75,7 +74,7 @@ export class ResourceEditFormComponent implements OnInit{
       })
     )
     .subscribe((res: any) => {
-      debugger;
+      // debugger;
       this.jobroles = res; // Assuming the response is directly the array of resources
       this.spinner.hide();
     },
@@ -96,7 +95,6 @@ export class ResourceEditFormComponent implements OnInit{
       })
     )
     .subscribe((res: any) => {
-      debugger;
       this.orgunits = res; // Assuming the response is directly the array of resources
     },
       (error) => {
@@ -113,9 +111,7 @@ export class ResourceEditFormComponent implements OnInit{
     this.resourceService.updateResource(this.selectedResource.resourceId, data)
       .subscribe(
         (res: any) => {
-          debugger;
           console.log('Resource updated successfully:', res);
-          // alert('Resource updated Successfully');
           this.editSucceseMassege(this.selectedResource.resourceId);
           this.formValue.reset();
           this.resourceService.resourceListUpdated.emit(); // Emit the event
@@ -142,6 +138,10 @@ export class ResourceEditFormComponent implements OnInit{
       // Handle error appropriately, such as displaying an error message to the user.
     }
     );
+  }
+
+  onCancel() {
+    this.router.navigate(['pages-body/first-view']);
   }
 
   //Delete Success Message

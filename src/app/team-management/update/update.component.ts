@@ -4,6 +4,7 @@ import { ApiService } from '../shared/api.service';
 import {  Resource, dataModel } from '../team-form/team-form.model';
 import { GeneralService } from '../shared/general.service';
 import { ResourceService } from '../shared/resource.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update',
@@ -26,7 +27,8 @@ export class UpdateComponent implements OnInit {
     private api: ApiService,
     public generalservice: GeneralService,
     private resourceService: ResourceService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private toastr: ToastrService
   ) {
     this.showResourceTable = false;
     this.teamData = { teamId: 0, team_Name: '', team_description: '', resources: [] };
@@ -65,6 +67,7 @@ export class UpdateComponent implements OnInit {
       this.api.updateTeam(this.dataid, this.teamData).subscribe(
         (_res: any) => {
           this.generalservice.refreshTeamList();
+          this.toastr.success('Team updated successfully', 'Updated Team', { timeOut: 3000 }); // Add this line
           this.router.navigate(['/pages-body/teamlistcomponent']);
           this.errorMessage = '';
         },

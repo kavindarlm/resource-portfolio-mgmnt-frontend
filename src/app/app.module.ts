@@ -93,6 +93,7 @@ import { ResetPasswordComponent } from './PageBody/reset-password/reset-password
 import { AddJobroleComponent } from './resourceMgt/add-jobrole/add-jobrole.component';
 import { EditSprintFormComponent } from './Sprint_Management/edit-sprint-form/edit-sprint-form.component';
 import { SprintListComponent } from './Handle_Request/sprint-list/sprint-list.component';
+import { ResponsiveTreeComponent } from './orgUnitMgt/responsive-tree/responsive-tree.component';
 
 @NgModule({
   declarations:[
@@ -172,7 +173,7 @@ import { SprintListComponent } from './Handle_Request/sprint-list/sprint-list.co
     AddJobroleComponent,
     EditSprintFormComponent,
     SprintListComponent,
-  
+    ResponsiveTreeComponent,
   ],
   imports: [
     BrowserModule,

@@ -56,7 +56,9 @@ export class UnitFormComponent implements OnInit{
 
   sendData(data: OrganizationalUnitModel) {
     console.log(data);
-
+    if(this.unitForm.invalid) {
+      this.toaster.error("Please fill the required fields to add a new org unit")
+    }
     const dataToSend = this.unitForm.value;
     this.orgUnitMgtService.createOrgUnit(data)
     .pipe(
@@ -85,12 +87,21 @@ export class UnitFormComponent implements OnInit{
       );
     }
 
-    capitalizeFirstLetter() {
+    capitalizeUnitName() {
       const unitNameControl = this.unitForm.get('unitName');
       if (unitNameControl && unitNameControl.value && unitNameControl.value.length > 1) {
         let words = unitNameControl.value.split(' ');
         words = words.map((word: string) => word.charAt(0).toUpperCase() + word.slice(1));
         unitNameControl.setValue(words.join(' '));
+      }
+    }
+
+    capitalizedescription() {
+      const descriptionControl = this.unitForm.get('description');
+      if (descriptionControl && descriptionControl.value && descriptionControl.value.length > 1) {
+        let words = descriptionControl.value.split(' ');
+        words = words.map((word: string) => word.charAt(0).toUpperCase() + word.slice(1));
+        descriptionControl.setValue(words.join(' '));
       }
     }
 

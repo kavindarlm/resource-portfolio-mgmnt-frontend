@@ -53,6 +53,7 @@ import { UnitEditFormComponent } from './orgUnitMgt/unit-edit-form/unit-edit-for
 import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
 import { EditSprintFormComponent } from './Sprint_Management/edit-sprint-form/edit-sprint-form.component';
 import { SprintListComponent } from './Handle_Request/sprint-list/sprint-list.component';
+import { ResourceTableComponent } from './team-management/resource-table/resource-table.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -106,7 +107,11 @@ const routes: Routes = [
         data: { functionId: 5 },
         children: [
           { path: 'NewTeamButton', component: NewTeamButtonComponent },
-          { path: 'TeamForm', component: TeamFormComponent },
+          { path: 'TeamForm', component: TeamFormComponent ,
+          children: [
+            { path: 'resourceTable', component:ResourceTableComponent}
+          ]
+          },
           { path: 'update/:id', component: UpdateComponent },
           { path: 'resources/:id', component: UpdateResourcTableComponent },
           { path: 'delete/:id', component: DeletePopupComponent }

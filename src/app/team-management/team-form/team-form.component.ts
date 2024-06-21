@@ -5,6 +5,7 @@ import { ServiceService } from '../shared/service.service';
 import { of } from 'rxjs';
 import { GeneralService } from '../shared/general.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-team-form',
@@ -19,9 +20,10 @@ export class TeamFormComponent implements OnInit {
   errorMessage: string = ''; // Define the errorMessage property
 
   constructor(private formbuilder: FormBuilder,
-    private service: ServiceService, 
-    private genaralService: GeneralService, 
-    private router: Router) { }
+    private service: ServiceService,
+    private genaralService: GeneralService,
+    private router: Router,
+    private toastr: ToastrService) { } // Add ToastrService here) { }
 
   ngOnInit(): void {
     //initialize the form
@@ -29,6 +31,16 @@ export class TeamFormComponent implements OnInit {
       teamName: ['', Validators.required],
       team_description: ['', Validators.required], // Changed from 'teamdescription' to 'team_description'
       selectedResources: this.formbuilder.array([])
+    });
+
+    // Subscribe to changes in the form value to uppercase
+    this.teamForm.valueChanges.subscribe(val => {
+      if (val.teamName && val.teamName.length === 1) {
+        this.teamForm.patchValue({teamName: val.teamName.toUpperCase()});
+      }
+      if (val.team_description && val.team_description.length === 1) {
+        this.teamForm.patchValue({team_description: val.team_description.toUpperCase()});
+      }
     });
 
     //subscribe to the selected resources
@@ -55,24 +67,28 @@ export class TeamFormComponent implements OnInit {
     if (this.teamForm.valid) {
       const resourceIds = this.selectedResources.map(resource => resource.resourceId);
       const formData = { ...this.teamForm.value, resourceIds };
-
+  
+      // Store the team name in a variable
+      const teamName = this.teamForm.value.teamName;
+  
       this.service.addTeam(formData).pipe(
         catchError((error: any) => {
           console.error('An error occurred while adding team:', error);
-          // Set the error message when there's an error
           this.errorMessage = 'An error occurred while adding the team. Please try again later.';
           return of(null);
         })
       ).subscribe({
         next: (_val: any) => {
-          // Success handling
-          this.errorMessage = ''; // Clear the error message when the request is successful
-          this.genaralService.refreshTeamList(); // Refresh the team list
-          this.teamForm.reset(); // Reset the form
-          this.router.navigate(['/pages-body/teamlistcomponent']); // Navigate to the team list page
+          this.errorMessage = '';
+          this.genaralService.refreshTeamList();
+          this.teamForm.reset();
+  
+          // Use the stored team name in the toastr message
+          this.toastr.success(`${teamName} Added successfully`, 'Created Team', { timeOut: 3000 });
+          this.router.navigate(['/pages-body/teamlistcomponent']);
         }
       });
-    }else {
+    } else {
       this.errorMessage = 'Please fill out all required fields.';
     }
   }

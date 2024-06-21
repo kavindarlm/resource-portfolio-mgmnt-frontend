@@ -23,6 +23,7 @@
     border: 1px solid #ced2d9;
     margin: 3% auto;
     border-radius: 5px;
+    font-size: 0.9rem;
 }
 
 .detailButton {
@@ -81,6 +82,7 @@ li {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    font-size: 0.9rem;
 }
 
 li:not(:last-child):after {

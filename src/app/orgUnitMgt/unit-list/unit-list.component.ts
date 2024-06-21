@@ -14,6 +14,7 @@ export class UnitListComponent implements OnInit{
   showForm = false;
   orgunits : OrganizationalUnitModel[] | undefined;
   selectedUnit: OrganizationalUnitModel | undefined;
+searchText: any;
   constructor(private orgUnitMgtService: OrgUnitMgtService,
               private spinner: NgxSpinnerService,
               private router: Router) {
