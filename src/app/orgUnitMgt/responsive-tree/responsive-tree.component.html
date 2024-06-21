@@ -1,0 +1,12 @@
+
+<div class="unit-list">
+    <button (click)="toggleChildren()">
+      <i class="bi" [ngClass]="{'bi-chevron-right': !showChildren, 'bi-chevron-down': showChildren}"></i>
+      {{ node.unitName }}</button>
+    <ul *ngIf="showChildren">
+      <li *ngFor="let child of node.children">
+        <app-responsive-tree [node]="child"></app-responsive-tree>
+      </li>
+    </ul>
+  </div>
+  

@@ -23,6 +23,7 @@
 
 .form-group label {
     display: block;
+    font-size: 0.9rem;
 
 }
 
@@ -30,6 +31,7 @@
 .form-group .form-control,
 .form-group .form-select {
     display: inline;
+    font-size: 0.9rem;
 }
 
 .form-group .form-control,
@@ -73,16 +75,25 @@
 
 .inputField {
     display: flex;
+    position: relative;
+    /* flex-direction: column; */
     justify-content: center;
-    color: #7752fe;
+    flex-wrap: wrap;
+    /* color: #7752fe; */
+}
+
+.invalid-feedback {
+    display:block;
+    width: 100%;
+    text-align: right;
 }
 
 @media (min-width: 768px) {
-    .inputField p {
+    /*.inputField p {
         float: left;
         margin-left: 5%;
         margin-right: 3%;
-    }
+    }*/
 }
 
 

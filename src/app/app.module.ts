@@ -93,6 +93,7 @@ import { UnitTreeComponent } from './orgUnitMgt/unit-tree/unit-tree.component';
 import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
 import { ResetPasswordComponent } from './PageBody/reset-password/reset-password.component';
 import { AddJobroleComponent } from './resourceMgt/add-jobrole/add-jobrole.component';
+import { ResponsiveTreeComponent } from './orgUnitMgt/responsive-tree/responsive-tree.component';
 
 
 @NgModule({
@@ -173,6 +174,7 @@ import { AddJobroleComponent } from './resourceMgt/add-jobrole/add-jobrole.compo
     EditTaskComponent,
     ResetPasswordComponent,
     AddJobroleComponent,
+    ResponsiveTreeComponent,
   ],
   imports: [
     BrowserModule,

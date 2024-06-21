@@ -1,6 +1,6 @@
 <div class="container-fluid" *ngIf="showForm">
-    <div class="formBox mt-3 pb-3">
-        <div class="topic border rounded text-center col-12 mb-3 mt-3 pt-1 pb-1 text-white bg-primary ">Edit Unit
+    <div class="formBox mt-3 pb-3 mb-3">
+        <div class="topic border rounded text-center col-9 mb-3 mt-3 pt-1 pb-1 text-white bg-primary ">Edit Unit
             Details</div>
         <form [formGroup]="unitForm">
             <div class="form-group mb-3">
@@ -36,7 +36,7 @@
 
             <div class="editAndDelete">
                 <button type="button" class="btn btn-outline-primary editButton col-4"
-                    (click)="onEditUnit(this.unitForm.value)">Edit</button><!--(click)="onEdit()"-->
+                    (click)="onEditUnit(this.unitForm.value)">Edit</button>
             </div>
         </form>
     </div>

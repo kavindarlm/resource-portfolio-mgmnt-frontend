@@ -9,6 +9,7 @@
 .font-color1{
     color: #1e3895e1;
     font-weight: 500;
+    font-size: 0.9rem;
 }
 
 ::placeholder {
@@ -37,6 +38,7 @@
 .form-group .form-control,
 .form-group .form-select {
     width: 75%;
+    font-size: 0.9rem;
 }
 
 .form-group p {
@@ -56,6 +58,10 @@
 
 .deleteButton {
     float: right;
+}
+
+.cancelButton {
+    float: left;
 }
 
 

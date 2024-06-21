@@ -40,6 +40,7 @@ export class AddJobroleComponent implements OnInit{
     console.log(data);
     // debugger;
     if (this.jobRoleForm.invalid) {
+      this.toastr.error("Please enter the required field to add a new job role.");
       return;
     }
     const dataToSend = this.jobRoleForm.value;
@@ -69,6 +70,15 @@ export class AddJobroleComponent implements OnInit{
             timeOut: 3000,
           }
         );
+      }
+
+      capitalizeFirstLetter() {
+        const jobRoleNameControl = this.jobRoleForm.get('roleName');
+        if (jobRoleNameControl && jobRoleNameControl.value && jobRoleNameControl.value.length > 1) {
+          let words = jobRoleNameControl.value.split(' ');
+          words = words.map((word: string) => word.charAt(0).toUpperCase() + word.slice(1));
+          jobRoleNameControl.setValue(words.join(' '));
+        }
       }
 
       cancelForm() {
