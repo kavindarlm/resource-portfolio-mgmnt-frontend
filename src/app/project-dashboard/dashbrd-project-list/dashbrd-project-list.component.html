@@ -8,7 +8,7 @@
                 </span>
                 <select class="form-select rounded small-text w-25" [(ngModel)]="selectedCriticality"
                     (ngModelChange)="onCriticalityChange()" aria-placeholder="Select">
-                    <option value="">All</option>
+                    <option value="">All Projects</option>
                     <option value="1">High Criticality</option>
                     <option value="2">Medium Criticality</option>
                     <option value="3">Low Criticality</option>
@@ -18,7 +18,6 @@
         <div class="col-xl-9 col-lg-9">
             <div class="row">
                 <div class="col-lg-7">
-                    <!-- Leave this div empty -->
                 </div>
                 <div class="col-lg-5">
                     <div class="input-group rounded">
@@ -48,7 +47,7 @@
                             <div class="border rounded-circle justify-content-center align-items-center d-flex position-relative"
                                 [ngClass]="getCriticalityClass(project.criticality_id)"
                                 style="z-index: 1; width: 50px; height: 50px;">
-                                <span><i class="bi bi-snow2 fs-4"></i></span>
+                                <span><i class="bi bi-snow2 fs-4 text-white"></i></span>
                             </div>
                             <div class="fs-6 fw-semibold font-color mt-1 text-capitalize">{{ project.projectName }}
                             </div>

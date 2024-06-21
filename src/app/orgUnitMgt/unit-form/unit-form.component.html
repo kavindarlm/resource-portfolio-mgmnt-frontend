@@ -1,9 +1,8 @@
-<div class="container col-md-10 col-lg-10 mb-3">
-    <div class="formBox mt-3 pb-3 mb-3">
+<div class="container col-md-10 col-lg-12 mb-3 border rounded ">
+    <div class="formBox mb-3">
         <div class="border rounded text-center col-12 mb-3 mt-3 pt-1 pb-1 text-white bg-primary">Create New Unit</div>
         <form [formGroup]="unitForm">
             <div class="form-group mb-3">
-                <br>
 
                 <div class="inputField">
                     <label for="unitName" class="form-label">Unit Name *: </label>
@@ -45,7 +44,7 @@
                 </div>
             </div>
             <div class="add d-flex justify-content-center">
-                <button type="submit" class="addButton" (click)="sendData(this.unitForm.value)">Add Unit</button>
+                <button type="submit" class="btn btn-outline-primary w-50 mt-3 mb-3 custom-button btn-sm" (click)="sendData(this.unitForm.value)">Add Unit</button>
             </div>
         </form>
     </div>
