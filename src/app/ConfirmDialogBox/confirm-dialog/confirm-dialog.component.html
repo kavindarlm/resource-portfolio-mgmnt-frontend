@@ -1,0 +1,17 @@
+<div class="modal fade show d-block font-color" (click)="onCancel()" tabindex="-1" role="dialog">
+    <div class="modal-dialog" (click)="$event.stopPropagation()" role="document">
+      <div class="modal-content">
+        <div class="modal-header d-flex justify-content-center fw-bold">
+          <h5 class="modal-title">Confirmation</h5>
+        </div>
+        <div class="modal-body text-center">
+          <p>{{ message }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-danger w- mt-3 btn-sm" (click)="onCancel()">Cancel</button>
+          <button type="button" class="btn btn-outline-primary w-30 mt-3 custom-button btn-sm" (click)="onConfirm()">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

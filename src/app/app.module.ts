@@ -91,6 +91,8 @@ import { UnitTreeComponent } from './orgUnitMgt/unit-tree/unit-tree.component';
 import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
 import { ResetPasswordComponent } from './PageBody/reset-password/reset-password.component';
 import { AddJobroleComponent } from './resourceMgt/add-jobrole/add-jobrole.component';
+import { WellcomeMessageComponent } from './PageBody/wellcome-message/wellcome-message.component';
+import { ConfirmDialogComponent } from './ConfirmDialogBox/confirm-dialog/confirm-dialog.component';
 import { EditSprintFormComponent } from './Sprint_Management/edit-sprint-form/edit-sprint-form.component';
 import { SprintListComponent } from './Handle_Request/sprint-list/sprint-list.component';
 import { ResponsiveTreeComponent } from './orgUnitMgt/responsive-tree/responsive-tree.component';
@@ -171,6 +173,8 @@ import { ResponsiveTreeComponent } from './orgUnitMgt/responsive-tree/responsive
     EditTaskComponent,
     ResetPasswordComponent,
     AddJobroleComponent,
+    WellcomeMessageComponent,
+    ConfirmDialogComponent,
     EditSprintFormComponent,
     SprintListComponent,
     ResponsiveTreeComponent,

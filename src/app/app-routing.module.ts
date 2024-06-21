@@ -51,6 +51,7 @@ import { UnitFormComponent } from './orgUnitMgt/unit-form/unit-form.component';
 import { UnitDetailsComponent } from './orgUnitMgt/unit-details/unit-details.component';
 import { UnitEditFormComponent } from './orgUnitMgt/unit-edit-form/unit-edit-form.component';
 import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
+import { WellcomeMessageComponent } from './PageBody/wellcome-message/wellcome-message.component';
 import { EditSprintFormComponent } from './Sprint_Management/edit-sprint-form/edit-sprint-form.component';
 import { SprintListComponent } from './Handle_Request/sprint-list/sprint-list.component';
 import { ResourceTableComponent } from './team-management/resource-table/resource-table.component';
@@ -66,9 +67,11 @@ const routes: Routes = [
     data: { roles: ['user'] },
     children: [
       {
-        path: 'projectBoard', component: ProjectBoardComponent,
-        canActivate: [FunctionGuardService],
-        data: { functionId: 1 },
+        path: 'welcome-page', component: WellcomeMessageComponent,
+      },
+      { path: 'projectBoard', component: ProjectBoardComponent,
+      canActivate:[FunctionGuardService],
+      data : { functionId : 1},
         children: [
           { path: 'dashboard-projectdetails/:id', component: DashbrdProjectDetailsComponent }
         ]
