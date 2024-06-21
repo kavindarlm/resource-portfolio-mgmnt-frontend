@@ -18,7 +18,7 @@
         </div>
 
         <div class="team-data">
-          <div *ngFor="let team of teams " class="mt-2">
+          <div *ngFor="let team of filteredTeams " class="mt-2">
             <button class="menu-button btn btn-md border rounded " routerLink="update/{{team.teamId}}"
               routerLinkActive="active">{{team.team_Name}}</button>
           </div>

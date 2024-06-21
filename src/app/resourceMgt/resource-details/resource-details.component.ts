@@ -76,8 +76,8 @@ export class ResourceDetailsComponent {
       })
     )
     .subscribe((res: any) => {
-      debugger;
-      this.jobroles = res; // Assuming the response is directly the array of resources
+      // debugger;
+      this.jobroles = res; 
     },
       (error) => {
         console.error('Error:', error);
@@ -96,8 +96,8 @@ export class ResourceDetailsComponent {
       })
     )
     .subscribe((res: any) => {
-      debugger;
-      this.orgunits = res; // Assuming the response is directly the array of resources
+      // debugger;
+      this.orgunits = res; 
     },
       (error) => {
         console.error('Error:', error);

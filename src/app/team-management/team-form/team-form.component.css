@@ -3,6 +3,11 @@
 
 }
 
+.error-message {
+    color: red;
+    font-size: 12px;
+  }
+
 .form-group {
     margin-bottom: 1%; 
     display: flex; 

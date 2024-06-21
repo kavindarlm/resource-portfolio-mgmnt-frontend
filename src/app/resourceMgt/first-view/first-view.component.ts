@@ -57,7 +57,7 @@ export class FirstViewComponent implements OnInit {
         })
       )
       .subscribe((res: any) => {
-        debugger;
+        // debugger;
         this.resourceList = res; // Assuming the response is directly the array of resources
         this.spinner.hide();
         //To set the total no of pages
@@ -77,7 +77,7 @@ export class FirstViewComponent implements OnInit {
         })
       )
       .subscribe((res: any) => {
-        debugger;
+        // debugger;
         this.jobroles = res; // Assuming the response is directly the array of resources
       },
         (error) => {
@@ -97,7 +97,7 @@ export class FirstViewComponent implements OnInit {
         })
       )
       .subscribe((res: any) => {
-        debugger;
+        // debugger;
         this.orgunits = res; // Assuming the response is directly the array of resources
       },
         (error) => {
