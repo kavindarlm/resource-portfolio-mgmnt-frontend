@@ -40,10 +40,8 @@ import { Ng2SearchPipe } from 'ng2-search-filter';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { AvailableResourceListComponent } from './Sprint_Management/available-resource-list/available-resource-list.component';
 import { AvailabiilityComponent } from './Sprint_Management/availabiility/availabiility.component';
-import { AddedResourceListComponent } from './Sprint_Management/added-resource-list/added-resource-list.component';
 import { ProjectListComponent } from './Project-management/project-list/project-list.component';
 import { ListComponent } from './Sprint_Management/Reusable_Components/list/list.component';
-import { TablesComponent } from './Sprint_Management/Reusable_Components/tables/tables.component';
 import { ResourceDetailsComponent } from './resourceMgt/resource-details/resource-details.component';
 import { ResourceEditFormComponent } from './resourceMgt/resource-edit-form/resource-edit-form.component';
 import { FilterPipe } from './team-management/filter.pipe';
@@ -95,7 +93,9 @@ import { ResetPasswordComponent } from './PageBody/reset-password/reset-password
 import { AddJobroleComponent } from './resourceMgt/add-jobrole/add-jobrole.component';
 import { WellcomeMessageComponent } from './PageBody/wellcome-message/wellcome-message.component';
 import { ConfirmDialogComponent } from './ConfirmDialogBox/confirm-dialog/confirm-dialog.component';
-
+import { EditSprintFormComponent } from './Sprint_Management/edit-sprint-form/edit-sprint-form.component';
+import { SprintListComponent } from './Handle_Request/sprint-list/sprint-list.component';
+import { ResponsiveTreeComponent } from './orgUnitMgt/responsive-tree/responsive-tree.component';
 
 @NgModule({
   declarations:[
@@ -131,10 +131,8 @@ import { ConfirmDialogComponent } from './ConfirmDialogBox/confirm-dialog/confir
     SprintMgtComponent,
     AvailableResourceListComponent,
     AvailabiilityComponent,
-    AddedResourceListComponent,
     // AlertBoxComponent,
     ListComponent,
-    TablesComponent,
     ResourceDetailsComponent,
     ResourceEditFormComponent,
     FilterPipe,
@@ -177,6 +175,9 @@ import { ConfirmDialogComponent } from './ConfirmDialogBox/confirm-dialog/confir
     AddJobroleComponent,
     WellcomeMessageComponent,
     ConfirmDialogComponent,
+    EditSprintFormComponent,
+    SprintListComponent,
+    ResponsiveTreeComponent,
   ],
   imports: [
     BrowserModule,

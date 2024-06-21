@@ -56,17 +56,14 @@
 
                 <br>
                 <div>
-                    <app-button (click)="showcomponent()"></app-button>
+                    <app-button routerLink="add-form" routerLinkActive="active" (click)="showcomponent()"></app-button>
                     <!-- <router-outlet></router-outlet> -->
                 </div>
             </div>
 
         </div>
         <div class="box2 col-lg-6 col-md-6 col-sm-12">
-          <!-- Calling the add-form component -->
-            <app-add-form *ngIf="showForm"></app-add-form>
-            <!-- Calling the resource-details component -->
-            <router-outlet *ngIf="showResourceDetails"></router-outlet>
+            <router-outlet></router-outlet>
         </div>
     </div>
 </div>

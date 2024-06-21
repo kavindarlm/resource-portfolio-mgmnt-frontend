@@ -1,3 +1,22 @@
-.resourceleave{
-color: #1e3895e1;
+.resourceleave {
+  color: #1e3895e1;
+}
+
+[data-initials]:before {
+  background: #1e3895e1;
+  color: white;
+  opacity: 1;
+  content: attr(data-initials);
+  display: inline-block;
+  font-size: 26px;
+  border-radius: 50%;
+  vertical-align: middle;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+}
+
+.title{
+  margin-left: 0;
 }

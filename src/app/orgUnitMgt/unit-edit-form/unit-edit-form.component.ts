@@ -99,6 +99,6 @@ export class UnitEditFormComponent implements OnInit {
   }
 
   onCancel() {
-    this.showForm = false;
+    this.router.navigate(['pages-body/unit-list']);
   }
 }
