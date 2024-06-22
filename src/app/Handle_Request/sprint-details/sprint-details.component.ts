@@ -130,7 +130,7 @@ export class SprintDetailsComponent {
     }
   }
   deleteContent() {
-    this.router.navigate(['/pages-body/sprint-management']);
+    this.router.navigate(['/pages-body/handle-request/']);
   }
 
   // Pagination methods

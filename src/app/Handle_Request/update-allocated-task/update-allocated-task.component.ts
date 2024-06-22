@@ -227,6 +227,6 @@ export class UpdateAllocatedTaskComponent implements OnInit {
   }
 
   deleteContent() {
-    this.router.navigate(['/pages-body/sprint-management/sprintmgt/', this.sprintId]);
+    this.router.navigate(['/pages-body/handle-request/sprintDetails/', this.sprintId]);
   }
 }

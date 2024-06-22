@@ -59,6 +59,8 @@ import { SprintDetailsComponent } from './Handle_Request/sprint-details/sprint-d
 import { AllocatedResourceInfoComponent } from './Handle_Request/allocated-resource-info/allocated-resource-info.component';
 import { UpdateAllocationPercentageComponent } from './Handle_Request/update-allocation-percentage/update-allocation-percentage.component';
 import { UpdateAllocatedTaskComponent } from './Handle_Request/update-allocated-task/update-allocated-task.component';
+import { AvailableResListComponent } from './Handle_Request/available-res-list/available-res-list.component';
+import { AvailabilityInfoComponent } from './Handle_Request/availability-info/availability-info.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -216,13 +218,18 @@ const routes: Routes = [
           {
             path: 'sprintDetails/:id', component: SprintDetailsComponent,
             children: [
+              {path: 'allocated-resource-info/:sprintId/:resourceId', component: AllocatedResourceInfoComponent },
+              { path: 'UpdateAllocationPercentage/:sprintId/:resourceId', component: UpdateAllocationPercentageComponent },
+              { path: 'UpdateAllocatedTask/:sprintId/:resourceId', component: UpdateAllocatedTaskComponent },
               {
-                path: 'allocated-resource-info/:sprintId/:resourceId', component: AllocatedResourceInfoComponent,
-              },
-              { path: 'UpdateAllocationPercentage/:sprintId/:resourceId', component: UpdateAllocationPercentageComponent, },
-              { path: 'UpdateAllocatedTask/:sprintId/:resourceId', component: UpdateAllocatedTaskComponent, },
+                path: 'availableResourceList', component: AvailableResListComponent,
+                children: [
+                  { path: 'availabilityInfo/:id', component: AvailabilityInfoComponent }
+                ]
+              }
             ]
-          }]
+          }
+        ]
       }
     ]
   },

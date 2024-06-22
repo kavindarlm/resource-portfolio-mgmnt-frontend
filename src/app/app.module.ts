@@ -101,6 +101,8 @@ import { SprintDetailsComponent } from './Handle_Request/sprint-details/sprint-d
 import { AllocatedResourceInfoComponent } from './Handle_Request/allocated-resource-info/allocated-resource-info.component';
 import { UpdateAllocationPercentageComponent } from './Handle_Request/update-allocation-percentage/update-allocation-percentage.component';
 import { UpdateAllocatedTaskComponent } from './Handle_Request/update-allocated-task/update-allocated-task.component';
+import { AvailableResListComponent } from './Handle_Request/available-res-list/available-res-list.component';
+import { AvailabilityInfoComponent } from './Handle_Request/availability-info/availability-info.component';
 
 @NgModule({
   declarations:[
@@ -187,6 +189,9 @@ import { UpdateAllocatedTaskComponent } from './Handle_Request/update-allocated-
     AllocatedResourceInfoComponent,
     UpdateAllocationPercentageComponent,
     UpdateAllocatedTaskComponent,
+    AvailableResListComponent,
+    AvailabilityInfoComponent,
+    
   ],
   imports: [
     BrowserModule,
