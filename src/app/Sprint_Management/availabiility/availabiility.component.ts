@@ -26,8 +26,7 @@ export class AvailabiilityComponent implements OnInit {
   resourceDetails: any = {};
   tasks: any[] = [];
   Projects: any[] = [];
-  Tasks: any[] = [];
-  sets: any[] = [{ projectId: '', taskId: '', percentage: null }]; // Initialize with one set of data
+  sets: any[] = [{ projectId: '', taskId: '', percentage: null, Tasks: [] }]; // Initialize with one set of data
   taskProjectDetails: { taskName: string, projectName: string, percentage: number }[] = [];
   holidays: NgbDateStruct[] = []; // Store holidays
   availabilityPercentage: number = 0; 
@@ -181,7 +180,7 @@ export class AvailabiilityComponent implements OnInit {
   }
 
   addSet(): void {
-    this.sets.push({ projectId: '', taskId: '', percentage: null });
+    this.sets.push({ projectId: '', taskId: '', percentage: null, Tasks: [] });
     const newIndex = this.sets.length - 1;
     this.searchText[newIndex] = '';
     this.filteredProjects[newIndex] = [...this.Projects];
@@ -210,7 +209,7 @@ export class AvailabiilityComponent implements OnInit {
       };
       this.sharedService.addData(projectTaskData);
     });
-    this.sets = [{ projectId: '', taskId: '', percentage: null }];
+    this.sets = [{ projectId: '', taskId: '', percentage: null, Tasks: [] }];
     this.searchText = [''];
     this.filteredProjects = [this.Projects];
     this.dropdownOpen = [false];

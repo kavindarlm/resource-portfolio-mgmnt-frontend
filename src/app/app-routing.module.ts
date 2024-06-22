@@ -55,6 +55,10 @@ import { WellcomeMessageComponent } from './PageBody/wellcome-message/wellcome-m
 import { EditSprintFormComponent } from './Sprint_Management/edit-sprint-form/edit-sprint-form.component';
 import { SprintListComponent } from './Handle_Request/sprint-list/sprint-list.component';
 import { ResourceTableComponent } from './team-management/resource-table/resource-table.component';
+import { SprintDetailsComponent } from './Handle_Request/sprint-details/sprint-details.component';
+import { AllocatedResourceInfoComponent } from './Handle_Request/allocated-resource-info/allocated-resource-info.component';
+import { UpdateAllocationPercentageComponent } from './Handle_Request/update-allocation-percentage/update-allocation-percentage.component';
+import { UpdateAllocatedTaskComponent } from './Handle_Request/update-allocated-task/update-allocated-task.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -210,18 +214,13 @@ const routes: Routes = [
         data: { functionId: 9 },
         children: [
           {
-            path: 'sprintmgt/:id', component: SprintMgtComponent,
+            path: 'sprintDetails/:id', component: SprintDetailsComponent,
             children: [
               {
-                path: 'allocated-resource/:sprintId/:resourceId', component: AllocatedResourceInformationComponent,
-                children: [
-                  { path: 'DeleteAllocation/:sprintId/:resourceId', component: DeleteResourceAllocationComponent },
-
-                ]
+                path: 'allocated-resource-info/:sprintId/:resourceId', component: AllocatedResourceInfoComponent,
               },
-              { path: 'UpdatePercentage/:sprintId/:resourceId', component: UpdatePercentageComponent, },
-              { path: 'UpdateTask/:sprintId/:resourceId', component: UpdateTaskInSprintComponent, },
-              { path: 'EditSprint/:sprintId', component: EditSprintFormComponent, }
+              { path: 'UpdateAllocationPercentage/:sprintId/:resourceId', component: UpdateAllocationPercentageComponent, },
+              { path: 'UpdateAllocatedTask/:sprintId/:resourceId', component: UpdateAllocatedTaskComponent, },
             ]
           }]
       }

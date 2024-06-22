@@ -46,102 +46,102 @@ export class CreateFormComponent implements OnInit {
     private resourceAllocationService: ResourceAllocationService,
     private toastr: ToastrService) { }
 
-    ngOnInit(): void {
-      // Subscribe to the data from the shared service
-      this.sharedService.data$.subscribe(data => {
-        // Handle the received data
-        console.log('Received data:', data);
-        this.sharedData = data;
-        this.fetchResources();
-      });
+  ngOnInit(): void {
+    // Subscribe to the data from the shared service
+    this.sharedService.data$.subscribe(data => {
+      // Handle the received data
+      console.log('Received data:', data);
+      this.sharedData = data;
       this.fetchResources();
-      this.updatePagination(); // Initialize pagination
-    }
-    
-    fetchResources(): void {
-      this.resourceService.getResourcesForSprint().subscribe(
-        (data: any[]) => {
-          this.tablecontents = data.filter(resource =>
-            this.sharedData.some(shared => shared.resourceId === resource.resource_id)
-          ).map(resource => ({
-            Resource_ID: resource.resource_id,
-            Team: resource.team_name,
-            Job_Role: resource.role_name,
-            Org_Unit: resource.org_unit_name,
-            Availability: '' 
-          }));
-          this.calculateAvailability();
-          this.updatePagination(); // Update pagination after fetching resources
-        },
-        error => {
-          console.error('Error fetching resources:', error);
-        }
-      );
-    }
-    
-    calculateAvailability(): void {
-      const availabilityObservables = this.tablecontents.map(resource =>
-        this.resourceAllocationService.getTasksByResourceId(resource.Resource_ID).pipe(
-          map(tasks => {
-            const filteredTasks = tasks.filter(task => task.resourceAllocation.task.taskProgressPercentage < 100);
-            const totalAllocation = filteredTasks.reduce((total, task) => {
-              const allocationPercentage = task.resourceAllocation.percentage || 0;
-              return total + allocationPercentage;
-            }, 0);
-    
-            const availabilityPercentage = totalAllocation;
-    
-            return {
-              ...resource,
-              Availability: availabilityPercentage
-            };
-          })
-        )
-      );
-    
-      // Use forkJoin to wait for all observables to complete
-      forkJoin(availabilityObservables).subscribe(
-        updatedResources => {
-          this.tablecontents = updatedResources;
-          this.updatePagination(); // Update pagination after calculating availability
-        },
-        error => {
-          console.error('Error calculating availability:', error);
-        }
-      );
-    }
-    
-    updatePagination(): void {
-      this.totalPages = Math.ceil(this.tablecontents.length / this.itemsPerPage);
-      this.totalPagesArray = Array(this.totalPages).fill(0).map((x, i) => i + 1);
+    });
+    this.fetchResources();
+    this.updatePagination(); // Initialize pagination
+  }
+
+  fetchResources(): void {
+    this.resourceService.getResourcesForSprint().subscribe(
+      (data: any[]) => {
+        this.tablecontents = data.filter(resource =>
+          this.sharedData.some(shared => shared.resourceId === resource.resource_id)
+        ).map(resource => ({
+          Resource_ID: resource.resource_id,
+          Team: resource.team_name,
+          Job_Role: resource.role_name,
+          Org_Unit: resource.org_unit_name,
+          Availability: '' 
+        }));
+        this.calculateAvailability();
+        this.updatePagination(); // Update pagination after fetching resources
+      },
+      error => {
+        console.error('Error fetching resources:', error);
+      }
+    );
+  }
+
+  calculateAvailability(): void {
+    const availabilityObservables = this.tablecontents.map(resource =>
+      this.resourceAllocationService.getTasksByResourceId(resource.Resource_ID).pipe(
+        map(tasks => {
+          const filteredTasks = tasks.filter(task => task.resourceAllocation.task.taskProgressPercentage < 100);
+          const totalAllocation = filteredTasks.reduce((total, task) => {
+            const allocationPercentage = task.resourceAllocation.percentage || 0;
+            return total + allocationPercentage;
+          }, 0);
+
+          const availabilityPercentage = totalAllocation;
+
+          return {
+            ...resource,
+            Availability: availabilityPercentage
+          };
+        })
+      )
+    );
+
+    // Use forkJoin to wait for all observables to complete
+    forkJoin(availabilityObservables).subscribe(
+      updatedResources => {
+        this.tablecontents = updatedResources;
+        this.updatePagination(); // Update pagination after calculating availability
+      },
+      error => {
+        console.error('Error calculating availability:', error);
+      }
+    );
+  }
+
+  updatePagination(): void {
+    this.totalPages = Math.ceil(this.tablecontents.length / this.itemsPerPage);
+    this.totalPagesArray = Array(this.totalPages).fill(0).map((x, i) => i + 1);
+    this.paginateContents();
+  }
+
+  paginateContents(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedContents = this.tablecontents.slice(startIndex, endIndex);
+  }
+
+  goToPreviousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
       this.paginateContents();
     }
-    
-    paginateContents(): void {
-      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-      const endIndex = startIndex + this.itemsPerPage;
-      this.paginatedContents = this.tablecontents.slice(startIndex, endIndex);
-    }
-    
-    goToPreviousPage(): void {
-      if (this.currentPage > 1) {
-        this.currentPage--;
-        this.paginateContents();
-      }
-    }
-    
-    goToNextPage(): void {
-      if (this.currentPage < this.totalPages) {
-        this.currentPage++;
-        this.paginateContents();
-      }
-    }
-    
-    goToPage(page: number): void {
-      this.currentPage = page;
+  }
+
+  goToNextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
       this.paginateContents();
     }
-    
+  }
+
+  goToPage(page: number): void {
+    this.currentPage = page;
+    this.paginateContents();
+  }
+
   getSprintFormData(data: any) {
     const today = new Date();
 
@@ -203,6 +203,7 @@ export class CreateFormComponent implements OnInit {
                 this.toastr.success('Sprint created successfully!', 'Success');
                 this.router.navigate(['/pages-body/sprint-management/createform']);
                 this.sharedService.notifySprintCreated();
+                this.clearResources(); // Clear resources after success
               } else {
                 uniqueAllocations.forEach(allocation => {
                   // Create the resource allocation data object
@@ -222,6 +223,7 @@ export class CreateFormComponent implements OnInit {
                         this.toastr.success('Sprint created successfully!', 'Success');
                         this.router.navigate(['/pages-body/sprint-management/createform']);
                         this.sharedService.notifySprintCreated();
+                        this.clearResources(); // Clear resources after success
                       }
                     },
                     (error) => {
@@ -233,8 +235,6 @@ export class CreateFormComponent implements OnInit {
               }
             });
 
-            // Clear the resources array
-            this.clearResources();
           },
           (error) => {
             console.error('Error fetching sprint ID:', error);
@@ -252,5 +252,6 @@ export class CreateFormComponent implements OnInit {
   // Method to clear the resources array
   clearResources(): void {
     this.tablecontents = [];
+    this.updatePagination(); // Update pagination after clearing resources
   }
 }
