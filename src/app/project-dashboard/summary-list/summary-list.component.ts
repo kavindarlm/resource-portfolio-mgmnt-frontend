@@ -6,6 +6,7 @@ import {
   ApexResponsive,
   ApexChart
 } from "ng-apexcharts";
+import { resource_count } from '../projct-dshbrd-model/dshbrd-project';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -31,6 +32,7 @@ export class SummaryListComponent implements OnInit {
   highCriticality_count!: number;
   mediumCriticality_count!: number;
   lowCriticality_count!: number;
+  resource_count!: resource_count;
 
   constructor(private projectDashboardService: ProjectDashboardService) {
     this.chartOptions = {
@@ -65,6 +67,7 @@ export class SummaryListComponent implements OnInit {
   ngOnInit(): void {
     this.getCreatedProjects();
     this.getCriticalityCount();
+    this.getResourceCount();
   }
 
   getCreatedProjects(){
@@ -81,6 +84,14 @@ export class SummaryListComponent implements OnInit {
       this.lowCriticality_count = data.low;
 
       this.chartOptions.series = [this.highCriticality_count, this.mediumCriticality_count, this.lowCriticality_count];
+    });
+  }
+
+  // function to get the resource count
+  getResourceCount(){
+    this.projectDashboardService.getResourceCount().subscribe(res => {
+      this.resource_count = res;
+      console.log(this.resource_count);
     });
   }
 }
