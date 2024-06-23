@@ -12,6 +12,7 @@ import { ProjectDetailsComponent } from '../project-details/project-details.comp
 import { taskSharedService } from '../services/taskshared.service';
 import { TaskApiResponse } from '../dataModels/projectModel';
 import { ToastrService } from 'ngx-toastr';
+import { ConfirmDialogService } from '../../ConfirmDialogBox/confirm-dialog.service';
 
 function dateRangeValidator(control: FormGroup): ValidationErrors | null {
   const startDate = control.get('exStartDate')?.value;
@@ -56,7 +57,8 @@ export class CreateNewtaskComponent implements OnInit {
     private taskService: taskApiService,
     private taskDetails: ProjectDetailsComponent,
     private shared: taskSharedService,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+    private confirmMessage: ConfirmDialogService
   ) {}
   ngOnInit(): void {
     // Get the project id from the route
@@ -103,35 +105,40 @@ export class CreateNewtaskComponent implements OnInit {
     // Convert taskAllocationPercentage to a number
     data.taskAllocationPercentage = parseFloat(data.taskAllocationPercentage);
 
-    this.taskService.addTask(data, this.projectid).subscribe(
-      (res: TaskApiResponse) => {
-        console.log(res);
-        if (res.success === false && res.message) {
-          // Task addition was unsuccessful, display the error message
-          this.errorMessage = res.message;
-          alert(res.message);
-        } else {
-          // Task added successfully, perform necessary actions
-          this.shared.refreshTaskList();
-          this.shared.refreshProjectDetails();
-          this.addsuccesemassege(data.taskName);
-          this.taskForm.reset();
-          this.errorMessage = ''; // Reset error message if submission succeeds
-        }
-      },
-      (error) => {
-        if (error.error && error.error.message) {
-          // Display backend validation error message
-          this.errorMessage = error.error.message;
-          alert(error.error.message);
-        } else {
-          console.error(error);
-          // Display generic error message
-          this.errorMessage = 'Failed to add task. Please try again.';
-          alert('Failed to add task. Please try again.');
-        }
+    this.confirmMessage.open('Are you sure you want to add this task?').subscribe(confirmed => {
+      if (confirmed) {
+        this.taskService.addTask(data, this.projectid).subscribe(
+          (res: TaskApiResponse) => {
+            console.log(res);
+            if (res.success === false && res.message) {
+              // Task addition was unsuccessful, display the error message
+              this.errorMessage = res.message;
+              alert(res.message);
+            } else {
+              // Task added successfully, perform necessary actions
+              this.shared.refreshTaskList();
+              this.shared.refreshProjectDetails();
+              this.addsuccesemassege(data.taskName);
+              this.taskForm.reset();
+              this.errorMessage = ''; // Reset error message if submission succeeds
+            }
+          },
+          (error) => {
+            if (error.error && error.error.message) {
+              // Display backend validation error message
+              this.errorMessage = error.error.message;
+              alert(error.error.message);
+            } else {
+              console.error(error);
+              // Display generic error message
+              this.errorMessage = 'Failed to add task. Please try again.';
+              alert('Failed to add task. Please try again.');
+            }
+          }
+        );
       }
-    );
+    })
+    
   }
 
   addsuccesemassege(taskName: string) {

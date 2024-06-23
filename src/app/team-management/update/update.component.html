@@ -54,25 +54,21 @@
           </table>
         </div>
 
-        <div class="addResourceBtn col-6">
-          <app-new-team-button [text]="'Add Resources ID'" (click)="toggleResourceTable()"></app-new-team-button>
-        </div>
-        <hr />
-
-        <div class="addResourceBtn col-6">
-          <app-new-team-button [text]="'Create Team'" value="Create Team"></app-new-team-button>
+        <div class="d-flex justify-content-center">
+          <!-- <app-new-team-button [text]="'Add Resources ID'" (click)="toggleResourceTable()"></app-new-team-button> -->
+          <button type="submit" class="btn btn-outline-primary w-50 mt-3 mb-3 custom-button btn-sm" (click)="toggleResourceTable()">Add Resources</button>
         </div>
 
-        <hr />
-
-        <div class="updatebox row col-12">
-          <div class="col-6">
-            <button class="btn btn-md editbtn w-60 btn-outline-primary ml-1" (click)="edit()">Edit</button>
+        <div class="row">
+          <div class="col-6 d-flex justify-content-center">
+            <button class="btn btn-outline-primary w-50 mt-3 custom-button btn-sm" (click)="edit()">Edit</button>
           </div>
-          <div class="col-6">
-            <button class="btn btn-md btn-outline-danger deletebtn w-60 float-right" (click)="generalservice.showDialog = true"> Delete</button>
+          <div class="col-6 d-flex justify-content-center">
+            <button class="btn btn-outline-danger w-50 mt-3 btn-sm" (click)="deleteTeam()">Delete</button>
           </div>
         </div>
+        
+        
 
         <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
       </form>

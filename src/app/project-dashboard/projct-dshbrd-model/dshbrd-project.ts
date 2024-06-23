@@ -21,7 +21,3 @@ export interface MangerNameandIdModel{
     resourceId: '';
     resourceName: '';
   }
-
-export interface resource_count{
-    count: number;
-}

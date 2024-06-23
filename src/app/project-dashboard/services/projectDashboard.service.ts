@@ -6,7 +6,6 @@ import {
   MangerNameandIdModel,
   projectDataModel,
   resourceDataModel,
-  resource_count,
 } from '../projct-dshbrd-model/dshbrd-project';
 
 @Injectable({
@@ -79,9 +78,14 @@ export class ProjectDashboardService {
   }
 
   //get Resource Count
-  getResourceCount(): Observable<resource_count> {
-    return this.http.get<resource_count>(
+  getResourceCount(): Observable<number> {
+    return this.http.get<number>(
       'http://localhost:3000/resource/countresources/resourcecount'
     );
+  }
+
+  //get Ongoing Project Count
+  getOngoingProjectCount(): Observable<number> {
+    return this.http.get<number>('http://localhost:3000/task/projects/not-completed/count');
   }
 }
