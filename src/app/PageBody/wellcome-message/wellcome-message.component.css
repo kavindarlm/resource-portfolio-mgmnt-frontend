@@ -12,7 +12,7 @@
   
   .background-animated {
     animation: backgroundAnimation 15s ease infinite;
-    background: linear-gradient(-45deg, rgba(82, 238, 233, 0.3), rgba(41, 137, 255, 0.3), rgba(21, 166, 219, 0.3), rgba(35, 204, 213, 0.3));
+    background: linear-gradient(-45deg, rgba(250, 255, 255, 0.3), rgba(41, 137, 255, 0.3), rgba(21, 166, 219, 0.3), rgba(35, 204, 213, 0.3));
     background-size: 400% 400%;
     color: white;
   }
