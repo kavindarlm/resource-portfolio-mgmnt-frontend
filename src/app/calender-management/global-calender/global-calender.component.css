@@ -1,58 +1,57 @@
+.grid-container-gc-tbtn {
+  width: 100%;
+}
 
-.grid-container-gc-tbtn{
-    width: 100%; /* Elements are full width by default */
-  }
-
-  .grid-container-gc-pic{
-    width: 100%;
-  }
-
-
-  .grid-container-gc-btn,
-  .grid-container-gc-addbox{
-    width: 100%;
-  }
-
-  .addHolidayBtn,
-  .editHolidayBtn{
-    background-color: #C2D9FF;
-    border-color: #8691A833;
-    width: 100%;
-    color: #7752FE;
-
-  }
+.grid-container-gc-pic {
+  width: 100%;
+}
 
 
-  .grid-container-gc-addbox,
-  .grid-container-gc-editbox{
-  
-    width: 100%; 
-   
-  }
+.grid-container-gc-btn,
+.grid-container-gc-addbox {
+  width: 100%;
+}
+
+.addHolidayBtn,
+.editHolidayBtn {
+  background-color: #C2D9FF;
+  border-color: #8691A833;
+  width: 100%;
+  color: #7752FE;
+
+}
+
+
+.grid-container-gc-addbox,
+.grid-container-gc-editbox {
+
+  width: 100%;
+
+}
 
 .titleHolidayBtn {
-    background-color: #7752FE;
-    border-color: #7752FE;
-    color: #FEFEFE;
-    width: 100%;
+  background-color: #7752FE;
+  border-color: #7752FE;
+  color: #FEFEFE;
+  width: 100%;
 
-  }
-  
-button{
-    border: 1px solid #1e3895;
 }
 
-button:hover{
-    background-color: #1e3895;
-    color: white;
+.custom-button {
+  border-color: #1E3895;
 }
+
+.custom-button:hover {
+  background-color: #1E3895;
+}
+
 
 .row.no-gutters {
-    margin-right: 0;
-    margin-left: 0;
+  margin-right: 0;
+  margin-left: 0;
 }
 
-.row.no-gutters > [class^="col-"] {
-    padding-right: 0;
-    padding-left: 0;
+.row.no-gutters>[class^="col-"] {
+  padding-right: 0;
+  padding-left: 0;
 }

@@ -11,6 +11,10 @@
     font-size: 0.9rem;
 }
 
+.font-color {
+    color: #1E3895;
+}
+
 /* .l-bg-blue-dark {
     background: linear-gradient(to right, #373b44, #4286f4) !important;
     color: #fff;

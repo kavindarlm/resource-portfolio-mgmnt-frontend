@@ -10,26 +10,28 @@ import { ApiServiceService } from '../shared/api-service.service';
 })
 export class CalenderMainBoxComponent {
 
-  constructor(private apiService: ApiServiceService) { }
+  constructor(private apiService: ApiServiceService,
+  ) { }
 
-  onAddEvent(event: {selectedDates: NgbDate[], holidayType: string}) {
+  holidayType: string = '';
+  holidays: any[] = [];
+
+  //add global holidays
+  onAddEvent(event: { selectedDates: NgbDate[], holidayType: string }) {
     this.apiService.addEvent(event.selectedDates, event.holidayType)
       .subscribe(response => {
         console.log(response);
       }, error => {
         console.error(error);
       });
-    }
+  }
 
 
-    holidayType: string = '';
-    holidays: any[] = [];
-    // In calender-main-box.component.ts
   ngOnInit() {
-  this.apiService.getEvents(this.holidayType).subscribe((events: Object) => {
-    this.holidays = Object.values(events).map(event => new NgbDate(event.year, event.month, event.day));
-  });
-}
-  
-    
+    this.apiService.getEvents(this.holidayType).subscribe((events: Object) => {
+      this.holidays = Object.values(events).map(event => new NgbDate(event.year, event.month, event.day));
+    });
+  }
+
+
 }

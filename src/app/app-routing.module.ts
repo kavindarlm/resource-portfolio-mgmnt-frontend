@@ -13,9 +13,6 @@ import { AdminDasbdBodyComponent } from './admin-dashboard/admin-dasbd-body/admi
 import { ProjectDetailsComponent } from './TaskManagement/project-details/project-details.component';
 import { CreateNewtaskComponent } from './TaskManagement/create-newtask/create-newtask.component';
 import { UpdateTaskComponent } from './TaskManagement/update-task/update-task.component';
-// import { MainComponent } from './Sprint_Management/main/main.component';
-// import { CreateFormComponent } from './Sprint_Management/create-form/create-form.component';
-// import { SprintMgtComponent } from './Sprint_Management/sprint-mgt/sprint-mgt.component';
 import { ListComponent } from './Sprint_Management/Reusable_Components/list/list.component';
 import { CreateFormComponent } from './Sprint_Management/create-form/create-form.component';
 import { AvailableResourceListComponent } from './Sprint_Management/available-resource-list/available-resource-list.component';
@@ -30,7 +27,6 @@ import { UpdateComponent } from './team-management/update/update.component';
 import { TeamListComponent } from './team-management/team-list/team-list.component';
 import { DeletePopupComponent } from './team-management/delete-popup/delete-popup.component';
 import { SprintMgtComponent } from './Sprint_Management/sprint-mgt/sprint-mgt.component';
-import { DeleteSprintPopupComponent } from './Sprint_Management/Reusable_Components/delete-sprint-popup/delete-sprint-popup.component';
 import { AvailabiilityComponent } from './Sprint_Management/availabiility/availabiility.component';
 import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
 import { ProjectBoardComponent } from './project-dashboard/project-board/project-board.component';
@@ -55,6 +51,16 @@ import { UnitFormComponent } from './orgUnitMgt/unit-form/unit-form.component';
 import { UnitDetailsComponent } from './orgUnitMgt/unit-details/unit-details.component';
 import { UnitEditFormComponent } from './orgUnitMgt/unit-edit-form/unit-edit-form.component';
 import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
+import { WellcomeMessageComponent } from './PageBody/wellcome-message/wellcome-message.component';
+import { EditSprintFormComponent } from './Sprint_Management/edit-sprint-form/edit-sprint-form.component';
+import { SprintListComponent } from './Handle_Request/sprint-list/sprint-list.component';
+import { ResourceTableComponent } from './team-management/resource-table/resource-table.component';
+import { SprintDetailsComponent } from './Handle_Request/sprint-details/sprint-details.component';
+import { AllocatedResourceInfoComponent } from './Handle_Request/allocated-resource-info/allocated-resource-info.component';
+import { UpdateAllocationPercentageComponent } from './Handle_Request/update-allocation-percentage/update-allocation-percentage.component';
+import { UpdateAllocatedTaskComponent } from './Handle_Request/update-allocated-task/update-allocated-task.component';
+import { AvailableResListComponent } from './Handle_Request/available-res-list/available-res-list.component';
+import { AvailabilityInfoComponent } from './Handle_Request/availability-info/availability-info.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -64,19 +70,22 @@ const routes: Routes = [
   {
     path: 'pages-body', component: PagesBodyComponent,
     canActivate: [AuthGuard],
-    data: { roles : ['user'] },
+    data: { roles: ['user'] },
     children: [
+      {
+        path: 'welcome-page', component: WellcomeMessageComponent,
+      },
       { path: 'projectBoard', component: ProjectBoardComponent,
       canActivate:[FunctionGuardService],
       data : { functionId : 1},
         children: [
-          { path: 'dashboard-projectdetails/:id', component: DashbrdProjectDetailsComponent}
+          { path: 'dashboard-projectdetails/:id', component: DashbrdProjectDetailsComponent }
         ]
       },
       {
         path: 'projectlist', component: ProjectListComponent,
-        canActivate:[FunctionGuardService],
-        data : { functionId : 6},
+        canActivate: [FunctionGuardService],
+        data: { functionId: 6 },
         children: [
           { path: 'createproject', component: CreateProjectComponent },
           { path: 'updatePoject/:id', component: UpdateProjectComponent }
@@ -84,16 +93,17 @@ const routes: Routes = [
       },
       {
         path: 'TaskProjectList', component: TaskProjectListComponent,
-        canActivate:[FunctionGuardService],
-        data : { functionId : 7},
+        canActivate: [FunctionGuardService],
+        data: { functionId: 7 },
         children: [
           {
             path: 'projectTaskDetails/:projectId', component: ProjectDetailsComponent,
             children: [
               { path: 'newTask/:id', component: CreateNewtaskComponent },
-              { path: 'updatetask/:id', component: UpdateTaskComponent,
+              {
+                path: 'updatetask/:id', component: UpdateTaskComponent,
                 children: [
-                  {path: 'editTask/:id', component: EditTaskComponent}
+                  { path: 'editTask/:id', component: EditTaskComponent }
                 ]
               }
             ],
@@ -102,11 +112,15 @@ const routes: Routes = [
       },
       {
         path: 'teamlistcomponent', component: TeamListComponent,
-        canActivate:[FunctionGuardService],
-        data : { functionId : 5},
+        canActivate: [FunctionGuardService],
+        data: { functionId: 5 },
         children: [
           { path: 'NewTeamButton', component: NewTeamButtonComponent },
-          { path: 'TeamForm', component: TeamFormComponent },
+          { path: 'TeamForm', component: TeamFormComponent ,
+          children: [
+            { path: 'resourceTable', component:ResourceTableComponent}
+          ]
+          },
           { path: 'update/:id', component: UpdateComponent },
           { path: 'resources/:id', component: UpdateResourcTableComponent },
           { path: 'delete/:id', component: DeletePopupComponent }
@@ -114,24 +128,25 @@ const routes: Routes = [
       },
       {
         path: 'calendertypecomponent', component: CalenderTypeComponent,
-        canActivate:[FunctionGuardService],
-        data : { functionId : 4},
+        canActivate: [FunctionGuardService],
+        data: { functionId: 4 },
         children: [
-          {path: 'calendermainbox', component:CalenderMainBoxComponent},
-          {path: 'commoncalender/:type', component:CommonCalenderComponent},
-          {path: 'resourcelist', component: ResourceListComponent,
+          { path: 'calendermainbox', component: CalenderMainBoxComponent },
+          { path: 'commoncalender/:type', component: CommonCalenderComponent },
+          {
+            path: 'resourcelist', component: ResourceListComponent,
             children: [
               { path: 'resourceleave/:id', component: ResourceLeaveComponent }
             ]
           }
-          
+
         ]
 
       },
       {
         path: 'first-view', component: FirstViewComponent,
-        canActivate:[FunctionGuardService],
-        data : { functionId : 2},
+        canActivate: [FunctionGuardService],
+        data: { functionId: 2 },
         children: [
           { path: 'button', component: ButtonComponent },
           { path: 'add-form', component: AddFormComponent },
@@ -145,16 +160,18 @@ const routes: Routes = [
       },
       {
         path: 'unit-list', component: UnitListComponent,
-        canActivate:[FunctionGuardService],
-        data : { functionId : 3},
+        canActivate: [FunctionGuardService],
+        data: { functionId: 3 },
         children: [
           { path: 'unit-form', component: UnitFormComponent },
-          { path: 'unit-details/:id', component: UnitDetailsComponent ,
+          {
+            path: 'unit-details/:id', component: UnitDetailsComponent,
             children: [
               { path: 'unit-edit-form/:id', component: UnitEditFormComponent }
             ]
           },
-          { path: 'unit-tree', component: UnitTreeComponent,
+          {
+            path: 'unit-tree', component: UnitTreeComponent,
             children: [
               { path: 'unit-node', component: UnitNodeComponent }
             ]
@@ -163,8 +180,8 @@ const routes: Routes = [
       },
       {
         path: 'sprint-management', component: ListComponent,
-        canActivate:[FunctionGuardService],
-        data : { functionId : 8},
+        canActivate: [FunctionGuardService],
+        data: { functionId: 8 },
         children: [
           {
             path: 'createform', component: CreateFormComponent,
@@ -181,23 +198,45 @@ const routes: Routes = [
             children: [
               {
                 path: 'allocated-resource/:sprintId/:resourceId', component: AllocatedResourceInformationComponent,
-                children:[
-                  { path: 'DeleteAllocation/:sprintId/:resourceId', component: DeleteResourceAllocationComponent},
-                  
+                children: [
+                  { path: 'DeleteAllocation/:sprintId/:resourceId', component: DeleteResourceAllocationComponent },
+
                 ]
               },
               { path: 'UpdatePercentage/:sprintId/:resourceId', component: UpdatePercentageComponent, },
-              { path: 'UpdateTask/:sprintId/:resourceId', component: UpdateTaskInSprintComponent, }
+              { path: 'UpdateTask/:sprintId/:resourceId', component: UpdateTaskInSprintComponent, },
+              { path: 'EditSprint/:sprintId', component: EditSprintFormComponent, }
             ]
           },
         ]
       },
+      {
+        path: 'handle-request', component: SprintListComponent,
+        canActivate: [FunctionGuardService],
+        data: { functionId: 9 },
+        children: [
+          {
+            path: 'sprintDetails/:id', component: SprintDetailsComponent,
+            children: [
+              {path: 'allocated-resource-info/:sprintId/:resourceId', component: AllocatedResourceInfoComponent },
+              { path: 'UpdateAllocationPercentage/:sprintId/:resourceId', component: UpdateAllocationPercentageComponent },
+              { path: 'UpdateAllocatedTask/:sprintId/:resourceId', component: UpdateAllocatedTaskComponent },
+              {
+                path: 'availableResourceList', component: AvailableResListComponent,
+                children: [
+                  { path: 'availabilityInfo/:id', component: AvailabilityInfoComponent }
+                ]
+              }
+            ]
+          }
+        ]
+      }
     ]
   },
   {
     path: 'admin-dashboard', component: AdminDasbdBodyComponent,
     canActivate: [AuthGuard],
-    data: { roles : ['admin'] },
+    data: { roles: ['admin'] },
     children: [
       { path: 'addNewUser', component: AddNewUserComponent },
       { path: 'userDetail/:id', component: UserDetailComponent }

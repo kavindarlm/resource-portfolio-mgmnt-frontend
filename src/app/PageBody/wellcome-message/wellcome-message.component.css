@@ -1,0 +1,38 @@
+@keyframes backgroundAnimation {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  .background-animated {
+    animation: backgroundAnimation 15s ease infinite;
+    background: linear-gradient(-45deg, rgba(250, 255, 255, 0.3), rgba(41, 137, 255, 0.3), rgba(21, 166, 219, 0.3), rgba(35, 204, 213, 0.3));
+    background-size: 400% 400%;
+    color: white;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      transform: translate3d(0, 40px, 0);
+      opacity: 0;
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+  
+  .fadeInUp {
+    animation: fadeInUp 1.5s ease-out;
+  }
+  
+  .card {
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: saturate(180%) blur(20px);
+  }

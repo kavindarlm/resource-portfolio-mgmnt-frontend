@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { sharedprojectService } from '../service/sharedproject.service';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, map, startWith } from 'rxjs';
+import { ConfirmDialogService } from '../../ConfirmDialogBox/confirm-dialog.service';
 
 function dateRangeValidator(control: FormGroup): ValidationErrors | null {
   const startDate = control.get('projectStartDate')?.value;
@@ -25,22 +26,23 @@ function dateRangeValidator(control: FormGroup): ValidationErrors | null {
 })
 export class CreateProjectComponent implements OnInit {
   projectform!: FormGroup;
-  submited = false;
+  submitted = false;
   criticalityType: criticalityModel[] = [];
   resources: resourceIdNameModel[] = [];
   filteredOptions: { [key: string]: Observable<resourceIdNameModel[]> } = {};
   showOptions: { [key: string]: boolean } = {};
 
   constructor(
-    private formbulider: FormBuilder,
+    private formbuilder: FormBuilder,
     private api: ApiService,
     private router: Router,
     private sharedService: sharedprojectService,
-    private toaster: ToastrService
+    private toastr: ToastrService,
+    private confirmMessage: ConfirmDialogService // Inject ToastrService
   ) {}
 
   ngOnInit(): void {
-    this.projectform = this.formbulider.group({
+    this.projectform = this.formbuilder.group({
       projectName: ['', Validators.required],
       projectStartDate: ['', Validators.required],
       projectEndDate: ['', Validators.required],
@@ -70,6 +72,16 @@ export class CreateProjectComponent implements OnInit {
     );
 
     this.getCriticality();
+
+    //form value to uppercase
+    this.projectform.valueChanges.subscribe(val =>{
+      if(val.projectName && val.projectName.length === 1) {
+        this.projectform.patchValue({projectName: val.projectName.toUpperCase()});
+      }
+      if(val.projectDescription && val.projectDescription.length == 1) {
+        this.projectform.patchValue({projectDescription: val.projectDescription.toUpperCase()});
+      }
+    })
   }
 
   private _filter(value: string, field: string): resourceIdNameModel[] {
@@ -99,52 +111,37 @@ export class CreateProjectComponent implements OnInit {
   }
 
   addProject(data: datamodel) {
-    this.submited = true;
+    this.submitted = true;
     if (this.projectform.invalid) {
-      alert('Form Invalid');
+      this.toastr.error('Please fill out all required fields correctly.', 'Form Validation Error');
       return;
     }
 
-    // Ensure the form values are correctly set
     const formValues = this.projectform.value;
-    console.log('Form Values Before Submission:', formValues);
 
     const projectData: datamodel = {
       ...formValues,
       projectManager_id: formValues.projectManager_id,
       deliveryManager_id: formValues.deliveryManager_id,
     };
-
-    console.log('Project Data:', projectData);
-
-    this.api.addProject(projectData).subscribe(
-      (res) => {
-        alert('Form Submitted Successfully');
-        console.log('Project added successfully:', res);
-        this.addsuccesemassege(data.projectName);
-        this.projectform.reset();
-        this.sharedService.refreshProjectList();
-        this.sharedService.refreshProjectCount();
-      },
-      (error) => {
-        alert('Error adding project:' + error.message);
-        console.log('Error adding project:', error);
+    this.confirmMessage.open('Are you sure you want to add this project?').subscribe(confirmed => {
+      if (confirmed) {
+        this.api.addProject(projectData).subscribe(
+          (res) => {
+            this.toastr.success(`${data.projectName} added successfully.`, 'Project Created');
+            this.projectform.reset();
+            this.sharedService.refreshProjectList();
+            this.sharedService.refreshProjectCount();
+          },
+          (error) => {
+            this.toastr.error(`Error adding project: ${error.message}`, 'Error');
+            console.error('Error adding project:', error);
+          }
+        );
       }
-    );
+    });
   }
 
-  //This is for success message
-  addsuccesemassege(projectName: string) {
-    this.toaster.success(
-      `${projectName} Added successfully`,
-      'Created Project',
-      {
-        timeOut: 3000,
-      }
-    );
-  }
-
-  // Get criticality
   getCriticality() {
     this.api.getCriticality().subscribe(
       (res) => {

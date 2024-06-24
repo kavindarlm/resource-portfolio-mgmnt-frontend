@@ -7,17 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalenderTypeComponent implements OnInit {
 
-  showMainCalenderBox=false;
+  showMainCalenderBox = false;
 
-  constructor() { 
-    this.showMainCalenderBox=false;
+  constructor() {
+    this.showMainCalenderBox = false;
   }
 
-  accessMainCalenderBox(){
-    this.showMainCalenderBox=!this.showMainCalenderBox;
+  accessMainCalenderBox() {
+    this.showMainCalenderBox = !this.showMainCalenderBox;
   }
-
-
 
   ngOnInit(): void {
   }

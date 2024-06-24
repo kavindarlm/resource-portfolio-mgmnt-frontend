@@ -48,8 +48,9 @@ td{
     
 }
 
-::placeholder {
-    color: #C2D9FF;
+input::placeholder, 
+textarea::placeholder {
+    opacity: .6; 
 }
 
 input.ng-invalid.ng-touched {
@@ -79,3 +80,11 @@ input.ng-invalid.ng-touched {
     padding-right: 0;
     padding-left: 0;
 }
+
+.custom-button {
+    border-color: #1E3895;
+  }
+  
+  .custom-button:hover {
+    background-color: #1E3895;
+  }  
