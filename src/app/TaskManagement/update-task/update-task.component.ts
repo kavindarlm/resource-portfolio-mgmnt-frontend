@@ -5,6 +5,7 @@ import { taskApiService } from '../services/taskApi.service';
 import { taskSharedService } from '../services/taskshared.service';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-update-task',
@@ -34,7 +35,8 @@ export class UpdateTaskComponent implements OnInit {
     private activateDataRout: ActivatedRoute,
     private TaskService: taskApiService,
     private shared: taskSharedService,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+    private spinner: NgxSpinnerService
   ) {}
   ngOnInit(): void {
     // Get the task id from the route
@@ -62,7 +64,9 @@ export class UpdateTaskComponent implements OnInit {
   // Implement the getTaskDetails method
   getTaskDetails() {
     this.TaskService.getTaskByid(this.taskid).subscribe((data: taskModel) => {
+      this.spinner.show();
       this.taskDetails = data;
+      this.spinner.hide();
     });
   }
 

@@ -1,44 +1,46 @@
 <div class="container-fluid ">
-    <div class="row no-gutters">
-      <div class="col-12 border rounded p-2">
-         <div>
-  
-          <div class="grid-container-gc-tbtn mb-2">
-            <div class="border rounded text-center col-12 mb-3  pt-1 pb-1 text-white bg-primary">{{text}}</div>
+  <div class="row no-gutters">
+    <div class="col-12 col-md-12 col-lg-12  border rounded p-2">
+      <div>
+
+        <div class="grid-container-gc-tbtn mb-2">
+          <div class="border rounded text-center col-12 mb-3  pt-1 pb-1 text-white bg-primary">{{text}}</div>
+        </div>
+
+        <div class="grid-container-gc-picn">
+          <div class="pic d-flex justify-content-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" fill="currentColor"
+              class="bi bi-bank border rounded p-2" viewBox="0 0 16 16">
+              <g>
+                <path [attr.d]="getSvgPath()" fill="#1e3895" />
+              </g>
+            </svg>
           </div>
-  
-          <!-- app-global-calender.component.html -->
-          <div class="grid-container-gc-picn">
-            <div class="pic d-flex justify-content-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" fill="currentColor" class="bi bi-bank border rounded p-2" viewBox="0 0 16 16">
-                <g >
-                  <path [attr.d]="getSvgPath()" fill="#1e3895" />
-                </g>
-              </svg>
-            </div>
+        </div>
+
+        <div class="grid-container-gc-btn mt-2 mb-2 d-flex justify-content-center">
+          <button class="btn btn-outline-primary btn-sm mt-2 custom-button w-75 " (click)="accessCalenderAdd()">Add New
+            Holiday</button>
+        </div>
+
+        <div class="grid-container-gc-addbox ">
+          <div class="border rounded col-12 mb-2 d-flex justify-content-center" *ngIf="showCalenderAdd">
+            <app-common-calender [actionType]="'add'" [holidayType]="holidayType"
+              (addEvent)="onAddEvent($event)"></app-common-calender>
           </div>
-  
-          <div class="grid-container-gc-btn mt-2 mb-2">
-            <button class="btn btn-outline-primary w-100  custom-button btn-sm curser" (click)="accessCalenderAdd()" >Add New Holiday</button>
-          </div>
-  
-          <div class="grid-container-gc-addbox ">
-            <div class="border rounded col-12 mb-2 d-flex justify-content-center" *ngIf="showCalenderAdd" >
-              <app-common-calender [actionType]="'add'" [holidayType]="holidayType" (addEvent)="onAddEvent($event)" ></app-common-calender>
-            </div>
-          </div>
-  
-          <div class="grid-container-gc-btn ">
-            <button class="btn btn-outline-primary w-100  custom-button btn-sm curser" (click)="accessCalenderEdit()" >Edit Holidays</button>
-          </div>
-  
-          <div class="grid-container-gc-editbox">
-            <div class="border rounded col-12 mb-2 d-flex justify-content-center" *ngIf="showCalenderEdit">
-              <app-common-calender [actionType]="'edit'" [holidayType]="holidayType"></app-common-calender> 
-            </div>
+        </div>
+
+        <div class="grid-container-gc-btn d-flex justify-content-center">
+          <button class="btn btn-outline-primary btn-sm mt-1 mb-1 custom-button w-75"
+            (click)="accessCalenderEdit()">Edit Holidays</button>
+        </div>
+
+        <div class="grid-container-gc-editbox">
+          <div class="border rounded col-12 mb-2 d-flex justify-content-center" *ngIf="showCalenderEdit">
+            <app-common-calender [actionType]="'edit'" [holidayType]="holidayType"></app-common-calender>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+</div>

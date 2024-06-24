@@ -1,12 +1,14 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ResourceService } from '../../team-management/shared/resource.service';
-import { ResourceAllocationService } from '../services/resource-allocation.service';
 import { taskApiService } from '../../TaskManagement/services/taskApi.service';
 import { ApiService } from '../../Project-management/service/api.service';
-import { sprintApiService } from '../services/sprintApi.service';
-import { Observable } from 'rxjs';
 import { SharedService } from '../services/shared.service';
+import { ToastrService } from 'ngx-toastr';
+import { ResourceAllocationService } from '../services/resource-allocation.service';
+import { forkJoin, map, switchMap } from 'rxjs';
+import { ApiServiceService } from '../../calender-management/shared/api-service.service';
 
 interface ProjectTaskData {
   resourceId: string;
@@ -14,43 +16,53 @@ interface ProjectTaskData {
   percentage: number | null;
 }
 
-// Define a type to store both the task and its corresponding resource allocation data
-interface TaskWithResourceAllocation {
-  task: any; // Task entity
-  resourceAllocation: any; // Resource allocation data
-}
-
 @Component({
   selector: 'app-availabiility',
   templateUrl: './availabiility.component.html',
-  styleUrl: './availabiility.component.css'
+  styleUrls: ['./availabiility.component.css']
 })
 export class AvailabiilityComponent implements OnInit {
-
   resourceId: string = '';
   resourceDetails: any = {};
   tasks: any[] = [];
-
   Projects: any[] = [];
-  Tasks: any[] = [];
-  sets: any[] = [{ projectId: '', taskId: '', percentage: null }]; // Initialize with one set of data
+  sets: any[] = [{ projectId: '', taskId: '', percentage: null, Tasks: [] }]; // Initialize with one set of data
+  taskProjectDetails: { taskName: string, projectName: string, percentage: number }[] = [];
+  holidays: NgbDateStruct[] = []; // Store holidays
+  availabilityPercentage: number = 0; 
+  searchText: string[] = [];
+  filteredProjects: any[][] = [];
+  dropdownOpen: boolean[] = [];
+  selectedProjectNames: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private resourceService: ResourceService, // Injecting the ResourceService
-    private resourceAllocationServices: ResourceAllocationService,
+    private resourceService: ResourceService,
+    private toastr: ToastrService,
     private taskApiService: taskApiService,
     private projectApiService: ApiService,
-    private sharedService: SharedService
+    private ResourceAllocationService: ResourceAllocationService, 
+    private sharedService: SharedService,
+    private ApiServiceService: ApiServiceService
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.resourceId = params['id'];
       this.fetchResourceDetails();
-      this.fetchTasksWithProjectNames();
       this.fetchProjects();
+      this.fetchTasksAndProjectsByResourceId(this.resourceId);
+      this.fetchHolidays(this.resourceId);
+    });
+    this.route.queryParams.subscribe(queryParams => {
+      this.availabilityPercentage = queryParams['availability'];
+    });
+    this.sets.forEach((_, index) => {
+      this.searchText[index] = '';
+      this.filteredProjects[index] = [];
+      this.dropdownOpen[index] = false;
+      this.selectedProjectNames[index] = '';
     });
   }
 
@@ -65,66 +77,42 @@ export class AvailabiilityComponent implements OnInit {
     );
   }
 
-  fetchTasksWithProjectNames(): void {
-    // Fetch tasks and resource allocations by resourceId
-    this.resourceAllocationServices.getTasksByResourceId(this.resourceId).subscribe(
-        (response: { task: any, resourceAllocation: any }[]) => {
-            // Create an array to hold the final data structure
-            const finalData: { taskName: string, projectName: string, resourceAllocationPercentage: number }[] = [];
-
-            // Keep track of the number of pending project info requests
-            let pendingRequests = response.length;
-
-            // Iterate through each task and its associated resource allocation
-            response.forEach((item, index) => {
-                const task = item.task;
-                const resourceAllocation = item.resourceAllocation;
-
-                // Fetch project information for each task
-                this.taskApiService.getProjectInfoByTaskId(task.taskid).subscribe(
-                    (projectInfo: { projectName: string, projectId: number } | null) => {
-                        if (projectInfo) {
-                            // Create a new object with task name, project name, and resource allocation percentage
-                            finalData.push({
-                                taskName: task.taskName,
-                                projectName: projectInfo.projectName,
-                                resourceAllocationPercentage: resourceAllocation.percentage,
-                            });
-                        } else {
-                            console.warn(`No project information found for task ${task.taskid}`);
-                        }
-
-                        // Decrement pending requests count
-                        pendingRequests--;
-
-                        // If all pending requests are completed, assign finalData to this.tasks
-                        if (pendingRequests === 0) {
-                            this.tasks = finalData;
-                        }
-                    },
-                    (error: any) => {
-                        console.error(`Error fetching project information for task ${task.taskid}:`, error);
-                        pendingRequests--;
-
-                        // Check if all pending requests are completed
-                        if (pendingRequests === 0) {
-                            this.tasks = finalData;
-                        }
-                    }
-                );
-            });
-        },
-        (error: any) => {
-            console.error('Error fetching tasks and resource allocations:', error);
-        }
+  fetchTasksAndProjectsByResourceId(resourceId: string): void {
+    this.taskProjectDetails = [];
+    this.tasks = []; 
+    this.Projects = []; 
+  
+    this.ResourceAllocationService.getTasksByResourceId(resourceId).pipe(
+      switchMap(tasks => {
+        const projectDetailsObservables = tasks.map(task => 
+          this.taskApiService.getProjectInfoByTaskId(task.resourceAllocation.task.taskid).pipe(
+            map(project => ({
+              taskName: task.resourceAllocation.task.taskName,
+              projectName: project?.projectName || 'Unknown',
+              percentage: task.resourceAllocation.percentage
+            }))
+          )
+        );
+        return forkJoin(projectDetailsObservables);
+      })
+    ).subscribe(
+      taskProjectDetails => {
+        this.taskProjectDetails = taskProjectDetails;
+        console.log('Task and project details:', this.taskProjectDetails);
+      },
+      error => {
+        console.error('Error fetching task and project details:', error);
+      }
     );
-}
-
+  }
 
   fetchProjects(): void {
     this.projectApiService.getProjectList().subscribe(
       (projects: any[]) => {
         this.Projects = projects;
+        this.sets.forEach((_, index) => {
+          this.filteredProjects[index] = [...this.Projects];
+        });
       },
       (error: any) => {
         console.error('Error fetching projects:', error);
@@ -132,24 +120,35 @@ export class AvailabiilityComponent implements OnInit {
     );
   }
 
+  fetchHolidays(resourceId: string): void {
+    this.ApiServiceService.resourceGetEvents(resourceId).subscribe(
+      (holidays: any[]) => {
+        this.holidays = holidays.map(holiday => {
+          const date = new Date(holiday.holiday.date);
+          return {
+            year: date.getFullYear(),
+            month: date.getMonth() + 1,
+            day: date.getDate()
+          };
+        });
+      },
+      (error: any) => {
+        console.error('Error fetching holidays:', error);
+      }
+    );
+  }
+
   onProjectSelect(event: Event, index: number): void {
     const selectElement = event.target as HTMLSelectElement;
     const projectId = selectElement.value;
-
-    // Save the selected project ID in the correct set
     this.sets[index].projectId = projectId;
-
-    // Fetch tasks based on the selected project
     this.fetchTasksByProjectId(projectId, index);
   }
 
   fetchTasksByProjectId(projectId: string, index: number): void {
     this.taskApiService.getTaskList(projectId).subscribe(
       (tasks: any[]) => {
-        // Store tasks in the Tasks array
-        this.Tasks = tasks;
-
-        // Optionally, you can handle additional logic here if needed
+        this.sets[index].Tasks = tasks;
         console.log(`Fetched tasks for project ID ${projectId}:`, tasks);
       },
       (error: any) => {
@@ -158,40 +157,78 @@ export class AvailabiilityComponent implements OnInit {
     );
   }
 
+  filterProjects(index: number): void {
+    this.filteredProjects[index] = this.Projects.filter(project =>
+      project.projectName.toLowerCase().includes(this.searchText[index].toLowerCase())
+    );
+  }
+
+  toggleDropdown(index: number): void {
+    this.dropdownOpen[index] = !this.dropdownOpen[index];
+  }
+
+  selectProject(index: number, project: any): void {
+    this.sets[index].projectId = project.projectid;
+    this.selectedProjectNames[index] = project.projectName;
+    this.dropdownOpen[index] = false;
+    this.fetchTasksByProjectId(project.projectid, index);
+  }
+
   onTaskSelect(event: Event, index: number): void {
     const selectElement = event.target as HTMLSelectElement;
-    // Save the selected task ID in the correct set
     this.sets[index].taskId = selectElement.value;
   }
 
   addSet(): void {
-    // Add a new set of project-task-percentage to the array
-    this.sets.push({ projectId: '', taskId: '', percentage: null });
+    this.sets.push({ projectId: '', taskId: '', percentage: null, Tasks: [] });
+    const newIndex = this.sets.length - 1;
+    this.searchText[newIndex] = '';
+    this.filteredProjects[newIndex] = [...this.Projects];
+    this.dropdownOpen[newIndex] = false;
+    this.selectedProjectNames[newIndex] = '';
   }
 
   removeSet(index: number): void {
-    // Remove the set at the specified index
+    if (this.sets.length === 1) {
+      this.toastr.error('At least one set should be there.', 'Error');
+      return;
+    }
     this.sets.splice(index, 1);
+    this.searchText.splice(index, 1);
+    this.filteredProjects.splice(index, 1);
+    this.dropdownOpen.splice(index, 1);
+    this.selectedProjectNames.splice(index, 1);
   }
 
   onAddClick(): void {
-    // Iterate through the sets array and create a ProjectTaskData object for each set
     this.sets.forEach(set => {
       const projectTaskData: ProjectTaskData = {
         resourceId: this.resourceId,
         taskId: set.taskId,
         percentage: set.percentage
       };
-
-      // Use the addData method from the shared service to add each set separately
       this.sharedService.addData(projectTaskData);
     });
-
-    // Clear the sets array after adding data
-    this.sets = [{ projectId: '', taskId: '', percentage: null }];
+    this.sets = [{ projectId: '', taskId: '', percentage: null, Tasks: [] }];
+    this.searchText = [''];
+    this.filteredProjects = [this.Projects];
+    this.dropdownOpen = [false];
+    this.selectedProjectNames = [''];
   }
 
   deleteContent() {
-    this.router.navigate(['availableResources']);
+    this.router.navigate(['/pages-body/sprint-management/createform/availableResources']);
+  }
+
+  disableAllDates(): boolean {
+    return true;
+  }
+
+  isHoliday(date: NgbDateStruct): boolean {
+    return this.holidays.some(holiday => 
+      holiday.year === date.year && 
+      holiday.month === date.month && 
+      holiday.day === date.day
+    );
   }
 }

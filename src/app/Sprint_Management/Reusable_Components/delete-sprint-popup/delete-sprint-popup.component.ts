@@ -1,24 +1,23 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+// delete-sprint-popup.component.ts
+import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-delete-sprint-popup',
   templateUrl: './delete-sprint-popup.component.html',
-  styleUrl: './delete-sprint-popup.component.css'
+  styleUrls: ['./delete-sprint-popup.component.css']
 })
 export class DeleteSprintPopupComponent {
+  @Output() confirmDelete = new EventEmitter<void>();
+  @Output() cancelDelete = new EventEmitter<void>();
 
-  sprintName: string = '';
+  constructor(private router: Router) {}
 
-  constructor(private route: ActivatedRoute,private router: Router) { }
-
-  ngOnInit(): void {
+  onDelete() {
+    this.confirmDelete.emit();
   }
 
-
-  cancelDelete() {
-    this.router.navigate(['/']); 
+  onCancel() {
+    this.cancelDelete.emit();
   }
-  
-
 }

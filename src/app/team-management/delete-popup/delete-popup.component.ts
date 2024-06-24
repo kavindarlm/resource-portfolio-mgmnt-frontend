@@ -3,6 +3,7 @@ import { GeneralService } from '../shared/general.service';
 import { ApiService } from '../shared/api.service';
 import { Router } from '@angular/router';
 import { dataModel } from '../team-form/team-form.model';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class DeletePopupComponent {
 
   constructor(public generalservice: GeneralService,
     private api: ApiService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
     ){}
 
    
@@ -30,6 +32,7 @@ export class DeletePopupComponent {
           console.log('Team deleted', response);
           this.errorMessage = '';
           this.generalservice.refreshTeamList();
+          this.toastr.success('Team deleted successfully', 'Deleted Team', { timeOut: 3000 }); // Add this line
           this.router.navigate(['/pages-body/teamlistcomponent']);
         },
         error => {
