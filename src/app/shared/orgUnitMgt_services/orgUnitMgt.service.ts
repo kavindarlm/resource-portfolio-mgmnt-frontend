@@ -58,6 +58,10 @@ export class OrgUnitMgtService {
         return this.http.get<any>("http://localhost:3000/org-unit/hierarchy/data")
     }
 
+    hasChildUnits(unitId: number): Observable<boolean> {
+        return this.http.get<boolean>(`http://localhost:3000/org-unit/${unitId}/has-children`);
+      }
+
     getAncestors(unitId: number): Observable<OrganizationalUnitModel[]> {
         return this.http.get<OrganizationalUnitModel[]>(`http://localhost:3000/org-unit/${unitId}/ancestors`);
     }

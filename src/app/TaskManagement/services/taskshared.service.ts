@@ -19,4 +19,11 @@ export class taskSharedService{
     refreshProjectDetails(){
         this.refreshProjectDetailsSource.next();
     }
+
+    private projectIdSubject = new BehaviorSubject<string>('');
+    projectId$ = this.projectIdSubject.asObservable();
+  
+    setProjectId(id: string) {
+      this.projectIdSubject.next(id);
+    }
 }
