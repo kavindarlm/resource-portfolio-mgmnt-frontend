@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router'; // Import Router
 import { sprintApiService } from '../services/sprintApi.service';
 import { SharedService } from '../services/shared.service';
 import { ToastrService } from 'ngx-toastr';
+import { ConfirmDialogService } from '../../ConfirmDialogBox/confirm-dialog.service';
 
 @Component({
   selector: 'app-edit-sprint-form',
@@ -22,7 +23,8 @@ export class EditSprintFormComponent implements OnInit {
     private router: Router, 
     private sprintApiService: sprintApiService,
     private sharedService: SharedService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private confirmDialogService: ConfirmDialogService
   ) { }
 
   openpopup() {
@@ -67,17 +69,22 @@ export class EditSprintFormComponent implements OnInit {
 
   onSubmit() {
     if (this.editSprintForm.valid) {
-      const updateSprintDto = this.editSprintForm.value;
-      this.sprintApiService.updateSprint(this.sprintId, updateSprintDto).subscribe(
-        response => {
-          this.toastr.success('Sprint updated successfully!', 'Success');
-          this.closepopup();
-          this.sharedService.notifySprintUpdated(); // Notify about the update
-        },
-        error => {
-          this.toastr.error('Error updating sprint. Please try again.', 'Error');
+      this.confirmDialogService.open('Are you sure you want to update this sprint?').subscribe(confirmed => {
+        if (confirmed) {
+          const updateSprintDto = this.editSprintForm.value;
+          this.sprintApiService.updateSprint(this.sprintId, updateSprintDto).subscribe(
+            response => {
+              this.toastr.success('Sprint updated successfully!', 'Success');
+              this.closepopup();
+              this.sharedService.notifySprintUpdated(); // Notify about the update
+            },
+            error => {
+              this.toastr.error('Error updating sprint. Please try again.', 'Error');
+            }
+          ); 
         }
-      );
+      
+      }); 
     }
   }
 }

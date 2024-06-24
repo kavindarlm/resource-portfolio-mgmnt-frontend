@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { OrgUnitRecrsive } from '../unit-tree/org-unitmodel';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ConfirmDialogService } from '../../ConfirmDialogBox/confirm-dialog.service';
 
 @Component({
   selector: 'app-unit-details',
@@ -23,7 +24,8 @@ export class UnitDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
     private router: Router,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+    private confirmMessage: ConfirmDialogService
   ) { }
 
   ngOnInit(): void {
@@ -52,36 +54,39 @@ export class UnitDetailsComponent implements OnInit {
   }
 
   onDeleteUnit() {
-    this.orgUnitMgtService.hasChildUnits(this.unit.unitId).subscribe(
-      (hasChildren) => {
-        console.log(hasChildren);
-        if (hasChildren == true) {
-          this.toaster.error("If you want to delete this unit, you should edit or delete its child units first.");
-        } else {
-          if (confirm("Are you sure you want to delete this unit?")) {
-            this.orgUnitMgtService.deleteOrgUnit(this.unit.unitId).subscribe(
-              (response) => {
-                this.toaster.success("Unit Deleted Successfully");
-                this.orgUnitMgtService.unitListUpdated.emit(); // Emit the event
-                this.router.navigate(['pages-body/unit-list']);
-              },
-              (error) => {
-                if (error.status === 400) {
-                  this.toaster.error(error.error.message);
-                } else {
-                  this.toaster.error("Failed to delete the unit.");
-                }
-                console.error(error);
-              }
-            );
+    this.confirmMessage.open("Are you sure you want to delete this unit?").subscribe(confirmed => {
+      if (confirmed){
+        this.orgUnitMgtService.hasChildUnits(this.unit.unitId).subscribe(
+          (hasChildren) => {
+            console.log(hasChildren);
+            if (hasChildren == true) {
+              this.toaster.error("If you want to delete this unit, you should edit or delete its child units first.");
+            } else {
+                this.orgUnitMgtService.deleteOrgUnit(this.unit.unitId).subscribe(
+                  (response) => {
+                    this.toaster.success("Unit Deleted Successfully");
+                    this.orgUnitMgtService.unitListUpdated.emit(); // Emit the event
+                    this.router.navigate(['pages-body/unit-list']);
+                  },
+                  (error) => {
+                    if (error.status === 400) {
+                      this.toaster.error(error.error.message);
+                    } else {
+                      this.toaster.error("Failed to delete the unit.");
+                    }
+                    console.error(error);
+                  }
+                );
+            }
+          },
+          (error) => {
+            this.toaster.error("Error checking for child units.");
+            console.error(error);
           }
-        }
-      },
-      (error) => {
-        this.toaster.error("Error checking for child units.");
-        console.error(error);
+        );
       }
-    );
+    })
+    
   }
    
   //get all the parent units belong to the org unitId

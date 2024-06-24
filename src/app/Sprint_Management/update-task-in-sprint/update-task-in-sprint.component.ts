@@ -41,6 +41,7 @@ export class UpdateTaskInSprintComponent implements OnInit {
   changedTasks: Set<number> = new Set(); // Track temporarily changed tasks
   availabilityPercentage: number = 0;
   holidays: NgbDateStruct[] = [];
+  currentTaskIndex: number | null = null; // Track the currently selected task
 
   constructor(
     private route: ActivatedRoute,
@@ -179,14 +180,20 @@ export class UpdateTaskInSprintComponent implements OnInit {
     );
   }
 
-  onTaskChange(taskInfo: TaskWithProjectInfo, event: Event): void {
+  onTaskChange(taskInfo: TaskWithProjectInfo, event: Event, index: number): void {
     const target = event.target as HTMLSelectElement;
     const taskId = Number(target.value);
     taskInfo.selectedTaskId = taskId.toString(); // Update the selectedTaskId
     this.changedTasks.add(taskInfo.resourceAllocationId); // Save temporarily changed task
+    this.currentTaskIndex = index; // Set the currently selected task index
   }
 
-  onSaveTask(taskInfo: TaskWithProjectInfo): void {
+  onSaveTask(taskInfo: TaskWithProjectInfo, index: number): void {
+    if (this.currentTaskIndex !== index) {
+      this.toastr.warning('Please update the selected task only.', 'Warning');
+      return;
+    }
+
     const taskAllocationId = taskInfo.resourceAllocationId;
     const selectedTaskId = Number(taskInfo.selectedTaskId);
 
@@ -209,6 +216,7 @@ export class UpdateTaskInSprintComponent implements OnInit {
 
     this.changedTasks.delete(taskAllocationId); // Remove from temporarily changed tasks
     taskInfo.checked = !taskInfo.checked; // Toggle the checked state
+    this.currentTaskIndex = null; // Reset the currently selected task index
   }
 
   onEditTask(): void {

@@ -24,6 +24,7 @@ export class DashbrdProjectListComponent implements OnInit {
   constructor(private projectDashboardServicee: ProjectDashboardService, private sharedService: DashbrdSharedService, private spinner: NgxSpinnerService) {
     this.sharedService.viewMore$.subscribe(value => {
       this.isViewMoreClicked = value;
+      this.currentPage = 1;
       this.itemsPerPage = 8;
     });
   }

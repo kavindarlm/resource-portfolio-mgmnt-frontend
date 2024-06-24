@@ -80,7 +80,7 @@ export class SprintMgtComponent implements OnInit {
             if (!uniqueResources.has(resource.resourceId)) {
               uniqueResources.set(resource.resourceId, {
                 Resource_ID: resource.resourceId,
-                Team: resource.job_role ? resource.job_role.team_name : 'N/A',
+                Team: resource.job_role ? resource.team_name : 'N/A',
                 Job_Role: resource.job_role ? resource.job_role.roleName : 'N/A',
                 Org_Unit: resource.org_unit ? resource.org_unit.unitName : 'N/A',
                 Availability: '' // Placeholder for availability

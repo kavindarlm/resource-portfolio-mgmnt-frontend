@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { sharedprojectService } from '../service/sharedproject.service';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, map, startWith } from 'rxjs';
+import { ConfirmDialogService } from '../../ConfirmDialogBox/confirm-dialog.service';
 
 function dateRangeValidator(control: FormGroup): ValidationErrors | null {
   const startDate = control.get('projectStartDate')?.value;
@@ -36,7 +37,8 @@ export class CreateProjectComponent implements OnInit {
     private api: ApiService,
     private router: Router,
     private sharedService: sharedprojectService,
-    private toastr: ToastrService // Inject ToastrService
+    private toastr: ToastrService,
+    private confirmMessage: ConfirmDialogService // Inject ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -122,19 +124,22 @@ export class CreateProjectComponent implements OnInit {
       projectManager_id: formValues.projectManager_id,
       deliveryManager_id: formValues.deliveryManager_id,
     };
-
-    this.api.addProject(projectData).subscribe(
-      (res) => {
-        this.toastr.success(`${data.projectName} added successfully.`, 'Project Created');
-        this.projectform.reset();
-        this.sharedService.refreshProjectList();
-        this.sharedService.refreshProjectCount();
-      },
-      (error) => {
-        this.toastr.error(`Error adding project: ${error.message}`, 'Error');
-        console.error('Error adding project:', error);
+    this.confirmMessage.open('Are you sure you want to add this project?').subscribe(confirmed => {
+      if (confirmed) {
+        this.api.addProject(projectData).subscribe(
+          (res) => {
+            this.toastr.success(`${data.projectName} added successfully.`, 'Project Created');
+            this.projectform.reset();
+            this.sharedService.refreshProjectList();
+            this.sharedService.refreshProjectCount();
+          },
+          (error) => {
+            this.toastr.error(`Error adding project: ${error.message}`, 'Error');
+            console.error('Error adding project:', error);
+          }
+        );
       }
-    );
+    });
   }
 
   getCriticality() {

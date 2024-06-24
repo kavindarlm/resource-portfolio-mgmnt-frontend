@@ -37,7 +37,7 @@ export class DashbrdProjectDetailsComponent implements OnInit {
   fetchProject() {
     this.projectdashboardservice.fetchProjectbyId(this.projectid).subscribe((data) => {
       this.projectData = data;
-      console.log(this.projectData);
+      // console.log(this.projectData);
       this.projectMangerId = this.projectData.projectManager_id;
       this.delivaryManagerId = this.projectData.deliveryManager_id;
       this.getProjectmangerDetails();

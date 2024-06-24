@@ -79,16 +79,16 @@
           </table>
         </div>
 
-        <div class="addResourceBtn col-6">
+        <div class="d-flex justify-content-center">
           <!-- <app-new-team-button [text]="'Add Resources ID'" (click)="toggleResourceTable()"></app-new-team-button> -->
-          <app-new-team-button [text]="'Add Resources ID'" routerLink="resourceTable"></app-new-team-button>
+          <!-- <app-new-team-button [text]="'Add Resources ID'" routerLink="resourceTable"></app-new-team-button> -->
+          <button type="submit" class="btn btn-outline-primary w-50 mt-3 mb-3 custom-button btn-sm" routerLink="resourceTable">Add Resources</button>
         </div>
 
         <hr>
 
-        <div class="addResourceBtn col-6">
-          <app-new-team-button [text]="'Create Team'" value="Create Team"
-            (click)="onFormSubmit()"></app-new-team-button>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-outline-primary w-50 mt-3 mb-3 custom-button btn-sm" (click)="onFormSubmit()">Create Team</button>
         </div>
 
         <!-- error message -->
