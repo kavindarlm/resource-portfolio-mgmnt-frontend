@@ -38,3 +38,30 @@ td{
     padding-left: 0;
 }
 
+select {
+    color: #1e3895e1;
+    display: flex;
+}
+
+/* .custom-button {
+    border-color: #1E3895;
+  }
+  
+ .custom-button:active, .custom-button:hover {
+    background-color: green;
+    color: white;
+}
+   
+.custom-button-clicked {
+    background-color: green;
+    color: white;
+}
+
+.selected {
+    background-color: green;
+    color: white;
+  } */
+
+  .selected {
+    color: white;
+  }

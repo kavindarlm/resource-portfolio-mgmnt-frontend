@@ -1,0 +1,44 @@
+.font-color {
+    color: #1E3895;
+}
+
+.small-text {
+    font-size: 0.9rem;
+    /* Adjust as needed */
+  }
+
+input::placeholder {
+    opacity: 0.5;
+    font-size: 0.9rem;
+  }
+
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px; 
+}
+
+.overlay {
+    z-index: 100;
+}
+
+.content {
+    width: 80%; 
+    max-width: 500px; 
+}
+
+.custom-button {
+    color: #1E3895;
+}
+
+.custom-button:hover {
+    background-color: #1E3895;
+    color: white;
+}
+
+@media only screen and (max-width: 768px) {
+    .content {
+        width: 70%; 
+    }
+}

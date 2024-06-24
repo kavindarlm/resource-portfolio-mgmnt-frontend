@@ -8,12 +8,12 @@ export class ResourceleaveService {
 
   constructor() { }
 
-private clickedResourceSource = new BehaviorSubject<any>(null);
-clickedResource = this.clickedResourceSource.asObservable();
+  private clickedResourceSource = new BehaviorSubject<any>(null);
+  clickedResource = this.clickedResourceSource.asObservable();
 
-setData(data: any) {
-  this.clickedResourceSource.next(data);
-}
+  setData(data: any) {
+    this.clickedResourceSource.next(data);
+  }
 
 
 }

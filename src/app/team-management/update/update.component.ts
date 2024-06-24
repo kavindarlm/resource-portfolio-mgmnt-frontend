@@ -4,6 +4,8 @@ import { ApiService } from '../shared/api.service';
 import {  Resource, dataModel } from '../team-form/team-form.model';
 import { GeneralService } from '../shared/general.service';
 import { ResourceService } from '../shared/resource.service';
+import { ToastrService } from 'ngx-toastr';
+import { ConfirmDialogService } from '../../ConfirmDialogBox/confirm-dialog.service';
 
 @Component({
   selector: 'app-update',
@@ -26,7 +28,9 @@ export class UpdateComponent implements OnInit {
     private api: ApiService,
     public generalservice: GeneralService,
     private resourceService: ResourceService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private toastr: ToastrService,
+    private confirmService: ConfirmDialogService
   ) {
     this.showResourceTable = false;
     this.teamData = { teamId: 0, team_Name: '', team_description: '', resources: [] };
@@ -61,30 +65,40 @@ export class UpdateComponent implements OnInit {
   }
 
   edit() {
-    try {
-      this.api.updateTeam(this.dataid, this.teamData).subscribe(
-        (_res: any) => {
-          this.generalservice.refreshTeamList();
-          this.router.navigate(['/pages-body/teamlistcomponent']);
-          this.errorMessage = '';
-        },
-        (error: any) => {
+    this.confirmService.open('Are you sure you want to update this team?').subscribe(confirmd => {
+      if (confirmd) {
+        try {
+          this.api.updateTeam(this.dataid, this.teamData).subscribe(
+            (_res: any) => {
+              this.generalservice.refreshTeamList();
+              this.toastr.success('Team updated successfully', 'Updated Team', { timeOut: 3000 }); // Add this line
+              this.router.navigate(['/pages-body/teamlistcomponent']);
+              this.errorMessage = '';
+            },
+            (error: any) => {
+              console.error('An error occurred while updating team:', error);
+              this.errorMessage = 'An error occurred while updating the team. Please try again later.';
+            }
+          );
+        } catch (error) {
           console.error('An error occurred while updating team:', error);
           this.errorMessage = 'An error occurred while updating the team. Please try again later.';
         }
-      );
-    } catch (error) {
-      console.error('An error occurred while updating team:', error);
-      this.errorMessage = 'An error occurred while updating the team. Please try again later.';
-    }
+      }
+    
+    });
   }
 
   handleResourceSelected(event: { resource: Resource; selected: boolean }) {
     console.log('Received resourceSelected event', event);
     if (event.selected) {
       this.teamData.resources.push(event.resource);
+      this.selectedResources.push(event.resource);
     } else {
       this.teamData.resources = this.teamData.resources.filter(
+        (resource: Resource) => resource.resourceId !== event.resource.resourceId
+      );
+      this.selectedResources = this.selectedResources.filter(
         (resource: Resource) => resource.resourceId !== event.resource.resourceId
       );
     }
@@ -92,5 +106,26 @@ export class UpdateComponent implements OnInit {
   
     // Trigger change detection
     this.cdr.detectChanges();
+  }
+
+  deleteTeam(){
+    this.confirmService.open('Are you sure you want to delete this team?').subscribe(confirmd => {
+      if (confirmd) {
+        this.api.deleteTeams(this.dataid).subscribe(
+          response => {
+            console.log('Team deleted', response);
+            this.errorMessage = '';
+            this.generalservice.refreshTeamList();
+            this.toastr.success('Team deleted successfully', 'Deleted Team', { timeOut: 3000 }); // Add this line
+            this.router.navigate(['/pages-body/teamlistcomponent']);
+          },
+          error => {
+            console.error('Error deleting team', error);
+            this.errorMessage = 'There was an error deleting the team. Please try again later.';
+          }
+        );
+      }
+    });
+    
   }
 }

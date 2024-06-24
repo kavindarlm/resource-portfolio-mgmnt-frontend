@@ -1,0 +1,24 @@
+<div class="overlay position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center bg-dark bg-opacity-50 font-color" *ngIf="isVisible">
+    <div class="content bg-white border rounded p-4" >
+        <div class="d-flex justify-content-center fw-bold">
+            <div class="fw-medium font-color fs-4">Add New Job Role</div>
+        </div>
+        <div class="d-flex justify-content-center fs-6 mb-2 text-center">
+            <div class="font-color small-text mt-1">You can add a new Job Role here.</div>
+        </div>
+        <form [formGroup]="jobRoleForm" class="small-text">
+            <label class="fw-medium font-color mt-2" for="roleName">Role Name *</label>
+            <div class="form-group row mt-1">
+                <div class="col-12">
+                    <input type="text" class="form-control" id="roleName" placeholder="Enter Role Name" formControlName="roleName"
+                        [ngClass]="{'is-invalid': jobRoleForm.controls['roleName'].invalid && jobRoleForm.controls['roleName'].touched}" (keyup)="capitalizeFirstLetter()">
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center mt-2">
+                <button class="btn btn-outline-primary mt-3 w-75 custom-button btn-sm me-4" (click)="sendData(this.jobRoleForm.value)">Add New Job Role</button>
+                <button class="btn btn-outline-secondary w-75 mt-3 btn-sm ms-4" (click)="cancelForm()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

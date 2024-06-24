@@ -3,8 +3,6 @@
 <ul *ngIf="node.children && node.children.length > 0">
   <li *ngFor="let child of node.children">
     <app-unit-node [node]="child"></app-unit-node>
-  </li> 
+  </li>
 </ul>
-
-
 

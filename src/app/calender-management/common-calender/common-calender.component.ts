@@ -7,17 +7,17 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { ApiServiceService } from '../shared/api-service.service';
 import { Holiday } from '../calender.model';
-import { BehaviorSubject } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-common-calender ',
+  selector: 'app-common-calender',
   templateUrl: './common-calender.component.html',
   styles: `
   /* Common styles for all screen sizes */
-
-ngb-datepicker {
+  ngb-datepicker {
     color: #1e3895e1;
-    border-color:#1e3895e1;
+    border-color: #1e3895e1;
   }
 
   .custom-day {
@@ -37,23 +37,18 @@ ngb-datepicker {
   }
 
   .custom-day.selected {
-    background-color:#1e3895e1;
+    background-color: #1e3895e1;
     color: white;
   }
 
   .custom-day.faded {
   }
 
-
-
   button.addbtn,
-  button.editbtn
-   {
-    
+  button.editbtn {
     color: #1e3895;
     display: block;
     width: 100%;
-  
   }
 
   button.addbtn:hover,
@@ -61,83 +56,65 @@ ngb-datepicker {
     background-color: #1e3895;
     color: white;
   }
-
-
-`,
-
-
+  `,
 })
 export class CommonCalenderComponent {
   hoveredDate: NgbDate | null = null;
   selectedDates: NgbDate[] = [];
   holidays: { date: NgbDate, id: number }[] = [];
   deselectedHolidays: Holiday[] = [];
-  // Declare a new BehaviorSubject to hold the holidays array
- // Declare a new BehaviorSubject to hold the holidays array
-holidays$ = new BehaviorSubject<{ date: NgbDate, id: number }[]>([]);
 
   @Input() actionType: 'add' | 'edit' = 'add';
   @Output() addEvent = new EventEmitter<{ selectedDates: NgbDate[], holidayType: string }>();
   @Input() holidayType: string = '';
-  @Input() resourceId: string | null = null; // Add this line to accept resource ID
-  //new code to post resource holiday
+  @Input() resourceId: string | null = null; // to accept resource ID
   @Output() resourceAddEvent = new EventEmitter<{ selectedDates: NgbDate[], holidayType: string, resourceId: string }>();
 
-
-  constructor(private calendar: NgbCalendar, private apiService: ApiServiceService) {}
+  constructor(
+    private calendar: NgbCalendar,
+    private apiService: ApiServiceService,
+    private toastr: ToastrService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.loadHolidays();
   }
 
-  // loadHolidays() {
-  //   if (this.holidayType === 'resource' && this.resourceId) {
-  //     this.apiService.resourceGetEvents(this.resourceId).subscribe((holidays: Holiday[]) => {
-  //       this.holidays = holidays.map((holiday: Holiday) => {
-  //         const date = new Date(holiday.date);
-  //         return {
-  //           date: new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
-  //           id: holiday.holy_id
-  //         };
-  //       });
-  //     });
-  //   } else {
-  //     this.apiService.getEvents(this.holidayType).subscribe((holidays: Holiday[]) => {
-  //       this.holidays = holidays.map((holiday: Holiday) => {
-  //         const date = new Date(holiday.date);
-  //         return {
-  //           date: new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
-  //           id: holiday.holy_id
-  //         };
-  //       });
-  //     });
-  //   }
-  // }
-
   loadHolidays() {
     if (this.holidayType === 'resource' && this.resourceId) {
-      this.apiService.resourceGetEvents(this.resourceId).subscribe((holidays: Holiday[]) => {
-        this.holidays = holidays.map((holiday: Holiday) => {
-          const date = new Date(holiday.date);
-          return {
-            date: new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
-            id: holiday.holy_id
-          };
-        });
-        // Update the BehaviorSubject with the new holidays array
-        this.holidays$.next(this.holidays);
+      console.log('resourceId', this.resourceId);
+      this.apiService.resourceGetEvents(this.resourceId).subscribe({
+        next: (holidays: any[]) => {
+          this.holidays = holidays.map((holidayData: any) => {
+            const date = new Date(holidayData.holiday.date);
+            return {
+              date: new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
+              id: holidayData.holiday.holy_id
+            };
+          });
+          console.log('holidays', this.holidays);
+        },
+        error: (error) => {
+          console.error('Error loading resource holidays:', error);
+          this.toastr.error('Failed to load resource holidays', 'Error', { timeOut: 3000 });
+        }
       });
     } else {
-      this.apiService.getEvents(this.holidayType).subscribe((holidays: Holiday[]) => {
-        this.holidays = holidays.map((holiday: Holiday) => {
-          const date = new Date(holiday.date);
-          return {
-            date: new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
-            id: holiday.holy_id
-          };
-        });
-        // Update the BehaviorSubject with the new holidays array
-        this.holidays$.next(this.holidays);
+      this.apiService.getEvents(this.holidayType).subscribe({
+        next: (holidays: Holiday[]) => {
+          this.holidays = holidays.map((holiday: Holiday) => {
+            const date = new Date(holiday.date);
+            return {
+              date: new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
+              id: holiday.holy_id
+            };
+          });
+        },
+        error: (error) => {
+          console.error('Error loading global holidays:', error);
+          this.toastr.error('Failed to load global holidays', 'Error', { timeOut: 3000 });
+        }
       });
     }
   }
@@ -169,32 +146,20 @@ holidays$ = new BehaviorSubject<{ date: NgbDate, id: number }[]>([]);
     return this.selectedDates.length === 1 && date.after(this.selectedDates[0]);
   }
 
- 
-  
-
   isSelected(date: NgbDate) {
-    const holidays = this.holidays$.getValue();
-    console.log('isSelected called with date:', date);
-    console.log('holidays array:', this.holidays);
-    if (this.holidayType === 'resource') {
-      const isResourceHoliday = this.holidays.some(holiday => holiday.date.year === date.year && holiday.date.month === date.month && holiday.date.day === date.day);
-      console.log('isResourceHoliday:', isResourceHoliday);
-      return isResourceHoliday;
-    } else {
-      const isSelectedDate = this.selectedDates.some(selectedDate => selectedDate.year === date.year && selectedDate.month === date.month && selectedDate.day === date.day);
-      const isHoliday = this.holidays.some(holiday => holiday.date.year === date.year && holiday.date.month === date.month && holiday.date.day === date.day);
-      console.log('isSelectedDate:', isSelectedDate);
-      console.log('isHoliday:', isHoliday);
-      return isSelectedDate || isHoliday;
-    }
+    return this.selectedDates.some((selectedDate) => selectedDate.equals(date)) ||
+      this.holidays.some((holiday) => holiday.date.equals(date));
   }
 
   onAddButtonClick() {
-    //new code to post resource hoilday 
     if (this.holidayType === 'resource' && this.resourceId) {
       this.resourceAddEvent.emit({ selectedDates: this.selectedDates, holidayType: this.holidayType, resourceId: this.resourceId });
+      this.toastr.success('Resource leave added successfully', 'Added Resource leave', { timeOut: 3000 });
+      this.router.navigate(['/pages-body/calendertypecomponent/resourcelist']);
     } else {
       this.addEvent.emit({ selectedDates: this.selectedDates, holidayType: this.holidayType });
+      this.toastr.success('Holiday added successfully', 'Added Holiday', { timeOut: 3000 });
+      this.router.navigate(['/pages-body/calendertypecomponent']);
     }
   }
 
@@ -203,7 +168,7 @@ holidays$ = new BehaviorSubject<{ date: NgbDate, id: number }[]>([]);
       holy_id: holiday.id,
       date: new Date(holiday.date.year, holiday.date.month - 1, holiday.date.day),
       holy_type: this.holidayType,
-      resourceHolidays: [] // Replace with the actual value
+      resourceHolidays: []
     };
     this.deselectedHolidays.push(deselectedHoliday);
   }
@@ -218,18 +183,45 @@ holidays$ = new BehaviorSubject<{ date: NgbDate, id: number }[]>([]);
       if (this.holidayType === 'resource' && this.resourceId) {
         holidayData.resource_id = this.resourceId;
       }
-      this.apiService.updateHoliday(holidayId, holidayData).subscribe(response => {
-        console.log(response);
+      this.apiService.updateHoliday(holidayId, holidayData).subscribe({
+        next: (response) => {
+          console.log(response);
+        },
+        error: (error) => {
+          console.error('Error updating holiday:', error);
+          this.toastr.error('Failed to update holiday', 'Error', { timeOut: 3000 });
+        }
       });
     });
 
     this.deselectedHolidays.forEach((holiday) => {
-      this.apiService.deleteHoliday(holiday.holy_id.toString()).subscribe(response => {
-        console.log(response);
-      });
+      if (this.holidayType === 'resource') {
+        this.apiService.deleteResourceHoliday(holiday.holy_id.toString()).subscribe({
+          next: (response) => {
+            console.log(response);
+            this.toastr.success('Resource holiday deleted successfully', 'Deleted Holiday', { timeOut: 3000 });
+            this.router.navigate(['/pages-body/calendertypecomponent']);
+          },
+          error: (error) => {
+            console.error('Error deleting resource holiday:', error);
+            this.toastr.error('Failed to delete resource holiday', 'Error', { timeOut: 3000 });
+          }
+        });
+      } else {
+        this.apiService.deleteHoliday(holiday.holy_id.toString()).subscribe({
+          next: (response) => {
+            console.log(response);
+            this.toastr.success('Holiday deleted successfully', 'Deleted Holiday', { timeOut: 3000 });
+            this.router.navigate(['/pages-body/calendertypecomponent']);
+          },
+          error: (error) => {
+            console.error('Error deleting holiday:', error);
+            this.toastr.error('Failed to delete holiday', 'Error', { timeOut: 3000 });
+          }
+        });
+      }
     });
 
     this.deselectedHolidays = [];
   }
 }
-

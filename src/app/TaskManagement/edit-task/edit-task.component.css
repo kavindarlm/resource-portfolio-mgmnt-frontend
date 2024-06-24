@@ -1,0 +1,16 @@
+.font-color {
+    color: #1E3895;
+}
+
+input::placeholder, 
+textarea::placeholder {
+    opacity: .6; 
+}
+
+.custom-button{
+    border-color: #1E3895;
+ }
+ 
+ .custom-button:hover{
+     background-color: #1E3895;
+ }

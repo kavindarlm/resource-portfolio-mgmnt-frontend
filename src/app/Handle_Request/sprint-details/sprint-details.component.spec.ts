@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TablesComponent } from './tables.component';
+import { SprintDetailsComponent } from './sprint-details.component';
 
-describe('TablesComponent', () => {
-  let component: TablesComponent;
-  let fixture: ComponentFixture<TablesComponent>;
+describe('SprintDetailsComponent', () => {
+  let component: SprintDetailsComponent;
+  let fixture: ComponentFixture<SprintDetailsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TablesComponent]
+      declarations: [SprintDetailsComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(TablesComponent);
+    fixture = TestBed.createComponent(SprintDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

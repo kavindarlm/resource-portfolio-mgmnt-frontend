@@ -1,48 +1,70 @@
 .unitList {
-    border: 1px #ced2d9 solid;
-    border-radius: 5px;
-    /* padding-top: 1%; */
-    padding-bottom: 1%;
-    margin-left: 1%;
-  }
-  
-  .unit-button, .addButton {
-      width: 95%;
-      /* Set the width for desktop */
-      height: 40px;
-      font-weight: 500;
-      background-color: #fefefe;
-      border: .5px solid #b4a0ff88;
-      border-radius: 10px;
-      color: #1e3895;
-      margin-top: 3%;
-      margin-left: 2%;
-      content: fit-content;
-      transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
-      /* Add subtle elevation */
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      /* Add padding */
-      padding: 0 15px;
-      /* Center text vertically */
-      line-height: 40px;
-      /* Ensure text fits within the button */
-      white-space: nowrap;
-      /* Prevent wrapping */
-      overflow: hidden;
-      /* Hide overflow text */
-      text-overflow: ellipsis;
-      
-    }
-    
-    .unit-button:hover,
-    .unit-button:active,
-    .addButton:hover,
-    .addButton:active {
-      background-color: #1e3895;
-      color: #FEFEFE;
-    }
+  border: 1px #ced2d9 solid;
+  border-radius: 5px;
+  padding-bottom: 1%;
+  margin-left: 1%;
+}
 
-    .unitTree {
-      margin-left: 7%;
-      display: inline-block;
-    }
+.unit-button {
+  width: 100%;
+  height: 40px;
+  font-weight: 500;
+  background-color: #fefefe;
+  border: .5px solid #b4a0ff88;
+  border-radius: 10px;
+  color: #1e3895;
+  margin-top: 3%;
+  content: fit-content;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0 15px;
+  line-height: 40px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+.unit-button:hover,
+.unit-button:active {
+  background-color: #1e3895;
+  color: #FEFEFE;
+}
+
+.unitTree {
+  /* margin-left: 7%; */
+  display: inline-block;
+  border: 1px #ced2d9 solid;
+  border-radius: 5px;
+  padding: 2% 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.addButton {
+  border-color: #1E3895;
+  color: #1E3895;
+  width: 100%;
+}
+
+.addButton:hover {
+  background-color: #1E3895;
+  color: #FEFEFE;
+}
+
+.addButton:active {
+  background-color: #1E3895;
+  color: #FEFEFE;
+}
+
+/* Styles for screens 768px or smaller */
+@media screen and (max-width: 768px) {
+  .unitTree {
+    /* margin-left: 7%; */
+    display: inline-block;
+    width: 100%;
+    /* margin: 0 auto; */
+  }
+}

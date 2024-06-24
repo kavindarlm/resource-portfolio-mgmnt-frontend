@@ -16,7 +16,6 @@ export class DeleteResourceAllocationComponent {
 
   tasks: any[] = [];
 
-
   constructor(
     private route : ActivatedRoute,
     private resourceAllocationServices: ResourceAllocationService,

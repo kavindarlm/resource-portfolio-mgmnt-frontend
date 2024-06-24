@@ -5,6 +5,7 @@ import { OrgUnitMgtService } from '../../shared/orgUnitMgt_services/orgUnitMgt.s
 import { catchError, throwError } from 'rxjs';
 import { error } from 'console';
 import { OrgUnit } from './org-unitmodel';
+import { ScreenSizeService } from '../../shared/orgUnitMgt_services/screenSize.service';
 
 
 @Component({
@@ -16,14 +17,25 @@ import { OrgUnit } from './org-unitmodel';
 
 export class UnitTreeComponent implements OnInit {
 
-  Data: undefined|OrgUnit[] = [];
-
+  Data: undefined | OrgUnit[] = [];
+  isSmallScreen: boolean | undefined;
 
   ngOnInit(): void {
-      this.fetchData(); 
+    this.fetchData();
+
+    // Subscribe to the unitListUpdated event
+    this.orgUnitMgtService.unitListUpdated.subscribe(() => {
+      this.fetchData(); // Fetch data when a unit is added, updated or deleted
+    });
+
+    this.screenSizeService.isSmallScreen$.subscribe(isSmall => {
+      this.isSmallScreen = isSmall;
+    });
   }
 
-  constructor(private orgUnitMgtService: OrgUnitMgtService) {}
+  constructor(private orgUnitMgtService: OrgUnitMgtService,
+              private screenSizeService: ScreenSizeService
+  ) { }
   tr: any;
   fetchData(): void {
     this.orgUnitMgtService.getOrgUnitData().subscribe(
@@ -31,11 +43,11 @@ export class UnitTreeComponent implements OnInit {
         this.Data = res;
         console.log(this.Data);
 
-      },   
-      (error) => { 
+      },
+      (error) => {
         console.error('Error fetching data:', error);
       }
-    );  
+    );
   }
-} 
+}
 

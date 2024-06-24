@@ -2,12 +2,12 @@
     <div class="col-xl-12 col-lg-12 col-md-12 mb-2">
         <div class="card l-bg-blue-dark">
             <div class="p-1 text-center">
-                <span><i class="bi bi-check2-circle fs-3"></i></span>
-                <div class="fw-medium fs-6">Done Projects</div>
+                <span><i class="bi bi-check2-circle fs-4"></i></span>
+                <div class="fw-normal small-text">Created Projects</div>
                 <div class="row align-items-center d-flex">
                     <div class="col-6">
                         <div class="align-items-center mb-0 fs-4 fw-medium">
-                            21
+                            {{this.createdProject_count}}
                         </div>
                     </div>
                     <div class="col-6">
@@ -21,12 +21,12 @@
     <div class="col-xl-12 col-lg-12 col-md-12 mb-2">
         <div class="card l-bg-blue-dark">
             <div class="p-1 text-center">
-                <span><i class="bi bi-brightness-high fs-3"></i></span>
-                <div class="fw-medium fs-6">In Progress Projects</div>
+                <span><i class="bi bi-brightness-high fs-4"></i></span>
+                <div class="fw-normal small-text">In Progress Projects</div>
                 <div class="row align-items-center d-flex">
                     <div class="col-6">
                         <div class="align-items-center mb-0 fs-4 fw-medium">
-                            121
+                            {{this.ongoingProject_count}}
                         </div>
                     </div>
                     <div class="col-6">
@@ -40,12 +40,12 @@
     <div class="col-xl-12 col-lg-12 col-md-12 mb-2">
         <div class="card l-bg-blue-dark">
             <div class="card-statistic-3 p-1 text-center">
-                <span><i class="bi bi-person-workspace fs-3"></i></span>
-                <div class="fw-medium fs-6">Employees</div>
+                <span><i class="bi bi-person-workspace fs-4"></i></span>
+                <div class="fw-normal small-text">Employees</div>
                 <div class="row align-items-center d-flex">
                     <div class="col-6">
                         <div class="align-items-center mb-0 fs-4 fw-medium">
-                            426
+                            {{this.resource_count}} 
                         </div>
                     </div>
                     <div class="col-6 text-right">
@@ -54,5 +54,14 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="col-xl-12 col-lg-12 col-md-12 mb-2">
+        <!-- <div class="card l-bg-blue-dark"> -->
+            <div class="container p-2 text-center d-flex flex-column align-items-center">
+                <div class="fw-normal small-text mt-2 mb-2 font-color">Project Criticality</div>
+                <apx-chart [series]="chartOptions.series || []" [chart]="chartOptions.chart || { type: 'line' }" [responsive]="chartOptions.responsive || []" [labels]="chartOptions.labels || []" class=""></apx-chart>
+              </div>
+        <!-- </div> -->
     </div>
 </div>

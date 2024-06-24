@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +29,26 @@ export class ResourceService {
      return this.http.get(`${this.baseUrl}`);
    }
 
-  getResourcesByTeamIdNull(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/no-team`);
+  // Method to get resources which teamId is null and filter by job role and org unit
+  getResourcesByTeamIdNull(jobRole?: string, orgUnit?: string): Observable<any> {
+    let params = new HttpParams();
+    if (jobRole) {
+      params = params.append('jobRole', jobRole);
+    }
+    if (orgUnit) {
+      params = params.append('orgUnit', orgUnit);
+    }
+    return this.http.get(`${this.baseUrl}/no-team`, { params });
+  }
+
+  //get the job roles for filtering
+  getJobRoles(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.baseUrl}/jobRoles`);
+  }
+
+  //get the unit for filtering
+  getOrgUnits(): Observable<string[]> {
+    return this.http.get<string[]>(`${this.baseUrl}/orgUnits`);
   }
   
   // Method to get resources by team id and null
@@ -38,8 +57,15 @@ export class ResourceService {
   }
 
   // Method to get resources by team id
-  getResourcesByTeamId(teamId: number): Observable<{resourceId: string, roleName: string, unitName: string, teamId: number }[]> {
-    return this.http.get<{resourceId: string, roleName: string, unitName: string, teamId: number }[]>(`${this.baseUrl}/team/${teamId}`);
+  getResourcesByTeamId(teamId: number, jobRole?: string, orgUnit?: string): Observable<{resourceId: string, roleName: string, unitName: string, teamId: number }[]> {
+    let params = new HttpParams();
+    if (jobRole) {
+      params = params.append('jobRole', jobRole);
+    }
+    if (orgUnit) {
+      params = params.append('orgUnit', orgUnit);
+    }
+    return this.http.get<{resourceId: string, roleName: string, unitName: string, teamId: number }[]>(`${this.baseUrl}/team/${teamId}`, { params });
   }
 
   // Method to get resources for team

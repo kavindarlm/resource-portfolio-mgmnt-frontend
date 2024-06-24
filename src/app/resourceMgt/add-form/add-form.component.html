@@ -9,7 +9,12 @@
                     <p class="font-color2">Name :</p>
                     <input type="text" formControlName="resourceName"
                         [ngClass]="{'is-invalid': resourceForm.controls['resourceName'].invalid && resourceForm.controls['resourceName'].touched}"
-                        class="form-control inputBox" id="resourceName" placeholder="Enter Name" (keyup)="capitalizeFirstLetter()">
+                        class="form-control inputBox" id="resourceName" placeholder="Enter Name"
+                        (keyup)="capitalizeFirstLetter()">
+                    <div class="invalid-feedback"
+                        *ngIf="resourceForm.controls['resourceName'].invalid && resourceForm.controls['resourceName'].touched">
+                        Resource Name is required
+                    </div>
                 </div>
             </div>
             <div class="form-group mb-3">
@@ -18,14 +23,21 @@
                     <p class="font-color2">Job Role :</p>
                     <select class="form-select inputBox" formControlName="roleId"
                         [ngClass]="{'is-invalid': resourceForm.controls['roleId'].invalid && resourceForm.controls['roleId'].touched}"
-                        id="jobRole">
+                        id="jobRole" (change)="onJobRoleChange($event)">
+                        <!--Add an event to call the function to add a new job-role-->
                         <option disabled selected value="">Select Job Role</option>
                         <option *ngFor="let role of jobroles" [value]="role.roleId">{{role.roleName}}</option>
+                        <!-- To add a job role which is not in the database yet -->
+                        <option value="other">Other</option>
                     </select>
+                    <div class="invalid-feedback"
+                        *ngIf="resourceForm.controls['roleId'].invalid && resourceForm.controls['roleId'].touched">
+                        Job Role is required
+                    </div>
                 </div>
             </div>
             <div class="form-group mb-3">
-                <label for="orgUnit" class="form-label font-color1">Organizational Unit</label>
+                <label for="orgUnit" class="form-label font-color1">Organizational Unit *</label>
                 <div class="inputField">
                     <p class="font-color2">Org Unit :</p>
                     <select class="form-select inputBox" formControlName="unitId"
@@ -34,13 +46,20 @@
                         <option disabled selected value="">Select Organizational Unit</option>
                         <option *ngFor="let unit of orgunits" [value]="unit.unitId">{{unit.unitName}}</option>
                     </select>
+                    <div class="invalid-feedback"
+                        *ngIf="resourceForm.controls['unitId'].invalid && resourceForm.controls['unitId'].touched">
+                        Org Unit is required
+                    </div>
                 </div>
             </div>
-            <div class="add mb-3">
-                <button type="submit" class="addButton" (click)="sendData(this.resourceForm.value)">Add
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-outline-primary w-50 mt-3 mb-3 custom-button btn-sm" (click)="sendData(this.resourceForm.value)">Add
                     Resource</button>
             </div>
         </form>
 
     </div>
 </div>
+
+<!-- To call the add-jobrole component -->
+<app-add-jobrole *ngIf="showForm"></app-add-jobrole>
