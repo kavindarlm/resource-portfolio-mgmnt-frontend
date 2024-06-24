@@ -44,7 +44,7 @@ export class AuthService {
             this.router.navigate(['./admin-dashboard']);
           }
           else if (body.user_role === 'user') {
-              this.router.navigate(['./pages-body']);
+              this.router.navigate(['./pages-body/welcome-page']);
           }
         }
       })

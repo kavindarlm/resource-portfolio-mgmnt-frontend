@@ -6,6 +6,8 @@ import { of } from 'rxjs';
 import { GeneralService } from '../shared/general.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ConfirmDialogService } from '../../ConfirmDialogBox/confirm-dialog.service';
 
 @Component({
   selector: 'app-team-form',
@@ -23,7 +25,9 @@ export class TeamFormComponent implements OnInit {
     private service: ServiceService,
     private genaralService: GeneralService,
     private router: Router,
-    private toastr: ToastrService) { } // Add ToastrService here) { }
+    private toastr: ToastrService,
+  private ngxSpinner: NgxSpinnerService,
+private confirmMessage: ConfirmDialogService) { } // Add ToastrService here) { }
 
   ngOnInit(): void {
     //initialize the form
@@ -70,24 +74,30 @@ export class TeamFormComponent implements OnInit {
   
       // Store the team name in a variable
       const teamName = this.teamForm.value.teamName;
-  
-      this.service.addTeam(formData).pipe(
-        catchError((error: any) => {
-          console.error('An error occurred while adding team:', error);
-          this.errorMessage = 'An error occurred while adding the team. Please try again later.';
-          return of(null);
-        })
-      ).subscribe({
-        next: (_val: any) => {
-          this.errorMessage = '';
-          this.genaralService.refreshTeamList();
-          this.teamForm.reset();
-  
-          // Use the stored team name in the toastr message
-          this.toastr.success(`${teamName} Added successfully`, 'Created Team', { timeOut: 3000 });
-          this.router.navigate(['/pages-body/teamlistcomponent']);
+
+      this.confirmMessage.open('Are you sure you want to add this team?').subscribe(confirmed => {
+        if (confirmed) {
+          this.service.addTeam(formData).pipe(
+            catchError((error: any) => {
+              console.error('An error occurred while adding team:', error);
+              this.errorMessage = 'An error occurred while adding the team. Please try again later.';
+              return of(null);
+            })
+          ).subscribe({
+            next: (_val: any) => {
+              this.errorMessage = '';
+              this.genaralService.refreshTeamList();
+              this.teamForm.reset();
+      
+              // Use the stored team name in the toastr message
+              this.toastr.success(`${teamName} Added successfully`, 'Created Team', { timeOut: 3000 });
+              this.router.navigate(['/pages-body/teamlistcomponent']);
+            }
+          });
         }
-      });
+      
+      })
+      
     } else {
       this.errorMessage = 'Please fill out all required fields.';
     }

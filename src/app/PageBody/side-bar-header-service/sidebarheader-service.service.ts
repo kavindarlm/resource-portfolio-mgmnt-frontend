@@ -1,9 +1,9 @@
 // sidebarheader-service.service.ts
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SidebarheaderServiceService {
   private headerNameKey = 'selectedHeaderName';
@@ -26,7 +26,7 @@ export class SidebarheaderServiceService {
   private sidebarActive = new BehaviorSubject<void>(undefined);
   sidebarActive$ = this.sidebarActive.asObservable();
 
-  setSidebarActive(){
+  setSidebarActive() {
     this.sidebarActive.next();
   }
 
@@ -43,5 +43,20 @@ export class SidebarheaderServiceService {
 
   toggleEditPasswardComponent() {
     this.EditpasswordVisible.next(!this.EditpasswordVisible.value);
+  }
+
+  private logoutSubject = new Subject<void>();
+
+  logout() {
+    this.logoutSubject.next();
+  }
+
+  getLogoutEvent() {
+    return this.logoutSubject.asObservable();
+  }
+
+  clearHeaderName() {
+    localStorage.removeItem(this.headerNameKey);
+    this.headerNameSubject.next('');
   }
 }

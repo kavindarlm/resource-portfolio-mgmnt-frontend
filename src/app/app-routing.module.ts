@@ -51,9 +51,16 @@ import { UnitFormComponent } from './orgUnitMgt/unit-form/unit-form.component';
 import { UnitDetailsComponent } from './orgUnitMgt/unit-details/unit-details.component';
 import { UnitEditFormComponent } from './orgUnitMgt/unit-edit-form/unit-edit-form.component';
 import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
+import { WellcomeMessageComponent } from './PageBody/wellcome-message/wellcome-message.component';
 import { EditSprintFormComponent } from './Sprint_Management/edit-sprint-form/edit-sprint-form.component';
 import { SprintListComponent } from './Handle_Request/sprint-list/sprint-list.component';
 import { ResourceTableComponent } from './team-management/resource-table/resource-table.component';
+import { SprintDetailsComponent } from './Handle_Request/sprint-details/sprint-details.component';
+import { AllocatedResourceInfoComponent } from './Handle_Request/allocated-resource-info/allocated-resource-info.component';
+import { UpdateAllocationPercentageComponent } from './Handle_Request/update-allocation-percentage/update-allocation-percentage.component';
+import { UpdateAllocatedTaskComponent } from './Handle_Request/update-allocated-task/update-allocated-task.component';
+import { AvailableResListComponent } from './Handle_Request/available-res-list/available-res-list.component';
+import { AvailabilityInfoComponent } from './Handle_Request/availability-info/availability-info.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -66,9 +73,11 @@ const routes: Routes = [
     data: { roles: ['user'] },
     children: [
       {
-        path: 'projectBoard', component: ProjectBoardComponent,
-        canActivate: [FunctionGuardService],
-        data: { functionId: 1 },
+        path: 'welcome-page', component: WellcomeMessageComponent,
+      },
+      { path: 'projectBoard', component: ProjectBoardComponent,
+      canActivate:[FunctionGuardService],
+      data : { functionId : 1},
         children: [
           { path: 'dashboard-projectdetails/:id', component: DashbrdProjectDetailsComponent }
         ]
@@ -207,20 +216,20 @@ const routes: Routes = [
         data: { functionId: 9 },
         children: [
           {
-            path: 'sprintmgt/:id', component: SprintMgtComponent,
+            path: 'sprintDetails/:id', component: SprintDetailsComponent,
             children: [
+              {path: 'allocated-resource-info/:sprintId/:resourceId', component: AllocatedResourceInfoComponent },
+              { path: 'UpdateAllocationPercentage/:sprintId/:resourceId', component: UpdateAllocationPercentageComponent },
+              { path: 'UpdateAllocatedTask/:sprintId/:resourceId', component: UpdateAllocatedTaskComponent },
               {
-                path: 'allocated-resource/:sprintId/:resourceId', component: AllocatedResourceInformationComponent,
+                path: 'availableResourceList', component: AvailableResListComponent,
                 children: [
-                  { path: 'DeleteAllocation/:sprintId/:resourceId', component: DeleteResourceAllocationComponent },
-
+                  { path: 'availabilityInfo/:id', component: AvailabilityInfoComponent }
                 ]
-              },
-              { path: 'UpdatePercentage/:sprintId/:resourceId', component: UpdatePercentageComponent, },
-              { path: 'UpdateTask/:sprintId/:resourceId', component: UpdateTaskInSprintComponent, },
-              { path: 'EditSprint/:sprintId', component: EditSprintFormComponent, }
+              }
             ]
-          }]
+          }
+        ]
       }
     ]
   },

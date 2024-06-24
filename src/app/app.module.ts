@@ -91,9 +91,18 @@ import { UnitTreeComponent } from './orgUnitMgt/unit-tree/unit-tree.component';
 import { EditTaskComponent } from './TaskManagement/edit-task/edit-task.component';
 import { ResetPasswordComponent } from './PageBody/reset-password/reset-password.component';
 import { AddJobroleComponent } from './resourceMgt/add-jobrole/add-jobrole.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { WellcomeMessageComponent } from './PageBody/wellcome-message/wellcome-message.component';
+import { ConfirmDialogComponent } from './ConfirmDialogBox/confirm-dialog/confirm-dialog.component';
 import { EditSprintFormComponent } from './Sprint_Management/edit-sprint-form/edit-sprint-form.component';
 import { SprintListComponent } from './Handle_Request/sprint-list/sprint-list.component';
 import { ResponsiveTreeComponent } from './orgUnitMgt/responsive-tree/responsive-tree.component';
+import { SprintDetailsComponent } from './Handle_Request/sprint-details/sprint-details.component';
+import { AllocatedResourceInfoComponent } from './Handle_Request/allocated-resource-info/allocated-resource-info.component';
+import { UpdateAllocationPercentageComponent } from './Handle_Request/update-allocation-percentage/update-allocation-percentage.component';
+import { UpdateAllocatedTaskComponent } from './Handle_Request/update-allocated-task/update-allocated-task.component';
+import { AvailableResListComponent } from './Handle_Request/available-res-list/available-res-list.component';
+import { AvailabilityInfoComponent } from './Handle_Request/availability-info/availability-info.component';
 
 @NgModule({
   declarations:[
@@ -171,9 +180,18 @@ import { ResponsiveTreeComponent } from './orgUnitMgt/responsive-tree/responsive
     EditTaskComponent,
     ResetPasswordComponent,
     AddJobroleComponent,
+    WellcomeMessageComponent,
+    ConfirmDialogComponent,
     EditSprintFormComponent,
     SprintListComponent,
     ResponsiveTreeComponent,
+    SprintDetailsComponent,
+    AllocatedResourceInfoComponent,
+    UpdateAllocationPercentageComponent,
+    UpdateAllocatedTaskComponent,
+    AvailableResListComponent,
+    AvailabilityInfoComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -188,7 +206,7 @@ import { ResponsiveTreeComponent } from './orgUnitMgt/responsive-tree/responsive
     NgbDatepickerModule,
     NgbModule,
     FormsModule,
-   
+    NgApexchartsModule,
   ],
 
   providers: [

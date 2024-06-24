@@ -1,105 +1,98 @@
 <div class="border rounded container p-2 mt-2">
     <div class="row">
-        <div class="col-11">
-            <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Availability</div>
-        </div>
-        <div class="col-1">
-            <button class="border btn shadow-none bd-highlight shadow p-1 mt-1 mb-3 me-1" (click)="deleteContent()">
-                <i class="bi bi-x"></i>
-            </button>
-        </div>
+      <div class="col-11">
+        <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Availability</div>
+      </div>
+      <div class="col-1">
+        <button class="border btn shadow-none bd-highlight shadow p-1 mt-1 mb-3 me-1" (click)="deleteContent()">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
     </div>
     <div class="row rounded border m-2 p-2 ">
-        <div class="col text-center justify-content-center">
-            <div class=" border border-4 rounded m-2 p-2">
-                <i class="bi bi-person-circle fa-2x mt-3"></i>
-                <div>{{ resourceDetails.resourceId }}</div>
-                <div class="text-primary">{{ resourceDetails.resourceName }}</div>
-                <div class="text-black-50">{{ resourceDetails.job_role?.roleName }}</div>
-            </div>
-            <div class="border rounded text-center col-12 mb-3 mt-3 pt-1 pb-1 text-white bg-primary bg-opacity-50">
-                Current Percentage
-            </div>
-            <!-- Slider for availability percentage -->
-            <div class="mb-3">
-                <label for="availabilitySlider" class="form-label">{{ availabilityPercentage }}%</label>
-                <input type="range" class="slider" id="availabilitySlider" min="0" max="100"
-                    [(ngModel)]="availabilityPercentage" disabled>
-            </div>
+      <div class="col text-center justify-content-center">
+        <div class="border border-4 rounded m-2 p-2">
+          <i class="bi bi-person-circle fa-2x mt-3"></i>
+          <div>{{ resourceDetails.resourceId }}</div>
+          <div class="text-primary">{{ resourceDetails.resourceName }}</div>
+          <div class="text-black-50">{{ resourceDetails.job_role?.roleName }}</div>
         </div>
-        <div class="col text-center">
-            <!-- Datepicker for Holidays -->
-            <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary bg-opacity-50">
-                Holiday Calendar
-            </div>
-            <ngb-datepicker #dp [markDisabled]="disableAllDates" [dayTemplate]="t"></ngb-datepicker>
-            <ng-template #t let-date="date" let-focused="focused">
-                <span class="custom-day" [class.holiday]="isHoliday(date)" [class.focused]="focused">
-                    {{ date.day }}
-                </span>
-            </ng-template>
+        <div class="border rounded text-center col-12 mb-3 mt-3 pt-1 pb-1 text-white bg-primary bg-opacity-50">
+          Current Percentage
         </div>
+        <!-- Slider for availability percentage -->
+        <div class="mb-3">
+          <label for="availabilitySlider" class="form-label">{{ availabilityPercentage }}%</label>
+          <input type="range" class="slider" id="availabilitySlider" min="0" max="100" [(ngModel)]="availabilityPercentage" disabled>
+        </div>
+      </div>
+      <div class="col text-center">
+        <!-- Datepicker for Holidays -->
+        <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary bg-opacity-50">
+          Holiday Calendar
+        </div>
+        <ngb-datepicker #dp [markDisabled]="disableAllDates" [dayTemplate]="t"></ngb-datepicker>
+        <ng-template #t let-date="date" let-focused="focused">
+          <span class="custom-day" [class.holiday]="isHoliday(date)" [class.focused]="focused">
+            {{ date.day }}
+          </span>
+        </ng-template>
+      </div>
     </div>
     <div>
-        <div class="rounded border p-2">
-            <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary bg-opacity-50">
-                Add Percentage
-            </div>
-            <div class="row mb-1" *ngFor="let task of tasks">
-                <div class="col-4 text-center">{{ task.projectName }}</div>
-                <div class="col-3 ms-1 text-center">{{ task.taskName }}</div>
-                <div class="col-2 text-center">{{ task.resourceAllocationPercentage }}</div>
-                <div class="col-2 text-center">
-                    <button type="button" class="btn btn-primary" disabled>
-                        <i class="bi bi-check"></i>
-                    </button>
-                </div>
-            </div>
-            <div *ngFor="let detail of taskProjectDetails" class="row mb-1 text-center">
-                <div class="col-4">{{ detail.projectName }}</div>
-                <div class="col-4">{{ detail.taskName }}</div>
-                <div class="col-4">{{ detail.percentage }}%</div>
-            </div>
-            <div *ngFor="let set of sets; let i = index" class="row mb-1">
-
-                <div class="form-group col-3 ms-1" *ngFor="let set of sets; let i = index">
-                    <div class="dropdown">
-                        <button class="form-select" type="button" (click)="toggleDropdown(i)">
-                            {{ selectedProjectNames[i] || 'Project' }}
-                        </button>
-                        <div class="dropdown-menu" [class.show]="dropdownOpen[i]">
-                            <input type="text" [(ngModel)]="searchText[i]" placeholder="Search Projects" class="form-control mb-2" (input)="filterProjects(i)">
-                            <button class="dropdown-item" *ngFor="let project of filteredProjects[i]" (click)="selectProject(i, project)">
-                                {{ project.projectName }}
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                
-                <div class="col-3 ms-1">
-                    <select class="form-select" (change)="onTaskSelect($event, i)">
-                        <option value="" disabled selected>Task</option>
-                        <option *ngFor="let task of set.Tasks" [value]="task.taskid"
-                            [disabled]="task.taskProgressPercentage === 100"
-                            [ngClass]="{'highlighted-task': task.taskProgressPercentage === 100}">
-                            {{ task.taskName }}
-                        </option>
-                    </select>
-                </div>
-                <div class="col-2">
-                    <input type="number" class="form-control" [(ngModel)]="set.percentage" placeholder="%" min="0"
-                        max="100">
-                </div>
-                <div class="col-2">
-                    <button class="btn btn-outline-primary Hover" type="button" (click)="addSet()"
-                        style="margin-right: 3px;">+</button>
-                    <button class="btn btn-outline-danger" type="button" (click)="removeSet(i)">-</button>
-                </div>
-            </div>
-            <div class="d-flex justify-content-center mb-2 mt-2">
-                <button class="btn btn-outline-primary Hover" type="button" (click)="onAddClick()">Add</button>
-            </div>
+      <div class="rounded border p-2">
+        <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary bg-opacity-50">
+          Add Percentage
         </div>
+        <div class="row mb-1" *ngFor="let task of tasks">
+          <div class="col-4 text-center">{{ task.projectName }}</div>
+          <div class="col-3 ms-1 text-center">{{ task.taskName }}</div>
+          <div class="col-2 text-center">{{ task.resourceAllocationPercentage }}</div>
+          <div class="col-2 text-center">
+            <button type="button" class="btn btn-primary" disabled>
+              <i class="bi bi-check"></i>
+            </button>
+          </div>
+        </div>
+        <div *ngFor="let detail of taskProjectDetails" class="row mb-1 text-center">
+          <div class="col-4">{{ detail.projectName }}</div>
+          <div class="col-4">{{ detail.taskName }}</div>
+          <div class="col-4">{{ detail.percentage }}%</div>
+        </div>
+        <div *ngFor="let set of sets; let i = index" class="row mb-1">
+          <div class="form-group col-3 ms-1">
+            <div class="dropdown">
+              <button class="form-select" type="button" (click)="toggleDropdown(i)">
+                {{ selectedProjectNames[i] || 'Project' }}
+              </button>
+              <div class="dropdown-menu" [class.show]="dropdownOpen[i]">
+                <input type="text" [(ngModel)]="searchText[i]" placeholder="Search Projects" class="form-control mb-2" (input)="filterProjects(i)">
+                <button class="dropdown-item" *ngFor="let project of filteredProjects[i]" (click)="selectProject(i, project)">
+                  {{ project.projectName }}
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-3 ms-1">
+            <select class="form-select" (change)="onTaskSelect($event, i)">
+              <option value="" disabled selected>Task</option>
+              <option *ngFor="let task of set.Tasks" [value]="task.taskid" [disabled]="task.taskProgressPercentage === 100" [ngClass]="{'highlighted-task': task.taskProgressPercentage === 100}">
+                {{ task.taskName }}
+              </option>
+            </select>
+          </div>
+          <div class="col-2">
+            <input type="number" class="form-control" [(ngModel)]="set.percentage" placeholder="%" min="0" max="100">
+          </div>
+          <div class="col-2">
+            <button class="btn btn-outline-primary Hover" type="button" (click)="addSet()" style="margin-right: 3px;">+</button>
+            <button class="btn btn-outline-danger" type="button" (click)="removeSet(i)">-</button>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center mb-2 mt-2">
+          <button class="btn btn-outline-primary Hover" type="button" (click)="onAddClick()">Add</button>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+  

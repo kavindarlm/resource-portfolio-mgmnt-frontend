@@ -12,6 +12,7 @@ import { OrgUnitService } from '../../shared/sevices_resourceMgt/orgUnit.service
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ConfirmDialogService } from '../../ConfirmDialogBox/confirm-dialog.service';
 
 @Component({
   selector: 'app-resource-edit-form',
@@ -34,7 +35,8 @@ export class ResourceEditFormComponent implements OnInit{
               private orgUnitService: OrgUnitService,
               private router: Router,
               private toaster: ToastrService,
-              private spinner: NgxSpinnerService) { }
+              private spinner: NgxSpinnerService,
+              private confirmMessage: ConfirmDialogService) { }
 
   ngOnInit(): void {
     this.loadJobRoles();// calling the loadJobRoles Method
@@ -108,7 +110,9 @@ export class ResourceEditFormComponent implements OnInit{
 
   onEditResource(data: ResourceModel) {
     console.log(data);
-    this.resourceService.updateResource(this.selectedResource.resourceId, data)
+    this.confirmMessage.open('Are you sure you want to edit this resource?').subscribe(confirmed => {
+      if (confirmed) {
+        this.resourceService.updateResource(this.selectedResource.resourceId, data)
       .subscribe(
         (res: any) => {
           console.log('Resource updated successfully:', res);
@@ -122,10 +126,15 @@ export class ResourceEditFormComponent implements OnInit{
           //display an error message to the user.
         }
       );
+      }
+    });
+    
   }
   
   onDeleteResource() {
-    this.resourceService.deleteResource(this.selectedResource.resourceId)
+  this.confirmMessage.open('Are you sure you want to delete this resource?').subscribe(confirmed => {
+    if(confirmed){
+      this.resourceService.deleteResource(this.selectedResource.resourceId)
     .subscribe((res:ResourceModel)=> {
       console.log('Resource deleted successfully:', res);
       this.deleteSucceseMassege(this.selectedResource.resourceId);
@@ -138,6 +147,8 @@ export class ResourceEditFormComponent implements OnInit{
       // Handle error appropriately, such as displaying an error message to the user.
     }
     );
+    }
+  });
   }
 
   onCancel() {

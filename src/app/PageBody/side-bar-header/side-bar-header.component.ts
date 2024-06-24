@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { SidebarheaderServiceService } from '../side-bar-header-service/sidebarheader-service.service';
 import { Subscription } from 'rxjs';
 
@@ -8,10 +8,11 @@ import { Subscription } from 'rxjs';
   templateUrl: './side-bar-header.component.html',
   styleUrl: './side-bar-header.component.css'
 })
-export class SideBarHeaderComponent implements OnInit{
+export class SideBarHeaderComponent implements OnInit, OnDestroy{
 
   //
   selectedButton: string | null = null;
+  private logoutSubscription!: Subscription;
   private headerNameSubscription!: Subscription;
   private subcriptioSidebarctive!: Subscription;
   @Input() sidebarActive: boolean = false;
@@ -35,9 +36,17 @@ export class SideBarHeaderComponent implements OnInit{
       this.togglrSidebar();
       });
     });
+
+    this.logoutSubscription = this.sidebarHeaderService.getLogoutEvent().subscribe(() => {
+      this.selectedButton = null;
+    });
+
   }
   ngOnDestroy(): void {
     this.headerNameSubscription.unsubscribe();
+    if (this.logoutSubscription) {
+      this.logoutSubscription.unsubscribe();
+    }
   }
 }
  
