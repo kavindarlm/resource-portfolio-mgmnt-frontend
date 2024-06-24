@@ -28,11 +28,13 @@
     /* color: #7752fe; */
     color:rgba(0, 0, 255, 0.575);
     font-weight: 400;
+    font-size: 0.9rem;
 }
 
 th{
     color: #1e3895e1;
     font-weight: 500;
+    font-size: 0.9rem;
 }
 
 

@@ -1,71 +1,94 @@
 <div class="container-fluid">
-    <div class="row no-gutters ">
-        <div class="col-6 border rounded p-2">
-            <div class="resourcebody ">
-                <div>
-                    <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Resource List</div>
-                </div>
-
-                <!-- new code-for search bar -->
-                <div>
-                    <!-- search box -->
-                    <input type="search" [(ngModel)]="searchtext" id="form1" class="form-control" placeholder="Search"
-                        aria-label="search">
-                </div>
-
-                <div class="table-responsive-sm  table-responsive-md table-responsive">
-                    <table class="table table-bordered table-striped table-hover table-sm text-center mt-1">
-                        <thead class="thead-dark fs-6 fst-normal">
-                            <tr class="">
-                              <th scope="col" class="col-4 text-center">
-                                Resource Id
-                              </th>
-                              <th scope="col" class="col-4 text-center">
-                                Job Role
-                              </th>
-                              <th scope="col" class="col-4 text-center">
-                                Org. Unit
-                              </th>
-                             
-                            </tr>
-                          </thead>
-                        <tbody>
-                            <tr *ngFor="let resource of resources | filter:searchtext" (click)="rowClick($event, resource)" [routerLink]="['/calendertypecomponent/resourcelist/resourceleave', resource.resourceId]" routerLinkActive="active" class="clickable-row">
-                                <td class="text-center ">{{resource.resourceId}}</td>
-                                <td class="text-center ">{{resource.roleName}}</td>
-                                <td class="text-center ">{{resource.unitName}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <nav>
-                        <ul class="pagination d-flex justify-content-center">
-                          <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                              <span aria-hidden="true">&lsaquo;</span>
-                            </a>
-                          </li>
-                          <li class="page-item"><a class="page-link" href="#">1</a></li>
-                          <li class="page-item"><a class="page-link" href="#">2</a></li>
-                          <li class="page-item"><a class="page-link" href="#">...</a></li>
-                          <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                              <span aria-hidden="true">&rsaquo;</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </nav>
-                      <!-- error message -->
-                      <div *ngIf="errorMessage" class="alert alert-danger">
-                        {{ errorMessage }}
-                      </div>
-                </div>
-            </div>
+  <div class="row no-gutters ">
+    <div class="col-12 col-md-6 border rounded p-2">
+      <div class="resourcebody ">
+        <div>
+          <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Resource List</div>
+        </div>
+        <div>
+          <!-- search box -->
+          <input type="search" [(ngModel)]="searchtext" id="form1" class="form-control" placeholder="Search"
+            aria-label="search">
         </div>
 
-        <div class="col-6">
-            <router-outlet></router-outlet>
+        <!-- filter by unit -->
+        <div class="row col-12 mt-1  d-flex justify-content-center">
+          <div class="col-6">
+            <label for="jobRole">Filter by Job Role:</label>
+            <select class="form-select rounded small-text w-100" [(ngModel)]="selectedJobRole"
+              (ngModelChange)="loadResources(selectedJobRole, selectedOrgUnit)">
+              <option value="" disabled selected>Filter by Job Role</option>
+              <option *ngFor="let jobRole of jobRoles" [value]="jobRole">{{ jobRole }}</option>
+              <option value="">None</option>
+            </select>
+          </div>
+
+          <!-- filter by job -->
+          <div class="col-6">
+            <label for="orgUnit">Filter by Org. Unit:</label>
+            <select class="form-select rounded small-text w-100" [(ngModel)]="selectedOrgUnit"
+              (ngModelChange)="loadResources(selectedJobRole, selectedOrgUnit)">
+              <option value="" disabled selected>Filter by Org Unit</option>
+              <option *ngFor="let orgUnit of orgUnits" [value]="orgUnit">{{ orgUnit }}</option>
+              <option value="">None</option>
+            </select>
+          </div>
         </div>
 
-       
+        <div class="table-responsive-sm  table-responsive-md table-responsive">
+          <table class="table table-bordered table-striped table-hover table-sm text-center mt-1">
+            <thead class="thead-dark fs-6 fst-normal">
+              <tr class="">
+                <th scope="col" class="col-4 text-center">
+                  Resource Id
+                </th>
+                <th scope="col" class="col-4 text-center">
+                  Job Role
+                </th>
+                <th scope="col" class="col-4 text-center">
+                  Org. Unit
+                </th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let resource of getFilteredPaginatedResourceList()" (click)="rowClick($event, resource)"
+                [routerLink]="['/calendertypecomponent/resourcelist/resourceleave', resource.resourceId]"
+                routerLinkActive="active" class="clickable-row">
+                <td class="text-center ">{{resource.resourceId}}</td>
+                <td class="text-center ">{{resource.roleName}}</td>
+                <td class="text-center ">{{resource.unitName}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <nav>
+            <ul class="pagination d-flex justify-content-center">
+              <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="setPage(currentPage - 1)" aria-label="Previous">
+                  <span aria-hidden="true">&lsaquo;</span>
+                </a>
+              </li>
+              <li class="page-item" *ngFor="let page of getPages()" [class.active]="page === currentPage">
+                <a class="page-link" (click)="setPage(page)">{{ page }}</a>
+              </li>
+              <li class="page-item" [class.disabled]="currentPage === totalPages">
+                <a class="page-link" (click)="setPage(currentPage + 1)" aria-label="Next">
+                  <span aria-hidden="true">&rsaquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <!-- error message -->
+          <div *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+          </div>
+        </div>
+      </div>
     </div>
+
+    <div class="col-12 col-md-6">
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
 </div>

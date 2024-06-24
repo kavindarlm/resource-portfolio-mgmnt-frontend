@@ -37,14 +37,14 @@ export class ApiServiceService {
   }
 
   //get the resource holidays by resourceId
-  resourceGetEvents( resourceId: string) {
+  resourceGetEvents(resourceId: string) {
     const url = `http://localhost:3000/resource-holiday/${resourceId}`;
-    return this.http.get<any>(url); 
+    return this.http.get<any>(url);
   }
 
   //update global holidays
   updateHoliday(id: string, holidayData: any): Observable<Holiday[]> {
-    const url = `${this.apiUrl}/${id}`; 
+    const url = `${this.apiUrl}/${id}`;
     return this.http.put(url, holidayData).pipe(
       map(response => response as Holiday[])
     );
@@ -53,6 +53,11 @@ export class ApiServiceService {
   //delete global holidays
   deleteHoliday(id: string): Observable<any> {
     const url = `${this.apiUrl}/${id}`;
+    return this.http.delete(url);
+  }
+
+  deleteResourceHoliday(holy_id: string): Observable<any> {
+    const url = `${this.apiUrl}/resource-holiday/${holy_id}`;
     return this.http.delete(url);
   }
 
