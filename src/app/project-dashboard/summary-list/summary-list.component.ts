@@ -31,6 +31,8 @@ export class SummaryListComponent implements OnInit {
   highCriticality_count!: number;
   mediumCriticality_count!: number;
   lowCriticality_count!: number;
+  resource_count!: number;
+  ongoingProject_count!: number;
 
   constructor(private projectDashboardService: ProjectDashboardService) {
     this.chartOptions = {
@@ -65,6 +67,8 @@ export class SummaryListComponent implements OnInit {
   ngOnInit(): void {
     this.getCreatedProjects();
     this.getCriticalityCount();
+    this.getResourceCount();
+    this.getOngoingProjectCount();
   }
 
   getCreatedProjects(){
@@ -83,4 +87,19 @@ export class SummaryListComponent implements OnInit {
       this.chartOptions.series = [this.highCriticality_count, this.mediumCriticality_count, this.lowCriticality_count];
     });
   }
+
+  // function to get the resource count
+  getResourceCount(){
+    this.projectDashboardService.getResourceCount().subscribe(res => {
+      this.resource_count = res;
+    });
+  }
+
+  // function to get the ongoing project count
+  getOngoingProjectCount(){
+    this.projectDashboardService.getOngoingProjectCount().subscribe(res => {
+      this.ongoingProject_count = res;
+    });
+  }
+
 }

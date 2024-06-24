@@ -8,6 +8,7 @@ import { Subscription, catchError } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { taskApiService } from '../../TaskManagement/services/taskApi.service';
+import { ConfirmDialogService } from '../../ConfirmDialogBox/confirm-dialog.service';
 
 @Component({
   selector: 'app-update-project',
@@ -43,7 +44,8 @@ export class UpdateProjectComponent implements OnInit {
     private shared: sharedprojectService,
     private spiner: NgxSpinnerService,
     private toaster: ToastrService,
-    private taskApiService: taskApiService
+    private taskApiService: taskApiService,
+    private confirmBox: ConfirmDialogService
   ) {}
 
   ngOnInit(): void {
@@ -124,6 +126,12 @@ export class UpdateProjectComponent implements OnInit {
       this.toaster.error('Project Name is required.', 'Validation Error');
       return;
     }
+
+    // Validate Project Description
+    if (!this.projectForm.projectDescription) {
+      this.toaster.error('Project Description is required.', 'Validation Error');
+      return;
+    }
   
     // Validate Project Criticality
     if (!this.projectForm.criticality_id) {
@@ -147,9 +155,10 @@ export class UpdateProjectComponent implements OnInit {
     if (!this.validateDates()) {
       return;
     }
-  
-    // If all validations pass, proceed to update project
-    this.api.updateProject(this.projectForm, this.dataid)
+    
+    this.confirmBox.open('Are you sure you want to update this project?').subscribe(confirmed => {
+      if (confirmed) {
+        this.api.updateProject(this.projectForm, this.dataid)
       .pipe(
         catchError((error) => {
           console.error('Failed to update project:', error);
@@ -163,24 +172,32 @@ export class UpdateProjectComponent implements OnInit {
         this.shared.refreshProjectList();
         this.shared.refreshProjectCount();
       });
+      }
+    })
+    // If all validations pass, proceed to update project
+    
   }
   
 
   deleteProjectDetails() {
-    this.api.deleteProject(this.dataid)
-      .pipe(
-        catchError((error) => {
-          console.error('Failed to delete project:', error);
-          return [];
-        })
-      )
-      .subscribe((res: datamodel) => {
-        this.deleteSucceseMassege(this.projectForm.projectName);
-        this.router.navigate(['/pages-body/projectlist']);
-        this.projectList.getProjectList();
-        this.shared.refreshProjectList();
-        this.shared.refreshProjectCount();
-      });
+    this.confirmBox.open('Are you sure you want to delete this project?').subscribe(confirmed => {
+      if (confirmed) {
+        this.api.deleteProject(this.dataid)
+        .pipe(
+          catchError((error) => {
+            console.error('Failed to delete project:', error);
+            return [];
+          })
+        )
+        .subscribe((res: datamodel) => {
+          this.deleteSucceseMassege(this.projectForm.projectName);
+          this.router.navigate(['/pages-body/projectlist']);
+          this.projectList.getProjectList();
+          this.shared.refreshProjectList();
+          this.shared.refreshProjectCount();
+        });
+      }
+    });
   }
 
   deleteSucceseMassege(projectname: string) {

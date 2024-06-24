@@ -97,6 +97,12 @@ import { ConfirmDialogComponent } from './ConfirmDialogBox/confirm-dialog/confir
 import { EditSprintFormComponent } from './Sprint_Management/edit-sprint-form/edit-sprint-form.component';
 import { SprintListComponent } from './Handle_Request/sprint-list/sprint-list.component';
 import { ResponsiveTreeComponent } from './orgUnitMgt/responsive-tree/responsive-tree.component';
+import { SprintDetailsComponent } from './Handle_Request/sprint-details/sprint-details.component';
+import { AllocatedResourceInfoComponent } from './Handle_Request/allocated-resource-info/allocated-resource-info.component';
+import { UpdateAllocationPercentageComponent } from './Handle_Request/update-allocation-percentage/update-allocation-percentage.component';
+import { UpdateAllocatedTaskComponent } from './Handle_Request/update-allocated-task/update-allocated-task.component';
+import { AvailableResListComponent } from './Handle_Request/available-res-list/available-res-list.component';
+import { AvailabilityInfoComponent } from './Handle_Request/availability-info/availability-info.component';
 
 @NgModule({
   declarations:[
@@ -179,6 +185,13 @@ import { ResponsiveTreeComponent } from './orgUnitMgt/responsive-tree/responsive
     EditSprintFormComponent,
     SprintListComponent,
     ResponsiveTreeComponent,
+    SprintDetailsComponent,
+    AllocatedResourceInfoComponent,
+    UpdateAllocationPercentageComponent,
+    UpdateAllocatedTaskComponent,
+    AvailableResListComponent,
+    AvailabilityInfoComponent,
+    
   ],
   imports: [
     BrowserModule,
