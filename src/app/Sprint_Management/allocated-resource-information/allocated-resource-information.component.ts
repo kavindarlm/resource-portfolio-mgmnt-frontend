@@ -1,13 +1,16 @@
+
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
+import { ApiServiceService } from '../../calender-management/shared/api-service.service';
+import { ConfirmDialogService } from '../../ConfirmDialogBox/confirm-dialog.service';
 import { ResourceService } from '../../team-management/shared/resource.service';
 import { ResourceAllocationService } from '../services/resource-allocation.service';
 import { taskApiService } from '../../TaskManagement/services/taskApi.service';
-import { forkJoin, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { ApiServiceService } from '../../calender-management/shared/api-service.service';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { SharedService } from '../services/shared.service';
 
 interface TaskWithProjectInfo {
   resourceAllocationId: number;
@@ -34,10 +37,6 @@ export class AllocatedResourceInformationComponent implements OnInit {
   holidays: NgbDateStruct[] = []; // Store holidays
   availabilityPercentage: number = 0;
 
-  isDeletePopupVisible: boolean = false;
-  deleteResourceAllocationId: number | null = null;
-  deleteTaskIndex: number | null = null;
-
   constructor(
     private route: ActivatedRoute,
     private resourceService: ResourceService,
@@ -45,7 +44,9 @@ export class AllocatedResourceInformationComponent implements OnInit {
     private taskApiService: taskApiService,
     private router: Router,
     private toastr: ToastrService,
-    private ApiServiceService: ApiServiceService
+    private ApiServiceService: ApiServiceService,
+    private confirmDialogService: ConfirmDialogService,
+    private sharedService: SharedService
   ) { }
 
   ngOnInit(): void {
@@ -57,6 +58,12 @@ export class AllocatedResourceInformationComponent implements OnInit {
     });
     this.route.queryParams.subscribe(queryParams => {
       this.availabilityPercentage = queryParams['availability'];
+    });
+
+    // Subscribe to sprint deletion notification
+    this.sharedService.resourceAllocationDeleted$.subscribe(() => {
+      // Handle resource allocation deletion here, e.g., refresh data
+      this.fetchData();
     });
   }
 
@@ -155,39 +162,34 @@ export class AllocatedResourceInformationComponent implements OnInit {
   }
 
   openDeletePopup(resourceAllocationId: number, index: number): void {
-    this.deleteResourceAllocationId = resourceAllocationId;
-    this.deleteTaskIndex = index;
-    this.isDeletePopupVisible = true;
+    this.confirmDialogService.open('Are you sure you want to delete this task?').subscribe(confirmed => {
+      if (confirmed) {
+        this.confirmDeleteTask(resourceAllocationId, index);
+      }
+    });
   }
 
-  confirmDeleteTask(): void {
-    if (this.deleteResourceAllocationId !== null && this.deleteTaskIndex !== null) {
-      this.resourceAllocationService.deleteResourceAllocationById(this.deleteResourceAllocationId).subscribe(
-        () => {
-          if (typeof this.deleteTaskIndex === 'number') {
-            this.tasksWithProjectInfo.splice(this.deleteTaskIndex, 1);
-          }
-          console.log(`Resource allocation with ID ${this.deleteResourceAllocationId} deleted successfully.`);
-          this.toastr.success('Resource Allocation deleted successfully!', 'Success');
-          this.resetDeletePopup();
-        },
-        error => {
-          this.toastr.error('Error deleting resource allocation', 'Error');
-          this.resetDeletePopup();
+  confirmDeleteTask(resourceAllocationId: number, index: number): void {
+    this.resourceAllocationService.deleteResourceAllocationById(resourceAllocationId).subscribe(
+      () => {
+        this.tasksWithProjectInfo.splice(index, 1);
+        this.toastr.success('Resource Allocation deleted successfully!', 'Success');
+        
+        // Notify shared service about resource allocation deletion
+        this.sharedService.notifyResourceAllocationDeleted();
+  
+        // Check if tasksWithProjectInfo is empty
+        if (this.tasksWithProjectInfo.length === 0) {
+          // Close the component or handle as needed (e.g., navigate away)
+          this.router.navigate(['/pages-body/sprint-management/sprintmgt/', this.sprintId]);
         }
-      );
-    }
+      },
+      error => {
+        this.toastr.error('Error deleting resource allocation', 'Error');
+      }
+    );
   }
-
-  cancelDeleteTask(): void {
-    this.resetDeletePopup();
-  }
-
-  resetDeletePopup(): void {
-    this.isDeletePopupVisible = false;
-    this.deleteResourceAllocationId = null;
-    this.deleteTaskIndex = null;
-  }
+  
 
   deleteContent() {
     this.router.navigate(['/pages-body/sprint-management/sprintmgt/', this.sprintId]);
