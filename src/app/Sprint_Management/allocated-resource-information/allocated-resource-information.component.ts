@@ -1,4 +1,3 @@
-// allocated-resource-information.component.ts
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -176,13 +175,13 @@ export class AllocatedResourceInformationComponent implements OnInit {
         this.tasksWithProjectInfo.splice(index, 1);
         this.toastr.success('Resource Allocation deleted successfully!', 'Success');
         
+        // Notify shared service about resource allocation deletion
+        this.sharedService.notifyResourceAllocationDeleted();
+  
         // Check if tasksWithProjectInfo is empty
         if (this.tasksWithProjectInfo.length === 0) {
           // Close the component or handle as needed (e.g., navigate away)
           this.router.navigate(['/pages-body/sprint-management/sprintmgt/', this.sprintId]);
-        } else {
-          // Notify shared service about task deletion
-          this.sharedService.notifyResourceAllocationDeleted();
         }
       },
       error => {
@@ -190,6 +189,7 @@ export class AllocatedResourceInformationComponent implements OnInit {
       }
     );
   }
+  
 
   deleteContent() {
     this.router.navigate(['/pages-body/sprint-management/sprintmgt/', this.sprintId]);

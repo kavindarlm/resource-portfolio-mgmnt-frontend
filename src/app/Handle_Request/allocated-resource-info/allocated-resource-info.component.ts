@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ApiServiceService } from '../../calender-management/shared/api-service.service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmDialogService } from '../../ConfirmDialogBox/confirm-dialog.service';
+import { SharedService } from '../../Sprint_Management/services/shared.service';
 
 interface TaskWithProjectInfo {
   resourceAllocationId: number;
@@ -21,7 +22,7 @@ interface TaskWithProjectInfo {
 @Component({
   selector: 'app-allocated-resource-info',
   templateUrl: './allocated-resource-info.component.html',
-  styleUrl: './allocated-resource-info.component.css'
+  styleUrls: ['./allocated-resource-info.component.css']
 })
 export class AllocatedResourceInfoComponent implements OnInit {
   resourceId: string = '';
@@ -46,7 +47,8 @@ export class AllocatedResourceInfoComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private ApiServiceService: ApiServiceService,
-    private confirmDialogService: ConfirmDialogService
+    private confirmDialogService: ConfirmDialogService,
+    private sharedService: SharedService // Inject SharedService
   ) { }
 
   ngOnInit(): void {
@@ -168,6 +170,7 @@ export class AllocatedResourceInfoComponent implements OnInit {
       () => {
         this.tasksWithProjectInfo.splice(index, 1);
         this.toastr.success('Resource Allocation deleted successfully!', 'Success');
+        this.sharedService.notifyResourceAllocationDeleted(); // Notify shared service
       },
       error => {
         this.toastr.error('Error deleting resource allocation', 'Error');

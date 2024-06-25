@@ -38,18 +38,24 @@ export class SprintMgtComponent implements OnInit {
     private sharedService: SharedService,
     private confirmDialogService: ConfirmDialogService
   ) { }
-
+  
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.sprint_id = params['id'];
       this.fetchSprintData();
     });
-
+  
     // Subscribe to task updates
     this.sharedService.taskUpdated$.subscribe(() => {
       this.fetchAndPopulateResourcesOfSprint();
     });
+  
+    // Subscribe to resource allocation deletion
+    this.sharedService.resourceAllocationDeleted$.subscribe(() => {
+      this.fetchSprintData();
+    });
   }
+  
 
   fetchSprintData(): void {
     // Clear the resources list before fetching new sprint data

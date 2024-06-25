@@ -1,19 +1,20 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, forkJoin, of } from 'rxjs';
-import { mergeMap, map, catchError } from 'rxjs/operators';
+import { Observable, forkJoin } from 'rxjs';
+import { mergeMap, map } from 'rxjs/operators';
 import { sprintApiService } from '../../Sprint_Management/services/sprintApi.service';
 import { ResourceService } from '../../team-management/shared/resource.service';
 import { ResourceAllocationService } from '../../Sprint_Management/services/resource-allocation.service';
 import { ToastrService } from 'ngx-toastr';
 import { SharedService } from '../../Sprint_Management/services/shared.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sprint-details',
   templateUrl: './sprint-details.component.html',
-  styleUrl: './sprint-details.component.css'
+  styleUrls: ['./sprint-details.component.css']
 })
-export class SprintDetailsComponent implements OnInit{
+export class SprintDetailsComponent implements OnInit, OnDestroy {
 
   sprint_id: string = '';
   sprintName: string = '';
@@ -30,6 +31,9 @@ export class SprintDetailsComponent implements OnInit{
   currentPage: number = 1;
   pageSize: number = 5; // Number of items per page
 
+  // Subscription for resource allocation deletion
+  private resourceAllocationDeletedSubscription!: Subscription;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -39,19 +43,28 @@ export class SprintDetailsComponent implements OnInit{
     private toastr: ToastrService,
     private sharedService: SharedService
   ) { }
-  
+
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.sprint_id = params['id'];
       this.fetchSprintData();
     });
-  
+
     // Subscribe to sprintUpdated$ to refresh data upon notification
     this.sharedService.sprintUpdated$.subscribe(() => {
       this.fetchAndPopulateResourcesOfSprint();
     });
+
+    // Subscribe to resourceAllocationDeleted$ to refresh data upon resource allocation deletion
+    this.resourceAllocationDeletedSubscription = this.sharedService.resourceAllocationDeleted$.subscribe(() => {
+      this.fetchAndPopulateResourcesOfSprint();
+    });
   }
-  
+
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions to avoid memory leaks
+    this.resourceAllocationDeletedSubscription.unsubscribe();
+  }
 
   fetchSprintData(): void {
     // Clear the resources list before fetching new sprint data
@@ -135,6 +148,7 @@ export class SprintDetailsComponent implements OnInit{
       });
     }
   }
+
   deleteContent() {
     this.router.navigate(['/pages-body/handle-request/']);
   }
