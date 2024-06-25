@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { JobRoleService } from '../../shared/sevices_resourceMgt/jobRole.service';
 import { JobRoleModel } from '../add-form/addformmodel';
 import { catchError, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-jobrole',
@@ -17,7 +18,8 @@ export class AddJobroleComponent implements OnInit{
   resourceService: any;
   constructor(private formBuilder: FormBuilder,
               private toastr: ToastrService,
-              private jobRoleService: JobRoleService) { }
+              private jobRoleService: JobRoleService,
+              private router: Router) { }
 
   openpopup() {
     this.show = true;
@@ -57,7 +59,7 @@ export class AddJobroleComponent implements OnInit{
       this.addsuccesemassege(data.roleName);
       this.jobRoleService.jobRoleListUpdated.emit(); // Emit the event
       this.isVisible = false;
-      // this.router.navigate(['pages-body/first-view']);
+      this.router.navigate(['pages-body/first-view/add-form']);
     }))
   }
 
