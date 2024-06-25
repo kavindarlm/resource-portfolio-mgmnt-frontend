@@ -13,7 +13,7 @@ import { SharedService } from '../../Sprint_Management/services/shared.service';
   templateUrl: './sprint-details.component.html',
   styleUrl: './sprint-details.component.css'
 })
-export class SprintDetailsComponent {
+export class SprintDetailsComponent implements OnInit{
 
   sprint_id: string = '';
   sprintName: string = '';
@@ -39,13 +39,19 @@ export class SprintDetailsComponent {
     private toastr: ToastrService,
     private sharedService: SharedService
   ) { }
-
+  
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.sprint_id = params['id'];
       this.fetchSprintData();
     });
+  
+    // Subscribe to sprintUpdated$ to refresh data upon notification
+    this.sharedService.sprintUpdated$.subscribe(() => {
+      this.fetchAndPopulateResourcesOfSprint();
+    });
   }
+  
 
   fetchSprintData(): void {
     // Clear the resources list before fetching new sprint data

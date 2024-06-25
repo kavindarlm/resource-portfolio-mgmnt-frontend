@@ -42,7 +42,6 @@ import { FunctionGuardService } from './guard/function.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AllocatedResourceInformationComponent } from './Sprint_Management/allocated-resource-information/allocated-resource-information.component';
 import { UpdatePercentageComponent } from './Sprint_Management/update-percentage/update-percentage.component';
-import { DeleteResourceAllocationComponent } from './Sprint_Management/delete-resource-allocation/delete-resource-allocation.component';
 import { UpdateTaskInSprintComponent } from './Sprint_Management/update-task-in-sprint/update-task-in-sprint.component';
 import { UnitListComponent } from './orgUnitMgt/unit-list/unit-list.component';
 import { UnitTreeComponent } from './orgUnitMgt/unit-tree/unit-tree.component';
@@ -196,13 +195,7 @@ const routes: Routes = [
           {
             path: 'sprintmgt/:id', component: SprintMgtComponent,
             children: [
-              {
-                path: 'allocated-resource/:sprintId/:resourceId', component: AllocatedResourceInformationComponent,
-                children: [
-                  { path: 'DeleteAllocation/:sprintId/:resourceId', component: DeleteResourceAllocationComponent },
-
-                ]
-              },
+              {path: 'allocated-resource/:sprintId/:resourceId', component: AllocatedResourceInformationComponent,},
               { path: 'UpdatePercentage/:sprintId/:resourceId', component: UpdatePercentageComponent, },
               { path: 'UpdateTask/:sprintId/:resourceId', component: UpdateTaskInSprintComponent, },
               { path: 'EditSprint/:sprintId', component: EditSprintFormComponent, }
@@ -222,9 +215,9 @@ const routes: Routes = [
               { path: 'UpdateAllocationPercentage/:sprintId/:resourceId', component: UpdateAllocationPercentageComponent },
               { path: 'UpdateAllocatedTask/:sprintId/:resourceId', component: UpdateAllocatedTaskComponent },
               {
-                path: 'availableResourceList', component: AvailableResListComponent,
+                path: 'availableResourceList/:sprintId', component: AvailableResListComponent,
                 children: [
-                  { path: 'availabilityInfo/:id', component: AvailabilityInfoComponent }
+                  { path: 'availabilityInfo/:sprintId/:resourceId', component: AvailabilityInfoComponent }
                 ]
               }
             ]

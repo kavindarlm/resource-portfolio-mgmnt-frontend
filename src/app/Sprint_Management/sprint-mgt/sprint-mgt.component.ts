@@ -5,9 +5,9 @@ import { mergeMap, map, catchError } from 'rxjs/operators';
 import { sprintApiService } from '../services/sprintApi.service';
 import { ResourceService } from '../../team-management/shared/resource.service';
 import { ResourceAllocationService } from '../services/resource-allocation.service';
-import { DeleteSprintPopupComponent } from '../Reusable_Components/delete-sprint-popup/delete-sprint-popup.component';
 import { ToastrService } from 'ngx-toastr';
 import { SharedService } from '../services/shared.service';
+import { ConfirmDialogService } from '../../ConfirmDialogBox/confirm-dialog.service';
 
 @Component({
   selector: 'app-sprint-mgt',
@@ -15,8 +15,6 @@ import { SharedService } from '../services/shared.service';
   styleUrls: ['./sprint-mgt.component.css']
 })
 export class SprintMgtComponent implements OnInit {
-  @ViewChild(DeleteSprintPopupComponent) deletePopup!: DeleteSprintPopupComponent;
-
   sprint_id: string = '';
   sprintName: string = '';
   startDate: string = '';
@@ -25,8 +23,6 @@ export class SprintMgtComponent implements OnInit {
   HeadArray = ['Resource_ID', 'Team', 'Job_Role', 'Org_Unit', 'Availability'];
   ResourcesOfSprint: any[] = [];
   clickedResourceId: string | null = null;
-
-  showPopup: boolean = false;
 
   // Pagination properties
   currentPage: number = 1;
@@ -39,7 +35,8 @@ export class SprintMgtComponent implements OnInit {
     private resourceService: ResourceService,
     private resourceAllocationService: ResourceAllocationService,
     private toastr: ToastrService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private confirmDialogService: ConfirmDialogService
   ) { }
 
   ngOnInit(): void {
@@ -133,11 +130,11 @@ export class SprintMgtComponent implements OnInit {
   }
 
   openDeletePopup(): void {
-    this.showPopup = true;
-  }
-
-  closePopup(): void {
-    this.showPopup = false;
+    this.confirmDialogService.open('Are you sure you want to delete this sprint?').subscribe(confirmed => {
+      if (confirmed) {
+        this.deleteSprint();
+      }
+    });
   }
 
   deleteSprint(): void {
@@ -151,8 +148,8 @@ export class SprintMgtComponent implements OnInit {
       })
     ).subscribe(() => {
       this.toastr.success('Sprint and associated resource allocations deleted successfully', 'Success');
-      this.closePopup(); // Hide the popup
       this.sharedService.notifySprintDeleted(); // Notify about the deletion
+      this.router.navigate(['/pages-body/sprint-management']); // Navigate to the sprint management page
     });
   }
 
