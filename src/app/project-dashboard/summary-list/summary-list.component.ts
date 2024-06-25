@@ -40,6 +40,7 @@ export class SummaryListComponent implements OnInit {
       chart: {
         width: 250,
         type: "pie",
+        height: 250,
         animations: {
           enabled: true
         },
@@ -57,7 +58,31 @@ export class SummaryListComponent implements OnInit {
               position: "bottom"
             }
           }
-        }
+        },
+        // Adding responsiveness for tablet sizes
+        {
+          breakpoint: 1024, // Targeting screens up to 1024px in width
+          options: {
+            chart: {
+              width: 200 // Example width, adjust as needed
+            },
+            legend: {
+              position: "bottom"
+            },
+          }
+        },
+        // Adding responsiveness for mobile sizes
+        {
+          breakpoint: 768, // Targeting screens up to 768px in width
+          options: {
+            chart: {
+              width: 200 // Example width, adjust as needed
+            },
+            legend: {
+              position: "bottom"
+            },
+          }
+        },
       ],
       legend: {
         position: 'bottom'
