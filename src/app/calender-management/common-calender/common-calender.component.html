@@ -18,9 +18,9 @@
         <!-- Conditionally render the "Add" or "Edit" button based on actionType -->
         <div class="grid-item-button ">
           <div class="pic d-flex justify-content-center">
-            <button class="addbtn btn border rounded text-center" *ngIf="actionType === 'add'"
+            <button class="addbtn btn border rounded text-center w-50" *ngIf="actionType === 'add'"
               (click)="onAddButtonClick()">Add</button>
-            <button class="editbtn  btn border rounded text-center" *ngIf="actionType === 'edit'"
+            <button class="editbtn  btn border rounded text-center w-50" *ngIf="actionType === 'edit'"
               (click)="onEditButtonClick()">Edit</button>
           </div>
         </div>

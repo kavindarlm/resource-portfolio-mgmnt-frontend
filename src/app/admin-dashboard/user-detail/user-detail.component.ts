@@ -75,14 +75,35 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   }
 
   // Function to edit the user details
+  // editUserDetail() {
+  //   if(confirm('Are you sure you want to edit this user?')){
+  //   this.dashboardService.editUser(this.userid, this.userForm).subscribe((res) => {
+  //     console.log(res);
+  //     this.sharedService.refreshUserList();
+  //     this.editUserFunctions();
+  //   });}
+  //   else{
+  //     this.getUserFunctions();
+  //   }
+  // }
+
   editUserDetail() {
-    if(confirm('Are you sure you want to edit this user?')){
-    this.dashboardService.editUser(this.userid, this.userForm).subscribe((res) => {
-      console.log(res);
-      this.sharedService.refreshUserList();
-      this.editUserFunctions();
-    });}
-    else{
+    if (confirm('Are you sure you want to edit this user?')) {
+      this.dashboardService.editUser(this.userid, this.userForm).subscribe(
+        (res) => {
+          // console.log(res);
+          this.sharedService.refreshUserList();
+          this.editUserFunctions();
+        },
+        (error) => { // Error handling logic here
+          if (error.error.message === 'Email already exists') {
+            alert('Email already exists');
+          } else {
+            console.error(error.error.message);
+          }
+        }
+      );
+    } else {
       this.getUserFunctions();
     }
   }
