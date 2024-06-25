@@ -1,3 +1,5 @@
+// allocated-resource-information.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin, of } from 'rxjs';
@@ -60,14 +62,9 @@ export class AllocatedResourceInformationComponent implements OnInit {
     });
 
     // Subscribe to sprint deletion notification
-    this.sharedService.sprintDeleted$.subscribe(() => {
-      // Handle sprint deletion here, e.g., close the component or refresh data
-      this.tasksWithProjectInfo = [];
-      this.tasks = [];
-      this.sprintAllocations = [];
-      this.resourceDetails = {};
-      this.resourceId = '';
-      this.sprintId = '';
+    this.sharedService.resourceAllocationDeleted$.subscribe(() => {
+      // Handle resource allocation deletion here, e.g., refresh data
+      this.fetchData();
     });
   }
 
@@ -132,11 +129,6 @@ export class AllocatedResourceInformationComponent implements OnInit {
           }
         }
       });
-
-      // If no tasks remain after deletion, close the component
-      if (this.tasksWithProjectInfo.length === 0) {
-        this.router.navigate(['/pages-body/sprint-management/pages-body/sprint-management/sprintmgt',this.sprintId]); // Navigate to wherever necessary
-      }
     });
   }
 
@@ -183,8 +175,15 @@ export class AllocatedResourceInformationComponent implements OnInit {
       () => {
         this.tasksWithProjectInfo.splice(index, 1);
         this.toastr.success('Resource Allocation deleted successfully!', 'Success');
-        // Notify shared service about task deletion
-        this.sharedService.notifyTaskUpdated();
+        
+        // Check if tasksWithProjectInfo is empty
+        if (this.tasksWithProjectInfo.length === 0) {
+          // Close the component or handle as needed (e.g., navigate away)
+          this.router.navigate(['/pages-body/sprint-management/sprintmgt/', this.sprintId]);
+        } else {
+          // Notify shared service about task deletion
+          this.sharedService.notifyResourceAllocationDeleted();
+        }
       },
       error => {
         this.toastr.error('Error deleting resource allocation', 'Error');

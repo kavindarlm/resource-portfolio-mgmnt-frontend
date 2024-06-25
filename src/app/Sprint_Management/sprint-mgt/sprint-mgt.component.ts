@@ -44,6 +44,11 @@ export class SprintMgtComponent implements OnInit {
       this.sprint_id = params['id'];
       this.fetchSprintData();
     });
+
+    // Subscribe to task updates
+    this.sharedService.taskUpdated$.subscribe(() => {
+      this.fetchAndPopulateResourcesOfSprint();
+    });
   }
 
   fetchSprintData(): void {
@@ -157,8 +162,7 @@ export class SprintMgtComponent implements OnInit {
     this.router.navigate(['/pages-body/sprint-management']);
   }
 
-  // Pagination methods
-  onPageChange(pageNumber: number): void {
+   onPageChange(pageNumber: number): void {
     this.currentPage = pageNumber;
     // You may fetch data for the new page here or adjust your existing data array
     // For simplicity, assuming your data is already in ResourcesOfSprint and just need to slice it

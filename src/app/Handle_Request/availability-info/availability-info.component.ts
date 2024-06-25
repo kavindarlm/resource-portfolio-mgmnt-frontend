@@ -215,6 +215,15 @@ export class AvailabilityInfoComponent implements OnInit {
   }
 
   onAddClick(): void {
+    // Check if any set is incomplete
+    const invalidSet = this.sets.find(set => !set.projectId || !set.taskId || set.percentage === null);
+  
+    if (invalidSet) {
+      this.toastr.error('Please fill all fields (Project, Task, and Percentage) for each entry.', 'Error');
+      return;
+    }
+  
+    // Proceed with adding data and creating resource allocations
     this.sets.forEach(set => {
       const projectTaskData: ProjectTaskData = {
         resourceId: this.resourceId,

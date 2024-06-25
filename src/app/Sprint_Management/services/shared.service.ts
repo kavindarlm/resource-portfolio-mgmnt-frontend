@@ -42,6 +42,14 @@ export class SharedService {
   // Observable for the task update subject
   taskUpdated$ = this.taskUpdatedSubject.asObservable();
 
+  private resourceAllocationDeletedSubject = new Subject<void>();
+  resourceAllocationDeleted$ = this.resourceAllocationDeletedSubject.asObservable();
+
+  constructor() {}
+
+  notifyResourceAllocationDeleted(): void {
+    this.resourceAllocationDeletedSubject.next();
+  }
 
   // Method to set an array of data
   setData(data: ProjectTaskData[]): void {
@@ -51,10 +59,10 @@ export class SharedService {
   addData(data: ProjectTaskData): void {
     // Get the current data array
     const currentData = this.dataSubject.value;
-
+  
     // Append the new data object
     const updatedData = [...currentData, data];
-
+  
     // Update the data subject with the new array
     this.dataSubject.next(updatedData);
   }
@@ -74,6 +82,6 @@ export class SharedService {
   notifyTaskUpdated(): void {
     this.taskUpdatedSubject.next();
   }
+
+  
 }
-
-
