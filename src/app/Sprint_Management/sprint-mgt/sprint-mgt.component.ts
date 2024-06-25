@@ -150,7 +150,7 @@ export class SprintMgtComponent implements OnInit {
 
   deleteSprint(): void {
     const sprintId = parseInt(this.sprint_id);
-
+  
     this.resourceAllocationService.deleteResourceAllocationsBySprintId(sprintId).pipe(
       mergeMap(() => this.sprintApiService.deleteSprint(sprintId)),
       catchError(error => {
@@ -163,6 +163,7 @@ export class SprintMgtComponent implements OnInit {
       this.router.navigate(['/pages-body/sprint-management']); // Navigate to the sprint management page
     });
   }
+  
 
   deleteContent() {
     this.router.navigate(['/pages-body/sprint-management']);
