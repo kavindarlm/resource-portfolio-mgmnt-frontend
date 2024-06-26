@@ -1,30 +1,42 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-6 col-md-6 col-sm-12 justify-content-center border rounded p-2">
-      <div class="row mb-5">
-        <div class="col-11">
+      <div class="row">
+        <div class="col-12">
           <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">{{ sprintName }}</div>
         </div>
-        <div class="col-1">
+        <!-- <div class="col-1">
           <button class="border btn shadow-none bd-highlight shadow p-1 mt-1 mb-3 me-1" (click)="deleteContent()">
             <i class="bi bi-x"></i>
           </button>
-        </div>
+        </div> -->
       </div>
 
-      <div class="row mb-5">
+      <div class="row mt-3 mb-2">
         <div class="col">
-          <div class="fw-bold border rounded p-2 text-center">
-            <i class="bi bi-calendar fa-2x"></i>
-            <div class="text">Start Date</div>
-            <div class="text-primary">{{ startDate }}</div>
+          <div class="fw-bold border rounded p-2">
+            <div class="row">
+              <div class="col-4 justify-content-center d-flex">
+                <i class="bi bi-calendar text"></i>
+              </div>
+              <div class="col-8 small-text">
+                <div class="text">Start Date</div>
+              </div>
+            </div>
+            <div class="text-primary text-center fw-normal">{{ startDate }}</div>
           </div>
         </div>
         <div class="col">
-          <div class="fw-bold border rounded p-2 text-center">
-            <i class="bi bi-calendar fa-2x"></i>
-            <div class="text">End Date</div>
-            <div class="text-primary">{{ endDate }}</div>
+          <div class="fw-bold border rounded p-2">
+            <div class="row">
+              <div class="col-4 justify-content-center d-flex">
+                <i class="bi bi-calendar text"></i>
+              </div>
+              <div class="col-8 small-text">
+                <div class="text">End Date</div>
+              </div>
+            </div>
+            <div class="text-primary text-center fw-normal">{{ endDate }}</div>
           </div>
         </div>
       </div>
@@ -34,7 +46,7 @@
         <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Added Resource List</div>
         <div class="table-responsive">
           <table class="table table-bordered table-striped table-hover table-sm text-center">
-            <thead class="thead-dark fs-6 fst-normal">
+            <thead class="thead-dark">
               <tr>
                 <th scope="col" *ngFor="let head of HeadArray">{{ head }}</th>
               </tr>
@@ -72,12 +84,12 @@
         <div class="row mt-3">
           <div class="col">
             <div class="d-grid gap-2 col-6 mx-auto border rounded">
-              <button class="btn btn-outline-primary hover" type="button" [routerLink]="'EditSprint/' + sprint_id">Edit Sprint</button>
+              <button class="btn btn-outline-primary hover btn-sm small" type="button" [routerLink]="'EditSprint/' + sprint_id">Edit Sprint</button>
             </div>
           </div>
           <div class="col">
             <div class="d-grid gap-2 col-6 mx-auto border rounded">
-              <button class="btn btn-outline-danger" type="button" (click)="openDeletePopup()">Delete Sprint</button>
+              <button class="btn btn-outline-danger btn-sm small" type="button" (click)="openDeletePopup()">Delete Sprint</button>
             </div>
           </div>
         </div>
