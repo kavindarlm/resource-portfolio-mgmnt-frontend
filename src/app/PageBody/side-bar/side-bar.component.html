@@ -8,7 +8,7 @@
     <li *ngIf="functionIds.includes(functionNamesToIds['CALENDAR MANAGEMENT'])" routerLink="calendertypecomponent"><button class="menu-button" (click)="selectHeaderName('CALENDAR MANAGEMENT')">Calendar Management</button></li>
     <li *ngIf="functionIds.includes(functionNamesToIds['TEAM MANAGEMENT'])"><button class="menu-button" (click)="selectHeaderName('TEAM MANAGEMENT')" routerLink="teamlistcomponent">Team Management</button></li>
     <li *ngIf="functionIds.includes(functionNamesToIds['PROJECT MANAGEMENT'])"><button class="menu-button" (click)="selectHeaderName('PROJECT MANAGEMENT')" routerLink="projectsview">Project Management</button></li>
-    <li *ngIf="functionIds.includes(functionNamesToIds['UPDATE TASK PROGRESS'])"><button class="menu-button" (click)="selectHeaderName('UPDATE TASK PROGRESS')" routerLink="TaskProjectList">Update Task Progress</button></li>
+    <li *ngIf="functionIds.includes(functionNamesToIds['UPDATE TASK PROGRESS'])"><button class="menu-button" (click)="selectHeaderName('UPDATE TASK PROGRESS')" routerLink="projectTaskview">Update Task Progress</button></li>
     <li *ngIf="functionIds.includes(functionNamesToIds['SPRINT MANAGEMENT'])"><button class="menu-button" (click)="selectHeaderName('SPRINT MANAGEMENT')" routerLink="sprint-management">Sprint Management</button></li>
     <li *ngIf="functionIds.includes(functionNamesToIds['HANDLE REQUEST RESOURCES'])"><button class="menu-button" (click)="selectHeaderName('HANDLE REQUEST RESOURCES')" routerLink="handle-request">Handle Request</button></li>
 </div>

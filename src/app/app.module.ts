@@ -3,7 +3,6 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { CreateNewtaskComponent } from './TaskManagement/create-newtask/create-newtask.component';
 import { ProjectDetailsComponent } from './TaskManagement/project-details/project-details.component';
 import { UpdateTaskComponent } from './TaskManagement/update-task/update-task.component';
-import { ButtonTusksComponent } from './TaskManagement/button-tusks/button-tusks.component';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -104,6 +103,7 @@ import { UpdateAllocatedTaskComponent } from './Handle_Request/update-allocated-
 import { AvailableResListComponent } from './Handle_Request/available-res-list/available-res-list.component';
 import { AvailabilityInfoComponent } from './Handle_Request/availability-info/availability-info.component';
 import { ProjectsViewComponent } from './Project-management/projects-view/projects-view.component';
+import { TaskProjectViewComponent } from './TaskManagement/task-project-view/task-project-view.component';
 
 @NgModule({
   declarations:[
@@ -112,7 +112,6 @@ import { ProjectsViewComponent } from './Project-management/projects-view/projec
     CreateNewtaskComponent,
     ProjectDetailsComponent,
     UpdateTaskComponent,
-    ButtonTusksComponent,
     AddFormComponent,
     ButtonComponent,
     FirstViewComponent,
@@ -193,6 +192,7 @@ import { ProjectsViewComponent } from './Project-management/projects-view/projec
     AvailableResListComponent,
     AvailabilityInfoComponent,
     ProjectsViewComponent,
+    TaskProjectViewComponent,
     
   ],
   imports: [

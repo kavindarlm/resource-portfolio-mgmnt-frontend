@@ -20,7 +20,7 @@ export class ProjectsViewComponent implements OnInit {
 
   // Pagination properties
   currentPage: number = 1;
-  itemsPerPage: number = 5;
+  itemsPerPage: number = 10;
   totalPages: number = 0;
 
   constructor(private projectService: ApiService, private taskApiService: taskApiService, private router: Router,private spinner: NgxSpinnerService) { }

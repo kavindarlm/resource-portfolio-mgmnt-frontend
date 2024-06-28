@@ -62,6 +62,7 @@ import { UpdateAllocatedTaskComponent } from './Handle_Request/update-allocated-
 import { AvailableResListComponent } from './Handle_Request/available-res-list/available-res-list.component';
 import { AvailabilityInfoComponent } from './Handle_Request/availability-info/availability-info.component';
 import { ProjectsViewComponent } from './Project-management/projects-view/projects-view.component';
+import { TaskProjectViewComponent } from './TaskManagement/task-project-view/task-project-view.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -92,6 +93,7 @@ const routes: Routes = [
           { path: 'updatePoject/:id', component: UpdateProjectComponent }
         ]
       },
+      {path: 'projectTaskview', component: TaskProjectViewComponent},
       {
         path: 'TaskProjectList', component: TaskProjectListComponent,
         canActivate: [FunctionGuardService],
