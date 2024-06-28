@@ -1,1 +1,63 @@
-<p>all-team-view works!</p>
+<app-spinner></app-spinner>
+
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-lg-12 col-md-12 col-sm-12 justify-content-center border rounded p-2">
+      <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Team List Details</div>
+      
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <div class="input-group mb-3 w-50">
+            <input type="search" aria-describedby="search-addon" [(ngModel)]="Seachtext" (ngModelChange)="onSearchChange()" id="form1" class="form-control" placeholder="Search..." aria-label="search">
+            <span class="input-group-text border-0" id="search-addon">
+              <i class="bi bi-search"></i>
+            </span>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-outline-primary custom-button btn-sm w-50" (click)="onClick()">Create Team</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover table-sm text-center">
+          <thead class="thead-dark fs-6 fst-normal">
+            <tr>
+              <th scope="col" class="col-12 col-md-6">Team Name</th>
+              <th scope="col" class="col-12 col-md-6">Team Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let team of getPaginatedTeams()">
+              <td>{{ team.team_Name }}</td>
+              <td>{{ team.team_Description }}</td>
+            </tr>   
+          </tbody>
+        </table>
+      </div>
+      
+      <div>
+        <ul class="pagination pagination-sm justify-content-center">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="changePage(currentPage - 1)" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+            <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="changePage(currentPage + 1)" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -28,12 +28,12 @@ export class TodayStatusComponent implements OnInit, OnDestroy {
 
   navigateToCalenderMainBox() {
     this.showSection = false; 
-    this.router.navigate(['pages-body/todayStatus/calendertypecomponent/calendermainbox']);
+    this.router.navigate(['pages-body/calendertypecomponent/calendermainbox']);
   }
 
   navigateToResourceList() {
     this.showSection = false; 
-    this.router.navigate(['pages-body/todayStatus/calendertypecomponent/resourcelist']);
+    this.router.navigate(['pages-body/calendertypecomponent/resourcelist']);
   }
 
 
