@@ -68,7 +68,7 @@ export class CreateFormComponent implements OnInit {
           Team: resource.team_name,
           Job_Role: resource.role_name,
           Org_Unit: resource.org_unit_name,
-          Availability: '' 
+          Availability: ''
         }));
         this.calculateAvailability();
         this.updatePagination(); // Update pagination after fetching resources

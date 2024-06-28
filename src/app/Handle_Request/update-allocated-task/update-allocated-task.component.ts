@@ -141,7 +141,7 @@ export class UpdateAllocatedTaskComponent implements OnInit {
           const taskId = this.commonTaskIds[index];
           if (!processedTaskIds.has(taskId)) {
             const task = this.tasks.find(task => task.resourceAllocation.task.taskid === taskId) ||
-                         this.sprintAllocations.find(allocation => allocation.task.taskid === taskId);
+              this.sprintAllocations.find(allocation => allocation.task.taskid === taskId);
             if (task) {
               const taskWithProjectInfo: TaskWithProjectInfo = {
                 resourceAllocationId: task.resourceAllocation ? task.resourceAllocation.id : null,
@@ -218,7 +218,7 @@ export class UpdateAllocatedTaskComponent implements OnInit {
     forkJoin(updateRequests).subscribe(
       results => {
         this.toastr.success('Tasks updated successfully!', 'Success');
-        this.sharedService.notifyTaskUpdated(); 
+        this.sharedService.notifyTaskUpdated();
       },
       error => {
         this.toastr.error('Error updating tasks. Please try again.', 'Error');

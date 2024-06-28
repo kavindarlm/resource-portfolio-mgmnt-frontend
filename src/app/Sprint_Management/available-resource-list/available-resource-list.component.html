@@ -1,5 +1,6 @@
 <div class="container justify-content-center border rounded p-2 col-lg-12 col-md-12 col-sm-12">
-    <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Available Resource List</div>
+    <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Available Resource List
+    </div>
     <div class="row mx-auto mb-2 mt-3">
         <div class="col">
             <div class="gap-2 col text mx-auto mb-2 mt-3 d-flex align-items-center">
@@ -51,7 +52,7 @@
                         <td>{{ items.Org_Unit }}</td>
                         <td>{{ items.Availability }}%</td>
                     </tr>
-                </ng-container>                
+                </ng-container>
             </tbody>
         </table>
     </div>
@@ -64,7 +65,8 @@
                     <span aria-hidden="true">&lsaquo;</span>
                 </button>
             </li>
-            <li class="page-item" *ngFor="let page of totalPagesArray; let i = index" [class.active]="currentPage === (i + 1)">
+            <li class="page-item" *ngFor="let page of totalPagesArray; let i = index"
+                [class.active]="currentPage === (i + 1)">
                 <button class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</button>
             </li>
             <li class="page-item" [class.disabled]="currentPage === totalPages">

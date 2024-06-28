@@ -10,7 +10,7 @@ import { forkJoin, map } from 'rxjs';
   templateUrl: './available-res-list.component.html',
   styleUrls: ['./available-res-list.component.css']
 })
-export class AvailableResListComponent implements OnInit{
+export class AvailableResListComponent implements OnInit {
 
   sprintId: string = '';
   resources: any[] = [];
@@ -27,11 +27,11 @@ export class AvailableResListComponent implements OnInit{
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router, // Add Router to the constructor
+    private router: Router,
     private resourceService: ResourceService,
     private serviceService: ServiceService,
-    private resourceAllocationService : ResourceAllocationService
-  ) {}
+    private resourceAllocationService: ResourceAllocationService
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -49,7 +49,7 @@ export class AvailableResListComponent implements OnInit{
           Team: resource.team_name,
           Job_Role: resource.role_name,
           Org_Unit: resource.org_unit_name,
-          Availability: '' 
+          Availability: ''
         }));
         this.calculateAvailability();
       },
@@ -71,15 +71,15 @@ export class AvailableResListComponent implements OnInit{
   }
 
   calculateAvailability(): void {
-    const observables = this.resources.map(resource => 
+    const observables = this.resources.map(resource =>
       this.resourceAllocationService.getTasksByResourceId(resource.Resource_ID).pipe(
         map(tasks => {
           // Filter tasks with taskProgressPercentage < 100
           const filteredTasks = tasks.filter(task => task.resourceAllocation.task.taskProgressPercentage < 100);
-          
+
           // Calculate the total allocation percentage
           const totalAllocation = filteredTasks.reduce((total, task) => {
-            const allocationPercentage = task.resourceAllocation.percentage || 0; 
+            const allocationPercentage = task.resourceAllocation.percentage || 0;
             return total + allocationPercentage;
           }, 0);
 
@@ -129,7 +129,7 @@ export class AvailableResListComponent implements OnInit{
   resetOrgUnitFilter(): void {
     this.orgUnitFilter = '';
     this.filterResources();
-  } 
+  }
 
   updatePagination(): void {
     this.totalPages = Math.ceil(this.filteredContents.length / this.itemsPerPage);
@@ -168,5 +168,5 @@ export class AvailableResListComponent implements OnInit{
       { queryParams: { availability } }
     );
   }
-  
+
 }

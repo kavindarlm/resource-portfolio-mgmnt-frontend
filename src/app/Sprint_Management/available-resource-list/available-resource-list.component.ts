@@ -11,7 +11,7 @@ import { forkJoin, map } from 'rxjs';
   styleUrls: ['./available-resource-list.component.css']
 })
 export class AvailableResourceListComponent implements OnInit {
-  
+
   resources: any[] = [];
   filteredContents: any[] = [];
   paginatedContents: any[] = [];
@@ -23,17 +23,16 @@ export class AvailableResourceListComponent implements OnInit {
   itemsPerPage: number = 5;
   totalPages: number = 0;
   totalPagesArray: number[] = [];
-  
+
 
   constructor(
     private resourceService: ResourceService,
     private serviceService: ServiceService,
-    private ResourceAllocationService : ResourceAllocationService,
+    private ResourceAllocationService: ResourceAllocationService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    // Fetch resources and team names from backend
     this.fetchResources();
     this.fetchTeamNames();
   }
@@ -46,7 +45,7 @@ export class AvailableResourceListComponent implements OnInit {
           Team: resource.team_name,
           Job_Role: resource.role_name,
           Org_Unit: resource.org_unit_name,
-          Availability: '' 
+          Availability: ''
         }));
         this.calculateAvailability();
       },
@@ -67,43 +66,43 @@ export class AvailableResourceListComponent implements OnInit {
     );
   }
 
- calculateAvailability(): void {
-  const observables = this.resources.map(resource => 
-    this.ResourceAllocationService.getTasksByResourceId(resource.Resource_ID).pipe(
-      map(tasks => {
-        // Filter tasks with taskProgressPercentage < 100
-        const filteredTasks = tasks.filter(task => task.resourceAllocation.task.taskProgressPercentage < 100);
-        
-        // Calculate the total allocation percentage
-        const totalAllocation = filteredTasks.reduce((total, task) => {
-          const allocationPercentage = task.resourceAllocation.percentage || 0; 
-          return total + allocationPercentage;
-        }, 0);
+  calculateAvailability(): void {
+    const observables = this.resources.map(resource =>
+      this.ResourceAllocationService.getTasksByResourceId(resource.Resource_ID).pipe(
+        map(tasks => {
+          // Filter tasks with taskProgressPercentage < 100
+          const filteredTasks = tasks.filter(task => task.resourceAllocation.task.taskProgressPercentage < 100);
 
-        // Calculate the availability percentage
-        const availabilityPercentage = totalAllocation;
+          // Calculate the total allocation percentage
+          const totalAllocation = filteredTasks.reduce((total, task) => {
+            const allocationPercentage = task.resourceAllocation.percentage || 0;
+            return total + allocationPercentage;
+          }, 0);
 
-        return {
-          ...resource,
-          Availability: availabilityPercentage
-        };
-      })
-    )
-  );
+          // Calculate the availability percentage
+          const availabilityPercentage = totalAllocation;
 
-  forkJoin(observables).subscribe(
-    updatedResources => {
-      this.resources = updatedResources;
-      this.filteredContents = this.resources; // Initialize filteredContents with all resources
-      this.updatePagination(); // Update pagination after fetching resources
-      console.log('Resources with availability percentages:', this.resources);
-    },
-    error => {
-      console.error('Error calculating availability:', error);
-    }
-  );
-}
-  
+          return {
+            ...resource,
+            Availability: availabilityPercentage
+          };
+        })
+      )
+    );
+
+    forkJoin(observables).subscribe(
+      updatedResources => {
+        this.resources = updatedResources;
+        this.filteredContents = this.resources; // Initialize filteredContents with all resources
+        this.updatePagination(); // Update pagination after fetching resources
+        console.log('Resources with availability percentages:', this.resources);
+      },
+      error => {
+        console.error('Error calculating availability:', error);
+      }
+    );
+  }
+
 
   filterResources(): void {
     // Filter resources based on the selected filters
@@ -134,7 +133,7 @@ export class AvailableResourceListComponent implements OnInit {
       queryParams: { availability: resource.Availability }
     });
   }
-  
+
 
   updatePagination(): void {
     this.totalPages = Math.ceil(this.filteredContents.length / this.itemsPerPage);

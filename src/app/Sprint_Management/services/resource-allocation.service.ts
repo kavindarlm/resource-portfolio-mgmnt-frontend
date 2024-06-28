@@ -71,7 +71,7 @@ export class ResourceAllocationService {
       })
     );
   }
-  
+
   // Method to delete all resource allocations by sprint ID
   deleteResourceAllocationsBySprintId(sprintId: number): Observable<void> {
     const url = `${this.baseUrl}/sprint/${sprintId}`;

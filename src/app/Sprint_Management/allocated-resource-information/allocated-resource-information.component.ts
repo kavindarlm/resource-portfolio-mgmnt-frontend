@@ -34,7 +34,7 @@ export class AllocatedResourceInformationComponent implements OnInit {
   sprintAllocations: any[] = [];
   tasksWithProjectInfo: TaskWithProjectInfo[] = [];
   commonTaskIds: string[] = [];
-  holidays: NgbDateStruct[] = []; // Store holidays
+  holidays: NgbDateStruct[] = [];
   availabilityPercentage: number = 0;
 
   constructor(
@@ -114,7 +114,7 @@ export class AllocatedResourceInformationComponent implements OnInit {
           const taskId = this.commonTaskIds[index];
           if (!processedTaskIds.has(taskId)) {
             const task = this.tasks.find(task => task.resourceAllocation.task.taskid === taskId) ||
-                        this.sprintAllocations.find(allocation => allocation.task.taskid === taskId);
+              this.sprintAllocations.find(allocation => allocation.task.taskid === taskId);
             if (task) {
               this.tasksWithProjectInfo.push({
                 resourceAllocationId: task.resourceAllocation ? task.resourceAllocation.id : null,
@@ -174,13 +174,13 @@ export class AllocatedResourceInformationComponent implements OnInit {
       () => {
         this.tasksWithProjectInfo.splice(index, 1);
         this.toastr.success('Resource Allocation deleted successfully!', 'Success');
-        
+
         // Notify shared service about resource allocation deletion
         this.sharedService.notifyResourceAllocationDeleted();
-  
+
         // Check if tasksWithProjectInfo is empty
         if (this.tasksWithProjectInfo.length === 0) {
-          // Close the component or handle as needed (e.g., navigate away)
+          // Close the component or handle as needed 
           this.router.navigate(['/pages-body/sprint-management/sprintmgt/', this.sprintId]);
         }
       },
@@ -189,7 +189,7 @@ export class AllocatedResourceInformationComponent implements OnInit {
       }
     );
   }
-  
+
 
   deleteContent() {
     this.router.navigate(['/pages-body/sprint-management/sprintmgt/', this.sprintId]);

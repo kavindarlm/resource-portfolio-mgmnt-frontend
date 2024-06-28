@@ -97,10 +97,10 @@ export class SprintDetailsComponent implements OnInit, OnDestroy {
             if (!uniqueResources.has(resource.resourceId)) {
               uniqueResources.set(resource.resourceId, {
                 Resource_ID: resource.resourceId,
-                Team: resource.job_role ? resource.team_name : 'N/A',
+                Team: resource.teams ? resource.teams.team_Name : 'N/A',
                 Job_Role: resource.job_role ? resource.job_role.roleName : 'N/A',
                 Org_Unit: resource.org_unit ? resource.org_unit.unitName : 'N/A',
-                Availability: '' // Placeholder for availability
+                Availability: ''
               });
             }
           });
@@ -156,8 +156,6 @@ export class SprintDetailsComponent implements OnInit, OnDestroy {
   // Pagination methods
   onPageChange(pageNumber: number): void {
     this.currentPage = pageNumber;
-    // You may fetch data for the new page here or adjust your existing data array
-    // For simplicity, assuming your data is already in ResourcesOfSprint and just need to slice it
   }
 
   get paginatedResources(): any[] {

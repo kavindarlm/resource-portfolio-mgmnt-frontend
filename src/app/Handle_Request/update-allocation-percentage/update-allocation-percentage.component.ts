@@ -13,7 +13,7 @@ interface TaskWithProjectInfo {
   resourceAllocationId: number;
   taskName: string;
   percentage: number;
-  initialPercentage: number; 
+  initialPercentage: number;
   projectName: string;
   projectId: number;
   isUpdated?: boolean; // property to track update status
@@ -106,7 +106,7 @@ export class UpdateAllocationPercentageComponent implements OnInit {
           const taskId = this.commonTaskIds[index];
           if (!processedTaskIds.has(taskId)) {
             const task = this.tasks.find(task => task.resourceAllocation.task.taskid === taskId) ||
-                         this.sprintAllocations.find(allocation => allocation.task.taskid === taskId);
+              this.sprintAllocations.find(allocation => allocation.task.taskid === taskId);
             if (task) {
               this.tasksWithProjectInfo.push({
                 resourceAllocationId: task.resourceAllocation ? task.resourceAllocation.id : null,
@@ -131,7 +131,7 @@ export class UpdateAllocationPercentageComponent implements OnInit {
           const date = new Date(holiday.holiday.date);
           return {
             year: date.getFullYear(),
-            month: date.getMonth() + 1, 
+            month: date.getMonth() + 1,
             day: date.getDate()
           };
         });

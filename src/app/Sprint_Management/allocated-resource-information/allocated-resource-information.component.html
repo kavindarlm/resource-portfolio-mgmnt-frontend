@@ -1,7 +1,8 @@
 <div class="border rounded container p-2">
   <div class="row">
     <div class="col-11">
-      <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Allocated Resource Information</div>
+      <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Allocated Resource
+        Information</div>
     </div>
     <div class="col-1">
       <button class="border btn shadow-none bd-highlight shadow p-1 mt-1 mb-3 me-1" (click)="deleteContent()">
@@ -24,7 +25,8 @@
       </div>
       <div class="mb-3">
         <label for="availabilitySlider" class="form-label">{{ availabilityPercentage }}</label>
-        <input type="range" class="slider" id="availabilitySlider" min="0" max="100" [(ngModel)]="availabilityPercentage" disabled>
+        <input type="range" class="slider" id="availabilitySlider" min="0" max="100"
+          [(ngModel)]="availabilityPercentage" disabled>
       </div>
     </div>
     <div class="col text-center">
@@ -53,25 +55,26 @@
           <div class="col-2 text-center">{{ taskInfo.percentage }}%</div>
           <!-- Display a delete button -->
           <div class="col-2 text-center">
-            <button type="button" class="btn btn-outline-danger" (click)="openDeletePopup(taskInfo.resourceAllocationId, i)">
+            <button type="button" class="btn btn-outline-danger"
+              (click)="openDeletePopup(taskInfo.resourceAllocationId, i)">
               <i class="bi bi-trash"></i>
             </button>
           </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="d-flex justify-content-center mb-2 mt-2">
-    <button class="btn btn-outline-primary Hover" type="button"
-      [routerLink]="['/pages-body/sprint-management/sprintmgt', sprintId, 'UpdatePercentage', sprintId, resourceId]"
-      [queryParams]="{ availability: availabilityPercentage }">Add new Percentage</button>
+    <div class="d-flex justify-content-center mb-2 mt-2">
+      <button class="btn btn-outline-primary Hover" type="button"
+        [routerLink]="['/pages-body/sprint-management/sprintmgt', sprintId, 'UpdatePercentage', sprintId, resourceId]"
+        [queryParams]="{ availability: availabilityPercentage }">Add new Percentage</button>
+
+    </div>
+    <div class="d-flex justify-content-center mb-2 mt-2">
+      <button class="btn btn-outline-primary Hover" type="button"
+        [routerLink]="['/pages-body/sprint-management/sprintmgt', sprintId, 'UpdateTask', sprintId, resourceId]"
+        [queryParams]="{ availability: availabilityPercentage }">Change Task</button>
+
+    </div>
 
   </div>
-  <div class="d-flex justify-content-center mb-2 mt-2">
-    <button class="btn btn-outline-primary Hover" type="button"
-      [routerLink]="['/pages-body/sprint-management/sprintmgt', sprintId, 'UpdateTask', sprintId, resourceId]"
-      [queryParams]="{ availability: availabilityPercentage }">Change Task</button>
-
-  </div>
-  
-</div>

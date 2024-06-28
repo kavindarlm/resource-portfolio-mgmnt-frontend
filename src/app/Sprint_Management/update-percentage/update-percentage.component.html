@@ -25,7 +25,7 @@
             </div>
             <!-- Slider for availability percentage -->
             <div class="mb-3">
-                <label for="availabilitySlider" class="form-label">{{ availabilityPercentage }}%</label>
+                <label for="availabilitySlider" class="form-label">{{ availabilityPercentage }}</label>
                 <input type="range" class="slider" id="availabilitySlider" min="0" max="100"
                     [(ngModel)]="availabilityPercentage" disabled>
             </div>
@@ -45,7 +45,7 @@
     </div>
     <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary bg-opacity-50">
         Add Percentage
-      </div>
+    </div>
     <div class="row mb-1" *ngFor="let taskInfo of tasksWithProjectInfo; let i = index">
         <!-- Display project name -->
         <div class="col-4 text-center">{{ taskInfo.projectName }}</div>

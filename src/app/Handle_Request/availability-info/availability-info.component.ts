@@ -47,7 +47,7 @@ export class AvailabilityInfoComponent implements OnInit {
     private ResourceAllocationService: ResourceAllocationService,
     private sharedService: SharedService,
     private ApiServiceService: ApiServiceService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -217,12 +217,12 @@ export class AvailabilityInfoComponent implements OnInit {
   onAddClick(): void {
     // Check if any set is incomplete
     const invalidSet = this.sets.find(set => !set.projectId || !set.taskId || set.percentage === null);
-  
+
     if (invalidSet) {
       this.toastr.error('Please fill all fields (Project, Task, and Percentage) for each entry.', 'Error');
       return;
     }
-  
+
     // Proceed with adding data and creating resource allocations
     this.sets.forEach(set => {
       const projectTaskData: ProjectTaskData = {
@@ -231,7 +231,7 @@ export class AvailabilityInfoComponent implements OnInit {
         percentage: set.percentage
       };
       this.sharedService.addData(projectTaskData);
-  
+
       // Create resource allocation separately for each set
       this.ResourceAllocationService.createResourceAllocation({
         sprint_id: this.sprintId,
@@ -249,7 +249,7 @@ export class AvailabilityInfoComponent implements OnInit {
         }
       );
     });
-  
+
     // Reset sets and related arrays after adding
     this.sets = [{ projectId: '', taskId: '', percentage: null, Tasks: [] }];
     this.searchText = [''];
@@ -257,7 +257,7 @@ export class AvailabilityInfoComponent implements OnInit {
     this.dropdownOpen = [false];
     this.selectedProjectNames = [''];
   }
-  
+
 
   deleteContent() {
     this.router.navigate(['/pages-body/handle-request/sprintDetails', this.sprintId, 'availableResourceList', this.sprintId]);

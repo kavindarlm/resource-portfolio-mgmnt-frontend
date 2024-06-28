@@ -26,10 +26,10 @@ export class AvailabiilityComponent implements OnInit {
   resourceDetails: any = {};
   tasks: any[] = [];
   Projects: any[] = [];
-  sets: any[] = [{ projectId: '', taskId: '', percentage: null, Tasks: [] }]; // Initialize with one set of data
+  sets: any[] = [{ projectId: '', taskId: '', percentage: null, Tasks: [] }];
   taskProjectDetails: { taskName: string, projectName: string, percentage: number }[] = [];
-  holidays: NgbDateStruct[] = []; // Store holidays
-  availabilityPercentage: number = 0; 
+  holidays: NgbDateStruct[] = [];
+  availabilityPercentage: number = 0;
   searchText: string[] = [];
   filteredProjects: any[][] = [];
   dropdownOpen: boolean[] = [];
@@ -42,7 +42,7 @@ export class AvailabiilityComponent implements OnInit {
     private toastr: ToastrService,
     private taskApiService: taskApiService,
     private projectApiService: ApiService,
-    private ResourceAllocationService: ResourceAllocationService, 
+    private ResourceAllocationService: ResourceAllocationService,
     private sharedService: SharedService,
     private ApiServiceService: ApiServiceService
   ) { }
@@ -79,12 +79,12 @@ export class AvailabiilityComponent implements OnInit {
 
   fetchTasksAndProjectsByResourceId(resourceId: string): void {
     this.taskProjectDetails = [];
-    this.tasks = []; 
-    this.Projects = []; 
-  
+    this.tasks = [];
+    this.Projects = [];
+
     this.ResourceAllocationService.getTasksByResourceId(resourceId).pipe(
       switchMap(tasks => {
-        const projectDetailsObservables = tasks.map(task => 
+        const projectDetailsObservables = tasks.map(task =>
           this.taskApiService.getProjectInfoByTaskId(task.resourceAllocation.task.taskid).pipe(
             map(project => ({
               taskName: task.resourceAllocation.task.taskName,
@@ -202,14 +202,14 @@ export class AvailabiilityComponent implements OnInit {
 
   onAddClick(): void {
     let allInputsValid = true;
-  
+
     this.sets.forEach(set => {
       if (!set.projectId || !set.taskId || set.percentage === null) {
         allInputsValid = false;
         return;
       }
     });
-  
+
     if (allInputsValid) {
       this.sets.forEach(set => {
         const projectTaskData: ProjectTaskData = {
@@ -224,7 +224,7 @@ export class AvailabiilityComponent implements OnInit {
       this.toastr.error('Please fill in all fields for each set.', 'Error');
     }
   }
-  
+
   clearSets(): void {
     this.sets = [{ projectId: '', taskId: '', percentage: null, Tasks: [] }];
     this.searchText = [''];
@@ -232,7 +232,7 @@ export class AvailabiilityComponent implements OnInit {
     this.dropdownOpen = [false];
     this.selectedProjectNames = [''];
   }
-  
+
 
   deleteContent() {
     this.router.navigate(['/pages-body/sprint-management/createform/availableResources']);
@@ -243,9 +243,9 @@ export class AvailabiilityComponent implements OnInit {
   }
 
   isHoliday(date: NgbDateStruct): boolean {
-    return this.holidays.some(holiday => 
-      holiday.year === date.year && 
-      holiday.month === date.month && 
+    return this.holidays.some(holiday =>
+      holiday.year === date.year &&
+      holiday.month === date.month &&
       holiday.day === date.day
     );
   }
