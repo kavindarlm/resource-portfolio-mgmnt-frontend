@@ -71,5 +71,13 @@ export class ApiServiceService {
     return this.http.get(`http://localhost:3000/resource/holiday/${resourceId}`);
   }
 
+  isTodayAHoliday(): Observable<{ isHoliday: boolean }> {
+    return this.http.get<{ isHoliday: boolean }>(`${this.apiUrl}/is-today-holiday`);
+  }
+
+  getCountOfResourcesWithHolidayToday(): Observable<number> {
+    return this.http.get<number>(`http://localhost:3000/resource-holiday/count/today`);
+  }
+
 
 }

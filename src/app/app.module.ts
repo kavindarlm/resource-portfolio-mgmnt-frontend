@@ -103,6 +103,8 @@ import { UpdateAllocationPercentageComponent } from './Handle_Request/update-all
 import { UpdateAllocatedTaskComponent } from './Handle_Request/update-allocated-task/update-allocated-task.component';
 import { AvailableResListComponent } from './Handle_Request/available-res-list/available-res-list.component';
 import { AvailabilityInfoComponent } from './Handle_Request/availability-info/availability-info.component';
+import { TodayStatusComponent } from './calender-management/today-status/today-status.component';
+import { AllTeamViewComponent } from './team-management/all-team-view/all-team-view.component';
 
 @NgModule({
   declarations:[
@@ -191,6 +193,8 @@ import { AvailabilityInfoComponent } from './Handle_Request/availability-info/av
     UpdateAllocatedTaskComponent,
     AvailableResListComponent,
     AvailabilityInfoComponent,
+    TodayStatusComponent,
+    AllTeamViewComponent,
     
   ],
   imports: [

@@ -61,6 +61,7 @@ import { UpdateAllocationPercentageComponent } from './Handle_Request/update-all
 import { UpdateAllocatedTaskComponent } from './Handle_Request/update-allocated-task/update-allocated-task.component';
 import { AvailableResListComponent } from './Handle_Request/available-res-list/available-res-list.component';
 import { AvailabilityInfoComponent } from './Handle_Request/availability-info/availability-info.component';
+import { TodayStatusComponent } from './calender-management/today-status/today-status.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -127,21 +128,27 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'calendertypecomponent', component: CalenderTypeComponent,
+        path: 'todayStatus',
+        component: TodayStatusComponent,
         canActivate: [FunctionGuardService],
         data: { functionId: 4 },
         children: [
-          { path: 'calendermainbox', component: CalenderMainBoxComponent },
-          { path: 'commoncalender/:type', component: CommonCalenderComponent },
           {
-            path: 'resourcelist', component: ResourceListComponent,
+            path: 'calendertypecomponent',
+            component: CalenderTypeComponent,
             children: [
-              { path: 'resourceleave/:id', component: ResourceLeaveComponent }
+              { path: 'calendermainbox', component: CalenderMainBoxComponent },
+              { path: 'commoncalender/:type', component: CommonCalenderComponent },
+              {
+                path: 'resourcelist',
+                component: ResourceListComponent,
+                children: [
+                  { path: 'resourceleave/:id', component: ResourceLeaveComponent }
+                ]
+              }
             ]
           }
-
         ]
-
       },
       {
         path: 'first-view', component: FirstViewComponent,
