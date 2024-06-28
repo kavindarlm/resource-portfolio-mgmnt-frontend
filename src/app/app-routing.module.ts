@@ -84,7 +84,10 @@ const routes: Routes = [
           { path: 'dashboard-projectdetails/:id', component: DashbrdProjectDetailsComponent }
         ]
       },
-      { path: 'projectsview' , component: ProjectsViewComponent},
+      { path: 'projectsview' , component: ProjectsViewComponent,
+        canActivate: [FunctionGuardService],
+        data: { functionId: 6 },
+      },
       {path: 'projectlist', component: ProjectListComponent,
         canActivate: [FunctionGuardService],
         data: { functionId: 6 },
@@ -93,7 +96,10 @@ const routes: Routes = [
           { path: 'updatePoject/:id', component: UpdateProjectComponent }
         ]
       },
-      {path: 'projectTaskview', component: TaskProjectViewComponent},
+      {path: 'projectTaskview', component: TaskProjectViewComponent,
+        canActivate: [FunctionGuardService],
+        data: { functionId: 7 },
+      },
       {
         path: 'TaskProjectList', component: TaskProjectListComponent,
         canActivate: [FunctionGuardService],
