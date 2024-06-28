@@ -31,9 +31,10 @@ export class SprintDetailsComponent implements OnInit, OnDestroy {
   currentPage: number = 1;
   pageSize: number = 5; // Number of items per page
 
-  // Subscription for resource allocation deletion
+  // Subscriptions
   private resourceAllocationDeletedSubscription!: Subscription;
-
+  private percentageUpdatedSubscription!: Subscription;
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -54,9 +55,15 @@ export class SprintDetailsComponent implements OnInit, OnDestroy {
     this.sharedService.sprintUpdated$.subscribe(() => {
       this.fetchAndPopulateResourcesOfSprint();
     });
+    
 
     // Subscribe to resourceAllocationDeleted$ to refresh data upon resource allocation deletion
     this.resourceAllocationDeletedSubscription = this.sharedService.resourceAllocationDeleted$.subscribe(() => {
+      this.fetchAndPopulateResourcesOfSprint();
+    });
+
+    // Subscribe to percentageUpdated$ to refresh data after percentage update
+    this.percentageUpdatedSubscription = this.sharedService.percentageUpdated$.subscribe(() => {
       this.fetchAndPopulateResourcesOfSprint();
     });
   }
@@ -64,6 +71,7 @@ export class SprintDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     // Unsubscribe from all subscriptions to avoid memory leaks
     this.resourceAllocationDeletedSubscription.unsubscribe();
+    this.percentageUpdatedSubscription.unsubscribe();
   }
 
   fetchSprintData(): void {
@@ -170,4 +178,7 @@ export class SprintDetailsComponent implements OnInit, OnDestroy {
   getPaginationArray(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
+
+  
 }
+

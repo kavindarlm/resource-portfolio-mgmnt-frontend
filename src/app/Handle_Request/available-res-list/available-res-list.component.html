@@ -1,27 +1,25 @@
-<div class="container justify-content-center border rounded p-2 col-lg-12 col-md-12 col-sm-12">
-    <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Available Resource List
-    </div>
+<div class="container border rounded p-2">
+    <div class="border rounded text-center mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Available Resource List</div>
+    
     <div class="row mx-auto mb-2 mt-3">
-        <div class="col">
-            <div class="gap-2 col text mx-auto mb-2 mt-3 d-flex align-items-center">
+        <div class="col-12 col-md-6 mb-3">
+            <div class="d-flex align-items-center">
                 <select class="form-select" [(ngModel)]="teamFilter" (ngModelChange)="filterResources()">
-                    <!-- Placeholder for filtering by Team Name -->
                     <option value="" disabled selected>Filter by: Team Name</option>
                     <option *ngFor="let team of teams" [value]="team">{{ team }}</option>
                 </select>
-                <button class="btn border-0" *ngIf="teamFilter" (click)="resetTeamFilter()">
+                <button class="btn border-0 ms-2" *ngIf="teamFilter" (click)="resetTeamFilter()">
                     <i class="bi bi-x fa-lg btn-reset"></i>
                 </button>
             </div>
         </div>
-        <div class="col">
-            <div class="gap-2 col rounded text mx-auto mb-2 mt-3 d-flex align-items-center">
+        <div class="col-12 col-md-6 mb-3">
+            <div class="d-flex align-items-center">
                 <select class="form-select" [(ngModel)]="orgUnitFilter" (ngModelChange)="filterResources()">
-                    <!-- Placeholder for filtering by Org.Unit -->
                     <option value="" disabled selected>Filter by: Org.Unit</option>
                     <option *ngFor="let orgunit of OrgUnit" [value]="orgunit">{{ orgunit }}</option>
                 </select>
-                <button class="btn border-0" *ngIf="orgUnitFilter" (click)="resetOrgUnitFilter()">
+                <button class="btn border-0 ms-2" *ngIf="orgUnitFilter" (click)="resetOrgUnitFilter()">
                     <i class="bi bi-x fa-lg btn-reset"></i>
                 </button>
             </div>
@@ -30,7 +28,6 @@
 
     <div class="table-responsive" style="height: 400px;">
         <table class="table table-bordered table-striped table-hover table-sm text-center">
-            <!-- Table header -->
             <thead class="thead-dark fs-6 fst-normal">
                 <tr>
                     <th class="text" scope="col">Resource ID</th>
@@ -40,9 +37,7 @@
                     <th class="text" scope="col">Availability</th>
                 </tr>
             </thead>
-            <!-- Table body -->
             <tbody>
-                <!-- Iterate over paginatedContents to populate table rows -->
                 <ng-container *ngFor="let items of paginatedContents">
                     <tr (click)="navigateToAvailabilityInfo(sprintId, items.Resource_ID, items.Availability)">
                         <td>{{ items.Resource_ID }}</td>
@@ -56,8 +51,6 @@
         </table>
     </div>
 
-
-    <!-- Pagination -->
     <nav>
         <ul class="pagination justify-content-center">
             <li class="page-item" [class.disabled]="currentPage === 1">
@@ -65,8 +58,7 @@
                     <span aria-hidden="true">&lsaquo;</span>
                 </button>
             </li>
-            <li class="page-item" *ngFor="let page of totalPagesArray; let i = index"
-                [class.active]="currentPage === (i + 1)">
+            <li class="page-item" *ngFor="let page of totalPagesArray; let i = index" [class.active]="currentPage === (i + 1)">
                 <button class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</button>
             </li>
             <li class="page-item" [class.disabled]="currentPage === totalPages">
@@ -77,4 +69,5 @@
         </ul>
     </nav>
 </div>
+
 <router-outlet></router-outlet>

@@ -8,6 +8,7 @@ import { catchError } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { ApiServiceService } from '../../calender-management/shared/api-service.service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { SharedService } from '../services/shared.service';
 
 interface TaskWithProjectInfo {
   resourceAllocationId: number;
@@ -43,8 +44,9 @@ export class UpdatePercentageComponent implements OnInit {
     private resourceAllocationService: ResourceAllocationService,
     private taskApiService: taskApiService,
     private toastr: ToastrService,
-    private ApiServiceService: ApiServiceService
-  ) { }
+    private ApiServiceService: ApiServiceService,
+    private SharedService: SharedService
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -53,8 +55,10 @@ export class UpdatePercentageComponent implements OnInit {
       this.fetchData();
       this.fetchHolidays(this.resourceId); // Fetch holidays for the resource
     });
-    this.route.queryParams.subscribe(params => {
-      this.availabilityPercentage = params['availability'];
+
+    // Subscribe to percentageUpdated$ to refresh availabilityPercentage after update
+    this.SharedService.percentageUpdated$.subscribe(() => {
+      this.fetchData(); // Refresh data after percentage update
     });
   }
 
@@ -76,6 +80,9 @@ export class UpdatePercentageComponent implements OnInit {
         const sprintTaskIds = sprintAllocations.map(allocation => allocation.task.taskid);
         this.commonTaskIds = this.getCommonTaskIds(this.taskIds, sprintTaskIds);
         this.fetchProjectInfoForCommonTasks();
+
+        // Calculate availabilityPercentage
+        this.calculateAvailabilityPercentage();
       },
       error => {
         console.error('Error fetching data:', error);
@@ -172,22 +179,37 @@ export class UpdatePercentageComponent implements OnInit {
   }
 
   updatePercentage(): void {
-    // Loop through tasksWithProjectInfo and call updateResourceAllocation for each task
-    this.tasksWithProjectInfo.forEach(taskInfo => {
-      // Only update the resource allocation if it's marked as updated locally
-      if (taskInfo.isUpdated) {
-        this.resourceAllocationService.updateResourceAllocationPercentage(taskInfo.resourceAllocationId, { percentage: taskInfo.percentage })
-          .subscribe(
-            (updatedResourceAllocation) => {
-              this.toastr.success('Percentage updated successfully!', 'Success');
-              taskInfo.isUpdated = false; // Reset the local update status after successful update
-            },
-            (error) => {
-              this.toastr.error('Error updating percentage. Please try again.', 'Error');
-            }
-          );
+    const updateRequests = this.tasksWithProjectInfo
+      .filter(taskInfo => taskInfo.isUpdated)
+      .map(taskInfo =>
+        this.resourceAllocationService.updateResourceAllocationPercentage(taskInfo.resourceAllocationId, { percentage: taskInfo.percentage }).pipe(
+          catchError(error => {
+            this.toastr.error('Error updating percentage. Please try again.', 'Error');
+            return of(null);
+          })
+        )
+      );
+
+    forkJoin(updateRequests).subscribe(
+      () => {
+        this.toastr.success('Percentages updated successfully!', 'Success');
+        this.tasksWithProjectInfo.forEach(taskInfo => {
+          if (taskInfo.isUpdated) {
+            taskInfo.isUpdated = false; // Reset the local update status after successful update
+          }
+        });
+        this.calculateAvailabilityPercentage(); // Recalculate availabilityPercentage after updates
+        this.SharedService.notifyPercentageUpdated(); // Notify SharedService
+      },
+      error => {
+        console.error('Error updating percentages:', error);
       }
-    });
+    );
+  }  
+
+  calculateAvailabilityPercentage(): void {
+    const totalAllocation = this.tasks.reduce((total, task) => total + (task.resourceAllocation.percentage || 0), 0);
+    this.availabilityPercentage = totalAllocation;
   }
 
   deleteContent() {

@@ -1,28 +1,43 @@
 .text {
     color: #1e3895;
-  }
-  
-  /* Button hover color change */
-  .hover:hover {
+}
+
+/* Button hover color change */
+.hover:hover {
     background: #1e3895;
-    color: #ffffff; 
-    border-color: #1e3895; 
-  }
-  
-  .custom,
-  th{
-      color: #1e3895e1;
-      font-weight: 500;
-  }
-  
-  td{
-      color:rgba(0, 0, 255, 0.575);
-      font-weight: 300;
-  }
-  
-  .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-      background-color: #3b5edd;
-      color: white;
-      cursor: pointer;
-  }
-  
+    color: #ffffff;
+    border-color: #1e3895;
+}
+
+.custom,
+th {
+    color: #1e3895e1;
+    font-weight: 500;
+}
+
+td {
+    color: rgba(0, 0, 255, 0.575);
+    font-weight: 300;
+}
+
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+    background-color: #3b5edd;
+    color: white;
+    cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .fw-bold .fa-2x {
+        font-size: 1.5rem;
+    }
+
+    .pagination {
+        flex-wrap: wrap;
+    }
+
+    .page-item {
+        margin: 0 2px;
+    }
+}

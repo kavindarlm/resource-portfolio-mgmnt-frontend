@@ -54,7 +54,13 @@ export class SprintMgtComponent implements OnInit {
     this.sharedService.resourceAllocationDeleted$.subscribe(() => {
       this.fetchSprintData();
     });
+
+    // Subscribe to percentage updates
+    this.sharedService.percentageUpdated$.subscribe(() => {
+      this.fetchAndPopulateResourcesOfSprint();
+    });
   }
+
 
 
   fetchSprintData(): void {
@@ -95,7 +101,7 @@ export class SprintMgtComponent implements OnInit {
               });
             }
           });
-  
+
           // Fetch tasks for each resource to calculate availability
           const availabilityObservables = Array.from(uniqueResources.values()).map(resource =>
             this.resourceAllocationService.getTasksByResourceId(resource.Resource_ID).pipe(
@@ -125,7 +131,7 @@ export class SprintMgtComponent implements OnInit {
           console.error('Error fetching and populating ResourcesOfSprint:', error);
         }
       );
-  }  
+  }
 
   onRowClick(resourceId: string): void {
     this.clickedResourceId = resourceId;

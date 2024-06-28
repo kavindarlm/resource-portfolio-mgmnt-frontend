@@ -30,6 +30,10 @@ export class SharedService {
   private resourceAllocationDeletedSubject = new Subject<void>();
   resourceAllocationDeleted$ = this.resourceAllocationDeletedSubject.asObservable();
 
+  private percentageUpdatedSubject = new Subject<void>();
+  percentageUpdated$ = this.percentageUpdatedSubject.asObservable();
+
+  
   constructor() {}
 
   notifyResourceAllocationDeleted(): void {
@@ -60,5 +64,9 @@ export class SharedService {
 
   notifyTaskUpdated(): void {
     this.taskUpdatedSubject.next();
+  }
+
+  notifyPercentageUpdated(): void {
+    this.percentageUpdatedSubject.next();
   }
 }
