@@ -60,6 +60,7 @@ import { UpdateAllocationPercentageComponent } from './Handle_Request/update-all
 import { UpdateAllocatedTaskComponent } from './Handle_Request/update-allocated-task/update-allocated-task.component';
 import { AvailableResListComponent } from './Handle_Request/available-res-list/available-res-list.component';
 import { AvailabilityInfoComponent } from './Handle_Request/availability-info/availability-info.component';
+import { AllSprintListComponent } from './Sprint_Management/all-sprint-list/all-sprint-list.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -176,6 +177,10 @@ const routes: Routes = [
             ]
           }
         ]
+      },
+      {path: 'all-sprints-view', component: AllSprintListComponent,
+        canActivate: [FunctionGuardService],
+        data: { functionId: 8 },
       },
       {
         path: 'sprint-management', component: ListComponent,
