@@ -1,75 +1,73 @@
 import { HttpClient } from '@angular/common/http';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, map } from 'rxjs';
 import { Holiday } from '../calender.model';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiServiceService {
 
-  private apiUrl = 'http://localhost:3000/holiday';
-
+  private apiUrl = environment.baseUrl // Global base URL
 
   constructor(private http: HttpClient) { }
 
-  // post public,bank,mercantile hoildays to all resourceIds
+  // post public,bank,mercantile holidays to all resourceIds
   addEvent(selectedDates: NgbDate[], holidayType: string): Observable<any> {
     const event = { selectedDates, holidayType };
-    return this.http.post(this.apiUrl, event);
+    return this.http.post(`${this.apiUrl}/holiday`, event);
   }
 
-  //new api to post resource holiday use if only if it is a holiday type of resource
+  // new api to post resource holiday use if only if it is a holiday type of resource
   resourceAddEvent(selectedDates: NgbDate[], holidayType: string, resourceIds: string[]): Observable<any> {
     const event = {
       selectedDates: selectedDates.map(date => ({ year: date.year, month: date.month, day: date.day })),
       holidayType,
       resourceIds
     };
-    return this.http.post(`${this.apiUrl}/resource`, event);
+    return this.http.post(`${this.apiUrl}/holiday/resource`, event);
   }
 
-  //get holiday by holiday type
+  // get holiday by holiday type
   getEvents(holidayType: string): Observable<Holiday[]> {
-    const url = `${this.apiUrl}/${holidayType}`;
+    const url = `${this.apiUrl}/holiday/${holidayType}`;
     return this.http.get<Holiday[]>(url);
   }
 
-  //get the resource holidays by resourceId
-  resourceGetEvents(resourceId: string) {
-    const url = `http://localhost:3000/resource-holiday/${resourceId}`;
+  // get the resource holidays by resourceId
+  resourceGetEvents(resourceId: string): Observable<any> {
+    const url = `${this.apiUrl}/resource-holiday/${resourceId}`;
     return this.http.get<any>(url);
   }
 
-  //update global holidays
+  // update global holidays
   updateHoliday(id: string, holidayData: any): Observable<Holiday[]> {
-    const url = `${this.apiUrl}/${id}`;
+    const url = `${this.apiUrl}/holiday/${id}`;
     return this.http.put(url, holidayData).pipe(
       map(response => response as Holiday[])
     );
   }
 
-  //delete global holidays
+  // delete global holidays
   deleteHoliday(id: string): Observable<any> {
-    const url = `${this.apiUrl}/${id}`;
+    const url = `${this.apiUrl}/holiday/${id}`;
     return this.http.delete(url);
   }
 
   deleteResourceHoliday(holy_id: string): Observable<any> {
-    const url = `${this.apiUrl}/resource-holiday/${holy_id}`;
+    const url = `${this.apiUrl}/holiday/resource-holiday/${holy_id}`;
     return this.http.delete(url);
   }
 
   // Method to get all resources to the table 
   getResources(): Observable<any> {
-    return this.http.get(`${this.apiUrl}`);
+    return this.http.get(`${this.apiUrl}/holiday`);
   }
 
-  //method to get resource details by id to resource calender
-  getResourceDetails(resourceId: string) {
-    return this.http.get(`http://localhost:3000/resource/holiday/${resourceId}`);
+  // method to get resource details by id to resource calendar
+  getResourceDetails(resourceId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/resource/holiday/${resourceId}`);
   }
-
-
 }
