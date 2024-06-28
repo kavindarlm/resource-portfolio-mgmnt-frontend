@@ -15,7 +15,8 @@ export class TaskProjectViewComponent {
   filteredProjects: datamodel[] = [];
   resourceNames: { [key: string]: string } = {};
   projectProgress: { [key: string]: number } = {};
-  Seachtext!: string;
+  searchText!: string;
+  selectedStatus: string = '';
 
   // Pagination properties
   currentPage: number = 1;
@@ -33,12 +34,12 @@ export class TaskProjectViewComponent {
     this.getProjectList();
   }
 
+  // Define the getProjectList method
   getProjectList() {
     this.projectService.getProjectList().subscribe((res) => {
       this.spinner.show();
       this.projectlist = res;
       this.filteredProjects = res;
-      this.spinner.hide();
       this.totalPages = Math.ceil(
         this.filteredProjects.length / this.itemsPerPage
       );
@@ -52,10 +53,13 @@ export class TaskProjectViewComponent {
         if (project.projectid) {
           this.getProjectProgrresById(project.projectid);
         }
+        
       });
+      this.spinner.hide();
     });
   }
 
+  // Define the getResourceName method
   getResourceName(resourceId: string) {
     this.taskApiService
       .getResourceNameByResourceId(resourceId)
@@ -66,6 +70,7 @@ export class TaskProjectViewComponent {
       });
   }
 
+  // Define the getCriticalityName method
   getCriticalityName(criticality_id: string | number) {
     if (criticality_id === 3) {
       return 'Low';
@@ -78,14 +83,17 @@ export class TaskProjectViewComponent {
     }
   }
 
+  // Define the getProjectProgressById method
   getProjectProgrresById(projectId: string) {
     this.taskApiService.getProjectProgress(projectId).subscribe((res) => {
       if (res) {
         this.projectProgress[projectId] = res;
+        this.onFilterChange();
       }
     });
   }
 
+  // Define the getProjectStatus method
   getProjectStatus(projectId: string): string {
     const progress = this.projectProgress[projectId];
     if (progress === 100) {
@@ -97,23 +105,35 @@ export class TaskProjectViewComponent {
     }
   }
 
+  // Define the onSearchChange method
   onSearchChange() {
-    if (this.Seachtext) {
-      this.filteredProjects =
-        this.projectlist?.filter((project) =>
-          project.projectName
-            .toLowerCase()
-            .includes(this.Seachtext.toLowerCase())
-        ) || [];
-    } else {
-      this.filteredProjects = this.projectlist || [];
+    this.onFilterChange();
+  }
+
+  // Define the onStatusChange method
+  onStatusChange() {
+    this.onFilterChange();
+  }
+
+  // Define the onFilterChange method
+  onFilterChange() {
+    let filtered = this.projectlist || [];
+    if (this.searchText) {
+      filtered = filtered.filter((project) =>
+        project.projectName.toLowerCase().includes(this.searchText.toLowerCase())
+      );
     }
-    this.totalPages = Math.ceil(
-      this.filteredProjects.length / this.itemsPerPage
-    );
+    if (this.selectedStatus) {
+      filtered = filtered.filter((project) => 
+        this.getProjectStatus(project.projectid) === this.selectedStatus
+      );
+    }
+    this.filteredProjects = filtered;
+    this.totalPages = Math.ceil(this.filteredProjects.length / this.itemsPerPage);
     this.currentPage = 1;
   }
 
+  // Define the getPaginatedProjects method
   getPaginatedProjects() {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     return this.filteredProjects.slice(
@@ -122,14 +142,17 @@ export class TaskProjectViewComponent {
     );
   }
 
+  // Define the changePage method
   changePage(page: number) {
     this.currentPage = page;
   }
 
+  // Define the onClickAddTask method
   onClickAddTask(projectId: string) {
     this.router.navigate(['/pages-body/TaskProjectList/projectTaskDetails/' + projectId + '/newTask/' + projectId]);
   }
 
+  // Define the onClickNavigateTo method
   onClickNavigateTo(projectId: string) {
     this.router.navigate(['/pages-body/TaskProjectList/projectTaskDetails/' + projectId]);
   }
