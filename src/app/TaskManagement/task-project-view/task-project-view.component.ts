@@ -4,6 +4,7 @@ import { taskApiService } from '../services/taskApi.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { datamodel } from '../../Project-management/create-project/modelproject';
+import { SidebarheaderServiceService } from '../../PageBody/side-bar-header-service/sidebarheader-service.service';
 
 @Component({
   selector: 'app-task-project-view',
@@ -27,10 +28,14 @@ export class TaskProjectViewComponent {
     private projectService: ApiService,
     private taskApiService: taskApiService,
     private router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private refreshData: SidebarheaderServiceService
   ) {}
 
   ngOnInit(): void {
+    this.refreshData.refreshSystem$.subscribe(() => {
+      this.getProjectList();
+    });
     this.getProjectList();
   }
 

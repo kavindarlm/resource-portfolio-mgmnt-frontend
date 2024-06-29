@@ -5,6 +5,7 @@ import { taskApiService } from '../../TaskManagement/services/taskApi.service';
 import { ResourceNameandId } from '../../TaskManagement/dataModels/projectModel';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { SidebarheaderServiceService } from '../../PageBody/side-bar-header-service/sidebarheader-service.service';
 
 @Component({
   selector: 'app-projects-view',
@@ -23,10 +24,13 @@ export class ProjectsViewComponent implements OnInit {
   itemsPerPage: number = 10;
   totalPages: number = 0;
 
-  constructor(private projectService: ApiService, private taskApiService: taskApiService, private router: Router,private spinner: NgxSpinnerService) { }
+  constructor(private projectService: ApiService, private taskApiService: taskApiService, private router: Router,private spinner: NgxSpinnerService, private refreshData: SidebarheaderServiceService) { }
 
   ngOnInit(): void {
     this.getProjectList();
+    this.refreshData.refreshSystem$.subscribe(() => {
+      this.getProjectList();
+    });
   }
 
   getProjectList(){
