@@ -12,23 +12,19 @@
                         </span> -->
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="d-flex justify-content-end">
-                        <button class="btn btn-outline-primary custom-button btn-sm w-50" routerLink="/pages-body/sprint-management/createform">Add New Sprint</button>
-                    </div>
-                </div>
             </div>
 
             <div class="table-responsive">
                 <table class="table table-bordered table-striped table-hover table-sm text-center">
                     <thead class="thead-dark fs-6 fst-normal">
                         <tr>
-                            <th scope="col" class="col-12 col-md-2">Sprint Name</th>
+                            <th scope="col" class="col-12 col-md-1">Sprint Name</th>
                             <th scope="col" class="col-12 col-md-2">Sprint Start Date</th>
                             <th scope="col" class="col-12 col-md-2">Sprint End Date</th>
-                            <th scope="col" class="col-12 col-md-2">Status</th>
+                            <th scope="col" class="col-12 col-md-1">Status</th>
                             <th scope="col" class="col-12 col-md-2">Resource Count</th>
                             <th scope="col" class="col-12 col-md-2">Project Count</th>
+                            <th scope="col" class="col-12 col-md-2">Add Resources</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +35,7 @@
                             <td>{{ sprint.status }}</td>
                             <td>{{ sprint.resourceCount || 0 }}</td>
                             <td>{{ sprint.projectCount || 0 }}</td>
+                            <td><button class="btn btn-outline-primary custom-button btn-sm w-50" (click)="navigateToAddResources(sprint.sprint_id)">Add</button></td>
                         </tr>
                     </tbody>
                 </table>

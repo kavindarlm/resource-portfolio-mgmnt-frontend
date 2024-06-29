@@ -102,6 +102,7 @@ import { UpdateAllocatedTaskComponent } from './Handle_Request/update-allocated-
 import { AvailableResListComponent } from './Handle_Request/available-res-list/available-res-list.component';
 import { AvailabilityInfoComponent } from './Handle_Request/availability-info/availability-info.component';
 import { AllSprintListComponent } from './Sprint_Management/all-sprint-list/all-sprint-list.component';
+import { AllSprintDetailsComponent } from './Handle_Request/all-sprint-details/all-sprint-details.component';
 
 @NgModule({
   declarations:[
@@ -190,6 +191,7 @@ import { AllSprintListComponent } from './Sprint_Management/all-sprint-list/all-
     AvailableResListComponent,
     AvailabilityInfoComponent,
     AllSprintListComponent,
+    AllSprintDetailsComponent,
     
   ],
   imports: [

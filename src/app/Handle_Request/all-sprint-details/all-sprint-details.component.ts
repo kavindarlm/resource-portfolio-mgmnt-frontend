@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { sprintApiService } from '../services/sprintApi.service';
+import { sprintApiService } from '../../Sprint_Management/services/sprintApi.service';
 import { taskApiService } from '../../TaskManagement/services/taskApi.service';
-import { ResourceAllocationService } from '../services/resource-allocation.service';
+import { ResourceAllocationService } from '../../Sprint_Management/services/resource-allocation.service';
 import { forkJoin, map, of, switchMap } from 'rxjs';
 
 @Component({
-  selector: 'app-all-sprint-list',
-  templateUrl: './all-sprint-list.component.html',
-  styleUrls: ['./all-sprint-list.component.css']
+  selector: 'app-all-sprint-details',
+  templateUrl: './all-sprint-details.component.html',
+  styleUrl: './all-sprint-details.component.css'
 })
-export class AllSprintListComponent implements OnInit {
-  
+export class AllSprintDetailsComponent implements OnInit{
   Seachtext: string = ''; 
   sprints: any[] = [];
   filteredSprints: any[] = [];
@@ -89,12 +88,16 @@ export class AllSprintListComponent implements OnInit {
   }
 
   navigateToSprint(sprintId: number): void {
-    this.router.navigate([`/pages-body/sprint-management/sprintmgt/${sprintId}`]);
+    this.router.navigate([`/pages-body/handle-request/sprintDetails/${sprintId}`]);
+  }
+
+  navigateToAddResources(sprintId: number): void {
+    this.router.navigate([`/pages-body/handle-request/sprintDetails/${sprintId}/availableResourceList/${sprintId}`]);
   }
 
   onSearchChange(): void {
     if (!this.Seachtext) {
-      this.filteredSprints = this.sprints; // Reset to show all sprints if search text is empty
+      this.filteredSprints = this.sprints;
     } else {
       this.filteredSprints = this.sprints.filter(sprint =>
         sprint.sprint_name.toLowerCase().includes(this.Seachtext.toLowerCase())
@@ -103,5 +106,4 @@ export class AllSprintListComponent implements OnInit {
     this.totalPages = Math.ceil(this.filteredSprints.length / this.itemsPerPage);
     this.currentPage = 1;
   }
-  
 }

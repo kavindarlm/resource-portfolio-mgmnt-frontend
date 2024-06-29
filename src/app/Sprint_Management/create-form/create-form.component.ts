@@ -200,7 +200,6 @@ export class CreateFormComponent implements OnInit {
 
               if (uniqueAllocations.length === 0) {
                 // If no allocations to process, show success message and navigate
-                this.toastr.success('Sprint created successfully!', 'Success');
                 this.router.navigate(['/pages-body/sprint-management/createform']);
                 this.sharedService.notifySprintCreated();
                 this.clearResources(); // Clear resources after success
