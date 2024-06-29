@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ResourceService } from '../../team-management/shared/resource.service';
 import { ServiceService } from '../../team-management/shared/service.service';
 import { ResourceAllocationService } from '../services/resource-allocation.service';
+import { OrgUnitMgtService } from '../../shared/orgUnitMgt_services/orgUnitMgt.service';
 import { forkJoin, map } from 'rxjs';
 
 @Component({
@@ -10,31 +11,45 @@ import { forkJoin, map } from 'rxjs';
   templateUrl: './available-resource-list.component.html',
   styleUrls: ['./available-resource-list.component.css']
 })
+
+
 export class AvailableResourceListComponent implements OnInit {
 
   resources: any[] = [];
   filteredContents: any[] = [];
   paginatedContents: any[] = [];
   teams: string[] = [];
-  OrgUnit: string[] = ['Development', 'Quality Assurance', 'Product Management'];
   teamFilter: string = '';
   orgUnitFilter: string = '';
   currentPage: number = 1;
   itemsPerPage: number = 5;
   totalPages: number = 0;
   totalPagesArray: number[] = [];
-
+  orgUnits: any[] = [];
 
   constructor(
     private resourceService: ResourceService,
     private serviceService: ServiceService,
     private ResourceAllocationService: ResourceAllocationService,
-    private router: Router
+    private router: Router,
+    private OrgUnitMgtService:OrgUnitMgtService
   ) { }
 
   ngOnInit(): void {
     this.fetchResources();
     this.fetchTeamNames();
+    this.fetchOrgUnits(); // Fetch organizational units on component initialization
+  }
+
+  fetchOrgUnits(): void {
+    this.OrgUnitMgtService.getOrgUnits().subscribe(
+      (data: any[]) => {
+        this.orgUnits= data.map(orgUnit => orgUnit.unitName); // Extract unitName from each object
+      },
+      error => {
+        console.error('Error fetching organizational units:', error);
+      }
+    );
   }
 
   fetchResources(): void {

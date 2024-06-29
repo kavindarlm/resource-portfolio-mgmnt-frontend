@@ -16,15 +16,15 @@
       <div class="col-md-6">
         <div class="gap-2 col rounded text mx-auto mb-2 mt-3 d-flex align-items-center">
           <select class="form-select" [(ngModel)]="orgUnitFilter" (ngModelChange)="filterResources()">
-            <!-- Placeholder for filtering by Org.Unit -->
             <option value="" disabled selected>Filter by: Org.Unit</option>
-            <option *ngFor="let orgunit of OrgUnit" [value]="orgunit">{{ orgunit }}</option>
+            <option *ngFor="let orgunit of orgUnits" [value]="orgunit">{{ orgunit }}</option>
           </select>
           <button class="btn border-0" *ngIf="orgUnitFilter" (click)="resetOrgUnitFilter()">
             <i class="bi bi-x fa-lg btn-reset"></i>
           </button>
         </div>
       </div>
+      
     </div>  
   
     <!-- Display filtered contents -->

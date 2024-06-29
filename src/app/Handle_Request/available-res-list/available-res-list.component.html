@@ -13,17 +13,17 @@
                 </button>
             </div>
         </div>
-        <div class="col-12 col-md-6 mb-3">
-            <div class="d-flex align-items-center">
-                <select class="form-select" [(ngModel)]="orgUnitFilter" (ngModelChange)="filterResources()">
-                    <option value="" disabled selected>Filter by: Org.Unit</option>
-                    <option *ngFor="let orgunit of OrgUnit" [value]="orgunit">{{ orgunit }}</option>
-                </select>
-                <button class="btn border-0 ms-2" *ngIf="orgUnitFilter" (click)="resetOrgUnitFilter()">
-                    <i class="bi bi-x fa-lg btn-reset"></i>
-                </button>
+        <div class="col-md-6">
+            <div class="gap-2 col rounded text mx-auto mb-2 d-flex align-items-center">
+              <select class="form-select" [(ngModel)]="orgUnitFilter" (ngModelChange)="filterResources()">
+                <option value="" disabled selected>Filter by: Org.Unit</option>
+                <option *ngFor="let orgunit of orgUnits" [value]="orgunit">{{ orgunit }}</option>
+              </select>
+              <button class="btn border-0" *ngIf="orgUnitFilter" (click)="resetOrgUnitFilter()">
+                <i class="bi bi-x fa-lg btn-reset"></i>
+              </button>
             </div>
-        </div>
+          </div>
     </div>
 
     <div class="table-responsive" style="height: 400px;">

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ResourceService } from '../../team-management/shared/resource.service';
 import { ServiceService } from '../../team-management/shared/service.service';
 import { ResourceAllocationService } from '../../Sprint_Management/services/resource-allocation.service';
+import { OrgUnitMgtService } from '../../shared/orgUnitMgt_services/orgUnitMgt.service';
 import { forkJoin, map } from 'rxjs';
 
 @Component({
@@ -17,7 +18,7 @@ export class AvailableResListComponent implements OnInit {
   filteredContents: any[] = [];
   paginatedContents: any[] = [];
   teams: string[] = [];
-  OrgUnit: string[] = ['Development', 'Quality Assurance', 'Product Management'];
+  orgUnits: any[] = [];
   teamFilter: string = '';
   orgUnitFilter: string = '';
   currentPage: number = 1;
@@ -30,7 +31,8 @@ export class AvailableResListComponent implements OnInit {
     private router: Router,
     private resourceService: ResourceService,
     private serviceService: ServiceService,
-    private resourceAllocationService: ResourceAllocationService
+    private resourceAllocationService: ResourceAllocationService,
+    private OrgUnitMgtService:OrgUnitMgtService
   ) { }
 
   ngOnInit(): void {
@@ -38,8 +40,22 @@ export class AvailableResListComponent implements OnInit {
       this.sprintId = params['sprintId'];
       this.fetchResources();
       this.fetchTeamNames();
+      this.fetchOrgUnits();
     });
   }
+
+  
+  fetchOrgUnits(): void {
+    this.OrgUnitMgtService.getOrgUnits().subscribe(
+      (data: any[]) => {
+        this.orgUnits= data.map(orgUnit => orgUnit.unitName); // Extract unitName from each object
+      },
+      error => {
+        console.error('Error fetching organizational units:', error);
+      }
+    );
+  }
+
 
   fetchResources(): void {
     this.resourceService.getResourcesForSprint().subscribe(
