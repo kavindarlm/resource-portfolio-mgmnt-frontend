@@ -2,29 +2,43 @@
     color: rgb(227, 113, 113);
   }
   
-  .custom-day {
-    position: relative;
+  .calendar-container {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.ngb-dp-day,
+.ngb-dp-month,
+.ngb-dp-year {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+}
+
+.custom-day {
     display: inline-block;
     width: 2rem;
     height: 2rem;
-    text-align: center;
     line-height: 2rem;
-  }
-  
-  .custom-day.holiday {
-    border-color: rgb(227, 113, 113);
-    color: rgb(227, 113, 113);
-  }
-  
-  .custom-day.holiday::after {
-    content: '✖';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1.2rem;
-  }
-  
+    text-align: center;
+    border-radius: .25rem;
+}
+
+.custom-day.focused {
+    background-color: #e6e6e6;
+}
+
+.custom-day.holiday {
+    background-color: #f9d6d5;
+}
+
+@media (max-width: 576px) {
+    .calendar-container {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+}
+
   .slider {
     width: 90%;
     height: 20px;
@@ -78,3 +92,32 @@
     border: none;
     padding: 0.375rem 0.75rem;
   }
+  .initials-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    /* Initial width for larger screens */
+    height: 60px;
+    /* Initial height for larger screens */
+    border-radius: 50%;
+    background-color: #007bff;
+    /* Change background color as needed */
+    color: white;
+    /* Text color */
+    font-size: 1rem;
+    /* Adjust font size as needed */
+    margin: auto;
+    /* Center the circle horizontally */
+}
+
+@media (max-width: 576px) {
+    .initials-circle {
+        width: 60px;
+        /* Adjust width for smaller screens */
+        height: 60px;
+        /* Adjust height for smaller screens */
+        font-size: 1.5rem;
+        /* Adjust font size for smaller screens */
+    }
+}

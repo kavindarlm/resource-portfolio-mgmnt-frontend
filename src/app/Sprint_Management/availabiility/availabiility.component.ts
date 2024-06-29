@@ -249,4 +249,11 @@ export class AvailabiilityComponent implements OnInit {
       holiday.day === date.day
     );
   }
+
+  getInitials(fullName: string): string {
+    const names = fullName.split(' ');
+    const initials = names.slice(0, 2).map(name => name.charAt(0)).join('');
+    return initials.toUpperCase();
+  }
 }
+

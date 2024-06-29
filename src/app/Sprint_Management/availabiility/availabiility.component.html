@@ -1,5 +1,5 @@
 <div class="border rounded container p-2 mt-2">
-  <div class="row align-items-center"> <!-- Added align-items-center to vertically center content -->
+  <div class="row align-items-center">
     <div class="col-md-11">
       <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Availability</div>
     </div>
@@ -10,7 +10,13 @@
     </div>
   </div>
   <div class="row rounded border m-2 p-2">
-    <div class="col-lg-6 col-md-12 mb-3">
+    <div class="col-lg-6 col-md-12 mb-3 text-center">
+      <div class="border rounded m-3 p-2">
+        <div class="initials-circle">{{ getInitials(resourceDetails.resourceName) }}</div>
+        <div class=" mt-2">{{ resourceDetails.resourceId }}</div>
+        <div class="text-primary">{{ resourceDetails.resourceName }}</div>
+        <div class="text-black-50">{{ resourceDetails.job_role?.roleName }}</div>
+      </div>  
       <div class="text-center justify-content-center">
         <div class="border rounded text-center col-12 mb-3 mt-3 pt-1 pb-1 text-white bg-primary bg-opacity-50">
           Current Percentage
@@ -58,16 +64,12 @@
         <div class="col-4">{{ detail.percentage }}%</div>
       </div>
       <div *ngFor="let set of sets; let i = index" class="row mb-1">
-        <div class="form-group col-3 ms-1">
+        <div class="form-group col-md-3 col-12 ms-1">
           <div class="dropdown">
-            <button class="form-select" type="button" (click)="toggleDropdown(i)">
-              {{ selectedProjectNames[i] || 'Project' }}
-            </button>
+            <button class="form-select" type="button" (click)="toggleDropdown(i)">{{ selectedProjectNames[i] || 'Project' }}</button>
             <div class="dropdown-menu scrollable-dropdown" [class.show]="dropdownOpen[i]">
               <input type="text" [(ngModel)]="searchText[i]" placeholder="Search Projects" class="form-control mb-2" (input)="filterProjects(i)">
-              <button class="dropdown-item" *ngFor="let project of filteredProjects[i]" (click)="selectProject(i, project)">
-                {{ project.projectName }}
-              </button>
+              <button class="dropdown-item" *ngFor="let project of filteredProjects[i]" (click)="selectProject(i, project)">{{ project.projectName }}</button>
             </div>
           </div>
         </div>

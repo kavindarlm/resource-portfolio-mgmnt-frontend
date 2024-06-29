@@ -4,6 +4,7 @@ import { ResourceService } from '../../team-management/shared/resource.service';
 import { ServiceService } from '../../team-management/shared/service.service';
 import { ResourceAllocationService } from '../../Sprint_Management/services/resource-allocation.service';
 import { OrgUnitMgtService } from '../../shared/orgUnitMgt_services/orgUnitMgt.service';
+import { SharedService } from '../../Sprint_Management/services/shared.service';
 import { forkJoin, map } from 'rxjs';
 
 @Component({
@@ -32,7 +33,8 @@ export class AvailableResListComponent implements OnInit {
     private resourceService: ResourceService,
     private serviceService: ServiceService,
     private resourceAllocationService: ResourceAllocationService,
-    private OrgUnitMgtService:OrgUnitMgtService
+    private OrgUnitMgtService:OrgUnitMgtService,
+    private sharedService:SharedService
   ) { }
 
   ngOnInit(): void {
@@ -41,6 +43,9 @@ export class AvailableResListComponent implements OnInit {
       this.fetchResources();
       this.fetchTeamNames();
       this.fetchOrgUnits();
+    });
+    this.sharedService.resourceAdded$.subscribe(() => {
+      this.fetchResources();
     });
   }
 

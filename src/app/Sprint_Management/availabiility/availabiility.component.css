@@ -32,7 +32,7 @@
   .calendar-container {
     max-width: 100%;
     overflow-x: auto;
-  }
+  }}
 
   .slider {
     width: 90%;
@@ -74,12 +74,6 @@
     position: relative;
   }
 
-  .scrollable-dropdown {
-    max-height: 200px;
-    overflow-y: auto;
-  }
-}
-
 .Hover:hover {
   background: #1e3895;
   color: #ffffff;
@@ -88,4 +82,53 @@
 
 .highlighted-task {
   color: rgb(227, 113, 113);
+}
+.scrollable-dropdown {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+@media (max-width: 767px) {
+
+  .col-12,
+  .col-md-4,
+  .col-md-3,
+  .col-md-2 {
+      text-align: center;
+      margin-bottom: 10px;
+  }
+
+  .col-2 {
+      text-align: center;
+  }
+}
+
+.initials-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  /* Initial width for larger screens */
+  height: 60px;
+  /* Initial height for larger screens */
+  border-radius: 50%;
+  background-color: #007bff;
+  /* Change background color as needed */
+  color: white;
+  /* Text color */
+  font-size: 1rem;
+  /* Adjust font size as needed */
+  margin: auto;
+  /* Center the circle horizontally */
+}
+
+@media (max-width: 576px) {
+  .initials-circle {
+      width: 60px;
+      /* Adjust width for smaller screens */
+      height: 60px;
+      /* Adjust height for smaller screens */
+      font-size: 1.5rem;
+      /* Adjust font size for smaller screens */
+  }
 }

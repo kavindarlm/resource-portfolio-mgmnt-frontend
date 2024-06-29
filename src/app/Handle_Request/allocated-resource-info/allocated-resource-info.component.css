@@ -97,3 +97,32 @@ input[type="range"]::-webkit-slider-thumb {
     max-width: 100%;
   }
 }
+.initials-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  /* Initial width for larger screens */
+  height: 60px;
+  /* Initial height for larger screens */
+  border-radius: 50%;
+  background-color: #007bff;
+  /* Change background color as needed */
+  color: white;
+  /* Text color */
+  font-size: 1rem;
+  /* Adjust font size as needed */
+  margin: auto;
+  /* Center the circle horizontally */
+}
+
+@media (max-width: 576px) {
+  .initials-circle {
+      width: 60px;
+      /* Adjust width for smaller screens */
+      height: 60px;
+      /* Adjust height for smaller screens */
+      font-size: 1.5rem;
+      /* Adjust font size for smaller screens */
+  }
+}

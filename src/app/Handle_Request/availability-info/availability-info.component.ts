@@ -59,6 +59,7 @@ export class AvailabilityInfoComponent implements OnInit {
       this.fetchHolidays(this.resourceId);
     });
 
+    // Subscribe to query params to update availabilityPercentage
     this.route.queryParams.subscribe(queryParams => {
       this.availabilityPercentage = queryParams['availability'];
     });
@@ -71,6 +72,17 @@ export class AvailabilityInfoComponent implements OnInit {
     });
   }
 
+  // Function to calculate availability percentage based on sets
+  calculateAvailabilityPercentage(): void {
+    let totalPercentage = 0;
+    this.sets.forEach(set => {
+      if (set.percentage !== null) {
+        totalPercentage += set.percentage;
+      }
+    });
+    this.availabilityPercentage = totalPercentage;
+  }
+
   fetchResourceDetails(): void {
     this.resourceService.findOneResource(this.resourceId).subscribe(
       (data: any) => {
@@ -81,6 +93,7 @@ export class AvailabilityInfoComponent implements OnInit {
       }
     );
   }
+
 
   fetchTasksAndProjectsByResourceId(resourceId: string): void {
     this.taskProjectDetails = [];
@@ -214,51 +227,61 @@ export class AvailabilityInfoComponent implements OnInit {
     this.selectedProjectNames.splice(index, 1);
   }
 
+ 
   onAddClick(): void {
     // Check if any set is incomplete
     const invalidSet = this.sets.find(set => !set.projectId || !set.taskId || set.percentage === null);
-
+  
     if (invalidSet) {
       this.toastr.error('Please fill all fields (Project, Task, and Percentage) for each entry.', 'Error');
       return;
     }
-
+  
     // Proceed with adding data and creating resource allocations
-    this.sets.forEach(set => {
+    const requests = this.sets.map(set => {
       const projectTaskData: ProjectTaskData = {
         resourceId: this.resourceId,
         taskId: set.taskId,
         percentage: set.percentage
       };
       this.sharedService.addData(projectTaskData);
-
+  
       // Create resource allocation separately for each set
-      this.ResourceAllocationService.createResourceAllocation({
+      return this.ResourceAllocationService.createResourceAllocation({
         sprint_id: this.sprintId,
         resource_id: this.resourceId,
         task_id: set.taskId,
         percentage: set.percentage
-      }).subscribe(
-        () => {
-          this.toastr.success('Resource added successfully!', 'Success');
-          this.sharedService.notifySprintUpdated(); // Notify sprint update
-        },
-        error => {
-          this.toastr.error('Error creating resource allocation.', 'Error');
-          // Handle error as needed
-        }
-      );
+      });
     });
-
-    // Reset sets and related arrays after adding
-    this.sets = [{ projectId: '', taskId: '', percentage: null, Tasks: [] }];
-    this.searchText = [''];
-    this.filteredProjects = [this.Projects];
-    this.dropdownOpen = [false];
-    this.selectedProjectNames = [''];
-  }
-
-
+  
+    // Execute all requests concurrently
+    forkJoin(requests).subscribe(
+      () => {
+        // Calculate updated availability percentage
+        this.calculateAvailabilityPercentage();
+  
+        this.toastr.success('Resource added successfully!', 'Success');
+        this.sharedService.notifySprintUpdated(); // Notify sprint update
+        this.sharedService.notifyResourceAdded(); // Notify resource added
+  
+        // Clear sets after successful addition
+        this.sets = [{ projectId: '', taskId: '', percentage: null, Tasks: [] }];
+        this.searchText = [''];
+        this.filteredProjects = [this.Projects];
+        this.dropdownOpen = [false];
+        this.selectedProjectNames = [''];
+  
+        // Refetch data to update UI
+        this.fetchTasksAndProjectsByResourceId(this.resourceId);
+      },
+      error => {
+        this.toastr.error('Error creating resource allocation.', 'Error');
+        // Handle error as needed
+      }
+    );
+  }  
+  
   deleteContent() {
     this.router.navigate(['/pages-body/handle-request/sprintDetails', this.sprintId, 'availableResourceList', this.sprintId]);
   }
@@ -284,6 +307,5 @@ export class AvailabilityInfoComponent implements OnInit {
     const initials = names.slice(0, 2).map(name => name.charAt(0)).join('');
     return initials.toUpperCase();
   }
-
 
 }

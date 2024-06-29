@@ -215,4 +215,11 @@ export class UpdateAllocationPercentageComponent implements OnInit {
   deleteContent() {
     this.router.navigate(['/pages-body/handle-request/sprintDetails/', this.sprintId]);
   }
+
+  getInitials(fullName: string): string {
+    const names = fullName.split(' ');
+    const initials = names.slice(0, 2).map(name => name.charAt(0)).join('');
+    return initials.toUpperCase();
+  }
+  
 }

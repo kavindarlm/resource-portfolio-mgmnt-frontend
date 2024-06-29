@@ -75,6 +75,16 @@ input[type="range"]::-webkit-slider-thumb {
     position: relative;
 }
 
+.Hover:hover {
+    background: #1e3895;
+    color: #ffffff;
+    border-color: #1e3895;
+}
+
+.highlighted-task {
+    color: rgb(227, 113, 113);
+}
+
 .scrollable-dropdown {
     max-height: 200px;
     overflow-y: auto;

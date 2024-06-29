@@ -238,4 +238,11 @@ export class UpdateTaskInSprintComponent implements OnInit {
   deleteContent() {
     this.router.navigate(['/pages-body/sprint-management/sprintmgt/', this.sprintId]);
   }
+
+  getInitials(fullName: string): string {
+    const names = fullName.split(' ');
+    const initials = names.slice(0, 2).map(name => name.charAt(0)).join('');
+    return initials.toUpperCase();
+  }
+
 }
