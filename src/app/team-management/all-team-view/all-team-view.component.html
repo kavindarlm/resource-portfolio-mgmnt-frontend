@@ -26,14 +26,16 @@
         <table class="table table-bordered table-striped table-hover table-sm text-center">
           <thead class="thead-dark fs-6 fst-normal">
             <tr>
-              <th scope="col" class="col-12 col-md-6">Team Name</th>
-              <th scope="col" class="col-12 col-md-6">Team Description</th>
+              <th scope="col" class="col-12 col-md-4">Team Name</th>
+              <th scope="col" class="col-12 col-md-4">Team Description</th>
+              <th scope="col" class="col-12 col-md-4">Number of Resources</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let team of getPaginatedTeams()">
-              <td>{{ team.team_Name }}</td>
-              <td>{{ team.team_Description }}</td>
+            <tr *ngFor="let team of getPaginatedTeams()" (click)="onClickNavigateTo(team.teamId)" style="cursor: pointer;">
+              <td>{{ team.teamName }}</td>
+              <td>{{ team.teamDescription }}</td>
+              <td>{{ team.resourceCount }}</td>
             </tr>   
           </tbody>
         </table>

@@ -37,6 +37,6 @@ export class ResourceLeaveComponent {
   }
 
   public closeDiv() {
-    this.router.navigate(['pages-body/todayStatus/calendertypecomponent/resourcelist']);
+    this.router.navigate(['pages-body/calendertypecomponent/resourcelist']);
 }
 }

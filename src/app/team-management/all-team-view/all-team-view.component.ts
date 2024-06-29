@@ -57,12 +57,12 @@ export class AllTeamViewComponent {
     this.currentPage = page;
   }
 
-  onClick(){
-  //  this.router.navigate(['/pages-body/projectlist/createproject']); 
+  onClick(){ 
+  this.router.navigate(['/pages-body/teamlistcomponent']);
   }
 
-  onClickNavigateTo(projectId: string){
-    // this.router.navigate(['/pages-body/projectlist/updatePoject/'+projectId]);
+  onClickNavigateTo(teamId: number){
+    this.router.navigate(['/pages-body/teamlistcomponent/update/' + teamId]);
 
   }
 }
