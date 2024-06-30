@@ -6,16 +6,17 @@
           outsideDays="hidden" class="p-3 mb-2 border rounded"></ngb-datepicker>
 
         <ng-template #t let-date let-focused="focused">
-          <span class="custom-day" [class.focused]="focused" [class.selected]="isSelected(date)"
-            [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
-            (mouseleave)="hoveredDate = null">
+          <span class="custom-day" [class.focused]="focused" 
+                [class.selected]="isSelected(date)"
+                [class.public]="getHolidayType(date) === 'public'"
+                [class.bank]="getHolidayType(date) === 'bank'"
+                [class.mercantile]="getHolidayType(date) === 'mercantile'"
+                (mouseenter)="hoveredDate = date"
+                (mouseleave)="hoveredDate = null">
             {{ date.day }}
           </span>
         </ng-template>
 
-
-
-        <!-- Conditionally render the "Add" or "Edit" button based on actionType -->
         <div class="grid-item-button ">
           <div class="pic d-flex justify-content-center">
             <button class="addbtn btn border rounded text-center" *ngIf="actionType === 'add'"
