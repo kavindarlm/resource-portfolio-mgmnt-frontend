@@ -9,7 +9,7 @@ import { ResourceModel } from '../../resourceMgt/add-form/addformmodel';
   providedIn: 'root'
 })
 export class ResourceService {
-  clickedResource: any[]=[];
+  clickedResource: any[] = [];
   resourceListUpdated = new EventEmitter<void>();
 
   constructor(private http: HttpClient) { }
@@ -22,27 +22,32 @@ export class ResourceService {
     return this.clickedResource;
   }
 
+  //To get resources
   getResources() {
     return this.http.get<ResourceModel[]>("http://localhost:3000/resource");
   }
 
+  //To get resource by id
   getResource(id: string) {
     return this.http.get<ResourceModel>(`http://localhost:3000/resource/${id}`);
   }
 
-  createResource(data: ResourceModel){
-    return this.http.post<ResourceModel>("http://localhost:3000/resource",data);
+  //To create resource
+  createResource(data: ResourceModel) {
+    return this.http.post<ResourceModel>("http://localhost:3000/resource", data);
   }
 
-
+  //To update a resource
   updateResource(id: string, resourceData: ResourceModel) {
-    return this.http.put<ResourceModel>("http://localhost:3000/resource/"+id, resourceData);
+    return this.http.put<ResourceModel>("http://localhost:3000/resource/" + id, resourceData);
   }
 
+  //To delete a resource
   deleteResource(id: string): Observable<any> {
-    return this.http.delete<any>("http://localhost:3000/resource/"+id);
+    return this.http.delete<any>("http://localhost:3000/resource/" + id);
   }
 
+  //To get job role name
   getRoleName(roleId: number): Observable<string> {
     console.log(roleId);
     return this.http.get<string>(`http://localhost:3000/job-role/${roleId}`)
@@ -54,7 +59,8 @@ export class ResourceService {
         })
       );
   }
-  
+
+  //To get org unit name
   getUnitName(unitId: number): Observable<string> {
     return this.http.get<string>(`http://localhost:3000/org-unit/${unitId}`)
       .pipe(

@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OrganizationalUnitModel } from '../unit-form/unit-form.model';
-import { HttpClient } from '@angular/common/http';
 import { OrgUnitMgtService } from '../../shared/orgUnitMgt_services/orgUnitMgt.service';
-import { catchError, throwError } from 'rxjs';
-import { error } from 'console';
 import { OrgUnit } from './org-unitmodel';
 import { ScreenSizeService } from '../../shared/orgUnitMgt_services/screenSize.service';
 
@@ -34,7 +30,7 @@ export class UnitTreeComponent implements OnInit {
   }
 
   constructor(private orgUnitMgtService: OrgUnitMgtService,
-              private screenSizeService: ScreenSizeService
+    private screenSizeService: ScreenSizeService
   ) { }
   tr: any;
   fetchData(): void {
