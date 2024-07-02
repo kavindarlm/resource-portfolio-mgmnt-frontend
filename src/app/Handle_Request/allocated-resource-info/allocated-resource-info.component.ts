@@ -33,7 +33,7 @@ export class AllocatedResourceInfoComponent implements OnInit {
   sprintAllocations: any[] = [];
   tasksWithProjectInfo: TaskWithProjectInfo[] = [];
   commonTaskIds: string[] = [];
-  holidays: NgbDateStruct[] = []; // Store holidays
+  holidays: NgbDateStruct[] = [];
   availabilityPercentage: number = 0;
 
   deleteResourceAllocationId: number | null = null;
@@ -48,7 +48,7 @@ export class AllocatedResourceInfoComponent implements OnInit {
     private toastr: ToastrService,
     private ApiServiceService: ApiServiceService,
     private confirmDialogService: ConfirmDialogService,
-    private sharedService: SharedService // Inject SharedService
+    private sharedService: SharedService
   ) { }
 
   ngOnInit(): void {
@@ -110,7 +110,7 @@ export class AllocatedResourceInfoComponent implements OnInit {
           const taskId = this.commonTaskIds[index];
           if (!processedTaskIds.has(taskId)) {
             const task = this.tasks.find(task => task.resourceAllocation.task.taskid === taskId) ||
-                        this.sprintAllocations.find(allocation => allocation.task.taskid === taskId);
+              this.sprintAllocations.find(allocation => allocation.task.taskid === taskId);
             if (task) {
               this.tasksWithProjectInfo.push({
                 resourceAllocationId: task.resourceAllocation ? task.resourceAllocation.id : null,
@@ -181,4 +181,12 @@ export class AllocatedResourceInfoComponent implements OnInit {
   deleteContent() {
     this.router.navigate(['/pages-body/handle-request/sprintDetails/', this.sprintId]);
   }
+  
+  getInitials(fullName: string): string {
+    const names = fullName.split(' ');
+    const initials = names.slice(0, 2).map(name => name.charAt(0)).join('');
+    return initials.toUpperCase();
+  }
+
+
 }

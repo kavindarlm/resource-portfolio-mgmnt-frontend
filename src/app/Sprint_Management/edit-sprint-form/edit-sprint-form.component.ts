@@ -22,7 +22,7 @@ export class EditSprintFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router, 
+    private router: Router,
     private sprintApiService: sprintApiService,
     private sharedService: SharedService,
     private toastr: ToastrService,
@@ -35,7 +35,7 @@ export class EditSprintFormComponent implements OnInit {
 
   closepopup() {
     this.isVisible = false;
-    this.router.navigate(['/pages-body//sprint-management/sprintmgt/', this.sprintId]); 
+    this.router.navigate(['/pages-body//sprint-management/sprintmgt/', this.sprintId]);
   }
 
   ngOnInit(): void {
@@ -103,9 +103,9 @@ export class EditSprintFormComponent implements OnInit {
             error => {
               this.toastr.error('Error updating sprint. Please try again.', 'Error');
             }
-          ); 
+          );
         }
-      }); 
+      });
     }
   }
 }

@@ -1,39 +1,38 @@
-/* Button hover color change */
-.Hover:hover {
-    background: #1e3895;
-    color: #ffffff;
-    border-color: #1e3895;
+.calendar-container {
+    max-width: 100%;
+    overflow-x: auto;
 }
 
-.text {
-    color: #1e3895;
-}
-
-.highlighted-task {
-    color: rgb(227, 113, 113);
+.ngb-dp-day,
+.ngb-dp-month,
+.ngb-dp-year {
+    display: block;
+    width: 100%;
+    max-width: 100%;
 }
 
 .custom-day {
-    position: relative;
     display: inline-block;
     width: 2rem;
     height: 2rem;
-    text-align: center;
     line-height: 2rem;
+    text-align: center;
+    border-radius: .25rem;
+}
+
+.custom-day.focused {
+    background-color: #e6e6e6;
 }
 
 .custom-day.holiday {
-    border-color: rgb(227, 113, 113);
-    color: rgb(227, 113, 113);
+    background-color: #f9d6d5;
 }
 
-.custom-day.holiday::after {
-    content: '✖';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1.2rem;
+@media (max-width: 576px) {
+    .calendar-container {
+        max-width: 100%;
+        overflow-x: auto;
+    }
 }
 
 .slider {
@@ -46,11 +45,9 @@
     transition: opacity .2s;
     border-radius: 6px;
     margin-right: 100px;
-
 }
 
 input[type="range"] {
-
     -webkit-appearance: none;
     appearance: none;
     width: 90%;
@@ -60,25 +57,80 @@ input[type="range"] {
     border-radius: 16px;
 }
 
-/* Track: Mozilla Firefox */
 input[type="range"]::-moz-range-track {
     height: 15px;
     background: #A9BCFF;
     border-radius: 16px;
 }
 
-/* Thumb: webkit */
 input[type="range"]::-webkit-slider-thumb {
-    /* removing default appearance */
     -webkit-appearance: none;
     appearance: none;
-    /* creating a custom design */
     height: 20px;
     width: 20px;
     background-color: #007bff;
     border-radius: 50%;
     border: 2px solid #fdfdfd;
-    /*  slider progress trick  */
     box-shadow: -407px 0 0 400px #007bff;
     position: relative;
+}
+
+.Hover:hover {
+    background: #1e3895;
+    color: #ffffff;
+    border-color: #1e3895;
+}
+
+.highlighted-task {
+    color: rgb(227, 113, 113);
+}
+
+.scrollable-dropdown {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+@media (max-width: 767px) {
+
+    .col-12,
+    .col-md-4,
+    .col-md-3,
+    .col-md-2 {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .col-2 {
+        text-align: center;
+    }
+}
+
+.initials-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    /* Initial width for larger screens */
+    height: 60px;
+    /* Initial height for larger screens */
+    border-radius: 50%;
+    background-color: #007bff;
+    /* Change background color as needed */
+    color: white;
+    /* Text color */
+    font-size: 1rem;
+    /* Adjust font size as needed */
+    margin: auto;
+    /* Center the circle horizontally */
+}
+
+@media (max-width: 576px) {
+    .initials-circle {
+        width: 60px;
+        /* Adjust width for smaller screens */
+        height: 60px;
+        /* Adjust height for smaller screens */
+        font-size: 1.5rem;
+        /* Adjust font size for smaller screens */
+    }
 }
