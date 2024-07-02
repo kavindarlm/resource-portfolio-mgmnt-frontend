@@ -7,6 +7,7 @@ import { ResourceAllocationService } from '../services/resource-allocation.servi
 import { ResourceService } from '../../team-management/shared/resource.service';
 import { ToastrService } from 'ngx-toastr';
 import { forkJoin, map } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 interface ProjectTaskData {
   resourceId: string;
@@ -44,6 +45,7 @@ export class CreateFormComponent implements OnInit {
     private resourceService: ResourceService,
     private sharedService: SharedService,
     private resourceAllocationService: ResourceAllocationService,
+    private spinner: NgxSpinnerService,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -59,6 +61,7 @@ export class CreateFormComponent implements OnInit {
   }
 
   fetchResources(): void {
+    this.spinner.show();
     this.resourceService.getResourcesForSprint().subscribe(
       (data: any[]) => {
         this.tablecontents = data.filter(resource =>
@@ -72,6 +75,7 @@ export class CreateFormComponent implements OnInit {
         }));
         this.calculateAvailability();
         this.updatePagination(); // Update pagination after fetching resources
+        this.spinner.hide();
       },
       error => {
         console.error('Error fetching resources:', error);

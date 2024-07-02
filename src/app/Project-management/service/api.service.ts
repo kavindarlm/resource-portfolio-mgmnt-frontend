@@ -2,68 +2,74 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { criticalityModel, datamodel, resourceIdNameModel } from '../create-project/modelproject';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+  private baseUrl = environment.baseUrl; // Global base URL
 
-  constructor(private http:HttpClient) { }
-  //AddProject
-  addProject(data:datamodel): Observable<any>{
-    return this.http.post<datamodel>("http://localhost:3000/project",data);
-  }
-  //GetProjectDetails
-  getProjectList(): Observable<datamodel[]>{ 
-    return this.http.get<datamodel[]>("http://localhost:3000/project");
-  }
-  //FetchProjectDetails
-  fetchProject(id:string){ 
-    return this.http.get<datamodel>("http://localhost:3000/project/"+id)
-  }
-  //UpdateProjectDetails
-  updateProject(data: datamodel,id: string){ 
-    return this.http.put<datamodel>("http://localhost:3000/project/"+id,data);
+  constructor(private http: HttpClient) { }
+
+  // Add Project
+  addProject(data: datamodel): Observable<any> {
+    return this.http.post<datamodel>(`${this.baseUrl}/project`, data);
   }
 
-  //DeleteProject
-  deleteProject(id: string){
-    return this.http.delete<datamodel>("http://localhost:3000/project/"+id);
+  // Get Project List
+  getProjectList(): Observable<datamodel[]> {
+    return this.http.get<datamodel[]>(`${this.baseUrl}/project`);
   }
 
-  //Number of ongoing projects
-  getProjectCount(): Observable<number>{
-    return this.http.get<number>("http://localhost:3000/project/count/countprojects");
-  } 
-
-  //Number of ongoing HighCriticalProjects
-  getHighCriticalProjectCount(){
-    return this.http.get<number>("http://localhost:3000/project/high-criticality/count");
+  // Fetch Project Details
+  fetchProject(id: string) {
+    return this.http.get<datamodel>(`${this.baseUrl}/project/${id}`);
   }
 
-  //Number of ongoing LowCriticalProjects
-  getLowCriticalProjectCount(){
-    return this.http.get<number>("http://localhost:3000/project/low-criticality/count");
+  // Update Project Details
+  updateProject(data: datamodel, id: string) {
+    return this.http.put<datamodel>(`${this.baseUrl}/project/${id}`, data);
   }
 
-  //Number of ongoing MediumCriticalProjects
-  getMediumCriticalProjectCount(){
-    return this.http.get<number>("http://localhost:3000/project/Medium-criticality/count");
+  // Delete Project
+  deleteProject(id: string) {
+    return this.http.delete<datamodel>(`${this.baseUrl}/project/${id}`);
   }
 
-  //search Project
-  searchProject(projectName: string){
+  // Number of ongoing projects
+  getProjectCount(): Observable<number> {
+    return this.http.get<number>(`${this.baseUrl}/project/count/countprojects`);
+  }
+
+  // Number of ongoing High Critical Projects
+  getHighCriticalProjectCount() {
+    return this.http.get<number>(`${this.baseUrl}/project/high-criticality/count`);
+  }
+
+  // Number of ongoing Low Critical Projects
+  getLowCriticalProjectCount() {
+    return this.http.get<number>(`${this.baseUrl}/project/low-criticality/count`);
+  }
+
+  // Number of ongoing Medium Critical Projects
+  getMediumCriticalProjectCount() {
+    return this.http.get<number>(`${this.baseUrl}/project/Medium-criticality/count`);
+  }
+
+  // Search Project
+  searchProject(projectName: string) {
     const params = new HttpParams().set('s', projectName);
-    return this.http.get<datamodel[]>("http://localhost:3000/project/searchprojectName/search", {params});
+    return this.http.get<datamodel[]>(`${this.baseUrl}/project/searchprojectName/search`, { params });
   }
 
-  //GetCriticality
-  getCriticality(){
-    return this.http.get<criticalityModel[]>("http://localhost:3000/criticality");
+  // Get Criticality
+  getCriticality() {
+    return this.http.get<criticalityModel[]>(`${this.baseUrl}/criticality`);
   }
 
-  //Get Resource id and Name
+  // Get Resource id and Name
   getResourceNameAndId(): Observable<resourceIdNameModel[]> {
-    return this.http.get<resourceIdNameModel[]>('http://localhost:3000/project/getResoure/bynameAndId');
+    return this.http.get<resourceIdNameModel[]>(`${this.baseUrl}/project/getResoure/bynameAndId`);
   }
 }

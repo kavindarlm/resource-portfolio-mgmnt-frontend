@@ -1,89 +1,74 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { ResourceNameandId, TaskApiResponse, projectModel, taskModel, taskUpdateModel } from "../dataModels/projectModel";
 import { Observable } from "rxjs";
+import { ResourceNameandId, TaskApiResponse, projectModel, taskModel, taskUpdateModel } from "../dataModels/projectModel";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class taskApiService {
 
-  private baseUrl = 'http://localhost:3000/task';
+  private baseUrl = environment.baseUrl; // Base URL
 
   constructor(private http: HttpClient) { }
 
   getProjectInfoByTaskId(taskId: number): Observable<{ projectName: string, projectId: number } | null> {
-    const url = `${this.baseUrl}/${taskId}`;
-    // Specify the expected response type as JSON
-    return this.http.get<{ projectName: string, projectId: number } | null>(url);
-}
+    return this.http.get<{ projectName: string, projectId: number } | null>(`${this.baseUrl}/task/${taskId}`);
+  }
 
-  //Function for get projectList
   getProjectList() {
-    return this.http.get<projectModel[]>("http://localhost:3000/project");
+    return this.http.get<projectModel[]>(`${this.baseUrl}/project`);
   }
 
-  //Function for Fetch Project
   fetchProject(id: string) {
-    return this.http.get<projectModel>("http://localhost:3000/project/" + id)
+    return this.http.get<projectModel>(`${this.baseUrl}/project/${id}`);
   }
 
-  //Function for Get Task List
   getTaskList(id: string) {
-    return this.http.get<taskModel[]>("http://localhost:3000/task/project/" + id)
+    return this.http.get<taskModel[]>(`${this.baseUrl}/task/project/${id}`);
   }
 
-  //Function to Add Task
-  addTask(data: taskModel,id: string): Observable<TaskApiResponse>{
-    return this.http.post<TaskApiResponse>("http://localhost:3000/task/newtask/"+id,data);
+  addTask(data: taskModel, id: string): Observable<TaskApiResponse> {
+    return this.http.post<TaskApiResponse>(`${this.baseUrl}/task/newtask/${id}`, data);
   }
 
-  //Function to Get Task By Id
   getTaskByid(id: string) {
-    return this.http.get<taskModel>("http://localhost:3000/task/getTask/" + id);
+    return this.http.get<taskModel>(`${this.baseUrl}/task/getTask/${id}`);
   }
 
-  //Function to Update Task Persentage
   updatetaskPersentage(id: string, data: taskModel) {
-    return this.http.put<taskUpdateModel>("http://localhost:3000/task/" + id, data);
+    return this.http.put<taskUpdateModel>(`${this.baseUrl}/task/${id}`, data);
   }
 
-  //search Project
   searchProject(projectName: string) {
     const params = new HttpParams().set('s', projectName);
-    return this.http.get<projectModel[]>("http://localhost:3000/project/searchprojectName/search", { params });
+    return this.http.get<projectModel[]>(`${this.baseUrl}/project/searchprojectName/search`, { params });
   }
 
-  //Edit Task Details
-  editTaskDetails(id:string,data: taskModel){
-    return this.http.put<taskModel>("http://localhost:3000/task/updateTaskProgress/"+id,data);
+  editTaskDetails(id: string, data: taskModel) {
+    return this.http.put<taskModel>(`${this.baseUrl}/task/updateTaskProgress/${id}`, data);
   }
 
-  //Delete Task
-  deleteTask(id:string){
-    return this.http.delete<taskModel>("http://localhost:3000/task/deletetask/"+id);
+  deleteTask(id: string) {
+    return this.http.delete<taskModel>(`${this.baseUrl}/task/deletetask/${id}`);
   }
 
-  //Get the Task sum of task allocation percentage
-  getProjectTaskSumByProjectId(id: string){
-    return this.http.get<number>("http://localhost:3000/task/sum-allocation/"+id);
+  getProjectTaskSumByProjectId(id: string) {
+    return this.http.get<number>(`${this.baseUrl}/task/sum-allocation/${id}`);
   }
 
-  //Get the overoll Project Progress
   getProjectProgress(id: string): Observable<number> {
-    return this.http.get<number>("http://localhost:3000/task/project-progress/"+id);
+    return this.http.get<number>(`${this.baseUrl}/task/project-progress/${id}`);
   }
 
-  //Serch Task
-  searchTaskByName(taskName: string){
+  searchTaskByName(taskName: string) {
     const params = new HttpParams().set('s', taskName);
-    return this.http.get<taskModel[]>("http://localhost:3000/task/searchtaskName/search", { params });
+    return this.http.get<taskModel[]>(`${this.baseUrl}/task/searchtaskName/search`, { params });
   }
 
-  
-  //Get Resource Name by ResourceId
-  getResourceNameByResourceId(resourceId: string){
-    return this.http.get<ResourceNameandId>("http://localhost:3000/project/resourceNameById/"+resourceId);
+  getResourceNameByResourceId(resourceId: string) {
+    return this.http.get<ResourceNameandId>(`${this.baseUrl}/project/resourceNameById/${resourceId}`);
   }
   
 }

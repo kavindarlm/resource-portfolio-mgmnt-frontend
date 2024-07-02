@@ -6,6 +6,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class SidebarheaderServiceService {
+  // This is for the display of the header name
   private headerNameKey = 'selectedHeaderName';
   private headerNameSubject = new BehaviorSubject<string>('');
   constructor() {
@@ -30,6 +31,7 @@ export class SidebarheaderServiceService {
     this.sidebarActive.next();
   }
 
+  //This method for edit password component visibility
   private EditpasswordVisible = new BehaviorSubject<boolean>(false);
   EditpasswordVisible$ = this.EditpasswordVisible.asObservable();
 
@@ -58,5 +60,16 @@ export class SidebarheaderServiceService {
   clearHeaderName() {
     localStorage.removeItem(this.headerNameKey);
     this.headerNameSubject.next('');
+  }
+
+
+  //This service to refresh the all the system after clicking the refresh button, This
+  //will refresh the only the data in the system
+
+  private refreshSystemSource = new BehaviorSubject<void>(undefined);
+  refreshSystem$ = this.refreshSystemSource.asObservable();
+
+  refreshSystem() {
+    this.refreshSystemSource.next();
   }
 }

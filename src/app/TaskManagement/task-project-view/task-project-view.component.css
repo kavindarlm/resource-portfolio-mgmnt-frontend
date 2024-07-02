@@ -1,0 +1,43 @@
+.small-text {
+    font-size: 0.75rem;
+  }
+
+.row.no-gutters>[class^="col-"] {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.row.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.border{
+    border: 1px solid #1E3895;
+}
+.custom,
+th{
+    color: #1e3895e1;
+    font-weight: 500;
+}
+
+td{
+    color:rgba(0, 0, 255, 0.575);
+    font-weight: 300;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #3b5edd;
+    color: white;
+    cursor: pointer;
+}
+
+.custom-button{
+    border-color: #1E3895;
+    color: #1e3895e1;
+ }
+ 
+ .custom-button:hover{
+     background-color: #1E3895;
+     color: white;
+ }

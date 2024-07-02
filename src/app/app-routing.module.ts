@@ -42,7 +42,6 @@ import { FunctionGuardService } from './guard/function.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AllocatedResourceInformationComponent } from './Sprint_Management/allocated-resource-information/allocated-resource-information.component';
 import { UpdatePercentageComponent } from './Sprint_Management/update-percentage/update-percentage.component';
-import { DeleteResourceAllocationComponent } from './Sprint_Management/delete-resource-allocation/delete-resource-allocation.component';
 import { UpdateTaskInSprintComponent } from './Sprint_Management/update-task-in-sprint/update-task-in-sprint.component';
 import { UnitListComponent } from './orgUnitMgt/unit-list/unit-list.component';
 import { UnitTreeComponent } from './orgUnitMgt/unit-tree/unit-tree.component';
@@ -63,6 +62,8 @@ import { AvailableResListComponent } from './Handle_Request/available-res-list/a
 import { AvailabilityInfoComponent } from './Handle_Request/availability-info/availability-info.component';
 import { TodayStatusComponent } from './calender-management/today-status/today-status.component';
 import { AllTeamViewComponent } from './team-management/all-team-view/all-team-view.component';
+import { ProjectsViewComponent } from './Project-management/projects-view/projects-view.component';
+import { TaskProjectViewComponent } from './TaskManagement/task-project-view/task-project-view.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -91,15 +92,21 @@ const routes: Routes = [
           },
         ],
       },
-      {
-        path: 'projectlist',
-        component: ProjectListComponent,
+      { path: 'projectsview' , component: ProjectsViewComponent,
+        canActivate: [FunctionGuardService],
+        data: { functionId: 6 },
+      },
+      {path: 'projectlist', component: ProjectListComponent,
         canActivate: [FunctionGuardService],
         data: { functionId: 6 },
         children: [
           { path: 'createproject', component: CreateProjectComponent },
           { path: 'updatePoject/:id', component: UpdateProjectComponent },
         ],
+      },
+      {path: 'projectTaskview', component: TaskProjectViewComponent,
+        canActivate: [FunctionGuardService],
+        data: { functionId: 7 },
       },
       {
         path: 'TaskProjectList',
@@ -244,69 +251,36 @@ const routes: Routes = [
             path: 'sprintmgt/:id',
             component: SprintMgtComponent,
             children: [
-              {
-                path: 'allocated-resource/:sprintId/:resourceId',
-                component: AllocatedResourceInformationComponent,
-                children: [
-                  {
-                    path: 'DeleteAllocation/:sprintId/:resourceId',
-                    component: DeleteResourceAllocationComponent,
-                  },
-                ],
-              },
-              {
-                path: 'UpdatePercentage/:sprintId/:resourceId',
-                component: UpdatePercentageComponent,
-              },
-              {
-                path: 'UpdateTask/:sprintId/:resourceId',
-                component: UpdateTaskInSprintComponent,
-              },
-              {
-                path: 'EditSprint/:sprintId',
-                component: EditSprintFormComponent,
-              },
-            ],
+              {path: 'allocated-resource/:sprintId/:resourceId', component: AllocatedResourceInformationComponent,},
+              { path: 'UpdatePercentage/:sprintId/:resourceId', component: UpdatePercentageComponent, },
+              { path: 'UpdateTask/:sprintId/:resourceId', component: UpdateTaskInSprintComponent, },
+              { path: 'EditSprint/:sprintId', component: EditSprintFormComponent, }
+            ]
           },
         ],
       },
-      {
-        path: 'handle-request',
-        component: SprintListComponent,
+       {
+        path: 'handle-request', component: SprintListComponent,
         canActivate: [FunctionGuardService],
         data: { functionId: 9 },
         children: [
           {
-            path: 'sprintDetails/:id',
-            component: SprintDetailsComponent,
+            path: 'sprintDetails/:id', component: SprintDetailsComponent,
             children: [
+              {path: 'allocated-resource-info/:sprintId/:resourceId', component: AllocatedResourceInfoComponent },
+              { path: 'UpdateAllocationPercentage/:sprintId/:resourceId', component: UpdateAllocationPercentageComponent },
+              { path: 'UpdateAllocatedTask/:sprintId/:resourceId', component: UpdateAllocatedTaskComponent },
               {
-                path: 'allocated-resource-info/:sprintId/:resourceId',
-                component: AllocatedResourceInfoComponent,
-              },
-              {
-                path: 'UpdateAllocationPercentage/:sprintId/:resourceId',
-                component: UpdateAllocationPercentageComponent,
-              },
-              {
-                path: 'UpdateAllocatedTask/:sprintId/:resourceId',
-                component: UpdateAllocatedTaskComponent,
-              },
-              {
-                path: 'availableResourceList',
-                component: AvailableResListComponent,
+                path: 'availableResourceList/:sprintId', component: AvailableResListComponent,
                 children: [
-                  {
-                    path: 'availabilityInfo/:id',
-                    component: AvailabilityInfoComponent,
-                  },
-                ],
-              },
-            ],
-          },
-        ],
-      },
-    ],
+                  { path: 'availabilityInfo/:sprintId/:resourceId', component: AvailabilityInfoComponent }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   {
     path: 'admin-dashboard',

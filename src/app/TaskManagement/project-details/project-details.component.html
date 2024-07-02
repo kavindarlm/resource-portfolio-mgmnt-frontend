@@ -4,26 +4,26 @@
             <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">
                 {{ projectData?.projectName }}
             </div>
-            <div class="row ms-1 me-1 custom">
+            <div class="row ms-1 me-1 custom small-text">
                 <div class="border rounded col-6 mb-3 mt-1 pt-1 pb-1">
                     <div>
-                        Project Start Date: {{ projectData?.projectStartDate | date: 'dd-MM-yyyy' }}
+                        Project Start Date : {{ projectData?.projectStartDate | date: 'dd-MM-yyyy' }}
                     </div>
                 </div>
                 <div class="border rounded col-6 mb-3 mt-1 pt-1 pb-1">
                     <div>
-                        Project End Date: {{ projectData?.projectEndDate | date: 'dd-MM-yyyy' }}
+                        Project End Date : {{ projectData?.projectEndDate | date: 'dd-MM-yyyy' }}
                     </div>
                 </div>
             </div>
-            <div class="row ms-1 me-1 custom">
+            <div class="row ms-1 me-1 custom small-text">
                 <div class="border rounded col-12 mb-3 mt-1 pt-1 pb-1">
                     <div>
                         Delivery Manager: {{ resoureIdAndName?.resourceName }}
                     </div>
                 </div>
             </div>
-            <div class="row ms-1 me-1 custom">
+            <div class="row ms-1 me-1 custom small-text">
                 <div class="border rounded col-9 mb-3 mt-1 pt-1 pb-1">
                     <div>
                         Project Description: {{ projectData?.projectDescription }}
@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row ms-1 me-1 custom">
+            <div class="row ms-1 me-1 custom small-text">
                 <div class="border rounded col-12 mb-3 mt-1 pt-1 pb-1">
                     <div>
                         Project Progress: {{ projectProgress }} %
@@ -54,17 +54,17 @@
             </div>
             <div class="taskTable">
                 <div class="row mb-3 custom">
-                    <div class="border rounded col-5 ms-3 mt-1 pt-1 pb-1">
+                    <div class="border rounded col-5 ms-3 mt-1 pt-1 pb-1 small-text">
                         Sum of Allocation : {{ allcationSum }} %
                     </div>
                     <div class="col-6 ms-3">
                         <input type="search" [(ngModel)]="searchText" (ngModelChange)="onSearchChange()"
-                            class="form-control" placeholder="Search task" aria-label="search">
+                            class="form-control small-text" placeholder="Search task" aria-label="search">
 
                     </div>
                 </div>
-                <table class="table table-bordered table-striped table-hover table-sm text-center">
-                    <thead class="thead-dark fs-6 fst-normal">
+                <table class="table table-bordered table-striped table-hover table-sm text-center small-text">
+                    <thead class="thead-dark">
                         <tr>
                             <th scope="col" class="col-4">
                                 Task Name

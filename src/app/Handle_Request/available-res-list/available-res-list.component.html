@@ -27,35 +27,34 @@
         </div>
     </div>
 
-    <!-- Display filtered contents -->
     <div class="table-responsive" style="height: 400px;">
         <table class="table table-bordered table-striped table-hover table-sm text-center">
-            <!-- Table header -->
-            <thead class="thead-dark fs-6 fst-normal">
-                <tr>
-                    <th class="text" scope="col">Resource ID</th>
-                    <th class="text" scope="col">Team</th>
-                    <th class="text" scope="col">Job Role</th>
-                    <th class="text" scope="col">Org Unit</th>
-                    <th class="text" scope="col">Availability</th>
+          <!-- Table header -->
+          <thead class="thead-dark fs-6 fst-normal">
+            <tr>
+              <th class="text" scope="col">Resource ID</th>
+              <th class="text" scope="col">Team</th>
+              <th class="text" scope="col">Job Role</th>
+              <th class="text" scope="col">Org Unit</th>
+              <th class="text" scope="col">Availability</th>
+            </tr>
+          </thead>
+          <!-- Table body -->
+          <tbody>
+            <!-- Iterate over paginatedContents to populate table rows -->
+            <ng-container *ngFor="let items of paginatedContents">
+                <tr (click)="navigateToAvailabilityInfo(sprintId, items.Resource_ID, items.Availability)">
+                  <td>{{ items.Resource_ID }}</td>
+                  <td>{{ items.Team }}</td>
+                  <td>{{ items.Job_Role }}</td>
+                  <td>{{ items.Org_Unit }}</td>
+                  <td>{{ items.Availability }}%</td>
                 </tr>
-            </thead>
-            <!-- Table body -->
-            <tbody>
-                <!-- Iterate over paginatedContents to populate table rows -->
-                <ng-container *ngFor="let items of paginatedContents">
-                  <tr (click)="navigateToAvailability(items)">
-                    <td>{{ items.Resource_ID }}</td>
-                    <td>{{ items.Team }}</td>
-                    <td>{{ items.Job_Role }}</td>
-                    <td>{{ items.Org_Unit }}</td>
-                    <td>{{ items.Availability }}%</td>
-                  </tr>
-                </ng-container>                
-              </tbody>
-              
+              </ng-container>              
+          </tbody>
         </table>
-    </div>
+      </div>      
+ 
 
     <!-- Pagination -->
     <nav>
