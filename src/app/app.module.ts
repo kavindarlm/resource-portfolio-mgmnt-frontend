@@ -100,6 +100,8 @@ import { UpdateAllocationPercentageComponent } from './Handle_Request/update-all
 import { UpdateAllocatedTaskComponent } from './Handle_Request/update-allocated-task/update-allocated-task.component';
 import { AvailableResListComponent } from './Handle_Request/available-res-list/available-res-list.component';
 import { AvailabilityInfoComponent } from './Handle_Request/availability-info/availability-info.component';
+import { TodayStatusComponent } from './calender-management/today-status/today-status.component';
+import { AllTeamViewComponent } from './team-management/all-team-view/all-team-view.component';
 import { ProjectsViewComponent } from './Project-management/projects-view/projects-view.component';
 import { TaskProjectViewComponent } from './TaskManagement/task-project-view/task-project-view.component';
 
@@ -166,7 +168,6 @@ import { TaskProjectViewComponent } from './TaskManagement/task-project-view/tas
     PageNotFoundComponent,
     AllocatedResourceInformationComponent,
     UpdatePercentageComponent,
-
     UpdateTaskInSprintComponent,
     UnitDetailsComponent,
     UnitEditFormComponent,
@@ -188,6 +189,8 @@ import { TaskProjectViewComponent } from './TaskManagement/task-project-view/tas
     UpdateAllocatedTaskComponent,
     AvailableResListComponent,
     AvailabilityInfoComponent,
+    TodayStatusComponent,
+    AllTeamViewComponent,
     ProjectsViewComponent,
     TaskProjectViewComponent,
     
