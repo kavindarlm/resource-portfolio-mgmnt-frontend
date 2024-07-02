@@ -19,10 +19,6 @@ export class OrgUnitMgtService {
     private refreshUnitfetch = new BehaviorSubject<void>(undefined);
     refreshUnitfetch$ = this.refreshUnitfetch.asObservable();
 
-    refreshUnitfetchData() {
-        this.refreshUnitfetch.next();
-    }
-
     constructor(private http: HttpClient) { }
 
     refreshUnitfetchData() {
