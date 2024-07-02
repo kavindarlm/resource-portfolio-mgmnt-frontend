@@ -24,14 +24,14 @@
           </div>
 
           <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Added Resource List</div>
-          <div class="table-responsive">
+          <div class="table-responsive small-text">
             <table class="table table-bordered table-striped table-hover table-sm text-center">
-              <thead class="thead-dark fs-6 fst-normal">
+              <thead class="thead-dark small-text">
                 <tr>
                   <th scope="col" class="col-4" *ngFor="let head of headArray">{{ head }}</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody class="small-text">
                 <ng-container *ngFor="let items of paginatedContents">
                   <tr>
                     <td *ngFor="let head of headArray">{{ items[head] }}</td>

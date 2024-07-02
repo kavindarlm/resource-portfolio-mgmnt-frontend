@@ -44,6 +44,15 @@ th{
     color: white;
 }
 
+.custom-button {
+    border-color: #1E3895;
+  }
+  
+  .custom-button:hover {
+    background-color: #1E3895;
+  }
+  
+
 @media screen and (min-width: 768px) {
     .grid-container {
         grid-template-columns: repeat(2, 1fr);

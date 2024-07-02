@@ -3,8 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ResourceService } from '../../shared/sevices_resourceMgt/resource.service';
 import { JobRoleModel, OrgUnitModel, ResourceModel } from '../add-form/addformmodel';
-import { Observable } from 'rxjs';
-import { FirstViewComponent } from '../first-view/first-view.component';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { JobRoleService } from '../../shared/sevices_resourceMgt/jobRole.service';
@@ -19,24 +17,24 @@ import { ConfirmDialogService } from '../../ConfirmDialogBox/confirm-dialog.serv
   templateUrl: './resource-edit-form.component.html',
   styleUrl: './resource-edit-form.component.css'
 })
-export class ResourceEditFormComponent implements OnInit{
+export class ResourceEditFormComponent implements OnInit {
 
   jobroles: JobRoleModel[] | undefined; //creating an array for jobroles
-  orgunits: OrgUnitModel[] | undefined;
+  orgunits: OrgUnitModel[] | undefined; //creating an array for orgunits
 
-  formValue!: FormGroup; 
-  selectedResource: any; 
+  formValue!: FormGroup;
+  selectedResource: any;
   resourceObject: any;
 
-  constructor(private formBuilder: FormBuilder, 
-              private http: HttpClient, 
-              private resourceService: ResourceService, 
-              private jobRoleService: JobRoleService, 
-              private orgUnitService: OrgUnitService,
-              private router: Router,
-              private toaster: ToastrService,
-              private spinner: NgxSpinnerService,
-              private confirmMessage: ConfirmDialogService) { }
+  constructor(private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private resourceService: ResourceService,
+    private jobRoleService: JobRoleService,
+    private orgUnitService: OrgUnitService,
+    private router: Router,
+    private toaster: ToastrService,
+    private spinner: NgxSpinnerService,
+    private confirmMessage: ConfirmDialogService) { }
 
   ngOnInit(): void {
     this.loadJobRoles();// calling the loadJobRoles Method
@@ -55,6 +53,7 @@ export class ResourceEditFormComponent implements OnInit{
 
   }
 
+  //Function to set the form data
   setFormData() {
 
     this.formValue.patchValue({
@@ -68,87 +67,86 @@ export class ResourceEditFormComponent implements OnInit{
   loadJobRoles() {
     this.spinner.show();
     this.jobRoleService.getJobRoles()
-    .pipe(
-      catchError((error) => {
-        console.error('Error fetching job roles:', error);
-        alert('An error occurred while fetching job roles. Please try again.');
-        return throwError('Error fetching job roles');
-      })
-    )
-    .subscribe((res: any) => {
-      // debugger;
-      this.jobroles = res; // Assuming the response is directly the array of resources
-      this.spinner.hide();
-    },
-      (error) => {
-        console.error('Error:', error);
-        // alert('An error occurred. Please try again.');
-      }
-    );
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching job roles:', error);
+          alert('An error occurred while fetching job roles. Please try again.');
+          return throwError('Error fetching job roles');
+        })
+      )
+      .subscribe((res: any) => {
+        // debugger;
+        this.jobroles = res; // Assuming the response is directly the array of resources
+        this.spinner.hide();
+      },
+        (error) => {
+          console.error('Error:', error);
+          // alert('An error occurred. Please try again.');
+        }
+      );
   }
 
   loadOrgUnits() {
     this.orgUnitService.getOrgUnits()
-    .pipe(
-      catchError((error) => {
-        console.error('Error fetching org units:', error);
-        alert('An error occurred while fetching org units. Please try again.');
-        return throwError('Error fetching org units');
-      })
-    )
-    .subscribe((res: any) => {
-      this.orgunits = res; // Assuming the response is directly the array of resources
-    },
-      (error) => {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again.');
-      }
-    );
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching org units:', error);
+          alert('An error occurred while fetching org units. Please try again.');
+          return throwError('Error fetching org units');
+        })
+      )
+      .subscribe((res: any) => {
+        this.orgunits = res; // Assuming the response is directly the array of resources
+      },
+        (error) => {
+          console.error('Error:', error);
+          alert('An error occurred. Please try again.');
+        }
+      );
   }
 
 
-
+  //To edit resource details
   onEditResource(data: ResourceModel) {
     console.log(data);
     this.confirmMessage.open('Are you sure you want to edit this resource?').subscribe(confirmed => {
       if (confirmed) {
         this.resourceService.updateResource(this.selectedResource.resourceId, data)
-      .subscribe(
-        (res: any) => {
-          console.log('Resource updated successfully:', res);
-          this.editSucceseMassege(this.selectedResource.resourceId);
-          this.formValue.reset();
-          this.resourceService.resourceListUpdated.emit(); // Emit the event
-          this.router.navigate(['pages-body/first-view']);
-        },
-        (error) => {
-          console.error('Error occurred while updating resource:', error);
-          //display an error message to the user.
-        }
-      );
+          .subscribe(
+            (res: any) => {
+              console.log('Resource updated successfully:', res);
+              this.editSucceseMassege(this.selectedResource.resourceId);
+              this.formValue.reset();
+              this.resourceService.resourceListUpdated.emit(); // Emit the event
+              this.router.navigate(['pages-body/first-view']);
+            },
+            (error) => {
+              console.error('Error occurred while updating resource:', error);
+            }
+          );
       }
     });
-    
+
   }
-  
+
+  //Function to delete a resource
   onDeleteResource() {
-  this.confirmMessage.open('Are you sure you want to delete this resource?').subscribe(confirmed => {
-    if(confirmed){
-      this.resourceService.deleteResource(this.selectedResource.resourceId)
-    .subscribe((res:ResourceModel)=> {
-      console.log('Resource deleted successfully:', res);
-      this.deleteSucceseMassege(this.selectedResource.resourceId);
-      this.formValue.reset();
-      this.resourceService.resourceListUpdated.emit(); // Emit the event
-      this.router.navigate(['pages-body/first-view']);
-    },
-    (error) => {
-      console.error('Error occurred while deleting resource:', error);
-      // Handle error appropriately, such as displaying an error message to the user.
-    }
-    );
-    }
-  });
+    this.confirmMessage.open('Are you sure you want to delete this resource?').subscribe(confirmed => {
+      if (confirmed) {
+        this.resourceService.deleteResource(this.selectedResource.resourceId)
+          .subscribe((res: ResourceModel) => {
+            console.log('Resource deleted successfully:', res);
+            this.deleteSucceseMassege(this.selectedResource.resourceId);
+            this.formValue.reset();
+            this.resourceService.resourceListUpdated.emit(); // Emit the event
+            this.router.navigate(['pages-body/first-view']);
+          },
+            (error) => {
+              console.error('Error occurred while deleting resource:', error);
+            }
+          );
+      }
+    });
   }
 
   onCancel() {

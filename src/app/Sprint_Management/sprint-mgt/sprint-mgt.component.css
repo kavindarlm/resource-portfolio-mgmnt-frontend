@@ -10,6 +10,7 @@
 }
 
 .custom,
+/* <<<<<<< sihara-frontend-dev
 th {
   color: #1e3895e1;
   font-weight: 500;
@@ -25,4 +26,30 @@ td {
   background-color: #3b5edd;
   color: white;
   cursor: pointer;
+}
+======= */
+th{
+    color: #1e3895e1;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+td{
+    color:rgba(0, 0, 255, 0.575);
+    font-weight: 300;
+    font-size: 0.9rem;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #3b5edd;
+    color: white;
+    cursor: pointer;
+}
+
+.small-text {
+  font-size: 0.75rem;
+}
+
+.small{
+  font-size: 0.8rem;
 }

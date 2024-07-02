@@ -47,12 +47,12 @@
       Add Task
     </div>
   
-    <div class="row mb-1" *ngFor="let taskInfo of tasksWithProjectInfo; let i = index">
+    <div class="row mb-1 small-text" *ngFor="let taskInfo of tasksWithProjectInfo; let i = index">
       <!-- Display project name -->
-      <div class="col-4 text-center">{{ taskInfo.projectName }}</div>
+      <div class="col-4 text-center text">{{ taskInfo.projectName }}</div>
       <!-- Display task name with a dropdown -->
-      <div class="col-3 ms-1 text-center">
-        <select class="form-select" [(ngModel)]="taskInfo.selectedTaskId" (change)="onTaskChange(taskInfo, $event, i)">
+      <div class="col-3 ms-1 text-center text">
+        <select class="form-select text small-text" [(ngModel)]="taskInfo.selectedTaskId" (change)="onTaskChange(taskInfo, $event, i)">
           <option *ngFor="let task of taskInfo.relatedTasks" [value]="task.taskid" [disabled]="task.disabled"
             [ngClass]="{'highlighted-task': task.disabled}">
             {{ task.taskName }}
@@ -60,10 +60,10 @@
         </select>
       </div>
       <!-- Display resource allocation percentage -->
-      <div class="col-2 text-center">{{ taskInfo.percentage }}%</div>
+      <div class="col-2 text-center text">{{ taskInfo.percentage }}%</div>
       <!-- Display a check button with conditional classes -->
-      <div class="col-2 text-center">
-        <button type="button" class='btn' [class.btn-outline-success]="!taskInfo.checked"
+      <div class="col-2 text-center text">
+        <button type="button" class='btn btn-sm' [class.btn-outline-success]="!taskInfo.checked"
           [class.btn-success]="taskInfo.checked" (click)="onSaveTask(taskInfo, i)">
           <i class="bi bi-check"></i>
         </button>
@@ -71,7 +71,7 @@
     </div>
   
     <div class="d-flex justify-content-center mb-2 mt-2">
-      <button class="btn btn-outline-primary Hover" type="button" (click)="onEditTask()">Edit Task</button>
+      <button class="btn btn-outline-primary Hover btn-sm" type="button" (click)="onEditTask()">Edit Task</button>
     </div>
   </div>
   

@@ -62,6 +62,10 @@ import { AvailableResListComponent } from './Handle_Request/available-res-list/a
 import { AvailabilityInfoComponent } from './Handle_Request/availability-info/availability-info.component';
 import { AllSprintListComponent } from './Sprint_Management/all-sprint-list/all-sprint-list.component';
 import { AllSprintDetailsComponent } from './Handle_Request/all-sprint-details/all-sprint-details.component';
+import { TodayStatusComponent } from './calender-management/today-status/today-status.component';
+import { AllTeamViewComponent } from './team-management/all-team-view/all-team-view.component';
+import { ProjectsViewComponent } from './Project-management/projects-view/projects-view.component';
+import { TaskProjectViewComponent } from './TaskManagement/task-project-view/task-project-view.component';
 
 const routes: Routes = [
   //redirect to login page
@@ -69,137 +73,189 @@ const routes: Routes = [
   { path: 'login', component: LoginAccComponent },
   { path: 'forgot-password', component: FgPsswdComponent },
   {
-    path: 'pages-body', component: PagesBodyComponent,
+    path: 'pages-body',
+    component: PagesBodyComponent,
     canActivate: [AuthGuard],
     data: { roles: ['user'] },
     children: [
       {
-        path: 'welcome-page', component: WellcomeMessageComponent,
-      },
-      { path: 'projectBoard', component: ProjectBoardComponent,
-      canActivate:[FunctionGuardService],
-      data : { functionId : 1},
-        children: [
-          { path: 'dashboard-projectdetails/:id', component: DashbrdProjectDetailsComponent }
-        ]
+        path: 'welcome-page',
+        component: WellcomeMessageComponent,
       },
       {
-        path: 'projectlist', component: ProjectListComponent,
+        path: 'projectBoard',
+        component: ProjectBoardComponent,
+        canActivate: [FunctionGuardService],
+        data: { functionId: 1 },
+        children: [
+          {
+            path: 'dashboard-projectdetails/:id',
+            component: DashbrdProjectDetailsComponent,
+          },
+        ],
+      },
+      { path: 'projectsview' , component: ProjectsViewComponent,
+        canActivate: [FunctionGuardService],
+        data: { functionId: 6 },
+      },
+      {path: 'projectlist', component: ProjectListComponent,
         canActivate: [FunctionGuardService],
         data: { functionId: 6 },
         children: [
           { path: 'createproject', component: CreateProjectComponent },
-          { path: 'updatePoject/:id', component: UpdateProjectComponent }
-        ]
+          { path: 'updatePoject/:id', component: UpdateProjectComponent },
+        ],
+      },
+      {path: 'projectTaskview', component: TaskProjectViewComponent,
+        canActivate: [FunctionGuardService],
+        data: { functionId: 7 },
       },
       {
-        path: 'TaskProjectList', component: TaskProjectListComponent,
+        path: 'TaskProjectList',
+        component: TaskProjectListComponent,
         canActivate: [FunctionGuardService],
         data: { functionId: 7 },
         children: [
           {
-            path: 'projectTaskDetails/:projectId', component: ProjectDetailsComponent,
+            path: 'projectTaskDetails/:projectId',
+            component: ProjectDetailsComponent,
             children: [
               { path: 'newTask/:id', component: CreateNewtaskComponent },
               {
-                path: 'updatetask/:id', component: UpdateTaskComponent,
+                path: 'updatetask/:id',
+                component: UpdateTaskComponent,
                 children: [
-                  { path: 'editTask/:id', component: EditTaskComponent }
-                ]
-              }
+                  { path: 'editTask/:id', component: EditTaskComponent },
+                ],
+              },
             ],
           },
         ],
       },
       {
-        path: 'teamlistcomponent', component: TeamListComponent,
+        path: 'all-team-view',
+        component: AllTeamViewComponent,
+        canActivate: [FunctionGuardService],
+        data: { functionId: 5 },
+      },
+      {
+        path: 'teamlistcomponent',
+        component: TeamListComponent,
         canActivate: [FunctionGuardService],
         data: { functionId: 5 },
         children: [
           { path: 'NewTeamButton', component: NewTeamButtonComponent },
-          { path: 'TeamForm', component: TeamFormComponent ,
-          children: [
-            { path: 'resourceTable', component:ResourceTableComponent}
-          ]
+          {
+            path: 'TeamForm',
+            component: TeamFormComponent,
+            children: [
+              { path: 'resourceTable', component: ResourceTableComponent },
+            ],
           },
           { path: 'update/:id', component: UpdateComponent },
           { path: 'resources/:id', component: UpdateResourcTableComponent },
-          { path: 'delete/:id', component: DeletePopupComponent }
-        ]
+          { path: 'delete/:id', component: DeletePopupComponent },
+        ],
       },
       {
-        path: 'calendertypecomponent', component: CalenderTypeComponent,
+        path: 'todayStatus',
+        component: TodayStatusComponent,
+        canActivate: [FunctionGuardService],
+        data: { functionId: 4 },
+      },
+      {
+        path: 'calendertypecomponent',
+        component: CalenderTypeComponent,
         canActivate: [FunctionGuardService],
         data: { functionId: 4 },
         children: [
           { path: 'calendermainbox', component: CalenderMainBoxComponent },
-          { path: 'commoncalender/:type', component: CommonCalenderComponent },
           {
-            path: 'resourcelist', component: ResourceListComponent,
+            path: 'commoncalender/:type',
+            component: CommonCalenderComponent,
+          },
+          {
+            path: 'resourcelist',
+            component: ResourceListComponent,
             children: [
-              { path: 'resourceleave/:id', component: ResourceLeaveComponent }
-            ]
-          }
-
-        ]
-
+              {
+                path: 'resourceleave/:id',
+                component: ResourceLeaveComponent,
+              },
+            ],
+          },
+        ],
       },
       {
-        path: 'first-view', component: FirstViewComponent,
+        path: 'first-view',
+        component: FirstViewComponent,
         canActivate: [FunctionGuardService],
         data: { functionId: 2 },
         children: [
           { path: 'button', component: ButtonComponent },
           { path: 'add-form', component: AddFormComponent },
           {
-            path: 'resource-details/:id', component: ResourceDetailsComponent,
+            path: 'resource-details/:id',
+            component: ResourceDetailsComponent,
             children: [
-              { path: 'resouce-edit-form/:id', component: ResourceEditFormComponent }
-            ]
+              {
+                path: 'resouce-edit-form/:id',
+                component: ResourceEditFormComponent,
+              },
+            ],
           },
-        ]
+        ],
       },
       {
-        path: 'unit-list', component: UnitListComponent,
+        path: 'unit-list',
+        component: UnitListComponent,
         canActivate: [FunctionGuardService],
         data: { functionId: 3 },
         children: [
           { path: 'unit-form', component: UnitFormComponent },
           {
-            path: 'unit-details/:id', component: UnitDetailsComponent,
+            path: 'unit-details/:id',
+            component: UnitDetailsComponent,
             children: [
-              { path: 'unit-edit-form/:id', component: UnitEditFormComponent }
-            ]
+              { path: 'unit-edit-form/:id', component: UnitEditFormComponent },
+            ],
           },
           {
-            path: 'unit-tree', component: UnitTreeComponent,
-            children: [
-              { path: 'unit-node', component: UnitNodeComponent }
-            ]
-          }
-        ]
+            path: 'unit-tree',
+            component: UnitTreeComponent,
+            children: [{ path: 'unit-node', component: UnitNodeComponent }],
+          },
+        ],
       },
       {path: 'all-sprints-view', component: AllSprintListComponent,
         canActivate: [FunctionGuardService],
         data: { functionId: 8 },
       },
       {
-        path: 'sprint-management', component: ListComponent,
+        path: 'sprint-management',
+        component: ListComponent,
         canActivate: [FunctionGuardService],
         data: { functionId: 8 },
         children: [
           {
-            path: 'createform', component: CreateFormComponent,
+            path: 'createform',
+            component: CreateFormComponent,
             children: [
               {
-                path: 'availableResources', component: AvailableResourceListComponent,
+                path: 'availableResources',
+                component: AvailableResourceListComponent,
                 children: [
-                  { path: 'availability/:id', component: AvailabiilityComponent }]
-              }
-            ]
+                  {
+                    path: 'availability/:id',
+                    component: AvailabiilityComponent,
+                  },
+                ],
+              },
+            ],
           },
           {
-            path: 'sprintmgt/:id', component: SprintMgtComponent,
+            path: 'sprintmgt/:id',
+            component: SprintMgtComponent,
             children: [
               {path: 'allocated-resource/:sprintId/:resourceId', component: AllocatedResourceInformationComponent,},
               { path: 'UpdatePercentage/:sprintId/:resourceId', component: UpdatePercentageComponent, },
@@ -207,9 +263,10 @@ const routes: Routes = [
               { path: 'EditSprint/:sprintId', component: EditSprintFormComponent, }
             ]
           },
-        ]
+        ],
       },
-      {path: 'all-sprints', component: AllSprintDetailsComponent,
+      {
+        path: 'all-sprints', component: AllSprintDetailsComponent,
         canActivate: [FunctionGuardService],
         data: { functionId: 9 },
       },
@@ -237,22 +294,23 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'admin-dashboard', component: AdminDasbdBodyComponent,
+    path: 'admin-dashboard',
+    component: AdminDasbdBodyComponent,
     canActivate: [AuthGuard],
     data: { roles: ['admin'] },
     children: [
       { path: 'addNewUser', component: AddNewUserComponent },
-      { path: 'userDetail/:id', component: UserDetailComponent }
-    ]
+      { path: 'userDetail/:id', component: UserDetailComponent },
+    ],
   },
   {
-    path: 'page-not-found', component: PageNotFoundComponent,
-  }
+    path: 'page-not-found',
+    component: PageNotFoundComponent,
+  },
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UsersFunctionModel } from '../dashboard-model/usersFunctionModel';
 import { ToastrService } from 'ngx-toastr';
+import { ConfirmDialogService } from '../../ConfirmDialogBox/confirm-dialog.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -15,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './user-detail.component.css'
 })
 export class UserDetailComponent implements OnInit, OnDestroy {
-  constructor(private activeRoutData: ActivatedRoute, private dashboardService: DashboardService, private router: Router, private sharedService: SharedService, private spinner: NgxSpinnerService, private toastr: ToastrService) { }
+  constructor(private activeRoutData: ActivatedRoute, private dashboardService: DashboardService, private router: Router, private sharedService: SharedService, private spinner: NgxSpinnerService, private toastr: ToastrService, private confirmMessage: ConfirmDialogService) { }
 
   public userid!: number;
   private subscription!: Subscription;
@@ -76,15 +77,25 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
   // Function to edit the user details
   editUserDetail() {
-    if(confirm('Are you sure you want to edit this user?')){
-    this.dashboardService.editUser(this.userid, this.userForm).subscribe((res) => {
-      console.log(res);
-      this.sharedService.refreshUserList();
-      this.editUserFunctions();
-    });}
-    else{
+    this.confirmMessage.open('Are you sure you want to edit this user?').subscribe(confirm => {
+      if (confirm) {
+      this.dashboardService.editUser(this.userid, this.userForm).subscribe(
+        (res) => {
+          // console.log(res);
+          this.sharedService.refreshUserList();
+          this.editUserFunctions();
+        },
+        (error) => { // Error handling logic here
+          if (error.error.message === 'Email already exists') {
+            alert('Email already exists');
+          } else {
+            console.error(error.error.message);
+          }
+        }
+      );
+    } else {
       this.getUserFunctions();
-    }
+    }});
   }
 
   // Function to check the user details before the delete
@@ -107,20 +118,22 @@ export class UserDetailComponent implements OnInit, OnDestroy {
   
   // Function to delete the user
   deleteUser() {
-    if (confirm('Are you sure you want to delete this user?')) {
-      this.dashboardService.deleteUser(this.userid).subscribe(
-        (res) => { // Success callback
-          console.log(res);
-          this.sharedService.refreshUserList();
-          this.deleteSuccess(this.userForm.user_name);
-          this.router.navigate(['/admin-dashboard']);
-        },
-        (err) => { // Error callback
-          console.error('Error deleting user:', err);
-          // Handle the error here. For example, you could show an error message to the user.
-        }
-      );
-    }
+    this.confirmMessage.open('Are you sure you want to delete this user?').subscribe(confirm => {
+      if (confirm) {
+        this.dashboardService.deleteUser(this.userid).subscribe(
+          (res) => { // Success callback
+            console.log(res);
+            this.sharedService.refreshUserList();
+            this.deleteSuccess(this.userForm.user_name);
+            this.router.navigate(['/admin-dashboard']);
+          },
+          (err) => { // Error callback
+            console.error('Error deleting user:', err);
+            // Handle the error here. For example, you could show an error message to the user.
+          }
+        );
+      }
+    });
   }
 
   // function to get the user functions

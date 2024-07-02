@@ -16,7 +16,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class FirstViewComponent implements OnInit {
 
   showResourceDetails: boolean = false;//first not to show the form
-  // searchText:ResourceModel[] | undefined;
   searchText: any;
   resourceList: ResourceModel[] | undefined;
   jobroles: JobRoleModel[] | undefined; //creating an array for jobroles

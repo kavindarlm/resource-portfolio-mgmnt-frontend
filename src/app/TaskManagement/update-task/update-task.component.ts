@@ -83,6 +83,7 @@ export class UpdateTaskComponent implements OnInit {
     });
   }
 
+  // Implement the addsuccesemassege method
   addsuccesemassege() {
     this.toaster.success(
       `Task Progress updated successfully`,

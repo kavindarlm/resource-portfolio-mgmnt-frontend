@@ -3,7 +3,6 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { CreateNewtaskComponent } from './TaskManagement/create-newtask/create-newtask.component';
 import { ProjectDetailsComponent } from './TaskManagement/project-details/project-details.component';
 import { UpdateTaskComponent } from './TaskManagement/update-task/update-task.component';
-import { ButtonTusksComponent } from './TaskManagement/button-tusks/button-tusks.component';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -103,6 +102,10 @@ import { AvailableResListComponent } from './Handle_Request/available-res-list/a
 import { AvailabilityInfoComponent } from './Handle_Request/availability-info/availability-info.component';
 import { AllSprintListComponent } from './Sprint_Management/all-sprint-list/all-sprint-list.component';
 import { AllSprintDetailsComponent } from './Handle_Request/all-sprint-details/all-sprint-details.component';
+import { TodayStatusComponent } from './calender-management/today-status/today-status.component';
+import { AllTeamViewComponent } from './team-management/all-team-view/all-team-view.component';
+import { ProjectsViewComponent } from './Project-management/projects-view/projects-view.component';
+import { TaskProjectViewComponent } from './TaskManagement/task-project-view/task-project-view.component';
 
 @NgModule({
   declarations:[
@@ -111,7 +114,6 @@ import { AllSprintDetailsComponent } from './Handle_Request/all-sprint-details/a
     CreateNewtaskComponent,
     ProjectDetailsComponent,
     UpdateTaskComponent,
-    ButtonTusksComponent,
     AddFormComponent,
     ButtonComponent,
     FirstViewComponent,
@@ -168,7 +170,6 @@ import { AllSprintDetailsComponent } from './Handle_Request/all-sprint-details/a
     PageNotFoundComponent,
     AllocatedResourceInformationComponent,
     UpdatePercentageComponent,
-
     UpdateTaskInSprintComponent,
     UnitDetailsComponent,
     UnitEditFormComponent,
@@ -192,6 +193,10 @@ import { AllSprintDetailsComponent } from './Handle_Request/all-sprint-details/a
     AvailabilityInfoComponent,
     AllSprintListComponent,
     AllSprintDetailsComponent,
+    TodayStatusComponent,
+    AllTeamViewComponent,
+    ProjectsViewComponent,
+    TaskProjectViewComponent,
     
   ],
   imports: [

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpParams } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class ResourceService {
 
   //service to get resources from the database
 
-   private baseUrl = 'http://localhost:3000/resource'; // Adjust the port if needed
+   private baseUrl = environment.baseUrl +'/resource'; // Adjust the port if needed
 
    constructor(private http: HttpClient) { }
 

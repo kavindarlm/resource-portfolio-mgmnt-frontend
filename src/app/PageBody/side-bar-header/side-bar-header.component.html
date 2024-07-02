@@ -2,5 +2,7 @@
   <div class="slider-icon" (click)="togglrSidebar()">
     <img [src]="sidebarActive ?'assets/image/cross.png' : 'assets/image/menu.png'">
   </div>
-  <div class="sidebar-header">{{selectedButton}}</div> 
+  <div class="sidebar-header">{{selectedButton}}</div>
+  <button class="button" (click)="rotateText()"><span [ngClass]="{ 'rotate': rotating }"><i
+        class="bi bi-arrow-repeat refresh-icon cursor-pointer" style="opacity: 0.5;"></i> </span></button>
 </div>
