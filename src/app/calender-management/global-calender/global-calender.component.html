@@ -1,6 +1,6 @@
 <div class="container-fluid ">
   <div class="row no-gutters">
-    <div class="col-12 col-md-12 col-lg-12  border rounded p-2">
+    <div class="col-12 col-md-12 col-lg-12  border rounded p-2 ms-2">
       <div>
 
         <div class="grid-container-gc-tbtn mb-2">
@@ -12,14 +12,14 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" fill="currentColor"
               class="bi bi-bank border rounded p-2" viewBox="0 0 16 16">
               <g>
-                <path [attr.d]="getSvgPath()" fill="#1e3895" />
+                <path [attr.d]="getSvgPath()" fill="#1e3895" fill-opacity="0.7" />
               </g>
             </svg>
           </div>
         </div>
 
         <div class="grid-container-gc-btn mt-2 mb-2 d-flex justify-content-center">
-          <button class="btn btn-outline-primary btn-sm mt-2 custom-button w-75 " (click)="accessCalenderAdd()">Add New
+          <button class="btn btn-outline-primary btn-sm mt-2 custom-button w-50 " (click)="accessCalenderAdd()">Add New
             Holiday</button>
         </div>
 
@@ -31,7 +31,7 @@
         </div>
 
         <div class="grid-container-gc-btn d-flex justify-content-center">
-          <button class="btn btn-outline-primary btn-sm mt-1 mb-1 custom-button w-75"
+          <button class="btn btn-outline-primary btn-sm mt-1 mb-1 custom-button w-50"
             (click)="accessCalenderEdit()">Edit Holidays</button>
         </div>
 

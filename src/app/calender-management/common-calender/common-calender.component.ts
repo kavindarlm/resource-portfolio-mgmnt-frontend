@@ -1,10 +1,5 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import {
-  NgbCalendar,
-  NgbDate,
-  NgbDatepickerModule,
-} from '@ng-bootstrap/ng-bootstrap';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { NgbCalendar, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { ApiServiceService } from '../shared/api-service.service';
 import { Holiday } from '../calender.model';
 import { ToastrService } from 'ngx-toastr';
@@ -14,7 +9,6 @@ import { Router } from '@angular/router';
   selector: 'app-common-calender',
   templateUrl: './common-calender.component.html',
   styles: `
-  /* Common styles for all screen sizes */
   ngb-datepicker {
     color: #1e3895e1;
     border-color: #1e3895e1;
@@ -41,8 +35,17 @@ import { Router } from '@angular/router';
     color: white;
   }
 
-  .custom-day.faded {
+
+
+  .custom-day.bank ,
+  .custom-day.mercantile,
+  .custom-day.public
+  {
+    background-color: #99ccff; /* Blue color for bank holidays */
+    color: white;
   }
+
+
 
   button.addbtn,
   button.editbtn {
@@ -61,13 +64,13 @@ import { Router } from '@angular/router';
 export class CommonCalenderComponent {
   hoveredDate: NgbDate | null = null;
   selectedDates: NgbDate[] = [];
-  holidays: { date: NgbDate, id: number }[] = [];
+  holidays: { date: NgbDate, id: number, type: string }[] = [];
   deselectedHolidays: Holiday[] = [];
 
   @Input() actionType: 'add' | 'edit' = 'add';
   @Output() addEvent = new EventEmitter<{ selectedDates: NgbDate[], holidayType: string }>();
   @Input() holidayType: string = '';
-  @Input() resourceId: string | null = null; // to accept resource ID
+  @Input() resourceId: string | null = null;
   @Output() resourceAddEvent = new EventEmitter<{ selectedDates: NgbDate[], holidayType: string, resourceId: string }>();
 
   constructor(
@@ -90,7 +93,8 @@ export class CommonCalenderComponent {
             const date = new Date(holidayData.holiday.date);
             return {
               date: new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
-              id: holidayData.holiday.holy_id
+              id: holidayData.holiday.holy_id,
+              type: holidayData.holiday.holy_type
             };
           });
           console.log('holidays', this.holidays);
@@ -107,7 +111,8 @@ export class CommonCalenderComponent {
             const date = new Date(holiday.date);
             return {
               date: new NgbDate(date.getFullYear(), date.getMonth() + 1, date.getDate()),
-              id: holiday.holy_id
+              id: holiday.holy_id,
+              type: holiday.holy_type
             };
           });
         },
@@ -126,7 +131,7 @@ export class CommonCalenderComponent {
         const [deselectedHoliday] = this.holidays.splice(holidayIndex, 1);
         this.onHolidayDeselected(deselectedHoliday);
       } else {
-        this.holidays.push({ date: date, id: 0 });
+        this.holidays.push({ date: date, id: 0, type: '' });
       }
     } else {
       const dateIndex = this.selectedDates.findIndex((selectedDate) => selectedDate.equals(date));
@@ -151,6 +156,11 @@ export class CommonCalenderComponent {
       this.holidays.some((holiday) => holiday.date.equals(date));
   }
 
+  getHolidayType(date: NgbDate): string {
+    const holiday = this.holidays.find((holiday) => holiday.date.equals(date));
+    return holiday ? holiday.type : '';
+  }
+
   onAddButtonClick() {
     if (this.holidayType === 'resource' && this.resourceId) {
       this.resourceAddEvent.emit({ selectedDates: this.selectedDates, holidayType: this.holidayType, resourceId: this.resourceId });
@@ -163,7 +173,7 @@ export class CommonCalenderComponent {
     }
   }
 
-  onHolidayDeselected(holiday: { date: NgbDate; id: number }) {
+  onHolidayDeselected(holiday: { date: NgbDate; id: number; type: string }) {
     const deselectedHoliday: Holiday = {
       holy_id: holiday.id,
       date: new Date(holiday.date.year, holiday.date.month - 1, holiday.date.day),

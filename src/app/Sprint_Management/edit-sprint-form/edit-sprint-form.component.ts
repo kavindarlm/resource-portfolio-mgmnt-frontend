@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router'; // Import Router
 import { sprintApiService } from '../services/sprintApi.service';
 import { SharedService } from '../services/shared.service';
@@ -16,6 +16,8 @@ export class EditSprintFormComponent implements OnInit {
   editSprintForm!: FormGroup;
   isVisible = true;
   sprintId: any = '';
+  startDateChanged = false;
+  endDateChanged = false;
 
   constructor(
     private fb: FormBuilder,
@@ -33,7 +35,7 @@ export class EditSprintFormComponent implements OnInit {
 
   closepopup() {
     this.isVisible = false;
-    this.router.navigate(['/pages-body//sprint-management/sprintmgt/',this.sprintId]); 
+    this.router.navigate(['/pages-body//sprint-management/sprintmgt/', this.sprintId]); 
   }
 
   ngOnInit(): void {
@@ -42,13 +44,21 @@ export class EditSprintFormComponent implements OnInit {
       this.initializeForm();
       this.loadSprintData(this.sprintId);
     });
+
+    this.editSprintForm.get('start_Date')?.statusChanges.subscribe(() => {
+      this.startDateChanged = true;
+    });
+
+    this.editSprintForm.get('end_Date')?.statusChanges.subscribe(() => {
+      this.endDateChanged = true;
+    });
   }
 
   initializeForm() {
     this.editSprintForm = this.fb.group({
       sprint_name: ['', Validators.required],
-      start_Date: ['', Validators.required],
-      end_Date: ['', Validators.required]
+      start_Date: ['', [Validators.required, this.dateNotBeforeToday]],
+      end_Date: ['', [Validators.required, this.endDateNotBeforeStartDate.bind(this)]]
     });
   }
 
@@ -67,6 +77,18 @@ export class EditSprintFormComponent implements OnInit {
     );
   }
 
+  dateNotBeforeToday(control: AbstractControl): ValidationErrors | null {
+    const today = new Date().setHours(0, 0, 0, 0); // Reset time to midnight
+    const inputDate = new Date(control.value).setHours(0, 0, 0, 0);
+    return inputDate >= today ? null : { dateNotBeforeToday: true };
+  }
+
+  endDateNotBeforeStartDate(control: AbstractControl): ValidationErrors | null {
+    const startDate = new Date(this.editSprintForm?.get('start_Date')?.value).setHours(0, 0, 0, 0);
+    const endDate = new Date(control.value).setHours(0, 0, 0, 0);
+    return endDate >= startDate ? null : { endDateNotBeforeStartDate: true };
+  }
+
   onSubmit() {
     if (this.editSprintForm.valid) {
       this.confirmDialogService.open('Are you sure you want to update this sprint?').subscribe(confirmed => {
@@ -83,7 +105,6 @@ export class EditSprintFormComponent implements OnInit {
             }
           ); 
         }
-      
       }); 
     }
   }

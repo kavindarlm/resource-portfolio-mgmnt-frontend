@@ -2,6 +2,14 @@
   color: rgb(227, 113, 113);
 }
 
+.text{
+  color: #1e3895;
+}
+
+.small-text {
+  font-size: 0.9rem;
+}
+
 .custom-day {
   position: relative;
   display: inline-block;

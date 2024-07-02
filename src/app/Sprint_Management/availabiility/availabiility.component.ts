@@ -201,20 +201,38 @@ export class AvailabiilityComponent implements OnInit {
   }
 
   onAddClick(): void {
+    let allInputsValid = true;
+  
     this.sets.forEach(set => {
-      const projectTaskData: ProjectTaskData = {
-        resourceId: this.resourceId,
-        taskId: set.taskId,
-        percentage: set.percentage
-      };
-      this.sharedService.addData(projectTaskData);
+      if (!set.projectId || !set.taskId || set.percentage === null) {
+        allInputsValid = false;
+        return;
+      }
     });
+  
+    if (allInputsValid) {
+      this.sets.forEach(set => {
+        const projectTaskData: ProjectTaskData = {
+          resourceId: this.resourceId,
+          taskId: set.taskId,
+          percentage: set.percentage
+        };
+        this.sharedService.addData(projectTaskData);
+      });
+      this.clearSets();
+    } else {
+      this.toastr.error('Please fill in all fields for each set.', 'Error');
+    }
+  }
+  
+  clearSets(): void {
     this.sets = [{ projectId: '', taskId: '', percentage: null, Tasks: [] }];
     this.searchText = [''];
     this.filteredProjects = [this.Projects];
     this.dropdownOpen = [false];
     this.selectedProjectNames = [''];
   }
+  
 
   deleteContent() {
     this.router.navigate(['/pages-body/sprint-management/createform/availableResources']);
