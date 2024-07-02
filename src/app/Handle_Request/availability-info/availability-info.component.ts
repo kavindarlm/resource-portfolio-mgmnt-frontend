@@ -228,6 +228,7 @@ export class AvailabilityInfoComponent implements OnInit {
   }
 
  
+  
   onAddClick(): void {
     // Check if any set is incomplete
     const invalidSet = this.sets.find(set => !set.projectId || !set.taskId || set.percentage === null);
@@ -252,14 +253,21 @@ export class AvailabilityInfoComponent implements OnInit {
         resource_id: this.resourceId,
         task_id: set.taskId,
         percentage: set.percentage
-      });
+      }).pipe(
+        map(() => set.percentage) // Return the percentage of the successfully created allocation
+      );
     });
   
     // Execute all requests concurrently
     forkJoin(requests).subscribe(
-      () => {
-        // Calculate updated availability percentage
-        this.calculateAvailabilityPercentage();  
+      (percentages: (number | null)[]) => {
+        // Filter out null values and sum the percentages
+        const validPercentages = percentages.filter((percentage): percentage is number => percentage !== null);
+        const newPercentageSum = validPercentages.reduce((sum, percentage) => sum + percentage, 0);
+        
+        // Ensure availabilityPercentage is treated as a number
+        this.availabilityPercentage = Number(this.availabilityPercentage) + newPercentageSum;
+  
         this.toastr.success('Resource added successfully!', 'Success');
         this.sharedService.notifySprintUpdated(); // Notify sprint update
         this.sharedService.notifyResourceAdded(); // Notify resource added
@@ -279,7 +287,9 @@ export class AvailabilityInfoComponent implements OnInit {
         // Handle error as needed
       }
     );
-  }  
+  }
+  
+  
   
   deleteContent() {
     this.router.navigate(['/pages-body/handle-request/sprintDetails', this.sprintId, 'availableResourceList', this.sprintId]);
@@ -298,6 +308,9 @@ export class AvailabilityInfoComponent implements OnInit {
   }
 
   getInitials(fullName: string): string {
+    if (!fullName) {
+      return ''; 
+    }
     const names = fullName.split(' ');
     const initials = names.slice(0, 2).map(name => name.charAt(0)).join('');
     return initials.toUpperCase();
