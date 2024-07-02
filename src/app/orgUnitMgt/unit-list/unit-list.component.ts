@@ -10,33 +10,33 @@ import { Router } from '@angular/router';
   templateUrl: './unit-list.component.html',
   styleUrl: './unit-list.component.css'
 })
-export class UnitListComponent implements OnInit{
+export class UnitListComponent implements OnInit {
   showForm = false;
-  orgunits : OrganizationalUnitModel[] | undefined;
+  orgunits: OrganizationalUnitModel[] | undefined;
   selectedUnit: OrganizationalUnitModel | undefined;
-searchText: any;
+  searchText: any;
   constructor(private orgUnitMgtService: OrgUnitMgtService,
-              private spinner: NgxSpinnerService,
-              private router: Router) {
-    this.showForm=false;
+    private spinner: NgxSpinnerService,
+    private router: Router) {
+    this.showForm = false;
   }
 
   ngOnInit(): void {
     this.loadOrgUnits();
 
-       // Subscribe to the resourceAdded event
-       this.orgUnitMgtService.unitListUpdated.subscribe(() => {
-        this.loadOrgUnits(); // Reload resource list when a new resource is added
-      });
+    // Subscribe to the resourceAdded event
+    this.orgUnitMgtService.unitListUpdated.subscribe(() => {
+      this.loadOrgUnits(); // Reload resource list when a new resource is added
+    });
   }
 
-  showcomponent(){
+  showcomponent() {
     this.showForm = !this.showForm;
   }
 
-  loadOrgUnits(){
+  loadOrgUnits() {
     this.spinner.show();
-    this.orgUnitMgtService.getOrgUnits().subscribe(res=>{
+    this.orgUnitMgtService.getOrgUnits().subscribe(res => {
       this.orgunits = res;
       this.spinner.hide();
     })
@@ -45,8 +45,7 @@ searchText: any;
   showUnitDetails(unit: OrganizationalUnitModel): void {
     this.selectedUnit = unit;
     this.orgUnitMgtService.setData(this.selectedUnit);
-    // this.router.navigate(['pages-body/unit-list/unit-details', this.selectedUnit.unitId]); // Navigate to unit details with unit ID
     this.orgUnitMgtService.refreshUnitfetchData();
   }
-  
+
 }

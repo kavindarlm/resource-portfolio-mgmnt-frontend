@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { OrganizationalUnitModel } from '../unit-form/unit-form.model';
 
 @Component({
   selector: 'app-unit-node',
@@ -7,10 +6,10 @@ import { OrganizationalUnitModel } from '../unit-form/unit-form.model';
   styleUrl: './unit-node.component.css'
 })
 export class UnitNodeComponent implements OnInit {
-  // @Input() node: OrganizationalUnitModel[] | undefined;
+
   @Input() node: any;
 
   ngOnInit() {
-    // console.log(this.node);
+
   }
 }

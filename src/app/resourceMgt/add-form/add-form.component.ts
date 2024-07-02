@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { ResourceService } from '../../shared/sevices_resourceMgt/resource.service'; 
+import { ResourceService } from '../../shared/sevices_resourceMgt/resource.service';
 import { JobRoleModel, OrgUnitModel, ResourceModel } from './addformmodel';
 import { catchError } from 'rxjs';
 import { throwError } from 'rxjs';
@@ -9,7 +9,6 @@ import { JobRoleService } from '../../shared/sevices_resourceMgt/jobRole.service
 import { OrgUnitService } from '../../shared/sevices_resourceMgt/orgUnit.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-// import { v4 as uuidv4 } from 'uuid';
 
 
 @Component({
@@ -21,18 +20,18 @@ import { ToastrService } from 'ngx-toastr';
 export class AddFormComponent implements OnInit {
   resourceForm !: FormGroup;
   showForm = false;
-  
+
 
   jobroles: JobRoleModel[] | undefined; //creating an array for jobroles
   orgunits: OrgUnitModel[] | undefined; //creating an array for orgunits
 
-  constructor(private http: HttpClient, 
-              private resourceService: ResourceService, 
-              private formBuilder: FormBuilder, 
-              private jobRoleService: JobRoleService, 
-              private orgUnitService: OrgUnitService,
-              private router: Router,
-              private toaster: ToastrService) { } 
+  constructor(private http: HttpClient,
+    private resourceService: ResourceService,
+    private formBuilder: FormBuilder,
+    private jobRoleService: JobRoleService,
+    private orgUnitService: OrgUnitService,
+    private router: Router,
+    private toaster: ToastrService) { }
   ngOnInit(): void {
 
     this.loadJobRoles();// calling the loadJobRoles Method
@@ -48,10 +47,10 @@ export class AddFormComponent implements OnInit {
       unitId: ['', Validators.required]
     });
 
-        // Subscribe to the jobRoleAdded event
-        this.jobRoleService.jobRoleListUpdated.subscribe(() => {
-          this.loadJobRoles(); // Reload resource list when a new resource is added
-        });
+    // Subscribe to the jobRoleAdded event
+    this.jobRoleService.jobRoleListUpdated.subscribe(() => {
+      this.loadJobRoles(); // Reload resource list when a new resource is added
+    });
 
 
   }
@@ -66,44 +65,45 @@ export class AddFormComponent implements OnInit {
 
   loadJobRoles() {
     this.jobRoleService.getJobRoles()
-    .pipe(
-      catchError((error) => {
-        console.error('Error fetching job roles:', error);
-        alert('An error occurred while fetching job roles. Please try again.');
-        return throwError('Error fetching job roles');
-      })
-    )
-    .subscribe((res: any) => {
-      // debugger;
-      this.jobroles = res; // Assuming the response is directly the array of jobroles
-    },
-      (error) => {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again.');
-      }
-    );
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching job roles:', error);
+          alert('An error occurred while fetching job roles. Please try again.');
+          return throwError('Error fetching job roles');
+        })
+      )
+      .subscribe((res: any) => {
+        // debugger;
+        this.jobroles = res; // Assuming the response is directly the array of jobroles
+      },
+        (error) => {
+          console.error('Error:', error);
+          alert('An error occurred. Please try again.');
+        }
+      );
   }
 
   loadOrgUnits() {
     this.orgUnitService.getOrgUnits()
-    .pipe(
-      catchError((error) => {
-        console.error('Error fetching org units:', error);
-        alert('An error occurred while fetching org units. Please try again.');
-        return throwError('Error fetching org units');
-      })
-    )
-    .subscribe((res: any) => {
-      // debugger;
-      this.orgunits = res; // Assuming the response is directly the array of orgunits
-    },
-      (error) => {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again.');
-      }
-    );
+      .pipe(
+        catchError((error) => {
+          console.error('Error fetching org units:', error);
+          alert('An error occurred while fetching org units. Please try again.');
+          return throwError('Error fetching org units');
+        })
+      )
+      .subscribe((res: any) => {
+        // debugger;
+        this.orgunits = res; // Assuming the response is directly the array of orgunits
+      },
+        (error) => {
+          console.error('Error:', error);
+          alert('An error occurred. Please try again.');
+        }
+      );
   }
 
+  //To add a new resource
   sendData(data: ResourceModel) {
     console.log(data);
     // debugger;
@@ -113,50 +113,51 @@ export class AddFormComponent implements OnInit {
     }
     const dataToSend = this.resourceForm.value;
     this.resourceService.createResource(data)
-    .pipe(
-      catchError((error) => {
-        console.error('Error creating resource:', error);
-        return throwError('Error creating resource');
-      })
-    )
-    .subscribe((res => {
-      console.log(data);
-      this.resourceForm.reset();
-      this.addsuccesemassege(data.resourceId);
-      this.resourceService.resourceListUpdated.emit(); // Emit the event
-      this.router.navigate(['pages-body/first-view']);
-    }))
+      .pipe(
+        catchError((error) => {
+          console.error('Error creating resource:', error);
+          return throwError('Error creating resource');
+        })
+      )
+      .subscribe((res => {
+        console.log(data);
+        this.resourceForm.reset();
+        this.addsuccesemassege(data.resourceId);
+        this.resourceService.resourceListUpdated.emit(); // Emit the event
+        this.router.navigate(['pages-body/first-view']);
+      }))
   }
 
-    //This is for success message
-    addsuccesemassege(resourceId: string) {
-      this.toaster.success(
-        `${resourceId} Added successfully`,
-        'Created Resource',
-        {
-          timeOut: 3000,
-        }
-      );
-    }
-
-    capitalizeFirstLetter() {
-      const resourceNameControl = this.resourceForm.get('resourceName');
-      if (resourceNameControl && resourceNameControl.value && resourceNameControl.value.length > 1) {
-        let words = resourceNameControl.value.split(' ');
-        words = words.map((word: string) => word.charAt(0).toUpperCase() + word.slice(1));
-        resourceNameControl.setValue(words.join(' '));
+  //This is for success message
+  addsuccesemassege(resourceId: string) {
+    this.toaster.success(
+      `${resourceId} Added successfully`,
+      'Created Resource',
+      {
+        timeOut: 3000,
       }
-    }
+    );
+  }
 
-    //Event call to call the function to add a new job role
-    onJobRoleChange(event: any) {
-      if (event.target.value === 'other') {
-        this.addNewJobRole();
-      }
+  //To capitalize the first letter of input
+  capitalizeFirstLetter() {
+    const resourceNameControl = this.resourceForm.get('resourceName');
+    if (resourceNameControl && resourceNameControl.value && resourceNameControl.value.length > 1) {
+      let words = resourceNameControl.value.split(' ');
+      words = words.map((word: string) => word.charAt(0).toUpperCase() + word.slice(1));
+      resourceNameControl.setValue(words.join(' '));
     }
-  
-    addNewJobRole() {
-      this.showForm = !this.showForm;
+  }
+
+  //Event call to call the function to add a new job role
+  onJobRoleChange(event: any) {
+    if (event.target.value === 'other') {
+      this.addNewJobRole();
     }
+  }
+
+  addNewJobRole() {
+    this.showForm = !this.showForm;
+  }
 
 }

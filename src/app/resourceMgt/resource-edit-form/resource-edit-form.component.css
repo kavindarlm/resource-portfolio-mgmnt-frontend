@@ -72,14 +72,14 @@
         margin: 3% 0;
     }
 
-    .editButton {
+    .cancelButton {
         width: 90%;
         margin: 0 5%;
     }
 
     .deleteButton {
         width: 90%;
-        margin: 0 5%;
+        margin: 2% 5%;
     }
 
 

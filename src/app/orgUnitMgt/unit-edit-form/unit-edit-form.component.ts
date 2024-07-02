@@ -28,7 +28,7 @@ export class UnitEditFormComponent implements OnInit {
     private router: Router,
     private toaster: ToastrService,
     private confirmationMessage: ConfirmDialogService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadOrgUnits();
@@ -44,6 +44,7 @@ export class UnitEditFormComponent implements OnInit {
     this.setFormData();
   }
 
+  //To set form data
   setFormData() {
     this.unitForm.patchValue({
       unitName: this.selectedUnit.unitName,
@@ -78,6 +79,7 @@ export class UnitEditFormComponent implements OnInit {
       );
   }
 
+  //To edit org unit details
   onEditUnit(data: OrganizationalUnitModel) {
     this.confirmationMessage
       .open('Are you sure you want to update this unit?')

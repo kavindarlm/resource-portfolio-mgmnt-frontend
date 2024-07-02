@@ -22,10 +22,12 @@ export class ResourceService {
     return this.clickedResource;
   }
 
+  //To get resources
   getResources() {
     return this.http.get<ResourceModel[]>(`${this.baseUrl}/resource`);
   }
 
+  //To get resource by id
   getResource(id: string) {
     return this.http.get<ResourceModel>(`${this.baseUrl}/resource/${id}`);
   }
@@ -38,10 +40,12 @@ export class ResourceService {
     return this.http.put<ResourceModel>(`${this.baseUrl}/resource/${id}`, resourceData);
   }
 
+  //To delete a resource
   deleteResource(id: string): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/resource/${id}`);
   }
 
+  //To get job role name
   getRoleName(roleId: number): Observable<string> {
     console.log(roleId);
     return this.http.get<string>(`${this.baseUrl}/job-role/${roleId}`)
@@ -53,7 +57,8 @@ export class ResourceService {
         })
       );
   }
-  
+
+  //To get org unit name
   getUnitName(unitId: number): Observable<string> {
     return this.http.get<string>(`${this.baseUrl}/org-unit/${unitId}`)
       .pipe(
