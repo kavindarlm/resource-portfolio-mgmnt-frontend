@@ -259,8 +259,7 @@ export class AvailabilityInfoComponent implements OnInit {
     forkJoin(requests).subscribe(
       () => {
         // Calculate updated availability percentage
-        this.calculateAvailabilityPercentage();
-  
+        this.calculateAvailabilityPercentage();  
         this.toastr.success('Resource added successfully!', 'Success');
         this.sharedService.notifySprintUpdated(); // Notify sprint update
         this.sharedService.notifyResourceAdded(); // Notify resource added
@@ -296,10 +295,6 @@ export class AvailabilityInfoComponent implements OnInit {
       holiday.month === date.month &&
       holiday.day === date.day
     );
-  }
-
-  onCancelClick(): void {
-    this.router.navigate(['/resource', this.sprintId, 'list']);
   }
 
   getInitials(fullName: string): string {
