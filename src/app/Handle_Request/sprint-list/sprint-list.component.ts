@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { sprintApiService } from '../../Sprint_Management/services/sprintApi.service';
 import { SharedService } from '../../Sprint_Management/services/shared.service';
 import { Subscription } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-sprint-list',
@@ -17,7 +18,7 @@ export class SprintListComponent {
   private sprintDeletedSubscription!: Subscription;
   private sprintUpdatedSubscription!: Subscription;
 
-  constructor(private sprintApiService: sprintApiService, private sharedService: SharedService) { }
+  constructor(private sprintApiService: sprintApiService, private sharedService: SharedService, private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.fetchSprints();
@@ -52,10 +53,12 @@ export class SprintListComponent {
   }
 
   fetchSprints(): void {
+    this.spinner.show();
     this.sprintApiService.getAllSprints().subscribe(
       (data: any[]) => {
         this.sprints = data;
         this.filteredSprints = data; // Initialize filteredSprints
+        this.spinner.hide();
       },
       (error) => {
         console.error('Error fetching sprints:', error);

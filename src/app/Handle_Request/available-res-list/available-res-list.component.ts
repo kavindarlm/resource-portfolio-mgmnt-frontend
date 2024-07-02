@@ -8,9 +8,10 @@ import { forkJoin, map } from 'rxjs';
 @Component({
   selector: 'app-available-res-list',
   templateUrl: './available-res-list.component.html',
-  styleUrl: './available-res-list.component.css'
+  styleUrls: ['./available-res-list.component.css']
 })
 export class AvailableResListComponent implements OnInit{
+
   sprintId: string = '';
   resources: any[] = [];
   filteredContents: any[] = [];
@@ -23,23 +24,23 @@ export class AvailableResListComponent implements OnInit{
   itemsPerPage: number = 5;
   totalPages: number = 0;
   totalPagesArray: number[] = [];
-  
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router, // Add Router to the constructor
     private resourceService: ResourceService,
     private serviceService: ServiceService,
-    private ResourceAllocationService : ResourceAllocationService,
-    private router: Router
+    private resourceAllocationService : ResourceAllocationService
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.sprintId = params['sprintId'];
       this.fetchResources();
-    this.fetchTeamNames();
+      this.fetchTeamNames();
     });
   }
+
   fetchResources(): void {
     this.resourceService.getResourcesForSprint().subscribe(
       (data: any[]) => {
@@ -69,43 +70,42 @@ export class AvailableResListComponent implements OnInit{
     );
   }
 
- calculateAvailability(): void {
-  const observables = this.resources.map(resource => 
-    this.ResourceAllocationService.getTasksByResourceId(resource.Resource_ID).pipe(
-      map(tasks => {
-        // Filter tasks with taskProgressPercentage < 100
-        const filteredTasks = tasks.filter(task => task.resourceAllocation.task.taskProgressPercentage < 100);
-        
-        // Calculate the total allocation percentage
-        const totalAllocation = filteredTasks.reduce((total, task) => {
-          const allocationPercentage = task.resourceAllocation.percentage || 0; 
-          return total + allocationPercentage;
-        }, 0);
+  calculateAvailability(): void {
+    const observables = this.resources.map(resource => 
+      this.resourceAllocationService.getTasksByResourceId(resource.Resource_ID).pipe(
+        map(tasks => {
+          // Filter tasks with taskProgressPercentage < 100
+          const filteredTasks = tasks.filter(task => task.resourceAllocation.task.taskProgressPercentage < 100);
+          
+          // Calculate the total allocation percentage
+          const totalAllocation = filteredTasks.reduce((total, task) => {
+            const allocationPercentage = task.resourceAllocation.percentage || 0; 
+            return total + allocationPercentage;
+          }, 0);
 
-        // Calculate the availability percentage
-        const availabilityPercentage = totalAllocation;
+          // Calculate the availability percentage
+          const availabilityPercentage = totalAllocation;
 
-        return {
-          ...resource,
-          Availability: availabilityPercentage
-        };
-      })
-    )
-  );
+          return {
+            ...resource,
+            Availability: availabilityPercentage
+          };
+        })
+      )
+    );
 
-  forkJoin(observables).subscribe(
-    updatedResources => {
-      this.resources = updatedResources;
-      this.filteredContents = this.resources; // Initialize filteredContents with all resources
-      this.updatePagination(); // Update pagination after fetching resources
-      console.log('Resources with availability percentages:', this.resources);
-    },
-    error => {
-      console.error('Error calculating availability:', error);
-    }
-  );
-}
-  
+    forkJoin(observables).subscribe(
+      updatedResources => {
+        this.resources = updatedResources;
+        this.filteredContents = this.resources; // Initialize filteredContents with all resources
+        this.updatePagination(); // Update pagination after fetching resources
+        console.log('Resources with availability percentages:', this.resources);
+      },
+      error => {
+        console.error('Error calculating availability:', error);
+      }
+    );
+  }
 
   filterResources(): void {
     // Filter resources based on the selected filters
@@ -129,18 +129,7 @@ export class AvailableResListComponent implements OnInit{
   resetOrgUnitFilter(): void {
     this.orgUnitFilter = '';
     this.filterResources();
-  }
-
-  navigateToAvailability(resource: any): void {
-    if (this.sprintId && resource.Resource_ID) {
-      this.router.navigate(['pages-body', 'handle-request', 'sprintDetails', this.sprintId, 'availableResourceList', 'availabilityInfo', resource.Resource_ID], {
-        queryParams: { availability: resource.Availability }
-      });
-    } else {
-      console.error('Invalid resource or sprint ID:', this.sprintId, resource.Resource_ID);
-    }
-  }
-  
+  } 
 
   updatePagination(): void {
     this.totalPages = Math.ceil(this.filteredContents.length / this.itemsPerPage);
@@ -172,4 +161,12 @@ export class AvailableResListComponent implements OnInit{
     this.currentPage = page;
     this.paginateContents();
   }
+
+  navigateToAvailabilityInfo(sprintId: string, resourceId: string, availability: number): void {
+    this.router.navigate(
+      [`/pages-body/handle-request/sprintDetails/${sprintId}/availableResourceList/${sprintId}/availabilityInfo/${sprintId}/${resourceId}`],
+      { queryParams: { availability } }
+    );
+  }
+  
 }

@@ -104,6 +104,7 @@ export class EditTaskComponent implements OnInit {
     });
   }
 
+  // Close the dialog
   close() {
     this.router.navigate(['/pages-body/TaskProjectList/projectTaskDetails/' + this.projectId+'/updatetask/'+this.Routetaskid]);
   }

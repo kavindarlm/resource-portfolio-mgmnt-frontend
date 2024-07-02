@@ -11,6 +11,7 @@ import { forkJoin, map } from 'rxjs';
   styleUrls: ['./available-resource-list.component.css']
 })
 export class AvailableResourceListComponent implements OnInit {
+  
   resources: any[] = [];
   filteredContents: any[] = [];
   paginatedContents: any[] = [];

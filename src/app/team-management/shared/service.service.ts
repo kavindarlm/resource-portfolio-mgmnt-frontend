@@ -1,27 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Resource } from '../team-form/team-form.model';
-
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceService {
+  private baseUrl = environment.baseUrl; // Base URL global variable
 
   constructor(private http: HttpClient) { }
-  //create data
+
+  // Create data
   addTeam(data: any): Observable<any> {
-    return this.http.post('http://localhost:3000/teams', data);
+    return this.http.post(`${this.baseUrl}/teams`, data);
   }
 
-  //fetch data
+  // Fetch data
   getTeams(): Observable<any> {
-    return this.http.get('http://localhost:3000/teams');
+    return this.http.get(`${this.baseUrl}/teams`);
   }
 
-  //new code - add selected resources to the table
+  // New code - add selected resources to the table
   private selectedResourcesSource = new BehaviorSubject<any[]>([]);
   selectedResources$ = this.selectedResourcesSource.asObservable();
 

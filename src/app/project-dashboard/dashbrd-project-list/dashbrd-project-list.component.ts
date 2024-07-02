@@ -4,6 +4,7 @@ import { ProjectDashboardService } from '../services/projectDashboard.service';
 import { DashbrdSharedService } from '../services/dshbrdshared.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { catchError } from 'rxjs';
+import { SidebarheaderServiceService } from '../../PageBody/side-bar-header-service/sidebarheader-service.service';
 
 @Component({
   selector: 'app-dashbrd-project-list',
@@ -21,7 +22,7 @@ export class DashbrdProjectListComponent implements OnInit {
   selectedCriticality: string = '';
   error: any;
 
-  constructor(private projectDashboardServicee: ProjectDashboardService, private sharedService: DashbrdSharedService, private spinner: NgxSpinnerService) {
+  constructor(private projectDashboardServicee: ProjectDashboardService, private sharedService: DashbrdSharedService, private spinner: NgxSpinnerService,private refreshData: SidebarheaderServiceService) {
     this.sharedService.viewMore$.subscribe(value => {
       this.isViewMoreClicked = value;
       this.currentPage = 1;
@@ -34,7 +35,10 @@ export class DashbrdProjectListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllprojects();
+    this.refreshData.refreshSystem$.subscribe(() => {
+      this.getAllprojects();
+    });
+    
   }
 
   viewMore() {
