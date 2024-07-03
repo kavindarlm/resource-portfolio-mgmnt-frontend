@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { datamodel } from '../../Project-management/create-project/modelproject';
 import { SidebarheaderServiceService } from '../../PageBody/side-bar-header-service/sidebarheader-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-task-project-view',
@@ -29,7 +30,8 @@ export class TaskProjectViewComponent {
     private taskApiService: taskApiService,
     private router: Router,
     private spinner: NgxSpinnerService,
-    private refreshData: SidebarheaderServiceService
+    private refreshData: SidebarheaderServiceService,
+    private toster: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -41,38 +43,44 @@ export class TaskProjectViewComponent {
 
   // Define the getProjectList method
   getProjectList() {
-    this.projectService.getProjectList().subscribe((res) => {
-      this.spinner.show();
-      this.projectlist = res;
-      this.filteredProjects = res;
-      this.totalPages = Math.ceil(
-        this.filteredProjects.length / this.itemsPerPage
-      );
-      this.projectlist?.forEach((project) => {
-        if (project.deliveryManager_id) {
-          this.getResourceName(project.deliveryManager_id);
-        }
-        if (project.projectManager_id) {
-          this.getResourceName(project.projectManager_id);
-        }
-        if (project.projectid) {
-          this.getProjectProgrresById(project.projectid);
-        }
-        
-      });
-      this.spinner.hide();
+    this.spinner.show();
+    this.projectService.getProjectList().subscribe({
+      next: (res) => {
+        this.projectlist = res;
+        this.filteredProjects = res;
+        this.totalPages = Math.ceil(this.filteredProjects.length / this.itemsPerPage);
+        this.projectlist?.forEach((project) => {
+          if (project.deliveryManager_id) {
+            this.getResourceName(project.deliveryManager_id);
+          }
+          if (project.projectManager_id) {
+            this.getResourceName(project.projectManager_id);
+          }
+          if (project.projectid) {
+            this.getProjectProgrresById(project.projectid);
+          }
+        });
+      },
+      error: (error) => {
+        this.spinner.hide();
+        this.toster.error('Failed to load projects. Please try again later.', 'Error');
+      }
     });
+    this.spinner.hide();
   }
 
   // Define the getResourceName method
   getResourceName(resourceId: string) {
-    this.taskApiService
-      .getResourceNameByResourceId(resourceId)
-      .subscribe((res) => {
+    this.taskApiService.getResourceNameByResourceId(resourceId).subscribe({
+      next: (res) => {
         if (res && res.resourceId) {
           this.resourceNames[res.resourceId] = res.resourceName;
         }
-      });
+      },
+      error: (error) => {
+        this.toster.error('Failed to load resource name. Please try again later.', 'Error');
+      }
+    });
   }
 
   // Define the getCriticalityName method

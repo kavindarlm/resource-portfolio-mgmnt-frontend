@@ -59,3 +59,7 @@ th{
         /* Use a two-column layout on larger screens */
     }
 }
+
+.small-text {
+    font-size: 0.75rem;
+  }

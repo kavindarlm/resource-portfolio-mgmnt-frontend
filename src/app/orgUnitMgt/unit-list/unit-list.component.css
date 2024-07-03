@@ -68,3 +68,7 @@
     /* margin: 0 auto; */
   }
 }
+
+.small-text {
+  font-size: 0.75rem;
+}

@@ -85,6 +85,7 @@ export class EditTaskComponent implements OnInit {
         timeOut: 3000,
       });
       this.tasksharedService.refreshTaskList();
+      this.tasksharedService.refreshProjectDetails();
       this.router.navigate(['/pages-body/TaskProjectList/projectTaskDetails/' + this.projectId+'/updatetask/'+this.Routetaskid]);
     });
   }
@@ -98,6 +99,7 @@ export class EditTaskComponent implements OnInit {
         this.taskApiService.deleteTask(this.Routetaskid).subscribe((data: taskModel) => {
           this.toaster.success('Task Deleted Successfully');
           this.tasksharedService.refreshTaskList();
+          this.tasksharedService.refreshProjectDetails();
           this.router.navigate(['/pages-body/TaskProjectList/projectTaskDetails/' + this.projectId]);
         });
       }

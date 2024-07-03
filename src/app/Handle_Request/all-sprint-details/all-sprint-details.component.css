@@ -30,8 +30,14 @@ td{
 
 .custom-button{
     border-color: #1E3895;
+    color: #1e3895e1;
  }
  
  .custom-button:hover{
-     background-color: #1E3895;
+    background-color: #1E3895;
+     color: white;
  }
+
+ .small-text {
+    font-size: 0.75rem;
+  }
