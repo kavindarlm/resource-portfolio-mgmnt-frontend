@@ -167,7 +167,7 @@ export class UpdateProjectComponent implements OnInit {
       )
       .subscribe((res: datamodel) => {
         this.editSucceseMassege(this.projectForm.projectName);
-        this.router.navigate(['/pages-body/projectlist']);
+        this.router.navigate(['/pages-body/projectsview']);
         this.projectList.getProjectList();
         this.shared.refreshProjectList();
         this.shared.refreshProjectCount();
@@ -191,7 +191,7 @@ export class UpdateProjectComponent implements OnInit {
         )
         .subscribe((res: datamodel) => {
           this.deleteSucceseMassege(this.projectForm.projectName);
-          this.router.navigate(['/pages-body/projectlist']);
+          this.router.navigate(['/pages-body/projectsview']);
           this.projectList.getProjectList();
           this.shared.refreshProjectList();
           this.shared.refreshProjectCount();

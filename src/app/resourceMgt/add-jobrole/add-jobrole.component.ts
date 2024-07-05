@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { JobRoleService } from '../../shared/sevices_resourceMgt/jobRole.service';
@@ -80,7 +80,10 @@ export class AddJobroleComponent implements OnInit {
     }
   }
 
+  @Output() cancel = new EventEmitter<void>();
+
   cancelForm() {
     this.isVisible = !this.isVisible;
+    this.cancel.emit();
   }
 }

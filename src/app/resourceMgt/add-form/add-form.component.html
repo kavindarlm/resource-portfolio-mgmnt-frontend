@@ -62,4 +62,4 @@
 </div>
 
 <!-- To call the add-jobrole component -->
-<app-add-jobrole *ngIf="showForm"></app-add-jobrole>
+<app-add-jobrole *ngIf="showForm" (cancel)="onCancelAddJobRoleForm()"></app-add-jobrole>
