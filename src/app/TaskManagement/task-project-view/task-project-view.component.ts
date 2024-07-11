@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-task-project-view',
   templateUrl: './task-project-view.component.html',
-  styleUrl: './task-project-view.component.css',
+  styleUrls: ['./task-project-view.component.css'],
 })
 export class TaskProjectViewComponent {
   projectlist: datamodel[] | undefined;
@@ -19,6 +19,11 @@ export class TaskProjectViewComponent {
   projectProgress: { [key: string]: number } = {};
   searchText!: string;
   selectedStatus: string = '';
+
+  // Sorting properties
+  sortProgressState: number = 0; // 0 = no sorting, 1 = ascending, 2 = descending
+  sortProjectNameState: number = 0; // 0 = no sorting, 1 = A-Z, 2 = Z-A
+  sortDeliveryManagerState: number = 0; // 0 = no sorting, 1 = A-Z, 2 = Z-A
 
   // Pagination properties
   currentPage: number = 1;
@@ -41,7 +46,6 @@ export class TaskProjectViewComponent {
     this.getProjectList();
   }
 
-  // Define the getProjectList method
   getProjectList() {
     this.spinner.show();
     this.projectService.getProjectList().subscribe({
@@ -60,16 +64,15 @@ export class TaskProjectViewComponent {
             this.getProjectProgrresById(project.projectid);
           }
         });
+        this.spinner.hide();
       },
       error: (error) => {
         this.spinner.hide();
         this.toster.error('Failed to load projects. Please try again later.', 'Error');
       }
     });
-    this.spinner.hide();
   }
 
-  // Define the getResourceName method
   getResourceName(resourceId: string) {
     this.taskApiService.getResourceNameByResourceId(resourceId).subscribe({
       next: (res) => {
@@ -83,7 +86,6 @@ export class TaskProjectViewComponent {
     });
   }
 
-  // Define the getCriticalityName method
   getCriticalityName(criticality_id: string | number) {
     if (criticality_id === 3) {
       return 'Low';
@@ -96,7 +98,6 @@ export class TaskProjectViewComponent {
     }
   }
 
-  // Define the getProjectProgressById method
   getProjectProgrresById(projectId: string) {
     this.taskApiService.getProjectProgress(projectId).subscribe((res) => {
       if (res) {
@@ -106,7 +107,6 @@ export class TaskProjectViewComponent {
     });
   }
 
-  // Define the getProjectStatus method
   getProjectStatus(projectId: string): string {
     const progress = this.projectProgress[projectId];
     if (progress === 100) {
@@ -118,17 +118,14 @@ export class TaskProjectViewComponent {
     }
   }
 
-  // Define the onSearchChange method
   onSearchChange() {
     this.onFilterChange();
   }
 
-  // Define the onStatusChange method
   onStatusChange() {
     this.onFilterChange();
   }
 
-  // Define the onFilterChange method
   onFilterChange() {
     let filtered = this.projectlist || [];
     if (this.searchText) {
@@ -137,35 +134,80 @@ export class TaskProjectViewComponent {
       );
     }
     if (this.selectedStatus) {
-      filtered = filtered.filter((project) => 
+      filtered = filtered.filter((project) =>
         this.getProjectStatus(project.projectid) === this.selectedStatus
       );
     }
+
+    if (this.sortProgressState !== 0) {
+      filtered = filtered.sort((a, b) => {
+        const progressA = this.projectProgress[a.projectid] || 0;
+        const progressB = this.projectProgress[b.projectid] || 0;
+        if (this.sortProgressState === 1) {
+          return progressA - progressB; // ascending
+        } else {
+          return progressB - progressA; // descending
+        }
+      });
+    }
+
+    if (this.sortProjectNameState !== 0) {
+      filtered = filtered.sort((a, b) => {
+        const nameA = a.projectName.toLowerCase();
+        const nameB = b.projectName.toLowerCase();
+        if (this.sortProjectNameState === 1) {
+          return nameA.localeCompare(nameB); // A-Z
+        } else {
+          return nameB.localeCompare(nameA); // Z-A
+        }
+      });
+    }
+
+    if (this.sortDeliveryManagerState !== 0) {
+      filtered = filtered.sort((a, b) => {
+        const nameA = this.resourceNames[a.deliveryManager_id]?.toLowerCase() || '';
+        const nameB = this.resourceNames[b.deliveryManager_id]?.toLowerCase() || '';
+        if (this.sortDeliveryManagerState === 1) {
+          return nameA.localeCompare(nameB); // A-Z
+        } else {
+          return nameB.localeCompare(nameA); // Z-A
+        }
+      });
+    }
+
     this.filteredProjects = filtered;
     this.totalPages = Math.ceil(this.filteredProjects.length / this.itemsPerPage);
     this.currentPage = 1;
   }
 
-  // Define the getPaginatedProjects method
-  getPaginatedProjects() {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    return this.filteredProjects.slice(
-      startIndex,
-      startIndex + this.itemsPerPage
-    );
+  toggleProgressSort() {
+    this.sortProgressState = (this.sortProgressState + 1) % 3;
+    this.onFilterChange();
   }
 
-  // Define the changePage method
+  toggleProjectNameSort() {
+    this.sortProjectNameState = (this.sortProjectNameState + 1) % 3;
+    this.onFilterChange();
+  }
+
+  toggleDeliveryManagerSort() {
+    this.sortDeliveryManagerState = (this.sortDeliveryManagerState + 1) % 3;
+    this.onFilterChange();
+  }
+
+  getPaginatedProjects() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return this.filteredProjects.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
   changePage(page: number) {
     this.currentPage = page;
   }
 
-  // Define the onClickAddTask method
   onClickAddTask(projectId: string) {
     this.router.navigate(['/pages-body/TaskProjectList/projectTaskDetails/' + projectId + '/newTask/' + projectId]);
   }
 
-  // Define the onClickNavigateTo method
   onClickNavigateTo(projectId: string) {
     this.router.navigate(['/pages-body/TaskProjectList/projectTaskDetails/' + projectId]);
   }

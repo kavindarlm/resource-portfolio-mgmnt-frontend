@@ -20,7 +20,8 @@
                 <table class="table table-striped table-bordered">
                     <thead class="table-headers thead-dark fs-6 fst-normal text-center">
                         <tr>
-                            <th>Resource ID</th>
+                            <th>ID</th>
+                            <th>Resource Name</th>
                             <th>Job Role</th>
                             <th>Org. Unit</th>
                         </tr>
@@ -30,6 +31,7 @@
                             (click)="rowClick($event, resource)" routerLink="resource-details/{{resource.resourceId}}"
                             routerLinkActive="active" class="clickable-row">
                             <td>{{resource.resourceId}}</td>
+                            <td>{{resource.resourceName}}</td>
                             <td>{{getRoleName(resource.roleId)}}</td>
                             <td>{{getUnitName(resource.unitId)}}</td>
                         </tr>

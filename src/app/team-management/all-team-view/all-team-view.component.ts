@@ -7,13 +7,16 @@ import { SidebarheaderServiceService } from '../../PageBody/side-bar-header-serv
 @Component({
   selector: 'app-all-team-view',
   templateUrl: './all-team-view.component.html',
-  styleUrl: './all-team-view.component.css',
+  styleUrls: ['./all-team-view.component.css'],
 })
-export class AllTeamViewComponent {
+export class AllTeamViewComponent implements OnInit {
   teams: any[] = [];
   filteredTeams: any[] = [];
-  resourceNames: { [key: string]: string } = {};
   searchText!: string;
+
+  // Sorting properties
+  sortStateTeamName: number = 0; // 0: No sort, 1: Ascending, 2: Descending
+  sortStateResourceCount: number = 0; // 0: No sort, 1: Ascending, 2: Descending
 
   // Pagination properties
   currentPage: number = 1;
@@ -43,8 +46,8 @@ export class AllTeamViewComponent {
       this.totalPages = Math.ceil(
         this.filteredTeams.length / this.itemsPerPage
       );
+      this.spinner.hide();
     });
-    this.spinner.hide();
   }
 
   onSearchChange() {
@@ -61,7 +64,47 @@ export class AllTeamViewComponent {
 
   getPaginatedTeams() {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    return this.filteredTeams.slice(startIndex, startIndex + this.itemsPerPage);
+    let sortedTeams = this.filteredTeams;
+
+    // Sort by Team Name
+    if (this.sortStateTeamName === 1) {
+      sortedTeams = sortedTeams.sort((a, b) =>
+        a.teamName.localeCompare(b.teamName)
+      );
+    } else if (this.sortStateTeamName === 2) {
+      sortedTeams = sortedTeams.sort((a, b) =>
+        b.teamName.localeCompare(a.teamName)
+      );
+    }
+
+    // Sort by Number of Resources
+    if (this.sortStateResourceCount === 1) {
+      sortedTeams = sortedTeams.sort((a, b) => a.resourceCount - b.resourceCount);
+    } else if (this.sortStateResourceCount === 2) {
+      sortedTeams = sortedTeams.sort((a, b) => b.resourceCount - a.resourceCount);
+    }
+
+    return sortedTeams.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  toggleSort(field: string) {
+    switch (field) {
+      case 'teamName':
+        this.sortStateTeamName = (this.sortStateTeamName + 1) % 3;
+        if (this.sortStateTeamName === 1) {
+          this.sortStateResourceCount = 0;
+        }
+        break;
+      case 'resourceCount':
+        this.sortStateResourceCount = (this.sortStateResourceCount + 1) % 3;
+        if (this.sortStateResourceCount === 1) {
+          this.sortStateTeamName = 0;
+        }
+        break;
+      default:
+        break;
+    }
+    this.currentPage = 1; // Reset to first page after sorting change
   }
 
   changePage(page: number) {

@@ -12,7 +12,7 @@
               <i class="bi bi-filter"></i>
             </span>
             <div class="d-flex justify-content-end w-50">
-              <select class="form-select rounded  small-text" [(ngModel)]="selectedStatus"
+              <select class="form-select rounded small-text" [(ngModel)]="selectedStatus"
                 (ngModelChange)="onStatusChange()">
                 <option value="">All</option>
                 <option value="Completed">Completed</option>
@@ -26,7 +26,7 @@
           <div class="d-flex justify-content-end">
             <div class="input-group rounded w-50">
               <input type="search" aria-describedby="search-addon" [(ngModel)]="searchText"
-                (ngModelChange)="onSearchChange()" id="form1" class="form-control  small-text" placeholder="Search..."
+                (ngModelChange)="onSearchChange()" id="form1" class="form-control small-text" placeholder="Search..."
                 aria-label="search">
               <span class="input-group-text border-0" id="search-addon">
                 <i class="bi bi-search"></i>
@@ -34,18 +34,44 @@
             </div>
           </div>
         </div>
-
       </div>
 
       <div class="table-responsive">
         <table class="table table-bordered table-striped table-hover table-sm text-center">
           <thead class="thead-dark fs-6 fst-normal">
             <tr>
-              <th scope="col" class="col-3">Project Name</th>
-              <th scope="col" class="col-1">Progress</th>
+              <th scope="col" class="col-3">
+                <div class="d-flex mb-0 align-items-center justify-content-center">
+                  <div class="me-2">Project Name</div>
+                  <span class="input-group-text border-0 clickable-icon " id="search-addon">
+                    <i class="bi bi-arrow-down-up" *ngIf="sortProjectNameState === 0" (click)="toggleProjectNameSort()"></i>
+                    <i class="bi bi-sort-alpha-down" *ngIf="sortProjectNameState === 1" (click)="toggleProjectNameSort()"></i>
+                    <i class="bi bi-sort-alpha-up" *ngIf="sortProjectNameState === 2" (click)="toggleProjectNameSort()"></i>
+                  </span>
+                </div>
+              </th>
+              <th scope="col" class="col-2">
+                <div class="d-flex mb-0 align-items-center justify-content-center">
+                  <div class="me-2">Progress</div>
+                  <span class="input-group-text border-0 clickable-icon " id="search-addon">
+                    <i class="bi bi bi-sort-numeric-down" *ngIf="sortProgressState === 1" (click)="toggleProgressSort()"></i>
+                    <i class="bi bi-sort-numeric-up-alt" *ngIf="sortProgressState === 2" (click)="toggleProgressSort()"></i>
+                    <i class="bi bi-arrow-down-up" *ngIf="sortProgressState === 0" (click)="toggleProgressSort()"></i>
+                  </span>
+                </div>
+              </th>
               <th scope="col" class="col-2">Status</th>
-              <th scope="col" class="col-2">Priority</th>
-              <th scope="col" class="col-3">Delivery Manager</th>
+              <th scope="col" class="col-1">Priority</th>
+              <th scope="col" class="col-3">
+                <div class="d-flex mb-0 align-items-center justify-content-center">
+                  <div class="me-2">Delivery Manager</div>
+                  <span class="input-group-text border-0 clickable-icon " id="search-addon">
+                    <i class="bi bi-arrow-down-up" *ngIf="sortDeliveryManagerState === 0" (click)="toggleDeliveryManagerSort()"></i>
+                    <i class="bi bi-sort-alpha-down" *ngIf="sortDeliveryManagerState === 1" (click)="toggleDeliveryManagerSort()"></i>
+                    <i class="bi bi-sort-alpha-up" *ngIf="sortDeliveryManagerState === 2" (click)="toggleDeliveryManagerSort()"></i>
+                  </span>
+                </div>
+              </th>
               <th scope="col" class="col-1">Add Tasks</th>
             </tr>
           </thead>
@@ -61,7 +87,7 @@
               <td class="clickable" (click)="onClickNavigateTo(project.projectid)">{{
                 resourceNames[project.deliveryManager_id] || project.deliveryManager_id }}</td>
               <td><button (click)="onClickAddTask(project.projectid)"
-                  class="btn btn-outline-primary w-100  custom-button btn-sm">Add</button></td>
+                  class="btn btn-outline-primary w-100 custom-button btn-sm">Add</button></td>
             </tr>
           </tbody>
         </table>

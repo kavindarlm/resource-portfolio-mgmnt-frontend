@@ -36,8 +36,17 @@ td{
     border-color: #1E3895;
     color: #1e3895e1;
  }
+
+ .table-hover tbody tr:hover .custom-button{
+     color: white;
+ }
  
  .custom-button:hover{
      background-color: #1E3895;
      color: white;
  }
+
+ .clickable-icon {
+    cursor: pointer;
+    opacity: .5;
+  }

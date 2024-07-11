@@ -19,6 +19,9 @@ export class TeamListComponent implements OnInit, OnDestroy {
   _searchtext: string = '';
   errorMessage: string = ''; // Define the errorMessage property
   private refreshTeam!: Subscription;
+  currentPage = 1;
+  itemsPerPage = 10; // Number of items per page
+  totalPages = 1;
 
   get searchtext(): string {
     return this._searchtext;
@@ -26,7 +29,7 @@ export class TeamListComponent implements OnInit, OnDestroy {
 
   set searchtext(value: string) {
     this._searchtext = value;
-    this.filteredTeams = this.filterTeams(value); // set the filteredTeams whenever the searchtext changes
+    this.applyFilters(); // set the filteredTeams whenever the searchtext changes
   }
 
   constructor(
@@ -56,6 +59,12 @@ export class TeamListComponent implements OnInit, OnDestroy {
     }
   }
 
+  applyFilters() {
+    this.filteredTeams = this.filterTeams(this.searchtext);
+    this.totalPages = Math.ceil(this.filteredTeams.length / this.itemsPerPage);
+    this.currentPage = 1; // Reset to the first page whenever filters are applied
+  }
+
   filterTeams(searchString: string) {
     if (!searchString) {
       return this.teams;
@@ -64,6 +73,17 @@ export class TeamListComponent implements OnInit, OnDestroy {
     return this.teams.filter(team =>
       team.teamName && team.teamName.toLowerCase().includes(searchString.toLowerCase())
     );
+  }
+
+  getPaginatedTeams(): any[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return this.filteredTeams.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  changePage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
   }
 
   // Method to fetch the team list
@@ -79,7 +99,7 @@ export class TeamListComponent implements OnInit, OnDestroy {
     ).subscribe({
       next: (res: any) => {
         this.teams = res;
-        this.filteredTeams = this.filterTeams(this.searchtext); // set the filteredTeams when the teams are fetched
+        this.applyFilters(); // Apply filters and pagination
         this.errorMessage = ''; // Clear the error message when the request is successful
         this.spinner.hide();
       },

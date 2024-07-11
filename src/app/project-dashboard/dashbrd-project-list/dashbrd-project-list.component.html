@@ -1,29 +1,35 @@
 <app-spinner></app-spinner>
 <div class="custom-overflow-y py-0">
     <div class="row">
-        <div class="col-xl-3 col-lg-3 col-md-5 col-sm-5">
+        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
             <div class="input-group rounded py-0">
                 <span class="input-group-text border-0" id="search-addon">
                     <i class="bi bi-filter"></i>
                 </span>
-                <select class="form-select rounded small-text w-25" [(ngModel)]="selectedCriticality"
-                    (ngModelChange)="onCriticalityChange()" aria-placeholder="Select">
+                <select class="form-select rounded small-text w-40" [(ngModel)]="selectedCriticality" (ngModelChange)="onCriticalityChange()" aria-placeholder="Select">
                     <option value="">All Projects</option>
                     <option value="1">High Priority</option>
                     <option value="2">Medium Priority</option>
                     <option value="3">Low Priority</option>
                 </select>
+                <span class="input-group-text border-0" id="progress-filter-addon">
+                    <i class="bi bi-filter"></i>
+                </span>
+                <select class="form-select rounded small-text w-40" [(ngModel)]="selectedProgress" (ngModelChange)="onProgressChange()" aria-placeholder="Select">
+                    <option value="">All Progress</option>
+                    <option value="Completed">Completed</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Not Started">Not Started</option>
+                </select>
             </div>
         </div>
-        <div class="col-xl-9 col-lg-9 col-md-7 col-sm-7">
+        <div class="col-xl-7 col-lg-7 col-md-7 col-sm-7">
             <div class="row">
                 <div class="col-lg-7">
                 </div>
                 <div class="col-lg-5">
                     <div class="input-group rounded">
-                        <input type="search" class="form-control rounded small-text" placeholder="Search"
-                            aria-label="Search" aria-describedby="search-addon" [(ngModel)]="searchText"
-                            (ngModelChange)="onSearchChange()" />
+                        <input type="search" class="form-control rounded small-text" placeholder="Search" aria-label="Search" aria-describedby="search-addon" [(ngModel)]="searchText" (ngModelChange)="onSearchChange()" />
                         <span class="input-group-text border-0" id="search-addon">
                             <i class="bi bi-search"></i>
                         </span>
@@ -36,26 +42,17 @@
     <div class="row">
         <div [ngClass]="{'col-6': isViewMoreClicked, 'col-12': !isViewMoreClicked}">
             <div class="row ms-1 me-1 mb-2 row-cols-lg-4 row-cols-md-2">
-                <div class="card-container" [ngClass]="{'col-lg-6': isViewMoreClicked, 'col-lg-3': !isViewMoreClicked}"
-                    *ngFor="let project of projectdata| slice: (currentPage-1) * itemsPerPage : currentPage * itemsPerPage; let i = index">
+                <div class="card-container" [ngClass]="{'col-lg-6': isViewMoreClicked, 'col-lg-3': !isViewMoreClicked}" *ngFor="let project of getFilteredProjects() | slice: (currentPage-1) * itemsPerPage : currentPage * itemsPerPage; let i = index">
                     <div class="card mb-3">
-                        <button class="btn fw-medium small-text font-color btn-sm view-button" (click)="viewMore()"
-                            routerLink="dashboard-projectdetails/{{project.projectid}}">ViewMore</button>
+                        <button class="btn fw-medium small-text font-color btn-sm view-button" (click)="viewMore()" routerLink="dashboard-projectdetails/{{project.projectid}}">ViewMore</button>
                         <div class="card-body py-2">
-                            <hr class="position-absolute w-100 left-0"
-                                style="top: 10%; border-top: 1px solid rgb(95, 95, 95); margin-left: -15px;">
-                            <div class="border rounded-circle justify-content-center align-items-center d-flex position-relative"
-                                [ngClass]="getCriticalityClass(project.criticality_id)"
-                                style="z-index: 1; width: 50px; height: 50px;">
+                            <hr class="position-absolute w-100 left-0" style="top: 10%; border-top: 1px solid rgb(95, 95, 95); margin-left: -15px;">
+                            <div class="border rounded-circle justify-content-center align-items-center d-flex position-relative" [ngClass]="getCriticalityClass(project.criticality_id)" style="z-index: 1; width: 50px; height: 50px;">
                                 <span><i class="bi bi-snow2 fs-4 text-white"></i></span>
                             </div>
-                            <div class="fs-6 fw-semibold font-color mt-1 text-capitalize">{{ project.projectName }}
-                            </div>
+                            <div class="fs-6 fw-semibold font-color mt-1 text-capitalize">{{ project.projectName }}</div>
                             <div class="progress mt-2">
-                                <div class="progress-bar l-bg-cyan" role="progressbar"
-                                    [style.width]="progress[project.projectid] + '%'"
-                                    [attr.aria-valuenow]="progress[project.projectid]" aria-valuemin="0"
-                                    aria-valuemax="100">{{ progress[project.projectid] }}%</div>
+                                <div class="progress-bar l-bg-cyan" role="progressbar" [style.width]="progress[project.projectid] + '%'" [attr.aria-valuenow]="progress[project.projectid]" aria-valuemin="0" aria-valuemax="100">{{ progress[project.projectid] }}%</div>
                             </div>
                             <div class="row mt-2 text-black-50 small-text">
                                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -81,7 +78,6 @@
                 </div>
             </div>
 
-
             <!-- table pagination -->
             <div>
                 <ul class="pagination pagination-sm justify-content-center">
@@ -91,8 +87,7 @@
                             <span class="sr-only">Previous</span>
                         </a>
                     </li>
-                    <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index"
-                        [class.active]="currentPage === i + 1">
+                    <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
                         <a class="page-link" (click)="currentPage = i + 1">{{ i + 1 }}</a>
                     </li>
                     <li class="page-item" [class.disabled]="currentPage === totalPages">

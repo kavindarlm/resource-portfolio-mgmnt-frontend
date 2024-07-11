@@ -40,3 +40,7 @@ td{
     font-size: 0.75rem;
   }
   
+  .clickable-icon {
+    cursor: pointer;
+    opacity: 0.5;
+  }

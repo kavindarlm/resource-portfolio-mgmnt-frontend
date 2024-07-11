@@ -20,9 +20,10 @@ export class DashbrdProjectListComponent implements OnInit {
   itemsPerPage = 8;
   searchText: string = '';
   selectedCriticality: string = '';
+  selectedProgress: string = '';
   error: any;
 
-  constructor(private projectDashboardServicee: ProjectDashboardService, private sharedService: DashbrdSharedService, private spinner: NgxSpinnerService,private refreshData: SidebarheaderServiceService) {
+  constructor(private projectDashboardServicee: ProjectDashboardService, private sharedService: DashbrdSharedService, private spinner: NgxSpinnerService, private refreshData: SidebarheaderServiceService) {
     this.sharedService.viewMore$.subscribe(value => {
       this.isViewMoreClicked = value;
       this.currentPage = 1;
@@ -31,14 +32,13 @@ export class DashbrdProjectListComponent implements OnInit {
   }
 
   get totalPages() {
-    return this.projectdata ? Math.ceil(this.projectdata.length / this.itemsPerPage) : 0;
+    return this.projectdata ? Math.ceil(this.getFilteredProjects().length / this.itemsPerPage) : 0;
   }
 
   ngOnInit(): void {
     this.refreshData.refreshSystem$.subscribe(() => {
       this.getAllprojects();
     });
-    
   }
 
   viewMore() {
@@ -102,6 +102,35 @@ export class DashbrdProjectListComponent implements OnInit {
       });
     } else {
       this.getAllprojects(); // If no criticality selected, get all projects
+    }
+  }
+
+  onProgressChange() {
+    // Update the project list based on the selected progress filter
+    this.getFilteredProjects();
+  }
+
+  getFilteredProjects() {
+    let filteredProjects = this.projectdata;
+
+    if (this.selectedProgress) {
+      filteredProjects = filteredProjects.filter(project => {
+        const progressStatus = this.getProjectProgressStatus(project.projectid);
+        return progressStatus === this.selectedProgress;
+      });
+    }
+
+    return filteredProjects;
+  }
+
+  getProjectProgressStatus(projectId: string): string {
+    const progress = this.progress[projectId];
+    if (progress === 100) {
+      return 'Completed';
+    } else if (progress > 0 && progress < 100) {
+      return 'In Progress';
+    } else {
+      return 'Not Started';
     }
   }
 }

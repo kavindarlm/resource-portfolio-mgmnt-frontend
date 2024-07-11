@@ -5,7 +5,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12 justify-content-center border rounded p-2">
       <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Project List Details</div>
       
-      <!-- // Search and Add Project Button -->
+      <!-- Search and Add Project Button -->
       <div class="row mb-3">
         <div class="col-md-8">
           <div class="input-group mb-3 w-50">
@@ -23,24 +23,73 @@
         </div>
       </div>
 
-      <!-- // Table -->
+      <!-- Table -->
       <div class="table-responsive">
         <table class="table table-bordered table-striped table-hover table-sm text-center">
           <thead class="thead-dark fs-6 fst-normal">
             <tr>
-              <th scope="col" class="col-12 col-md-2">Project Name</th>
-              <th scope="col" class="col-12 col-md-2">Project Start Date</th>
-              <th scope="col" class="col-12 col-md-2">Project End Date</th>
-              <th scope="col" class="col-12 col-md-2">Priority</th>
-              <th scope="col" class="col-12 col-md-2">Delivery Manager</th>
-              <th scope="col" class="col-12 col-md-2">Project Manager</th>
+              <th scope="col" class="col-12 col-md-2">
+                <div class="d-flex align-items-center justify-content-center">
+                  Project Name
+                  <span class="input-group-text border-0 clickable-icon" id="search-addon">
+                    <i class="bi bi-sort-alpha-down" *ngIf="sortState === 1" (click)="toggleSort('projectName')"></i>
+                    <i class="bi bi-sort-alpha-up-alt" *ngIf="sortState === 2" (click)="toggleSort('projectName')"></i>
+                    <i class="bi bi-arrow-down-up" *ngIf="sortState === 0" (click)="toggleSort('projectName')"></i>
+                  </span>
+                </div>
+              </th>
+              <th scope="col" class="col-12 col-md-2">
+                <div class="d-flex align-items-center justify-content-center">
+                  Project Start Date
+                  <span class="input-group-text border-0 clickable-icon" id="search-addon">
+                    <i class="bi bi-arrow-up" *ngIf="sortStateStartDate === 1" (click)="toggleSort('projectStartDate')"></i>
+                    <i class="bi bi-arrow-down" *ngIf="sortStateStartDate === 2" (click)="toggleSort('projectStartDate')"></i>
+                    <i class="bi bi-arrow-down-up" *ngIf="sortStateStartDate === 0" (click)="toggleSort('projectStartDate')"></i>
+                  </span>
+                </div>
+              </th>
+              <th scope="col" class="col-12 col-md-2">
+                <div class="d-flex align-items-center justify-content-center">
+                  Project End Date
+                  <span class="input-group-text border-0 clickable-icon" id="search-addon">
+                    <i class="bi bi-arrow-up" *ngIf="sortStateEndDate === 1" (click)="toggleSort('projectEndDate')"></i>
+                    <i class="bi bi-arrow-down" *ngIf="sortStateEndDate === 2" (click)="toggleSort('projectEndDate')"></i>
+                    <i class="bi bi-arrow-down-up" *ngIf="sortStateEndDate === 0" (click)="toggleSort('projectEndDate')"></i>
+                  </span>
+                </div>
+              </th>
+              <th scope="col" class="col-12 col-md-2">
+                <div class="d-flex align-items-center justify-content-center">
+                  Priority
+                </div>
+              </th>
+              <th scope="col" class="col-12 col-md-2">
+                <div class="d-flex align-items-center justify-content-center">
+                  Delivery Manager
+                  <span class="input-group-text border-0 clickable-icon" id="search-addon">
+                    <i class="bi bi-sort-alpha-down" *ngIf="sortStateDeliveryManager === 1" (click)="toggleSort('deliveryManager_id')"></i>
+                    <i class="bi bi-sort-alpha-up-alt" *ngIf="sortStateDeliveryManager === 2" (click)="toggleSort('deliveryManager_id')"></i>
+                    <i class="bi bi-arrow-down-up" *ngIf="sortStateDeliveryManager === 0" (click)="toggleSort('deliveryManager_id')"></i>
+                  </span>
+                </div>
+              </th>
+              <th scope="col" class="col-12 col-md-2">
+                <div class="d-flex align-items-center justify-content-center">
+                  Project Manager
+                  <span class="input-group-text border-0 clickable-icon" id="search-addon">
+                    <i class="bi bi-sort-alpha-down" *ngIf="sortStateProjectManager === 1" (click)="toggleSort('projectManager_id')"></i>
+                    <i class="bi bi-sort-alpha-up-alt" *ngIf="sortStateProjectManager === 2" (click)="toggleSort('projectManager_id')"></i>
+                    <i class="bi bi-arrow-down-up" *ngIf="sortStateProjectManager === 0" (click)="toggleSort('projectManager_id')"></i>
+                  </span>
+                </div>
+              </th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let project of getPaginatedProjects()" (click)="onClickNavigateTo(project.projectid)">
               <td>{{ project.projectName }}</td>
-              <td>{{ project.projectStartDate }}</td>
-              <td>{{ project.projectEndDate }}</td>
+              <td>{{ project.projectStartDate | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ project.projectEndDate | date: 'dd/MM/yyyy' }}</td>
               <td>{{ getCriticalityName(project.criticality_id) }}</td>
               <td>{{ resourceNames[project.deliveryManager_id] || project.deliveryManager_id }}</td>
               <td>{{ resourceNames[project.projectManager_id] || project.projectManager_id }}</td>
@@ -49,7 +98,7 @@
         </table>
       </div>
       
-      <!-- // Pagination -->
+      <!-- Pagination -->
       <div>
         <ul class="pagination pagination-sm justify-content-center">
           <li class="page-item" [class.disabled]="currentPage === 1">

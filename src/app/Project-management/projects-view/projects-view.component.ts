@@ -14,10 +14,17 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./projects-view.component.css'],
 })
 export class ProjectsViewComponent implements OnInit {
-  projectlist: datamodel[] | undefined;
+  projectlist: datamodel[] = [];
   filteredProjects: datamodel[] = [];
   resourceNames: { [key: string]: string } = {};
   Seachtext!: string;
+
+  // Sorting properties
+  sortState: number = 0; // 0 = no sorting, 1 = ascending, 2 = descending
+  sortStateStartDate: number = 0;
+  sortStateEndDate: number = 0;
+  sortStateDeliveryManager: number = 0;
+  sortStateProjectManager: number = 0;
 
   // Pagination properties
   currentPage: number = 1;
@@ -50,7 +57,7 @@ export class ProjectsViewComponent implements OnInit {
         this.totalPages = Math.ceil(
           this.filteredProjects.length / this.itemsPerPage
         );
-        this.projectlist?.forEach((project) => {
+        this.projectlist.forEach((project) => {
           if (project.deliveryManager_id) {
             this.getResourceName(project.deliveryManager_id);
           }
@@ -91,36 +98,119 @@ export class ProjectsViewComponent implements OnInit {
     }
   }
 
-  // Get resource name by resource id
-  onSearchChange() {
-    if (this.Seachtext) {
-      this.filteredProjects =
-        this.projectlist?.filter((project) =>
-          project.projectName
-            .toLowerCase()
-            .includes(this.Seachtext.toLowerCase())
-        ) || [];
-    } else {
-      this.filteredProjects = this.projectlist || [];
-    }
-    this.totalPages = Math.ceil(
-      this.filteredProjects.length / this.itemsPerPage
-    );
-    this.currentPage = 1;
-  }
-
   // Get paginated projects
   getPaginatedProjects() {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    return this.filteredProjects.slice(
-      startIndex,
-      startIndex + this.itemsPerPage
-    );
+    let sortedProjects = this.filteredProjects;
+
+    // Sort by Project Name
+    if (this.sortState === 1) {
+      sortedProjects = sortedProjects.sort((a, b) =>
+        a.projectName.localeCompare(b.projectName)
+      );
+    } else if (this.sortState === 2) {
+      sortedProjects = sortedProjects.sort((a, b) =>
+        b.projectName.localeCompare(a.projectName)
+      );
+    }
+
+    // Sort by Project Start Date
+    if (this.sortStateStartDate === 1) {
+      sortedProjects = sortedProjects.sort((a, b) =>
+        new Date(a.projectStartDate).getTime() -
+        new Date(b.projectStartDate).getTime()
+      );
+    } else if (this.sortStateStartDate === 2) {
+      sortedProjects = sortedProjects.sort((a, b) =>
+        new Date(b.projectStartDate).getTime() -
+        new Date(a.projectStartDate).getTime()
+      );
+    }
+
+    // Sort by Project End Date
+    if (this.sortStateEndDate === 1) {
+      sortedProjects = sortedProjects.sort((a, b) =>
+        new Date(a.projectEndDate).getTime() -
+        new Date(b.projectEndDate).getTime()
+      );
+    } else if (this.sortStateEndDate === 2) {
+      sortedProjects = sortedProjects.sort((a, b) =>
+        new Date(b.projectEndDate).getTime() -
+        new Date(a.projectEndDate).getTime()
+      );
+    }
+
+    // Sort by Delivery Manager
+    if (this.sortStateDeliveryManager === 1) {
+      sortedProjects = sortedProjects.sort((a, b) =>
+        this.resourceNames[a.deliveryManager_id]?.localeCompare(this.resourceNames[b.deliveryManager_id])
+      );
+    } else if (this.sortStateDeliveryManager === 2) {
+      sortedProjects = sortedProjects.sort((a, b) =>
+        this.resourceNames[b.deliveryManager_id]?.localeCompare(this.resourceNames[a.deliveryManager_id])
+      );
+    }
+
+    // Sort by Project Manager
+    if (this.sortStateProjectManager === 1) {
+      sortedProjects = sortedProjects.sort((a, b) =>
+        this.resourceNames[a.projectManager_id]?.localeCompare(this.resourceNames[b.projectManager_id])
+      );
+    } else if (this.sortStateProjectManager === 2) {
+      sortedProjects = sortedProjects.sort((a, b) =>
+        this.resourceNames[b.projectManager_id]?.localeCompare(this.resourceNames[a.projectManager_id])
+      );
+    }
+
+    return sortedProjects.slice(startIndex, startIndex + this.itemsPerPage);
   }
 
   // Change page
   changePage(page: number) {
     this.currentPage = page;
+  }
+
+  // Toggle sorting
+  toggleSort(field: string) {
+    switch (field) {
+      case 'projectName':
+        this.sortState = (this.sortState + 1) % 3;
+        break;
+      case 'projectStartDate':
+        this.sortStateStartDate = (this.sortStateStartDate + 1) % 3;
+        break;
+      case 'projectEndDate':
+        this.sortStateEndDate = (this.sortStateEndDate + 1) % 3;
+        break;
+      case 'deliveryManager_id':
+        this.sortStateDeliveryManager = (this.sortStateDeliveryManager + 1) % 3;
+        break;
+      case 'projectManager_id':
+        this.sortStateProjectManager = (this.sortStateProjectManager + 1) % 3;
+        break;
+      default:
+        break;
+    }
+    this.currentPage = 1; // Reset to first page after sorting change
+    this.onSearchChange(); // Reapply search filter if active
+  }
+
+  // Search filter
+  onSearchChange() {
+    if (this.Seachtext) {
+      this.filteredProjects =
+        this.projectlist.filter((project) =>
+          project.projectName
+            .toLowerCase()
+            .includes(this.Seachtext.toLowerCase())
+        );
+    } else {
+      this.filteredProjects = this.projectlist;
+    }
+    this.totalPages = Math.ceil(
+      this.filteredProjects.length / this.itemsPerPage
+    );
+    this.currentPage = 1;
   }
 
   // Navigate to create project

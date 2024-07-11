@@ -1,3 +1,14 @@
+.table-data {
+  display: flex;
+  flex-direction: column;
+  /* gap: 10px; */
+  justify-content: space-between;
+  /* margin: 10px 0; */
+  max-height: 99vh;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
 .unitList {
   border: 1px #ced2d9 solid;
   border-radius: 5px;

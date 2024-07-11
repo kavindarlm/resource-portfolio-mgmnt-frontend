@@ -40,3 +40,8 @@ td{
  .custom-button:hover{
      background-color: #1E3895;
  }
+
+ .clickable-icon {
+    cursor: pointer;
+    opacity: 0.5;
+  }
