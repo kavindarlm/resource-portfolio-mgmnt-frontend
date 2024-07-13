@@ -13,6 +13,8 @@ import { SidebarheaderServiceService } from '../../../PageBody/side-bar-header-s
 export class ListComponent implements OnInit, OnDestroy {
   sprints: any[] = [];
   filteredSprints: any[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 15; // Number of items per page
 
   private sprintCreatedSubscription!: Subscription;
   private sprintDeletedSubscription!: Subscription;
@@ -28,41 +30,13 @@ export class ListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.fetchSprints();
 
-    // Subscribe to the sprint created event
-    this.sprintCreatedSubscription =
-      this.sharedService.sprintCreated$.subscribe(() => {
-        this.fetchSprints(); // Refresh the sprint list
-      });
-
-    // Subscribe to the sprint deleted event
-    this.sprintDeletedSubscription =
-      this.sharedService.sprintDeleted$.subscribe(() => {
-        this.fetchSprints(); // Refresh the sprint list
-      });
-
-    // Subscribe to the sprint updated event
-    this.sprintUpdatedSubscription =
-      this.sharedService.sprintUpdated$.subscribe(() => {
-        this.fetchSprints(); // Refresh the sprint list
-      });
-
-    // Subscribe to the refresh system event
-    this.refreshData.refreshSystem$.subscribe(() => {
-      this.fetchSprints();
-    });
+    // Subscribe to events
+    this.subscribeToEvents();
   }
 
   ngOnDestroy(): void {
-    // Unsubscribe to avoid memory leaks
-    if (this.sprintCreatedSubscription) {
-      this.sprintCreatedSubscription.unsubscribe();
-    }
-    if (this.sprintDeletedSubscription) {
-      this.sprintDeletedSubscription.unsubscribe();
-    }
-    if (this.sprintUpdatedSubscription) {
-      this.sprintUpdatedSubscription.unsubscribe();
-    }
+    // Unsubscribe from events
+    this.unsubscribeFromEvents();
   }
 
   fetchSprints(): void {
@@ -70,7 +44,7 @@ export class ListComponent implements OnInit, OnDestroy {
     this.sprintApiService.getAllSprints().subscribe(
       (data: any[]) => {
         this.sprints = data;
-        this.filteredSprints = data; // Initialize filteredSprints
+        this.updateFilteredSprints(); // Initialize filteredSprints with current page data
         this.spinner.hide();
       },
       (error) => {
@@ -84,11 +58,64 @@ export class ListComponent implements OnInit, OnDestroy {
     const searchTerm = target.value;
 
     if (!searchTerm) {
-      this.filteredSprints = this.sprints;
+      this.updateFilteredSprints();
     } else {
       this.filteredSprints = this.sprints.filter((sprint) =>
         sprint.sprint_name.toLowerCase().includes(searchTerm.toLowerCase())
+      ).slice(
+        (this.currentPage - 1) * this.itemsPerPage,
+        this.currentPage * this.itemsPerPage
       );
+    }
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    this.updateFilteredSprints();
+  }
+
+  updateFilteredSprints(): void {
+    this.filteredSprints = this.sprints.slice(
+      (this.currentPage - 1) * this.itemsPerPage,
+      this.currentPage * this.itemsPerPage
+    );
+  }
+
+  getPaginationArray(): number[] {
+    const totalPages = Math.ceil(this.sprints.length / this.itemsPerPage);
+    return Array.from({ length: totalPages }, (_, index) => index + 1);
+  }
+
+  private subscribeToEvents(): void {
+    this.sprintCreatedSubscription =
+      this.sharedService.sprintCreated$.subscribe(() => {
+        this.fetchSprints();
+      });
+
+    this.sprintDeletedSubscription =
+      this.sharedService.sprintDeleted$.subscribe(() => {
+        this.fetchSprints();
+      });
+
+    this.sprintUpdatedSubscription =
+      this.sharedService.sprintUpdated$.subscribe(() => {
+        this.fetchSprints();
+      });
+
+    this.refreshData.refreshSystem$.subscribe(() => {
+      this.fetchSprints();
+    });
+  }
+
+  private unsubscribeFromEvents(): void {
+    if (this.sprintCreatedSubscription) {
+      this.sprintCreatedSubscription.unsubscribe();
+    }
+    if (this.sprintDeletedSubscription) {
+      this.sprintDeletedSubscription.unsubscribe();
+    }
+    if (this.sprintUpdatedSubscription) {
+      this.sprintUpdatedSubscription.unsubscribe();
     }
   }
 }
