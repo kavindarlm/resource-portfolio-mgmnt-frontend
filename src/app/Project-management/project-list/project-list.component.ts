@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from '../service/api.service';
 import { datamodel } from '../create-project/modelproject';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -8,17 +8,22 @@ import { sharedprojectService } from '../service/sharedproject.service';
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
-  styleUrl: './project-list.component.css',
+  styleUrls: ['./project-list.component.css'],
 })
-export class ProjectListComponent {
-  projects: undefined | datamodel[];
+export class ProjectListComponent implements OnInit, OnDestroy {
+  projects: datamodel[] = [];
   searchText: string = '';
   subscrip!: Subscription;
-  error: any; // Variable to hold error information
-  
+  error: any;
+
+  // Pagination properties
+  currentPage: number = 1;
+  itemsPerPage: number = 10;
+  totalPages: number = 1;
+
   constructor(
     private api: ApiService,
-    private spiner: NgxSpinnerService,
+    private spinner: NgxSpinnerService,
     private sharedService: sharedprojectService
   ) {}
 
@@ -26,39 +31,56 @@ export class ProjectListComponent {
     this.subscrip = this.sharedService.refreshProjectList$.subscribe(() => {
       this.getProjectList();
     });
+    this.getProjectList();
   }
 
-  //Shared Serice call to upadate project details in update project component
+  ngOnDestroy(): void {
+    this.subscrip.unsubscribe();
+  }
+
   openproject() {
     console.log('open project');
     this.sharedService.refreshProjectfetchData();
   }
 
-  //Fetch Project List
   getProjectList() {
-    this.spiner.show();
+    this.spinner.show();
     this.api.getProjectList().pipe(
       catchError(error => {
-        this.error = error; // Assign error to the variable for display
-        return []; // Return empty array to prevent further processing
+        this.error = error;
+        this.spinner.hide();
+        return [];
       })
     ).subscribe((res: datamodel[]) => {
       this.projects = res;
-      this.spiner.hide();
+      this.totalPages = Math.ceil(this.projects.length / this.itemsPerPage);
+      this.spinner.hide();
     });
   }
 
-  //Search Projects
   onSearchChange() {
-    this.spiner.show();
+    this.spinner.show();
     this.api.searchProject(this.searchText).pipe(
       catchError(error => {
-        this.error = error; // Assign error to the variable for display
-        return []; // Return empty array to prevent further processing
+        this.error = error;
+        this.spinner.hide();
+        return [];
       })
     ).subscribe((res: datamodel[]) => {
       this.projects = res;
-      this.spiner.hide();
+      this.totalPages = Math.ceil(this.projects.length / this.itemsPerPage);
+      this.spinner.hide();
     });
+  }
+
+  changePage(page: number) {
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+  }
+
+  get paginatedProjects(): datamodel[] {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    return this.projects.slice(start, end);
   }
 }

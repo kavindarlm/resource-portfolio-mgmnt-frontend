@@ -28,6 +28,7 @@
     text-align: center; 
     letter-spacing: 0.05rem;
   }
+
   @media only screen and (max-width: 768px) {
     .hederContainer{
       position: relative;
@@ -72,4 +73,41 @@
         font-size: 1.5rem;
     }
   }
+
+  .button {
+    border: 1px solid rgba(3, 26, 81, 0.8);
+    color: #031a51;
+    text-align: center;
+    background-color: white;
+    transition: all 0.5s;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+    border-radius: 4px;
+  }
+  
+  .button:hover {
+    transform: translateY(-2px); /* Example hover effect: move button up slightly */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adjusted shadow on hover */
+  }
+  
+  .button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .button span:after {
+    transition: 0.5s;
+  }
+  
+  .rotate {
+    transform: rotate(360deg); /* Rotate the text 360 degrees */
+  }
+  
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  
   

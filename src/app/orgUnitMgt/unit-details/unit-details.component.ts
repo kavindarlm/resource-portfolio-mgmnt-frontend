@@ -13,7 +13,6 @@ import { ConfirmDialogService } from '../../ConfirmDialogBox/confirm-dialog.serv
   styleUrl: './unit-details.component.css'
 })
 export class UnitDetailsComponent implements OnInit {
-  // @Input()
   unit!: OrganizationalUnitModel;
   OrgUnitid: number | undefined;
   ParentUnit!: OrgUnitRecrsive[];
@@ -29,8 +28,6 @@ export class UnitDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-    //After adding routing
     this.route.params.subscribe(params => {
       const unitId = +params['id']; // Retrieve unit ID from route parameters
       if (unitId) {
@@ -39,6 +36,7 @@ export class UnitDetailsComponent implements OnInit {
     });
   }
 
+  //Load org unit details
   loadUnitDetails(unitId: number) {
     this.spinner.show();
     this.orgUnitMgtService.getOrgUnitById(unitId).subscribe(unit => {
@@ -49,18 +47,22 @@ export class UnitDetailsComponent implements OnInit {
     });
   }
 
+  //When edit button is clicked show the unit edit form component
   onEdit() {
     this.showUnitEditForm = true;
   }
 
+  //To delete an org unit
   onDeleteUnit() {
     this.confirmMessage.open("Are you sure you want to delete this unit?").subscribe(confirmed => {
       if (confirmed){
         this.orgUnitMgtService.hasChildUnits(this.unit.unitId).subscribe(
           (hasChildren) => {
             console.log(hasChildren);
+            //If the selected unit has child units
             if (hasChildren == true) {
               this.toaster.error("If you want to delete this unit, you should edit or delete its child units first.");
+              //If the selected unit has no child units
             } else {
                 this.orgUnitMgtService.deleteOrgUnit(this.unit.unitId).subscribe(
                   (response) => {

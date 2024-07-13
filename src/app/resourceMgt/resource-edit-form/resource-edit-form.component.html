@@ -38,14 +38,14 @@
     
                     </div>
                     <div class="edit d-flex justify-content-center">
-                        <button type="button" (click)="onEditResource(this.formValue.value)" class="btn btn-outline-primary col-5 editButton">Edit
+                        <button type="button" (click)="onEditResource(this.formValue.value)" class="btn btn-outline-primary col-5 editButton custom-button">Edit
                             Resource</button>
                     </div>
                 </div>
-                <div class="editAndDelete">
-                    <button type="button" class="btn btn-outline-secondary cancelButton col-4" (click)="onCancel()">Cancel</button>
+                <div class="cancel">
+                    <button type="button" class="btn btn-outline-secondary cancelButton col-5" (click)="onCancel()">Cancel</button>
                 </div>
-                <div class="delete">
+                <div class="delete" >
                     <button type="button" (click)="onDeleteResource()" class="btn btn-outline-danger col-5 deleteButton">Delete Resource</button>
                 </div>
             </form>

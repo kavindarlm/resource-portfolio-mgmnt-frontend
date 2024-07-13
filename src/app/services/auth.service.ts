@@ -5,6 +5,7 @@ import { Observable, throwError} from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { DashboardService } from '../admin-dashboard/admin-dashboard-services/dashboard.service';
+import { environment } from '../../environments/environment';
 
 export interface LoginResponse {
   user_id: number;
@@ -18,14 +19,15 @@ export interface LoginResponse {
 })
 export class AuthService {
 
+  private baseUrl = environment.baseUrl +'/api'; // Global base URL
   private tokenKey = 'token';
   private readonly tokenExpirationPeriod = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
 
-  constructor(private http: HttpClient, private router: Router , private dashboardservice : DashboardService) { }
+  constructor(private http: HttpClient, private router: Router, private dashboardservice: DashboardService) { }
 
   // function to login
   login(user_email: string, password: string): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>('http://localhost:3000/api/login', {
+    return this.http.post<LoginResponse>(`${this.baseUrl}/login`, {
       user_email,
       password
     }, { observe: 'response' }).pipe(
@@ -103,7 +105,7 @@ export class AuthService {
 
   // Function to forgot password
   forgotPassword(user_email: string): Observable<any> {
-    return this.http.post('http://localhost:3000/api/forgotPassword', {
+    return this.http.post(`${this.baseUrl}/forgotPassword`, {
       user_email
     }).pipe(
       tap(response => {
@@ -113,6 +115,4 @@ export class AuthService {
       })
     );
   }
-
-
 }

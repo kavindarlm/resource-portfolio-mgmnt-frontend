@@ -5,33 +5,47 @@
             <div class="fw-medium font-color fs-4">Edit Sprint</div>
         </div>
         <div *ngIf="isVisible" class="popup">
-        <form [formGroup]="editSprintForm" (ngSubmit)="onSubmit()" class="small-text">
-            <label class="fw-medium font-color" for="currentPassword">Sprint Time</label>
-            <div class="form-group row mt-1 ">
-                <div class="col-12">
-                    <div class="col">
-                        <label class="text-primary p-3" for="start_Date" >From:</label>
-                        <input class="border rounded text-black-50" id="start_Date" formControlName="start_Date" type="date" />
+            <form [formGroup]="editSprintForm" (ngSubmit)="onSubmit()" class="small-text">
+                <label class="fw-medium font-color" for="currentPassword">Sprint Time</label>
+                <div class="form-group row mt-1 ">
+                    <div class="col-12">
+                        <div class="col">
+                            <label class="text-primary p-3" for="start_Date">From:</label>
+                            <input class="border rounded text-black-50" id="start_Date" formControlName="start_Date"
+                                type="date" />
+                            <div *ngIf="startDateChanged && editSprintForm.get('start_Date')?.errors?.['dateNotBeforeToday']"
+                                class="text-danger">
+                                Start date cannot be before today.
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label class="text-primary p-3" for="end_Date">To:</label>
+                            <input type="date" class="border rounded text-black-50" id="end_Date"
+                                formControlName="end_Date" />
+                            <div *ngIf="endDateChanged && editSprintForm.get('end_Date')?.errors?.['endDateNotBeforeStartDate']"
+                                class="text-danger">
+                                End date cannot be before start date.
+                            </div>
+                        </div>
                     </div>
-                    <div class="col">
-                        <label class="text-primary p-3" for="end_Date">To:</label>
-                        <input type="date" class="border rounded text-black-50" id="end_Date" formControlName="end_Date"/>
-                    </div>                
                 </div>
-            </div>
 
-            <label class="fw-medium font-color mt-2" for="newPassword">Sprint Name</label>
-            <div class="form-group row mt-1">
-                <div class="col-12">
-                    <label for="sprint_name" class="text-primary col-sm-2 col-form-label">Name:</label>
-                    <input type="text" class="form-control" placeholder="Enter Sprint Name" id="sprint_name" formControlName="sprint_name" />
+                <label class="fw-medium font-color mt-2" for="newPassword">Sprint Name</label>
+                <div class="form-group row mt-1">
+                    <div class="col-12">
+                        <label for="sprint_name" class="text-primary col-sm-2 col-form-label">Name:</label>
+                        <input type="text" class="form-control" placeholder="Enter Sprint Name" id="sprint_name"
+                            formControlName="sprint_name" />
+                        <div *ngIf="editSprintForm.get('sprint_name')?.errors?.['required']" class="text-danger">
+                            Sprint name is required.
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="d-flex justify-content-center">
-                <button type="submit" class="btn btn-outline-primary w-100 mt-3 custom-button btn-sm">Edit</button>
-            </div>
-        </form>
-    </div> 
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-outline-primary w-100 mt-3 custom-button btn-sm">Edit</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>

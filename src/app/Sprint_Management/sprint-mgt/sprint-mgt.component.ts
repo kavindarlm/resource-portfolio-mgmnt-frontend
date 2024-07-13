@@ -5,9 +5,9 @@ import { mergeMap, map, catchError } from 'rxjs/operators';
 import { sprintApiService } from '../services/sprintApi.service';
 import { ResourceService } from '../../team-management/shared/resource.service';
 import { ResourceAllocationService } from '../services/resource-allocation.service';
-import { DeleteSprintPopupComponent } from '../Reusable_Components/delete-sprint-popup/delete-sprint-popup.component';
 import { ToastrService } from 'ngx-toastr';
 import { SharedService } from '../services/shared.service';
+import { ConfirmDialogService } from '../../ConfirmDialogBox/confirm-dialog.service';
 
 @Component({
   selector: 'app-sprint-mgt',
@@ -15,8 +15,6 @@ import { SharedService } from '../services/shared.service';
   styleUrls: ['./sprint-mgt.component.css']
 })
 export class SprintMgtComponent implements OnInit {
-  @ViewChild(DeleteSprintPopupComponent) deletePopup!: DeleteSprintPopupComponent;
-
   sprint_id: string = '';
   sprintName: string = '';
   startDate: string = '';
@@ -25,8 +23,6 @@ export class SprintMgtComponent implements OnInit {
   HeadArray = ['Resource_ID', 'Team', 'Job_Role', 'Org_Unit', 'Availability'];
   ResourcesOfSprint: any[] = [];
   clickedResourceId: string | null = null;
-
-  showPopup: boolean = false;
 
   // Pagination properties
   currentPage: number = 1;
@@ -39,7 +35,8 @@ export class SprintMgtComponent implements OnInit {
     private resourceService: ResourceService,
     private resourceAllocationService: ResourceAllocationService,
     private toastr: ToastrService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private confirmDialogService: ConfirmDialogService
   ) { }
 
   ngOnInit(): void {
@@ -47,7 +44,24 @@ export class SprintMgtComponent implements OnInit {
       this.sprint_id = params['id'];
       this.fetchSprintData();
     });
+
+    // Subscribe to task updates
+    this.sharedService.taskUpdated$.subscribe(() => {
+      this.fetchAndPopulateResourcesOfSprint();
+    });
+
+    // Subscribe to resource allocation deletion
+    this.sharedService.resourceAllocationDeleted$.subscribe(() => {
+      this.fetchSprintData();
+    });
+
+    // Subscribe to percentage updates
+    this.sharedService.percentageUpdated$.subscribe(() => {
+      this.fetchAndPopulateResourcesOfSprint();
+    });
   }
+
+
 
   fetchSprintData(): void {
     // Clear the resources list before fetching new sprint data
@@ -80,10 +94,10 @@ export class SprintMgtComponent implements OnInit {
             if (!uniqueResources.has(resource.resourceId)) {
               uniqueResources.set(resource.resourceId, {
                 Resource_ID: resource.resourceId,
-                Team: resource.job_role ? resource.team_name : 'N/A',
+                Team: resource.teams ? resource.teams.team_Name : 'N/A',
                 Job_Role: resource.job_role ? resource.job_role.roleName : 'N/A',
                 Org_Unit: resource.org_unit ? resource.org_unit.unitName : 'N/A',
-                Availability: '' // Placeholder for availability
+                Availability: ''
               });
             }
           });
@@ -94,7 +108,7 @@ export class SprintMgtComponent implements OnInit {
               map(tasks => {
                 const filteredTasks = tasks.filter(task => task.resourceAllocation.task.taskProgressPercentage < 100);
                 const totalAllocation = filteredTasks.reduce((total, task) => {
-                  const allocationPercentage = task.resourceAllocation.percentage || 0; // Assuming the field name is 'percentage'
+                  const allocationPercentage = task.resourceAllocation.percentage || 0;
                   return total + allocationPercentage;
                 }, 0);
                 const availabilityPercentage = totalAllocation + '%';
@@ -133,11 +147,11 @@ export class SprintMgtComponent implements OnInit {
   }
 
   openDeletePopup(): void {
-    this.showPopup = true;
-  }
-
-  closePopup(): void {
-    this.showPopup = false;
+    this.confirmDialogService.open('Are you sure you want to delete this sprint?').subscribe(confirmed => {
+      if (confirmed) {
+        this.deleteSprint();
+      }
+    });
   }
 
   deleteSprint(): void {
@@ -151,20 +165,18 @@ export class SprintMgtComponent implements OnInit {
       })
     ).subscribe(() => {
       this.toastr.success('Sprint and associated resource allocations deleted successfully', 'Success');
-      this.closePopup(); // Hide the popup
       this.sharedService.notifySprintDeleted(); // Notify about the deletion
+      this.router.navigate(['/pages-body/sprint-management']); // Navigate to the sprint management page
     });
   }
+
 
   deleteContent() {
     this.router.navigate(['/pages-body/sprint-management']);
   }
 
-  // Pagination methods
   onPageChange(pageNumber: number): void {
     this.currentPage = pageNumber;
-    // You may fetch data for the new page here or adjust your existing data array
-    // For simplicity, assuming your data is already in ResourcesOfSprint and just need to slice it
   }
 
   get paginatedResources(): any[] {

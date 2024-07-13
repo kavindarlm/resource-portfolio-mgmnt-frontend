@@ -48,5 +48,17 @@ export class SideBarHeaderComponent implements OnInit, OnDestroy{
       this.logoutSubscription.unsubscribe();
     }
   }
+
+  rotating: boolean = false;
+
+  rotateText() {
+    this.rotating = true;
+    // Refresh the system after the animation completes
+    this.sidebarHeaderService.refreshSystem();
+    // Reset rotation after animation completes
+    setTimeout(() => {
+      this.rotating = false;
+    }, 1000); // Adjust this time to match your CSS animation duration
+  }
 }
  

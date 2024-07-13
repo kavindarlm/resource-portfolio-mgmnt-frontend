@@ -1,3 +1,4 @@
+<app-spinner></app-spinner>
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-2 col-md-2 col-sm-12 justify-content-center border rounded p-2">
@@ -8,7 +9,7 @@
                 </div>
                 <div class="">
                     <!-- search box -->
-                    <input type="search" id="form1" class="form-control" placeholder="Search by Name"
+                    <input type="search" id="form1" class="form-control small-text" placeholder="Search by Name"
                         aria-label="search" (input)="searchSprints($event)">
                 </div>
                 <div class="table-data">
@@ -20,9 +21,7 @@
             </div>
         </div>
         <div class="col-md-10 col-md-10 col-sm-12">
-            <!-- <div class="justify-content-center p-2 ml-3"> -->
             <router-outlet></router-outlet>
-            <!-- </div>   -->
         </div>
     </div>
 </div>

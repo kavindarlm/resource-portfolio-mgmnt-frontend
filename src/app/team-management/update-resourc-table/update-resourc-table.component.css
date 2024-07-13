@@ -55,3 +55,7 @@ td {
     padding-right: 0;
     padding-left: 0;
 }
+
+.small-text {
+    font-size: 0.75rem;
+  }

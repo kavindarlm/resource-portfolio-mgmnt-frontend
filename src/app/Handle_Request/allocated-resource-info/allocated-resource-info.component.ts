@@ -8,6 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ApiServiceService } from '../../calender-management/shared/api-service.service';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmDialogService } from '../../ConfirmDialogBox/confirm-dialog.service';
+import { SharedService } from '../../Sprint_Management/services/shared.service';
 
 interface TaskWithProjectInfo {
   resourceAllocationId: number;
@@ -20,9 +22,9 @@ interface TaskWithProjectInfo {
 @Component({
   selector: 'app-allocated-resource-info',
   templateUrl: './allocated-resource-info.component.html',
-  styleUrl: './allocated-resource-info.component.css'
+  styleUrls: ['./allocated-resource-info.component.css']
 })
-export class AllocatedResourceInfoComponent {
+export class AllocatedResourceInfoComponent implements OnInit {
   resourceId: string = '';
   sprintId: string = '';
   resourceDetails: any = {};
@@ -31,10 +33,9 @@ export class AllocatedResourceInfoComponent {
   sprintAllocations: any[] = [];
   tasksWithProjectInfo: TaskWithProjectInfo[] = [];
   commonTaskIds: string[] = [];
-  holidays: NgbDateStruct[] = []; // Store holidays
+  holidays: NgbDateStruct[] = [];
   availabilityPercentage: number = 0;
 
-  isDeletePopupVisible: boolean = false;
   deleteResourceAllocationId: number | null = null;
   deleteTaskIndex: number | null = null;
 
@@ -45,7 +46,9 @@ export class AllocatedResourceInfoComponent {
     private taskApiService: taskApiService,
     private router: Router,
     private toastr: ToastrService,
-    private ApiServiceService: ApiServiceService
+    private ApiServiceService: ApiServiceService,
+    private confirmDialogService: ConfirmDialogService,
+    private sharedService: SharedService
   ) { }
 
   ngOnInit(): void {
@@ -107,7 +110,7 @@ export class AllocatedResourceInfoComponent {
           const taskId = this.commonTaskIds[index];
           if (!processedTaskIds.has(taskId)) {
             const task = this.tasks.find(task => task.resourceAllocation.task.taskid === taskId) ||
-                        this.sprintAllocations.find(allocation => allocation.task.taskid === taskId);
+              this.sprintAllocations.find(allocation => allocation.task.taskid === taskId);
             if (task) {
               this.tasksWithProjectInfo.push({
                 resourceAllocationId: task.resourceAllocation ? task.resourceAllocation.id : null,
@@ -155,41 +158,35 @@ export class AllocatedResourceInfoComponent {
   }
 
   openDeletePopup(resourceAllocationId: number, index: number): void {
-    this.deleteResourceAllocationId = resourceAllocationId;
-    this.deleteTaskIndex = index;
-    this.isDeletePopupVisible = true;
+    this.confirmDialogService.open('Are you sure you want to delete this resource allocation?').subscribe(confirmed => {
+      if (confirmed) {
+        this.deleteResourceAllocation(resourceAllocationId, index);
+      }
+    });
   }
 
-  confirmDeleteTask(): void {
-    if (this.deleteResourceAllocationId !== null && this.deleteTaskIndex !== null) {
-      this.resourceAllocationService.deleteResourceAllocationById(this.deleteResourceAllocationId).subscribe(
-        () => {
-          if (typeof this.deleteTaskIndex === 'number') {
-            this.tasksWithProjectInfo.splice(this.deleteTaskIndex, 1);
-          }
-          console.log(`Resource allocation with ID ${this.deleteResourceAllocationId} deleted successfully.`);
-          this.toastr.success('Resource Allocation deleted successfully!', 'Success');
-          this.resetDeletePopup();
-        },
-        error => {
-          this.toastr.error('Error deleting resource allocation', 'Error');
-          this.resetDeletePopup();
-        }
-      );
-    }
-  }
-
-  cancelDeleteTask(): void {
-    this.resetDeletePopup();
-  }
-
-  resetDeletePopup(): void {
-    this.isDeletePopupVisible = false;
-    this.deleteResourceAllocationId = null;
-    this.deleteTaskIndex = null;
+  deleteResourceAllocation(resourceAllocationId: number, index: number): void {
+    this.resourceAllocationService.deleteResourceAllocationById(resourceAllocationId).subscribe(
+      () => {
+        this.tasksWithProjectInfo.splice(index, 1);
+        this.toastr.success('Resource Allocation deleted successfully!', 'Success');
+        this.sharedService.notifyResourceAllocationDeleted(); // Notify shared service
+      },
+      error => {
+        this.toastr.error('Error deleting resource allocation', 'Error');
+      }
+    );
   }
 
   deleteContent() {
     this.router.navigate(['/pages-body/handle-request/sprintDetails/', this.sprintId]);
   }
+  
+  getInitials(fullName: string): string {
+    const names = fullName.split(' ');
+    const initials = names.slice(0, 2).map(name => name.charAt(0)).join('');
+    return initials.toUpperCase();
+  }
+
+
 }
