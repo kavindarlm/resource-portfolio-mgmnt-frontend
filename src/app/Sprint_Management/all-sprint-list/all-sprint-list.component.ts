@@ -6,6 +6,7 @@ import { taskApiService } from '../../TaskManagement/services/taskApi.service';
 import { ResourceAllocationService } from '../services/resource-allocation.service';
 import { forkJoin, of } from 'rxjs';
 import { switchMap, map, catchError } from 'rxjs/operators';
+import { SidebarheaderServiceService } from '../../PageBody/side-bar-header-service/sidebarheader-service.service';
 
 @Component({
   selector: 'app-all-sprint-list',
@@ -26,10 +27,14 @@ export class AllSprintListComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private sprintApiService: sprintApiService,
     private resourceAllocationService: ResourceAllocationService,
-    private taskApiService: taskApiService
+    private taskApiService: taskApiService,
+    private refreshData: SidebarheaderServiceService
   ) {}
 
   ngOnInit(): void {
+    this.refreshData.refreshSystem$.subscribe(() => {
+      this.fetchSprints();
+    });
     this.fetchSprints();
   }
 

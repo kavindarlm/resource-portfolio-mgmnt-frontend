@@ -1,34 +1,49 @@
 <app-spinner></app-spinner>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-2 col-md-3 col-sm-3 justify-content-center border rounded p-2">
-            <div class="table-container">
-                <div>
-                    <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Project List</div>
-                </div>
-                <div class="">
-                    <!-- search box -->
-                    <input type="search" [(ngModel)]="searchText" id="form1" (ngModelChange)="onSearchChange()" class="form-control" placeholder="Search by Name"
-                        aria-label="search">
-                </div>
-                <div class="table-data">
-                    <div *ngFor="let project of projects " class="btns">
-                        <button class="menu-button" routerLink="updatePoject/{{project.projectid}}" (click)="openproject()"
-                            routerLinkActive="active">{{project.projectName}}</button>
-                    </div>
-                </div>
-
-                <div class="d-grid gap-2">
-                    <button type="button" class="btn btn-outline mt-2 custom-button" routerLink="createproject" routerLinkActive="active">Add New
-                        Project</button>
-                </div>
-            </div>
+  <div class="row">
+    <div class="col-lg-2 col-md-3 col-sm-3 justify-content-center border rounded p-2">
+      <div class="table-container">
+        <div>
+          <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Project List</div>
         </div>
-        <div class="col-lg-8 col-md-9 col-sm-9 justify-content-center">
-            <router-outlet></router-outlet>
+        <div class="">
+          <input type="search" [(ngModel)]="searchText" id="form1" (ngModelChange)="onSearchChange()" class="form-control small-text" placeholder="Search by Name" aria-label="search">
         </div>
-        <div class="col-lg-2 col-md-12 col-sm-12 justify-content-center border rounded p-2">
-            <app-critical-leval></app-critical-leval> 
+        <div class="d-grid gap-2">
+          <button type="button" class="btn btn-outline mt-2 custom-button" routerLink="createproject" routerLinkActive="active">Add New Project</button>
         </div>
+        <div class="table-data">
+          <div *ngFor="let project of paginatedProjects" class="btns">
+            <button class="menu-button" routerLink="updatePoject/{{project.projectid}}" (click)="openproject()" routerLinkActive="active">{{project.projectName}}</button>
+          </div>
+        </div>
+        <!-- pagination -->
+        <div>
+          <ul class="pagination pagination-sm justify-content-center mt-2 mb-0">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+              <a class="page-link" (click)="changePage(currentPage - 1)" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+              <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+              <a class="page-link" (click)="changePage(currentPage + 1)" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
+    <div class="col-lg-8 col-md-9 col-sm-9 justify-content-center">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="col-lg-2 col-md-12 col-sm-12 justify-content-center border rounded p-2">
+      <app-critical-leval></app-critical-leval>
+    </div>
+  </div>
 </div>

@@ -5,15 +5,15 @@
             <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Sprint List Details</div>
 
             <div class="row mb-3">
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <div class="input-group mb-3 w-50">
-                        <input type="search" aria-describedby="search-addon" id="form1" class="form-control" placeholder="Search by Sprint Name..." aria-label="search" (ngModelChange)="onSearchChange()">
+                        <input type="search" aria-describedby="search-addon" id="form1" class="form-control small-text" placeholder="Search by Sprint Name..." [(ngModel)]="SearchText" aria-label="search" (ngModelChange)="onSearchChange()">
                         <!-- <span class="input-group-text border-0" id="search-addon">
                             <i class="bi bi-search"></i>
                         </span> -->
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="d-flex justify-content-end">
                         <button class="btn btn-outline-primary custom-button btn-sm w-50" routerLink="/pages-body/sprint-management/createform">Add New Sprint</button>
                     </div>

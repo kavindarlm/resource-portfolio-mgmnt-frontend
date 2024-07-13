@@ -152,12 +152,17 @@ export class AddFormComponent implements OnInit {
   //Event call to call the function to add a new job role
   onJobRoleChange(event: any) {
     if (event.target.value === 'other') {
-      this.addNewJobRole();
+      this.showForm = true;
     }
   }
 
   addNewJobRole() {
-    this.showForm = !this.showForm;
+    this.showForm = true;
+  }
+
+  onCancelAddJobRoleForm() {
+    this.showForm = false;
+    this.resourceForm.controls['roleId'].setValue(''); // Reset the dropdown selection
   }
 
 }

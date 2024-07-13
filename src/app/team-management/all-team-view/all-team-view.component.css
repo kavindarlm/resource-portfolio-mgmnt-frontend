@@ -35,3 +35,12 @@ td{
  .custom-button:hover{
      background-color: #1E3895;
  }
+
+ .small-text {
+    font-size: 0.75rem;
+  }
+  
+  .clickable-icon {
+    cursor: pointer;
+    opacity: 0.5;
+  }

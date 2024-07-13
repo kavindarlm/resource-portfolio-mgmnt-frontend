@@ -1,60 +1,94 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ServiceService } from '../shared/service.service';
 import { catchError } from 'rxjs/operators';
 import { Subscription, of } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { GeneralService } from '../shared/general.service';
+import { SidebarheaderServiceService } from '../../PageBody/side-bar-header-service/sidebarheader-service.service';
 
 @Component({
   selector: 'app-team-list',
   templateUrl: './team-list.component.html',
-  styleUrls: ['./team-list.component.css'] 
+  styleUrls: ['./team-list.component.css']
 })
-export class TeamListComponent implements OnInit {
+export class TeamListComponent implements OnInit, OnDestroy {
   teams: any[] = [];
-  filteredTeams: any[] = []; 
+  filteredTeams: any[] = [];
   showForm = false;
   showUpdate = false;
-  _searchtext: any;
+  _searchtext: string = '';
   errorMessage: string = ''; // Define the errorMessage property
-  private refreshTeam! : Subscription;
+  private refreshTeam!: Subscription;
+  currentPage = 1;
+  itemsPerPage = 10; // Number of items per page
+  totalPages = 1;
 
-  get searchtext(): any {
+  get searchtext(): string {
     return this._searchtext;
   }
 
-  set searchtext(value: any) {
+  set searchtext(value: string) {
     this._searchtext = value;
-    this.filteredTeams = this.filterTeams(value); // set the filteredTeams whenever the searchtext changes
+    this.applyFilters(); // set the filteredTeams whenever the searchtext changes
   }
 
-  constructor(private service: ServiceService,
-    private spineer: NgxSpinnerService,
-    private generalService: GeneralService
+  constructor(
+    private service: ServiceService,
+    private spinner: NgxSpinnerService,
+    private generalService: GeneralService,
+    private refreshData: SidebarheaderServiceService
   ) {}
-  
 
   ngOnInit(): void {
     this.refreshTeam = this.generalService.refreshTeamList$.subscribe(() => {
-    this.fetchTeamList();
+      this.fetchTeamList();
     });
+
+    // Refresh System
+    this.refreshData.refreshSystem$.subscribe(() => {
+      this.fetchTeamList();
+    });
+
+    // Initial fetch
+    this.fetchTeamList();
+  }
+
+  ngOnDestroy(): void {
+    if (this.refreshTeam) {
+      this.refreshTeam.unsubscribe();
+    }
+  }
+
+  applyFilters() {
+    this.filteredTeams = this.filterTeams(this.searchtext);
+    this.totalPages = Math.ceil(this.filteredTeams.length / this.itemsPerPage);
+    this.currentPage = 1; // Reset to the first page whenever filters are applied
   }
 
   filterTeams(searchString: string) {
     if (!searchString) {
       return this.teams;
     }
-  
-    return this.teams.filter(team => 
-      team.team_Name && 
-      team.team_Name.toLowerCase().indexOf(searchString.toLowerCase()) !== -1
+
+    return this.teams.filter(team =>
+      team.teamName && team.teamName.toLowerCase().includes(searchString.toLowerCase())
     );
   }
 
+  getPaginatedTeams(): any[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return this.filteredTeams.slice(startIndex, startIndex + this.itemsPerPage);
+  }
 
-  //method to fetch the team list
+  changePage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
+  }
+
+  // Method to fetch the team list
   fetchTeamList() {
-    this.spineer.show();
+    this.spinner.show();
     this.service.getTeams().pipe(
       catchError((err: any) => {
         console.error('An error occurred while fetching teams:', err);
@@ -62,12 +96,15 @@ export class TeamListComponent implements OnInit {
         this.errorMessage = 'An error occurred while fetching the teams. Please try again later.';
         return of([]); 
       })
-    ).subscribe({ 
+    ).subscribe({
       next: (res: any) => {
-        this.teams = res; 
-        this.filteredTeams = this.filterTeams(this.searchtext); // set the filteredTeams when the teams are fetched
+        this.teams = res;
+        this.applyFilters(); // Apply filters and pagination
         this.errorMessage = ''; // Clear the error message when the request is successful
-        this.spineer.hide();
+        this.spinner.hide();
+      },
+      error: () => {
+        this.spinner.hide();
       }
     });
   }

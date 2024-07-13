@@ -4,6 +4,7 @@ import { ApiServiceService } from '../shared/api-service.service';
 import { Holiday } from '../calender.model';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { SidebarheaderServiceService } from '../../PageBody/side-bar-header-service/sidebarheader-service.service';
 
 @Component({
   selector: 'app-common-calender',
@@ -77,10 +78,15 @@ export class CommonCalenderComponent {
     private calendar: NgbCalendar,
     private apiService: ApiServiceService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private refreshData: SidebarheaderServiceService
   ) { }
 
   ngOnInit() {
+    //Refresh System
+    this.refreshData.refreshSystem$.subscribe(() => {
+      this.loadHolidays();
+    });
     this.loadHolidays();
   }
 

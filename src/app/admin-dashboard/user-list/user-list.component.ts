@@ -6,15 +6,21 @@ import { DashboardService } from '../admin-dashboard-services/dashboard.service'
 import { NgxSpinnerService } from 'ngx-spinner'; // for spinner
 import { SharedService } from '../admin-dashboard-services/shared.service';
 import { Subscription, catchError } from 'rxjs';
+import { SidebarheaderServiceService } from '../../PageBody/side-bar-header-service/sidebarheader-service.service';
 
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
-  styleUrl: './user-list.component.css'
+  styleUrl: './user-list.component.css',
 })
 export class UserListComponent implements OnInit, OnDestroy {
-
-  constructor(private router: Router, private dashboardService: DashboardService, private spinner: NgxSpinnerService, private sharedService: SharedService) { }
+  constructor(
+    private router: Router,
+    private dashboardService: DashboardService,
+    private spinner: NgxSpinnerService,
+    private sharedService: SharedService,
+    private refreshData: SidebarheaderServiceService
+  ) {}
 
   usersData: undefined | UserModel[];
   searchText: string = '';
@@ -30,6 +36,11 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.subscription = this.sharedService.refreshUserList$.subscribe(() => {
       this.onRoleChange(this.selectedRole);
     });
+    
+    // Refresh the system after the animation completes
+    this.refreshData.refreshSystem$.subscribe(() => {
+      this.onRoleChange(this.selectedRole);
+    });
   }
 
   ngOnDestroy() {
@@ -43,44 +54,50 @@ export class UserListComponent implements OnInit, OnDestroy {
     } else if (this.selectedRole === 'Admin') {
       this.getAllAdmins();
     }
-}
+  }
 
   async getAll() {
     try {
       this.spinner.show();
-      await (await this.dashboardService.getUser()).subscribe(res => {
+      await (
+        await this.dashboardService.getUser()
+      ).subscribe((res) => {
         this.usersData = res;
         this.totalPages = Math.ceil(this.usersData.length / this.itemsPerPage);
         this.spinner.hide();
       });
     } catch (error) {
-      console.log("error", error)
+      console.log('error', error);
     }
   }
 
   async getAllUsers() {
     try {
       this.spinner.show();
-      await (await this.dashboardService.getAllUsers()).subscribe(res => {
+      await (
+        await this.dashboardService.getAllUsers()
+      ).subscribe((res) => {
         this.usersData = res;
         this.totalPages = Math.ceil(this.usersData.length / this.itemsPerPage);
         this.spinner.hide();
       });
     } catch (error) {
-      console.log("error", error)
+      console.log('error', error);
     }
   }
 
   async getAllAdmins() {
     try {
       this.spinner.show();
-      await (await this.dashboardService.getAllAdmins()).subscribe(res => {
+      await (
+        await this.dashboardService.getAllAdmins()
+      ).subscribe((res) => {
         this.usersData = res;
         this.totalPages = Math.ceil(this.usersData.length / this.itemsPerPage);
         this.spinner.hide();
       });
     } catch (error) {
-      console.log("error", error)
+      console.log('error', error);
     }
   }
 
@@ -91,14 +108,16 @@ export class UserListComponent implements OnInit, OnDestroy {
 
   //Search Users
   onSearchChange() {
-    this.dashboardService.searchUser(this.searchText).pipe(
-      catchError(error => {
-        this.error = error; // Assign error to the variable for display
-        return []; // Return empty array to prevent further processing
-      })
-    ).subscribe((res: UserModel[]) => {
-      this.usersData = res;
-    });
+    this.dashboardService
+      .searchUser(this.searchText)
+      .pipe(
+        catchError((error) => {
+          this.error = error; // Assign error to the variable for display
+          return []; // Return empty array to prevent further processing
+        })
+      )
+      .subscribe((res: UserModel[]) => {
+        this.usersData = res;
+      });
   }
-
 }

@@ -85,6 +85,7 @@ export class EditTaskComponent implements OnInit {
         timeOut: 3000,
       });
       this.tasksharedService.refreshTaskList();
+      this.tasksharedService.refreshProjectDetails();
       this.router.navigate(['/pages-body/TaskProjectList/projectTaskDetails/' + this.projectId+'/updatetask/'+this.Routetaskid]);
     });
   }
@@ -95,11 +96,16 @@ export class EditTaskComponent implements OnInit {
   DeleteTask() {
     this.confirmDialogService.open('Are you sure you want to delete this task?').subscribe(confirmed => {
       if (confirmed) {
-        this.taskApiService.deleteTask(this.Routetaskid).subscribe((data: taskModel) => {
+        this.taskApiService.deleteTask(this.Routetaskid).subscribe({
+          next: (data: taskModel) => {
           this.toaster.success('Task Deleted Successfully');
           this.tasksharedService.refreshTaskList();
+          this.tasksharedService.refreshProjectDetails();
           this.router.navigate(['/pages-body/TaskProjectList/projectTaskDetails/' + this.projectId]);
-        });
+        },
+      error: (err) => {
+        this.toaster.error('Could not delete task. Please check resource allocation and try again.', 'Error');
+      }});
       }
     });
   }

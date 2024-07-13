@@ -137,17 +137,18 @@ export class ResourceDetailsComponent {
         if (confirmed) {
           this.resourceService
             .deleteResource(this.selectedResource.resourceId)
-            .subscribe(
-              (res: ResourceModel) => {
+            .subscribe({
+              next: (res: ResourceModel) => {
                 console.log('Resource deleted successfully:', res);
                 this.deleteSucceseMassege(this.selectedResource.resourceId);
                 this.showResourceDetails = false;
                 this.resourceService.resourceListUpdated.emit(); // Emit the event
               },
-              (error) => {
+              error: (error) => {
                 console.error('Error occurred while deleting resource:', error);
+                this.deleteErrorMessage();
               }
-            );
+        });
         }
       });
   }
@@ -176,6 +177,14 @@ export class ResourceDetailsComponent {
       `${resourceId} Deleted successfully`,
       'Resource Deleted Successfully',
       { timeOut: 3000 }
+    );
+  }
+
+  //Delete Error Message
+  deleteErrorMessage() {
+    this.toaster.error(
+      `Could not delete resource. Please check resource allocation and try again`,'Delete Failed',
+      { timeOut: 3000}
     );
   }
 }
