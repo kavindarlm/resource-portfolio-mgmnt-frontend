@@ -7,6 +7,7 @@ import { throwError } from 'rxjs';
 import { JobRoleService } from '../../shared/sevices_resourceMgt/jobRole.service';
 import { OrgUnitService } from '../../shared/sevices_resourceMgt/orgUnit.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { SidebarheaderServiceService } from '../../PageBody/side-bar-header-service/sidebarheader-service.service';
 
 @Component({
   selector: 'app-first-view',
@@ -16,7 +17,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class FirstViewComponent implements OnInit {
 
   showResourceDetails: boolean = false;//first not to show the form
-  // searchText:ResourceModel[] | undefined;
   searchText: any;
   resourceList: ResourceModel[] | undefined;
   jobroles: JobRoleModel[] | undefined; //creating an array for jobroles
@@ -31,7 +31,8 @@ export class FirstViewComponent implements OnInit {
               private resourceService: ResourceService, 
               private jobRoleService: JobRoleService, 
               private orgUnitService: OrgUnitService,
-              private spinner: NgxSpinnerService) {
+              private spinner: NgxSpinnerService,
+              private refreshData: SidebarheaderServiceService) {
   }
 
 
@@ -43,6 +44,13 @@ export class FirstViewComponent implements OnInit {
     // Subscribe to the resourceAdded event
     this.resourceService.resourceListUpdated.subscribe(() => {
       this.loadResources(); // Reload resource list when a new resource is added
+    });
+
+    // Subscribe to the refreshSystem event
+    this.refreshData.refreshSystem$.subscribe(() => {
+      this.loadResources(); // Reload resource list when a new resource is added
+      this.loadJobRoles(); // Reload job roles list when a new resource is added
+      this.loadOrgUnits(); // Reload org units list when a new resource is added
     });
   }
 

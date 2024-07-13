@@ -1,0 +1,118 @@
+<app-spinner></app-spinner>
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-lg-12 col-md-12 col-sm-12 justify-content-center border rounded p-2">
+      <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Project List Details
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-lg-4 col-md-4 col-sm-12 mb-3">
+          <div class="input-group rounded py-0">
+            <span class="input-group-text border-0" id="search-addon">
+              <i class="bi bi-filter"></i>
+            </span>
+            <div class="d-flex justify-content-end w-50">
+              <select class="form-select rounded small-text" [(ngModel)]="selectedStatus"
+                (ngModelChange)="onStatusChange()">
+                <option value="">All Projects</option>
+                <option value="Completed">Completed Projects</option>
+                <option value="In Progress">In Progress Projects</option>
+                <option value="Not Started">Not Started Projects</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12 mb-3">
+          <div class="d-flex justify-content-end">
+            <div class="input-group rounded w-50">
+              <input type="search" aria-describedby="search-addon" [(ngModel)]="searchText"
+                (ngModelChange)="onSearchChange()" id="form1" class="form-control small-text" placeholder="Search..."
+                aria-label="search">
+              <span class="input-group-text border-0" id="search-addon">
+                <i class="bi bi-search"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover table-sm text-center">
+          <thead class="thead-dark fs-6 fst-normal">
+            <tr>
+              <th scope="col" class="col-3">
+                <div class="d-flex mb-0 align-items-center justify-content-center">
+                  <div class="me-2">Project Name</div>
+                  <span class="input-group-text border-0 clickable-icon " id="search-addon">
+                    <i class="bi bi-arrow-down-up" *ngIf="sortProjectNameState === 0" (click)="toggleProjectNameSort()"></i>
+                    <i class="bi bi-sort-alpha-down" *ngIf="sortProjectNameState === 1" (click)="toggleProjectNameSort()"></i>
+                    <i class="bi bi-sort-alpha-up" *ngIf="sortProjectNameState === 2" (click)="toggleProjectNameSort()"></i>
+                  </span>
+                </div>
+              </th>
+              <th scope="col" class="col-2">
+                <div class="d-flex mb-0 align-items-center justify-content-center">
+                  <div class="me-2">Progress</div>
+                  <span class="input-group-text border-0 clickable-icon " id="search-addon">
+                    <i class="bi bi bi-sort-numeric-down" *ngIf="sortProgressState === 1" (click)="toggleProgressSort()"></i>
+                    <i class="bi bi-sort-numeric-up-alt" *ngIf="sortProgressState === 2" (click)="toggleProgressSort()"></i>
+                    <i class="bi bi-arrow-down-up" *ngIf="sortProgressState === 0" (click)="toggleProgressSort()"></i>
+                  </span>
+                </div>
+              </th>
+              <th scope="col" class="col-2">Status</th>
+              <th scope="col" class="col-1">Priority</th>
+              <th scope="col" class="col-3">
+                <div class="d-flex mb-0 align-items-center justify-content-center">
+                  <div class="me-2">Delivery Manager</div>
+                  <span class="input-group-text border-0 clickable-icon " id="search-addon">
+                    <i class="bi bi-arrow-down-up" *ngIf="sortDeliveryManagerState === 0" (click)="toggleDeliveryManagerSort()"></i>
+                    <i class="bi bi-sort-alpha-down" *ngIf="sortDeliveryManagerState === 1" (click)="toggleDeliveryManagerSort()"></i>
+                    <i class="bi bi-sort-alpha-up" *ngIf="sortDeliveryManagerState === 2" (click)="toggleDeliveryManagerSort()"></i>
+                  </span>
+                </div>
+              </th>
+              <th scope="col" class="col-1">Add Tasks</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let project of getPaginatedProjects()">
+              <td class="clickable" (click)="onClickNavigateTo(project.projectid)">{{ project.projectName }}</td>
+              <td class="clickable" (click)="onClickNavigateTo(project.projectid)">{{ projectProgress[project.projectid]
+                || 0 }} %</td>
+              <td class="clickable" (click)="onClickNavigateTo(project.projectid)">{{
+                getProjectStatus(project.projectid) }}</td>
+              <td class="clickable" (click)="onClickNavigateTo(project.projectid)">{{
+                getCriticalityName(project.criticality_id) }}</td>
+              <td class="clickable" (click)="onClickNavigateTo(project.projectid)">{{
+                resourceNames[project.deliveryManager_id] || project.deliveryManager_id }}</td>
+              <td><button (click)="onClickAddTask(project.projectid)"
+                  class="btn btn-outline-primary w-100 custom-button btn-sm">Add</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <ul class="pagination pagination-sm justify-content-center">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="changePage(currentPage - 1)" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index"
+            [class.active]="currentPage === i + 1">
+            <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+          </li>
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="changePage(currentPage + 1)" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

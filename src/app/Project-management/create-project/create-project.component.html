@@ -48,13 +48,13 @@
         </div>
       </div>
 
-      <label class="fw-medium font-color" for="ProjectCriticality">Project Criticallity *</label>
+      <label class="fw-medium font-color" for="ProjectCriticality">Project Priority *</label>
       <div class="form-group row mt-2 mb-3">
-        <label for="ProjectCriticality" class="col-3 ps-5 fst-normal text-primary">Criticality :</label>
+        <label for="ProjectCriticality" class="col-3 ps-5 fst-normal text-primary">Priority Level :</label>
         <div class="col-9">
-          <select class="form-control" required id="criticality_id" formControlName="criticality_id"
+          <select class="form-control" required id="criticality_id" formControlName="criticality_id" placeholder="Enter Project Priority"
             [ngClass]="{'is-invalid': projectform.controls['criticality_id'].invalid && projectform.controls['criticality_id'].touched}">
-            <option disabled selected value="">Select Project Criticality</option>
+            <option disabled selected value="">Select Project Priority</option>
             <option *ngFor="let criticality of criticalityType" [value]="criticality.criticality_id">
               {{criticality.type}}</option>
           </select>

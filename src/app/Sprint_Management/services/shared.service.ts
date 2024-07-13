@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 
 interface ProjectTaskData {
@@ -10,51 +10,42 @@ interface ProjectTaskData {
 @Injectable({
   providedIn: 'root'
 })
-export class SharedService {
+export class SharedService implements OnDestroy {
 
-  // Define a BehaviorSubject to hold an array of data
   private dataSubject = new BehaviorSubject<ProjectTaskData[]>([]);
-
-  // Observable for the data subject
   data$ = this.dataSubject.asObservable();
 
-  // Subject for notifying sprint creation
   private sprintCreatedSubject = new Subject<void>();
-
-  // Observable for the sprint creation subject
   sprintCreated$ = this.sprintCreatedSubject.asObservable();
 
-  // Subject for notifying sprint deletion
   private sprintDeletedSubject = new Subject<void>();
-
-  // Observable for the sprint deletion subject
   sprintDeleted$ = this.sprintDeletedSubject.asObservable();
 
-  // Subject for notifying sprint update
   private sprintUpdatedSubject = new Subject<void>();
-
-  // Observable for the sprint update subject
   sprintUpdated$ = this.sprintUpdatedSubject.asObservable();
 
-  // Subject for notifying task update
   private taskUpdatedSubject = new Subject<void>();
-
-  // Observable for the task update subject
   taskUpdated$ = this.taskUpdatedSubject.asObservable();
 
-  // Method to set an array of data
+  private resourceAllocationDeletedSubject = new Subject<void>();
+  resourceAllocationDeleted$ = this.resourceAllocationDeletedSubject.asObservable();
+
+  private percentageUpdatedSubject = new Subject<void>();
+  percentageUpdated$ = this.percentageUpdatedSubject.asObservable();
+
+  constructor() {}
+
+  notifyResourceAllocationDeleted(): void {
+    this.resourceAllocationDeletedSubject.next();
+  }
+
   setData(data: ProjectTaskData[]): void {
     this.dataSubject.next(data);
   }
 
   addData(data: ProjectTaskData): void {
-    // Get the current data array
     const currentData = this.dataSubject.value;
-  
-    // Append the new data object
     const updatedData = [...currentData, data];
-  
-    // Update the data subject with the new array
     this.dataSubject.next(updatedData);
   }
 
@@ -74,5 +65,34 @@ export class SharedService {
     this.taskUpdatedSubject.next();
   }
 
-  
+  notifyPercentageUpdated(): void {
+    this.percentageUpdatedSubject.next();
+  }
+
+  private resourceAddedSubject = new Subject<void>();
+  resourceAdded$ = this.resourceAddedSubject.asObservable();
+
+  // Notify resource added
+  notifyResourceAdded(): void {
+    this.resourceAddedSubject.next();
+  }
+
+  // Clear state method (optional)
+  clearData(): void {
+    this.dataSubject.next([]);
+  }
+
+  ngOnDestroy(): void {
+    // Complete the subjects to prevent memory leaks
+    this.dataSubject.complete();
+    this.sprintCreatedSubject.complete();
+    this.sprintDeletedSubject.complete();
+    this.sprintUpdatedSubject.complete();
+    this.taskUpdatedSubject.complete();
+    this.resourceAllocationDeletedSubject.complete();
+    this.percentageUpdatedSubject.complete();
+    this.resourceAddedSubject.complete();
+  }
+
+
 }

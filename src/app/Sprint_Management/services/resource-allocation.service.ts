@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResourceAllocationService {
 
-  private baseUrl = 'http://localhost:3000/resource-allocation';
+  private baseUrl = environment.baseUrl +'/resource-allocation';
 
   constructor(private http: HttpClient) { }
 
@@ -71,7 +72,7 @@ export class ResourceAllocationService {
       })
     );
   }
-  
+
   // Method to delete all resource allocations by sprint ID
   deleteResourceAllocationsBySprintId(sprintId: number): Observable<void> {
     const url = `${this.baseUrl}/sprint/${sprintId}`;

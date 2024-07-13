@@ -14,12 +14,12 @@
 
     <div class="row rounded border m-2 p-2 ">
         <div class="col text-center justify-content-center">
-            <div class=" border border-4 rounded m-2 p-2">
-                <i class="bi bi-person-circle fa-2x mt-3"></i>
-                <div>{{ resourceDetails.resourceId }}</div>
+            <div class="border rounded m-3 p-2">
+                <div class="initials-circle">{{ getInitials(resourceDetails.resourceName) }}</div>
+                <div class=" mt-2">{{ resourceDetails.resourceId }}</div>
                 <div class="text-primary">{{ resourceDetails.resourceName }}</div>
                 <div class="text-black-50">{{ resourceDetails.job_role?.roleName }}</div>
-            </div>
+              </div> 
             <div class="border rounded text-center col-12 mb-3 mt-3 pt-1 pb-1 text-white bg-primary bg-opacity-50">
                 Current Percentage
             </div>

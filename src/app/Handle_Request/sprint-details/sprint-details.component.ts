@@ -1,19 +1,20 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, forkJoin, of } from 'rxjs';
-import { mergeMap, map, catchError } from 'rxjs/operators';
+import { Observable, forkJoin } from 'rxjs';
+import { mergeMap, map } from 'rxjs/operators';
 import { sprintApiService } from '../../Sprint_Management/services/sprintApi.service';
 import { ResourceService } from '../../team-management/shared/resource.service';
 import { ResourceAllocationService } from '../../Sprint_Management/services/resource-allocation.service';
 import { ToastrService } from 'ngx-toastr';
 import { SharedService } from '../../Sprint_Management/services/shared.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sprint-details',
   templateUrl: './sprint-details.component.html',
-  styleUrl: './sprint-details.component.css'
+  styleUrls: ['./sprint-details.component.css']
 })
-export class SprintDetailsComponent {
+export class SprintDetailsComponent implements OnInit, OnDestroy {
 
   sprint_id: string = '';
   sprintName: string = '';
@@ -30,6 +31,10 @@ export class SprintDetailsComponent {
   currentPage: number = 1;
   pageSize: number = 5; // Number of items per page
 
+  // Subscriptions
+  private resourceAllocationDeletedSubscription!: Subscription;
+  private percentageUpdatedSubscription!: Subscription;
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -45,6 +50,28 @@ export class SprintDetailsComponent {
       this.sprint_id = params['id'];
       this.fetchSprintData();
     });
+
+    // Subscribe to sprintUpdated$ to refresh data upon notification
+    this.sharedService.sprintUpdated$.subscribe(() => {
+      this.fetchAndPopulateResourcesOfSprint();
+    });
+    
+
+    // Subscribe to resourceAllocationDeleted$ to refresh data upon resource allocation deletion
+    this.resourceAllocationDeletedSubscription = this.sharedService.resourceAllocationDeleted$.subscribe(() => {
+      this.fetchAndPopulateResourcesOfSprint();
+    });
+
+    // Subscribe to percentageUpdated$ to refresh data after percentage update
+    this.percentageUpdatedSubscription = this.sharedService.percentageUpdated$.subscribe(() => {
+      this.fetchAndPopulateResourcesOfSprint();
+    });
+  }
+
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions to avoid memory leaks
+    this.resourceAllocationDeletedSubscription.unsubscribe();
+    this.percentageUpdatedSubscription.unsubscribe();
   }
 
   fetchSprintData(): void {
@@ -78,10 +105,10 @@ export class SprintDetailsComponent {
             if (!uniqueResources.has(resource.resourceId)) {
               uniqueResources.set(resource.resourceId, {
                 Resource_ID: resource.resourceId,
-                Team: resource.job_role ? resource.team_name : 'N/A',
+                Team: resource.teams ? resource.teams.team_Name : 'N/A',
                 Job_Role: resource.job_role ? resource.job_role.roleName : 'N/A',
                 Org_Unit: resource.org_unit ? resource.org_unit.unitName : 'N/A',
-                Availability: '' // Placeholder for availability
+                Availability: ''
               });
             }
           });
@@ -129,6 +156,7 @@ export class SprintDetailsComponent {
       });
     }
   }
+
   deleteContent() {
     this.router.navigate(['/pages-body/handle-request/']);
   }
@@ -136,8 +164,6 @@ export class SprintDetailsComponent {
   // Pagination methods
   onPageChange(pageNumber: number): void {
     this.currentPage = pageNumber;
-    // You may fetch data for the new page here or adjust your existing data array
-    // For simplicity, assuming your data is already in ResourcesOfSprint and just need to slice it
   }
 
   get paginatedResources(): any[] {
@@ -152,4 +178,7 @@ export class SprintDetailsComponent {
   getPaginationArray(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
+
+  
 }
+

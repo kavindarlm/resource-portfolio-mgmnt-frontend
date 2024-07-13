@@ -3,43 +3,65 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ResourceService } from '../../team-management/shared/resource.service';
 import { ServiceService } from '../../team-management/shared/service.service';
 import { ResourceAllocationService } from '../../Sprint_Management/services/resource-allocation.service';
+import { OrgUnitMgtService } from '../../shared/orgUnitMgt_services/orgUnitMgt.service';
+import { SharedService } from '../../Sprint_Management/services/shared.service';
 import { forkJoin, map } from 'rxjs';
 
 @Component({
   selector: 'app-available-res-list',
   templateUrl: './available-res-list.component.html',
-  styleUrl: './available-res-list.component.css'
+  styleUrls: ['./available-res-list.component.css']
 })
-export class AvailableResListComponent implements OnInit{
+export class AvailableResListComponent implements OnInit {
+
   sprintId: string = '';
   resources: any[] = [];
   filteredContents: any[] = [];
   paginatedContents: any[] = [];
   teams: string[] = [];
-  OrgUnit: string[] = ['Development', 'Quality Assurance', 'Product Management'];
+  orgUnits: any[] = [];
   teamFilter: string = '';
   orgUnitFilter: string = '';
   currentPage: number = 1;
   itemsPerPage: number = 5;
   totalPages: number = 0;
   totalPagesArray: number[] = [];
-  
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private resourceService: ResourceService,
     private serviceService: ServiceService,
-    private ResourceAllocationService : ResourceAllocationService,
-    private router: Router
-  ) {}
+    private resourceAllocationService: ResourceAllocationService,
+    private OrgUnitMgtService:OrgUnitMgtService,
+    private sharedService:SharedService
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.sprintId = params['sprintId'];
       this.fetchResources();
-    this.fetchTeamNames();
+      this.fetchTeamNames();
+      this.fetchOrgUnits();
+    });
+    this.sharedService.resourceAdded$.subscribe(() => {
+      this.fetchResources();
     });
   }
+
+  
+  fetchOrgUnits(): void {
+    this.OrgUnitMgtService.getOrgUnits().subscribe(
+      (data: any[]) => {
+        this.orgUnits= data.map(orgUnit => orgUnit.unitName); // Extract unitName from each object
+      },
+      error => {
+        console.error('Error fetching organizational units:', error);
+      }
+    );
+  }
+
+
   fetchResources(): void {
     this.resourceService.getResourcesForSprint().subscribe(
       (data: any[]) => {
@@ -48,7 +70,7 @@ export class AvailableResListComponent implements OnInit{
           Team: resource.team_name,
           Job_Role: resource.role_name,
           Org_Unit: resource.org_unit_name,
-          Availability: '' 
+          Availability: ''
         }));
         this.calculateAvailability();
       },
@@ -69,43 +91,42 @@ export class AvailableResListComponent implements OnInit{
     );
   }
 
- calculateAvailability(): void {
-  const observables = this.resources.map(resource => 
-    this.ResourceAllocationService.getTasksByResourceId(resource.Resource_ID).pipe(
-      map(tasks => {
-        // Filter tasks with taskProgressPercentage < 100
-        const filteredTasks = tasks.filter(task => task.resourceAllocation.task.taskProgressPercentage < 100);
-        
-        // Calculate the total allocation percentage
-        const totalAllocation = filteredTasks.reduce((total, task) => {
-          const allocationPercentage = task.resourceAllocation.percentage || 0; 
-          return total + allocationPercentage;
-        }, 0);
+  calculateAvailability(): void {
+    const observables = this.resources.map(resource =>
+      this.resourceAllocationService.getTasksByResourceId(resource.Resource_ID).pipe(
+        map(tasks => {
+          // Filter tasks with taskProgressPercentage < 100
+          const filteredTasks = tasks.filter(task => task.resourceAllocation.task.taskProgressPercentage < 100);
 
-        // Calculate the availability percentage
-        const availabilityPercentage = totalAllocation;
+          // Calculate the total allocation percentage
+          const totalAllocation = filteredTasks.reduce((total, task) => {
+            const allocationPercentage = task.resourceAllocation.percentage || 0;
+            return total + allocationPercentage;
+          }, 0);
 
-        return {
-          ...resource,
-          Availability: availabilityPercentage
-        };
-      })
-    )
-  );
+          // Calculate the availability percentage
+          const availabilityPercentage = totalAllocation;
 
-  forkJoin(observables).subscribe(
-    updatedResources => {
-      this.resources = updatedResources;
-      this.filteredContents = this.resources; // Initialize filteredContents with all resources
-      this.updatePagination(); // Update pagination after fetching resources
-      console.log('Resources with availability percentages:', this.resources);
-    },
-    error => {
-      console.error('Error calculating availability:', error);
-    }
-  );
-}
-  
+          return {
+            ...resource,
+            Availability: availabilityPercentage
+          };
+        })
+      )
+    );
+
+    forkJoin(observables).subscribe(
+      updatedResources => {
+        this.resources = updatedResources;
+        this.filteredContents = this.resources; // Initialize filteredContents with all resources
+        this.updatePagination(); // Update pagination after fetching resources
+        console.log('Resources with availability percentages:', this.resources);
+      },
+      error => {
+        console.error('Error calculating availability:', error);
+      }
+    );
+  }
 
   filterResources(): void {
     // Filter resources based on the selected filters
@@ -130,17 +151,6 @@ export class AvailableResListComponent implements OnInit{
     this.orgUnitFilter = '';
     this.filterResources();
   }
-
-  navigateToAvailability(resource: any): void {
-    if (this.sprintId && resource.Resource_ID) {
-      this.router.navigate(['pages-body', 'handle-request', 'sprintDetails', this.sprintId, 'availableResourceList', 'availabilityInfo', resource.Resource_ID], {
-        queryParams: { availability: resource.Availability }
-      });
-    } else {
-      console.error('Invalid resource or sprint ID:', this.sprintId, resource.Resource_ID);
-    }
-  }
-  
 
   updatePagination(): void {
     this.totalPages = Math.ceil(this.filteredContents.length / this.itemsPerPage);
@@ -172,4 +182,12 @@ export class AvailableResListComponent implements OnInit{
     this.currentPage = page;
     this.paginateContents();
   }
+
+  navigateToAvailabilityInfo(sprintId: string, resourceId: string, availability: number): void {
+    this.router.navigate(
+      [`/pages-body/handle-request/sprintDetails/${sprintId}/availableResourceList/${sprintId}/availabilityInfo/${sprintId}/${resourceId}`],
+      { queryParams: { availability } }
+    );
+  }
+
 }

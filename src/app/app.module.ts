@@ -3,7 +3,6 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { CreateNewtaskComponent } from './TaskManagement/create-newtask/create-newtask.component';
 import { ProjectDetailsComponent } from './TaskManagement/project-details/project-details.component';
 import { UpdateTaskComponent } from './TaskManagement/update-task/update-task.component';
-import { ButtonTusksComponent } from './TaskManagement/button-tusks/button-tusks.component';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -58,7 +57,6 @@ import { UserDetailComponent } from './admin-dashboard/user-detail/user-detail.c
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SpinnerComponent } from './spinner/spinner/spinner.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DeleteSprintPopupComponent } from './Sprint_Management/Reusable_Components/delete-sprint-popup/delete-sprint-popup.component';
 import { SearchPipe } from './resourceMgt/search.pipe';
 import { UpdateResourcTableComponent } from './team-management/update-resourc-table/update-resourc-table.component';
 import { ToastrModule } from 'ngx-toastr';
@@ -80,7 +78,6 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AllocatedResourceInformationComponent } from './Sprint_Management/allocated-resource-information/allocated-resource-information.component';
 import { UpdatePercentageComponent } from './Sprint_Management/update-percentage/update-percentage.component';
-import { DeleteResourceAllocationComponent } from './Sprint_Management/delete-resource-allocation/delete-resource-allocation.component';
 import { UpdateTaskInSprintComponent } from './Sprint_Management/update-task-in-sprint/update-task-in-sprint.component';
 import { UnitDetailsComponent } from './orgUnitMgt/unit-details/unit-details.component';
 import { UnitEditFormComponent } from './orgUnitMgt/unit-edit-form/unit-edit-form.component';
@@ -103,6 +100,12 @@ import { UpdateAllocationPercentageComponent } from './Handle_Request/update-all
 import { UpdateAllocatedTaskComponent } from './Handle_Request/update-allocated-task/update-allocated-task.component';
 import { AvailableResListComponent } from './Handle_Request/available-res-list/available-res-list.component';
 import { AvailabilityInfoComponent } from './Handle_Request/availability-info/availability-info.component';
+import { AllSprintListComponent } from './Sprint_Management/all-sprint-list/all-sprint-list.component';
+import { AllSprintDetailsComponent } from './Handle_Request/all-sprint-details/all-sprint-details.component';
+import { TodayStatusComponent } from './calender-management/today-status/today-status.component';
+import { AllTeamViewComponent } from './team-management/all-team-view/all-team-view.component';
+import { ProjectsViewComponent } from './Project-management/projects-view/projects-view.component';
+import { TaskProjectViewComponent } from './TaskManagement/task-project-view/task-project-view.component';
 
 @NgModule({
   declarations:[
@@ -111,7 +114,6 @@ import { AvailabilityInfoComponent } from './Handle_Request/availability-info/av
     CreateNewtaskComponent,
     ProjectDetailsComponent,
     UpdateTaskComponent,
-    ButtonTusksComponent,
     AddFormComponent,
     ButtonComponent,
     FirstViewComponent,
@@ -150,7 +152,6 @@ import { AvailabilityInfoComponent } from './Handle_Request/availability-info/av
     FunctionButtonComponent,
     UserDetailComponent,
     SpinnerComponent,
-    DeleteSprintPopupComponent,
     SearchPipe,
     UpdateResourcTableComponent,
     ProjectBoardComponent,
@@ -169,7 +170,6 @@ import { AvailabilityInfoComponent } from './Handle_Request/availability-info/av
     PageNotFoundComponent,
     AllocatedResourceInformationComponent,
     UpdatePercentageComponent,
-    DeleteResourceAllocationComponent,
     UpdateTaskInSprintComponent,
     UnitDetailsComponent,
     UnitEditFormComponent,
@@ -191,6 +191,12 @@ import { AvailabilityInfoComponent } from './Handle_Request/availability-info/av
     UpdateAllocatedTaskComponent,
     AvailableResListComponent,
     AvailabilityInfoComponent,
+    AllSprintListComponent,
+    AllSprintDetailsComponent,
+    TodayStatusComponent,
+    AllTeamViewComponent,
+    ProjectsViewComponent,
+    TaskProjectViewComponent,
     
   ],
   imports: [

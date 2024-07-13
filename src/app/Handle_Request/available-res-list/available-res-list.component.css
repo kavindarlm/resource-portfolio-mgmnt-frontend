@@ -9,13 +9,13 @@
 }
 
 .custom,
-th{
+th {
     color: #1e3895e1;
     font-weight: 500;
 }
 
-td{
-    color:rgba(0, 0, 255, 0.575);
+td {
+    color: rgba(0, 0, 255, 0.575);
     font-weight: 300;
 }
 
@@ -24,4 +24,3 @@ td{
     color: white;
     cursor: pointer;
 }
-

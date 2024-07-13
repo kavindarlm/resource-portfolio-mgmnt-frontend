@@ -98,7 +98,7 @@ export class CreateNewtaskComponent implements OnInit {
     console.log(data);
     this.submited = true;
     if (this.taskForm.invalid) {
-      alert('Form Invalid');
+      this.toaster.error('Form is invalid. Please correct and try again.', 'Error', { timeOut: 3000 });
       return;
     }
 
@@ -141,6 +141,7 @@ export class CreateNewtaskComponent implements OnInit {
     
   }
 
+  // Add success message
   addsuccesemassege(taskName: string) {
     this.toaster.success(
       `${taskName} Added successfully`,
