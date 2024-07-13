@@ -47,7 +47,7 @@ export class AvailabilityInfoComponent implements OnInit {
     private ResourceAllocationService: ResourceAllocationService,
     private sharedService: SharedService,
     private ApiServiceService: ApiServiceService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -59,6 +59,7 @@ export class AvailabilityInfoComponent implements OnInit {
       this.fetchHolidays(this.resourceId);
     });
 
+    // Subscribe to query params to update availabilityPercentage
     this.route.queryParams.subscribe(queryParams => {
       this.availabilityPercentage = queryParams['availability'];
     });
@@ -71,6 +72,17 @@ export class AvailabilityInfoComponent implements OnInit {
     });
   }
 
+  // Function to calculate availability percentage based on sets
+  calculateAvailabilityPercentage(): void {
+    let totalPercentage = 0;
+    this.sets.forEach(set => {
+      if (set.percentage !== null) {
+        totalPercentage += set.percentage;
+      }
+    });
+    this.availabilityPercentage = totalPercentage;
+  }
+
   fetchResourceDetails(): void {
     this.resourceService.findOneResource(this.resourceId).subscribe(
       (data: any) => {
@@ -81,6 +93,7 @@ export class AvailabilityInfoComponent implements OnInit {
       }
     );
   }
+
 
   fetchTasksAndProjectsByResourceId(resourceId: string): void {
     this.taskProjectDetails = [];
@@ -214,6 +227,8 @@ export class AvailabilityInfoComponent implements OnInit {
     this.selectedProjectNames.splice(index, 1);
   }
 
+ 
+  
   onAddClick(): void {
     // Check if any set is incomplete
     const invalidSet = this.sets.find(set => !set.projectId || !set.taskId || set.percentage === null);
@@ -224,7 +239,7 @@ export class AvailabilityInfoComponent implements OnInit {
     }
   
     // Proceed with adding data and creating resource allocations
-    this.sets.forEach(set => {
+    const requests = this.sets.map(set => {
       const projectTaskData: ProjectTaskData = {
         resourceId: this.resourceId,
         taskId: set.taskId,
@@ -233,32 +248,49 @@ export class AvailabilityInfoComponent implements OnInit {
       this.sharedService.addData(projectTaskData);
   
       // Create resource allocation separately for each set
-      this.ResourceAllocationService.createResourceAllocation({
+      return this.ResourceAllocationService.createResourceAllocation({
         sprint_id: this.sprintId,
         resource_id: this.resourceId,
         task_id: set.taskId,
         percentage: set.percentage
-      }).subscribe(
-        () => {
-          this.toastr.success('Resource added successfully!', 'Success');
-          this.sharedService.notifySprintUpdated(); // Notify sprint update
-        },
-        error => {
-          this.toastr.error('Error creating resource allocation.', 'Error');
-          // Handle error as needed
-        }
+      }).pipe(
+        map(() => set.percentage) // Return the percentage of the successfully created allocation
       );
     });
   
-    // Reset sets and related arrays after adding
-    this.sets = [{ projectId: '', taskId: '', percentage: null, Tasks: [] }];
-    this.searchText = [''];
-    this.filteredProjects = [this.Projects];
-    this.dropdownOpen = [false];
-    this.selectedProjectNames = [''];
+    // Execute all requests concurrently
+    forkJoin(requests).subscribe(
+      (percentages: (number | null)[]) => {
+        // Filter out null values and sum the percentages
+        const validPercentages = percentages.filter((percentage): percentage is number => percentage !== null);
+        const newPercentageSum = validPercentages.reduce((sum, percentage) => sum + percentage, 0);
+        
+        // Ensure availabilityPercentage is treated as a number
+        this.availabilityPercentage = Number(this.availabilityPercentage) + newPercentageSum;
+  
+        this.toastr.success('Resource added successfully!', 'Success');
+        this.sharedService.notifySprintUpdated(); // Notify sprint update
+        this.sharedService.notifyResourceAdded(); // Notify resource added
+  
+        // Clear sets after successful addition
+        this.sets = [{ projectId: '', taskId: '', percentage: null, Tasks: [] }];
+        this.searchText = [''];
+        this.filteredProjects = [this.Projects];
+        this.dropdownOpen = [false];
+        this.selectedProjectNames = [''];
+  
+        // Refetch data to update UI
+        this.fetchTasksAndProjectsByResourceId(this.resourceId);
+      },
+      error => {
+        this.toastr.error('Error creating resource allocation.', 'Error');
+        // Handle error as needed
+      }
+    );
   }
   
-
+  
+  
   deleteContent() {
     this.router.navigate(['/pages-body/handle-request/sprintDetails', this.sprintId, 'availableResourceList', this.sprintId]);
   }
@@ -275,8 +307,13 @@ export class AvailabilityInfoComponent implements OnInit {
     );
   }
 
-  onCancelClick(): void {
-    this.router.navigate(['/resource', this.sprintId, 'list']);
+  getInitials(fullName: string): string {
+    if (!fullName) {
+      return ''; 
+    }
+    const names = fullName.split(' ');
+    const initials = names.slice(0, 2).map(name => name.charAt(0)).join('');
+    return initials.toUpperCase();
   }
 
 }

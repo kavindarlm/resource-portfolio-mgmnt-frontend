@@ -1,8 +1,8 @@
   .custom-size {
     max-width: 100%; /* Set your desired maximum width */
-    max-height: 25vh; /* Set your desired maximum height */
+    max-height: 25vh; 
     width: 100%;
-    height: auto; /* Maintain aspect ratio */ 
+    height: auto; 
   }
 
   .background-container {
@@ -56,10 +56,8 @@
     border-radius: 10px;
     /*inside content padding 10px*/
     padding: 10px;
-    /* Adjust the height as necessary, or remove it to fit content */
-    max-height: 85vh;
-    margin-bottom: 75px;
-    height: 85vh;
+    /* max-height: 85vh; */
+    height: calc(100% - 110px);
     display: flex;
     background-color: rgb(255, 255, 255);
     overflow-y: hidden;
@@ -78,7 +76,7 @@
     overflow-y: scroll;
     padding: 10px;
     box-shadow: 0px 2px 10px #CBCBCB;
-    height: 85vh;
+    height: 100%;
     flex-direction: column;
     overflow-x: hidden;
   } 

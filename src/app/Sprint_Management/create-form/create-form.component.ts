@@ -20,6 +20,7 @@ interface ProjectTaskData {
   templateUrl: './create-form.component.html',
   styleUrls: ['./create-form.component.css']
 })
+
 export class CreateFormComponent implements OnInit {
 
   sprintName: string = '';
@@ -37,6 +38,7 @@ export class CreateFormComponent implements OnInit {
   totalPagesArray: number[] = [];
   paginatedContents: any[] = [];
 
+  sprintData: any = {}; 
 
   constructor(
     private router: Router,
@@ -71,7 +73,7 @@ export class CreateFormComponent implements OnInit {
           Team: resource.team_name,
           Job_Role: resource.role_name,
           Org_Unit: resource.org_unit_name,
-          Availability: '' 
+          Availability: ''
         }));
         this.calculateAvailability();
         this.updatePagination(); // Update pagination after fetching resources
@@ -167,22 +169,23 @@ export class CreateFormComponent implements OnInit {
     }
 
     // Prepare sprint data
-    const sprintData = {
+    this.sprintData = {
       sprint_name: this.sprintName,
       start_Date: this.startDate,
       end_Date: this.endDate,
     };
 
     // Call the sprintApiService to create a new sprint
-    this.sprintApiService.createSprint(sprintData).subscribe(
+    this.sprintApiService.createSprint(this.sprintData).subscribe(
       (response) => {
         // Reset form
         this.sprintName = '';
         this.startDate = new Date();
         this.endDate = new Date();
+        console.log('sprint details',response);
 
         // After creating the sprint, find the sprint ID using the sprint name
-        this.sprintApiService.findOneByName(sprintData.sprint_name).subscribe(
+        this.sprintApiService.findOneByName(this.sprintData.sprint_name).subscribe(
           (sprint) => {
             const sprintId = sprint.sprint_id; // Get the sprint ID
 
@@ -204,7 +207,6 @@ export class CreateFormComponent implements OnInit {
 
               if (uniqueAllocations.length === 0) {
                 // If no allocations to process, show success message and navigate
-                this.toastr.success('Sprint created successfully!', 'Success');
                 this.router.navigate(['/pages-body/sprint-management/createform']);
                 this.sharedService.notifySprintCreated();
                 this.clearResources(); // Clear resources after success
@@ -225,9 +227,12 @@ export class CreateFormComponent implements OnInit {
                       if (allocationCounter === uniqueAllocations.length) {
                         // Show success message and navigate only after all allocations are processed
                         this.toastr.success('Sprint created successfully!', 'Success');
+                        this.sharedService.clearData();
+                        this.sprintData.clearData();
                         this.router.navigate(['/pages-body/sprint-management/createform']);
+                        console.log('resource details',response);
                         this.sharedService.notifySprintCreated();
-                        this.clearResources(); // Clear resources after success
+                        // this.clearResources(); // Clear resources after success
                       }
                     },
                     (error) => {
@@ -245,7 +250,9 @@ export class CreateFormComponent implements OnInit {
             this.toastr.error('Error fetching sprint ID.', 'Error');
           }
         );
+        
       },
+     
       (error) => {
         console.error('Error creating sprint:', error);
         this.toastr.error('Failed to create sprint. Please try again.', 'Error');
@@ -258,4 +265,6 @@ export class CreateFormComponent implements OnInit {
     this.tablecontents = [];
     this.updatePagination(); // Update pagination after clearing resources
   }
+
+ 
 }

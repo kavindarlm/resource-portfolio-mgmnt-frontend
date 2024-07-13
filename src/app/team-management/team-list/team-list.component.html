@@ -1,45 +1,54 @@
 <app-spinner></app-spinner>
 <div class="container-fluid">
   <div class="row no-gutters">
-    <div class=" col-12 col-md-2">
-
+    <div class="col-12 col-md-2">
       <!-- display created team list -->
-
-      <div class="team-data-container border rounded p-1" >
-
+      <div class="team-data-container border rounded p-1">
         <div class="mt-2">
           <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Team List</div>
         </div>
-
         <div>
           <!-- search box -->
-          <input type="search" [(ngModel)]="searchtext" id="form1" class="form-control" placeholder="Search"
-              aria-label="search">
+          <input type="search" [(ngModel)]="searchtext" id="form1" class="form-control small-text" placeholder="Search" aria-label="search" (input)="applyFilters()">
         </div>
-
-        <div class="team-data">
-          <div *ngFor="let team of filteredTeams " class="mt-2">
-            <button class="menu-button btn btn-md border rounded " routerLink="update/{{team.teamId}}"
-              routerLinkActive="active">{{team.team_Name}}</button>
-          </div>
-        </div>
-
         <div class="mt-1">
           <app-new-team-button [text]="'Add Team'" routerLink="TeamForm"></app-new-team-button>
         </div>
-      </div>
+        <div class="team-data">
+          <div *ngFor="let team of getPaginatedTeams()" class="mt-2">
+            <button class="menu-button btn btn-md border rounded" routerLink="update/{{team.teamId}}" routerLinkActive="active">{{team.teamName}}</button>
+          </div>
+        </div>
 
+        <!-- pagination -->
+        <div>
+          <ul class="pagination pagination-sm justify-content-center mt-2 mb-0">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+              <a class="page-link" (click)="changePage(currentPage - 1)" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+              <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+              <a class="page-link" (click)="changePage(currentPage + 1)" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
       <!-- error message -->
       <div *ngIf="errorMessage" class="alert alert-danger">
         {{ errorMessage }}
       </div>
-
     </div>
-
     <!-- display team form -->
     <div class="col-12 col-md-10">
       <router-outlet></router-outlet>
     </div>
-
   </div>
 </div>

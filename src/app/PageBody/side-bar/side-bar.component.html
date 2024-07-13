@@ -5,10 +5,10 @@
     <li *ngIf="functionIds.includes(functionNamesToIds['PROJECT DASHBOARD'])"><button class="menu-button" (click)="selectHeaderName('PROJECT DASHBOARD')" routerLink="projectBoard">Project Dashboard</button></li>
     <li *ngIf="functionIds.includes(functionNamesToIds['RESOURCE MANAGEMENT'])"><button class="menu-button" (click)="selectHeaderName('RESOURCE MANAGEMENT')" routerLink="first-view">Resource Management</button></li>
     <li *ngIf="functionIds.includes(functionNamesToIds['ORGANIZATION UNIT MANAGEMENT'])"><button class="menu-button" (click)="selectHeaderName('ORGANIZATION UNIT MANAGEMENT')" routerLink="unit-list">Org. Unit Management</button></li>
-    <li *ngIf="functionIds.includes(functionNamesToIds['CALENDAR MANAGEMENT'])" routerLink="calendertypecomponent"><button class="menu-button" (click)="selectHeaderName('CALENDAR MANAGEMENT')">Calendar Management</button></li>
-    <li *ngIf="functionIds.includes(functionNamesToIds['TEAM MANAGEMENT'])"><button class="menu-button" (click)="selectHeaderName('TEAM MANAGEMENT')" routerLink="teamlistcomponent">Team Management</button></li>
+    <li *ngIf="functionIds.includes(functionNamesToIds['CALENDAR MANAGEMENT'])"><button class="menu-button" (click)="selectHeaderName('CALENDAR MANAGEMENT')" routerLink="todayStatus">Calendar Management</button></li>
+    <li *ngIf="functionIds.includes(functionNamesToIds['TEAM MANAGEMENT'])"><button class="menu-button" (click)="selectHeaderName('TEAM MANAGEMENT')" routerLink="all-team-view">Team Management</button></li>
     <li *ngIf="functionIds.includes(functionNamesToIds['PROJECT MANAGEMENT'])"><button class="menu-button" (click)="selectHeaderName('PROJECT MANAGEMENT')" routerLink="projectsview">Project Management</button></li>
     <li *ngIf="functionIds.includes(functionNamesToIds['UPDATE TASK PROGRESS'])"><button class="menu-button" (click)="selectHeaderName('UPDATE TASK PROGRESS')" routerLink="projectTaskview">Update Task Progress</button></li>
-    <li *ngIf="functionIds.includes(functionNamesToIds['SPRINT MANAGEMENT'])"><button class="menu-button" (click)="selectHeaderName('SPRINT MANAGEMENT')" routerLink="sprint-management">Sprint Management</button></li>
-    <li *ngIf="functionIds.includes(functionNamesToIds['HANDLE REQUEST RESOURCES'])"><button class="menu-button" (click)="selectHeaderName('HANDLE REQUEST RESOURCES')" routerLink="handle-request">Handle Request</button></li>
+    <li *ngIf="functionIds.includes(functionNamesToIds['SPRINT MANAGEMENT'])"><button class="menu-button" (click)="selectHeaderName('SPRINT MANAGEMENT')" routerLink="all-sprints-view">Sprint Management</button></li>
+    <li *ngIf="functionIds.includes(functionNamesToIds['HANDLE REQUEST RESOURCES'])"><button class="menu-button" (click)="selectHeaderName('HANDLE REQUEST RESOURCES')" routerLink="all-sprints">Handle Request</button></li>
 </div>

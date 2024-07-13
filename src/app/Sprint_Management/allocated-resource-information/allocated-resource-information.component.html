@@ -1,7 +1,9 @@
 <div class="border rounded container p-2">
-  <div class="row">
-    <div class="col-11">
-      <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Allocated Resource Information</div>
+
+  <div class="row align-items-center">
+    <div class="col-md-11">
+      <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Allocated Resource
+        Information</div>
     </div>
     <div class="col-1">
       <button class="border btn shadow-none bd-highlight shadow mt-1 mb-3 me-1 btn-sm" (click)="deleteContent()">
@@ -18,13 +20,14 @@
         <div class="text">{{ resourceDetails.resourceId }}</div>
         <div class="text-primary">{{ resourceDetails.resourceName }}</div>
         <div class="text-black-50">{{ resourceDetails.job_role?.roleName }}</div>
-      </div>
+      </div>     
       <div class="border rounded text-center col-12 mb-3 mt-3 pt-1 pb-1 text-white bg-primary bg-opacity-50">
         Current Percentage
       </div>
       <div class="mb-3">
         <label for="availabilitySlider" class="form-label">{{ availabilityPercentage }}</label>
-        <input type="range" class="slider" id="availabilitySlider" min="0" max="100" [(ngModel)]="availabilityPercentage" disabled>
+        <input type="range" class="slider" id="availabilitySlider" min="0" max="100"
+          [(ngModel)]="availabilityPercentage" disabled>
       </div>
     </div>
     <div class="col text-center">
@@ -57,9 +60,9 @@
               <i class="bi bi-trash"></i>
             </button>
           </div>
+        </div>
       </div>
     </div>
-  </div>
 
   <div class="row d-flex justify-content-center  mb-2 mt-2 text-center">
     <div class="col-6">

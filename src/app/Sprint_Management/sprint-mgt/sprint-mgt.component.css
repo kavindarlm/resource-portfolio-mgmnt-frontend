@@ -5,11 +5,29 @@
 /* Button hover color change */
 .hover:hover {
   background: #1e3895;
-  color: #ffffff; 
-  border-color: #1e3895; 
+  color: #ffffff;
+  border-color: #1e3895;
 }
 
 .custom,
+/* <<<<<<< sihara-frontend-dev
+th {
+  color: #1e3895e1;
+  font-weight: 500;
+}
+
+td {
+  color: rgba(0, 0, 255, 0.575);
+  font-weight: 300;
+}
+
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+  background-color: #3b5edd;
+  color: white;
+  cursor: pointer;
+}
+======= */
 th{
     color: #1e3895e1;
     font-weight: 500;
@@ -35,5 +53,3 @@ td{
 .small{
   font-size: 0.8rem;
 }
-
-

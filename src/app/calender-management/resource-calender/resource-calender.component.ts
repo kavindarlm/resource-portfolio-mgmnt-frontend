@@ -3,6 +3,7 @@ import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 import { ApiServiceService } from '../shared/api-service.service';
 import { ResourceleaveService } from '../shared/resourceleave.service';
 import { map } from 'rxjs/operators';
+import { SidebarheaderServiceService } from '../../PageBody/side-bar-header-service/sidebarheader-service.service';
 
 @Component({
   selector: 'app-resource-calender',
@@ -21,7 +22,8 @@ export class ResourceCalenderComponent implements OnInit {
   showCalenderEdit = false;
 
   constructor(private apiService: ApiServiceService,
-    private resourceleave: ResourceleaveService) {
+    private resourceleave: ResourceleaveService,
+    private refreshData: SidebarheaderServiceService) {
     this.showCalenderAdd = false;
     this.showCalenderEdit = false;
   }
@@ -51,12 +53,16 @@ export class ResourceCalenderComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Refresh System
+    this.refreshData.refreshSystem$.subscribe(() => {
+      // Load events
     this.resourceleave.clickedResource.subscribe(resource => {
       if (resource) {
         this.resourceId = resource.resourceId;
         this.loadEvents();
       }
     });
+  });
   }
 
   //get resource holidays by resource ID

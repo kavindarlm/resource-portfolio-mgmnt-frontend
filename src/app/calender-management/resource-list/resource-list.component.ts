@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ResourceleaveService } from '../shared/resourceleave.service';
 import { Resource } from '../calender.model';
 import { ResourceService } from '../../team-management/shared/resource.service';
+import { SidebarheaderServiceService } from '../../PageBody/side-bar-header-service/sidebarheader-service.service';
 
 @Component({
   selector: 'app-resource-list',
@@ -28,12 +29,20 @@ export class ResourceListComponent {
     private route: ActivatedRoute,
     private apiService: ApiServiceService,
     private resourceleave: ResourceleaveService,
-    private resourceService: ResourceService) { }
+    private resourceService: ResourceService,
+    private refreshData: SidebarheaderServiceService) { }
 
   ngOnInit() {
     this.loadResources();
     this.resourceService.getJobRoles().subscribe(jobRoles => this.jobRoles = jobRoles);// get job roles to fiter resources
     this.resourceService.getOrgUnits().subscribe(orgUnits => this.orgUnits = orgUnits);//get org units to filter resources
+
+    //Refresh System
+    this.refreshData.refreshSystem$.subscribe(() => {
+      this.loadResources();
+      this.resourceService.getJobRoles().subscribe(jobRoles => this.jobRoles = jobRoles);// get job roles to fiter resources
+      this.resourceService.getOrgUnits().subscribe(orgUnits => this.orgUnits = orgUnits);//get org units to filter resources
+    });
   }
 
   // Method to load resources

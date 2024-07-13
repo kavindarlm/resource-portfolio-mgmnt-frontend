@@ -17,6 +17,7 @@ export class ProjectDashboardService {
 
   constructor(private http: HttpClient) {}
 
+  //Fetch All Projects
   getAllProject(): Observable<projectDataModel[]> {
     return this.http.get<projectDataModel[]>(`${this.apiUrl}/project`);
   }

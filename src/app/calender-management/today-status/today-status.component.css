@@ -1,0 +1,52 @@
+.card {
+    background-color: #fff;
+    color: #1E3895;
+    border-radius: 4px;
+    border: #1E3895 1px solid;
+    position: relative;
+    /* box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1); */
+}
+
+.small-text{
+    font-size: 0.9rem;
+}
+
+.font-color {
+    color: #1E3895;
+}
+
+.equal-height {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.equal-height .card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.custom-button {
+    border-color: #1E3895;
+  }
+  
+  .custom-button:hover {
+    background-color: #1E3895;
+  }
+
+  .center-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .center-image-container {
+        /* Additional styles for smaller screens if needed */
+    }
+}
+
+    

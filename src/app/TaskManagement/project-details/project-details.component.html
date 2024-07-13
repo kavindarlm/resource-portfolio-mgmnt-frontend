@@ -31,7 +31,7 @@
                 </div>
                 <div class="border rounded col-3 mb-3 mt-1 pt-1 pb-1">
                     <div>
-                        Project Criticality:
+                        Project Priority:
                         <div [ngClass]="projectData?.criticality_id" class="levelSqure">
                         </div>
                         {{ criticalityName }}
@@ -53,16 +53,16 @@
                 Tasks Details
             </div>
             <div class="taskTable">
-                <div class="row mb-3 custom">
-                    <div class="border rounded col-5 ms-3 mt-1 pt-1 pb-1 small-text">
+                <div class="row ms-1 me-1 custom small-text">
+                    <div class="border rounded col-6 mb-3 mt-1 pt-1 pb-1">
                         Sum of Allocation : {{ allcationSum }} %
                     </div>
-                    <div class="col-6 ms-3">
+                    <div class="col-6 mb-3 mt-1 pt-1 pb-1">
                         <input type="search" [(ngModel)]="searchText" (ngModelChange)="onSearchChange()"
                             class="form-control small-text" placeholder="Search task" aria-label="search">
-
                     </div>
                 </div>
+                
                 <table class="table table-bordered table-striped table-hover table-sm text-center small-text">
                     <thead class="thead-dark">
                         <tr>

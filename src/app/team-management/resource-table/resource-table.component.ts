@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ServiceService } from '../shared/service.service';
 import { ResourceService } from '../shared/resource.service';
 import { Resource } from '../team-form/team-form.model';
+import { SidebarheaderServiceService } from '../../PageBody/side-bar-header-service/sidebarheader-service.service';
 
 @Component({
   selector: 'app-resource-table',
@@ -23,13 +24,19 @@ export class ResourceTableComponent {
   selectedOrgUnit!: string; //selected org unit in drop down
 
   constructor(private service: ServiceService,
-              private resourceService: ResourceService
+              private resourceService: ResourceService,
+              private refreshData: SidebarheaderServiceService
   ) {}
 
   ngOnInit() {
     this.loadResources(); // load resource to resource table 
     this.resourceService.getJobRoles().subscribe(jobRoles => this.jobRoles = jobRoles);// get job roles to fiter resources
     this.resourceService.getOrgUnits().subscribe(orgUnits => this.orgUnits = orgUnits);//get org units to filter resources
+
+    // Refresh System
+    this.refreshData.refreshSystem$.subscribe(() => {
+      this.loadResources(); // Reload resource list when a new resource is added
+    });
   }
 
 

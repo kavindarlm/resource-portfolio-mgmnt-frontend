@@ -1,39 +1,50 @@
 <app-spinner></app-spinner>
 <div class="container-fluid">
-    <div class="row">
-        <div class="unitList col-md-2 col-lg-2 col-sm-12">
-            <div class="table-container">
-                <div class="d-flex justify-content-center mt-2">
-                    <div class="border rounded text-center col-10 mb-3 mt-1 pt-1 pb-1 text-white bg-primary ">Unit List
-                    </div>
-                </div>
-                <div class="">
-                    <!-- search box -->
-                    <input type="search" [(ngModel)]="searchText" id="form1" class="form-control" placeholder="Search by Name"
-                        aria-label="search">
-                </div>
-
-                <div class="table-data">
-                    <div *ngFor="let unit of orgunits | search: searchText">
-                        <button class="btn unit-button" routerLink="unit-details/{{unit.unitId}}" (click)="showUnitDetails(unit)"
-                        routerLinkActive="active">{{unit.unitName}}</button>
-                    </div>
-                </div>
-
-                <div>
-                    <button class="btn btn-outline mt-2 addButton" routerLink="unit-form" routerLinkActive="active" (click)="showcomponent()">Add New Unit</button>
-                </div>
-            </div>
+  <div class="row">
+    <div class="unitList col-md-2 col-lg-2 col-sm-12">
+      <div class="table-container">
+        <div class="d-flex justify-content-center mt-2">
+          <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Unit List</div>
         </div>
-
-        <div class="unitForms col-md-9 col-lg-9 col-sm-12">
-            <router-outlet></router-outlet>
-            <div class="unitTree">
-                <app-unit-tree></app-unit-tree>
-            </div>
-            
+        <div class="">
+          <!-- search box -->
+          <input type="search" [(ngModel)]="searchText" id="form1" class="form-control small-text" placeholder="Search by Name" aria-label="search" (input)="applyFilters()">
         </div>
-
+        <div>
+          <button class="btn btn-outline mt-2 addButton" routerLink="unit-form" routerLinkActive="active" (click)="showcomponent()">Add New Unit</button>
+        </div>
+        <div class="table-data">
+          <div *ngFor="let unit of getPaginatedUnits()">
+            <button class="btn unit-button" routerLink="unit-details/{{unit.unitId}}" (click)="showUnitDetails(unit)" routerLinkActive="active">{{unit.unitName}}</button>
+          </div>
+        </div>
+        <!-- pagination -->
+        <div>
+          <ul class="pagination pagination-sm justify-content-center mt-2 mb-0">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+              <a class="page-link" (click)="changePage(currentPage - 1)" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+              <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+              <a class="page-link" (click)="changePage(currentPage + 1)" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-
+    <div class="unitForms col-md-9 col-lg-9 col-sm-12">
+      <router-outlet></router-outlet>
+      <div class="unitTree">
+        <app-unit-tree></app-unit-tree>
+      </div>
+    </div>
+  </div>
 </div>

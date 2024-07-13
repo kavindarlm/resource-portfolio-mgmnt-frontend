@@ -38,24 +38,30 @@ export class SprintMgtComponent implements OnInit {
     private sharedService: SharedService,
     private confirmDialogService: ConfirmDialogService
   ) { }
-  
+
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.sprint_id = params['id'];
       this.fetchSprintData();
     });
-  
+
     // Subscribe to task updates
     this.sharedService.taskUpdated$.subscribe(() => {
       this.fetchAndPopulateResourcesOfSprint();
     });
-  
+
     // Subscribe to resource allocation deletion
     this.sharedService.resourceAllocationDeleted$.subscribe(() => {
       this.fetchSprintData();
     });
+
+    // Subscribe to percentage updates
+    this.sharedService.percentageUpdated$.subscribe(() => {
+      this.fetchAndPopulateResourcesOfSprint();
+    });
   }
-  
+
+
 
   fetchSprintData(): void {
     // Clear the resources list before fetching new sprint data
@@ -88,10 +94,10 @@ export class SprintMgtComponent implements OnInit {
             if (!uniqueResources.has(resource.resourceId)) {
               uniqueResources.set(resource.resourceId, {
                 Resource_ID: resource.resourceId,
-                Team: resource.job_role ? resource.team_name : 'N/A',
+                Team: resource.teams ? resource.teams.team_Name : 'N/A',
                 Job_Role: resource.job_role ? resource.job_role.roleName : 'N/A',
                 Org_Unit: resource.org_unit ? resource.org_unit.unitName : 'N/A',
-                Availability: '' // Placeholder for availability
+                Availability: ''
               });
             }
           });
@@ -102,7 +108,7 @@ export class SprintMgtComponent implements OnInit {
               map(tasks => {
                 const filteredTasks = tasks.filter(task => task.resourceAllocation.task.taskProgressPercentage < 100);
                 const totalAllocation = filteredTasks.reduce((total, task) => {
-                  const allocationPercentage = task.resourceAllocation.percentage || 0; // Assuming the field name is 'percentage'
+                  const allocationPercentage = task.resourceAllocation.percentage || 0;
                   return total + allocationPercentage;
                 }, 0);
                 const availabilityPercentage = totalAllocation + '%';
@@ -150,7 +156,7 @@ export class SprintMgtComponent implements OnInit {
 
   deleteSprint(): void {
     const sprintId = parseInt(this.sprint_id);
-  
+
     this.resourceAllocationService.deleteResourceAllocationsBySprintId(sprintId).pipe(
       mergeMap(() => this.sprintApiService.deleteSprint(sprintId)),
       catchError(error => {
@@ -163,16 +169,14 @@ export class SprintMgtComponent implements OnInit {
       this.router.navigate(['/pages-body/sprint-management']); // Navigate to the sprint management page
     });
   }
-  
+
 
   deleteContent() {
     this.router.navigate(['/pages-body/sprint-management']);
   }
 
-   onPageChange(pageNumber: number): void {
+  onPageChange(pageNumber: number): void {
     this.currentPage = pageNumber;
-    // You may fetch data for the new page here or adjust your existing data array
-    // For simplicity, assuming your data is already in ResourcesOfSprint and just need to slice it
   }
 
   get paginatedResources(): any[] {

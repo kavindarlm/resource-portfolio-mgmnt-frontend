@@ -1,0 +1,66 @@
+<app-spinner></app-spinner>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-12 col-md-12 col-sm-12 justify-content-center border rounded p-2">
+            <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Sprint List Details</div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="input-group mb-3 w-50">
+                        <input type="search" aria-describedby="search-addon" [(ngModel)]="Seachtext" id="form1" class="form-control small-text" placeholder="Search by Sprint Name..." aria-label="search" (ngModelChange)="onSearchChange()">
+                        <!-- <span class="input-group-text border-0" id="search-addon">
+                            <i class="bi bi-search"></i>
+                        </span> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover table-sm text-center">
+                    <thead class="thead-dark fs-6 fst-normal">
+                        <tr>
+                            <th scope="col" class="col-12 col-md-1">Sprint Name</th>
+                            <th scope="col" class="col-12 col-md-2">Sprint Start Date</th>
+                            <th scope="col" class="col-12 col-md-2">Sprint End Date</th>
+                            <th scope="col" class="col-12 col-md-1">Status</th>
+                            <th scope="col" class="col-12 col-md-2">Resource Count</th>
+                            <th scope="col" class="col-12 col-md-2">Project Count</th>
+                            <th scope="col" class="col-12 col-md-2">Add Resources</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let sprint of getPaginatedSprints()" (click)="navigateToSprint(sprint.sprint_id)">
+                            <td>{{ sprint.sprint_name }}</td>
+                            <td>{{ sprint.start_Date }}</td>
+                            <td>{{ sprint.end_Date }}</td>
+                            <td>{{ sprint.status }}</td>
+                            <td>{{ sprint.resourceCount || 0 }}</td>
+                            <td>{{ sprint.projectCount || 0 }}</td>
+                            <td><button class="btn btn-outline-primary custom-button btn-sm w-50" (click)="navigateToAddResources(sprint.sprint_id)">Add</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <ul class="pagination pagination-sm justify-content-center">
+                    <li class="page-item" [class.disabled]="currentPage === 1">
+                        <a class="page-link" (click)="changePage(currentPage - 1)" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i + 1">
+                        <a class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</a>
+                    </li>
+                    <li class="page-item" [class.disabled]="currentPage === totalPages">
+                        <a class="page-link" (click)="changePage(currentPage + 1)" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

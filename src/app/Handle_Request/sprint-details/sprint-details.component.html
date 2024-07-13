@@ -1,86 +1,81 @@
 <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-6 col-md-6 col-sm-12 justify-content-center border rounded p-2">
-        <div class="row mb-5">
-          <div class="col-11">
-            <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">{{ sprintName }}</div>
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 justify-content-center border rounded p-2">
+      <div class="row mb-5">
+        <div class="col-12 d-flex align-items-center">
+          <div class="border rounded text-center flex-grow-1 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">
+            {{ sprintName }}
           </div>
-          <div class="col-1">
-            <button class="border btn shadow-none bd-highlight shadow p-1 mt-1 mb-3 me-1" (click)="deleteContent()">
-              <i class="bi bi-x"></i>
-            </button>
-          </div>
-        </div>
-  
-        <div class="row mb-5">
-          <div class="col">
-            <div class="fw-bold border rounded p-2 text-center">
-              <i class="bi bi-calendar fa-2x"></i>
-              <div class="text">Start Date</div>
-              <div class="text-primary">{{ startDate }}</div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="fw-bold border rounded p-2 text-center">
-              <i class="bi bi-calendar fa-2x"></i>
-              <div class="text">End Date</div>
-              <div class="text-primary">{{ endDate }}</div>
-            </div>
-          </div>
-        </div>
-  
-        <!-- Added Resource List -->
-        <div class="container">
-          <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Added Resource List</div>
-          <div class="table-responsive">
-            <table class="table table-bordered table-striped table-hover table-sm text-center">
-              <thead class="thead-dark fs-6 fst-normal">
-                <tr>
-                  <th scope="col" *ngFor="let head of HeadArray">{{ head }}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <ng-container *ngFor="let resource of paginatedResources">
-                  <tr (click)="onRowClick(resource.Resource_ID)">
-                    <td *ngFor="let head of HeadArray">{{ resource[head] }}</td>
-                  </tr>
-                </ng-container>
-              </tbody>
-            </table>          
-          </div>
-          
-          <!-- Pagination -->
-          <nav>
-            <ul class="pagination justify-content-center">
-                <li class="page-item" [class.disabled]="currentPage === 1">
-                    <button class="page-link" (click)="onPageChange(currentPage - 1)" aria-label="Previous">
-                        <span aria-hidden="true">&lsaquo;</span>
-                    </button>
-                </li>
-                <li class="page-item" *ngFor="let page of getPaginationArray()" >
-                    <button class="page-link" (click)="onPageChange(page)" [class.active]="currentPage === page">{{ page }}</button>
-                </li>
-                <li class="page-item" [class.disabled]="currentPage === totalPages">
-                    <button class="page-link" (click)="onPageChange(currentPage + 1)" aria-label="Next">
-                        <span aria-hidden="true">&rsaquo;</span>
-                    </button>
-                </li>
-            </ul>
-        </nav>
-        </div>
-
-        <div class="d-grid gap-2 col-6 mx-auto mb-2">
-          <button type="button"
-          [routerLink]="['/pages-body/handle-request/sprintDetails', sprint_id, 'availableResourceList', sprint_id]" class="btn btn-outline-primary">Add New Resource</button>
+          <button class="border btn shadow-none bd-highlight shadow p-1 mt-1 mb-3 ms-2" (click)="deleteContent()">
+            <i class="bi bi-x"></i>
+          </button>
         </div>
       </div>
 
-      
-  
-      <!-- Right Column for Child Routes -->
-      <div class="col-lg-6 col-md-6 col-sm-12">
-        <router-outlet></router-outlet>
+      <div class="row mb-5">
+        <div class="col-6">
+          <div class="fw-bold border rounded p-2 text-center">
+            <i class="bi bi-calendar fa-2x"></i>
+            <div class="text">Start Date</div>
+            <div class="text-primary">{{ startDate }}</div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="fw-bold border rounded p-2 text-center">
+            <i class="bi bi-calendar fa-2x"></i>
+            <div class="text">End Date</div>
+            <div class="text-primary">{{ endDate }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Added Resource List -->
+      <div class="container">
+        <div class="border rounded text-center col-12 mb-3 mt-1 pt-1 pb-1 text-white bg-primary">Added Resource List</div>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover table-sm text-center">
+            <thead class="thead-dark fs-6 fst-normal">
+              <tr>
+                <th scope="col" *ngFor="let head of HeadArray">{{ head }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let resource of paginatedResources">
+                <tr (click)="onRowClick(resource.Resource_ID)">
+                  <td *ngFor="let head of HeadArray">{{ resource[head] }}</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <nav>
+          <ul class="pagination justify-content-center">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+              <button class="page-link" (click)="onPageChange(currentPage - 1)" aria-label="Previous">
+                <span aria-hidden="true">&lsaquo;</span>
+              </button>
+            </li>
+            <li class="page-item" *ngFor="let page of getPaginationArray()">
+              <button class="page-link" (click)="onPageChange(page)" [class.active]="currentPage === page">{{ page }}</button>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+              <button class="page-link" (click)="onPageChange(currentPage + 1)" aria-label="Next">
+                <span aria-hidden="true">&rsaquo;</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="d-grid gap-2 col-6 mx-auto mb-2">
+        <button type="button" [routerLink]="['/pages-body/handle-request/sprintDetails', sprint_id, 'availableResourceList', sprint_id]" class="btn btn-outline-primary">Add New Resource</button>
       </div>
     </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-12">
+      <router-outlet></router-outlet>
+    </div>
   </div>
-  
+</div>

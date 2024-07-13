@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { OrganizationalUnitModel } from '../unit-form/unit-form.model';
-import { HttpClient } from '@angular/common/http';
 import { OrgUnitMgtService } from '../../shared/orgUnitMgt_services/orgUnitMgt.service';
-import { catchError, throwError } from 'rxjs';
-import { error } from 'console';
 import { OrgUnit } from './org-unitmodel';
 import { ScreenSizeService } from '../../shared/orgUnitMgt_services/screenSize.service';
+import { SidebarheaderServiceService } from '../../PageBody/side-bar-header-service/sidebarheader-service.service';
 
 
 @Component({
@@ -23,6 +20,11 @@ export class UnitTreeComponent implements OnInit {
   ngOnInit(): void {
     this.fetchData();
 
+    // Subscribe to the refreshSystem event
+    this.refreshData.refreshSystem$.subscribe(() => {
+      this.fetchData(); // Fetch data when a new unit is added
+    });
+
     // Subscribe to the unitListUpdated event
     this.orgUnitMgtService.unitListUpdated.subscribe(() => {
       this.fetchData(); // Fetch data when a unit is added, updated or deleted
@@ -34,7 +36,8 @@ export class UnitTreeComponent implements OnInit {
   }
 
   constructor(private orgUnitMgtService: OrgUnitMgtService,
-              private screenSizeService: ScreenSizeService
+    private screenSizeService: ScreenSizeService,
+    private refreshData: SidebarheaderServiceService
   ) { }
   tr: any;
   fetchData(): void {

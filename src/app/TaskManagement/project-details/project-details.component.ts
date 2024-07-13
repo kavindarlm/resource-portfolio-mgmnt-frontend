@@ -9,6 +9,7 @@ import {
 import { taskSharedService } from '../services/taskshared.service';
 import { Subscription, catchError, of } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { SidebarheaderServiceService } from '../../PageBody/side-bar-header-service/sidebarheader-service.service';
 
 @Component({
   selector: 'app-project-details',
@@ -20,7 +21,8 @@ export class ProjectDetailsComponent implements OnInit {
     private activateDataRout: ActivatedRoute,
     private api: taskApiService,
     private shared: taskSharedService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private refreshData: SidebarheaderServiceService
   ) {}
 
   // Define the dataid property
@@ -65,6 +67,14 @@ export class ProjectDetailsComponent implements OnInit {
     });
 
     this.subscription = this.shared.refreshTaskList$.subscribe(() => {
+      this.getTaskList();
+      this.getProjectTaskSum();
+      this.getProjectProgress();
+    });
+
+    // Refresh the system after the animation completes
+    this.refreshData.refreshSystem$.subscribe(() => {
+      this.getProjectDetails();
       this.getTaskList();
       this.getProjectTaskSum();
       this.getProjectProgress();
