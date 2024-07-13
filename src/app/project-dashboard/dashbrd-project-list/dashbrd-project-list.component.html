@@ -12,14 +12,14 @@
                     <option value="2">Medium Priority</option>
                     <option value="3">Low Priority</option>
                 </select>
-                <span class="input-group-text border-0" id="progress-filter-addon">
+                <span class="input-group-text border-0 ms-4" id="progress-filter-addon">
                     <i class="bi bi-filter"></i>
                 </span>
                 <select class="form-select rounded small-text w-40" [(ngModel)]="selectedProgress" (ngModelChange)="onProgressChange()" aria-placeholder="Select">
-                    <option value="">All Progress</option>
-                    <option value="Completed">Completed</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Not Started">Not Started</option>
+                    <option value="">Projects Progress</option>
+                    <option value="Completed">Completed Projects</option>
+                    <option value="In Progress">In Progress Projects</option>
+                    <option value="Not Started">Not Started Projects</option>
                 </select>
             </div>
         </div>
