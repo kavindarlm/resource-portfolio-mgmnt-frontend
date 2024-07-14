@@ -9,9 +9,9 @@ import { forkJoin, map, of, switchMap } from 'rxjs';
 @Component({
   selector: 'app-all-sprint-details',
   templateUrl: './all-sprint-details.component.html',
-  styleUrl: './all-sprint-details.component.css'
+  styleUrls: ['./all-sprint-details.component.css']
 })
-export class AllSprintDetailsComponent implements OnInit{
+export class AllSprintDetailsComponent implements OnInit {
   Seachtext: string = ''; 
   sprints: any[] = [];
   filteredSprints: any[] = [];
@@ -19,12 +19,19 @@ export class AllSprintDetailsComponent implements OnInit{
   itemsPerPage: number = 10;
   totalPages: number = 0;
 
+  // Sorting properties
+  sortState: number = 0; // 0 = no sorting, 1 = ascending, 2 = descending
+  sortStateStartDate: number = 0;
+  sortStateEndDate: number = 0;
+  sortStateResourceCount: number = 0;
+  sortStateProjectCount: number = 0;
+
   constructor(
     private router: Router,
     private spinner: NgxSpinnerService,
     private sprintApiService: sprintApiService,
-    private ResourceAllocationService: ResourceAllocationService,
-    private taskApiService:taskApiService
+    private resourceAllocationService: ResourceAllocationService,
+    private taskApiService: taskApiService
   ) {}
 
   ngOnInit(): void {
@@ -35,11 +42,11 @@ export class AllSprintDetailsComponent implements OnInit{
     this.spinner.show();
     this.sprintApiService.getAllSprints().pipe(
       switchMap((data) => {
-        const sprintRequests = data.map(sprint => this.ResourceAllocationService.getResourceAllocationBySprintId(sprint.sprint_id).pipe(
+        const sprintRequests = data.map(sprint => this.resourceAllocationService.getResourceAllocationBySprintId(sprint.sprint_id).pipe(
           switchMap(resourceAllocations => {
             const uniqueResourceIds = new Set(resourceAllocations.map(allocation => allocation.resource.resourceId));
             const projectRequests = resourceAllocations.map(allocation => {
-              const taskId = allocation.task.taskid; // Correctly access task ID
+              const taskId = allocation.task.taskid;
               if (taskId !== undefined) {
                 return this.taskApiService.getProjectInfoByTaskId(taskId);
               } else {
@@ -47,7 +54,7 @@ export class AllSprintDetailsComponent implements OnInit{
                 return of(null);
               }
             });
-  
+
             return forkJoin(projectRequests).pipe(
               map(projects => {
                 const uniqueProjectIds = new Set(projects.filter(project => project !== null).map(project => project!.projectId));
@@ -60,7 +67,7 @@ export class AllSprintDetailsComponent implements OnInit{
             );
           })
         ));
-  
+
         return forkJoin(sprintRequests);
       })
     ).subscribe(
@@ -76,7 +83,7 @@ export class AllSprintDetailsComponent implements OnInit{
       }
     );
   }
-  
+
   getPaginatedSprints(): any[] {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
@@ -105,5 +112,67 @@ export class AllSprintDetailsComponent implements OnInit{
     }
     this.totalPages = Math.ceil(this.filteredSprints.length / this.itemsPerPage);
     this.currentPage = 1;
+  }
+
+  toggleSort(column: string): void {
+    if (column === 'sprintName') {
+      this.sortState = this.sortState === 1 ? 2 : 1;
+      this.sortStateStartDate = 0;
+      this.sortStateEndDate = 0;
+      this.sortStateResourceCount = 0;
+      this.sortStateProjectCount = 0;
+    } else if (column === 'startDate') {
+      this.sortStateStartDate = this.sortStateStartDate === 1 ? 2 : 1;
+      this.sortState = 0;
+      this.sortStateEndDate = 0;
+      this.sortStateResourceCount = 0;
+      this.sortStateProjectCount = 0;
+    } else if (column === 'endDate') {
+      this.sortStateEndDate = this.sortStateEndDate === 1 ? 2 : 1;
+      this.sortState = 0;
+      this.sortStateStartDate = 0;
+      this.sortStateResourceCount = 0;
+      this.sortStateProjectCount = 0;
+    } else if (column === 'resourceCount') {
+      this.sortStateResourceCount = this.sortStateResourceCount === 1 ? 2 : 1;
+      this.sortState = 0;
+      this.sortStateStartDate = 0;
+      this.sortStateEndDate = 0;
+      this.sortStateProjectCount = 0;
+    } else if (column === 'projectCount') {
+      this.sortStateProjectCount = this.sortStateProjectCount === 1 ? 2 : 1;
+      this.sortState = 0;
+      this.sortStateStartDate = 0;
+      this.sortStateEndDate = 0;
+      this.sortStateResourceCount = 0;
+    }
+
+    this.sortSprints(column);
+  }
+
+  sortSprints(column: string): void {
+    const direction = column === 'sprintName' ? this.sortState : 
+                      column === 'startDate' ? this.sortStateStartDate : 
+                      column === 'endDate' ? this.sortStateEndDate : 
+                      column === 'resourceCount' ? this.sortStateResourceCount : 
+                      this.sortStateProjectCount;
+
+    this.filteredSprints.sort((a, b) => {
+      let comparison = 0;
+
+      if (column === 'sprintName') {
+        comparison = a.sprint_name.localeCompare(b.sprint_name);
+      } else if (column === 'startDate') {
+        comparison = new Date(a.start_Date).getTime() - new Date(b.start_Date).getTime();
+      } else if (column === 'endDate') {
+        comparison = new Date(a.end_Date).getTime() - new Date(b.end_Date).getTime();
+      } else if (column === 'resourceCount') {
+        comparison = a.resourceCount - b.resourceCount;
+      } else if (column === 'projectCount') {
+        comparison = a.projectCount - b.projectCount;
+      }
+
+      return direction === 1 ? comparison : -comparison;
+    });
   }
 }
