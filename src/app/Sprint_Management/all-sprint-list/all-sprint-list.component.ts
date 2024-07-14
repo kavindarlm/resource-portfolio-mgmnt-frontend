@@ -14,13 +14,20 @@ import { SidebarheaderServiceService } from '../../PageBody/side-bar-header-serv
   styleUrls: ['./all-sprint-list.component.css']
 })
 export class AllSprintListComponent implements OnInit {
-  
+
   SearchText: string = ''; 
   sprints: any[] = [];
   filteredSprints: any[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 10;
   totalPages: number = 0;
+
+  // Sorting properties
+  sortState: number = 0; // 0 = no sorting, 1 = ascending, 2 = descending
+  sortStateStartDate: number = 0;
+  sortStateEndDate: number = 0;
+  sortStateResourceCount: number = 0;
+  sortStateProjectCount: number = 0;
 
   constructor(
     private router: Router,
@@ -84,12 +91,18 @@ export class AllSprintListComponent implements OnInit {
         this.spinner.hide();
       },
       (error) => {
-        console.error('Error fetching sprints', error);
+        console.error('Error fetching sprints:', error);
         this.spinner.hide();
       }
     );
   }
-  
+
+  onSearchChange(): void {
+    this.filteredSprints = this.sprints.filter(sprint => sprint.sprint_name.toLowerCase().includes(this.SearchText.toLowerCase()));
+    this.totalPages = Math.ceil(this.filteredSprints.length / this.itemsPerPage);
+    this.currentPage = 1; // Reset to first page on search
+  }
+
   getPaginatedSprints(): any[] {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
@@ -97,22 +110,74 @@ export class AllSprintListComponent implements OnInit {
   }
 
   changePage(page: number): void {
-    this.currentPage = page;
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
   }
 
   navigateToSprint(sprintId: number): void {
     this.router.navigate([`/pages-body/sprint-management/sprintmgt/${sprintId}`]);
   }
 
-  onSearchChange(): void {
-    if (!this.SearchText) {
-      this.filteredSprints = this.sprints; // Reset to show all sprints if search text is empty
-    } else {
-      this.filteredSprints = this.sprints.filter(sprint =>
-        sprint.sprint_name.toLowerCase().includes(this.SearchText.toLowerCase())
-      );
+  toggleSort(column: string): void {
+    if (column === 'sprintName') {
+      this.sortState = this.sortState === 1 ? 2 : 1;
+      this.sortStateStartDate = 0;
+      this.sortStateEndDate = 0;
+      this.sortStateResourceCount = 0;
+      this.sortStateProjectCount = 0;
+    } else if (column === 'startDate') {
+      this.sortStateStartDate = this.sortStateStartDate === 1 ? 2 : 1;
+      this.sortState = 0;
+      this.sortStateEndDate = 0;
+      this.sortStateResourceCount = 0;
+      this.sortStateProjectCount = 0;
+    } else if (column === 'endDate') {
+      this.sortStateEndDate = this.sortStateEndDate === 1 ? 2 : 1;
+      this.sortState = 0;
+      this.sortStateStartDate = 0;
+      this.sortStateResourceCount = 0;
+      this.sortStateProjectCount = 0;
+    } else if (column === 'resourceCount') {
+      this.sortStateResourceCount = this.sortStateResourceCount === 1 ? 2 : 1;
+      this.sortState = 0;
+      this.sortStateStartDate = 0;
+      this.sortStateEndDate = 0;
+      this.sortStateProjectCount = 0;
+    } else if (column === 'projectCount') {
+      this.sortStateProjectCount = this.sortStateProjectCount === 1 ? 2 : 1;
+      this.sortState = 0;
+      this.sortStateStartDate = 0;
+      this.sortStateEndDate = 0;
+      this.sortStateResourceCount = 0;
     }
-    this.totalPages = Math.ceil(this.filteredSprints.length / this.itemsPerPage);
-    this.currentPage = 1;
+
+    this.sortSprints(column);
+  }
+
+  sortSprints(column: string): void {
+    const direction = column === 'sprintName' ? this.sortState : 
+                      column === 'startDate' ? this.sortStateStartDate : 
+                      column === 'endDate' ? this.sortStateEndDate : 
+                      column === 'resourceCount' ? this.sortStateResourceCount : 
+                      this.sortStateProjectCount;
+
+    this.filteredSprints.sort((a, b) => {
+      let comparison = 0;
+
+      if (column === 'sprintName') {
+        comparison = a.sprint_name.localeCompare(b.sprint_name);
+      } else if (column === 'startDate') {
+        comparison = new Date(a.start_Date).getTime() - new Date(b.start_Date).getTime();
+      } else if (column === 'endDate') {
+        comparison = new Date(a.end_Date).getTime() - new Date(b.end_Date).getTime();
+      } else if (column === 'resourceCount') {
+        comparison = a.resourceCount - b.resourceCount;
+      } else if (column === 'projectCount') {
+        comparison = a.projectCount - b.projectCount;
+      }
+
+      return direction === 1 ? comparison : -comparison;
+    });
   }
 }
